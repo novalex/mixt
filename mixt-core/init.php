@@ -288,6 +288,7 @@ if ( get_option('mixt-dynamic-sass', 0) ) {
 	require_once( MIXT_MODULES_DIR . '/dynamic-styles/dynamic.css.php' );
 }
 
+
 // JS LOCALIZATION DATA
 function local_options() {
 
@@ -302,14 +303,26 @@ function local_options() {
 		'head-fullscreen'   => array(),
 		'head-content-fade' => array(),
 		// Blog
-		'blog-type' => array( 'return' => 'value' ),
+		'blog-type'       => array( 'return' => 'value' ),
+		// Pagination
+		'pagination-type' => array( 'return' => 'value' ),
+		'show-page-nr'    => array(),
 	);
 	$options = mixt_get_options($options);
 
 	$options['show-admin-bar'] = is_admin_bar_showing() === true ? 'true' : 'false';
 
+	if ( $options['pagination-type'] != 'classic' ) {
+		global $wp_query;
+
+		$options['page-num'] = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
+		$options['page-max'] = $wp_query->max_num_pages;
+		$options['next-page-link'] = next_posts($wp_query->max_num_pages, false);
+	}
+
 	return $options;
 }
+
 
 // ENQUEUE SCRIPTS AND STYLESHEETS
 

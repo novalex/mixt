@@ -1,5 +1,5 @@
 
-// - MIXT COLORS STYLESHEET - //
+/* - COLORS STYLESHEET - */
 
 
 // GLOBAL
@@ -61,34 +61,65 @@ $input-focus-bs: rgba(0,0,0,0.1);
 
 // THEMES
 
-
 // Aqua Theme (Blue Accent)
 
-$aqua-accent: #539DDD;
-$aqua-bg-dark-accent: $aqua-accent;
+$theme-aqua: (
+	'accent': #539DDD,
+	'bg-dark-accent': #539DDD,
 
-$aqua-bg: #FFF;
-$aqua-bg-hover: darken($aqua-bg, 5);
+	'bg': #fff,
+	'bg-hover': darken(#fff, 5),
 
-$aqua-border: #ddd;
-$aqua-border-alpha: rgba(0,0,0,0.15);
+	'color': #333,
+	'color-fade': lighten(#333, 30),
+	'bg-dark-color': #fff,
+	'bg-dark-color-fade': darken(#fff, 4),
 
-$aqua-bg-dark-border: #333;
-$aqua-bg-dark-border-alpha: rgba(0,0,0,0.8);
+	'border': #ddd,
+	'border-alpha': rgba(0,0,0,0.15),
+	'bg-dark-border': #333,
+	'bg-dark-border-alpha': rgba(0,0,0,0.8),
 
-$aqua-color: #333;
-$aqua-color-fade: lighten($aqua-color, 30);
+	'menu-bg': #fbfbfb,
+	'menu-bg-hover': darken(#fbfbfb, 4),
+	'menu-expand': rgba(0,0,0,0.05),
 
-$aqua-bg-dark-color: #fff;
-$aqua-bg-dark-color-fade: darken($aqua-bg-dark-color, 4);
+	'menu-border': #e2e2e2,
+	'menu-border-alpha': rgba(0,0,0,0.15),
 
-$aqua-menu-color: #333;
-$aqua-menu-color-fade: lighten($aqua-menu-color, 4);
+	'menu-color': #333,
+	'menu-color-fade': lighten(#333, 4)
+);
 
-$aqua-menu-bg: #fbfbfb;
-$aqua-menu-bg-hover: darken($aqua-menu-bg, 4);
+@function theme-color($color, $theme: $theme-aqua) {
+	@if not map-has-key($theme, $color) {
+		@warn "Key #{$color} not found for the '#{$theme}' theme!";
+	}
+	@return map-get($theme, $color);
+}
 
-$aqua-menu-border: #e2e2e2;
-$aqua-menu-border-alpha: rgba(0,0,0,0.15);
+$theme-accent: theme-color('accent');
+$theme-bg-dark-accent: theme-color('bg-dark-accent');
 
-$aqua-menu-expand: rgba(0,0,0,0.05);
+$theme-bg: theme-color('bg');
+$theme-bg-hover: theme-color('bg-hover');
+
+$theme-color: theme-color('color');
+$theme-color-fade: theme-color('color-fade');
+$theme-bg-dark-color: theme-color('bg-dark-color');
+$theme-bg-dark-color-fade: theme-color('bg-dark-color-fade');
+
+$theme-border: theme-color('border');
+$theme-border-alpha: theme-color('border-alpha');
+$theme-bg-dark-border: theme-color('bg-dark-border');
+$theme-bg-dark-border-alpha: theme-color('bg-dark-border-alpha');
+
+$theme-menu-bg: theme-color('menu-bg');
+$theme-menu-bg-hover: theme-color('menu-bg-hover');
+$theme-menu-expand: theme-color('menu-expand');
+
+$theme-menu-border: theme-color('menu-border');
+$theme-menu-border-alpha: theme-color('menu-border-alpha');
+
+$theme-menu-color: theme-color('menu-color');
+$theme-menu-color-fade: theme-color('menu-color-fade');

@@ -15,9 +15,10 @@ get_header();
 
 if ( have_posts() ) {
 
+	// Determine if a blog page is displayed
 	$is_blog = ( ! is_front_page() && is_home() ) ? true : false;
 
-	if ( $is_blog ) { echo '<div class="blog-container theme-bd">'; }
+	if ( $is_blog ) { echo '<div class="posts-container">'; }
 
 	while ( have_posts() ) : // Start The Loop
 
@@ -31,9 +32,9 @@ if ( have_posts() ) {
 
 	endwhile; // End The Loop
 
-	if ( $is_blog ) { echo '</div>'; } // Close .blog-container
+	if ( $is_blog ) { echo '</div>'; } // Close .posts-container
 
-	mixt_content_nav( 'nav-below' );
+	mixt_content_nav( 'nav-below', true );
 
 } else {
 	

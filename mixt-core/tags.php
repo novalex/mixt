@@ -54,50 +54,105 @@ function mixt_get_title( $echo = false ) {
 
 /**
  * Display navigation to next/previous pages when applicable
+ *
+ * @param string $nav_id ID to give the nav element
+ * @param bool $archive whether the queried page is a posts page (blog, archive, etc.)
  */
-function mixt_content_nav( $nav_id ) {
+function mixt_content_nav( $nav_id, $archive = false ) {
 	global $wp_query, $post;
 
-	// Don't print empty markup on single pages if there's nowhere to navigate.
-	if ( is_single() ) {
-		$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
-		$next = get_adjacent_post( false, '', false );
+	$options = array(
+		'pagination-type' => array( 'return' => 'value' ),
+	);
+	$options = mixt_get_options($options);
 
-		if ( ! $next && ! $previous )
-			return;
+	$nav_class = 'page-nav ';
+	$page_max  = $wp_query->max_num_pages;
+	$page_now  = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
+
+	// Numbered Navigation
+
+	if ( $archive === true && $options['pagination-type'] == 'numbered' ) {
+		$nav_class .= 'paging-navigation numbered-paging ';
+
+		$page_links = paginate_links( array(
+			'current'   => $page_now,
+			'total'     => $page_max,
+			'type'      => 'array',
+			'prev_text' => '<i class="icon icon-chevron-left"></i>' . __('Previous'),
+			'next_text' => __('Next') . '<i class="icon icon-chevron-right"></i>',
+		));
+
+		if ( ! empty($page_links) ) {
+			?>
+			<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+				<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h1>
+				<ul class="pager">
+					<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
+				</ul>
+			</nav>
+			<?php
+		}
+
+	// AJAX Navigation
+
+	} else if ( $archive === true && $options['pagination-type'] != 'classic' ) {
+		$nav_class .= 'paging-navigation ajax-paging ';
+
+		?>
+		<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+			<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h1>
+			<ul class="pager">
+				<li><a href="#" class="ajax-more" 
+					data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
+					data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
+					data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
+				><i class="icon icon-chevron-down"></i><?php _e( 'Load more posts', 'mixt' ); ?></a></li>
+			</ul>
+		</nav>
+		<?php
+
+	// Classic Navigation
+
+	} else {
+
+		// Don't print empty markup
+		if ( is_single() ) {
+			$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+			$next = get_adjacent_post( false, '', false );
+
+			if ( ! $next && ! $previous ) { return; }
+		}
+		if ( $page_max < 2 && ( is_home() || is_archive() || is_search() ) ) { return; }
+
+		$nav_class .= ( is_single() ) ? 'post-extra post-navigation ' : 'paging-navigation ';
+
+		?>
+		<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+			<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h1>
+			<ul class="pager">
+
+			<?php if ( is_single() ) : // Navigation links for single posts ?>
+
+				<?php previous_post_link( '<li class="nav-previous prev">%link</li>', '<i class="icon icon-chevron-left"></i> %title' ); ?>
+				<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <i class="icon icon-chevron-right"></i>' ); ?>
+
+			<?php elseif ( $page_max > 1 && ( is_home() || is_archive() || is_search() ) ) : ?>
+
+				<?php if ( get_next_posts_link() ) : ?>
+				<li class="nav-previous prev"><?php next_posts_link( __( '<i class="icon icon-chevron-left"></i> Older posts', 'mixt' ) ); ?></li>
+				<?php endif; ?>
+
+				<?php if ( get_previous_posts_link() ) : ?>
+				<li class="nav-next next"><?php previous_posts_link( __( 'Newer posts <i class="icon icon-chevron-right"></i>', 'mixt' ) ); ?></li>
+				<?php endif; ?>
+
+			<?php endif; ?>
+
+			</ul>
+		</nav>
+		<?php
 	}
-
-	// Don't print empty markup in archives if there's only one page.
-	if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) )
-		return;
-
-	$nav_class = ( is_single() ) ? 'post-navigation' : 'paging-navigation';
-
-	?>
-	<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h1>
-		<ul class="pager">
-
-		<?php if ( is_single() ) : // navigation links for single posts ?>
-
-			<?php previous_post_link( '<li class="nav-previous previous">%link</li>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'mixt' ) . '</span> %title' ); ?>
-			<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'mixt' ) . '</span>' ); ?>
-
-		<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
-
-			<?php if ( get_next_posts_link() ) : ?>
-			<li class="nav-previous previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'mixt' ) ); ?></li>
-			<?php endif; ?>
-
-			<?php if ( get_previous_posts_link() ) : ?>
-			<li class="nav-next next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'mixt' ) ); ?></li>
-			<?php endif; ?>
-
-		<?php endif; ?>
-
-		</ul>
-	</nav>
-	<?php
 }
 
 
@@ -228,118 +283,6 @@ function mixt_the_attached_image() {
 		the_title_attribute( array( 'echo' => false ) ),
 		wp_get_attachment_image( $post->ID, $attachment_size )
 	);
-}
-
-
-/**
- * Prints or returns HTML with meta information for the current post-date/time and author.
- *
- * @param mixed $args array of arguments or null to use global settings
- */
-function mixt_post_meta( $args = array() ) {
-
-	global $mixt_opt;
-
-	if ( is_null($args) ) {
-		$args = array();
-		
-		if ( $mixt_opt['meta-show'] == false ) { return false; }
-
-		if ( $mixt_opt['meta-author']   == false ) { $args['author'] = false; }
-		if ( $mixt_opt['meta-date']     == false ) { $args['date'] = false; }
-		if ( $mixt_opt['meta-category'] == false ) { $args['category'] = false; }
-		if ( $mixt_opt['meta-comments'] == false ) { $args['comments'] = false; }
-		if ( ! empty($mixt_opt['meta-separator']) ) { $args['separator'] = $mixt_opt['meta-separator']; }
-	}
-
-	// Default Args
-	$defaults = array(
-		'echo'      => true,
-		'author'    => true,
-		'date'      => true,
-		'category'  => true,
-		'comments'  => true,
-		'separator' => '',
-	);
-
-	$args = wp_parse_args($args, $defaults);
-
-	$author = $date = $category = $comments = '';
-
-	$separator = empty($args['separator']) ? '' : '<span class="meta-sep">' . $args['separator'] . '</span>';
-
-	// Author
-	if ( $args['author'] ) {
-		$author_name   = get_the_author();
-		$author_icon   = empty($mixt_opt['meta-author-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-author-icon'] . '"></i>';
-		if ( empty($author_name) ) {
-			$author_id   = get_queried_object()->post_author;
-			$author_name = get_the_author_meta( 'display_name', $author_id );
-		} else {
-			$author_id = get_the_author_meta( 'ID' );
-		}
-
-		if ( ! empty($author_name) ) {
-			$author_url = esc_url( get_author_posts_url( $author_id ) );
-			$author_all = __( 'View all posts by ', 'mixt' ) . esc_attr( $author_name );
-			$author = '<span class="author vcard"><a class="url fn n" href="' . $author_url . '" title="' . $author_all . '">' . esc_html( $author_name ) . '</a></span>';
-			$author = '<span class="byline">' . $author_icon . __( 'By ', 'mixt' ) . $author . '</span>' . $separator;
-		}
-	}
-
-	// Post Date
-	if ( $args['date'] ) {
-		$date_iso    = esc_attr( get_the_date('c') );
-		$date_format = esc_html( get_the_date('F jS, Y') );
-		$date_url    = get_day_link( get_the_date('Y'), get_the_date('m'), get_the_date('d') );
-		$date_icon   = empty($mixt_opt['meta-date-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-date-icon'] . '"></i>';
-
-		$date = '<time class="entry-date published" datetime="' . $date_iso . '">' . $date_format . '</time>';
-		$date = '<a href="' . esc_url( $date_url ) . '" title="' . esc_attr( get_the_time() ) . '" rel="bookmark">' . $date . '</a>';
-
-		if ( get_the_time('U') !== get_the_modified_time( 'U' ) ) {
-			// Post was updated
-			$updated_iso  = esc_attr( get_the_modified_date('c') );
-			$updated_date = esc_html( get_the_modified_date() );
-			$updated_text = __( 'Updated', 'mixt' );
-
-			$date .= '<time class="updated" datetime="' . $updated_iso . '" title="' . $updated_text . '&nbsp;' . $updated_date . '">*</time>';
-		}
-
-		$date = '<span class="posted-on">' . $date_icon . $date . '</span>' . $separator;
-	}
-
-	// Category
-	if ( $args['category'] ) {
-		$cats     = get_the_category();
-		$cat_icon = empty($mixt_opt['meta-category-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-category-icon'] . '"></i>';
-		if ( ! empty($cats) && is_array($cats) ) {
-			$category = '<span class="cat">' . $cat_icon;
-			foreach ( $cats as $cat ) {
-				$category .= '<a href="' . get_category_link($cat->term_id ) . '">' . $cat->cat_name . '</a>';
-			}
-			$category .= '</span>' . $separator;
-		}
-	}
-
-	// Comments
-	if ( $args['comments'] && ( comments_open() || '0' != get_comments_number() ) ) {
-		$comments_num  = get_comments_number();
-		$comments_icon = empty($mixt_opt['meta-comments-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-comments-icon'] . '"></i>';
-
-		
-		if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }
-		else if ( $comments_num > 1 ) { $comments_text = $comments_num . __( ' comments', 'mixt' ); }
-		else { $comments_text = __( '1 comment', 'mixt' ); }
-
-		$comments = '<span class="comments">' . $comments_icon . '<a href="' . get_comments_link() . '">' . $comments_text . '</a></span>' . $separator;
-	}
-
-	// Full HTML string
-	$meta = '<div class="entry-meta post-meta">' . $author . $date . $category . $comments . '</div>';
-
-	if ( $args['echo'] ) { echo $meta; }
-	else { return $meta; }
 }
 
 

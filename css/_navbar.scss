@@ -38,129 +38,6 @@ $sec-nav-item-height: 32px;
 	}
 }
 
-// SECONDARY NAVIGATION
-
-.second-nav {
-	min-height: $sec-nav-item-height;
-	z-index: 10000;
-
-	.left, .right {
-		border-color: inherit;
-	}
-
-	// Left Side
-	.left {
-		float: left;
-
-		.dropdown:last-child > .sub-menu {
-			left: 0; right: auto;
-		}
-	}
-
-	// Right Side
-	.right {
-		float: right;
-		text-align: right;
-
-		.nav {
-			float: right;
-		}
-	}
-
-	// Navigation
-	.nav {
-		> li {
-			float: left;
-
-			> a {
-				padding: 0 10px;
-				line-height: $sec-nav-item-height - 1px;
-			}
-		}
-
-		li > a { font-size: 12px; }
-
-		.menu-icon { font-size: 14px; }
-
-		.drop-arrow { font-size: 8px; }
-
-		.sub-menu li > a { padding: 8px; }
-
-		.divider,
-		.btn-cont {
-			height: ($sec-nav-item-height - 6px);
-			margin-top: 3px;
-			margin-bottom: 3px;
-		}
-		.btn-cont {
-			margin-left: 3px;
-			margin-right: 3px;
-
-			.btn { padding: 0 10px; }
-		}
-
-		.mega-menu > .sub-menu > li > a {
-			height: 38px;
-			max-height: 38px;
-			padding-top: 10px !important;
-		}
-	}
-
-	.no-menu-msg {
-		line-height: $sec-nav-item-height;
-	}
-
-	&.bordered .left .dropdown:last-child > .sub-menu {
-		left: -1px; right: auto;
-	}
-
-	// Custom Code / Text
-	.content-code { display: table; }
-	.code-inner {
-		font-size: 13px;
-		display: table-cell;
-		vertical-align: middle;
-
-		a, i, strong, em { vertical-align: baseline; }
-
-		.icon { margin: auto 5px; }
-	}
-
-	.nav > li > a,
-	.content-code {
-		height: $sec-nav-item-height;
-	}
-
-	// Handle left and right side "overlap"
-	&.items-overlap {
-
-		.container { padding: 0; }
-
-		.left, .right {
-			width: 100%;
-			font-size: 0;
-			text-align: center;
-
-			> .content-code,
-			> .navbar-inner,
-			> .link-list {
-				float: none;
-				display: inline-block;
-			}
-
-			.nav > li {
-				float: none;
-				display: inline-block;
-				vertical-align: top;
-			}
-
-			.divider { display: none !important; }
-		}
-
-		.right { border-top: 1px solid #000; border-color: inherit; }
-	}
-}
-
 // PRIMARY NAVIGATION
 
 #top-nav-wrap {
@@ -321,6 +198,131 @@ $sec-nav-item-height: 32px;
 	height: 0 !important;
 	min-height: 0 !important;
 }
+
+
+// SECONDARY NAVIGATION
+
+.second-nav {
+	min-height: $sec-nav-item-height;
+	z-index: 10000;
+
+	.left, .right {
+		border-color: inherit;
+	}
+
+	// Left Side
+	.left {
+		float: left;
+
+		.dropdown:last-child > .sub-menu {
+			left: 0; right: auto;
+		}
+	}
+
+	// Right Side
+	.right {
+		float: right;
+		text-align: right;
+
+		.nav {
+			float: right;
+		}
+	}
+
+	// Navigation
+	.nav {
+		> li {
+			float: left;
+
+			> a {
+				padding: 0 10px;
+				line-height: $sec-nav-item-height - 1px;
+			}
+		}
+
+		li > a { font-size: 12px; }
+
+		.menu-icon { font-size: 14px; }
+
+		.drop-arrow { font-size: 8px; }
+
+		.sub-menu li > a { padding: 8px; }
+
+		.divider,
+		.btn-cont {
+			height: ($sec-nav-item-height - 6px);
+			margin-top: 3px;
+			margin-bottom: 3px;
+		}
+		.btn-cont {
+			margin-left: 3px;
+			margin-right: 3px;
+
+			.btn { padding: 0 10px; }
+		}
+
+		.mega-menu > .sub-menu > li > a {
+			height: 38px;
+			max-height: 38px;
+			padding-top: 10px !important;
+		}
+	}
+
+	.no-menu-msg {
+		line-height: $sec-nav-item-height;
+	}
+
+	&.bordered .left .dropdown:last-child > .sub-menu {
+		left: -1px; right: auto;
+	}
+
+	// Custom Code / Text
+	.content-code { display: table; }
+	.code-inner {
+		font-size: 13px;
+		display: table-cell;
+		vertical-align: middle;
+
+		a, i, strong, em { vertical-align: baseline; }
+
+		.icon { margin: auto 5px; }
+	}
+
+	.nav > li > a,
+	.content-code {
+		height: $sec-nav-item-height;
+	}
+
+	// Handle left and right side "overlap"
+	&.items-overlap {
+
+		.container { padding: 0; }
+
+		.left, .right {
+			width: 100%;
+			font-size: 0;
+			text-align: center;
+
+			> .content-code,
+			> .navbar-inner,
+			> .link-list {
+				float: none;
+				display: inline-block;
+			}
+
+			.nav > li {
+				float: none;
+				display: inline-block;
+				vertical-align: top;
+			}
+
+			.divider { display: none !important; }
+		}
+
+		.right { border-top: 1px solid #000; border-color: inherit; }
+	}
+}
+
 
 // MEDIA QUERIES
 

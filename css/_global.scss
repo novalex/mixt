@@ -20,7 +20,7 @@ body.loading {
 	display: table;
 	opacity: 0;
 	visibility: hidden;
-	background: $aqua-accent;
+	background: $theme-accent;
 	z-index: 999999;
 
 	transition: visibility 0.2s ease 0.2s, opacity 0.2s ease 0.2s;

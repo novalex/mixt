@@ -12,6 +12,7 @@ MIXT GLOBAL FUNCTIONS
 	var viewport = $(window),
 		bodyEl   = $('body');
 
+
 	// Fix WPML Dropdown
 
 	$('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
@@ -30,6 +31,32 @@ MIXT GLOBAL FUNCTIONS
 		langs.wrapAll('<ul class="sub-menu dropdown-menu"></ul>').parent().appendTo(item);
 	}
 	plLangDrop();
+
+
+	// Functions To Run On Blog & Post Pages
+
+	function postsPage() {
+
+		// Featured gallery slider
+		if ( typeof $.fn.lightSlider === 'function' ) {
+			var gallerySlider = $('.gallery-slider').not('.lightSlider');
+
+			gallerySlider.lightSlider({
+				item: 1,
+				auto: true,
+				loop: true,
+				pager: false,
+				pause: 5000,
+				keyPress: true,
+				slideMargin: 0,
+			});
+		}
+
+		// Equalize featured media height for related posts and grid blog
+		if ( typeof $.fn.matchHeight === 'function' ) {
+			$('.blog-grid .post-feat, .post-related .post-feat').matchHeight();
+		}
+	}
 
 
 	// RUN ON LOAD
@@ -127,46 +154,28 @@ MIXT GLOBAL FUNCTIONS
 			}
 		});
 
-		// Featured Gallery Slider
-		if ( typeof $.fn.lightSlider === 'function' ) {
-			var gallerySlider = $('.gallery-slider');
+		// Isotope Masonry Init
 
-			gallerySlider.lightSlider({
-				item: 1,
-				auto: true,
-				loop: true,
-				pager: false,
-				pause: 5000,
-				keyPress: true,
-				slideMargin: 0,
+		if ( mixt_opt['blog-type'] == 'masonry' ) {
+			var blogCont = $('.blog-masonry .posts-container');
+
+			blogCont.isotope({
+				itemSelector: '.hentry',
+				layout: 'masonry',
+				gutter: 0
 			});
+
+			blogCont.imagesLoaded( function() { blogCont.isotope('layout'); });
+			viewport.resize( $.debounce( 500, function() { blogCont.isotope('layout'); } ));
 		}
 
+		postsPage();
+
 	});
-
-	// Isotope Masonry Init
-
-	if ( mixt_opt['blog-type'] == 'masonry' ) {
-		var blogCont = $('.blog-masonry .blog-container');
-
-		blogCont.isotope({
-			itemSelector: '.hentry',
-			layout: 'masonry'
-		});
-
-		blogCont.imagesLoaded( function() {
-			blogCont.isotope('layout');
-		});
-	}
 
 	// lightSlider Instances
 
 	var postGallerySlider = $('.gallery-slider');
-
-	// Equalize Related Posts Height For Featured Media
-	if ( typeof $.fn.matchHeight === 'function' ) {
-		$('.post-related .post-feat').matchHeight();
-	}
 
 	// Resize Embedded Videos Proportionally
 
@@ -185,22 +194,94 @@ MIXT GLOBAL FUNCTIONS
 	}
 	iframeAspect();
 
-	// Functions to run on window resize
+
+	// AJAX POST LOADING
+
+	if ( mixt_opt['pagination-type'] != 'classic' ) {
+		var pageNum = parseInt(mixt_opt['page-num']) + 1,
+			pageMax = parseInt(mixt_opt['page-max']),
+			nextLink = mixt_opt['next-page-link'],
+
+			container = $('.posts-container'),
+			pagCont   = $('.paging-navigation'),
+			ajaxBtn   = $('.ajax-more', pagCont);
+
+		// Trigger AJAX load upon reaching bottom of page
+		var ajaxScrollHandle = $.debounce( 500, function() {
+				/* global elemVisible */
+				if ( elemVisible(ajaxBtn, viewport) === true ) {
+					ajaxBtn.trigger('cont:bottom');
+				}
+			});
+		if ( mixt_opt['pagination-type'] == 'ajax-scroll' && ajaxBtn.length ) {
+			viewport.on('scroll', ajaxScrollHandle);
+		}
+		
+		ajaxBtn.on('click cont:bottom', function() {
+			/* jshint unused: false */
+
+			var $button = $(this);
+
+			// Prevent loading twice on scroll
+			viewport.off('scroll', ajaxScrollHandle);
+		
+			// Are there more pages to load?
+			if ( pageNum <= pageMax ) {
+			
+				$button.button('loading');
+
+				// Load posts
+				$('<div>').load(nextLink + ' .posts-container .hentry', function(response, status, xhr) {
+					var newPosts = $(this);
+
+					$button.blur();
+
+					newPosts.children('.hentry').addClass('ajax-new');
+					if ( mixt_opt['blog-type'] != 'masonry' && mixt_opt['show-page-nr'] == 'true' ) {
+						newPosts.prepend('<div class="ajax-page page-'+ pageNum +'"><a href="'+ nextLink +'">Page '+ pageNum +'</a></div>');
+					}
+					container.append(newPosts.html());
+
+					newPosts = container.children('.ajax-new');
+
+					// Update page number and nextLink
+					pageNum++;
+					nextLink = nextLink.replace(/\/page\/[0-9]?/, '/page/'+ pageNum);
+					
+					// Update the button state
+					if ( pageNum <= pageMax ) { $button.button('reset'); }
+					else { $button.button('complete'); }
+
+					// Update layout once posts have loaded
+					setTimeout( function() {
+						iframeAspect();
+						postsPage();
+						newPosts.removeClass('ajax-new');
+						if ( mixt_opt['blog-type'] == 'masonry' ) { $('.blog-masonry .posts-container').isotope('appended', newPosts); }
+					}, 100);
+
+					if ( mixt_opt['pagination-type'] == 'ajax-scroll' ) { viewport.on('scroll', ajaxScrollHandle); }
+
+					// Handle Errors
+					if ( status == 'error' ) {
+						$button.button('error');
+						// Debugging info
+						// alert('AJAX Error: ' + xhr.status + ' ' + xhr.statusText );
+					}
+				});
+			}	
+			
+			return false;
+		});
+	}
+
+	// Functions To Run On Window Resize
 
 	function resizeFn() {
 		iframeAspect();
-
 		postGallerySlider.css('height', '');
 	}
 
 	viewport.resize( $.debounce( 500, resizeFn ));
-
-	// $(document).ready( function() {
-	// 	// Init Stellar Parallax
-
-	// 	$('.parallax').stellar({
-	// 		responsive: true
-	// 	});
-	// });
 
 }(jQuery));

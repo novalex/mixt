@@ -79,6 +79,10 @@
 			'return'  => 'value',
 			'default' => 'standard',
 		),
+		'blog-columns' => array(
+			'return'  => 'value',
+			'default' => '2-col',
+		),
 	);
 	$page_options = mixt_get_options($page_options);
 
@@ -230,9 +234,7 @@
 		</nav><?php // Close #top-nav ?>
 
 		<div id="navbar-check"></div>
-	</div><?php // Close #top-nav-wrap ?>
-
-	<?php
+	</div><?php // Close #top-nav-wrap
 
 	// Show Header Media (Below Navbar)
 	if ( $header_options['head-media'] == 'true' && $navbar_options['nav-position']['value'] != 'below' ) {
@@ -244,21 +246,34 @@
 		mixt_location_bar();
 	}
 
+	// Start Content Wrapper
+
+	$content_classes = 'main-content container ';
+
+	if ( $page_options['sidebar'] != 'false' ) {
+		$content_classes .= 'has-sidebar ';
+
+		if ( $page_options['sidebar-position'] == 'left' ) { $content_classes .= 'sidebar-left '; }
+	}
+
 	?>
 
-	<?php // Start Content Wrapper ?>
+	<div id="content-wrap" class="<?php echo $content_classes; ?>">
+		<div class="row">
 
-	<div id="content-wrap" class="main-content container">
-		<div class="row"><?php
+			<?php
 
-			$cont_classes = 'main-content-inner col-sm-12 ';
+			/**
+			 * TODO: Check for type of page displayed and fetch specific settings if page is archive, tag, category...
+			 */
+
+			$cont_classes = 'main-content-inner ';
 			
 			if ( ! is_front_page() && is_home() ) {
 				$cont_classes .= 'blog-' . $page_options['blog-type'] . ' ';
+				if ( $page_options['blog-type'] != 'standard' ) { $cont_classes .= 'blog-' . $page_options['blog-columns'] . '-col '; }
 			}
 
-			if ( $page_options['sidebar'] != 'false' ) { $cont_classes .= 'col-md-9 '; }
-			else { $cont_classes .= 'col-md-12 '; }
-
-			if ( $page_options['sidebar-position'] == 'left' ) { $cont_classes .= ' pull-right'; } ?>
+			?>
+			
 			<div id="content" class="<?php echo $cont_classes; ?>">

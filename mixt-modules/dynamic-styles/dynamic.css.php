@@ -21,6 +21,18 @@ function mixt_print_css() {
 
 	if ( ! is_array($mixt_opt) ) { return; }
 
+	// FUNCTIONS
+
+	$set_color_for_bg = function($bg, $colors = array('#333333', '#ffffff')) {
+		$bg_ob = new Color($bg);
+
+		if ( $bg_ob->isLight() ) {
+			return $colors[0];
+		} else {
+			return $colors[1];
+		}
+	};
+
 	// MEDIA BREAKPOINTS
 
 	$media_bp = function($bp, $range = 'max') {
@@ -116,7 +128,7 @@ function mixt_print_css() {
 
 	$site_link_color = ! empty($site_theme['link']) ? $site_theme['link'] : $site_accent;
 
-	if ( ! array_key_exists($active_site_theme, $default_site_themes) || 0 < 1 ) {
+	if ( ! array_key_exists($active_site_theme, $default_site_themes) || 0 < 1 ) { ////////////////////////////////////////////////////////////////////////////////
 
 		// Text Color
 		echo "body, a.no-color, a:hover, a:focus { color: $site_text; }\n";
@@ -126,19 +138,17 @@ function mixt_print_css() {
 			 ".post-meta > span { color: $site_text_fade; }\n";
 
 		// Border Color
-		echo ".post-extra," .
-			 ".comments-area," .
-			 ".comment .children," .
-			 ".comment-cont { border-color: $site_border; }\n";
+		echo "#content { border-color: $site_border; }\n";
 
 		// Accent Text Color
 		echo ".accent-color { color: $site_accent; }\n";
 
 		// Accent Background Color
 		echo ".accent-bg," .
+			 ".accent-bg:hover," .
 			 ".tag-list a:hover," .
 			 ".tagcloud a:hover," .
-			 ".hover-accent-bg:hover { background-color: $site_accent; }\n";
+			 ".hover-accent-bg:hover { background-color: $site_accent; color: " . $set_color_for_bg($site_accent, array($site_text, $site_inv_text)) . "; }\n";
 
 		// Accent Border Color
 		echo "blockquote { border-color: $site_accent; }\n";

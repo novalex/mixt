@@ -168,11 +168,42 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 		'show_names'   => true,
 		'fields'       => array(
 
+			// Blog Type
+			array(
+				'id'      => $prefix . 'blog-type',
+				'name'    => __( 'Blog Type', 'mixt' ),
+				'desc'    => __( 'Select the blog layout type', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'   => __( 'Auto', 'mixt' ),
+					'standard' => __( 'Standard', 'mixt' ),
+					'grid'     => __( 'Grid', 'mixt' ),
+					'masonry'  => __( 'Masonry', 'mixt' ),
+				),
+				'default' => 'auto',
+			),
+
+			// Blog Columns
+			array(
+				'id'      => $prefix . 'blog-columns',
+				'name'    => __( 'Blog Columns', 'mixt' ),
+				'desc'    => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto' => __( 'Auto', 'mixt' ),
+					'2'    => '2',
+					'3'    => '3',
+					'4'    => '4',
+					'5'    => '5',
+				),
+				'default' => 'auto',
+			),
+
 			// Post Image Size
 			array(
 				'id'      => $prefix . 'post-feat-size',
-				'name'    => __( 'Image Size', 'mixt' ),
-				'desc'    => __( 'Size of the post featured media', 'mixt' ),
+				'name'    => __( 'Media Size', 'mixt' ),
+				'desc'    => __( 'Select a size for the featured post media', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
 					'auto'   => __( 'Auto', 'mixt' ),

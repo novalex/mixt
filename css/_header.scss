@@ -110,7 +110,7 @@
     .container,
     .media-inner a:not(:hover),
     #breadcrumbs > li + li:before {
-        color: $aqua-color;
+        color: $theme-color;
     }
 
     &.bg-dark {
@@ -120,7 +120,7 @@
         .container,
         .media-inner a:not(:hover),
         #breadcrumbs > li + li:before {
-            color: $aqua-bg-dark-color;
+            color: $theme-bg-dark-color;
         }
     }
 }
@@ -173,7 +173,7 @@
 
         p {
             font-size: $font-size-s;
-            margin: $margin-s 0 0;
+            margin: 5px 0 0;
         }
     }
     #breadcrumbs + .page-title { text-align: right; }

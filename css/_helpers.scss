@@ -1,7 +1,29 @@
 
 /* - MIXT HELPERS - */
 
-// 1. Borders
+
+// 1. Functions
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+@function set-color-for-bg($bg) {
+	@if (lightness($bg) > 75) {
+		@return $theme-color;
+	} @else {
+		@return $theme-bg-dark-color;
+	}
+}
+
+// 2. Borders
+
 .border-base {
 	border-width: 0;
 	border-style: solid;
@@ -28,7 +50,8 @@
 	&:after { clear: both; }
 }
 
-// ?. 
+// 3. Layering
+
 %bring-to-front {
 	position: relative;
 	z-index: 1;

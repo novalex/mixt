@@ -14,7 +14,7 @@
 
 		> ul,
 		.menu-item-has-children > ul {
-			border-top: 1px solid $aqua-border;
+			border-top: 1px solid $theme-border;
 		}
 
 		a {
@@ -38,7 +38,7 @@
 
 	.nav li,
 	#recentcomments li {
-		border-bottom: 1px solid $aqua-border;
+		border-bottom: 1px solid $theme-border;
 	}
 
 	#recentcomments li { padding: $padding-s 0 !important; }

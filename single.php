@@ -30,14 +30,14 @@ get_header();
 		);
 		$options = mixt_get_options($options);
 
-		// About The Author
-		if ( $options['post-about-author'] == 'true' ) {
-			mixt_about_the_author();
-		}
-
 		// Post Navigation
 		if ( $options['post-navigation'] == 'true' ) {
 			mixt_content_nav( 'nav-below' );
+		}
+
+		// About The Author
+		if ( $options['post-about-author'] == 'true' ) {
+			mixt_about_the_author();
 		}
 
 		// Related Posts

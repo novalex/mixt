@@ -146,3 +146,78 @@ function mixt_preset_social_profiles() {
 
 	return $profiles;
 }
+
+/**
+ * Display the social sharing buttons
+ */
+function mixt_social_sharing_links() {
+
+	$networks = array(
+		// Facebook
+		'facebook'  => array(
+			'name'  => 'Facebook',
+			'url'   => 'https://www.facebook.com/',
+			'icon'  => 'icon-facebook',
+			'color' => '#3b5998',
+			'title' => __('Like us on Facebook', 'mixt'),
+		),
+		// Twitter
+		'twitter'  => array(
+			'name'  => 'Twitter',
+			'url'   => 'https://twitter.com/',
+			'icon'  => 'icon-twitter',
+			'color' => '#00aced',
+			'title' => __('Follow us on Twitter', 'mixt'),
+		),
+		// Google+
+		'google+'  => array(
+			'name'  => 'Google+',
+			'url'   => 'https://plus.google.com/',
+			'icon'  => 'icon-googleplus',
+			'color' => '#dd4b39',
+			'title' => __('Follow us on Google+', 'mixt'),
+		),
+		// YouTube
+		'youtube'  => array(
+			'name'  => 'YouTube',
+			'url'   => 'https://www.youtube.com/',
+			'icon'  => 'icon-youtube',
+			'color' => '#bb0000',
+			'title' => __('Subscribe to us on Youtube', 'mixt'),
+		),
+		// LinkedIn
+		'linkedin'  => array(
+			'name'  => 'LinkedIn',
+			'url'   => 'https://www.linkedin.com/',
+			'icon'  => 'icon-linkedin',
+			'color' => '#007bb6',
+			'title' => __('Connect on LinkedIn', 'mixt'),
+		),
+		// Instagram
+		'instagram'  => array(
+			'name'  => 'Instagram',
+			'url'   => 'https://instagram.com/',
+			'icon'  => 'icon-instagram',
+			'color' => '#517fa4',
+			'title' => __('Follow us on Instagram', 'mixt'),
+		),
+		// Pinterest
+		'pinterest'  => array(
+			'name'  => 'Pinterest',
+			'url'   => 'https://www.pinterest.com/',
+			'icon'  => 'icon-pinterest',
+			'color' => '#cb2027',
+			'title' => __('Follow us on Pinterest', 'mixt'),
+		),
+		// Tumblr
+		'tumblr'  => array(
+			'name'  => 'Tumblr',
+			'url'   => 'https://www.tumblr.com/',
+			'icon'  => 'icon-tumblr',
+			'color' => '#32506d',
+			'title' => __('Follow us on Tumblr', 'mixt'),
+		),
+	);
+
+	return $profiles;
+}

@@ -4,8 +4,7 @@
 #main-wrap {
 	min-height: 100%;
 	height: auto !important;
-	margin: 0 auto -50px;
-	padding-bottom: 50px;
+	margin: 0 auto;
 }
 
 .admin-bar #main-wrap { padding-top: 32px; }
@@ -17,18 +16,81 @@
 #content-wrap {
 	color: $text-dark-color;
 	border-color: $border-color;
-	border-color: $border-color-alpha;
 	
-	> .container { padding-bottom: 0; }
+	> .row { border-color: inherit; }
 }
 
-.main-content-inner { padding-bottom: 0; }
+#content,
+.sidebar {
+	padding-left: $gutter;
+	padding-right: $gutter;
+	border-width: 0;
+	border-style: solid;
+}
 
+#content,
+.sidebar,
+.posts-container,
+.page-nav { border-color: inherit; }
+
+@include media('screen', 'mars') {
+	#content-wrap {
+		&.has-sidebar {
+			#content {
+				float: left;
+				width: 70%;
+				padding-left: $gutter;
+				padding-right: $gutter-l;
+				border-right-width: 1px;
+			}
+			.sidebar {
+				width: 30%;
+				margin-left: -1px;
+				padding-right: $gutter;
+				padding-left: $gutter-l;
+				border-left-width: 1px;
+			}
+		}
+
+		&.sidebar-left {
+			#content {
+				float: right;
+				padding-left: $gutter-l;
+				padding-right: $gutter;
+				border-left-width: 1px;
+				border-right-width: 0;
+			}
+			.sidebar {
+				margin-left: 0;
+				padding-left: $gutter;
+				padding-right: $gutter-l;
+				border-left-width: 0;
+				box-shadow: 1px 0 0 $border-color;
+
+			}
+		}
+	}
+
+	.fullwidth #content-wrap {
+		#content,
+		.sidebar {
+			padding-left: $gutter-l;
+			padding-right: $gutter-l;
+		}
+	}
+}
 
 // Fullwidth Layout
 
 .fullwidth {
+	#content-wrap,
 	#content-wrap .container { width: 100%; }
+
+	.blog-grid {
+		padding: 0 !important;
+
+		.paging-navigation { padding: 0 $gutter; }
+	}
 }
 
 
@@ -53,7 +115,7 @@
 	transition: color 0.2s, background 0.2s;
 
 	&:hover {
-		background-color: $aqua-accent;
+		background-color: $theme-accent;
 	}
 }
 
@@ -141,8 +203,13 @@ footer.entry-meta { clear: both; }
 blockquote {
 	font-size: $font-size;
 	padding: $padding-s;
-	border-color: $aqua-accent;
+	border-color: $theme-accent;
 	background-color: rgba(0,0,0,0.03);
 
-	cite { font-size: $font-size-s; }
+	cite {
+		display: block;
+		margin-top: 6px;
+		opacity: 0.8;
+		font-size: $font-size-s;
+	}
 }

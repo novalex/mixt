@@ -464,8 +464,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Enable
 						array(
-							'id'   => 'head-media',
-							'type' => 'switch',
+							'id'       => 'head-media',
+							'type'     => 'switch',
 							'title'    => __( 'Enabled', 'mixt' ),
 							'subtitle' => __( 'Display the header media element on all pages where possible', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -475,8 +475,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Fullscreen
 						array(
-							'id'   => 'head-fullscreen',
-							'type' => 'switch',
+							'id'       => 'head-fullscreen',
+							'type'     => 'switch',
 							'title'    => __( 'Fullscreen', 'mixt' ),
 							'subtitle' => __( 'Header fills entire screen size', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1167,8 +1167,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Position
 						array(
-							'id'   => 'nav-position',
-							'type' => 'button_set',
+							'id'       => 'nav-position',
+							'type'     => 'button_set',
 							'title'    => __( 'Position', 'mixt' ),
 							'subtitle' => __( 'Display navbar above or below header (when possible)', 'mixt' ),
 							'options'  => array(
@@ -1180,8 +1180,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Hover Item Background
 						array(
-							'id'   => 'nav-hover-bg',
-							'type' => 'button_set',
+							'id'       => 'nav-hover-bg',
+							'type'     => 'button_set',
 							'title'    => __( 'Hover Item Background', 'mixt' ),
 							'subtitle' => __( 'Item background color on hover', 'mixt' ),
 							'options'  => array(
@@ -1193,8 +1193,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Active Item Bar
 						array(
-							'id'   => 'nav-active-bar',
-							'type' => 'button_set',
+							'id'       => 'nav-active-bar',
+							'type'     => 'button_set',
 							'title'    => __( 'Active Item Bar', 'mixt' ),
 							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
 							'options'  => array(
@@ -1206,8 +1206,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Active Item Bar Position
 						array(
-							'id'   => 'nav-active-bar-pos',
-							'type' => 'button_set',
+							'id'       => 'nav-active-bar-pos',
+							'type'     => 'button_set',
 							'title'    => __( 'Active Bar Position', 'mixt' ),
 							'subtitle' => __( 'Where will the active bar be placed', 'mixt' ),
 							'options'  => array(
@@ -1222,8 +1222,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Border Items
 						array(
-							'id'   => 'nav-bordered',
-							'type' => 'button_set',
+							'id'       => 'nav-bordered',
+							'type'     => 'button_set',
 							'title'    => __( 'Border Items', 'mixt' ),
 							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
 							'options'  => array(
@@ -1283,8 +1283,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Hover Item Background
 						array(
-							'id'   => 'sec-nav-hover-bg',
-							'type' => 'button_set',
+							'id'       => 'sec-nav-hover-bg',
+							'type'     => 'button_set',
 							'title'    => __( 'Hover Item Background', 'mixt' ),
 							'subtitle' => __( 'Item background color on hover', 'mixt' ),
 							'options'  => array(
@@ -1297,8 +1297,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Active Item Bar
 						array(
-							'id'   => 'sec-nav-active-bar',
-							'type' => 'button_set',
+							'id'       => 'sec-nav-active-bar',
+							'type'     => 'button_set',
 							'title'    => __( 'Active Item Bar', 'mixt' ),
 							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
 							'options'  => array(
@@ -1311,8 +1311,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Active Item Bar Position
 						array(
-							'id'   => 'sec-nav-active-bar-pos',
-							'type' => 'button_set',
+							'id'       => 'sec-nav-active-bar-pos',
+							'type'     => 'button_set',
 							'title'    => __( 'Active Bar Position', 'mixt' ),
 							'subtitle' => __( 'Where will the active bar be placed', 'mixt' ),
 							'options'  => array(
@@ -1327,8 +1327,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Border Items
 						array(
-							'id'   => 'sec-nav-bordered',
-							'type' => 'button_set',
+							'id'       => 'sec-nav-bordered',
+							'type'     => 'button_set',
 							'title'    => __( 'Border Items', 'mixt' ),
 							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
 							'options'  => array(
@@ -1406,8 +1406,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Enable Sidebar
 					array(
-						'id'   => 'page-sidebar',
-						'type' => 'switch',
+						'id'       => 'page-sidebar',
+						'type'     => 'switch',
 						'title'    => __( 'Enabled', 'mixt' ),
 						'subtitle' => __( 'Display the sidebar', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
@@ -1417,8 +1417,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Sidebar Position
 					array(
-						'id'   => 'sidebar-position',
-						'type' => 'button_set',
+						'id'       => 'sidebar-position',
+						'type'     => 'button_set',
 						'title'    => __( 'Position', 'mixt' ),
 						'subtitle' => __( 'Sidebar to the left or to the right of the page', 'mixt' ),
 						'options'  => array(
@@ -1447,8 +1447,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Blog Type
 					array(
-						'id'   => 'blog-type',
-						'type' => 'button_set',
+						'id'       => 'blog-type',
+						'type'     => 'button_set',
 						'title'    => __( 'Blog Type', 'mixt' ),
 						'subtitle' => __( 'Select the blog layout type', 'mixt' ),
 						'options'  => array(
@@ -1461,24 +1461,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Blog Columns
 					array(
-						'id'   => 'blog-columns',
-						'type' => 'button_set',
+						'id'       => 'blog-columns',
+						'type'     => 'button_set',
 						'title'    => __( 'Blog Columns', 'mixt' ),
 						'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
 						'options'  => array(
-							'col-sm-6' => '2',
-							'col-md-4' => '3',
-							'col-md-3' => '4',
-							'col-md-2' => '6',
+							'2' => '2',
+							'3' => '3',
+							'4' => '4',
+							'5' => '5',
 						),
-						'default'  => 'col-md-4',
+						'default'  => '2',
 						'required' => array('blog-type', '!=', 'standard'),
 					),
 
 					// Post Media Size
 					array(
-						'id'   => 'post-feat-size',
-						'type' => 'button_set',
+						'id'       => 'post-feat-size',
+						'type'     => 'button_set',
 						'title'    => __( 'Media Size', 'mixt' ),
 						'subtitle' => __( 'Select a size for the featured post media', 'mixt' ),
 						'options'  => array(
@@ -1492,8 +1492,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Post Content Type
 					array(
-						'id'   => 'post-content',
-						'type' => 'button_set',
+						'id'       => 'post-content',
+						'type'     => 'button_set',
 						'title'    => __( 'Post Content', 'mixt' ),
 						'subtitle' => __( 'Show an excerpt or the full content on the blog or posts page', 'mixt' ),
 						'options'  => array(
@@ -1529,8 +1529,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// About The Author
 					array(
-						'id'   => 'post-about-author',
-						'type' => 'switch',
+						'id'       => 'post-about-author',
+						'type'     => 'switch',
 						'title'    => __( 'About The Author', 'mixt' ),
 						'subtitle' => __( 'Show info about the author', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
@@ -1540,8 +1540,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Post Navigation
 					array(
-						'id'   => 'post-navigation',
-						'type' => 'switch',
+						'id'       => 'post-navigation',
+						'type'     => 'switch',
 						'title'    => __( 'Post Navigation', 'mixt' ),
 						'subtitle' => __( 'Display links to the previous and next posts', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
@@ -1565,8 +1565,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Related Posts
 						array(
-							'id'   => 'post-related',
-							'type' => 'switch',
+							'id'       => 'post-related',
+							'type'     => 'switch',
 							'title'    => __( 'Show', 'mixt' ),
 							'subtitle' => __( 'Display related posts at the bottom of the post', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1589,8 +1589,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Related Posts Featured Media
 						array(
-							'id'   => 'post-related-feat',
-							'type' => 'switch',
+							'id'       => 'post-related-feat',
+							'type'     => 'switch',
 							'title'    => __( 'Featured Media', 'mixt' ),
 							'subtitle' => __( 'Display featured media for the related posts', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1612,8 +1612,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Related Posts Excerpt
 						array(
-							'id'   => 'post-related-excerpt',
-							'type' => 'switch',
+							'id'       => 'post-related-excerpt',
+							'type'     => 'switch',
 							'title'    => __( 'Excerpt', 'mixt' ),
 							'subtitle' => __( 'Display the excerpt for the related posts', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1638,8 +1638,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Meta Position / Display
 						array(
-							'id'   => 'meta-show',
-							'type' => 'button_set',
+							'id'       => 'meta-show',
+							'type'     => 'button_set',
 							'title'    => __( 'Post Meta', 'mixt' ),
 							'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 							'options'  => array(
@@ -1652,8 +1652,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Meta Author
 						array(
-							'id'   => 'meta-author',
-							'type' => 'switch',
+							'id'       => 'meta-author',
+							'type'     => 'switch',
 							'title'    => __( 'Author', 'mixt' ),
 							'subtitle' => __( 'Display the post author', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1673,8 +1673,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Meta Date
 						array(
-							'id'   => 'meta-date',
-							'type' => 'switch',
+							'id'       => 'meta-date',
+							'type'     => 'switch',
 							'title'    => __( 'Date', 'mixt' ),
 							'subtitle' => __( 'Display the post date and time', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1694,8 +1694,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Meta Category
 						array(
-							'id'   => 'meta-category',
-							'type' => 'switch',
+							'id'       => 'meta-category',
+							'type'     => 'switch',
 							'title'    => __( 'Category', 'mixt' ),
 							'subtitle' => __( 'Display the post category(es)', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1715,8 +1715,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Meta Comments
 						array(
-							'id'   => 'meta-comments',
-							'type' => 'switch',
+							'id'       => 'meta-comments',
+							'type'     => 'switch',
 							'title'    => __( 'Comments', 'mixt' ),
 							'subtitle' => __( 'Display the comments number', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1759,8 +1759,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Info Display
 						array(
-							'id'   => 'post-info',
-							'type' => 'switch',
+							'id'       => 'post-info',
+							'type'     => 'switch',
 							'title'    => __( 'Post Info', 'mixt' ),
 							'subtitle' => __( 'Display the post format and date', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
@@ -1774,7 +1774,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Standard Format Icon', 'mixt' ),
 							'default'  => 'icon-pen',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Aside Format Icon
@@ -1783,7 +1782,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Aside Format Icon', 'mixt' ),
 							'default'  => 'icon-noteslistalt',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Image Format Icon
@@ -1792,7 +1790,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Image Format Icon', 'mixt' ),
 							'default'  => 'icon-picture',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Video Format Icon
@@ -1801,7 +1798,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Video Format Icon', 'mixt' ),
 							'default'  => 'icon-playvideo',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Audio Format Icon
@@ -1810,7 +1806,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Audio Format Icon', 'mixt' ),
 							'default'  => 'icon-music',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Gallery Format Icon
@@ -1819,7 +1814,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Gallery Format Icon', 'mixt' ),
 							'default'  => 'icon-burstmode',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Quote Format Icon
@@ -1828,7 +1822,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Quote Format Icon', 'mixt' ),
 							'default'  => 'icon-quote',
-							'required' => array('post-info', '=', true),
 						),
 
 						// Link Format Icon
@@ -1837,7 +1830,31 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Link Format Icon', 'mixt' ),
 							'default'  => 'icon-linkalt',
-							'required' => array('post-info', '=', true),
+						),
+
+					// Divider
+					array(
+						'id'   => 'post-divider-4',
+						'type' => 'divide',
+					),
+
+					// SOCIAL SHARING SECTION
+					array(
+						'id'       => 'post-social-section',
+						'type'     => 'section',
+						'title'    => __( 'Social Sharing', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Show Share Buttons
+						array(
+							'id'       => 'post-social',
+							'type'     => 'button_set',
+							'title'    => __( 'Show', 'mixt' ),
+							'subtitle' => __( 'Display the share buttons', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
 						),
 				),
 			);
@@ -1853,8 +1870,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Comment Before Notes
 					array(
-						'id'   => 'comment-notes-before',
-						'type' => 'switch',
+						'id'       => 'comment-notes-before',
+						'type'     => 'switch',
 						'title'    => __( 'Show Before Notes', 'mixt' ),
 						'subtitle' => __( 'Display the notes before the comment fields for users not logged in', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
@@ -1864,8 +1881,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Show Logged In As
 					array(
-						'id'   => 'comment-logged-in',
-						'type' => 'switch',
+						'id'       => 'comment-logged-in',
+						'type'     => 'switch',
 						'title'    => __( '&quot;Logged in as&quot;', 'mixt' ),
 						'subtitle' => __( 'Display the &quot;logged in as&quot; message', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
@@ -1875,13 +1892,53 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Show Allowed Tags
 					array(
-						'id'   => 'comment-notes-after',
-						'type' => 'switch',
+						'id'       => 'comment-notes-after',
+						'type'     => 'switch',
 						'title'    => __( 'Allowed Tags', 'mixt' ),
 						'subtitle' => __( 'Display the allowed tags in the comment form', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
 						'default'  => false,
+					),
+				),
+			);
+
+			// POST PAGES SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Post Pages', 'mixt' ),
+				'desc'       => __( 'Manage post and archive pages', 'mixt' ),
+				'icon'       => 'el-icon-th-list',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Pagination Type
+					array(
+						'id'       => 'pagination-type',
+						'type'     => 'select',
+						'title'    => __( 'Pagination', 'mixt' ),
+						'subtitle' => __( 'Select a pagination type', 'mixt' ),
+						'options'  => array(
+							'classic'     => __( 'Classic', 'mixt' ),
+							'numbered'    => __( 'Numbered', 'mixt' ),
+							'ajax-click'  => __( 'Ajax On Click', 'mixt' ),
+							'ajax-scroll' => __( 'Ajax On Scroll', 'mixt' ),
+						),
+						'default'  => 'classic',
+					),
+
+					// Show Page Numbers
+					array(
+						'id'       => 'show-page-nr',
+						'type'     => 'switch',
+						'title'    => __( 'Show Page Numbers', 'mixt' ),
+						'subtitle' => __( 'Display a link with the current page number', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+						'required' => array(
+							array('pagination-type', '!=', 'classic'),
+							array('pagination-type', '!=', 'numbered'),
+						),
 					),
 				),
 			);

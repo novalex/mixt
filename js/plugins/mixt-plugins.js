@@ -120,3 +120,13 @@ function imageCover(cont, type, corrH) {
 		}
 	}
 }
+
+// Determine If An Element Is Scrolled Into View
+function elemVisible(elem, cont) {
+	var contTop = cont.scrollTop(),
+		contBtm = contTop + cont.height(),
+		elemTop = elem.offset().top,
+		elemBtm = elemTop + elem.height();
+
+	return ((elemBtm <= contBtm) && (elemTop >= contTop));
+}

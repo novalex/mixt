@@ -3,38 +3,39 @@
 /**
  * Template For Displaying Archive Pages
  *
- * @package mixt
+ * @package MIXT
  */
 
-get_header(); ?>
+get_header();
 
-	<div class="content-padder">
+if ( have_posts() ) {
 
-		<?php if ( have_posts() ) : ?>
+	echo '<div class="posts-container">';
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+	while ( have_posts() ) : // Start The Loop
 
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'templates/content', get_post_format() );
-				?>
+		the_post();
 
-			<?php endwhile; ?>
+		/* Include the Post-Format-specific template for the content.
+		 * If you want to overload this in a child theme then include a file
+		 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+		 */
+		get_template_part( 'templates/content', get_post_format() );
 
-			<?php mixt_content_nav( 'nav-below' ); ?>
+	endwhile; // End The Loop
 
-		<?php else : ?>
+	echo '</div>'; // Close .posts-container
 
-			<?php get_template_part( 'templates/no-results', 'archive' ); ?>
+	mixt_content_nav( 'nav-below', true );
 
-		<?php endif; ?>
+} else {
 
-	</div>
+	get_template_part( 'templates/no-results', 'archive' ); // Load "Nothing Found / No Results" template
 
-<?php get_sidebar(); ?>
+}
 
-<?php get_footer(); ?>
+get_sidebar();
+
+get_footer();
+
+?>

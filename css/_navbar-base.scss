@@ -10,11 +10,11 @@
 	border-width: 0;
 	border-style: solid;
 	border-bottom-width: 1px;
-	border-color: $aqua-border;
-	border-color: $aqua-border-alpha;
+	border-color: $theme-border;
+	border-color: $theme-border-alpha;
 	background-repeat: repeat;
 	background-position: center center;
-	@include bg-color-alpha($aqua-bg, 0.95);
+	@include bg-color-alpha($theme-bg, 0.95);
 
 	.container {
 		padding: 0 15px;
@@ -43,7 +43,7 @@
 		> li:hover > a,
 		> li.hover > a,
 		.navbar-toggle:hover {
-			background-color: $aqua-bg-hover;
+			background-color: $theme-bg-hover;
 		}
 
 		// Active State
@@ -52,7 +52,7 @@
 			> a,
 			> a:hover,
 			> a:focus {
-				color: $aqua-accent;
+				color: $theme-accent;
 				position: relative;
 				border-color: transparent;
 				background-color: transparent;
@@ -67,7 +67,7 @@
 				width: 100%;
 				height: 3px;
 				content: '';
-				background-color: $aqua-accent;
+				background-color: $theme-accent;
 			}
 		}
 		&.active-top > .active > a:before {
@@ -93,8 +93,8 @@
 		.nav > li,
 		.nav > li > a,
 		.navbar-toggle {
-			border-color: $aqua-border;
-			border-color: $aqua-border-alpha;
+			border-color: $theme-border;
+			border-color: $theme-border-alpha;
 		}
 
 		// Disabled State
@@ -148,10 +148,10 @@
 	.nav > li > a,
 	.text-cont,
 	.text-cont a:hover,
-	.text-cont a.no-color { color: $aqua-color; }
+	.text-cont a.no-color { color: $theme-color; }
 
 	.nav > li > a:hover,
-	.text-cont a { color: $aqua-accent; }
+	.text-cont a { color: $theme-accent; }
 
 	// DROPDOWN MENUS
 
@@ -177,7 +177,7 @@
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 		transition: visibility 0.2s, opacity 0.2s, margin 0.2s;
 		transition-delay: 0.15s;
-		@include bg-color-alpha($aqua-menu-bg, 0.95);
+		@include bg-color-alpha($theme-menu-bg, 0.95);
 
 		li > a {
 			max-height: 37px;
@@ -185,7 +185,7 @@
 			overflow: hidden;
 			transition: background 0.3s, color 0.3s;
 
-			&:hover { background-color: $aqua-menu-bg-hover; }
+			&:hover { background-color: $theme-menu-bg-hover; }
 
 			&:focus { background-color: transparent; }
 		}
@@ -202,19 +202,19 @@
 		}
 
 		li > a,
-		input { color: $aqua-menu-color; }
+		input { color: $theme-menu-color; }
 
 		&,
 		> li,
 		> li > a {
-			border-color: $aqua-menu-border;
-			border-color: $aqua-menu-border-alpha;
+			border-color: $theme-menu-border;
+			border-color: $theme-menu-border-alpha;
 		}
 
 		li > a:hover,
 		.active > a,
 		.active > a:hover {
-			color: $aqua-accent;
+			color: $theme-accent;
 		}
 
 		li.disabled {
@@ -301,7 +301,7 @@
 		}
 
 		.mega-menu-column {
-			> a { background-color: $aqua-menu-bg-hover; }
+			> a { background-color: $theme-menu-bg-hover; }
 
 			> .sub-menu {
 				visibility: inherit;
@@ -396,7 +396,7 @@
 	// OTHER ELEMENTS
 
 	.navbar-toggle .icon-bar {
-		background-color: $aqua-color;
+		background-color: $theme-color;
 	}
 
 	// Divider
@@ -405,8 +405,8 @@
 		opacity: 0.5;
 		margin: 0 10px;
 		border-width: 0 !important;
-		background-color: $aqua-border;
-		background-color: $aqua-border-alpha;
+		background-color: $theme-border;
+		background-color: $theme-border-alpha;
 	}
 
 	// Nav Search Form
@@ -423,13 +423,13 @@
 			}
 
 			button {
-				color: $aqua-menu-color;
+				color: $theme-menu-color;
 				border-left-width: 1px;
-				border-color: $aqua-menu-border;
-				border-color: $aqua-menu-border-alpha;
+				border-color: $theme-menu-border;
+				border-color: $theme-menu-border-alpha;
 			}
 
-			::placeholder { color: $aqua-menu-color-fade; }
+			::placeholder { color: $theme-menu-color-fade; }
 		}
 	}
 
@@ -450,11 +450,11 @@
 		.text-cont,
 		.text-cont a:hover,
 		.text-cont a.no-color {
-			color: $aqua-bg-dark-color;
+			color: $theme-bg-dark-color;
 		}
 
 		.navbar-toggle .icon-bar {
-			background-color: $aqua-bg-dark-color;
+			background-color: $theme-bg-dark-color;
 		}
 
 		// Border Colors
@@ -462,15 +462,15 @@
 		.nav > li,
 		.nav > li > a,
 		.navbar-toggle {
-			border-color: $aqua-bg-dark-border;
-			border-color: $aqua-bg-dark-border-alpha;
+			border-color: $theme-bg-dark-border;
+			border-color: $theme-bg-dark-border-alpha;
 		}
 
 		// Divider
 
 		.divider {
-			background-color: $aqua-bg-dark-border;
-			background-color: $aqua-bg-dark-border-alpha;
+			background-color: $theme-bg-dark-border;
+			background-color: $theme-bg-dark-border-alpha;
 		}
 	}
 
@@ -489,14 +489,14 @@
 
 		&.navbar-mixt {
 			.navbar-inner {
-				background-color: $aqua-menu-bg;
+				background-color: $theme-menu-bg;
 			}
 
 			.navbar-inner .text-cont,
 			.navbar-inner .text-cont a:hover,
 			.navbar-inner .text-cont a.no-color,
 			.nav > li > a {
-				color: $aqua-menu-color;
+				color: $theme-menu-color;
 			}
 
 			// Hover State
@@ -504,28 +504,28 @@
 			.nav > li > a:hover,
 			.nav > li:hover > a,
 			.nav > li.hover > a {
-				background-color: $aqua-menu-bg-hover;
+				background-color: $theme-menu-bg-hover;
 			}
 
 			.nav > li:hover > a,
 			.nav > li.hover > a,
 			.nav > li > a:hover,
 			.nav > li.active > a,
-			.navbar-inner .text-cont a { color: $aqua-accent; }
+			.navbar-inner .text-cont a { color: $theme-accent; }
 
 			// Border Colors
 
 			.navbar-inner,
 			.nav > li,
 			.nav > li > a {
-				border-color: $aqua-menu-border;
-				border-color: $aqua-menu-border-alpha;
+				border-color: $theme-menu-border;
+				border-color: $theme-menu-border-alpha;
 			}
 
 			// Menu Expanded State
 			.nav li.expand,
 			.nav li.expand .sub-menu a:hover {
-				background-color: $aqua-menu-expand;
+				background-color: $theme-menu-expand;
 			}
 		}
 	};
@@ -547,9 +547,9 @@
 // Nightly Theme
 
 .navbar.theme-nightly {
-	border-color: $aqua-border;
-	border-color: $aqua-border-alpha;
-	@include bg-color-alpha($aqua-bg, 0.95);
+	border-color: $theme-border;
+	border-color: $theme-border-alpha;
+	@include bg-color-alpha($theme-bg, 0.95);
 
 	// Text Colors
 
@@ -557,18 +557,18 @@
 	.text-cont,
 	.text-cont a:hover,
 	.text-cont a.no-color {
-		color: $aqua-color;
+		color: $theme-color;
 	}
 
 	.text-cont a,
 	.nav > li > a:hover,
 	.nav > .active > a,
 	.nav > .active > a:hover {
-		color: $aqua-accent;
+		color: $theme-accent;
 	}
 
 	.navbar-toggle .icon-bar {
-		background-color: $aqua-color;
+		background-color: $theme-color;
 	}
 
 	// Border Colors
@@ -576,8 +576,8 @@
 	.nav > li,
 	.nav > li > a,
 	.navbar-toggle {
-		border-color: $aqua-border;
-		border-color: $aqua-border-alpha;
+		border-color: $theme-border;
+		border-color: $theme-border-alpha;
 	}
 
 	// Hover State
@@ -586,56 +586,56 @@
 	.nav > li:hover > a,
 	.nav > li.hover > a,
 	.navbar-toggle:hover {
-		background-color: $aqua-bg-hover;
+		background-color: $theme-bg-hover;
 	}
 
 	// Active State
 
 	.nav > .active > a:before {
-		background-color: $aqua-accent;
+		background-color: $theme-accent;
 	}
 
 	// Submenus
 
 	.sub-menu {
-		@include bg-color-alpha($aqua-menu-bg, 0.95);
+		@include bg-color-alpha($theme-menu-bg, 0.95);
 
 		li > a,
 		input,
 		.search-form button {
-			color: $aqua-menu-color;
+			color: $theme-menu-color;
 		}
 
 		li > a:hover {
-			background-color: $aqua-menu-bg-hover;
+			background-color: $theme-menu-bg-hover;
 		}
 
 		li > a:hover,
 		.active > a,
 		.active > a:hover {
-			color: $aqua-accent;
+			color: $theme-accent;
 		}
 
 		&,
 		> li,
 		> li > a,
 		.search-form button {
-			border-color: $aqua-menu-border;
-			border-color: $aqua-menu-border-alpha;
+			border-color: $theme-menu-border;
+			border-color: $theme-menu-border-alpha;
 		}
 
-		.search-form ::placeholder { color: $aqua-menu-color-fade; }
+		.search-form ::placeholder { color: $theme-menu-color-fade; }
 	}
 
 	.mega-menu > .sub-menu > li > a {
-		background-color: $aqua-menu-bg-hover;
+		background-color: $theme-menu-bg-hover;
 	}
 
 	// Divider
 
 	.divider {
-		background-color: $aqua-border;
-		background-color: $aqua-border-alpha;
+		background-color: $theme-border;
+		background-color: $theme-border-alpha;
 	}
 
 	// DARK BACKGROUND
@@ -648,11 +648,11 @@
 		.text-cont,
 		.text-cont a:hover,
 		.text-cont a.no-color {
-			color: $aqua-bg-dark-color;
+			color: $theme-bg-dark-color;
 		}
 
 		.navbar-toggle .icon-bar {
-			background-color: $aqua-bg-dark-color;
+			background-color: $theme-bg-dark-color;
 		}
 
 		// Border Colors
@@ -660,8 +660,8 @@
 		.nav > li,
 		.nav > li > a,
 		.navbar-toggle {
-			border-color: $aqua-bg-dark-border;
-			border-color: $aqua-bg-dark-border-alpha;
+			border-color: $theme-bg-dark-border;
+			border-color: $theme-bg-dark-border-alpha;
 		}
 
 		// Hover & Active State
@@ -671,18 +671,18 @@
 		.nav > li > a:hover,
 		.nav > .active > a,
 		.text-cont a {
-			color: $aqua-accent;
+			color: $theme-accent;
 		}
 
 		> .active > a:before {
-			background-color: $aqua-bg-dark-accent;
+			background-color: $theme-bg-dark-accent;
 		}
 
 		// Divider
 
 		.divider {
-			background-color: $aqua-bg-dark-border;
-			background-color: $aqua-bg-dark-border-alpha;
+			background-color: $theme-bg-dark-border;
+			background-color: $theme-bg-dark-border-alpha;
 		}
 	}
 
@@ -690,14 +690,14 @@
 
 		&.navbar-mixt {
 			.navbar-inner {
-				background-color: $aqua-menu-bg;
+				background-color: $theme-menu-bg;
 			}
 
 			.navbar-inner .text-cont,
 			.navbar-inner .text-cont a:hover,
 			.navbar-inner .text-cont a.no-color,
 			.nav > li > a {
-				color: $aqua-menu-color;
+				color: $theme-menu-color;
 			}
 
 			// Hover State
@@ -705,28 +705,28 @@
 			.nav > li > a:hover,
 			.nav > li:hover > a,
 			.nav > li.hover > a {
-				background-color: $aqua-menu-bg-hover;
+				background-color: $theme-menu-bg-hover;
 			}
 
 			.nav > li:hover > a,
 			.nav > li.hover > a,
 			.nav > li > a:hover,
 			.nav > li.active > a,
-			.navbar-inner .text-cont a { color: $aqua-accent; }
+			.navbar-inner .text-cont a { color: $theme-accent; }
 
 			// Border Colors
 
 			.navbar-inner,
 			.nav > li,
 			.nav > li > a {
-				border-color: $aqua-menu-border;
-				border-color: $aqua-menu-border-alpha;
+				border-color: $theme-menu-border;
+				border-color: $theme-menu-border-alpha;
 			}
 
 			// Menu Expanded State
 			.nav li.expand,
 			.nav li.expand .sub-menu a:hover {
-				background-color: $aqua-menu-expand;
+				background-color: $theme-menu-expand;
 			}
 		}
 	};
@@ -768,7 +768,7 @@ $nightly-menu-color-fade: #bbb;
 			> a,
 			> a:hover,
 			> a:focus {
-				color: $aqua-accent;
+				color: $theme-accent;
 				background-color: $nightly-hover-bg;
 			}
 		}
@@ -804,7 +804,7 @@ $nightly-menu-color-fade: #bbb;
 			> a,
 			> a:hover,
 			> a:focus {
-				color: $aqua-accent;
+				color: $theme-accent;
 				background-color: $nightly-menu-hover-bg;
 			}
 		}
@@ -812,8 +812,8 @@ $nightly-menu-color-fade: #bbb;
 			> a,
 			> a:hover,
 			> a:focus {
-				color: $aqua-accent;
-				border-color: $aqua-accent;
+				color: $theme-accent;
+				border-color: $theme-accent;
 			}
 		}
 	}

@@ -23,13 +23,13 @@ $blog_options = array(
 );
 $blog_options = mixt_get_options($blog_options);
 
-$blog_grid = ( $blog_options['blog-type'] != 'standard' ) ? true : false;
+$blog_masonry = ( $blog_options['blog-type'] == 'masonry' ) ? true : false;
 
 ?>
 
 <article id="post-<?php echo $post_id; ?>" <?php post_class( $post_classes . $post_ob->classes() ); ?>>
 
-	<?php if ( $blog_grid ) { echo '<div class="post-wrapper">'; } ?>
+	<?php if ( $blog_masonry ) { echo '<div class="post-wrapper">'; } ?>
 
 	<header class="page-header">
 		<?php $post_ob->header(); ?>
@@ -53,6 +53,6 @@ $blog_grid = ( $blog_options['blog-type'] != 'standard' ) ? true : false;
 		</div>
 	<?php endif; ?>
 
-	<?php if ( $blog_grid ) { echo '</div>'; } // Close .post-wrapper ?>
+	<?php if ( $blog_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
 
 </article>
