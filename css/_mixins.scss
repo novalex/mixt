@@ -1,0 +1,28 @@
+
+// MIXT Sass Mixins
+
+@mixin gradient-linear($from, $to) {
+    background-image: -webkit-linear-gradient(top, $from, 0%, $to, 100%);
+    background-image: -moz-linear-gradient(top, $from 0%, $to 100%);
+    background-image: linear-gradient(to bottom, $from 0%, $to 100%);
+}
+
+@mixin transition($prop, $time, $ease:ease, $delay:0s) {
+    transition: $prop $time $ease $delay;
+    -webkit-transition: $prop $time $ease $delay;
+    -moz-transition: $prop $time $ease $delay;
+    -ms-transition: $prop $time $ease $delay;
+    -o-transition: $prop $time $ease $delay;
+}
+
+@mixin transform($prop) {
+    transform: $prop;
+    -webkit-transform: $prop;
+    -moz-transform: $prop;
+    -ms-transform: $prop;
+    -o-transform: $prop;
+}
+
+@mixin highlight($alpha:0.4) {
+    box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);
+}

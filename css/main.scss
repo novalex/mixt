@@ -1,0 +1,41 @@
+
+
+/* - MIXT MASTER STYLESHEET - */
+
+// Base styling & reset
+@import 'base';
+
+// Theme vars
+@import 'vars';
+
+// Theme color schemes
+@import 'colors';
+
+// Theme mixins
+@import 'mixins';
+
+// Bootstrap theme
+@import 'mixt-bootstrap';
+
+// Theme global
+@import 'global';
+
+// Navbar styling
+@import 'navbar';
+
+// Header styling
+@import 'header';
+
+// Input styling
+@import 'inputs';
+
+// Content styling
+@import 'content';
+
+// Sidebar styling
+@import 'sidebar';
+
+// Footer styling
+@import 'footer';
+
+

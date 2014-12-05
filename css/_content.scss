@@ -1,0 +1,67 @@
+#main-wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -50px;
+	padding-bottom: 50px;
+}
+.admin-bar #main-wrap { padding-top: 32px; }
+
+#content-wrap > .container { padding-bottom: 0; }
+
+.fullwidth #content-wrap > .container {
+	width: 100%;
+	padding-left: 0; padding-right: 0;
+	margin-left: 0; margin-right: 0;
+}
+.fullwidth #content-wrap > .container > .row {
+	margin-left: 0; margin-right: 0;
+}
+.fullwidth #content-wrap > .container > .row #content {
+	width: 100%; padding-left: 0; padding-right: 0;
+}
+
+.portfolio-sorter {
+	width: 100%; padding: 20px;
+	background-color: #fff;
+}
+.portfolio-sorter button {
+	width: 25%;
+}
+.grid-container { width: 100%; }
+.grid-container article {
+	min-width: 200px;
+	min-height: 100px;
+	width: 25%; float: left;
+	padding: 0; margin: 0;
+	position: relative;
+	overflow: hidden;
+	background-color: #f6f6f6;
+}
+.grid-container article.sticky { width: 50%; }
+.grid-container article .main-anchor { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+.grid-container article .post-image img { min-width: 100%; max-width: 100%; min-height: 100%; }
+.grid-container article .post-content {
+	padding: 15px 15px 0;
+	position: absolute;
+	left: 0; right: 0; bottom: -100%;
+	background-color: rgba(0,0,0,0.7);
+	@include transition(bottom, 0.4s, ease, 0.6s);
+}
+.grid-container article:hover .post-content { bottom: 0; }
+.grid-container .post-title { font-size: 16px; margin: 0 0 15px; }
+.grid-container .post-date { font-size: 14px; color: #999; margin: 0 0 15px; }
+
+@media screen and (max-width: 782px) {
+    .admin-bar #main-wrap { padding-top: 46px; }
+}
+
+/* POST CONTENT */
+
+.page-header {
+	margin-top: 0;
+	
+	.page-title { font-size: 26px; }
+}
+
+footer.entry-meta { clear: both; }

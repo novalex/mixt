@@ -1,0 +1,24 @@
+
+.postbox-container .cmb-row.nest-parent {
+	padding-bottom: 0 !important;
+}
+.postbox-container .cmb-row.nest-parent > .cmb-th,
+.postbox-container .cmb-row.nest-parent > .cmb-td {
+	margin-bottom: 10px;
+}
+.postbox-container .cmb-row .cmb-row {
+	float: left; width: 100%;
+	padding-bottom: 0; padding: 10px 0;
+	border-bottom-width: 0;
+	border-top: 1px solid #E9E9E9;
+	background-color: #eee;
+}
+.postbox-container .cmb-row .cmb-row .cmb-th {
+	width: 16% !important;
+	padding-left: 2%;
+}
+
+.postbox-container .cmb-th + .cmb-td {
+	width: 78% !important;
+	padding-right: 2%;
+}

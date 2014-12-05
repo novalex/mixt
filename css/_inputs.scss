@@ -1,0 +1,40 @@
+
+// MIXT INPUTS STYLING
+
+
+.input-group-btn .btn {
+	height: $btn-height;
+}
+
+// GLOBAL
+
+// Inputs
+input,
+.form-control {
+	border-color: $input-bd;
+	background-color: $input-bg;
+	box-shadow: none;
+	transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+
+// INPUT STATES
+
+// Input & Button Focus Style
+input:focus,
+.form-control:focus {
+	border-color: $input-focus-bd;
+	box-shadow: 0 0 3px $input-focus-bs;
+}
+// Override input & button outline
+input,
+button,
+.button,
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
+	outline: none !important;
+}

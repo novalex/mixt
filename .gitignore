@@ -1,0 +1,6 @@
+node_modules/
+framework/cmb2-mixt/
+framework/micf-mixt/
+framework/redux-mixt/
+*.sublime-workspace
+assets/icons/
