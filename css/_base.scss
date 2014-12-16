@@ -1,4 +1,6 @@
 
+// MIXT BASE STYLESHEET
+
 html,
 body {
   height: 100%;
@@ -7,6 +9,11 @@ body {
 body {
 	word-wrap: break-word;
 	font-family: 'Clear Sans', 'Verdana', sans-serif !important;
+}
+
+html.no-scroll,
+html.no-scroll body {
+	overflow: hidden;
 }
 
 /* Alignment */

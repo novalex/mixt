@@ -38,7 +38,6 @@
 		$has_sidebar = mixt_meta('mixt_page_sidebar');
 
 		// Header & global page settings
-
 		$navbar_theme = '';
 		$head_media = mixt_meta('mixt_head_media');
 		$head_image = mixt_meta('mixt_head_image');
@@ -118,6 +117,8 @@
 
 	<div id="top-nav-wrap" class="<?php echo $navbar_wrap_classes; ?>">
 
+	<?php // mixt_social_links() ?>
+
 		<nav id="top-nav" class="site-navigation navbar navbar-mixt <?php echo $navbar_classes; ?>" role="banner">
 			<div class="container">
 				<div class="navbar-header">
@@ -138,7 +139,7 @@
 						'menu_class' => 'nav navbar-nav',
 						'fallback_cb' => '',
 						'menu_id' => 'main-menu',
-						'walker' => new wp_bootstrap_navwalker()
+						'walker' => new mixt_navwalker()
 					)
 				); ?>
 			</div>

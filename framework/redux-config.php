@@ -412,6 +412,19 @@
                 );
 
                 $this->sections[] = array(
+                    'title'  => __( 'Social Profiles', 'redux-framework-demo' ),
+                    'icon'   => 'el-icon-group',
+                    'submenu' => false,
+                    'fields' => array(
+                        array(
+                            'id'     => 'social-profiles',
+                            'type'   => 'multi_text',
+                            'title'  => __('Social Profiles', 'redux-framework-demo'),
+                        ),
+                    ),
+                );
+
+                $this->sections[] = array(
                     'icon'   => 'el-icon-cogs',
                     'title'  => __( 'General Settings', 'redux-framework-demo' ),
                     'fields' => array(

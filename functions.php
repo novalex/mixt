@@ -318,8 +318,11 @@ require get_template_directory() . '/inc/customizer.php';
 // Load Jetpack compatibility file
 require get_template_directory() . '/inc/jetpack.php';
 
-// Load custom WordPress nav walker
-require get_template_directory() . '/inc/bootstrap-wp-navwalker.php';
+// Load custom nav walker
+require get_template_directory() . '/inc/mixt-navwalker.php';
+
+// Load modules
+require get_template_directory() . '/inc/modules.php';
 
 
 // Various options and functions

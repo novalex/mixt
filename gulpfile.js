@@ -34,7 +34,7 @@ gulp.task('lintinc', function() {
 
 // Concat & Minify JS
 gulp.task('minify', function(){
-    return gulp.src([jsIncDir, '!inc/js/bootstrap.js', '!inc/js/bootstrap/*.js', '!inc/js/customizer.js'])
+    return gulp.src([jsIncDir, '!inc/js/bootstrap.js', '!inc/js/bootstrap/*.js', '!inc/js/customizer.js', '!inc/js/modernizr.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('js-inc.js'))
         // .pipe(uglify())

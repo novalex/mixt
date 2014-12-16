@@ -10,7 +10,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-class wp_bootstrap_navwalker extends Walker_Nav_Menu {
+class mixt_navwalker extends Walker_Nav_Menu {
 
 	/**
 	 * @see Walker::start_lvl()
@@ -61,8 +61,11 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$classes[]   = 'menu-item-' . $item->ID;
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			$is_disabled = get_post_meta($item->ID, 'menu-item-disabled', true);
-			if (isset($is_disabled) && $is_disabled == true) $class_names .= ' disabled';
+			$is_disabled = '' !== get_post_meta($item->ID, 'menu-item-disabled', true) ? true : false;
+
+			if ($is_disabled == true) {
+				$class_names .= ' disabled';
+			}
 
 			if (!function_exists('is_megamenu_check')) {
 				function is_megamenu_check($itemID) {
@@ -85,7 +88,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			// Create mega menu columns
 			if ($depth == 1 && $is_megamenu($item->menu_item_parent) == 'true') {
-				$class_names = str_replace(' drop-submenu', ' mega-menu-column', $class_names);
+				$class_names = str_replace(array(' drop-submenu', ' arrow-right'), array(' mega-menu-column', ''), $class_names);
 			}
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
@@ -95,10 +98,12 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$output .= $indent . '<li' . $id . $value . $class_names .'>';
 
-			$attributes  = !empty( $item->target) ? ' target="' . esc_attr( $item->target ) . '"' : '';
-			$attributes .= !empty( $item->xfn)    ? ' rel="'    . esc_attr( $item->xfn    ) . '"' : '';
-			$attributes .= !empty( $item->url)    ? ' href="'   . esc_attr( $item->url    ) . '"' : '';
-			$attributes .= ($args->has_children)  ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle disabled"' : '';
+			$attr_href = $is_disabled == true ? '#' : $item->url;
+
+			$attributes  = !empty( $item->target )  ? ' target="' . esc_attr( $item->target ) . '"' : '';
+			$attributes .= !empty( $item->xfn )     ? ' rel="'    . esc_attr( $item->xfn    ) . '"' : '';
+			$attributes .= !empty( $attr_href )     ? ' href="'   . esc_attr( $item->url    ) . '"' : '';
+			$attributes .= ( $args->has_children )  ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle disabled"' : '';
 
 			$item_output = $args->before;
 
@@ -117,8 +122,13 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			if ($args->has_children) {
 				if ($depth === 0)
 					$item_output .= ' <span class="drop-arrow icon-chevron-down"></span>';
-				if ($depth > 0 && $is_megamenu($item->menu_item_parent) != 'true')
-					$item_output .= ' <span class="drop-arrow icon-chevron-right"></span>';
+				if ($depth > 0) {
+					if ($is_megamenu($item->menu_item_parent) == 'true') {
+						$item_output .= ' <span class="drop-arrow icon-chevron-down visible-xs-inline-block"></span>';
+					} else {
+						$item_output .= ' <span class="drop-arrow icon-chevron-right"></span>';
+					}
+				}
 			}
 			$item_output .= '</a>' . $args->after;
 

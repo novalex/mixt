@@ -1,5 +1,5 @@
 
-// NAVBAR STYLESHEET
+// MIXT NAVBAR STYLESHEET
 
 #top-nav-wrap {
     min-height: 90px;
@@ -7,10 +7,11 @@
     transition: min-height, 0.3s;
 }
 
-// Navbar mobile check element
 #navbar-check { width: 0; height: 0; display: none; }
 
+
 .navbar-mixt {
+    width: 100%;
     margin-bottom: 0;
     opacity: 1;
     padding: 20px 0;
@@ -20,6 +21,7 @@
     border-color: $nav-border;
     border-color: $nav-border-alpha;
     background-color: $nav-bg;
+    background-color: $nav-bg-alpha;
     background-image: none;
     z-index: 9999;
     transition: padding 0.3s, box-shadow 0.2s, background 0.4s;
@@ -80,11 +82,10 @@
         }
 
         > .disabled {
-            > a,
-            > a:hover,
-            > a:focus {
+            > a {
                 background-color: transparent !important;
             }
+            .submenu { display: none !important; }
         }
 
     }
@@ -109,7 +110,6 @@
     }
 
     // Dropdown Menus
-
     .nav > li > a,
     .submenu > li > a {
         font-weight: 500;
@@ -133,7 +133,6 @@
         transition-delay: 0.15s;
 
         li > a {
-            max-width: 300px;
             text-overflow: ellipsis;
             overflow: hidden;
             transition: background 0.3s, color 0.3s;
@@ -155,7 +154,8 @@
             border-color: $nav-border-alpha;
         }
 
-        li:hover {
+        li:hover,
+        li.active:hover {
             > a,
             > a:hover,
             > a:focus {
@@ -170,11 +170,18 @@
             > a:focus {
                 color: $theme-accent;
                 border-color: $theme-accent;
+                background-color: transparent;
             }
         }
 
-        li:last-child > a:not(.dropdown-toggle),
-        .submenu li:last-child > a,
+        li.disabled {
+            opacity: 0.8;
+
+            > a { color: $nav-menu-color-fade !important; }
+            .submenu { display: none !important; }
+        }
+
+        li:last-child > a,
         .mega-menu-column li:last-child > a {
             border-bottom-width: 0;
         }
@@ -191,16 +198,18 @@
                 font-size: 14px;
             }
         }
-    }
+        .mega-menu-column:last-child > a {
+            border-bottom-width: 1px;
+        }
 
-    .mega-menu:hover .mega-menu-column > .submenu {
-        visibility: visible;
-        opacity: 1;
+        &:hover .mega-menu-column > .submenu {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 
     .dropdown > .submenu.drop-left,
-    .dropdown:last-child > .submenu,
-    .dropdown.mega-menu > .submenu {
+    .dropdown:last-child > .submenu {
         left: auto; right: 0;
     }
 
@@ -235,11 +244,11 @@
             .submenu { background-color: darken($nav-menu-bg, 4); }
 
             > .submenu {
-                transition: visibility 0.3s, opacity 0.3s, left 0.1s ease 0.3s, right 0.1s ease 0.3s;
+                transition: visibility 0.3s, opacity 0.3s, left 0.1s ease 0.3s, right 0.1s ease 0.3s, top 0.1s ease 0.3s;
             }
 
             &:hover > .submenu {
-                transition: visibility 0.2s, opacity 0.2s, left 0.2s, right 0.2s;
+                transition: visibility 0.2s, opacity 0.2s, left 0.2s, right 0.2s, top 0.2s;
                 transition-delay: 0.15s;
             }
         }
@@ -249,6 +258,7 @@
 .no-visibility .navbar-mixt .submenu {
     display: none;
 }
+
 
 // Navbar Sticky (fixed) State
 .fixed-nav {
@@ -284,6 +294,7 @@
 
 }
 
+
 // NAVBAR THEMES
 
 // Dark Navbar Text & Logo
@@ -311,6 +322,7 @@
 
     .navbar-toggle {
         border-color: $nav-border;
+        border-color: $nav-border-alpha;
         &:hover,
         &:focus {
             background-color: $nav-hover-bg;
@@ -348,6 +360,7 @@
 
     .navbar-toggle {
         border-color: $nav-border-dark;
+        border-color: $nav-border-dark-alpha;
 
         &:hover,
         &:focus {
@@ -363,11 +376,10 @@
 
 // Dark Theme
 .navbar-mixt.navbar-inverse {
-
     border-color: $nav-border-dark;
+    border-color: $nav-border-dark-alpha;
     background-color: $nav-bg-dark;
     background-color: $nav-bg-dark-alpha;
-
 }
 
 // Dark Submenu Theme
@@ -382,7 +394,8 @@
             border-color: $nav-border-dark;
             text-shadow: 0 1px 1px darken($nav-bg-dark, 10);
         }
-        li:hover {
+        li:hover,
+        li.active:hover {
             > a,
             > a:hover,
             > a:focus {
@@ -404,11 +417,6 @@
         }
     }
 
-    .nav > li > .submenu,
-    .drop-menu .drop-submenu:first-child > .submenu {
-        border-top-color: $nav-border-dark;
-    }
-
     .drop-menu .submenu,
     .mega-menu-column .submenu {
         .drop-submenu {
@@ -419,8 +427,11 @@
 
 // Transparent Navbar
 .nav-transparent .navbar-mixt.position-top {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
     border-color: transparent;
-    background-color: transparent;
+    background: transparent;
     box-shadow: none;
 
     .navbar-toggle {
@@ -430,7 +441,8 @@
 
 .nav-transparent.has-head-media #top-nav-wrap,
 .fixed-nav .nav-transparent.has-head-media #top-nav-wrap {
-    min-height: 0; height: 0;
+    height: 0;
+    min-height: 0;
 }
 
 .shine .navbar-mixt {
@@ -439,43 +451,10 @@
 
 // MEDIA QUERIES
 
-@media (min-width: 601px) {
+// DESKTOP NAV BREAKPOINT
 
-    .fixed-nav #top-nav-wrap {
-        min-height: 50px;
-    }
-    .fixed-nav .navbar-mixt {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        padding: 0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-
-        .nav > li > a { height: 51px; }
-    }
-
-    .fixed-nav .nav-transparent {
-
-        .navbar-mixt.navbar-default {
-            background-color: $nav-bg;
-            background-color: $nav-bg-alpha;
-        }
-
-        .navbar-mixt.navbar-inverse {
-            border-color: $nav-border-dark;
-            border-color: $nav-border-dark-alpha;
-            background-color: $nav-bg-dark;
-        }
-    }
-
-    .no-rgba .fixed-nav .navbar-mixt { opacity: 0.97; }
-    .fixed-nav.admin-bar #top-nav { top: 32px; }
-}
-@media (min-width: 601px) and (max-width: 782px) {
-    .fixed-nav.admin-bar #top-nav { top: 46px; }
-}
-
-// MOBILE NAV BREAKPOINT
 @media (min-width: 768px) {
+
     .fixed-nav #nav-logo { width: 54px; height: 20px; }
 
     .logo-left .navbar-mixt {
@@ -503,12 +482,11 @@
         }
         .navbar-inner {
             text-align: center;
-
-            .navbar-nav {
-                float: none;
-                display: table;
-                margin: 0 auto !important;
-            }
+        }
+        .navbar-nav {
+            float: none;
+            display: table;
+            margin: 0 auto !important;
         }
     }
 
@@ -518,12 +496,14 @@
     .fixed-nav #top-nav-wrap.logo-center {
         min-height: 101px;
     }
-
     
     .navbar-mixt {
 
-        // Standard Menu
+        .submenu a {
+            max-width: 300px;
+        }
 
+        // Standard Menu
         .drop-menu .submenu,
         .mega-menu-column .submenu {
             .drop-submenu {
@@ -539,10 +519,10 @@
                     visibility: hidden;
                     opacity: 0;
                     z-index: -1;
-                }
 
-                .submenu.drop-left {
-                    left: auto; right: 0;
+                    &.drop-left {
+                        left: auto; right: 0;
+                    }
                 }
             }
             .drop-submenu:hover {
@@ -552,15 +532,15 @@
                     left: 100%;
                     visibility: visible;
                     opacity: 1;
-                }
-                > .submenu.drop-left {
-                    left: auto; right: 100%;
+
+                    &.drop-left {
+                        left: auto; right: 100%;
+                    }
                 }
             }
         }
 
         // Mega Menu
-
         .mega-menu {
             > .submenu {
                 display: table;
@@ -582,7 +562,6 @@
         }
 
         // Show submenus on hover
-
         .dropdown:hover > .submenu {
             margin-top: 0;
             visibility: visible;
@@ -594,10 +573,15 @@
         }
     }
 
-    .no-visibility .navbar-mixt .dropdown:hover > .submenu {
-        display: block;
+    .no-visibility .navbar-mixt {
+        .dropdown:hover > .submenu,
+        .mega-menu:hover > .submenu {
+            display: block;
+        }
     }
 }
+
+// MOBILE NAV BREAKPOINT
 
 @media (max-width: 767px) {
 
@@ -608,32 +592,136 @@
 
         .container { padding: 0; }
 
-        .navbar-collapse { padding: 0 !important; margin: 0 !important; }
+        .navbar-inner {
+            padding: 0 !important;
+            margin: 0 !important;
+            border-color: $nav-border;
+            border-color: $nav-border-alpha;
+            background-color: $nav-bg;
+        }
+
+        .nav > li > a {
+            border-width: 0;
+            border-style: solid;
+            border-color: $nav-border;
+            border-color: $nav-border-alpha;
+            border-bottom-width: 1px;
+        }
+
+        .drop-arrow {
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 50px;
+            font-size: 14px;
+            text-align: center;
+            margin-left: 0;
+        }
+        .drop-submenu .drop-arrow {
+            top: 0; right: 0;
+            margin: 0; padding: 10px 0;
+        }
+        .mega-menu-column > a .drop-arrow {
+            line-height: 44px;
+        }
 
         .dropdown-menu,
         .submenu {
             position: static;
             float: none;
             width: auto;
-            margin-top: 0;
             border: 0;
+            display: none;
             visibility: visible;
             opacity: 1;
-            background-color: rgba(0, 0, 0, 0);
-            box-shadow: none !important;
+            margin: 0 !important;
+            background-color: transparent !important;
+            box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
+            -webkit-box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
 
-            & > li > a { line-height: 20px; }
+            a {
+                max-width: none;
+                position: relative;
+            }
 
-            & > li > a:hover,
-            & > li > a:focus { background-image: none; }
+            li:last-child > a,
+            .mega-menu-column li:last-child > a {
+                border-bottom-width: 1px;
+            }
+        }
+
+        li {
+            transition: background-color 0.2s;
+
+            a .drop-arrow:before {
+                content: '\f48b';
+            }
+
+            &.expand {
+                background-color: rgba(0,0,0,0.06);
+                > a .drop-arrow:before {
+                    content: '\f48a';
+                }
+
+                > .submenu {
+                    display: block;
+                }
+            }
+        }
+
+        &.navbar-inverse {
+            .navbar-inner {
+                border-color: $nav-border-dark;
+                border-color: $nav-border-dark-alpha;
+                background-color: $nav-bg-dark;
+            }
+
+            .nav > li > a {
+                border-color: $nav-border-dark;
+                border-color: $nav-border-dark-alpha;
+            }
+
+            li.expand {
+                background-color: rgba(255,255,255,0.06);
+            }
         }
     }
 
     .no-visiblity #top-nav .dropdown-menu {
         display: block;
     }
+
+    #navbar-check { display: inline; }
 }
 
 @media (max-width: 601px) {
     #navbar-check { display: block; }
+}
+
+@media (min-width: 601px) {
+
+    .navbar-mixt {
+        .nav > li > a { height: 51px; }
+    }
+
+    .fixed-nav #top-nav-wrap {
+        min-height: 50px;
+
+        .nav-transparent.has-head-media #top-nav-wrap {
+            height: 0;
+            min-height: 0;
+        }
+    }
+    .fixed-nav .navbar-mixt {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        padding: 0;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .no-rgba .fixed-nav .navbar-mixt { opacity: 0.97; }
+    .fixed-nav.admin-bar #top-nav { top: 32px; }
+}
+
+@media (min-width: 601px) and (max-width: 782px) {
+    .fixed-nav.admin-bar #top-nav { top: 46px; }
 }
