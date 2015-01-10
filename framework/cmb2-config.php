@@ -107,6 +107,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 				'default' => 'false',
 			),
+
 			// Transparent Nav
 			array(
 				'name'      => __( 'Transparent Nav', 'cmb2' ),
@@ -124,22 +125,26 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			        'data-show-on' => 'mixt_head_media',
 			    ),
 			),
-			// Use Featured Image as Header Image
+
+			// Media Type For Header
 	        array(
-	            'name' => __( 'Use featured image', 'cmb2'),
-	            'id'   => $prefix . 'head_img_feat',
+	            'name' => __( 'Media Type', 'cmb2'),
+	            'desc' => __( 'Type of media to use for the header', 'cmb2' ),
+	            'id'   => $prefix . 'head_media_type',
 	            'type' => 'radio_inline',
 	            'options' => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false' => __( 'No', 'cmb2' ),
+					'feat'   => __( 'Featured Image', 'cmb2' ),
+					'slider' => __( 'Slider', 'cmb2' ),
+					'color'  => __( 'Solid Color', 'cmb2' ),
 				),
-				'default' => 'false',
+				'default' => 'color',
 				'attributes' => array(
 					'class' => 'conditional nested',
 					'data-parent-field' => 'mixt_head_media',
 			        'data-show-on' => 'mixt_head_media',
 			    ),
 	        ),
+
 	        // Repeat / Pattern Header Image
 	        array(
 	            'name' => __('Repeat Image', 'cmb2'),
@@ -152,10 +157,24 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'default' => 'false',
 				'attributes'  => array(
 					'class' => 'conditional nested',
-					'data-parent-field' => 'mixt_head_media',
-			        'data-show-on' => 'mixt_head_media',
+					'data-parent-field' => 'mixt_head_media_type',
+			        'data-show-on-id' => 'mixt_head_media_type1',
 			    ),
 	        ),
+
+	        // Header Slider ID Field
+	        array(
+	            'name' => __('Slider ID', 'cmb2'),
+	            'id'   => $prefix . 'head_slider',
+	            'type' => 'text',
+				'default' => '',
+				'attributes'  => array(
+					'class' => 'conditional nested',
+					'data-parent-field' => 'mixt_head_media_type',
+			        'data-show-on-id' => 'mixt_head_media_type2',
+			    ),
+	        ),
+
 	        // Custom HTML Wysiwyg Field
 	        array(
 	            'name' => __('Header Code', 'cmb2'),

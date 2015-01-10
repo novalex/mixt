@@ -1,5 +1,5 @@
 
-// MIXT COLORS STYLESHEET
+// - MIXT COLORS STYLESHEET - //
 
 
 // GLOBAL
@@ -10,8 +10,16 @@ $theme-accent: #539DDD;
 // Text Colors
 $text-light-color: #fff;
 $text-light-color-fade: #aaa;
+
 $text-dark-color: #333;
-$text-dark-color-fade: #888;
+$text-dark-color-fade: #999;
+
+// Border Colors
+$border-color: #e4e4e4;
+$border-color-alpha: rgba(0,0,0,0.15);
+
+$border-color-dark: #333;
+$border-color-dark-alpha: rgba(0,0,0,0.6);
 
 
 // NAVBAR
@@ -19,8 +27,8 @@ $text-dark-color-fade: #888;
 // Navbar Light
 $nav-bg: #fff;
 $nav-bg-alpha: rgba(255,255,255,0.95);
-$nav-border: #e4e4e4;
-$nav-border-alpha: rgba(0,0,0,0.2);
+$nav-border: $border-color;
+$nav-border-alpha: $border-color-alpha;
 
 $nav-hover-bg: rgba(0,0,0,0.04);
 
@@ -34,8 +42,8 @@ $nav-menu-hover-color: $text-dark-color;
 // Navbar Inverse
 $nav-bg-dark: #444;
 $nav-bg-dark-alpha: rgba(50,50,50,0.95);
-$nav-border-dark: #333;
-$nav-border-dark-alpha: rgba(0,0,0,0.6);
+$nav-border-dark: $border-color-dark;
+$nav-border-dark-alpha: $border-color-dark-alpha;
 
 $nav-hover-bg-dark: rgba(255,255,255,0.04);
 
@@ -50,9 +58,9 @@ $nav-menu-hover-color-dark: $text-light-color;
 // SUBNAV & BREADCRUMBS
 
 // Subnav
-$subnav-bg: #F4F4F4;
-$subnav-border: #CCC;
-$subnav-border-alpha: rgba(0,0,0,0.15);
+$subnav-bg: #f8f8f8;
+$subnav-border: $border-color;
+$subnav-border-alpha: $border-color-alpha;
 
 
 // INPUTS & BUTTONS

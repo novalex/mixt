@@ -1,5 +1,5 @@
 
-// MIXT SCRIPTS BUILDER
+// MIXT GULP BUILDER
 
 // Global Vars & Dependencies
 var gulp       = require('gulp'),

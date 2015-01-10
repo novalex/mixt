@@ -3,10 +3,12 @@
 
 html,
 body {
-  height: 100%;
-  margin: 0 !important;
+	height: 100%;
+	max-width: 100%;
+	margin: 0 !important;
 }
 body {
+	overflow-x: hidden;
 	word-wrap: break-word;
 	font-family: 'Clear Sans', 'Verdana', sans-serif !important;
 }
@@ -16,7 +18,18 @@ html.no-scroll body {
 	overflow: hidden;
 }
 
-/* Alignment */
+// Resets
+
+a,
+a:hover,
+a:focus { text-decoration: none; }
+
+ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+// Alignment
 .alignleft {
 	display: inline;
 	float: left;
@@ -34,7 +47,7 @@ html.no-scroll body {
 }
 
 
-/* Images and wp-captions should always fit and be responsive */
+// Images And Wp-captions Should Always Fit And Be Responsive
 img {
 	display: inline-block;
 	height: auto;
@@ -63,7 +76,7 @@ img[class*="wp-image-"] {
 	margin-top: 10px;
 }
 
-/* WP Gallery */
+// WP Gallery
 .gallery {
 	margin-bottom: 1.5em;
 }
@@ -78,7 +91,7 @@ img[class*="wp-image-"] {
 .gallery-caption {}
 
 
-/* Make sure embeds and iframes fit their containers */
+// Make Sure Embeds And Iframes Fit Their Containers
 embed,
 iframe,
 object {
@@ -86,7 +99,7 @@ object {
 }
 
 
-/* Text meant only for screen readers */
+// Text Meant Only For Screen Readers
 .screen-reader-text {
 	clip: rect(1px, 1px, 1px, 1px);
 	position: absolute !important;

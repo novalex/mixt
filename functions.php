@@ -1,131 +1,126 @@
 <?php
 
 /**
- * mixt functions and definitions
+ * MIXT Functions and Definitions
  *
  * @package mixt
  */
 
+// DEFINE CONSTANTS
 
-// Require includes
+define( 'MIXT_FRAME_DIR', get_template_directory_uri() . '/framework/'); // Framework Directory
+
+// REQUIRE INCLUDES
 
 $mixt_includes = array(
-  'inc/breadcrumbs.php',     // Breadcrumbs
+  'inc/breadcrumbs.php', // Breadcrumbs
 );
 
-foreach ($mixt_includes as $file) {
-  if (!$filepath = locate_template($file)) {
-    trigger_error(sprintf(__('Error locating %s for inclusion', 'mixt'), $file), E_USER_ERROR);
-  }
-
-  require_once $filepath;
+foreach ( $mixt_includes as $file ) {
+	if ( !$filepath = locate_template($file) ) {
+	  	trigger_error(sprintf(__('Error locating %s for inclusion', 'mixt'), $file), E_USER_ERROR);
+	}
+	require_once $filepath;
 }
-unset($file, $filepath);
+unset( $file, $filepath );
 
 
-// General vars
+// GENERAL VARS
 
 $fns_path = dirname( __FILE__ );
 
 
-// Retreive post meta
+// LOAD FRAMEWORK PLUGINS
 
-function mixt_meta($key, $post_id = '', $single = true) {
-	if (!$post_id || $post_id == '') $post_id = get_queried_object_id();
-	return get_post_meta( $post_id, $key, $single );
-}
+$tgmpa_plugins = array(); // Array of required plugins.
 
+// Redux Framework and extensions
 
-// Remove admin bar inline styles
+	// Redux Extension Loader
+	if ( file_exists( $fns_path . '/framework/redux-mixt-extension-loader/loader.php' ) ) {
+		require_once( $fns_path . '/framework/redux-mixt-extension-loader/loader.php' );
+	}
+	// Redux Framework
+	if ( file_exists( $fns_path . '/framework/redux-mixt/ReduxCore/framework.php' ) ) {
+	    if ( !class_exists( 'ReduxFramework' ) ) {
+	    	require_once( $fns_path . '/framework/redux-mixt/ReduxCore/framework.php' );
+	    }
+	} else {
+		$tgmpa_plugins[] = array(
+			'name'     => 'Redux Framework',
+			'slug'     => 'redux-framework',
+			'required' => true
+		);
+	}
+	// MIXT Redux Custom CSS
+	function redux_mixt_css() {
+	    wp_register_style( 'redux-mixt-css', get_template_directory_uri() . '/framework/admin/css/redux-options.css', array( 'redux-css' ), time(), 'all' );  
+	    wp_enqueue_style( 'redux-mixt-css' );
+	}
+	add_action( 'redux/page/mixt_opt/enqueue', 'redux_mixt_css' );
+	// MIXT Redux Config
+	if ( !isset( $mixt_opt ) && file_exists( $fns_path . '/framework/redux-config.php' ) ) {
+		require_once( $fns_path . '/framework/redux-config.php' );
+	}
 
-add_action('get_header', 'remove_adminbar_styles');
-function remove_adminbar_styles() {
-	remove_action('wp_head', '_admin_bar_bump_cb');
-}
+// CMB2 Framework
 
-// Set global vars
+	if ( file_exists( $fns_path . '/framework/cmb2-config.php' ) ) {
+	    require_once( $fns_path . '/framework/cmb2-config.php' );
 
-// Background patterns array
-$bg_patterns_path = get_stylesheet_directory() . '/assets/img/bg-pat/';
-$bg_patterns_url  = get_stylesheet_directory_uri() . '/assets/img/bg-pat/';
-$bg_patterns      = array();
+	    if ( !file_exists( $fns_path . '/framework/cmb2-mixt/init.php') ) {
+			$tgmpa_plugins[] = array(
+				'name'     => 'CMB2',
+				'slug'     => 'cmb2',
+				'required' => true
+			);
+		}
+	}
 
-if ( is_dir( $bg_patterns_path ) ) :
+// MICF library & Config
 
-    if ( $bg_patterns_dir = opendir( $bg_patterns_path ) ) :
-        $bg_patterns = array();
+	if ( file_exists( $fns_path . '/framework/micf-mixt/menu-item-custom-fields.php' ) ) {
+	    require_once( $fns_path . '/framework/micf-mixt/menu-item-custom-fields.php' );
+	} else {
+		$tgmpa_plugins[] = array(
+			'name'     => 'Menu Item Custom Fields',
+			'slug'     => 'menu-item-custom-fields',
+			'required' => true
+	    );
+	}
+	if ( file_exists( $fns_path . '/framework/micf-config.php' ) ) {
+		require_once( $fns_path . '/framework/micf-config.php' );
+	}
 
-        while ( ( $bg_patterns_file = readdir( $bg_patterns_dir ) ) !== false ) {
+// WPBakery Visual Composer
 
-            if ( stristr( $bg_patterns_file, '.png' ) !== false || stristr( $bg_patterns_file, '.jpg' ) !== false ) {
-                $name              = explode( '.', $bg_patterns_file );
-                $name              = str_replace( '.' . end( $name ), '', $bg_patterns_file );
-                $bg_patterns[] = array(
-                    'alt' => $name,
-                    'img' => $bg_patterns_url . $bg_patterns_file
-                );
-            }
-        }
-    endif;
-endif;
+	$tgmpa_plugins[] = array(
+		'name'     => 'WPBakery Visual Composer',
+		'slug'     => 'js_composer',
+		'source'   => $fns_path . '/framework/plugins/js_composer.zip',
+		'required' => false
+	);
 
+// LayerSlider
 
-// Include the Redux Framework
+	$tgmpa_plugins[] = array(
+	    'name' => 'LayerSlider WP',
+	    'slug' => 'LayerSlider',
+	    'source' => $fns_path . '/framework/plugins/layerslider.zip',
+	    'required' => false,
+	    'version' => '5.0.2',
+	    'force_deactivation' => true
+	);
 
-if ( file_exists( $fns_path . '/framework/redux-mixt-extension-loader/loader.php' ) ) {
-	require_once( $fns_path . '/framework/redux-mixt-extension-loader/loader.php' );
-}
-if ( !class_exists( 'ReduxFramework' ) && file_exists( $fns_path . '/framework/redux-mixt/ReduxCore/framework.php' ) ) {
-    require_once( $fns_path . '/framework/redux-mixt/ReduxCore/framework.php' );
-}
-if ( !isset( $mixt_opt ) && file_exists( $fns_path . '/framework/redux-config.php' ) ) {
-    require_once( $fns_path . '/framework/redux-config.php' );
-}
+// Run TGMPA Function
 
-
-// Include the CMB2 framework
-
-if ( file_exists( $fns_path . '/framework/cmb2-config.php' ) ) {
-    require_once( $fns_path . '/framework/cmb2-config.php' );
-}
-
-
-// Include the Menu Item Custom Fields library & config
-
-if ( file_exists( $fns_path . '/framework/micf-mixt/menu-item-custom-fields.php' ) ) {
-    require_once( $fns_path . '/framework/micf-mixt/menu-item-custom-fields.php' );
-}
-if ( file_exists( $fns_path . '/framework/micf-config.php' ) ) {
-    require_once( $fns_path . '/framework/micf-config.php' );
-}
-
-
-// If Redux is removed from theme, include the TGM_Plugin_Activation class to show a notice
-// if ( !file_exists( dirname( __FILE__ ) . '/framework/redux-mixt/ReduxCore/framework.php' ) ) :
-// require_once dirname( __FILE__ ) . '/framework/class-tgm-plugin-activation.php';
+require_once( $fns_path . '/framework/class-tgm-plugin-activation.php' );
 
 add_action( 'tgmpa_register', 'mixt_register_required_plugins' );
 
 function mixt_register_required_plugins() {
 
-    $plugins = array(
-
-        array(
-            'name'     => 'Redux Framework',
-            'slug'     => 'redux-framework',
-            'required' => true
-        ),
-        array(
-        	'name'     => 'CMB2',
-        	'slug'     => 'cmb2',
-        	'required' => true
-    	),
-       array(
-			'name'     => 'Menu Item Custom Fields',
-			'slug'     => 'menu-item-custom-fields',
-			'required' => true
-	    ),
-    );
+	global $tgmpa_plugins;
 
     $config = array(
         'default_path' => '',                      // Default absolute path to pre-packaged plugins.
@@ -157,70 +152,137 @@ function mixt_register_required_plugins() {
         )
     );
 
-    tgmpa( $plugins, $config );
-
+    tgmpa( $tgmpa_plugins, $config );
 }
 
 
-// Set the content width based on the theme's design and stylesheet
+// SET UP THEME AND REGISTER FEATURES
 
-if ( ! isset( $content_width ) ) $content_width = 750;
-
-
-// Set up theme defaults and register support for various WordPress features
+if ( ! isset( $content_width ) ) {
+	// Set The Content Width
+	$content_width = 750;
+}
 
 if ( ! function_exists( 'mixt_setup' ) ) :
+	function mixt_setup() {
 
-function mixt_setup() {
-	global $cap, $content_width;
+		global $cap, $content_width;
 
-	// This theme styles the visual editor with editor-style.css to match the theme style.
-	add_editor_style();
+		// This theme styles the visual editor with editor-style.css to match the theme style.
+		add_editor_style();
 
-	if ( function_exists( 'add_theme_support' ) ) {
+		if ( function_exists( 'add_theme_support' ) ) {
 
-		// Add default posts and comments RSS feed links to head
-		add_theme_support( 'automatic-feed-links' );
+			// Add default posts and comments RSS feed links to head
+			add_theme_support( 'automatic-feed-links' );
 
-		// Enable support for Post Thumbnails on posts and pages
-		add_theme_support( 'post-thumbnails' );
+			// Enable support for Post Thumbnails on posts and pages
+			add_theme_support( 'post-thumbnails' );
 
-		// Enable support for Post Formats
-		add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+			// Enable support for Post Formats
+			add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
 
-		// Setup the WordPress core custom background feature
-		add_theme_support( 'custom-background', apply_filters( 'mixt_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
+			// Setup the WordPress core custom background feature
+			add_theme_support( 'custom-background', apply_filters( 'mixt_custom_background_args', array(
+				'default-color' => 'ffffff',
+				'default-image' => '',
+			) ) );
 
+			// Declare WooCommerce Support
+			add_theme_support( 'woocommerce' );
+
+		}
+
+		// Add Translation Support
+		load_theme_textdomain( 'mixt', get_template_directory() . '/languages' );
+
+		// Register Navigation Menus
+		register_nav_menus( array(
+			'primary'  => __( 'Top Navigation', 'mixt' ),
+		) );
 	}
-
-	/*
-	* Make theme available for translation
-	* Translations can be filed in the /languages/ directory
-	* If you're building a theme based on mixt, use a find and replace
-	* to change 'mixt' to the name of your theme in all the template files
-	*/
-	load_theme_textdomain( 'mixt', get_template_directory() . '/languages' );
-
-	// This theme uses wp_nav_menu() in one location
-	register_nav_menus( array(
-		'primary'  => __( 'Top Nav Menu', 'mixt' ),
-	) );
-
-}
-endif; // mixt_setup
+endif;
 add_action( 'after_setup_theme', 'mixt_setup' );
 
 
-// Remove auto <br> tags added in content
+// Initialize Visual Composer As Included With Theme
+add_action( 'vc_before_init', 'mixt_vcSetAsTheme' );
+function mixt_vcSetAsTheme() {
+    vc_set_as_theme();
+}
 
-remove_filter('the_content', 'wpautop');
+// Initialize LayerSlider As Included With Theme
+add_action('layerslider_ready', 'mixt_layerslider_overrides');
+function mixt_layerslider_overrides() {
+    // Disable auto-updates
+    $GLOBALS['lsAutoUpdateBox'] = false;
+}
+
+
+// Add search button in top nav menu
+add_filter( 'wp_nav_menu_items', 'top_nav_search', 10, 2 );
+function top_nav_search( $items, $args ) {
+	if ( $args->theme_location !== 'primary' ) {
+	    return $items;
+	} else {
+		$search_form = '<li class="nav-search menu-item dropdown">' .
+					   '<a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle disabled">' .
+		               '<i class="menu-icon icon-search"></i></a>' .
+		               '<ul class="submenu dropdown-menu"><li class="menu-item">' .
+					   get_search_form(false) .
+					   '</li></ul></li>';
+	    $items .= $search_form;
+	    return $items;
+	}
+}
+
+// Function To Retreive Post Meta
+function mixt_meta( $key, $post_id = '', $single = true ) {
+	if ( !$post_id || $post_id == '' ) $post_id = get_queried_object_id();
+	return get_post_meta( $post_id, $key, $single );
+}
+
+// Remove auto <br> tags added in content
+remove_filter( 'the_content', 'wpautop' );
 function wpautopnobr($content) {
 	return wpautop($content, false);
 }
-add_filter('the_content', 'wpautopnobr');
+add_filter( 'the_content', 'wpautopnobr' );
+
+// Remove admin bar inline styles
+add_action( 'get_header', 'remove_adminbar_styles' );
+function remove_adminbar_styles() {
+	remove_action('wp_head', '_admin_bar_bump_cb');
+}
+
+
+// DEFINE GLOBAL VARS
+
+// Background patterns array
+$bg_patterns_path = get_stylesheet_directory() . '/assets/img/bg-pat/';
+$bg_patterns_url  = get_stylesheet_directory_uri() . '/assets/img/bg-pat/';
+$bg_patterns      = array();
+
+if ( is_dir( $bg_patterns_path ) ) :
+
+    if ( $bg_patterns_dir = opendir( $bg_patterns_path ) ) :
+        $bg_patterns = array();
+
+        while ( ( $bg_patterns_file = readdir( $bg_patterns_dir ) ) !== false ) {
+
+            if ( stristr( $bg_patterns_file, '.png' ) !== false || stristr( $bg_patterns_file, '.jpg' ) !== false ) {
+                $name              = explode( '.', $bg_patterns_file );
+                $name              = str_replace( '.' . end( $name ), '', $bg_patterns_file );
+                $bg_patterns[] = array(
+                    'alt' => $name,
+                    'img' => $bg_patterns_url . $bg_patterns_file
+                );
+            }
+        }
+
+    endif;
+
+endif;
 
 
 // Register widgetized area and update sidebar with default widgets
@@ -246,11 +308,7 @@ function mixt_widgets_init() {
 add_action( 'widgets_init', 'mixt_widgets_init' );
 
 
-// Get Global Options Var
-
-global $mixt_opt;
-
-// Enqueue scripts and styles
+// ENQUEUE SCRIPTS AND STYLES
 
 function mixt_scripts() {
 
@@ -258,10 +316,10 @@ function mixt_scripts() {
 	wp_enqueue_style( 'mixt-style', get_stylesheet_uri() );
 
 	// Load JS plugins
-	wp_enqueue_script( 'mixt-plugins-js', get_stylesheet_directory_uri() . '/assets/js/plugins.js', array( 'jquery' ), '1', true );
+	wp_enqueue_script( 'mixt-plugins-js', get_stylesheet_directory_uri() . '/assets/js/plugins.js', array( 'jquery' ), '1.0', true );
 
 	// Load global functions
-	wp_enqueue_script( 'mixt-global-js', get_stylesheet_directory_uri() . '/assets/js/global.js', array( 'jquery' ), '1', true );
+	wp_enqueue_script( 'mixt-global-js', get_stylesheet_directory_uri() . '/assets/js/global.js', array( 'jquery' ), '1.0', true );
 
 	// load bootstrap CSS
 	wp_enqueue_style( 'mixt-bootstrap', get_template_directory_uri() . '/dist/bootstrap-mixt.css' );
@@ -288,20 +346,28 @@ function mixt_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'mixt_scripts' );
 
-// Enqueue admin scripts and styles
+
+// ENQUEUE ADMIN SCRIPTS AND STYLES
 
 function mixt_admin_scripts($hook) {
-    if ( $hook == 'nav-menus.php' ) { // Menu Admin Scripts
+	// Menu Page Scripts
+    if ( $hook == 'nav-menus.php' ) {
         wp_enqueue_script( 'mixt-admin-menu-js', get_template_directory_uri() . '/framework/admin/js/menu-scripts.js', array('jquery'), '1.0' );
-    } elseif ( $hook == 'post.php' ) { // Page Admin Scripts
-    	wp_enqueue_script( 'mixt-admin-page-js', get_template_directory_uri() . '/framework/admin/js/page-scripts.js', array('jquery'), '1.0' );
-    	wp_enqueue_style( 'mixt-admin-page-css', get_template_directory_uri() . '/framework/admin/css/page-styles.css', false, '0.1.0' );
+    // Page Admin Scripts
+    } elseif ( $hook == 'post.php' || $hook == 'post-new.php' ) {
+    	wp_enqueue_script( 'mixt-admin-page-js', get_template_directory_uri() . '/framework/admin/js/page-scripts.js', array('jquery'), '1.0', true );
+    	wp_enqueue_style( 'mixt-admin-page-css', get_template_directory_uri() . '/framework/admin/css/page-styles.css', false, '1.0' );
     } else {
     	return;
     }
 }
 add_action( 'admin_enqueue_scripts', 'mixt_admin_scripts' );
 
+
+// VARIOUS THEME OPTIONS AND FUNCTIONS
+
+// Get Global Options Var
+global $mixt_opt;
 
 // Implement the Custom Header feature
 require get_template_directory() . '/inc/custom-header.php';
@@ -324,15 +390,14 @@ require get_template_directory() . '/inc/mixt-navwalker.php';
 // Load modules
 require get_template_directory() . '/inc/modules.php';
 
-
-// Various options and functions
-
 // WP Admin bar
-if ($mixt_opt['show-admin-bar'] == false) show_admin_bar( false );
+if ( array_key_exists('show-admin-bar', $mixt_opt) && $mixt_opt['show-admin-bar'] == false ) {
+	show_admin_bar( false );
+}
 
 // Global option vars
 
 function mixt_meta_options() {
 	// $has_sidebar = mixt_meta('mixt_page_sidebar');
 }
-add_action('wp_head', 'mixt_meta_options');
+// add_action( 'wp_head', 'mixt_meta_options' );

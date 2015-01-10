@@ -2,40 +2,43 @@
 
 /* - MIXT MASTER STYLESHEET - */
 
-// Base styling & reset
-@import 'base';
-
-// Theme vars
+// Theme Vars
 @import 'vars';
 
-// Theme color schemes
+// Theme Color Schemes
 @import 'colors';
 
-// Theme mixins
+// Theme Mixins
 @import 'mixins';
 
-// Bootstrap theme
+// Base Styling & Reset
+@import 'base';
+
+// Bootstrap Theme
 @import 'mixt-bootstrap';
 
-// Theme global
+// Theme Global
 @import 'global';
 
-// Navbar styling
+// Navbar Styling
 @import 'navbar';
 
-// Header styling
+// Header Styling
 @import 'header';
 
-// Input styling
+// Input Styling
 @import 'inputs';
 
-// Content styling
+// UI Elements Styling
+@import 'ui';
+
+// Content Styling
 @import 'content';
 
-// Sidebar styling
+// Sidebar Styling
 @import 'sidebar';
 
-// Footer styling
+// Footer Styling
 @import 'footer';
 
 

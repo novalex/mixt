@@ -1,20 +1,23 @@
 
 jQuery(document).ready( function($) {
 
-	// Mega Menu Handling
+	// MIXT Menu Handling Scripts
 
+	// Check if item is a mega menu
+	// If it is, label it as "Mega Menu" and its children as "Mega Menu Column"
 	function megaMenuCheck(menuItem) {
-		var itemType = menuItem.find('.item-controls .item-type'),
-			itemSubs = menuItem.nextUntil('.menu-item-depth-0'),
-			megaCheck    = menuItem.find('.field-megamenu input:checkbox:checked'),
-			megaCheckVal = (megaCheck.val() ? true : false);
+		var itemType     = menuItem.find('.item-controls .item-type'),
+			itemSubs     = menuItem.nextUntil('.menu-item-depth-0'),
+			megaCheck    = menuItem.find('.field-megamenu input:checked'),
+			megaCheckVal = megaCheck.val() ? true : false,
+			defaultType;
 
-		if (megaCheckVal == true) {
-			var defaultType = itemType.text();
+		if (megaCheckVal === true) {
+			defaultType = itemType.text();
 			menuItem.addClass('is-mega');
 			itemType.text('Mega Menu').attr('data-def-type', defaultType);
 
-			// Mega menu columns
+			// Handle Mega Menu Columns
 			itemSubs.each( function() {
 				var subItem = $(this);
 				if (subItem.is('.menu-item-depth-1')) {
@@ -27,7 +30,7 @@ jQuery(document).ready( function($) {
 				}
 			});
 		} else if (menuItem.hasClass('is-mega')) {
-			var defaultType = itemType.attr('data-def-type');
+			defaultType = itemType.attr('data-def-type');
 			itemType.text(defaultType).removeAttr('data-def-type');
 			menuItem.removeClass('is-mega');
 			
@@ -43,14 +46,52 @@ jQuery(document).ready( function($) {
 		}
 	}
 
-	// Check only top level items
-	$('.menu-item-depth-0').each( function() {
-		var menuItem = $(this);
-		megaMenuCheck(menuItem);
+	// Check if item is disabled
+	// If it is, append "(disabled)" to its title
+	function disabledCheck(menuItem) {
+		var disCheck    = menuItem.find('.field-disabled input:checked'),
+			disCheckVal = disCheck.val() ? true : false,
+			itemTitle   = menuItem.find('.menu-item-title'),
+			newTitle;
 
-		$('.field-megamenu input:checkbox', menuItem).change( function() {
+		if (disCheckVal === true) {
+			newTitle = itemTitle.text() + ' (disabled)';
+		} else {
+			newTitle = itemTitle.text().replace(' (disabled)', '');
+		}
+		itemTitle.text(newTitle);
+	}
+
+	function checkMegaMenu() {
+		$('.menu-item-depth-0').each( function() {
+			var menuItem = $(this);
 			megaMenuCheck(menuItem);
 		});
+
+		$('.field-megamenu input').on('change', function() {
+			var target = $(this).parents('.menu-item-depth-0');
+			megaMenuCheck(target);
+		});
+	}
+
+	function checkDisabled() {
+		$('.menu-item').each( function() {
+			var menuItem = $(this);
+			disabledCheck(menuItem);
+		});
+
+		$('.field-disabled input').on('change', function() {
+			var target = $(this).parents('.menu-item');
+			disabledCheck(target);
+		});
+	}
+
+	checkMegaMenu();
+	checkDisabled();
+
+	$( document ).ajaxComplete(function() {
+		checkMegaMenu();
+		checkDisabled();
 	});
 
 });

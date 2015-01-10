@@ -1,11 +1,14 @@
 <?php
 
 /**
- * Class Name: wp_bootstrap_navwalker
- * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Twitter Bootstrap 2.3.2 navigation style in a custom theme using the WordPress built in menu manager.
- * Version: 1.4.3
- * Author: Edward McIntyre - @twittem
+ * Custom MIXT Nav Walker
+ *
+ * Class Name: mixt_navwalker
+ * Description: Custom WordPress Nav Walker Class For The MIXT Theme
+ * Version: 1.0
+ *
+ * Based on:
+ * https://github.com/twittem/wp-bootstrap-navwalker by Edward McIntyre - @twittem
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -19,10 +22,14 @@ class mixt_navwalker extends Walker_Nav_Menu {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int $depth Depth of page. Used for padding.
 	 */
+
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
-		if ($depth == 0) {
+
+		// Check If Item Is Top Level Menu
+
+		if ( $depth == 0 ) {
 			$output .= "\n$indent<ul class=\"submenu dropdown-menu\">\n";
 		} else {
 			$output .= "\n$indent<ul class=\"submenu\">\n";
@@ -42,17 +49,14 @@ class mixt_navwalker extends Walker_Nav_Menu {
 	 */
 
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
 		global $wp_query;
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		// Determine whether the item is a Divider, Header, or regular menu item
+		// Determine Whether The Item Is A Divider Or Regular Menu Item
 
-		if (strcasecmp($item->title, 'divider') == 0) {
+		if ( strcasecmp($item->title, 'divider' ) == 0) {
 			$output .= $indent . '<li class="divider">';
-		} else if (strcasecmp($item->title, 'divider-vertical') == 0) {
-			$output .= $indent . '<li class="divider-vertical">';
-		} else if (strcasecmp($item->title, 'dropdown-header') == 0) {
-			$output .= $indent . '<li class="dropdown-header">' . esc_attr( $item->attr_title );
 		} else {
 
 			$class_names = $value = '';
@@ -61,35 +65,43 @@ class mixt_navwalker extends Walker_Nav_Menu {
 			$classes[]   = 'menu-item-' . $item->ID;
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-			$is_disabled = '' !== get_post_meta($item->ID, 'menu-item-disabled', true) ? true : false;
+			// Check If Item Is Disabled
 
-			if ($is_disabled == true) {
+			$is_disabled = ( get_post_meta($item->ID, 'menu-item-disabled', true) !== '' ) ? true : false;
+			if ( $is_disabled == true ) {
 				$class_names .= ' disabled';
 			}
 
-			if (!function_exists('is_megamenu_check')) {
+			// Check If Item Is Mega Menu
+
+			if ( !function_exists('is_megamenu_check') ) {
 				function is_megamenu_check($itemID) {
 					return get_post_meta($itemID, 'menu-item-megamenu', true);
 				}
 			}
 			$is_megamenu = 'is_megamenu_check';
 
-			if ($args->has_children) {
-				if ($depth === 0) {
+			if ( $args->has_children ) {
+				if ( $depth === 0 ) {
 					$class_names .= ' dropdown';
 
-					if ($is_megamenu($item->ID) == 'true') $class_names .= ' mega-menu';
-					else $class_names .= ' drop-menu';
-
-				} else if ($depth > 0) {
+					if ( $is_megamenu($item->ID) == 'true' ) {
+						$class_names .= ' mega-menu';
+					} else {
+						$class_names .= ' drop-menu';
+					}
+				} else if ( $depth > 0 ) {
 					$class_names .= ' drop-submenu arrow-right';
 				}
 			}
 
-			// Create mega menu columns
-			if ($depth == 1 && $is_megamenu($item->menu_item_parent) == 'true') {
-				$class_names = str_replace(array(' drop-submenu', ' arrow-right'), array(' mega-menu-column', ''), $class_names);
+			// Create Mega Menu Columns
+
+			if ( $depth == 1 && $is_megamenu($item->menu_item_parent) == 'true' ) {
+				$class_names = str_replace( array(' drop-submenu', ' arrow-right'), array(' mega-menu-column', ''), $class_names );
 			}
+
+			// Start Constructing Item
 
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
@@ -98,7 +110,7 @@ class mixt_navwalker extends Walker_Nav_Menu {
 
 			$output .= $indent . '<li' . $id . $value . $class_names .'>';
 
-			$attr_href = $is_disabled == true ? '#' : $item->url;
+			$attr_href = ( $is_disabled == true ) ? '#' : $item->url;
 
 			$attributes  = !empty( $item->target )  ? ' target="' . esc_attr( $item->target ) . '"' : '';
 			$attributes .= !empty( $item->xfn )     ? ' rel="'    . esc_attr( $item->xfn    ) . '"' : '';
@@ -107,11 +119,11 @@ class mixt_navwalker extends Walker_Nav_Menu {
 
 			$item_output = $args->before;
 
-			// Menu icons
+			// Add Menu Icons
 
 			$menu_icon = get_post_meta($item->ID, 'menu-item-menuicon', true);
 
-			if (!empty($menu_icon)) {
+			if ( !empty($menu_icon) ) {
 				$item_output .= '<a'. $attributes .'><i class="menu-icon ' . esc_attr( $menu_icon ) . '"></i>&nbsp;';
 			} else {
 				$item_output .= '<a'. $attributes .'>';
@@ -119,17 +131,21 @@ class mixt_navwalker extends Walker_Nav_Menu {
 
 			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 
-			if ($args->has_children) {
-				if ($depth === 0)
+			// Add Drop Arrows
+
+			if ( $args->has_children ) {
+				if ( $depth === 0 ) {
 					$item_output .= ' <span class="drop-arrow icon-chevron-down"></span>';
-				if ($depth > 0) {
-					if ($is_megamenu($item->menu_item_parent) == 'true') {
+				}
+				if ( $depth > 0 ) {
+					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
 						$item_output .= ' <span class="drop-arrow icon-chevron-down visible-xs-inline-block"></span>';
 					} else {
 						$item_output .= ' <span class="drop-arrow icon-chevron-right"></span>';
 					}
 				}
 			}
+
 			$item_output .= '</a>' . $args->after;
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
@@ -158,19 +174,16 @@ class mixt_navwalker extends Walker_Nav_Menu {
 	 */
 
 	function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-		if ( !$element ) {
-			return;
-		}
+
+		if ( !$element ) { return; }
 
 		$id_field = $this->db_fields['id'];
 
-		//display this element
+		// Display This Element
 		if ( is_object( $args[0] ) ) {
 			$args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
 		}
 
-		parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
+		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
 }
-
-?>

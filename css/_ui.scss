@@ -1,0 +1,41 @@
+
+/* - MIXT UI ELEMENTS - */
+
+// Helper Classes
+
+.border-base {
+	border-width: 0;
+	border-style: solid;
+}
+
+.nav-border {
+	@extend .border-base;
+	border-color: $nav-border;
+	border-color: $nav-border-alpha;
+}
+
+// Link List
+.link-list {
+	margin-bottom: 0;
+
+	li {
+		display: inline-block;
+		text-align: center;
+		@extend .nav-border;
+		border-right-width: 1px;
+		a {
+			display: block;
+			padding: 5px 10px;
+			color: $text-dark-color-fade;
+			transition: color 0.2s;
+
+			&:hover,
+			&:active {
+				color: $theme-accent;
+				text-decoration: none;
+			}
+		}
+
+		&:first-child { border-left-width: 1px; }
+	}
+}

@@ -7,6 +7,7 @@
 ?>
 
 <!DOCTYPE html>
+
 <html <?php language_attributes(); ?>>
 
 <head>
@@ -28,7 +29,7 @@
 
 		$page_ID = get_queried_object_id();
 
-		if ($mixt_opt['page-loader'] !== false) {
+		if ($mixt_opt['page-loader'] != 0) {
 			echo '<div id="load-ov"><div class="signal"></div></div>';
 			?>
 			<script type="text/javascript" id="mixt_load_class">document.getElementsByTagName('html')[0].className += ' loading';</script>
@@ -39,11 +40,9 @@
 
 		// Header & global page settings
 		$navbar_theme = '';
-		$head_media = mixt_meta('mixt_head_media');
-		$head_image = mixt_meta('mixt_head_image');
-		$head_slider = mixt_meta('mixt_head_slider');
 		$fullwidth_class = (mixt_meta('mixt_page_fullwidth') == 'true' ? 'fullwidth' : '');
 		$navbar_tsp = (mixt_meta('mixt_nav_tsp') == 'true' ? 'nav-transparent' : '');
+		$head_media = mixt_meta('mixt_head_media');
 
 		// Main wrapper classes
 		$wrap_classes = '';
@@ -86,11 +85,13 @@
 		$navbar_classes .= $navbar_scheme;
 		if ($navbar_sub_scheme) $navbar_classes .= ' submenu-inverse';
 		if ($navbar_sticky) $navbar_classes .= ' sticky';
+
+		get_template_part( 'inc/mixt', 'header' );
 	?>
 
 <div id="main-wrap" class="<?php echo $wrap_classes; ?>">
 
-	<?php if ($mixt_opt['show-masthead']) : ?>
+	<?php if (1 > 2) : ?>
 	<header id="masthead" class="site-header" role="banner">
 		<div class="container">
 			<div class="row">
@@ -115,9 +116,11 @@
 	</header>
 	<?php endif; ?>
 
-	<div id="top-nav-wrap" class="<?php echo $navbar_wrap_classes; ?>">
+	<?php // TOP NAVIGATION AREA ?>
 
-	<?php // mixt_social_links() ?>
+	<?php if ($mixt_opt['second-nav']) { mixt_nav_second(); } ?>
+
+	<div id="top-nav-wrap" class="<?php echo $navbar_wrap_classes; ?>">
 
 		<nav id="top-nav" class="site-navigation navbar navbar-mixt <?php echo $navbar_classes; ?>" role="banner">
 			<div class="container">
@@ -132,16 +135,19 @@
 					<a id="nav-logo" class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"></a>
 				</div>
 
-				<?php wp_nav_menu(
-					array(
-						'theme_location' => 'primary',
-						'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
-						'menu_class' => 'nav navbar-nav',
-						'fallback_cb' => '',
-						'menu_id' => 'main-menu',
-						'walker' => new mixt_navwalker()
-					)
-				); ?>
+				<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'primary',
+							'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
+							'menu_class' => 'nav navbar-nav',
+							'fallback_cb' => '',
+							'menu_id' => 'main-menu',
+							'walker' => new mixt_navwalker()
+						)
+					);
+				?>
+
 			</div>
 		</nav>
 
@@ -149,47 +155,62 @@
 
 	</div>
 
-	<?php
+	<?php // END TOP NAVIGATION AREA ?>
 
-	// Header Media
+
+	<?php // HEADER MEDIA
 
 	if ($head_media == 'true') :
 
-		if ($head_slider) {
+		mixt_head_media($page_ID);
 
-			if (class_exists('layerslider')) layerslider($head_slider);
+	/*
 
-		} else {
-			if (mixt_meta('mixt_head_img_feat') == 'true') {
-				$img_url = wp_get_attachment_url( get_post_thumbnail_id($page_ID) );
-			} else {
-				$img_url = '';
-			}
+		$head_media_type = mixt_meta('mixt_head_media_type');
+		$head_image      = mixt_meta('mixt_head_image');
+		$head_slider     = mixt_meta('mixt_head_slider');
+		$head_code       = mixt_meta('mixt_head_code');
+
+		$hm_classes      = 'head-media media-image';
+
+		$media_img = $media_slider = $media_html = '';
+
+		if ($head_media_type == 'feat') {
+			$img_url = wp_get_attachment_url( get_post_thumbnail_id($page_ID) );
 
 			$page_head_classes = '';
 			if (mixt_meta('mixt_head_img_repeat') == 'true') $page_head_classes .= 'pattern ';
 
-			$head_code = mixt_meta('mixt_head_code');
+			$media_img = sprintf('<div class="media-container %1$s" style="background-image: url(%2$s);" data-imgsrc="%2$s"></div>',
+				$page_head_classes,
+				$img_url
+			);
+		}
 
+		?>
+		<div class="<?php echo $hm_classes; ?>">
+
+			<?php
+			echo $media_img;
+			if ($head_media_type == 'slider') {
+				$head_slider_id = mixt_meta('mixt_head_slider');
+				echo do_shortcode("[layerslider id=$head_slider_id]");
+			} else if ($head_code) {
+				printf('<div class="media-inner"><div class="container">%s</div></div>', $head_code);
+			}
 			?>
 
-			<div class="head-media media-image">
-				<div class="media-container <?php echo $page_head_classes; ?>" style="background-image: url('<?php echo $img_url; ?>');" data-imgsrc="<?php echo $img_url; ?>"></div>
-				<?php if ($head_code != '') : ?>
-					<div class="media-inner">
-						<div class="container">
-							<?=$head_code?>
-						</div>
-					</div>
-				<?php endif; ?>
-			</div>
-
+		</div>
 		<?php
-		}
+
+	*/
 
 	endif;
 
-	// Location Bar
+	// END HEADER MEDIA
+
+
+	// LOCATION BAR
 
 	if (!is_front_page()) : ?>
 

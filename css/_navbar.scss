@@ -1,36 +1,63 @@
 
-// MIXT NAVBAR STYLESHEET
+/* - MIXT NAVBAR STYLESHEET - */
 
-#top-nav-wrap {
-    min-height: 90px;
-    z-index: 9999;
-    transition: min-height, 0.3s;
-}
-
-#navbar-check { width: 0; height: 0; display: none; }
-
-
-.navbar-mixt {
+%navbar {
     width: 100%;
     margin-bottom: 0;
-    opacity: 1;
-    padding: 20px 0;
     border-radius: 0;
     border-width: 0;
+    border-style: solid;
     border-bottom-width: 1px;
     border-color: $nav-border;
     border-color: $nav-border-alpha;
     background-color: $nav-bg;
     background-color: $nav-bg-alpha;
+}
+
+#navbar-check { width: 0; height: 0; display: none; }
+
+// SECONDARY NAVIGATION
+
+.second-nav {
+    min-height: 30px;
+    @extend %navbar;
+
+    .container {
+        display: table;
+        padding: 0 15px;
+    }
+    .left, .right {
+        width: 50%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+// TOP NAVIGATION
+
+#top-nav-wrap {
+    min-height: 90px;
+    position: relative;
+    z-index: 9999;
+    transition: min-height, 0.3s;
+}
+
+.navbar-mixt {
+    @extend %navbar;
+    opacity: 1;
+    padding: 20px 0;
     background-image: none;
     z-index: 9999;
     transition: padding 0.3s, box-shadow 0.2s, background 0.4s;
 
     .container { padding: 0 15px; }
     .navbar-inner { padding: 0; }
+    .navbar-collapse.in { overflow-y: visible; }
 
     .navbar-header,
     .navbar-nav { margin: 0; }
+
+    // Navbar Header & Logo
 
     .navbar-header { height: 50px; line-height: 50px; text-align: center; }
 
@@ -45,6 +72,8 @@
         transition: width 0.3s, height 0.3s, background-image 0.4s;
     }
 
+    // Navbar Menu
+
     .nav {
 
         > li > a {
@@ -58,7 +87,6 @@
         .menu-item:hover > a,
         .menu-item:hover > a:hover {
             color: $theme-accent;
-            text-decoration: none;
         }
 
         > .active {
@@ -88,15 +116,11 @@
             .submenu { display: none !important; }
         }
 
+        .menu-item a { text-decoration: none !important; }
+
     }
 
-    .menu-icon {
-        font-size: 16px;
-        vertical-align: middle;
-        margin-right: 5px;
-
-        &:after:empty { display: none; }
-    }
+    // Mobile Expand/Collapse Handle
 
     .navbar-toggle {
         height: 50px;
@@ -109,11 +133,24 @@
         transition: background-color 0.3s;
     }
 
+    // Menu Icons
+
+    .menu-icon {
+        font-size: 16px;
+        vertical-align: middle;
+        margin-right: 5px;
+
+        &:after:empty { display: none; }
+    }
+
     // Dropdown Menus
+
     .nav > li > a,
     .submenu > li > a {
         font-weight: 500;
     }
+
+    // Standard Submenus
 
     .nav > li > .submenu {
         margin-top: 10px;
@@ -187,61 +224,36 @@
         }
     }
 
+    // Mega Menus
+
     .mega-menu {
-        > .submenu {
-            > li > a,
-            > li:hover > a,
-            > li:hover > a:hover {
-                height: 44px;
-                padding-top: 13px;
-                color: $nav-menu-color-fade;
-                font-size: 14px;
+        .mega-menu-column {
+            > .submenu {
+                visibility: inherit;
+                opacity: 1;
+                transition: visibility 0s;
+            }
+
+            &:last-child > a {
+                border-bottom-width: 1px;
             }
         }
-        .mega-menu-column:last-child > a {
-            border-bottom-width: 1px;
-        }
-
-        &:hover .mega-menu-column > .submenu {
-            visibility: visible;
-            opacity: 1;
-        }
     }
+
+    // Submenu Dropping On The Left
 
     .dropdown > .submenu.drop-left,
     .dropdown:last-child > .submenu {
         left: auto; right: 0;
     }
 
-    .drop-arrow {
-        font-size: 10px;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
-
-    .drop-submenu.arrow-right {
-        > a { padding-right: 30px !important; }
-    }
-    .drop-submenu.arrow-left {
-        > a { padding-left: 30px !important; }
-
-        .drop-arrow {
-            right: auto; left: 10px;
-        }
-        .drop-arrow:before { content: '\f489'; }
-    }
-
-    .drop-submenu .drop-arrow {
-        position: absolute;
-        top: 50%; right: 10px;
-        margin: -8px 0 0;
-    }
+    // Level 2+ Submenus
 
     .drop-menu .submenu,
     .mega-menu-column .submenu {
         .drop-submenu {
 
-            .submenu { background-color: darken($nav-menu-bg, 4); }
+            .submenu { background-color: darken($nav-menu-bg, 3); }
 
             > .submenu {
                 transition: visibility 0.3s, opacity 0.3s, left 0.1s ease 0.3s, right 0.1s ease 0.3s, top 0.1s ease 0.3s;
@@ -253,23 +265,66 @@
             }
         }
     }
+
+    // Nav Search Form
+
+    .nav-search {
+        .submenu { width: 300px; }
+        .search-form {
+            input, button {
+                border-width: 0;
+                border-radius: 0;
+            }
+            input { border-right-width: 1px; }
+            button { border-left-width: 1px; }
+        }
+    }
+
+    // Submenu Drop Arrows
+
+    .drop-arrow {
+        font-size: 10px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
+    .drop-submenu {
+        &.arrow-right {
+            > a { padding-right: 30px !important; }
+        }
+
+        &.arrow-left {
+            > a { padding-left: 30px !important; }
+
+            .drop-arrow {
+                right: auto; left: 10px;
+            }
+            .drop-arrow:before { content: '\f489'; }
+        }
+
+        .drop-arrow {
+            position: absolute;
+            top: 50%; right: 10px;
+            margin: -8px 0 0;
+        }
+    }
 }
 
+// Fix for browsers with no visibility support
 .no-visibility .navbar-mixt .submenu {
     display: none;
 }
 
 
 // Navbar Sticky (fixed) State
+
 .fixed-nav {
 
     .navbar-mixt {
         padding: 0;
         z-index: 9999;
-    }
 
-    .navbar-mixt.navbar-default {
-        .nav {
+        &.navbar-default .nav {
             > li:hover {
                 > a,
                 > a:hover,
@@ -278,10 +333,8 @@
                 }
             }
         }
-    }
 
-    .navbar-mixt.navbar-inverse {
-        .nav {
+        &.navbar-inverse .nav {
             > li:hover {
                 > a,
                 > a:hover,
@@ -291,7 +344,6 @@
             }
         }
     }
-
 }
 
 
@@ -411,11 +463,6 @@
             }
         }
     }
-    .mega-menu {
-        > .submenu > li > a {
-            color: $nav-menu-color-dark-fade;
-        }
-    }
 
     .drop-menu .submenu,
     .mega-menu-column .submenu {
@@ -453,49 +500,10 @@
 
 // DESKTOP NAV BREAKPOINT
 
+// The menu is displayed by default.
+// Menu items are displayed next to each other and their submenus display on hover.
+
 @media (min-width: 768px) {
-
-    .fixed-nav #nav-logo { width: 54px; height: 20px; }
-
-    .logo-left .navbar-mixt {
-        .navbar-header {
-            float: left;
-            margin-right: 15px;
-        }
-        .nav {
-            float: right;
-        }
-    }
-
-    .logo-right .navbar-mixt {
-        .navbar-header {
-            float: right;
-            margin-left: 15px;
-        }
-    }
-
-    .logo-center .navbar-mixt {
-        .navbar-header {
-            float: none;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .navbar-inner {
-            text-align: center;
-        }
-        .navbar-nav {
-            float: none;
-            display: table;
-            margin: 0 auto !important;
-        }
-    }
-
-    #top-nav-wrap.logo-center {
-        min-height: 121px;
-    }
-    .fixed-nav #top-nav-wrap.logo-center {
-        min-height: 101px;
-    }
     
     .navbar-mixt {
 
@@ -542,20 +550,48 @@
 
         // Mega Menu
         .mega-menu {
+
             > .submenu {
-                display: table;
                 width: auto;
+                display: table;
 
                 > li {
                     min-width: 160px;
                     display: table-cell;
                     vertical-align: top;
-                    border-right: 1px solid;
+                    border-width: 0;
+                    border-style: solid;
+                    border-right-width: 1px;
                     border-color: $nav-border;
                     border-color: $nav-border-alpha;
 
-                    &:last-child {
-                        border-width: 0;
+                    > a {
+                        height: 44px;
+                        padding-top: 13px;
+                        font-size: 14px;
+                        color: $nav-menu-color-fade;
+                        background-color: rgba(0,0,0,0.02);
+                    }
+
+                    &:nth-child(4n),
+                    &:nth-child(n-4):last-child {
+                        border-right-width: 0;
+                    }
+                }
+
+                &.multi-row {
+                    display: block;
+                    min-width: 680px;
+
+                    > li {
+                        width: 25%;
+                        float: left;
+                        display: block;
+                        border-top-width: 1px;
+
+                        &:nth-child(-n+4) {
+                            border-top-width: 0;
+                        }
                     }
                 }
             }
@@ -570,9 +606,67 @@
         }
         .mega-menu:hover > .submenu {
             display: table !important;
+
+            &.multi-row {
+                display: block !important;
+            }
+        }
+
+        &.navbar-inverse {
+            .mega-menu {
+                > .submenu > li > a {
+                    color: $nav-menu-color-dark-fade;
+                    background-color: rgba(0,0,0,0.08);
+                }
+            }
         }
     }
 
+    // Navbar Sticky (fixed) State
+    .fixed-nav {
+        #top-nav-wrap.logo-center {
+            min-height: 101px;
+        }
+        
+        #nav-logo { width: 54px; height: 20px; }
+    }
+
+    // Logo Positions
+    .logo-left .navbar-mixt {
+        .navbar-header {
+            float: left;
+            margin-right: 15px;
+        }
+        .nav {
+            float: right;
+        }
+    }
+    .logo-right .navbar-mixt {
+        .navbar-header {
+            float: right;
+            margin-left: 15px;
+        }
+    }
+    .logo-center .navbar-mixt {
+        .navbar-header {
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .navbar-inner {
+            text-align: center;
+        }
+        .navbar-nav {
+            float: none;
+            display: table;
+            margin: 0 auto !important;
+        }
+    }
+    #top-nav-wrap.logo-center {
+        min-height: 121px;
+    }
+
+    // Fix for browsers with no visibility support
     .no-visibility .navbar-mixt {
         .dropdown:hover > .submenu,
         .mega-menu:hover > .submenu {
@@ -582,6 +676,9 @@
 }
 
 // MOBILE NAV BREAKPOINT
+
+// The menu is collapsed by default and the handle needs to be pressed to display it.
+// Each menu item takes up a row, and its submenus can be toggled by pressing the drop arrow.
 
 @media (max-width: 767px) {
 
@@ -598,6 +695,7 @@
             border-color: $nav-border;
             border-color: $nav-border-alpha;
             background-color: $nav-bg;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .nav > li > a {
@@ -606,22 +704,29 @@
             border-color: $nav-border;
             border-color: $nav-border-alpha;
             border-bottom-width: 1px;
+
+            &.dropdown-toggle { padding-right: 50px; }
         }
 
-        .drop-arrow {
-            position: absolute;
-            top: 0; right: 0; bottom: 0;
-            width: 50px;
-            font-size: 14px;
-            text-align: center;
-            margin-left: 0;
-        }
-        .drop-submenu .drop-arrow {
-            top: 0; right: 0;
-            margin: 0; padding: 10px 0;
-        }
-        .mega-menu-column > a .drop-arrow {
-            line-height: 44px;
+        .nav > li:last-child > a { border-bottom-width: 0; }
+
+        // Dropdown Menus
+
+        .drop-submenu,
+        .drop-submenu.arrow-left,
+        .drop-submenu.arrow-right,
+        .mega-menu-column {
+            > a {
+                font-size: 13px;
+                padding-right: 50px !important;
+            }
+
+            .drop-arrow {
+                top: 0; left: auto; right: 0;
+                margin: 0;
+                padding: 10px 0;
+                line-height: 22px;
+            }
         }
 
         .dropdown-menu,
@@ -638,9 +743,13 @@
             box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
             -webkit-box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
 
-            a {
+            li > a,
+            li .menu-item > a,
+            .mega-menu-column li > a {
+                height: 42px;
                 max-width: none;
                 position: relative;
+                line-height: 21px;
             }
 
             li:last-child > a,
@@ -657,9 +766,13 @@
             }
 
             &.expand {
-                background-color: rgba(0,0,0,0.06);
-                > a .drop-arrow:before {
-                    content: '\f48a';
+                background-color: rgba(0,0,0,0.03);
+                > a {
+                    background-color: transparent !important;
+
+                    .drop-arrow:before {
+                        content: '\f48a';
+                    }
                 }
 
                 > .submenu {
@@ -667,6 +780,40 @@
                 }
             }
         }
+
+        // Nav Search Form
+
+        .nav-search {
+            .submenu {
+                position: absolute;
+                top: 0; left: 0;
+                display: block;
+                width: 100%;
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+            }
+
+            input { padding-left: 40px; }
+            button { padding-left: 30px; padding-right: 30px; }
+
+            input, button {
+                height: 50px;
+                background-color: transparent;
+            }
+        }
+
+        // Submenu Drop Arrows
+
+        .drop-arrow {
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 50px;
+            font-size: 14px;
+            text-align: center;
+            margin-left: 0;
+        }
+
+        // Navbar Themes
 
         &.navbar-inverse {
             .navbar-inner {
@@ -681,20 +828,32 @@
             }
 
             li.expand {
-                background-color: rgba(255,255,255,0.06);
+                background-color: rgba(255,255,255,0.05);
             }
         }
     }
 
+    // Logo Positions
+
+    .logo-left .navbar-mixt {
+        .navbar-header { text-align: left; }
+
+        #nav-logo { margin-left: 15px; }
+    }
+
+    .logo-right .navbar-mixt {
+        .navbar-header { text-align: right; }
+
+        #nav-logo { margin-right: 15px; }
+    }
+
+    // Fix for browsers with no visibility support
     .no-visiblity #top-nav .dropdown-menu {
         display: block;
     }
 
+    // Tell jQuery the mobile media query is active
     #navbar-check { display: inline; }
-}
-
-@media (max-width: 601px) {
-    #navbar-check { display: block; }
 }
 
 @media (min-width: 601px) {
@@ -703,25 +862,37 @@
         .nav > li > a { height: 51px; }
     }
 
-    .fixed-nav #top-nav-wrap {
-        min-height: 50px;
+    // Navbar Sticky (fixed) State
 
+    .fixed-nav {
+        #top-nav-wrap {
+            min-height: 50px;
+        }
         .nav-transparent.has-head-media #top-nav-wrap {
             height: 0;
             min-height: 0;
         }
-    }
-    .fixed-nav .navbar-mixt {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        padding: 0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+        .navbar-mixt {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 0;
+            box-shadow: 0 0 4px rgba(0,0,0,0.14);
+        }
+
+        &.admin-bar .navbar-mixt { top: 32px; }
     }
 
+    // Fix for browsers with no rgba() support
     .no-rgba .fixed-nav .navbar-mixt { opacity: 0.97; }
-    .fixed-nav.admin-bar #top-nav { top: 32px; }
 }
 
 @media (min-width: 601px) and (max-width: 782px) {
+    // Prevent overlay when the WP admin bar is shown
     .fixed-nav.admin-bar #top-nav { top: 46px; }
+}
+
+@media (max-width: 601px) {
+    // Tell jQuery the smallest mobile media query is active
+    #navbar-check { display: block; }
 }
