@@ -17,8 +17,12 @@ $post_tags = wp_get_post_tags($post_id);
 
 <article id="post-<?php $post_id ?>" <?php post_class(); ?>>
 	<header class="page-header">
-		<h1 class="page-title"><?php the_title(); ?></h1>
-		<?php if ($post_thumb) echo '<div class="post-image">' . $post_thumb . '</div>'; ?>
+
+		<!--<h1 class="page-title"><?php the_title(); ?></h1>-->
+
+		<?php if ( $post_thumb ) {
+			echo '<div class="post-image">' . $post_thumb . '</div>';
+		} ?>
 
 		<div class="entry-meta">
 			<?php mixt_posted_on(); ?>

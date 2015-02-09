@@ -1,28 +1,93 @@
 
 // MIXT Sass Mixins
 
+// VISIBILITY
+
+@mixin vis-visible {
+	opacity: 1;
+	visibility: visible;
+}
+@mixin vis-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+// MEDIA BREAKPOINTS
+
+$bp-mercury: 480px;
+$bp-mars:    768px;
+$bp-venus:   992px;
+$bp-earth:   1200px;
+
+// neptune, uranus, saturn, jupiter
+
+@function translate-media-condition($c) {
+	$media-cond: (
+		// Medium
+		"print":   "only print",
+		"screen":  "only screen",
+		"retina":  "(-webkit-min-device-pixel-ratio: 1.5),
+					(min--moz-device-pixel-ratio: 1.5),
+					(-o-min-device-pixel-ratio: 3/2),
+					(min-device-pixel-ratio: 1.5),
+					(min-resolution: 120dpi)",
+		// Laptops
+		"earth":    "(min-width: #{$bp-earth + 1})",
+		"<earth":   "(max-width: #{$bp-earth})",
+		// Laptops
+		"venus":    "(min-width: #{$bp-venus + 1})",
+		"<venus":   "(max-width: #{$bp-venus})",
+		// Tablets
+		"mars":     "(min-width: #{$bp-mars + 1})",
+		"<mars":    "(max-width: #{$bp-mars})",
+		// Phones
+		"mercury":  "(min-width: #{$bp-mercury + 1})",
+		"<mercury": "(max-width: #{$bp-mercury})"
+	);
+	@return map-get( $media-cond, $c );
+}
+
+@mixin media($args...) {
+	$query: "";
+	@each $arg in $args {
+		$op: "";
+		@if ( $query != "" ) {
+			$op: " and ";
+		}
+		$query: $query + $op + translate-media-condition($arg);
+	}
+	@media #{$query}  { @content; }
+}
+
+// .section {
+//   border: 2px solid #777;
+//   padding: 40px;
+//   background: silver;
+//   @include media( "retina" ){
+//     border: 2px dotted #000;
+//   };
+//   @include media( "screen", ">bp1Width", "<maxWidth" ){
+//     background: red;
+//     color: white;
+//   };
+// 	@include media( "screen", ">minWidth", "<bp1Width" ){
+//     background: green;
+//     color: white;
+//   };
+// 	@include media( "screen", "<minWidth" ){
+//     background: blue;
+//     color: white;
+//   };
+// }
+
+// GRADIENTS
+
 @mixin gradient-linear($from, $to) {
-    background-image: -webkit-linear-gradient(top, $from, 0%, $to, 100%);
-    background-image: -moz-linear-gradient(top, $from 0%, $to 100%);
-    background-image: linear-gradient(to bottom, $from 0%, $to 100%);
-}
-
-@mixin transition($prop, $time, $ease:ease, $delay:0s) {
-    transition: $prop $time $ease $delay;
-    -webkit-transition: $prop $time $ease $delay;
-    -moz-transition: $prop $time $ease $delay;
-    -ms-transition: $prop $time $ease $delay;
-    -o-transition: $prop $time $ease $delay;
-}
-
-@mixin transform($prop) {
-    transform: $prop;
-    -webkit-transform: $prop;
-    -moz-transform: $prop;
-    -ms-transform: $prop;
-    -o-transform: $prop;
+	background-image: -webkit-linear-gradient(top, $from, 0%, $to, 100%);
+	background-image: -moz-linear-gradient(top, $from 0%, $to 100%);
+	background-image: linear-gradient(to bottom, $from 0%, $to 100%);
 }
 
 @mixin highlight($alpha:0.4) {
-    box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);
+	box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);
 }

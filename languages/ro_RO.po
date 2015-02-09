@@ -1,0 +1,3437 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mixt v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-10 15:03+0200\n"
+"PO-Revision-Date: 2015-01-10 15:03+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;"
+"_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: inc\n"
+"X-Poedit-SearchPath-2: ./inc\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: dist\n"
+"X-Poedit-SearchPathExcluded-2: css\n"
+"X-Poedit-SearchPathExcluded-3: assets\n"
+"X-Poedit-SearchPathExcluded-4: ./node_modules\n"
+
+#: inc/breadcrumbs.php:58
+msgctxt "breadcrumb"
+msgid "Home"
+msgstr ""
+
+#: inc/content-grid.php:46
+msgid "Read more"
+msgstr ""
+
+#: inc/content-grid.php:54
+msgid "Tags:"
+msgstr ""
+
+# @ mixt
+#: inc/extras.php:66
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: inc/mixt-helpers.php:13
+msgid "No menu assigned"
+msgstr "Niciun meniu in aceasta locatie"
+
+#: inc/mixt-helpers.php:14
+msgid "Manage menus"
+msgstr "Gestioneaza meniuri"
+
+#: inc/mixt-helpers.php:15
+msgid "Click here to assign one"
+msgstr "Apasa aici pentru a gestiona meniurile"
+
+# @ mixt
+#: inc/template-tags.php:34
+msgid "Post navigation"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:39
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:40
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:45
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:49
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:73
+msgid "Pingback:"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:73 content-page.php:34 content-single.php:73 content.php:73 image.php:34
+#: image.php:78
+msgid "Edit"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:88
+#, php-format
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:92
+#, php-format
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:95
+msgid "<span style=\"margin-left: 5px;\" class=\"glyphicon glyphicon-edit\"></span> Edit"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:100
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:216
+msgid ", updated on "
+msgstr ""
+
+#: inc/template-tags.php:219
+#, php-format
+msgid "<span class=\"posted-on\">%1$s</span><span class=\"byline\"> by %2$s</span>"
+msgstr ""
+
+# @ mixt
+#: inc/template-tags.php:223
+#, php-format
+msgid "View all posts by %s"
+msgstr ""
+
+# @ mixt
+#: 404.php:14
+msgid "Oops! Something went wrong here."
+msgstr ""
+
+# @ mixt
+#: 404.php:19
+msgid "Nothing could be found at this location. Maybe try a search?"
+msgstr ""
+
+# @ mixt
+#: archive.php:31
+#, php-format
+msgid "Author: %s"
+msgstr ""
+
+# @ mixt
+#: archive.php:39
+#, php-format
+msgid "Day: %s"
+msgstr ""
+
+# @ mixt
+#: archive.php:42
+#, php-format
+msgid "Month: %s"
+msgstr ""
+
+# @ mixt
+#: archive.php:45
+#, php-format
+msgid "Year: %s"
+msgstr ""
+
+# @ mixt
+#: archive.php:48
+msgid "Asides"
+msgstr ""
+
+# @ mixt
+#: archive.php:51
+msgid "Images"
+msgstr ""
+
+# @ mixt
+#: archive.php:54
+msgid "Videos"
+msgstr ""
+
+# @ mixt
+#: archive.php:57
+msgid "Quotes"
+msgstr ""
+
+# @ mixt
+#: archive.php:60
+msgid "Links"
+msgstr ""
+
+# @ mixt
+#: archive.php:63 sidebar.php:24
+msgid "Archives"
+msgstr ""
+
+#: blog-grid-fw.php:44
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: comments.php:31
+#, php-format
+msgctxt "comments title"
+msgid "One comment on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+# @ mixt
+#: comments.php:39 comments.php:61
+msgid "Comment navigation"
+msgstr ""
+
+# @ mixt
+#: comments.php:41 comments.php:62
+msgid "&larr; Older Comments"
+msgstr ""
+
+# @ mixt
+#: comments.php:42 comments.php:63
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+# @ mixt
+#: comments.php:73
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:79
+msgid "Reply"
+msgstr ""
+
+#: comments.php:80
+#, php-format
+msgid "Reply to %s"
+msgstr ""
+
+# @ default
+#: comments.php:81
+msgid "Cancel Reply"
+msgstr ""
+
+#: comments.php:82
+msgid "Post Reply"
+msgstr ""
+
+# @ default
+#: comments.php:87
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes:"
+msgstr ""
+
+# @ mixt
+#: content-page.php:29 content-single.php:32 content.php:39 image.php:60
+msgid "Pages:"
+msgstr ""
+
+# @ mixt
+#. translators: used between list items, there is a space after the comma
+#: content-single.php:41 content-single.php:44 content.php:50 content.php:60
+msgid ", "
+msgstr ""
+
+# @ mixt
+#: content-single.php:49
+#, php-format
+msgid ""
+"This entry was tagged %2$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark"
+"\">permalink</a>."
+msgstr ""
+
+# @ mixt
+#: content-single.php:51
+#, php-format
+msgid "Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+# @ mixt
+#: content-single.php:57
+#, php-format
+msgid ""
+"This entry was posted in %1$s and tagged %2$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to "
+"%4$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+# @ mixt
+#: content-single.php:59
+#, php-format
+msgid ""
+"This entry was posted in %1$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel="
+"\"bookmark\">permalink</a>."
+msgstr ""
+
+# @ mixt
+#: content.php:36
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+# @ mixt
+#: content.php:54
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+# @ mixt
+#: content.php:64
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+# @ mixt
+#: content.php:70
+msgid "Leave a comment"
+msgstr ""
+
+# @ mixt
+#: content.php:70
+msgid "1 Comment"
+msgstr ""
+
+# @ mixt
+#: content.php:70
+msgid "% Comments"
+msgstr ""
+
+# @ mixt
+#: footer.php:30
+#, php-format
+msgid "Theme: %1$s by %2$s."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:161 functions.php:134
+msgid "Install Required Plugins"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:162 functions.php:135
+msgid "Install Plugins"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:163 functions.php:136
+#, php-format
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:164
+msgid "Something went wrong."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:165 functions.php:138
+#, php-format
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:166 functions.php:139
+#, php-format
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:167 functions.php:140
+#, php-format
+msgid ""
+"Sorry, but you do not have the correct permissions to install the %s plugin. Contact the "
+"administrator of this site for help on getting the plugin installed."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to install the %s plugins. Contact the "
+"administrator of this site for help on getting the plugins installed."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:168 functions.php:141
+#, php-format
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:169 functions.php:142
+#, php-format
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:170 functions.php:143
+#, php-format
+msgid ""
+"Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the "
+"administrator of this site for help on getting the plugin activated."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the "
+"administrator of this site for help on getting the plugins activated."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:171 functions.php:144
+#, php-format
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure maximum compatibility with "
+"this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure maximum compatibility "
+"with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:172 functions.php:145
+#, php-format
+msgid ""
+"Sorry, but you do not have the correct permissions to update the %s plugin. Contact the "
+"administrator of this site for help on getting the plugin updated."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to update the %s plugins. Contact the "
+"administrator of this site for help on getting the plugins updated."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:173 functions.php:146
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:174 functions.php:147
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:175 functions.php:148
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:176
+msgid "Return to the dashboard"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:177 framework/class-tgm-plugin-activation.php:1945
+#: functions.php:149
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:178 framework/class-tgm-plugin-activation.php:1636
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: framework/class-tgm-plugin-activation.php:179
+#, php-format
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:180
+msgid "Dismiss this notice"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:534 framework/class-tgm-plugin-activation.php:2162
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1169
+msgid "Private Repository"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1172
+msgid "Pre-Packaged"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1177
+msgid "WordPress Repository"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1180
+msgid "Required"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1180
+msgid "Recommended"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1183
+msgid "Not Installed"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1185
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1290 framework/class-tgm-plugin-activation.php:1398
+msgid "Install"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1312 framework/class-tgm-plugin-activation.php:1399
+msgid "Activate"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1361
+#, php-format
+msgid ""
+"No plugins to install or activate. <a href=\"%1$s\" title=\"Return to the Dashboard\">Return to the "
+"Dashboard</a>"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1377
+msgid "Plugin"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1378
+msgid "Source"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1379
+msgid "Type"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1380
+msgid "Status"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1928
+msgid "Install package not available."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1929
+#, php-format
+msgid "Downloading install package from <span class=\"code\">%s</span>&#8230;"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1930
+msgid "Unpacking the package&#8230;"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1931
+msgid "Installing the plugin&#8230;"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1932
+msgid "Plugin install failed."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1933
+msgid "Plugin installed successfully."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:1944
+msgid "Plugin activation failed."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2058
+msgid ""
+"The installation and activation process is starting. This process may take a while on some hosts, "
+"so please be patient."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2059
+#, php-format
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2059 framework/class-tgm-plugin-activation.php:2068
+msgid "Show Details"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2059 framework/class-tgm-plugin-activation.php:2068
+msgid "Hide Details"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2060
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2061
+#, php-format
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2065
+msgid ""
+"The installation process is starting. This process may take a while on some hosts, so please be "
+"patient."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2066
+#, php-format
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2067
+#, php-format
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2068
+#, php-format
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2069
+msgid "All installations have been completed."
+msgstr ""
+
+#: framework/class-tgm-plugin-activation.php:2070
+#, php-format
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:50 framework/cmb2-mixt/example-functions.php:52
+msgid "Test Metabox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:58 framework/cmb2-config-orig.php:292
+#: framework/cmb2-mixt/example-functions.php:60 framework/cmb2-mixt/example-functions.php:294
+msgid "Test Text"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:59 framework/cmb2-config-orig.php:70
+#: framework/cmb2-config-orig.php:77 framework/cmb2-config-orig.php:84
+#: framework/cmb2-config-orig.php:92 framework/cmb2-config-orig.php:99
+#: framework/cmb2-config-orig.php:111 framework/cmb2-config-orig.php:117
+#: framework/cmb2-config-orig.php:124 framework/cmb2-config-orig.php:139
+#: framework/cmb2-config-orig.php:147 framework/cmb2-config-orig.php:154
+#: framework/cmb2-config-orig.php:160 framework/cmb2-config-orig.php:166
+#: framework/cmb2-config-orig.php:178 framework/cmb2-config-orig.php:189
+#: framework/cmb2-config-orig.php:200 framework/cmb2-config-orig.php:211
+#: framework/cmb2-config-orig.php:219 framework/cmb2-config-orig.php:226
+#: framework/cmb2-config-orig.php:234 framework/cmb2-config-orig.php:240
+#: framework/cmb2-config-orig.php:252 framework/cmb2-config-orig.php:293
+#: framework/cmb2-config-orig.php:359 framework/cmb2-config-orig.php:366
+#: framework/cmb2-config-orig.php:372 framework/cmb2-config-orig.php:378
+#: framework/cmb2-config-orig.php:384 framework/cmb2-config-orig.php:390
+#: framework/cmb2-config-orig.php:396 framework/cmb2-config-orig.php:414
+#: framework/cmb2-config.php:220 framework/cmb2-mixt/example-functions.php:61
+#: framework/cmb2-mixt/example-functions.php:72 framework/cmb2-mixt/example-functions.php:79
+#: framework/cmb2-mixt/example-functions.php:86 framework/cmb2-mixt/example-functions.php:94
+#: framework/cmb2-mixt/example-functions.php:101 framework/cmb2-mixt/example-functions.php:113
+#: framework/cmb2-mixt/example-functions.php:119 framework/cmb2-mixt/example-functions.php:126
+#: framework/cmb2-mixt/example-functions.php:141 framework/cmb2-mixt/example-functions.php:149
+#: framework/cmb2-mixt/example-functions.php:156 framework/cmb2-mixt/example-functions.php:162
+#: framework/cmb2-mixt/example-functions.php:168 framework/cmb2-mixt/example-functions.php:180
+#: framework/cmb2-mixt/example-functions.php:191 framework/cmb2-mixt/example-functions.php:202
+#: framework/cmb2-mixt/example-functions.php:213 framework/cmb2-mixt/example-functions.php:221
+#: framework/cmb2-mixt/example-functions.php:228 framework/cmb2-mixt/example-functions.php:236
+#: framework/cmb2-mixt/example-functions.php:242 framework/cmb2-mixt/example-functions.php:254
+#: framework/cmb2-mixt/example-functions.php:295 framework/cmb2-mixt/example-functions.php:361
+#: framework/cmb2-mixt/example-functions.php:368 framework/cmb2-mixt/example-functions.php:374
+#: framework/cmb2-mixt/example-functions.php:380 framework/cmb2-mixt/example-functions.php:386
+#: framework/cmb2-mixt/example-functions.php:392 framework/cmb2-mixt/example-functions.php:398
+#: framework/cmb2-mixt/example-functions.php:416
+msgid "field description (optional)"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:69 framework/cmb2-config.php:219
+#: framework/cmb2-mixt/example-functions.php:71
+msgid "Test Text Small"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:76 framework/cmb2-mixt/example-functions.php:78
+msgid "Test Text Medium"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:83 framework/cmb2-mixt/example-functions.php:85
+msgid "Website URL"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:91 framework/cmb2-mixt/example-functions.php:93
+msgid "Test Text Email"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:98 framework/cmb2-mixt/example-functions.php:100
+msgid "Test Time"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:104 framework/cmb2-config-orig.php:105
+#: framework/cmb2-mixt/example-functions.php:106 framework/cmb2-mixt/example-functions.php:107
+msgid "Time zone"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:110 framework/cmb2-mixt/example-functions.php:112
+msgid "Test Date Picker"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:116 framework/cmb2-mixt/example-functions.php:118
+msgid "Test Date Picker (UNIX timestamp)"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:123 framework/cmb2-mixt/example-functions.php:125
+msgid "Test Date/Time Picker Combo (UNIX timestamp)"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:138 framework/cmb2-mixt/example-functions.php:140
+msgid "Test Money"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:146 framework/cmb2-mixt/example-functions.php:148
+msgid "Test Color Picker"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:153 framework/cmb2-mixt/example-functions.php:155
+msgid "Test Text Area"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:159 framework/cmb2-mixt/example-functions.php:161
+msgid "Test Text Area Small"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:165 framework/cmb2-mixt/example-functions.php:167
+msgid "Test Text Area for Code"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:171 framework/cmb2-mixt/example-functions.php:173
+msgid "Test Title Weeeee"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:172 framework/cmb2-mixt/example-functions.php:174
+msgid "This is a title description"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:177 framework/cmb2-mixt/example-functions.php:179
+msgid "Test Select"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:182 framework/cmb2-config-orig.php:193
+#: framework/cmb2-config-orig.php:204 framework/cmb2-mixt/example-functions.php:184
+#: framework/cmb2-mixt/example-functions.php:195 framework/cmb2-mixt/example-functions.php:206
+msgid "Option One"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:183 framework/cmb2-config-orig.php:194
+#: framework/cmb2-config-orig.php:205 framework/cmb2-mixt/example-functions.php:185
+#: framework/cmb2-mixt/example-functions.php:196 framework/cmb2-mixt/example-functions.php:207
+msgid "Option Two"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:184 framework/cmb2-config-orig.php:195
+#: framework/cmb2-config-orig.php:206 framework/cmb2-mixt/example-functions.php:186
+#: framework/cmb2-mixt/example-functions.php:197 framework/cmb2-mixt/example-functions.php:208
+msgid "Option Three"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:188 framework/cmb2-mixt/example-functions.php:190
+msgid "Test Radio inline"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:199 framework/cmb2-mixt/example-functions.php:201
+msgid "Test Radio"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:210 framework/cmb2-mixt/example-functions.php:212
+msgid "Test Taxonomy Radio"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:218 framework/cmb2-mixt/example-functions.php:220
+msgid "Test Taxonomy Select"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:225 framework/cmb2-mixt/example-functions.php:227
+msgid "Test Taxonomy Multi Checkbox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:233 framework/cmb2-mixt/example-functions.php:235
+msgid "Test Checkbox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:239 framework/cmb2-mixt/example-functions.php:241
+msgid "Test Multi Checkbox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:244 framework/cmb2-mixt/example-functions.php:246
+msgid "Check One"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:245 framework/cmb2-mixt/example-functions.php:247
+msgid "Check Two"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:246 framework/cmb2-mixt/example-functions.php:248
+msgid "Check Three"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:251 framework/cmb2-mixt/example-functions.php:253
+msgid "Test wysiwyg"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:258 framework/cmb2-mixt/example-functions.php:260
+msgid "Test Image"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:259 framework/cmb2-mixt/example-functions.php:261
+msgid "Upload an image or enter a URL."
+msgstr ""
+
+#: framework/cmb2-config-orig.php:264 framework/cmb2-mixt/example-functions.php:266
+msgid "Multiple Files"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:265 framework/cmb2-mixt/example-functions.php:267
+msgid "Upload or add multiple images/attachments."
+msgstr ""
+
+#: framework/cmb2-config-orig.php:271 framework/cmb2-mixt/example-functions.php:273
+msgid "oEmbed"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:272 framework/cmb2-mixt/example-functions.php:274
+msgid ""
+"Enter a youtube, twitter, or instagram URL. Supports services listed at <a href=\"http://codex."
+"wordpress.org/Embeds\">http://codex.wordpress.org/Embeds</a>."
+msgstr ""
+
+#: framework/cmb2-config-orig.php:284 framework/cmb2-mixt/example-functions.php:286
+msgid "About Page Metabox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:305 framework/cmb2-mixt/example-functions.php:307
+msgid "Repeating Field Group"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:311 framework/cmb2-mixt/example-functions.php:313
+msgid "Generates reusable form entries"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:313 framework/cmb2-mixt/example-functions.php:315
+msgid "Entry {#}"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:314 framework/cmb2-mixt/example-functions.php:316
+msgid "Add Another Entry"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:315 framework/cmb2-mixt/example-functions.php:317
+msgid "Remove Entry"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:352 framework/cmb2-mixt/example-functions.php:354
+msgid "User Profile Metabox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:358 framework/cmb2-mixt/example-functions.php:360
+msgid "Extra Info"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:365 framework/cmb2-mixt/example-functions.php:367
+msgid "Avatar"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:371 framework/cmb2-mixt/example-functions.php:373
+msgid "Facebook URL"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:377 framework/cmb2-mixt/example-functions.php:379
+msgid "Twitter URL"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:383 framework/cmb2-mixt/example-functions.php:385
+msgid "Google+ URL"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:389 framework/cmb2-mixt/example-functions.php:391
+msgid "Linkedin URL"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:395 framework/cmb2-mixt/example-functions.php:397
+msgid "User Field"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:409 framework/cmb2-mixt/example-functions.php:411
+msgid "Theme Options Metabox"
+msgstr ""
+
+#: framework/cmb2-config-orig.php:413 framework/cmb2-mixt/example-functions.php:415
+msgid "Site Background Color"
+msgstr ""
+
+#: framework/cmb2-config.php:51
+msgid "Page Header"
+msgstr ""
+
+#: framework/cmb2-config.php:60
+msgid "Sticky Nav"
+msgstr "Bara Nav Lipicioasa"
+
+#: framework/cmb2-config.php:61 framework/redux-config.php:343
+msgid "Navbar scrolls with page"
+msgstr ""
+
+#: framework/cmb2-config.php:65 framework/cmb2-config.php:78 framework/cmb2-config.php:91
+msgid "Auto"
+msgstr ""
+
+#: framework/cmb2-config.php:66 framework/cmb2-config.php:105 framework/cmb2-config.php:118
+#: framework/cmb2-config.php:154 framework/cmb2-config.php:200 framework/cmb2-config.php:213
+msgid "Yes"
+msgstr "Da"
+
+#: framework/cmb2-config.php:67 framework/cmb2-config.php:106 framework/cmb2-config.php:119
+#: framework/cmb2-config.php:155 framework/cmb2-config.php:201 framework/cmb2-config.php:214
+msgid "No"
+msgstr "Nu"
+
+#: framework/cmb2-config.php:74
+msgid "Navbar Scheme"
+msgstr "Schema Barei de Navigatie"
+
+#: framework/cmb2-config.php:79 framework/cmb2-config.php:92
+msgid "Light"
+msgstr "Aprins"
+
+#: framework/cmb2-config.php:80 framework/cmb2-config.php:93
+msgid "Dark"
+msgstr "Inchis"
+
+#: framework/cmb2-config.php:87
+msgid "Navbar Menu Scheme"
+msgstr ""
+
+#: framework/cmb2-config.php:100
+msgid "Header Media"
+msgstr ""
+
+#: framework/cmb2-config.php:101
+msgid "Display media, a slider & other content in the header"
+msgstr ""
+
+#: framework/cmb2-config.php:113
+msgid "Transparent Nav"
+msgstr "Bara Navigatie Transparenta"
+
+#: framework/cmb2-config.php:114
+msgid "Navbar transparent when not scrolled"
+msgstr ""
+
+#: framework/cmb2-config.php:131
+msgid "Media Type"
+msgstr ""
+
+#: framework/cmb2-config.php:132
+msgid "Type of media to use for the header"
+msgstr "Tip de media folosit in header"
+
+#: framework/cmb2-config.php:136
+msgid "Featured Image"
+msgstr "Imaginea Postului"
+
+#: framework/cmb2-config.php:137
+msgid "Slider"
+msgstr ""
+
+#: framework/cmb2-config.php:138
+msgid "Solid Color"
+msgstr "Culoare Solida"
+
+#: framework/cmb2-config.php:150
+msgid "Repeat Image"
+msgstr "Repeta Imaginea"
+
+#: framework/cmb2-config.php:167
+msgid "Slider ID"
+msgstr ""
+
+#: framework/cmb2-config.php:180
+msgid "Header Code"
+msgstr "Cod in Promo"
+
+#: framework/cmb2-config.php:181
+msgid "Code to output in the header (can use shortcodes)"
+msgstr ""
+
+#: framework/cmb2-config.php:195
+msgid "Full Width"
+msgstr ""
+
+#: framework/cmb2-config.php:196
+msgid "Display page in full width mode"
+msgstr ""
+
+#: framework/cmb2-config.php:208
+msgid "Show Sidebar"
+msgstr ""
+
+#: framework/cmb2-config.php:209
+msgid "Show or hide the sidebar on this page"
+msgstr ""
+
+#: framework/cmb2-mixt/CMB2.php:96
+msgid "Metabox configuration is required to have an ID parameter"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Ajax.php:37
+msgid "Please Try Again"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Ajax.php:133
+msgid "Remove Embed"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Ajax.php:137
+#, php-format
+msgid "No oEmbed Results Found for %s. View more info at"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Field.php:531
+msgid "Add Group"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Field.php:532
+msgid "Remove Group"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:286
+msgid "Add Row"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:345 framework/cmb2-mixt/includes/CMB2_Types.php:792
+#: framework/cmb2-mixt/includes/CMB2_Types.php:872 framework/cmb2-mixt/includes/CMB2_hookup.php:178
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:321
+#: framework/redux-mixt/ReduxCore/inc/fields/media/field_media.php:205
+#: framework/redux-mixt/ReduxCore/inc/fields/multi_text/field_multi_text.php:69
+#: framework/redux-mixt/ReduxCore/inc/fields/multi_text/field_multi_text.php:73
+#: framework/redux-mixt/ReduxCore/inc/fields/multi_text/field_multi_text.php:76
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:133
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:190
+msgid "Remove"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:668 framework/cmb2-mixt/includes/CMB2_Types.php:716
+msgid "No terms"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:760 framework/cmb2-mixt/includes/CMB2_Types.php:817
+msgid "Add or Upload File"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:781 framework/cmb2-mixt/includes/CMB2_Types.php:864
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:177
+msgid "Remove Image"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:792 framework/cmb2-mixt/includes/CMB2_Types.php:872
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:179
+msgid "File:"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_Types.php:792 framework/cmb2-mixt/includes/CMB2_Types.php:872
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:180
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:104
+msgid "Download"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:125 framework/cmb2-mixt/includes/CMB2_hookup.php:165
+msgid "Clear"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:126 framework/redux-mixt/ReduxCore/framework.php:1846
+msgid "Default"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:127
+msgid "Select Color"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:128
+msgid "Current Color"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:155
+msgid "mm/dd/yy"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:156
+msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:157
+msgid "Su, Mo, Tu, We, Th, Fr, Sa"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:158
+msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:159
+msgid ""
+"January, February, March, April, May, June, July, August, September, October, November, December"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:160
+msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:161
+msgid "Next"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:162
+msgid "Prev"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:163
+msgid "Today"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:164
+msgid "Done"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:176
+msgid "Use this file"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/CMB2_hookup.php:181
+msgid "Select / Deselect All"
+msgstr ""
+
+#: framework/cmb2-mixt/includes/helper-functions.php:226
+msgid "Save"
+msgstr "Salveaza"
+
+#: framework/micf-config.php:23
+msgid "Menu Icon"
+msgstr "Iconita Meniu"
+
+#: framework/micf-config.php:27
+msgid "Disabled"
+msgstr ""
+
+#: framework/micf-config.php:32
+msgid "Mega Menu"
+msgstr "Meniu Mega"
+
+#: framework/micf-mixt/doc/menu-item-custom-fields-example.php:51
+msgid "Custom Field #1"
+msgstr ""
+
+#: framework/micf-mixt/doc/menu-item-custom-fields-example.php:52
+msgid "Custom Field #2"
+msgstr ""
+
+#: framework/redux-config.php:109 framework/redux-mixt/sample/sample-config.php:108
+msgid "Section via hook"
+msgstr ""
+
+#: framework/redux-config.php:110 framework/redux-mixt/sample/sample-config.php:109
+msgid ""
+"<p class=\"description\">This is a section created by adding a filter to the sections array. Can be "
+"used by child themes to add/remove sections from the options.</p>"
+msgstr ""
+
+#: framework/redux-config.php:190 framework/redux-mixt/sample/sample-config.php:189
+#, php-format
+msgid "Customize &#8220;%s&#8221;"
+msgstr ""
+
+#: framework/redux-config.php:210 framework/redux-mixt/sample/sample-config.php:209
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#: framework/redux-config.php:211 framework/redux-mixt/ReduxCore/inc/welcome.php:169
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:300
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:338
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:476
+#: framework/redux-mixt/sample/sample-config.php:210
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: framework/redux-config.php:212 framework/redux-mixt/sample/sample-config.php:211
+msgid "Tags"
+msgstr ""
+
+#: framework/redux-config.php:217 framework/redux-mixt/sample/sample-config.php:216
+#, php-format
+msgid "This <a href=\"%1$s\">child theme</a> requires its parent theme, %2$s."
+msgstr ""
+
+#: framework/redux-config.php:217 framework/redux-mixt/sample/sample-config.php:216
+msgid "http://codex.wordpress.org/Child_Themes"
+msgstr ""
+
+#: framework/redux-config.php:247
+msgid "Global Options"
+msgstr ""
+
+#: framework/redux-config.php:253
+msgid "Theme Dev Mode"
+msgstr ""
+
+#: framework/redux-config.php:254
+msgid "Load source JS files instead of concatenated and minified ones"
+msgstr ""
+
+#: framework/redux-config.php:262
+msgid "Show Loader"
+msgstr ""
+
+#: framework/redux-config.php:263
+msgid "Enable page load animations"
+msgstr ""
+
+#: framework/redux-config.php:271
+msgid "Site Background"
+msgstr ""
+
+#: framework/redux-config.php:272
+msgid "Background color, image or both"
+msgstr ""
+
+#: framework/redux-config.php:284
+msgid "Background Color"
+msgstr ""
+
+#: framework/redux-config.php:285
+msgid "The site&#39;s background color (default: #FFF)."
+msgstr ""
+
+#: framework/redux-config.php:295
+msgid "Background Pattern"
+msgstr ""
+
+#: framework/redux-config.php:296
+msgid "The site&#39;s background pattern"
+msgstr ""
+
+#: framework/redux-config.php:305 framework/redux-mixt/sample/barebones-config.php:64
+#: framework/redux-mixt/sample/sample-config.php:248
+msgid "Web Fonts"
+msgstr ""
+
+#: framework/redux-config.php:309 framework/redux-mixt/sample/barebones-config.php:68
+#: framework/redux-mixt/sample/sample-config.php:252
+#: framework/redux-mixt/sample/sample-config.php:281
+msgid "Basic media uploader with disabled URL input field."
+msgstr ""
+
+#: framework/redux-config.php:310 framework/redux-mixt/sample/barebones-config.php:69
+#: framework/redux-mixt/sample/sample-config.php:253
+#: framework/redux-mixt/sample/sample-config.php:282
+#: framework/redux-mixt/sample/sample-config.php:300
+#: framework/redux-mixt/sample/sample-config.php:308
+msgid "Upload any media using the WordPress native uploader"
+msgstr ""
+
+#: framework/redux-config.php:319
+msgid "Header"
+msgstr ""
+
+#: framework/redux-config.php:326
+msgid "Show WP Admin Bar"
+msgstr ""
+
+#: framework/redux-config.php:334
+msgid "Show Second Navigation"
+msgstr ""
+
+#: framework/redux-config.php:342
+msgid "Sticky Navbar"
+msgstr "Bara Navigatie Fixa"
+
+#: framework/redux-config.php:349
+msgid "Navbar Color Scheme"
+msgstr ""
+
+#: framework/redux-config.php:357
+msgid "Navbar Menu Color Scheme"
+msgstr ""
+
+#: framework/redux-config.php:365
+msgid "Show Menu Icons"
+msgstr ""
+
+#: framework/redux-config.php:373
+msgid "Show Menu Arrows"
+msgstr ""
+
+#: framework/redux-config.php:381
+msgid "Logo Alignment"
+msgstr ""
+
+#: framework/redux-config.php:393
+msgid "Navbar Color"
+msgstr ""
+
+#: framework/redux-config.php:401
+msgid "Navbar Border Color"
+msgstr ""
+
+#: framework/redux-config.php:413 framework/redux-config.php:420
+msgid "Social Profiles"
+msgstr ""
+
+#: framework/redux-config.php:427 framework/redux-mixt/sample/sample-config.php:555
+msgid "General Settings"
+msgstr ""
+
+#: framework/redux-config.php:433 framework/redux-mixt/sample/sample-config.php:561
+msgid "Main Layout"
+msgstr ""
+
+#: framework/redux-config.php:434 framework/redux-mixt/sample/sample-config.php:562
+msgid "Select main content and sidebar alignment. Choose between 1, 2 or 3 column layout."
+msgstr ""
+
+#: framework/redux-config.php:467 framework/redux-mixt/sample/sample-config.php:595
+msgid "Tracking Code"
+msgstr ""
+
+#: framework/redux-config.php:468 framework/redux-mixt/sample/sample-config.php:596
+msgid ""
+"Paste your Google Analytics (or other) tracking code here. This will be added into the footer "
+"template of your theme."
+msgstr ""
+
+#: framework/redux-config.php:475 framework/redux-mixt/sample/sample-config.php:603
+msgid "CSS Code"
+msgstr ""
+
+#: framework/redux-config.php:476 framework/redux-mixt/sample/sample-config.php:604
+msgid "Paste your CSS code here."
+msgstr ""
+
+#: framework/redux-config.php:507 framework/redux-mixt/sample/sample-config.php:635
+msgid "Footer Text"
+msgstr ""
+
+#: framework/redux-config.php:508 framework/redux-mixt/sample/sample-config.php:636
+msgid ""
+"You can use the following shortcodes in your footer text: [wp-url] [site-url] [theme-url] [login-"
+"url] [logout-url] [site-title] [site-tagline] [current-year]"
+msgstr ""
+
+#: framework/redux-config.php:523 framework/redux-mixt/sample/sample-config.php:651
+msgid "Styling Options"
+msgstr ""
+
+#: framework/redux-config.php:529 framework/redux-mixt/sample/sample-config.php:657
+msgid "Theme Stylesheet"
+msgstr ""
+
+#: framework/redux-config.php:530 framework/redux-mixt/sample/sample-config.php:658
+msgid "Select your themes alternative color scheme."
+msgstr ""
+
+#: framework/redux-config.php:572 framework/redux-mixt/sample/sample-config.php:703
+msgid "Header Gradient Color Option"
+msgstr ""
+
+#: framework/redux-config.php:573 framework/redux-config.php:584 framework/redux-config.php:600
+#: framework/redux-mixt/sample/sample-config.php:704
+#: framework/redux-mixt/sample/sample-config.php:715
+#: framework/redux-mixt/sample/sample-config.php:731
+msgid "Only color validation can be done on this field type"
+msgstr ""
+
+#: framework/redux-config.php:574 framework/redux-config.php:585 framework/redux-config.php:603
+#: framework/redux-config.php:701 framework/redux-config.php:715 framework/redux-config.php:724
+#: framework/redux-config.php:731 framework/redux-config.php:744 framework/redux-config.php:753
+#: framework/redux-config.php:762 framework/redux-config.php:784 framework/redux-config.php:797
+#: framework/redux-config.php:806 framework/redux-config.php:821 framework/redux-config.php:830
+#: framework/redux-config.php:839 framework/redux-config.php:849 framework/redux-config.php:865
+#: framework/redux-config.php:873 framework/redux-config.php:892 framework/redux-config.php:900
+#: framework/redux-config.php:908 framework/redux-config.php:922 framework/redux-config.php:930
+#: framework/redux-config.php:980 framework/redux-config.php:993 framework/redux-config.php:1013
+#: framework/redux-config.php:1028 framework/redux-config.php:1061 framework/redux-config.php:1070
+#: framework/redux-config.php:1078 framework/redux-config.php:1087 framework/redux-config.php:1095
+#: framework/redux-config.php:1104 framework/redux-config.php:1112 framework/redux-config.php:1121
+#: framework/redux-config.php:1129 framework/redux-config.php:1138 framework/redux-config.php:1148
+#: framework/redux-config.php:1156 framework/redux-config.php:1165 framework/redux-config.php:1173
+#: framework/redux-config.php:1182 framework/redux-config.php:1232 framework/redux-config.php:1243
+#: framework/redux-config.php:1257 framework/redux-mixt/sample/sample-config.php:315
+#: framework/redux-mixt/sample/sample-config.php:705
+#: framework/redux-mixt/sample/sample-config.php:716
+#: framework/redux-mixt/sample/sample-config.php:734
+#: framework/redux-mixt/sample/sample-config.php:832
+#: framework/redux-mixt/sample/sample-config.php:846
+#: framework/redux-mixt/sample/sample-config.php:855
+#: framework/redux-mixt/sample/sample-config.php:862
+#: framework/redux-mixt/sample/sample-config.php:875
+#: framework/redux-mixt/sample/sample-config.php:884
+#: framework/redux-mixt/sample/sample-config.php:893
+#: framework/redux-mixt/sample/sample-config.php:915
+#: framework/redux-mixt/sample/sample-config.php:928
+#: framework/redux-mixt/sample/sample-config.php:937
+#: framework/redux-mixt/sample/sample-config.php:952
+#: framework/redux-mixt/sample/sample-config.php:961
+#: framework/redux-mixt/sample/sample-config.php:970
+#: framework/redux-mixt/sample/sample-config.php:980
+#: framework/redux-mixt/sample/sample-config.php:996
+#: framework/redux-mixt/sample/sample-config.php:1004
+#: framework/redux-mixt/sample/sample-config.php:1023
+#: framework/redux-mixt/sample/sample-config.php:1031
+#: framework/redux-mixt/sample/sample-config.php:1039
+#: framework/redux-mixt/sample/sample-config.php:1053
+#: framework/redux-mixt/sample/sample-config.php:1061
+#: framework/redux-mixt/sample/sample-config.php:1111
+#: framework/redux-mixt/sample/sample-config.php:1124
+#: framework/redux-mixt/sample/sample-config.php:1144
+#: framework/redux-mixt/sample/sample-config.php:1158
+#: framework/redux-mixt/sample/sample-config.php:1186
+#: framework/redux-mixt/sample/sample-config.php:1219
+#: framework/redux-mixt/sample/sample-config.php:1228
+#: framework/redux-mixt/sample/sample-config.php:1236
+#: framework/redux-mixt/sample/sample-config.php:1245
+#: framework/redux-mixt/sample/sample-config.php:1253
+#: framework/redux-mixt/sample/sample-config.php:1262
+#: framework/redux-mixt/sample/sample-config.php:1270
+#: framework/redux-mixt/sample/sample-config.php:1279
+#: framework/redux-mixt/sample/sample-config.php:1287
+#: framework/redux-mixt/sample/sample-config.php:1296
+#: framework/redux-mixt/sample/sample-config.php:1306
+#: framework/redux-mixt/sample/sample-config.php:1314
+#: framework/redux-mixt/sample/sample-config.php:1323
+#: framework/redux-mixt/sample/sample-config.php:1331
+#: framework/redux-mixt/sample/sample-config.php:1340
+#: framework/redux-mixt/sample/sample-config.php:1390
+#: framework/redux-mixt/sample/sample-config.php:1401
+#: framework/redux-mixt/sample/sample-config.php:1415
+msgid "This is the description field, again good for additional info."
+msgstr ""
+
+#: framework/redux-config.php:583 framework/redux-mixt/sample/sample-config.php:714
+msgid "Links Color Option"
+msgstr ""
+
+#: framework/redux-config.php:599 framework/redux-mixt/sample/sample-config.php:730
+msgid "Header Border Option"
+msgstr ""
+
+#: framework/redux-config.php:629 framework/redux-mixt/sample/sample-config.php:760
+msgid "Padding/Margin Option"
+msgstr ""
+
+#: framework/redux-config.php:630 framework/redux-mixt/sample/sample-config.php:761
+msgid "Allow your users to choose the spacing or margin they want."
+msgstr ""
+
+#: framework/redux-config.php:631 framework/redux-mixt/sample/sample-config.php:762
+msgid "You can enable or disable any piece of this field. Top, Right, Bottom, Left, or Units."
+msgstr ""
+
+#: framework/redux-config.php:644 framework/redux-mixt/sample/sample-config.php:775
+msgid "Dimensions (Width/Height) Option"
+msgstr ""
+
+#: framework/redux-config.php:645 framework/redux-mixt/sample/sample-config.php:776
+msgid "Allow your users to choose width, height, and/or unit."
+msgstr ""
+
+#: framework/redux-config.php:646 framework/redux-mixt/sample/sample-config.php:777
+msgid "You can enable or disable any piece of this field. Width, Height, or Units."
+msgstr ""
+
+#: framework/redux-config.php:655 framework/redux-mixt/sample/sample-config.php:786
+msgid "Body Font"
+msgstr ""
+
+#: framework/redux-config.php:656 framework/redux-mixt/sample/sample-config.php:787
+msgid "Specify the body font properties."
+msgstr ""
+
+#: framework/redux-config.php:668 framework/redux-mixt/sample/sample-config.php:799
+msgid "Custom CSS"
+msgstr ""
+
+#: framework/redux-config.php:669 framework/redux-mixt/sample/sample-config.php:800
+msgid "Quickly add some CSS to your theme by adding it to this block."
+msgstr ""
+
+#: framework/redux-config.php:670 framework/redux-mixt/sample/sample-config.php:801
+msgid "This field is even CSS validated!"
+msgstr ""
+
+#: framework/redux-config.php:676 framework/redux-mixt/sample/sample-config.php:807
+msgid "Custom HTML"
+msgstr ""
+
+#: framework/redux-config.php:677 framework/redux-mixt/sample/sample-config.php:808
+msgid "Just like a text box widget."
+msgstr ""
+
+#: framework/redux-config.php:678 framework/redux-mixt/sample/sample-config.php:809
+msgid "This field is even HTML validated!"
+msgstr ""
+
+#: framework/redux-config.php:692 framework/redux-mixt/sample/sample-config.php:823
+msgid "Field Validation"
+msgstr ""
+
+#: framework/redux-config.php:693 framework/redux-mixt/sample/sample-config.php:824
+msgid "Validate ALL fields within Redux."
+msgstr ""
+
+#: framework/redux-config.php:694 framework/redux-mixt/sample/sample-config.php:825
+msgid "<p class=\"description\">This is the Description. Again HTML is allowed2</p>"
+msgstr ""
+
+#: framework/redux-config.php:699 framework/redux-mixt/sample/sample-config.php:830
+msgid "Text Option - Email Validated"
+msgstr ""
+
+#: framework/redux-config.php:700 framework/redux-mixt/sample/sample-config.php:831
+msgid ""
+"This is a little space under the Field Title in the Options table, additional info is good in here."
+msgstr ""
+
+#: framework/redux-config.php:713 framework/redux-mixt/sample/sample-config.php:844
+msgid "Text Option with Data Attributes"
+msgstr ""
+
+#: framework/redux-config.php:714 framework/redux-mixt/sample/sample-config.php:845
+msgid "You can also pass an options array if you want. Set the default to whatever you like."
+msgstr ""
+
+#: framework/redux-config.php:721 framework/redux-mixt/sample/sample-config.php:852
+msgid "Multi Text Option - Color Validated"
+msgstr ""
+
+#: framework/redux-config.php:723 framework/redux-mixt/sample/sample-config.php:854
+msgid "If you enter an invalid color it will be removed. Try using the text \"blue\" as a color.  ;)"
+msgstr ""
+
+#: framework/redux-config.php:729 framework/redux-mixt/sample/sample-config.php:860
+msgid "Text Option - URL Validated"
+msgstr ""
+
+#: framework/redux-config.php:730 framework/redux-mixt/sample/sample-config.php:861
+msgid "This must be a URL."
+msgstr ""
+
+#: framework/redux-config.php:742 framework/redux-mixt/sample/sample-config.php:873
+msgid "Text Option - Numeric Validated"
+msgstr ""
+
+#: framework/redux-config.php:743 framework/redux-mixt/sample/sample-config.php:874
+msgid "This must be numeric."
+msgstr ""
+
+#: framework/redux-config.php:751 framework/redux-mixt/sample/sample-config.php:882
+msgid "Text Option - Comma Numeric Validated"
+msgstr ""
+
+#: framework/redux-config.php:752 framework/redux-mixt/sample/sample-config.php:883
+msgid "This must be a comma separated string of numerical values."
+msgstr ""
+
+#: framework/redux-config.php:760 framework/redux-mixt/sample/sample-config.php:891
+msgid "Text Option - No Special Chars Validated"
+msgstr ""
+
+#: framework/redux-config.php:761 framework/redux-mixt/sample/sample-config.php:892
+msgid "This must be a alpha numeric only."
+msgstr ""
+
+#: framework/redux-config.php:769 framework/redux-mixt/sample/sample-config.php:900
+msgid "Text Option - Str Replace Validated"
+msgstr ""
+
+#: framework/redux-config.php:770 framework/redux-config.php:783 framework/redux-config.php:796
+#: framework/redux-config.php:805 framework/redux-mixt/sample/sample-config.php:901
+#: framework/redux-mixt/sample/sample-config.php:914
+#: framework/redux-mixt/sample/sample-config.php:927
+#: framework/redux-mixt/sample/sample-config.php:936
+msgid "You decide."
+msgstr ""
+
+#: framework/redux-config.php:771 framework/redux-mixt/sample/sample-config.php:902
+msgid "This field's default value was changed by a filter hook!"
+msgstr ""
+
+#: framework/redux-config.php:782 framework/redux-mixt/sample/sample-config.php:913
+msgid "Text Option - Preg Replace Validated"
+msgstr ""
+
+#: framework/redux-config.php:795 framework/redux-mixt/sample/sample-config.php:926
+msgid "Text Option - Custom Callback Validated"
+msgstr ""
+
+#: framework/redux-config.php:804 framework/redux-mixt/sample/sample-config.php:935
+msgid "Text Option - Custom Callback Validated - Class"
+msgstr ""
+
+#: framework/redux-config.php:819 framework/redux-mixt/sample/sample-config.php:950
+msgid "Textarea Option - No HTML Validated"
+msgstr ""
+
+#: framework/redux-config.php:820 framework/redux-mixt/sample/sample-config.php:951
+msgid "All HTML will be stripped"
+msgstr ""
+
+#: framework/redux-config.php:828 framework/redux-mixt/sample/sample-config.php:959
+msgid "Textarea Option - HTML Validated"
+msgstr ""
+
+#: framework/redux-config.php:829 framework/redux-mixt/sample/sample-config.php:960
+msgid "HTML Allowed (wp_kses)"
+msgstr ""
+
+#: framework/redux-config.php:837 framework/redux-mixt/sample/sample-config.php:968
+msgid "Textarea Option - HTML Validated Custom"
+msgstr ""
+
+#: framework/redux-config.php:838 framework/redux-mixt/sample/sample-config.php:969
+msgid "Custom HTML Allowed (wp_kses)"
+msgstr ""
+
+#: framework/redux-config.php:847 framework/redux-mixt/sample/sample-config.php:978
+msgid "Textarea Option - JS Validated"
+msgstr ""
+
+#: framework/redux-config.php:848 framework/redux-mixt/sample/sample-config.php:979
+msgid "JS will be escaped"
+msgstr ""
+
+#: framework/redux-config.php:857 framework/redux-mixt/sample/sample-config.php:988
+msgid "Radio/Checkbox Fields"
+msgstr ""
+
+#: framework/redux-config.php:858 framework/redux-config.php:1006 framework/redux-config.php:1225
+#: framework/redux-config.php:1426 framework/redux-mixt/sample/sample-config.php:989
+#: framework/redux-mixt/sample/sample-config.php:1137
+#: framework/redux-mixt/sample/sample-config.php:1383
+#: framework/redux-mixt/sample/sample-config.php:1584
+msgid "<p class=\"description\">This is the Description. Again HTML is allowed</p>"
+msgstr ""
+
+#: framework/redux-config.php:863 framework/redux-mixt/sample/sample-config.php:994
+msgid "Checkbox Option"
+msgstr ""
+
+#: framework/redux-config.php:864 framework/redux-config.php:872 framework/redux-config.php:891
+#: framework/redux-config.php:899 framework/redux-config.php:907 framework/redux-config.php:921
+#: framework/redux-config.php:929 framework/redux-config.php:944 framework/redux-config.php:1012
+#: framework/redux-config.php:1027 framework/redux-config.php:1060 framework/redux-config.php:1069
+#: framework/redux-config.php:1077 framework/redux-config.php:1086 framework/redux-config.php:1094
+#: framework/redux-config.php:1103 framework/redux-config.php:1111 framework/redux-config.php:1120
+#: framework/redux-config.php:1128 framework/redux-config.php:1137 framework/redux-config.php:1155
+#: framework/redux-config.php:1164 framework/redux-config.php:1172 framework/redux-config.php:1181
+#: framework/redux-config.php:1189 framework/redux-config.php:1231 framework/redux-config.php:1242
+#: framework/redux-config.php:1256 framework/redux-mixt/sample/sample-config.php:995
+#: framework/redux-mixt/sample/sample-config.php:1003
+#: framework/redux-mixt/sample/sample-config.php:1022
+#: framework/redux-mixt/sample/sample-config.php:1030
+#: framework/redux-mixt/sample/sample-config.php:1038
+#: framework/redux-mixt/sample/sample-config.php:1052
+#: framework/redux-mixt/sample/sample-config.php:1060
+#: framework/redux-mixt/sample/sample-config.php:1075
+#: framework/redux-mixt/sample/sample-config.php:1143
+#: framework/redux-mixt/sample/sample-config.php:1157
+#: framework/redux-mixt/sample/sample-config.php:1185
+#: framework/redux-mixt/sample/sample-config.php:1218
+#: framework/redux-mixt/sample/sample-config.php:1227
+#: framework/redux-mixt/sample/sample-config.php:1235
+#: framework/redux-mixt/sample/sample-config.php:1244
+#: framework/redux-mixt/sample/sample-config.php:1252
+#: framework/redux-mixt/sample/sample-config.php:1261
+#: framework/redux-mixt/sample/sample-config.php:1269
+#: framework/redux-mixt/sample/sample-config.php:1278
+#: framework/redux-mixt/sample/sample-config.php:1286
+#: framework/redux-mixt/sample/sample-config.php:1295
+#: framework/redux-mixt/sample/sample-config.php:1313
+#: framework/redux-mixt/sample/sample-config.php:1322
+#: framework/redux-mixt/sample/sample-config.php:1330
+#: framework/redux-mixt/sample/sample-config.php:1339
+#: framework/redux-mixt/sample/sample-config.php:1347
+#: framework/redux-mixt/sample/sample-config.php:1389
+#: framework/redux-mixt/sample/sample-config.php:1400
+#: framework/redux-mixt/sample/sample-config.php:1414
+msgid "No validation can be done on this field type"
+msgstr ""
+
+#: framework/redux-config.php:871 framework/redux-mixt/sample/sample-config.php:1002
+msgid "Multi Checkbox Option"
+msgstr ""
+
+#: framework/redux-config.php:890 framework/redux-config.php:920
+#: framework/redux-mixt/sample/sample-config.php:1021
+#: framework/redux-mixt/sample/sample-config.php:1051
+msgid "Multi Checkbox Option (with menu data)"
+msgstr ""
+
+#: framework/redux-config.php:898 framework/redux-mixt/sample/sample-config.php:1029
+msgid "Multi Checkbox Option (with sidebar data)"
+msgstr ""
+
+#: framework/redux-config.php:906 framework/redux-mixt/sample/sample-config.php:1037
+msgid "Radio Option"
+msgstr ""
+
+#: framework/redux-config.php:928 framework/redux-mixt/sample/sample-config.php:1059
+msgid "Images Option"
+msgstr ""
+
+#: framework/redux-config.php:943 framework/redux-mixt/sample/sample-config.php:1074
+msgid "Images Option for Layout"
+msgstr ""
+
+#: framework/redux-config.php:945 framework/redux-mixt/sample/sample-config.php:1076
+msgid "This uses some of the built in images, you can use them for layout options."
+msgstr ""
+
+#: framework/redux-config.php:978 framework/redux-config.php:991
+#: framework/redux-mixt/sample/sample-config.php:1109
+#: framework/redux-mixt/sample/sample-config.php:1122
+msgid "Sortable Text Option"
+msgstr ""
+
+#: framework/redux-config.php:979 framework/redux-config.php:992
+#: framework/redux-mixt/sample/sample-config.php:1110
+#: framework/redux-mixt/sample/sample-config.php:1123
+msgid "Define and reorder these however you want."
+msgstr ""
+
+#: framework/redux-config.php:1005 framework/redux-mixt/sample/sample-config.php:1136
+msgid "Select Fields"
+msgstr ""
+
+#: framework/redux-config.php:1011 framework/redux-mixt/sample/sample-config.php:1142
+msgid "Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1026 framework/redux-mixt/sample/sample-config.php:1184
+msgid "Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1041 framework/redux-mixt/sample/sample-config.php:1199
+msgid "Select Image"
+msgstr ""
+
+#: framework/redux-config.php:1042 framework/redux-mixt/sample/sample-config.php:1200
+msgid "A preview of the selected image will appear underneath the select box."
+msgstr ""
+
+#: framework/redux-config.php:1053 framework/redux-mixt/sample/sample-config.php:1211
+msgid "You can easily add a variety of data from WordPress."
+msgstr ""
+
+#: framework/redux-config.php:1059 framework/redux-mixt/sample/sample-config.php:1217
+msgid "Categories Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1068 framework/redux-mixt/sample/sample-config.php:1226
+msgid "Categories Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1076 framework/redux-mixt/sample/sample-config.php:1234
+msgid "Pages Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1085 framework/redux-mixt/sample/sample-config.php:1243
+msgid "Pages Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1093 framework/redux-mixt/sample/sample-config.php:1251
+msgid "Tags Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1102 framework/redux-mixt/sample/sample-config.php:1260
+msgid "Tags Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1110 framework/redux-mixt/sample/sample-config.php:1268
+msgid "Menus Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1119 framework/redux-mixt/sample/sample-config.php:1277
+msgid "Menus Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1127 framework/redux-mixt/sample/sample-config.php:1285
+msgid "Post Type Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1136 framework/redux-mixt/sample/sample-config.php:1294
+msgid "Post Type Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1146 framework/redux-mixt/sample/sample-config.php:1304
+msgid "Post Type Multi Select Option + Sortable"
+msgstr ""
+
+#: framework/redux-config.php:1147 framework/redux-mixt/sample/sample-config.php:1305
+msgid "This field also has sortable enabled!"
+msgstr ""
+
+#: framework/redux-config.php:1154 framework/redux-mixt/sample/sample-config.php:1312
+msgid "Posts Select Option2"
+msgstr ""
+
+#: framework/redux-config.php:1163 framework/redux-mixt/sample/sample-config.php:1321
+msgid "Posts Multi Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1171 framework/redux-mixt/sample/sample-config.php:1329
+msgid "User Role Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1180 framework/redux-mixt/sample/sample-config.php:1338
+msgid "Capabilities Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1188 framework/redux-mixt/sample/sample-config.php:1346
+msgid "Elusive Icons Select Option"
+msgstr ""
+
+#: framework/redux-config.php:1190 framework/redux-mixt/sample/sample-config.php:1348
+msgid "Here's a list of all the elusive icons by name and icon."
+msgstr ""
+
+#: framework/redux-config.php:1196 framework/redux-mixt/sample/sample-config.php:1354
+msgid "<strong>Theme URL:</strong> "
+msgstr ""
+
+#: framework/redux-config.php:1197 framework/redux-mixt/sample/sample-config.php:1355
+msgid "<strong>Author:</strong> "
+msgstr ""
+
+#: framework/redux-config.php:1198 framework/redux-mixt/sample/sample-config.php:1356
+msgid "<strong>Version:</strong> "
+msgstr ""
+
+#: framework/redux-config.php:1202 framework/redux-mixt/sample/sample-config.php:1360
+msgid "<strong>Tags:</strong> "
+msgstr ""
+
+#: framework/redux-config.php:1209 framework/redux-config.php:1439 framework/redux-config.php:1585
+#: framework/redux-mixt/class.redux-plugin.php:410 framework/redux-mixt/sample/sample-config.php:1367
+#: framework/redux-mixt/sample/sample-config.php:1597
+#: framework/redux-mixt/sample/sample-config.php:1743
+msgid "Documentation"
+msgstr ""
+
+#: framework/redux-config.php:1224 framework/redux-mixt/sample/sample-config.php:1382
+msgid "Additional Fields"
+msgstr ""
+
+#: framework/redux-config.php:1230 framework/redux-mixt/sample/sample-config.php:1388
+msgid "Date Option"
+msgstr ""
+
+#: framework/redux-config.php:1241 framework/redux-mixt/sample/sample-config.php:1399
+msgid "Button Set Option"
+msgstr ""
+
+#: framework/redux-config.php:1255 framework/redux-mixt/sample/sample-config.php:1413
+msgid "Button Set, Multi Select"
+msgstr ""
+
+#: framework/redux-config.php:1270 framework/redux-mixt/sample/sample-config.php:1428
+msgid "This is the info field, if you want to break sections up."
+msgstr ""
+
+#: framework/redux-config.php:1276 framework/redux-config.php:1284 framework/redux-config.php:1292
+#: framework/redux-config.php:1306 framework/redux-config.php:1314 framework/redux-config.php:1323
+#: framework/redux-config.php:1332 framework/redux-config.php:1341
+#: framework/redux-mixt/sample/sample-config.php:1434
+#: framework/redux-mixt/sample/sample-config.php:1442
+#: framework/redux-mixt/sample/sample-config.php:1450
+#: framework/redux-mixt/sample/sample-config.php:1464
+#: framework/redux-mixt/sample/sample-config.php:1472
+#: framework/redux-mixt/sample/sample-config.php:1481
+#: framework/redux-mixt/sample/sample-config.php:1490
+#: framework/redux-mixt/sample/sample-config.php:1499
+msgid "This is a title."
+msgstr ""
+
+#: framework/redux-config.php:1277 framework/redux-mixt/sample/sample-config.php:1435
+msgid "This is an info field with the warning style applied and a header."
+msgstr ""
+
+#: framework/redux-config.php:1285 framework/redux-mixt/sample/sample-config.php:1443
+msgid "This is an info field with the success style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1293 framework/redux-mixt/sample/sample-config.php:1451
+msgid "This is an info field with the critical style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1307 framework/redux-mixt/sample/sample-config.php:1465
+msgid "This is an info notice field with the normal style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1315 framework/redux-mixt/sample/sample-config.php:1473
+msgid "This is an info notice field with the info style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1324 framework/redux-mixt/sample/sample-config.php:1482
+msgid "This is an info notice field with the warning style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1333 framework/redux-mixt/sample/sample-config.php:1491
+msgid "This is an info notice field with the success style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1342 framework/redux-mixt/sample/sample-config.php:1500
+msgid "This is an notice field with the critical style applied, a header and an icon."
+msgstr ""
+
+#: framework/redux-config.php:1347 framework/redux-mixt/sample/sample-config.php:1505
+msgid "Custom Field Callback"
+msgstr ""
+
+#: framework/redux-config.php:1348 framework/redux-config.php:1356
+#: framework/redux-mixt/sample/sample-config.php:1506
+#: framework/redux-mixt/sample/sample-config.php:1514
+msgid "This is a completely unique field type"
+msgstr ""
+
+#: framework/redux-config.php:1349 framework/redux-config.php:1357
+#: framework/redux-mixt/sample/sample-config.php:1507
+#: framework/redux-mixt/sample/sample-config.php:1515
+msgid ""
+"This is created with a callback function, so anything goes in this field. Make sure to define the "
+"function though."
+msgstr ""
+
+#: framework/redux-config.php:1355 framework/redux-mixt/sample/sample-config.php:1513
+msgid "Custom Field Callback - Class"
+msgstr ""
+
+#: framework/redux-config.php:1365 framework/redux-config.php:1389
+#: framework/redux-mixt/sample/sample-config.php:1523
+#: framework/redux-mixt/sample/sample-config.php:1547
+msgid "Customizer Only Option"
+msgstr ""
+
+#: framework/redux-config.php:1366 framework/redux-config.php:1390
+#: framework/redux-mixt/sample/sample-config.php:1524
+#: framework/redux-mixt/sample/sample-config.php:1548
+msgid "The subtitle is NOT visible in customizer"
+msgstr ""
+
+#: framework/redux-config.php:1367 framework/redux-config.php:1391
+#: framework/redux-mixt/sample/sample-config.php:1525
+#: framework/redux-mixt/sample/sample-config.php:1549
+msgid "The field desc is NOT visible in customizer."
+msgstr ""
+
+#: framework/redux-config.php:1382 framework/redux-mixt/sample/sample-config.php:1540
+msgid "Customizer Only"
+msgstr ""
+
+#: framework/redux-config.php:1383 framework/redux-mixt/sample/sample-config.php:1541
+msgid "<p class=\"description\">This Section should be visible only in Customizer</p>"
+msgstr ""
+
+#: framework/redux-config.php:1405 framework/redux-mixt/ReduxCore/inc/import_export.php:140
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:149
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:150
+#: framework/redux-mixt/sample/sample-config.php:1563
+msgid "Import / Export"
+msgstr ""
+
+#: framework/redux-config.php:1406 framework/redux-mixt/sample/sample-config.php:1564
+msgid "Import and Export your Redux Framework settings from file, text or URL."
+msgstr ""
+
+#: framework/redux-config.php:1425 framework/redux-mixt/sample/sample-config.php:1583
+msgid "Theme Information"
+msgstr ""
+
+#: framework/redux-config.php:1450 framework/redux-mixt/sample/barebones-config.php:84
+#: framework/redux-mixt/sample/sample-config.php:1608
+msgid "Theme Information 1"
+msgstr ""
+
+#: framework/redux-config.php:1451 framework/redux-config.php:1457
+#: framework/redux-mixt/sample/barebones-config.php:85
+#: framework/redux-mixt/sample/barebones-config.php:91
+#: framework/redux-mixt/sample/sample-config.php:1609
+#: framework/redux-mixt/sample/sample-config.php:1615
+msgid "<p>This is the tab content, HTML is allowed.</p>"
+msgstr ""
+
+#: framework/redux-config.php:1456 framework/redux-mixt/sample/barebones-config.php:90
+#: framework/redux-mixt/sample/sample-config.php:1614
+msgid "Theme Information 2"
+msgstr ""
+
+#: framework/redux-config.php:1461 framework/redux-mixt/sample/barebones-config.php:95
+#: framework/redux-mixt/sample/sample-config.php:1619
+msgid "<p>This is the sidebar content, HTML is allowed.</p>"
+msgstr ""
+
+#: framework/redux-config.php:1484
+msgid "MIXT"
+msgstr ""
+
+#: framework/redux-config.php:1485
+msgid "MIXT Options"
+msgstr ""
+
+#: framework/redux-config.php:1591 framework/redux-mixt/sample/sample-config.php:1749
+msgid "Support"
+msgstr ""
+
+#: framework/redux-config.php:1597 framework/redux-mixt/sample/sample-config.php:1755
+msgid "Extensions"
+msgstr ""
+
+#: framework/redux-config.php:1611
+msgid "<p>MiXT by <a href=\"http://novalx.com/\">novalex</a></p>"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/core/enqueue.php:354
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:530
+msgid "You have changes that are not saved. Would you like to save them now?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/core/enqueue.php:362
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:531
+msgid "Are you sure? Resetting will lose all custom values."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/core/enqueue.php:370
+msgid "Are you sure? Resetting will lose all custom values in this section."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/core/enqueue.php:378
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:532
+msgid ""
+"Your current options will be replaced with the values of this preset. Would you like to proceed?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/core/enqueue.php:385
+msgid "Please Wait"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:565
+msgid "You have changes that are not saved.  Would you like to save them now?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:566
+msgid "Are you sure?  Resetting will lose all custom values."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/extensions/customizer/extension_customizer.php:567
+msgid ""
+"Your current options will be replaced with the values of this preset.  Would you like to proceed?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:221
+#, php-format
+msgid "Options panel created using %1$s"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:221
+msgid "Redux Framework"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:225 framework/redux-mixt/ReduxCore/framework.php:229
+msgid "Options"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1395
+#: framework/redux-mixt/ReduxCore/framework.php:1396
+#: framework/redux-mixt/ReduxCore/framework.php:3240
+#: framework/redux-mixt/ReduxCore/framework.php:3319
+msgid "System Info"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1699
+msgid "Enable"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1704
+msgid "Disable"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1710
+msgid "moving the mouse over"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1712
+msgid "clicking"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1716
+#, php-format
+msgid ""
+"Hints are tooltips that popup when %d the hint icon, offering addition information about the field "
+"in which they appear.  They can be %d d by using the link below."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:1721
+msgid "Hints"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:2984
+msgid "Warning- This options panel will not work properly without javascript!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3035
+msgid "Developer Mode Enabled"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3064
+msgid "Expand"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3066
+#: framework/redux-mixt/ReduxCore/framework.php:3376
+msgid "Save Changes"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3070
+#: framework/redux-mixt/ReduxCore/framework.php:3380
+msgid "Reset Section"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3072
+#: framework/redux-mixt/ReduxCore/framework.php:3382
+msgid "Reset All"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3077
+#: framework/redux-mixt/ReduxCore/framework.php:3387
+msgid "Working..."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3097
+msgid "Settings Imported!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3112
+msgid "All Defaults Restored!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3126
+msgid "Section Defaults Restored!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3140
+msgid "Settings Saved!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3160
+msgid "Settings have changed, you should save them!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3168
+msgid "error(s) were found!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/framework.php:3176
+msgid "warning(s) were found!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/class.redux_filesystem.php:23
+msgid "Unable to modify required files. Please ensure that"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/class.redux_filesystem.php:25
+msgid "has the proper read/write permissions or enter your FTP information below."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/class.redux_functions.php:253
+msgid "Dismiss"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/class.redux_themecheck.php:61
+#, php-format
+msgid ""
+"The theme you are testing has %s embedded. We invite you to read the %sTheme-Check Documentation%s "
+"to understand some warnings you will see because of Redux."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/class.redux_themecheck.php:109
+msgid ""
+"The following directories & files are still located in your <strong>Redux</strong>  directory. They "
+"may cause errors in Theme-Check."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/debug.php:41 framework/redux-mixt/ReduxCore/inc/debug.php:69
+#: framework/redux-mixt/ReduxCore/inc/debug.php:76 framework/redux-mixt/ReduxCore/inc/debug.php:77
+msgid "Options Object"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/debug.php:54
+msgid "Show Object in Javascript Console Object"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:124
+#: framework/redux-mixt/ReduxCore/inc/fields/color/field_color.php:73
+#: framework/redux-mixt/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:79
+#: framework/redux-mixt/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:91
+msgid "Transparent"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:141
+msgid "Background Repeat"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:157
+msgid "Background Clip"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:173
+msgid "Background Origin"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:188
+msgid "Background Size"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:203
+msgid "Background Attachment"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:223
+msgid "Background Position"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:277
+#: framework/redux-mixt/ReduxCore/inc/fields/media/field_media.php:149
+msgid "No media selected"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/background/field_background.php:314
+#: framework/redux-mixt/ReduxCore/inc/fields/media/field_media.php:198
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:126
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:188
+msgid "Upload"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:125
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:191
+msgid "All"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:138
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:215
+msgid "Top"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:145
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:222
+msgid "Right"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:152
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:229
+msgid "Bottom"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:159
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:236
+msgid "Left"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/border/field_border.php:173
+msgid "Border style"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:68
+msgid "From "
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/color_gradient/field_color_gradient.php:82
+msgid "To "
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/dimensions/field_dimensions.php:161
+msgid "Width"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/dimensions/field_dimensions.php:177
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:436
+msgid "Height"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/dimensions/field_dimensions.php:188
+#: framework/redux-mixt/ReduxCore/inc/fields/dimensions/field_dimensions.php:189
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:245
+#: framework/redux-mixt/ReduxCore/inc/fields/spacing/field_spacing.php:246
+msgid "Units"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/gallery/field_gallery.php:73
+#: framework/redux-mixt/sample/sample-config.php:313
+msgid "Add/Edit Gallery"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/gallery/field_gallery.php:74
+msgid "Clear Gallery"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/link_color/field_link_color.php:87
+msgid "Regular"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/link_color/field_link_color.php:91
+msgid "Hover"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/link_color/field_link_color.php:95
+msgid "Visited"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/link_color/field_link_color.php:99
+msgid "Active"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/multi_text/field_multi_text.php:61
+msgid "Add More"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/password/field_password.php:62
+msgid "Password"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/password/field_password.php:63
+msgid "Username"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/select/field_select.php:83
+#: framework/redux-mixt/ReduxCore/inc/fields/select_image/field_select_image.php:63
+msgid "Select an item"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/select/field_select.php:134
+#: framework/redux-mixt/ReduxCore/inc/fields/select_image/field_select_image.php:144
+msgid "No items of this type were found."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:68
+msgid "Slide"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:73
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:174
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:145
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:200
+msgid "Title"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:149
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:204
+msgid "Description"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:153
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:207
+msgid "URL"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:167
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:220
+msgid "Delete"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/slides/field_slides.php:223
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/switch/field_switch.php:41
+msgid "On"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/switch/field_switch.php:44
+msgid "Off"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:227
+msgid "Font Family"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:228
+msgid "Font family"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:254
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:255
+msgid "Backup Font Family"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:269
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:276
+msgid "Font style"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:270
+msgid "Font Weight &amp; Style"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:276
+msgid "Style"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:316
+msgid "Font subsets"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:318
+msgid "Font Subsets"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:319
+msgid "Subsets"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:319
+msgid "Font script"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:336
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:337
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:338
+msgid "Text Align"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:359
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:360
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:361
+msgid "Text Transform"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:382
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:383
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:384
+msgid "Font Variant"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:402
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:403
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:404
+msgid "Text Decoration"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:426
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:427
+msgid "Font Size"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:427
+msgid "Size"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:435
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:436
+msgid "Line Height"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:444
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:445
+msgid "Word Spacing"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:453
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:454
+msgid "Letter Spacing"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:472
+msgid "Font Color"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:474
+msgid "Font color"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:871
+msgid "Standard Fonts"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/fields/typography/field_typography.php:972
+msgid "Google Webfonts"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:78
+msgid "Import / Export Options"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:81
+msgid "Import Options"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:82
+msgid "Import from file"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:82
+msgid "Import from URL"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:85
+msgid "Input your backup file below and hit Import to restore your sites options from a backup."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:90
+msgid "Input the URL to another sites options set and hit Import to load the options from that site."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:94
+msgid "Import"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:94
+msgid "WARNING! This will overwrite all existing option values, please proceed with caution!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:97
+msgid "Export Options"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:100
+msgid ""
+"Here you can copy/download your current option settings. Keep this safe as you can use it as a "
+"backup should anything go wrong, or you can use it to restore your settings on this site (or any "
+"other site)."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:104
+msgid "Copy"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/import_export.php:104
+msgid "Copy Link"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:129
+msgid "Help improve Our Panel"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:130
+msgid ""
+"Please helps us improve our panel by allowing us to gather anonymous usage stats so we know which "
+"configurations, plugins and themes to test to ensure compatibility."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:135
+msgid "Allow tracking"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:140
+msgid "Do not allow tracking"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:151
+msgid "Welcome to the Redux Demo Panel"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:152
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:139
+msgid "Getting Started"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:152
+#, php-format
+msgid ""
+"This panel demonstrates the many features of Redux.  Before digging in, we suggest you get up to "
+"speed by reviewing %1$s."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:152
+msgid "our documentation"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:153
+msgid "Redux Generator"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:153
+#, php-format
+msgid ""
+"Want to get a head start? Use the %1$s. It will create a customized boilerplate theme or a "
+"standalone admin folder complete with all things Redux (with the help of Underscores and TGM). Save "
+"yourself a headache and try it today."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:154
+msgid "Redux Extensions"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:154
+#, php-format
+msgid ""
+"Did you know we have extensions, which greatly enhance the features of Redux?  Visit our %1$s to "
+"learn more!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:154
+msgid "extensions directory"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:155
+msgid "Like Redux?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:155
+#, php-format
+msgid "If so, please %1$s and consider making a %2$s to keep development of Redux moving forward."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:155
+msgid "leave us a favorable review on WordPress.org"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:155
+msgid "donation"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:156
+msgid "Newsletter"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:156
+msgid "If you'd like to keep up to with all things Redux, please subscribe to our newsletter"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:157
+msgid "Email address"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:157
+msgid "Subscribe"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/tracking.php:166
+msgid "Close"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/color/validation_color.php:15
+#: framework/redux-mixt/ReduxCore/inc/validation/color_rgba/validation_color_rgba.php:14
+#: framework/redux-mixt/ReduxCore/inc/validation/colorrgba/validation_colorrgba.php:16
+msgid "This field must be a valid color value."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/comma_numeric/validation_comma_numeric.php:16
+msgid "You must provide a comma separated list of numerical values for this option."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/date/validation_date.php:16
+msgid "This field must be a valid date."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/email/validation_email.php:16
+#: framework/redux-mixt/ReduxCore/inc/validation/email_not_empty/validation_email_not_empty.php:16
+msgid "You must provide a valid email for this option."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/no_html/validation_no_html.php:15
+msgid "You must not enter any HTML in this field, all HTML tags have been removed."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/no_special_chars/validation_no_special_chars.php:16
+msgid ""
+"You must not enter any special characters in this field, all special characters have been removed."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/not_empty/validation_not_empty.php:16
+msgid "This field cannot be empty. Please provide a value."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/numeric/validation_numeric.php:16
+#: framework/redux-mixt/ReduxCore/inc/validation/numeric_not_empty/validation_numeric_not_empty.php:16
+msgid "You must provide a numerical value for this option."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/validation/url/validation_url.php:16
+msgid "You must provide a valid URL for this option."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:40
+msgid "Welcome to Redux Framework"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:48
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:295
+msgid "Redux Framework Changelog"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:56
+msgid "Getting started with Redux Framework"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:64
+msgid "The people that develop Redux Framework"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:135
+msgid "What's New"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:143
+msgid "Changelog"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:147
+msgid "Credits"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:164
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:333
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:471
+#, php-format
+msgid "Welcome to Redux Framework %s"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:167
+#, php-format
+msgid "Thank you for updating to the latest version! Redux Framework %s is ready to <add description>"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:174
+msgid "Some Feature"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:178
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:182
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:195
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:199
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:203
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:208
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:221
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:225
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:230
+msgid "Feature"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:190
+msgid "Some feature"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:217
+msgid "More Features"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:223
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:227
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:232
+msgid "description"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:238
+msgid "Additional Updates"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:242
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:246
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:252
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:256
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:262
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:266
+msgid "Cool thing"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:244
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:248
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:254
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:258
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:264
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:268
+msgid "cool thing description."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:277
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:316
+msgid "Go to Redux Framework"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:278
+msgid "View the Full Changelog"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:298
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:336
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:474
+#, php-format
+msgid ""
+"Thank you for updating to the latest version! Redux Framework %s is ready to make your <description>"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:305
+msgid "Full Changelog"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:342
+msgid "Use the tips below to get started using Redux Framework. You'll be up and running in no time!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:345
+msgid "Creating Your First Panel"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:350
+#, php-format
+msgid "<a href=\"%s\">%s &rarr; Add New</a>"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:352
+#, php-format
+msgid ""
+"The %s menu is your access point for all aspects of your Easy Digital Downloads product creation "
+"and setup. To create your first product, simply click Add New and then fill out the product details."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:354
+msgid "Product Price"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:356
+msgid ""
+"Products can have simple prices or variable prices if you wish to have more than one price point "
+"for a product. For a single price, simply enter the price. For multiple price points, click "
+"<em>Enable variable pricing</em> and enter the options."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:358
+msgid "Download Files"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:360
+msgid ""
+"Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files "
+"section and choose your download file. To add more than one file, simply click the <em>Add New</em> "
+"button."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:366
+msgid "Display a Product Grid"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:373
+msgid "Flexible Product Grids"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:375
+msgid ""
+"The [downloads] shortcode will display a product grid that works with any theme, no matter the "
+"size. It is even responsive!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:377
+msgid "Change the Number of Columns"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:379
+msgid "You can easily change the number of columns by adding the columns=\"x\" parameter:"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:385
+msgid "Additional Display Options"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:387
+#, php-format
+msgid ""
+"The product grids can be customized in any way you wish and there is <a href=\"%s\">extensive "
+"documentation</a> to assist you."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:392
+msgid "Purchase Buttons Anywhere"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:397
+msgid "The <em>[purchase_link]</em> Shortcode"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:399
+msgid ""
+"With easily accessible shortcodes to display purchase buttons, you can add a Buy Now or Add to Cart "
+"button for any product anywhere on your site in seconds."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:401
+msgid "Buy Now Buttons"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:403
+msgid ""
+"Purchase buttons can behave as either Add to Cart or Buy Now buttons. With Buy Now buttons "
+"customers are taken straight to PayPal, giving them the most frictionless purchasing experience "
+"possible."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:409
+msgid "Need Help?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:413
+msgid "Phenomenal Support"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:415
+msgid ""
+"We do our best to provide the best support we can. If you encounter a problem or have a question, "
+"post a question in the <a href=\"https://easydigitaldownloads.com/support\">support forums</a>."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:417
+msgid "Need Even Faster Support?"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:419
+msgid ""
+"Our <a href=\"https://easydigitaldownloads.com/support/pricing/\">Priority Support forums</a> are "
+"there for customers that need faster and/or more in-depth assistance."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:425
+msgid "Stay Up to Date"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:429
+msgid "Get Notified of Extension Releases"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:431
+msgid ""
+"New extensions that make Easy Digital Downloads even more powerful are released nearly every single "
+"week. Subscribe to the newsletter to stay up to date with our latest releases. <a href=\"http://"
+"eepurl.com/kaerz\" target=\"_blank\">Signup now</a> to ensure you do not miss a release!"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:433
+msgid "Get Alerted About New Tutorials"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:435
+msgid ""
+"<a href=\"http://eepurl.com/kaerz\" target=\"_blank\">Signup now</a> to hear about the latest "
+"tutorial releases that explain how to take Easy Digital Downloads further."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:441
+msgid "Extensions for Everything"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:445
+msgid "Over 250 Extensions"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:447
+msgid ""
+"Add-on plugins are available that greatly extend the default functionality of Easy Digital "
+"Downloads. There are extensions for payment processors, such as Stripe and PayPal, extensions for "
+"newsletter integrations, and many, many more."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:449
+msgid "Visit the Extension Store"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:451
+msgid ""
+"<a href=\"https://asydigitaldownloads.com/extensions\" target=\"_blank\">The Extensions store</a> "
+"has a list of all available extensions, including convenient category filters so you can find "
+"exactly what you are looking for."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:480
+msgid "Redux Framework is created by a worldwide team of developers who <something witty here>"
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:500
+msgid "No valid changlog was found."
+msgstr ""
+
+#: framework/redux-mixt/ReduxCore/inc/welcome.php:539
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:306
+msgid "Redux Framework has an embedded demo."
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:306
+msgid "Click here to activate the sample config file."
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:407
+msgid "Repo"
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:408
+msgid "Generator"
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:409
+msgid "Issues"
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:415
+msgid "Deactivate Demo Mode"
+msgstr ""
+
+#: framework/redux-mixt/class.redux-plugin.php:417
+msgid "Activate Demo Mode"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:55
+#: framework/redux-mixt/sample/sample-config.php:239
+msgid "Home Settings"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:56
+#, php-format
+msgid ""
+"Redux Framework was created with the developer in mind. It allows for any theme developer to have "
+"an advanced theme panel with most of the features a developer would need. For more information "
+"check out the Github repo at: %d"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:118
+#: framework/redux-mixt/sample/barebones-config.php:119
+#: framework/redux-mixt/sample/sample-config.php:1642
+#: framework/redux-mixt/sample/sample-config.php:1643
+msgid "Sample Options"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:236
+#: framework/redux-mixt/sample/sample-config.php:1788
+#, php-format
+msgid ""
+"<p>Did you know that Redux sets a global variable for you? To access any of your saved options from "
+"within your code you can use your global variable: <strong>$%1$s</strong></p>"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:238
+#: framework/redux-mixt/sample/sample-config.php:1790
+msgid ""
+"<p>This text is displayed above the options panel. It isn't required, but more info is always "
+"better! The intro_text field accepts all HTML.</p>"
+msgstr ""
+
+#: framework/redux-mixt/sample/barebones-config.php:242
+#: framework/redux-mixt/sample/sample-config.php:1794
+msgid ""
+"<p>This text is displayed below the options panel. It isn't required, but more info is always "
+"better! The footer_text field accepts all HTML.</p>"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:240
+msgid ""
+"Redux Framework was created with the developer in mind. It allows for any theme developer to have "
+"an advanced theme panel with most of the features a developer would need. For more information "
+"check out the Github repo at: <a href=\"https://github.com/ReduxFramework/Redux-Framework\">https://"
+"github.com/ReduxFramework/Redux-Framework</a>"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:262
+msgid "Section Show"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:263
+#: framework/redux-mixt/sample/sample-config.php:270
+msgid "With the \"section\" field you can create indent option sections."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:269
+msgid "Media Options"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:278
+msgid "Media w/ URL"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:298
+msgid "Media w/o URL"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:299
+#: framework/redux-mixt/sample/sample-config.php:307
+msgid ""
+"This represents the minimalistic view. It does not have the preview box or the display URL in an "
+"input box. "
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:306
+msgid "Media No Preview"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:314
+msgid ""
+"Create a new Gallery by selecting existing or uploading new images using the WordPress native "
+"uploader"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:320
+msgid "Slider Example 1"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:321
+msgid "This slider displays the value as a label."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:322
+msgid "Slider description. Min: 1, max: 500, step: 1, default value: 250"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:332
+msgid "Slider Example 2 with Steps (5)"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:333
+msgid "This example displays the value in a text box"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:334
+msgid "Slider description. Min: 0, max: 300, step: 5, default value: 75"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:344
+msgid "Slider Example 3 with two sliders"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:345
+msgid "This example displays the values in select boxes"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:346
+msgid ""
+"Slider description. Min: 0, max: 500, step: 5, slider 1 default value: 100, slider 2 default value: "
+"300"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:360
+msgid "Slider Example 4 with float values"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:361
+msgid "This example displays float values"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:362
+msgid "Slider description. Min: 0, max: 1, step: .1, default value: .5"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:373
+msgid "JQuery UI Spinner Example 1"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:374
+msgid "JQuery UI spinner description. Min:20, max: 100, step:20, default value: 40"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:383
+msgid "Switch On"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:384
+#: framework/redux-mixt/sample/sample-config.php:391
+msgid "Look, it's on!"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:390
+msgid "Switch Off"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:398
+msgid "Switch - Nested Children, Enable to show"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:399
+msgid "Look, it's on! Also hidden child elements!"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:408
+msgid "Switch - This and the next switch required for patterns to show"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:409
+#: framework/redux-mixt/sample/sample-config.php:418
+msgid "Also called a \"fold\" parent."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:410
+#: framework/redux-mixt/sample/sample-config.php:419
+msgid "Items set with a fold to this ID will hide unless this is set to the appropriate value."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:417
+msgid "Switch2 - Enable the above switch and this one for patterns to show"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:430
+msgid "Images Option (with pattern=>true)"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:431
+msgid "Select a background pattern."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:477
+msgid "Slides Options"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:478
+msgid "Unlimited slides with drag and drop sortings."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:479
+msgid ""
+"This field will store all slides values into a multidimensional array to use into a foreach loop."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:481
+msgid "This is a title"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:482
+msgid "Description Here"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:483
+msgid "Give us a link!"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:490
+msgid "Preset"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:491
+#: framework/redux-mixt/sample/sample-config.php:493
+msgid "This allows you to set a json string or array to override multiple preferences in your theme."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:514
+msgid "Typography"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:536
+msgid "Typography option with each property can be called individually."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:666
+msgid "Body Background Color"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:667
+msgid "Pick a background color for the theme (default: #fff)."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:675
+msgid "Body Background"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:676
+msgid "Body background with image, color, etc."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:682
+msgid "Footer Background Color"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:683
+msgid "Pick a background color for the footer (default: #dd9933)."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:690
+msgid "Color RGBA"
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:691
+msgid "Gives you the RGBA color."
+msgstr ""
+
+#: framework/redux-mixt/sample/sample-config.php:1156
+msgid "Select Option with optgroup"
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm-controller.php:28
+msgid "Must call in of after the \"plugins_loaded\" action."
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm-controller.php:138
+#, php-format
+msgid "Unknown action \"%1$s\" specified for %2$s"
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm-controller.php:143
+#, php-format
+msgid "The unknown action has been replaced with \"%s\""
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm-controller.php:158
+#, php-format
+msgid "Automatic action performed: \"%s\""
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm.php:112
+msgid "Activate Development Plugins"
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm.php:119
+msgid "Deactivate Development Plugins"
+msgstr ""
+
+#: framework/redux-mixt/tests/includes/class-tivwp-dm.php:131
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: functions.php:21
+#, php-format
+msgid "Error locating %s for inclusion"
+msgstr ""
+
+#: functions.php:137
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#: functions.php:150
+#, php-format
+msgid "All plugins installed and activated successfully. %s"
+msgstr ""
+
+#: functions.php:201
+msgid "Top Navigation"
+msgstr ""
+
+#: functions.php:202
+msgid "Secondary Navigation"
+msgstr ""
+
+# @ mixt
+#: functions.php:292
+msgid "Sidebar"
+msgstr ""
+
+# @ mixt
+#: image.php:23
+#, php-format
+msgid ""
+"Published <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></"
+"span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s"
+"\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>"
+msgstr ""
+
+# @ mixt
+#: image.php:39
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
+msgstr ""
+
+# @ mixt
+#: image.php:40
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+# @ mixt
+#: image.php:69
+#, php-format
+msgid ""
+"<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post a comment</a> or leave a "
+"trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel="
+"\"trackback\">Trackback URL</a>."
+msgstr ""
+
+# @ mixt
+#: image.php:71
+#, php-format
+msgid ""
+"Comments are closed, but you can leave a trackback: <a class=\"trackback-link\" href=\"%s\" title="
+"\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr ""
+
+# @ mixt
+#: image.php:73
+msgid ""
+"Trackbacks are closed, but you can <a class=\"comment-link\" href=\"#respond\" title=\"Post a "
+"comment\">post a comment</a>."
+msgstr ""
+
+# @ mixt
+#: image.php:75
+msgid "Both comments and trackbacks are currently closed."
+msgstr ""
+
+# @ mixt
+#: no-results.php:13
+msgid "Nothing Found"
+msgstr ""
+
+# @ mixt
+#: no-results.php:19
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+# @ mixt
+#: no-results.php:23
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+# @ mixt
+#: no-results.php:28
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+# @ mixt
+#: search.php:13
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+# @ mixt
+#: searchform.php:9
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+# @ mixt
+#: sidebar.php:31
+msgid "Meta"
+msgstr ""
+
+# @ mixt
+#~ msgctxt "comments title"
+#~ msgid "One thought on &ldquo;%2$s&rdquo;"
+#~ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+#~ msgstr[0] "Un comentariu pe &ldquo;%2$s&rdquo;"
+#~ msgstr[1] "%1$s comentarii pe &ldquo;%2$s&rdquo;"
+#~ msgstr[2] ""

@@ -1,20 +1,18 @@
 
 /* - MIXT UI ELEMENTS - */
 
-// Helper Classes
+// SEARCH WIDGET
 
-.border-base {
-	border-width: 0;
-	border-style: solid;
+.search-form {
+	.search-submit {
+		margin-left: -1px;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
 }
 
-.nav-border {
-	@extend .border-base;
-	border-color: $nav-border;
-	border-color: $nav-border-alpha;
-}
+// LINK LISTS
 
-// Link List
 .link-list {
 	margin-bottom: 0;
 
@@ -27,7 +25,7 @@
 			display: block;
 			padding: 5px 10px;
 			color: $text-dark-color-fade;
-			transition: color 0.2s;
+			transition: color 0.25s;
 
 			&:hover,
 			&:active {
@@ -37,5 +35,17 @@
 		}
 
 		&:first-child { border-left-width: 1px; }
+	}
+}
+
+// SOCIAL LINKS
+
+.social-links {
+	li a {
+		padding: 5px 10px 3px;
+
+		&:not(:hover) { color: $text-dark-color-fade !important; }
+
+		i { font-size: 16px; }
 	}
 }

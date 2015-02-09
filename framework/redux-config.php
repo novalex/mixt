@@ -1,1692 +1,1365 @@
 <?php
-    
-    // MIXT Redux Config
-
-    if ( ! class_exists( 'Redux_MIXT_config' ) ) {
-
-        class Redux_MIXT_config {
-
-            public $args = array();
-            public $sections = array();
-            public $theme;
-            public $ReduxFramework;
-
-            public function __construct() {
-
-                if ( ! class_exists( 'ReduxFramework' ) ) {
-                    return;
-                }
-
-                // This is needed. Bah WordPress bugs.  ;)
-                if ( true == Redux_Helpers::isTheme( __FILE__ ) ) {
-                    $this->initSettings();
-                } else {
-                    add_action( 'plugins_loaded', array( $this, 'initSettings' ), 10 );
-                }
-
-            }
-
-            public function initSettings() {
-
-                // Just for demo purposes. Not needed per say.
-                // $this->theme = wp_get_theme();
-
-                // Set the default arguments
-                $this->setArguments();
-
-                // Set a few help tabs so you can see how it's done
-                $this->setHelpTabs();
-
-                // Create the sections and fields
-                $this->setSections();
-
-                if ( ! isset( $this->args['opt_name'] ) ) { // No errors please
-                    return;
-                }
-
-                // If Redux is running as a plugin, this will remove the demo notice and links
-                add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
-
-                // Function to test the compiler hook and demo CSS output.
-                // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-                add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 3);
-
-                // Change the arguments after they've been declared, but before the panel is created
-                //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
-
-                // Change the default value of a field after it's been set, but before it's been useds
-                //add_filter('redux/options/'.$this->args['opt_name'].'/defaults', array( $this,'change_defaults' ) );
-
-                // Dynamically add a section. Can be also used to modify sections/fields
-                //add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
-
-                $this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
-            }
-
-            /**
-             * This is a test function that will let you see when the compiler hook occurs.
-             * It only runs if a field    set with compiler=>true is changed.
-             * */
-            function compiler_action( $options, $css, $changed_values ) {
-                add_action('admin_notices', 'compiler_notification');
-                function compiler_notification() {
-                    echo '<div id="info-notice_success" class="redux-success redux-notice-field redux-field-info" style="margin: 15px 0 0;">
-                          <p class="redux-info-desc"><b>Compiler Run</b><br>Custom CSS sucessfully compiled!</p>
-                          </div>';
-                }
-                // echo "<pre>";
-                // print_r( $changed_values ); // Values that have changed since the last save
-                // echo "</pre>";
-                //print_r($options); //Option values
-                //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
-
-                // Demo of how to use the dynamic CSS and write your own static CSS file
-                $filename = get_stylesheet_directory() . '/css/custom' . '.css';
-                global $wp_filesystem;
-                if( empty( $wp_filesystem ) ) {
-                    require_once( ABSPATH .'/wp-admin/includes/file.php' );
-                    WP_Filesystem();
-                }
-
-                if( $wp_filesystem ) {
-                    $wp_filesystem->put_contents(
-                        $filename,
-                        $css,
-                        FS_CHMOD_FILE // predefined mode settings for WP files
-                    );
-                }
-            }
-
-            /**
-             * Custom function for filtering the sections array. Good for child themes to override or add to the sections.
-             * Simply include this function in the child themes functions.php file.
-             * NOTE: the defined constants for URLs, and directories will NOT be available at this point in a child theme,
-             * so you must use get_template_directory_uri() if you want to use any of the built in icons
-             * */
-            function dynamic_section( $sections ) {
-                //$sections = array();
-                $sections[] = array(
-                    'title'  => __( 'Section via hook', 'mixt-redux' ),
-                    'desc'   => __( '<p class="description">This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.</p>', 'mixt-redux' ),
-                    'icon'   => 'el-icon-paper-clip',
-                    // Leave this as a blank section, no options just some intro text set above.
-                    'fields' => array()
-                );
-
-                return $sections;
-            }
-
-            /**
-             * Filter hook for filtering the args. Good for child themes to override or add to the args array. Can also be used in other functions.
-             * */
-            function change_arguments( $args ) {
-                //$args['dev_mode'] = true;
-
-                return $args;
-            }
-
-            /**
-             * Filter hook for filtering the default value of any given field. Very useful in development mode.
-             * */
-            function change_defaults( $defaults ) {
-                $defaults['str_replace'] = 'Testing filter hook!';
-
-                return $defaults;
-            }
-
-            // Remove the demo link and the notice of integrated demo from the redux-framework plugin
-            function remove_demo() {
-
-                // Used to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
-                if ( class_exists( 'ReduxFrameworkPlugin' ) ) {
-                    remove_filter( 'plugin_row_meta', array(
-                        ReduxFrameworkPlugin::instance(),
-                        'plugin_metalinks'
-                    ), null, 2 );
-
-                    // Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
-                    remove_action( 'admin_notices', array( ReduxFrameworkPlugin::instance(), 'admin_notices' ) );
-                }
-            }
-
-            public function setSections() {
-
-                /**
-                 * Used within different fields. Simply examples. Search for ACTUAL DECLARATION for field examples
-                 * */
-                // Background Patterns Reader
-                $sample_patterns_path = ReduxFramework::$_dir . '../sample/patterns/';
-                $sample_patterns_url  = ReduxFramework::$_url . '../sample/patterns/';
-                $sample_patterns      = array();
-
-                if ( is_dir( $sample_patterns_path ) ) :
-
-                    if ( $sample_patterns_dir = opendir( $sample_patterns_path ) ) :
-                        $sample_patterns = array();
-
-                        while ( ( $sample_patterns_file = readdir( $sample_patterns_dir ) ) !== false ) {
-
-                            if ( stristr( $sample_patterns_file, '.png' ) !== false || stristr( $sample_patterns_file, '.jpg' ) !== false ) {
-                                $name              = explode( '.', $sample_patterns_file );
-                                $name              = str_replace( '.' . end( $name ), '', $sample_patterns_file );
-                                $sample_patterns[] = array(
-                                    'alt' => $name,
-                                    'img' => $sample_patterns_url . $sample_patterns_file
-                                );
-                            }
-                        }
-                    endif;
-                endif;
-
-                ob_start();
-
-                $ct          = wp_get_theme();
-                $this->theme = $ct;
-                $item_name   = $this->theme->get( 'Name' );
-                $tags        = $this->theme->Tags;
-                $screenshot  = $this->theme->get_screenshot();
-                $class       = $screenshot ? 'has-screenshot' : '';
-
-                $customize_title = sprintf( __( 'Customize &#8220;%s&#8221;', 'mixt-redux' ), $this->theme->display( 'Name' ) );
-
-                ?>
-                <div id="current-theme" class="<?php echo esc_attr( $class ); ?>">
-                    <?php if ( $screenshot ) : ?>
-                        <?php if ( current_user_can( 'edit_theme_options' ) ) : ?>
-                            <a href="<?php echo wp_customize_url(); ?>" class="load-customize hide-if-no-customize"
-                               title="<?php echo esc_attr( $customize_title ); ?>">
-                                <img src="<?php echo esc_url( $screenshot ); ?>"
-                                     alt="<?php esc_attr_e( 'Current theme preview', 'mixt-redux' ); ?>"/>
-                            </a>
-                        <?php endif; ?>
-                        <img class="hide-if-customize" src="<?php echo esc_url( $screenshot ); ?>"
-                             alt="<?php esc_attr_e( 'Current theme preview', 'mixt-redux' ); ?>"/>
-                    <?php endif; ?>
-
-                    <h4><?php echo $this->theme->display( 'Name' ); ?></h4>
-
-                    <div>
-                        <ul class="theme-info">
-                            <li><?php printf( __( 'By %s', 'mixt-redux' ), $this->theme->display( 'Author' ) ); ?></li>
-                            <li><?php printf( __( 'Version %s', 'mixt-redux' ), $this->theme->display( 'Version' ) ); ?></li>
-                            <li><?php echo '<strong>' . __( 'Tags', 'mixt-redux' ) . ':</strong> '; ?><?php printf( $this->theme->display( 'Tags' ) ); ?></li>
-                        </ul>
-                        <p class="theme-description"><?php echo $this->theme->display( 'Description' ); ?></p>
-                        <?php
-                            if ( $this->theme->parent() ) {
-                                printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'mixt-redux' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'mixt-redux' ), $this->theme->parent()->display( 'Name' ) );
-                            }
-                        ?>
-
-                    </div>
-                </div>
-
-                <?php
-                $item_info = ob_get_contents();
-
-                ob_end_clean();
-
-                $sampleHTML = '';
-                if ( file_exists( dirname( __FILE__ ) . '/info-html.html' ) ) {
-                    Redux_Functions::initWpFilesystem();
-
-                    global $wp_filesystem;
-
-                    $sampleHTML = $wp_filesystem->get_contents( dirname( __FILE__ ) . '/info-html.html' );
-                }
-
-                // GET GLOBAL VARS
-
-                global $bg_patterns;
-
-
-                // ACTUAL DECLARATION OF SECTIONS
-
-
-                $this->sections[] = array(
-                    'title'  => __( 'Global Options', 'mixt-redux' ),
-                    'icon'   => 'el-icon-cogs',
-                    'fields' => array(
-                        array(
-                            'id'       => 'theme-dev-mode',
-                            'type'     => 'switch',
-                            'title'    => __( 'Theme Dev Mode', 'mixt-redux' ),
-                            'subtitle' => __( 'Load source JS files instead of concatenated and minified ones', 'mixt-redux' ),
-                            'default'  => false,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'page-loader',
-                            'type'     => 'switch',
-                            'title'    => __( 'Show Loader', 'mixt-redux' ),
-                            'subtitle' => __( 'Enable page load animations', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'background-type',
-                            'type'     => 'button_set',
-                            'title'    => __( 'Site Background', 'mixt-redux' ),
-                            'subtitle' => __('Background color, image or both', 'mixt-redux'),
-                            'options'  => array(
-                                '1' => 'Color',
-                                '2' => 'Image',
-                                '3' => 'Both'
-                            ),
-                            'default'  => '1',
-                            'compiler' => true
-                        ),
-                        array(
-                            'id'       => 'background-color',
-                            'type'     => 'color',
-                            'title'    => __('Background Color', 'mixt-redux'), 
-                            'subtitle' => __('The site&#39;s background color (default: #FFF).', 'mixt-redux'),
-                            'required' => array('background-type','not','2'),
-                            'default'  => '#FFFFFF',
-                            'validate' => 'color',
-                            'compiler' => array('body'),
-                            'mode'     => 'background-color'
-                        ),
-                        array(
-                            'id'       => 'background-pattern',
-                            'type'     => 'image_select',
-                            'title'    => __('Background Pattern', 'mixt-redux'), 
-                            'subtitle' => __('The site&#39;s background pattern', 'mixt-redux'),
-                            'required' => array('background-type','not','1'),
-                            'options'  => $bg_patterns,
-                            'compiler' => array('body'),
-                            'mode'     => 'background-image'
-                        ),
-                        array(
-                            'id'       => 'opt-web-fonts',
-                            'type'     => 'media',
-                            'title'    => __( 'Web Fonts', 'mixt-redux' ),
-                            'compiler' => 'true',
-                            'mode'     => false,
-                            // Can be set to false to allow any media type, or can also be set to any mime type.
-                            'desc'     => __( 'Basic media uploader with disabled URL input field.', 'mixt-redux' ),
-                            'subtitle' => __( 'Upload any media using the WordPress native uploader', 'mixt-redux' ),
-                            'hint'     => array(
-                                //'title'     => '',
-                                'content' => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
-                            )
-                        ),
-                    ),
-                );
-                $this->sections[] = array(
-                    'title'  => __( 'Header', 'mixt-redux' ),
-                    'icon'   => 'el-icon-lines',
-                    // 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
-                    'fields' => array(
-                        array(
-                            'id'       => 'show-admin-bar',
-                            'type'     => 'switch',
-                            'title'    => __( 'Show WP Admin Bar', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'second-nav',
-                            'type'     => 'switch',
-                            'title'    => __( 'Show Second Navigation', 'mixt-redux' ),
-                            'default'  => false,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'nav-sticky',
-                            'type'     => 'switch',
-                            'title'    => __( 'Sticky Navbar', 'mixt-redux' ),
-                            'subtitle' => __( 'Navbar scrolls with page', 'mixt-redux' ),
-                            'default'  => true
-                        ),
-                        array(
-                            'id'       => 'nav-scheme',
-                            'type'     => 'switch',
-                            'title'    => __( 'Navbar Color Scheme', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Light',
-                            'off'      => 'Dark'
-                        ),
-                        array(
-                            'id'       => 'nav-sub-scheme',
-                            'type'     => 'switch',
-                            'title'    => __( 'Navbar Menu Color Scheme', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Light',
-                            'off'      => 'Dark'
-                        ),
-                        array(
-                            'id'       => 'nav-menu-icons',
-                            'type'     => 'switch',
-                            'title'    => __( 'Show Menu Icons', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'nav-menu-arrows',
-                            'type'     => 'switch',
-                            'title'    => __( 'Show Menu Arrows', 'mixt-redux' ),
-                            'default'  => true,
-                            'on'       => 'Yes',
-                            'off'      => 'No'
-                        ),
-                        array(
-                            'id'       => 'logo-align',
-                            'type'     => 'button_set',
-                            'title'    => __( 'Logo Alignment', 'mixt-redux' ),
-                            'options'  => array(
-                                '1' => 'Left',
-                                '2' => 'Center',
-                                '3' => 'Right'
-                            ),
-                            'default'  => '1'
-                        ),
-                        array(
-                            'id'       => 'nav-background',
-                            'type'     => 'color',
-                            'compiler' => array('#top-nav'),
-                            'title'    => __('Navbar Color', 'mixt-redux'),
-                            'mode'     => 'background-color',
-                            'validate' => 'color'
-                        ),
-                        array(
-                            'id'       => 'nav-border-color',
-                            'type'     => 'color',
-                            'compiler' => array('#top-nav'),
-                            'title'    => __('Navbar Border Color', 'mixt-redux'),
-                            'mode'     => 'border-color',
-                            'validate' => 'color'
-                        ),
-                    ),
-                );
-
-                $this->sections[] = array(
-                    'type' => 'divide',
-                );
-
-                $this->sections[] = array(
-                    'title'  => __( 'Social Profiles', 'mixt-redux' ),
-                    'icon'   => 'el-icon-group',
-                    'submenu' => false,
-                    'fields' => array(
-                        array(
-                            'id'     => 'social-profiles',
-                            'type'   => 'multi_text',
-                            'title'  => __('Social Profiles', 'mixt-redux'),
-                        ),
-                    ),
-                );
-
-                $this->sections[] = array(
-                    'icon'   => 'el-icon-cogs',
-                    'title'  => __( 'General Settings', 'mixt-redux' ),
-                    'fields' => array(
-                        array(
-                            'id'       => 'opt-layout',
-                            'type'     => 'image_select',
-                            'compiler' => true,
-                            'title'    => __( 'Main Layout', 'mixt-redux' ),
-                            'subtitle' => __( 'Select main content and sidebar alignment. Choose between 1, 2 or 3 column layout.', 'mixt-redux' ),
-                            'options'  => array(
-                                '1' => array(
-                                    'alt' => '1 Column',
-                                    'img' => ReduxFramework::$_url . 'assets/img/1col.png'
-                                ),
-                                '2' => array(
-                                    'alt' => '2 Column Left',
-                                    'img' => ReduxFramework::$_url . 'assets/img/2cl.png'
-                                ),
-                                '3' => array(
-                                    'alt' => '2 Column Right',
-                                    'img' => ReduxFramework::$_url . 'assets/img/2cr.png'
-                                ),
-                                '4' => array(
-                                    'alt' => '3 Column Middle',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cm.png'
-                                ),
-                                '5' => array(
-                                    'alt' => '3 Column Left',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cl.png'
-                                ),
-                                '6' => array(
-                                    'alt' => '3 Column Right',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cr.png'
-                                )
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-textarea',
-                            'type'     => 'textarea',
-                            'required' => array( 'layout', 'equals', '1' ),
-                            'title'    => __( 'Tracking Code', 'mixt-redux' ),
-                            'subtitle' => __( 'Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'mixt-redux' ),
-                            'validate' => 'js',
-                            'desc'     => 'Validate that it\'s javascript!',
-                        ),
-                        array(
-                            'id'       => 'opt-ace-editor-css',
-                            'type'     => 'ace_editor',
-                            'title'    => __( 'CSS Code', 'mixt-redux' ),
-                            'subtitle' => __( 'Paste your CSS code here.', 'mixt-redux' ),
-                            'mode'     => 'css',
-                            'theme'    => 'monokai',
-                            'desc'     => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
-                            'default'  => "#header{\nmargin: 0 auto;\n}"
-                        ),
-                        /*
-                    array(
-                        'id'        => 'opt-ace-editor-js',
-                        'type'      => 'ace_editor',
-                        'title'     => __('JS Code', 'mixt-redux'),
-                        'subtitle'  => __('Paste your JS code here.', 'mixt-redux'),
-                        'mode'      => 'javascript',
-                        'theme'     => 'chrome',
-                        'desc'      => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
-                        'default'   => "jQuery(document).ready(function(){\n\n});"
-                    ),
-                    array(
-                        'id'        => 'opt-ace-editor-php',
-                        'type'      => 'ace_editor',
-                        'title'     => __('PHP Code', 'mixt-redux'),
-                        'subtitle'  => __('Paste your PHP code here.', 'mixt-redux'),
-                        'mode'      => 'php',
-                        'theme'     => 'chrome',
-                        'desc'      => 'Possible modes can be found at <a href="http://ace.c9.io" target="_blank">http://ace.c9.io/</a>.',
-                        'default'   => '<?php\nisset ( $redux ) ? true : false;\n?>'
-                    ),
-                    */
-                        array(
-                            'id'       => 'opt-editor',
-                            'type'     => 'editor',
-                            'title'    => __( 'Footer Text', 'mixt-redux' ),
-                            'subtitle' => __( 'You can use the following shortcodes in your footer text: [wp-url] [site-url] [theme-url] [login-url] [logout-url] [site-title] [site-tagline] [current-year]', 'mixt-redux' ),
-                            'default'  => 'Powered by Redux Framework.',
-                        ),
-                        array(
-                            'id'       => 'password',
-                            'type'     => 'password',
-                            'username' => true,
-                            'title'    => 'SMTP Account',
-                            //'placeholder' => array('username' => 'Enter your Username')
-                        )
-                    )
-                );
-
-                $this->sections[] = array(
-                    'icon'       => 'el-icon-website',
-                    'title'      => __( 'Styling Options', 'mixt-redux' ),
-                    'subsection' => true,
-                    'fields'     => array(
-                        array(
-                            'id'       => 'opt-select-stylesheet',
-                            'type'     => 'select',
-                            'title'    => __( 'Theme Stylesheet', 'mixt-redux' ),
-                            'subtitle' => __( 'Select your themes alternative color scheme.', 'mixt-redux' ),
-                            'options'  => array( 'default.css' => 'default.css', 'color1.css' => 'color1.css' ),
-                            'default'  => 'default.css',
-                        ),
-                        // array(
-                        //     'id'       => 'opt-color-background',
-                        //     'type'     => 'color',
-                        //     'output'   => array( '.site-title' ),
-                        //     'title'    => __( 'Body Background Color', 'mixt-redux' ),
-                        //     'subtitle' => __( 'Pick a background color for the theme (default: #fff).', 'mixt-redux' ),
-                        //     'default'  => '#FFFFFF',
-                        //     'validate' => 'color',
-                        // ),
-                        // array(
-                        //     'id'       => 'opt-background',
-                        //     'type'     => 'background',
-                        //     'output'   => array( 'body' ),
-                        //     'title'    => __( 'Body Background', 'mixt-redux' ),
-                        //     'subtitle' => __( 'Body background with image, color, etc.', 'mixt-redux' ),
-                        //     //'default'   => '#FFFFFF',
-                        // ),
-                        // array(
-                        //     'id'       => 'opt-color-footer',
-                        //     'type'     => 'color',
-                        //     'title'    => __( 'Footer Background Color', 'mixt-redux' ),
-                        //     'subtitle' => __( 'Pick a background color for the footer (default: #dd9933).', 'mixt-redux' ),
-                        //     'default'  => '#dd9933',
-                        //     'validate' => 'color',
-                        // ),
-                        // array(
-                        //     'id'       => 'opt-color-rgba',
-                        //     'type'     => 'color_rgba',
-                        //     'title'    => __( 'Color RGBA - BETA', 'mixt-redux' ),
-                        //     'subtitle' => __( 'Gives you the RGBA color. Still quite experimental. Use at your own risk.', 'mixt-redux' ),
-                        //     'default'  => array( 'color' => '#dd9933', 'alpha' => '1.0' ),
-                        //     'output'   => array( 'body' ),
-                        //     'mode'     => 'background',
-                        //     'validate' => 'colorrgba',
-                        // ),
-                        array(
-                            'id'       => 'opt-color-header',
-                            'type'     => 'color_gradient',
-                            'title'    => __( 'Header Gradient Color Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Only color validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'default'  => array(
-                                'from' => '#1e73be',
-                                'to'   => '#00897e'
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-link-color',
-                            'type'     => 'link_color',
-                            'title'    => __( 'Links Color Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Only color validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //'regular'   => false, // Disable Regular Color
-                            //'hover'     => false, // Disable Hover Color
-                            //'active'    => false, // Disable Active Color
-                            //'visited'   => true,  // Enable Visited Color
-                            'default'  => array(
-                                'regular' => '#aaa',
-                                'hover'   => '#bbb',
-                                'active'  => '#ccc',
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-header-border',
-                            'type'     => 'border',
-                            'title'    => __( 'Header Border Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Only color validation can be done on this field type', 'mixt-redux' ),
-                            'output'   => array( '.site-header' ),
-                            // An array of CSS selectors to apply this font style to
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'default'  => array(
-                                'border-color'  => '#1e73be',
-                                'border-style'  => 'solid',
-                                'border-top'    => '3px',
-                                'border-right'  => '3px',
-                                'border-bottom' => '3px',
-                                'border-left'   => '3px'
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-spacing',
-                            'type'     => 'spacing',
-                            'output'   => array( '.site-header' ),
-                            // An array of CSS selectors to apply this font style to
-                            'mode'     => 'margin',
-                            // absolute, padding, margin, defaults to padding
-                            'all'      => true,
-                            // Have one field that applies to all
-                            //'top'           => false,     // Disable the top
-                            //'right'         => false,     // Disable the right
-                            //'bottom'        => false,     // Disable the bottom
-                            //'left'          => false,     // Disable the left
-                            //'units'         => 'em',      // You can specify a unit value. Possible: px, em, %
-                            //'units_extended'=> 'true',    // Allow users to select any type of unit
-                            //'display_units' => 'false',   // Set to false to hide the units if the units are specified
-                            'title'    => __( 'Padding/Margin Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Allow your users to choose the spacing or margin they want.', 'mixt-redux' ),
-                            'desc'     => __( 'You can enable or disable any piece of this field. Top, Right, Bottom, Left, or Units.', 'mixt-redux' ),
-                            'default'  => array(
-                                'margin-top'    => '1px',
-                                'margin-right'  => '2px',
-                                'margin-bottom' => '3px',
-                                'margin-left'   => '4px'
-                            )
-                        ),
-                        array(
-                            'id'             => 'opt-dimensions',
-                            'type'           => 'dimensions',
-                            'units'          => 'em',    // You can specify a unit value. Possible: px, em, %
-                            'units_extended' => 'true',  // Allow users to select any type of unit
-                            'title'          => __( 'Dimensions (Width/Height) Option', 'mixt-redux' ),
-                            'subtitle'       => __( 'Allow your users to choose width, height, and/or unit.', 'mixt-redux' ),
-                            'desc'           => __( 'You can enable or disable any piece of this field. Width, Height, or Units.', 'mixt-redux' ),
-                            'default'        => array(
-                                'width'  => 200,
-                                'height' => 100,
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-typography-body',
-                            'type'     => 'typography',
-                            'title'    => __( 'Body Font', 'mixt-redux' ),
-                            'subtitle' => __( 'Specify the body font properties.', 'mixt-redux' ),
-                            'google'   => true,
-                            'default'  => array(
-                                'color'       => '#dd9933',
-                                'font-size'   => '30px',
-                                'font-family' => 'Arial,Helvetica,sans-serif',
-                                'font-weight' => 'Normal',
-                            ),
-                        ),
-                        array(
-                            'id'       => 'opt-custom-css',
-                            'type'     => 'textarea',
-                            'title'    => __( 'Custom CSS', 'mixt-redux' ),
-                            'subtitle' => __( 'Quickly add some CSS to your theme by adding it to this block.', 'mixt-redux' ),
-                            'desc'     => __( 'This field is even CSS validated!', 'mixt-redux' ),
-                            'validate' => 'css',
-                        ),
-                        array(
-                            'id'       => 'opt-custom-html',
-                            'type'     => 'textarea',
-                            'title'    => __( 'Custom HTML', 'mixt-redux' ),
-                            'subtitle' => __( 'Just like a text box widget.', 'mixt-redux' ),
-                            'desc'     => __( 'This field is even HTML validated!', 'mixt-redux' ),
-                            'validate' => 'html',
-                        ),
-                    )
-                );
-
-                /**
-                 *  Note here I used a 'heading' in the sections array construct
-                 *  This allows you to use a different title on your options page
-                 * instead of reusing the 'title' value.  This can be done on any
-                 * section - kp
-                 */
-                $this->sections[] = array(
-                    'icon'    => 'el-icon-bullhorn',
-                    'title'   => __( 'Field Validation', 'mixt-redux' ),
-                    'heading' => __( 'Validate ALL fields within Redux.', 'mixt-redux' ),
-                    'desc'    => __( '<p class="description">This is the Description. Again HTML is allowed2</p>', 'mixt-redux' ),
-                    'fields'  => array(
-                        array(
-                            'id'       => 'opt-text-email',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - Email Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'This is a little space under the Field Title in the Options table, additional info is good in here.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'email',
-                            'msg'      => 'custom error message',
-                            'default'  => 'test@test.com',
-                            //                        'text_hint' => array(
-                            //                            'title'     => 'Valid Email Required!',
-                            //                            'content'   => 'This field required a valid email address.'
-                            //                        )
-                        ),
-                        array(
-                            'id'       => 'opt-text-post-type',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option with Data Attributes', 'mixt-redux' ),
-                            'subtitle' => __( 'You can also pass an options array if you want. Set the default to whatever you like.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'data'     => 'post_type',
-                        ),
-                        array(
-                            'id'       => 'opt-multi-text',
-                            'type'     => 'multi_text',
-                            'title'    => __( 'Multi Text Option - Color Validated', 'mixt-redux' ),
-                            'validate' => 'color',
-                            'subtitle' => __( 'If you enter an invalid color it will be removed. Try using the text "blue" as a color.  ;)', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'       => 'opt-text-url',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - URL Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'This must be a URL.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'url',
-                            'default'  => 'http://reduxframework.com',
-                            //                        'text_hint' => array(
-                            //                            'title'     => '',
-                            //                            'content'   => 'Please enter a valid <strong>URL</strong> in this field.'
-                            //                        )
-                        ),
-                        array(
-                            'id'       => 'opt-text-numeric',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - Numeric Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'This must be numeric.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'numeric',
-                            'default'  => '0',
-                        ),
-                        array(
-                            'id'       => 'opt-text-comma-numeric',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - Comma Numeric Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'This must be a comma separated string of numerical values.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'comma_numeric',
-                            'default'  => '0',
-                        ),
-                        array(
-                            'id'       => 'opt-text-no-special-chars',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - No Special Chars Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'This must be a alpha numeric only.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'no_special_chars',
-                            'default'  => '0'
-                        ),
-                        array(
-                            'id'       => 'opt-text-str_replace',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - Str Replace Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'You decide.', 'mixt-redux' ),
-                            'desc'     => __( 'This field\'s default value was changed by a filter hook!', 'mixt-redux' ),
-                            'validate' => 'str_replace',
-                            'str'      => array(
-                                'search'      => ' ',
-                                'replacement' => 'thisisaspace'
-                            ),
-                            'default'  => 'This is the default.'
-                        ),
-                        array(
-                            'id'       => 'opt-text-preg_replace',
-                            'type'     => 'text',
-                            'title'    => __( 'Text Option - Preg Replace Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'You decide.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'preg_replace',
-                            'preg'     => array(
-                                'pattern'     => '/[^a-zA-Z_ -]/s',
-                                'replacement' => 'no numbers'
-                            ),
-                            'default'  => '0'
-                        ),
-                        array(
-                            'id'                => 'opt-text-custom_validate',
-                            'type'              => 'text',
-                            'title'             => __( 'Text Option - Custom Callback Validated', 'mixt-redux' ),
-                            'subtitle'          => __( 'You decide.', 'mixt-redux' ),
-                            'desc'              => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate_callback' => 'redux_validate_callback_function',
-                            'default'           => '0'
-                        ),
-                        array(
-                            'id'                => 'opt-text-custom_validate-class',
-                            'type'              => 'text',
-                            'title'             => __( 'Text Option - Custom Callback Validated - Class', 'mixt-redux' ),
-                            'subtitle'          => __( 'You decide.', 'mixt-redux' ),
-                            'desc'              => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate_callback' => array( $this, 'validate_callback_function' ),
-                            // You can pass the current class
-                            // Or pass the class name and method
-                            //'validate_callback' => array(
-                            //    'Redux_MIXT_config',
-                            //    'validate_callback_function'
-                            //),
-                            'default'           => '0'
-                        ),
-                        array(
-                            'id'       => 'opt-textarea-no-html',
-                            'type'     => 'textarea',
-                            'title'    => __( 'Textarea Option - No HTML Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'All HTML will be stripped', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'no_html',
-                            'default'  => 'No HTML is allowed in here.'
-                        ),
-                        array(
-                            'id'       => 'opt-textarea-html',
-                            'type'     => 'textarea',
-                            'title'    => __( 'Textarea Option - HTML Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'HTML Allowed (wp_kses)', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
-                            'default'  => 'HTML is allowed in here.'
-                        ),
-                        array(
-                            'id'           => 'opt-textarea-some-html',
-                            'type'         => 'textarea',
-                            'title'        => __( 'Textarea Option - HTML Validated Custom', 'mixt-redux' ),
-                            'subtitle'     => __( 'Custom HTML Allowed (wp_kses)', 'mixt-redux' ),
-                            'desc'         => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate'     => 'html_custom',
-                            'default'      => '<p>Some HTML is allowed in here.</p>',
-                            'allowed_html' => array( '' ) //see http://codex.wordpress.org/Function_Reference/wp_kses
-                        ),
-                        array(
-                            'id'       => 'opt-textarea-js',
-                            'type'     => 'textarea',
-                            'title'    => __( 'Textarea Option - JS Validated', 'mixt-redux' ),
-                            'subtitle' => __( 'JS will be escaped', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'validate' => 'js'
-                        ),
-                    )
-                );
-
-                $this->sections[] = array(
-                    'icon'   => 'el-icon-check',
-                    'title'  => __( 'Radio/Checkbox Fields', 'mixt-redux' ),
-                    'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'mixt-redux' ),
-                    'fields' => array(
-                        array(
-                            'id'       => 'opt-checkbox',
-                            'type'     => 'checkbox',
-                            'title'    => __( 'Checkbox Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'default'  => '1'// 1 = on | 0 = off
-                        ),
-                        array(
-                            'id'       => 'opt-multi-check',
-                            'type'     => 'checkbox',
-                            'title'    => __( 'Multi Checkbox Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value pairs for multi checkbox options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            //See how std has changed? you also don't need to specify opts that are 0.
-                            'default'  => array(
-                                '1' => '1',
-                                '2' => '0',
-                                '3' => '0'
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-checkbox-data',
-                            'type'     => 'checkbox',
-                            'title'    => __( 'Multi Checkbox Option (with menu data)', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'data'     => 'menu'
-                        ),
-                        array(
-                            'id'       => 'opt-checkbox-sidebar',
-                            'type'     => 'checkbox',
-                            'title'    => __( 'Multi Checkbox Option (with sidebar data)', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'data'     => 'sidebars'
-                        ),
-                        array(
-                            'id'       => 'opt-radio',
-                            'type'     => 'radio',
-                            'title'    => __( 'Radio Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value pairs for radio options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-radio-data',
-                            'type'     => 'radio',
-                            'title'    => __( 'Multi Checkbox Option (with menu data)', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'data'     => 'menu'
-                        ),
-                        array(
-                            'id'       => 'opt-image-select',
-                            'type'     => 'image_select',
-                            'title'    => __( 'Images Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value(array:title|img) pairs for radio options
-                            'options'  => array(
-                                '1' => array( 'title' => 'Opt 1', 'img' => 'images/align-none.png' ),
-                                '2' => array( 'title' => 'Opt 2', 'img' => 'images/align-left.png' ),
-                                '3' => array( 'title' => 'Opt 3', 'img' => 'images/align-center.png' ),
-                                '4' => array( 'title' => 'Opt 4', 'img' => 'images/align-right.png' )
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-image-select-layout',
-                            'type'     => 'image_select',
-                            'title'    => __( 'Images Option for Layout', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This uses some of the built in images, you can use them for layout options.', 'mixt-redux' ),
-                            //Must provide key => value(array:title|img) pairs for radio options
-                            'options'  => array(
-                                '1' => array(
-                                    'alt' => '1 Column',
-                                    'img' => ReduxFramework::$_url . 'assets/img/1col.png'
-                                ),
-                                '2' => array(
-                                    'alt' => '2 Column Left',
-                                    'img' => ReduxFramework::$_url . 'assets/img/2cl.png'
-                                ),
-                                '3' => array(
-                                    'alt' => '2 Column Right',
-                                    'img' => ReduxFramework::$_url . 'assets/img/2cr.png'
-                                ),
-                                '4' => array(
-                                    'alt' => '3 Column Middle',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cm.png'
-                                ),
-                                '5' => array(
-                                    'alt' => '3 Column Left',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cl.png'
-                                ),
-                                '6' => array(
-                                    'alt' => '3 Column Right',
-                                    'img' => ReduxFramework::$_url . 'assets/img/3cr.png'
-                                )
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-sortable',
-                            'type'     => 'sortable',
-                            'title'    => __( 'Sortable Text Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Define and reorder these however you want.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'options'  => array(
-                                'si1' => 'Item 1',
-                                'si2' => 'Item 2',
-                                'si3' => 'Item 3',
-                            )
-                        ),
-                        array(
-                            'id'       => 'opt-check-sortable',
-                            'type'     => 'sortable',
-                            'mode'     => 'checkbox', // checkbox or text
-                            'title'    => __( 'Sortable Text Option', 'mixt-redux' ),
-                            'subtitle' => __( 'Define and reorder these however you want.', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'options'  => array(
-                                'si1' => false,
-                                'si2' => true,
-                                'si3' => false,
-                            )
-                        ),
-                    )
-                );
-
-                $this->sections[] = array(
-                    'icon'   => 'el-icon-list-alt',
-                    'title'  => __( 'Select Fields', 'mixt-redux' ),
-                    'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'mixt-redux' ),
-                    'fields' => array(
-                        array(
-                            'id'       => 'opt-select',
-                            'type'     => 'select',
-                            'title'    => __( 'Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value pairs for select options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select',
-                            'type'     => 'select',
-                            'multi'    => true,
-                            'title'    => __( 'Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value pairs for radio options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'required' => array( 'select', 'equals', array( '1', '3' ) ),
-                            'default'  => array( '2', '3' )
-                        ),
-                        array(
-                            'id'       => 'opt-select-image',
-                            'type'     => 'select_image',
-                            'title'    => __( 'Select Image', 'mixt-redux' ),
-                            'subtitle' => __( 'A preview of the selected image will appear underneath the select box.', 'mixt-redux' ),
-                            'options'  => $sample_patterns,
-                            // Alternatively
-                            //'options'   => Array(
-                            //                'img_name' => 'img_path'
-                            //             )
-                            'default'  => 'tree_bark.png'
-                        ),
-                        array(
-                            'id'   => 'opt-info',
-                            'type' => 'info',
-                            'desc' => __( 'You can easily add a variety of data from WordPress.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-categories',
-                            'type'     => 'select',
-                            'data'     => 'categories',
-                            'title'    => __( 'Categories Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-categories-multi',
-                            'type'     => 'select',
-                            'data'     => 'categories',
-                            'multi'    => true,
-                            'title'    => __( 'Categories Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-pages',
-                            'type'     => 'select',
-                            'data'     => 'pages',
-                            'title'    => __( 'Pages Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-pages',
-                            'type'     => 'select',
-                            'data'     => 'pages',
-                            'multi'    => true,
-                            'title'    => __( 'Pages Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-tags',
-                            'type'     => 'select',
-                            'data'     => 'tags',
-                            'title'    => __( 'Tags Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-tags',
-                            'type'     => 'select',
-                            'data'     => 'tags',
-                            'multi'    => true,
-                            'title'    => __( 'Tags Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-menus',
-                            'type'     => 'select',
-                            'data'     => 'menus',
-                            'title'    => __( 'Menus Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-menus',
-                            'type'     => 'select',
-                            'data'     => 'menu',
-                            'multi'    => true,
-                            'title'    => __( 'Menus Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-post-type',
-                            'type'     => 'select',
-                            'data'     => 'post_type',
-                            'title'    => __( 'Post Type Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-post-type',
-                            'type'     => 'select',
-                            'data'     => 'post_type',
-                            'multi'    => true,
-                            'title'    => __( 'Post Type Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-sortable',
-                            'type'     => 'select',
-                            'data'     => 'post_type',
-                            'multi'    => true,
-                            'sortable' => true,
-                            'title'    => __( 'Post Type Multi Select Option + Sortable', 'mixt-redux' ),
-                            'subtitle' => __( 'This field also has sortable enabled!', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-posts',
-                            'type'     => 'select',
-                            'data'     => 'post',
-                            'title'    => __( 'Posts Select Option2', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-multi-select-posts',
-                            'type'     => 'select',
-                            'data'     => 'post',
-                            'multi'    => true,
-                            'title'    => __( 'Posts Multi Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-roles',
-                            'type'     => 'select',
-                            'data'     => 'roles',
-                            'title'    => __( 'User Role Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-capabilities',
-                            'type'     => 'select',
-                            'data'     => 'capabilities',
-                            'multi'    => true,
-                            'title'    => __( 'Capabilities Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                        ),
-                        array(
-                            'id'       => 'opt-select-elusive',
-                            'type'     => 'select',
-                            'data'     => 'elusive-icons',
-                            'title'    => __( 'Elusive Icons Select Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'Here\'s a list of all the elusive icons by name and icon.', 'mixt-redux' ),
-                        ),
-                    )
-                );
-
-                $theme_info = '<div class="redux-framework-section-desc">';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-uri">' . __( '<strong>Theme URL:</strong> ', 'mixt-redux' ) . '<a href="' . $this->theme->get( 'ThemeURI' ) . '" target="_blank">' . $this->theme->get( 'ThemeURI' ) . '</a></p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-author">' . __( '<strong>Author:</strong> ', 'mixt-redux' ) . $this->theme->get( 'Author' ) . '</p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-version">' . __( '<strong>Version:</strong> ', 'mixt-redux' ) . $this->theme->get( 'Version' ) . '</p>';
-                $theme_info .= '<p class="redux-framework-theme-data description theme-description">' . $this->theme->get( 'Description' ) . '</p>';
-                $tabs = $this->theme->get( 'Tags' );
-                if ( ! empty( $tabs ) ) {
-                    $theme_info .= '<p class="redux-framework-theme-data description theme-tags">' . __( '<strong>Tags:</strong> ', 'mixt-redux' ) . implode( ', ', $tabs ) . '</p>';
-                }
-                $theme_info .= '</div>';
-
-                if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
-                    $this->sections['theme_docs'] = array(
-                        'icon'   => 'el-icon-list-alt',
-                        'title'  => __( 'Documentation', 'mixt-redux' ),
-                        'fields' => array(
-                            array(
-                                'id'       => '17',
-                                'type'     => 'raw',
-                                'markdown' => true,
-                                'content'  => file_get_contents( dirname( __FILE__ ) . '/../README.md' )
-                            ),
-                        ),
-                    );
-                }
-
-                // You can append a new section at any time.
-                $this->sections[] = array(
-                    'icon'   => 'el-icon-eye-open',
-                    'title'  => __( 'Additional Fields', 'mixt-redux' ),
-                    'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'mixt-redux' ),
-                    'fields' => array(
-                        array(
-                            'id'       => 'opt-datepicker',
-                            'type'     => 'date',
-                            'title'    => __( 'Date Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'   => 'opt-divide',
-                            'type' => 'divide'
-                        ),
-                        array(
-                            'id'       => 'opt-button-set',
-                            'type'     => 'button_set',
-                            'title'    => __( 'Button Set Option', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            //Must provide key => value pairs for radio options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'  => '2'
-                        ),
-                        array(
-                            'id'       => 'opt-button-set-multi',
-                            'type'     => 'button_set',
-                            'title'    => __( 'Button Set, Multi Select', 'mixt-redux' ),
-                            'subtitle' => __( 'No validation can be done on this field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is the description field, again good for additional info.', 'mixt-redux' ),
-                            'multi'    => true,
-                            //Must provide key => value pairs for radio options
-                            'options'  => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'  => array( '2', '3' )
-                        ),
-                        array(
-                            'id'   => 'opt-info-field',
-                            'type' => 'info',
-                            'desc' => __( 'This is the info field, if you want to break sections up.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'    => 'opt-info-warning',
-                            'type'  => 'info',
-                            'style' => 'warning',
-                            'title' => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'  => __( 'This is an info field with the warning style applied and a header.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'    => 'opt-info-success',
-                            'type'  => 'info',
-                            'style' => 'success',
-                            'icon'  => 'el-icon-info-sign',
-                            'title' => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'  => __( 'This is an info field with the success style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'    => 'opt-info-critical',
-                            'type'  => 'info',
-                            'style' => 'critical',
-                            'icon'  => 'el-icon-info-sign',
-                            'title' => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'  => __( 'This is an info field with the critical style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'       => 'opt-raw_info',
-                            'type'     => 'info',
-                            'required' => array( '18', 'equals', array( '1', '2' ) ),
-                            'raw_html' => true,
-                            'desc'     => $sampleHTML,
-                        ),
-                        array(
-                            'id'     => 'opt-info-normal',
-                            'type'   => 'info',
-                            'notice' => true,
-                            'title'  => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'   => __( 'This is an info notice field with the normal style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'     => 'opt-notice-info',
-                            'type'   => 'info',
-                            'notice' => true,
-                            'style'  => 'info',
-                            'title'  => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'   => __( 'This is an info notice field with the info style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'     => 'opt-notice-warning',
-                            'type'   => 'info',
-                            'notice' => true,
-                            'style'  => 'warning',
-                            'icon'   => 'el-icon-info-sign',
-                            'title'  => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'   => __( 'This is an info notice field with the warning style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'     => 'opt-notice-success',
-                            'type'   => 'info',
-                            'notice' => true,
-                            'style'  => 'success',
-                            'icon'   => 'el-icon-info-sign',
-                            'title'  => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'   => __( 'This is an info notice field with the success style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'     => 'opt-notice-critical',
-                            'type'   => 'info',
-                            'notice' => true,
-                            'style'  => 'critical',
-                            'icon'   => 'el-icon-info-sign',
-                            'title'  => __( 'This is a title.', 'mixt-redux' ),
-                            'desc'   => __( 'This is an notice field with the critical style applied, a header and an icon.', 'mixt-redux' )
-                        ),
-                        array(
-                            'id'       => 'opt-custom-callback',
-                            'type'     => 'callback',
-                            'title'    => __( 'Custom Field Callback', 'mixt-redux' ),
-                            'subtitle' => __( 'This is a completely unique field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'mixt-redux' ),
-                            'callback' => 'redux_my_custom_field'
-                        ),
-                        array(
-                            'id'       => 'opt-custom-callback-class',
-                            'type'     => 'callback',
-                            'title'    => __( 'Custom Field Callback - Class', 'mixt-redux' ),
-                            'subtitle' => __( 'This is a completely unique field type', 'mixt-redux' ),
-                            'desc'     => __( 'This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'mixt-redux' ),
-                            //'callback'  => array( $this, 'class_field_callback' ) // Can use the current class object
-                            'callback' => array( 'Redux_MIXT_config', 'class_field_callback' )
-                            // Can use just class name
-                        ),
-                        array(
-                            'id'              => 'opt-customizer-only-in-section',
-                            'type'            => 'select',
-                            'title'           => __( 'Customizer Only Option', 'mixt-redux' ),
-                            'subtitle'        => __( 'The subtitle is NOT visible in customizer', 'mixt-redux' ),
-                            'desc'            => __( 'The field desc is NOT visible in customizer.', 'mixt-redux' ),
-                            'customizer_only' => true,
-                            //Must provide key => value pairs for select options
-                            'options'         => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'         => '2'
-                        ),
-                    )
-                );
-
-                $this->sections[] = array(
-                    'icon'            => 'el-icon-list-alt',
-                    'title'           => __( 'Customizer Only', 'mixt-redux' ),
-                    'desc'            => __( '<p class="description">This Section should be visible only in Customizer</p>', 'mixt-redux' ),
-                    'customizer_only' => true,
-                    'fields'          => array(
-                        array(
-                            'id'              => 'opt-customizer-only',
-                            'type'            => 'select',
-                            'title'           => __( 'Customizer Only Option', 'mixt-redux' ),
-                            'subtitle'        => __( 'The subtitle is NOT visible in customizer', 'mixt-redux' ),
-                            'desc'            => __( 'The field desc is NOT visible in customizer.', 'mixt-redux' ),
-                            'customizer_only' => true,
-                            //Must provide key => value pairs for select options
-                            'options'         => array(
-                                '1' => 'Opt 1',
-                                '2' => 'Opt 2',
-                                '3' => 'Opt 3'
-                            ),
-                            'default'         => '2'
-                        ),
-                    )
-                );
-
-                $this->sections[] = array(
-                    'title'  => __( 'Import / Export', 'mixt-redux' ),
-                    'desc'   => __( 'Import and Export your Redux Framework settings from file, text or URL.', 'mixt-redux' ),
-                    'icon'   => 'el-icon-refresh',
-                    'fields' => array(
-                        array(
-                            'id'         => 'opt-import-export',
-                            'type'       => 'import_export',
-                            'title'      => 'Import Export',
-                            'subtitle'   => 'Save and restore your Redux options',
-                            'full_width' => false,
-                        ),
-                    ),
-                );
-
-                $this->sections[] = array(
-                    'type' => 'divide',
-                );
-
-                $this->sections[] = array(
-                    'icon'   => 'el-icon-info-sign',
-                    'title'  => __( 'Theme Information', 'mixt-redux' ),
-                    'desc'   => __( '<p class="description">This is the Description. Again HTML is allowed</p>', 'mixt-redux' ),
-                    'fields' => array(
-                        array(
-                            'id'      => 'opt-raw-info',
-                            'type'    => 'raw',
-                            'content' => $item_info,
-                        )
-                    ),
-                );
-
-                if ( file_exists( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) ) {
-                    $tabs['docs'] = array(
-                        'icon'    => 'el-icon-book',
-                        'title'   => __( 'Documentation', 'mixt-redux' ),
-                        'content' => nl2br( file_get_contents( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) )
-                    );
-                }
-            }
-
-            public function setHelpTabs() {
-
-                // Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
-                $this->args['help_tabs'][] = array(
-                    'id'      => 'redux-help-tab-1',
-                    'title'   => __( 'Theme Information 1', 'mixt-redux' ),
-                    'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt-redux' )
-                );
-
-                $this->args['help_tabs'][] = array(
-                    'id'      => 'redux-help-tab-2',
-                    'title'   => __( 'Theme Information 2', 'mixt-redux' ),
-                    'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt-redux' )
-                );
-
-                // Set the help sidebar
-                $this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'mixt-redux' );
-            }
-
-            /**
-             * All the possible arguments for Redux.
-             * For full documentation on arguments, please refer to: https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
-             * */
-            public function setArguments() {
-
-                $theme = wp_get_theme(); // For use with some settings. Not necessary.
-
-                $this->args = array(
-                    // TYPICAL -> Change these values as you need/desire
-                    'opt_name'             => 'mixt_opt',
-                    // This is where your data is stored in the database and also becomes your global variable name.
-                    'display_name'         => $theme->get( 'Name' ),
-                    // Name that appears at the top of your panel
-                    'display_version'      => $theme->get( 'Version' ),
-                    // Version that appears at the top of your panel
-                    'menu_type'            => 'menu',
-                    //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
-                    'allow_sub_menu'       => true,
-                    // Show the sections below the admin menu item or not
-                    'menu_title'           => __( 'MIXT', 'mixt-redux' ),
-                    'page_title'           => __( 'MIXT Options', 'mixt-redux' ),
-                    // You will need to generate a Google API key to use this feature.
-                    // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
-                    'google_api_key'       => '',
-                    // Set it you want google fonts to update weekly. A google_api_key value is required.
-                    'google_update_weekly' => false,
-                    // Must be defined to add google fonts to the typography module
-                    'async_typography'     => true,
-                    // Use a asynchronous font on the front end or font string
-                    //'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
-                    'admin_bar'            => true,
-                    // Show the panel pages on the admin bar
-                    'admin_bar_icon'     => 'dashicons-admin-appearance',
-                    // Choose an icon for the admin bar menu
-                    'admin_bar_priority' => 50,
-                    // Choose an priority for the admin bar menu
-                    'global_variable'      => '',
-                    // Set a different name for your global variable other than the opt_name
-                    'dev_mode'             => true,
-                    // Show the time the page took to load, etc
-                    'update_notice'        => true,
-                    // If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
-                    'customizer'           => true,
-                    // Enable basic customizer support
-                    //'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
-                    //'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
-
-                    // OPTIONAL -> Give you extra features
-                    'page_priority'        => null,
-                    // Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
-                    'page_parent'          => 'themes.php',
-                    // For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-                    'page_permissions'     => 'manage_options',
-                    // Permissions needed to access the options panel.
-                    'menu_icon'            => 'dashicons-admin-appearance',
-                    // Specify a custom URL to an icon
-                    'last_tab'             => '',
-                    // Force your panel to always open to a specific tab (by id)
-                    'page_icon'            => 'icon-themes',
-                    // Icon displayed in the admin panel next to your menu_title
-                    'page_slug'            => 'mixt_options',
-                    // Page slug used to denote the panel
-                    'save_defaults'        => true,
-                    // On load save the defaults to DB before user clicks save or not
-                    'default_show'         => false,
-                    // If true, shows the default value next to each field that is not the default value.
-                    'default_mark'         => '',
-                    // What to print by the field's title if the value shown is default. Suggested: *
-                    'show_import_export'   => true,
-                    // Shows the Import/Export panel when not used as a field.
-
-                    // CAREFUL -> These options are for advanced use only
-                    'transient_time'       => 60 * MINUTE_IN_SECONDS,
-                    'output'               => true,
-                    // Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
-                    'output_tag'           => true,
-                    // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
-                    // 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
-
-                    // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
-                    'database'             => '',
-                    // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-                    'system_info'          => false,
-                    // REMOVE
-
-                    // HINTS
-                    'hints'                => array(
-                        'icon'          => 'icon-question-sign',
-                        'icon_position' => 'right',
-                        'icon_color'    => 'lightgray',
-                        'icon_size'     => 'normal',
-                        'tip_style'     => array(
-                            'color'   => 'light',
-                            'shadow'  => true,
-                            'rounded' => false,
-                            'style'   => '',
-                        ),
-                        'tip_position'  => array(
-                            'my' => 'top left',
-                            'at' => 'bottom right',
-                        ),
-                        'tip_effect'    => array(
-                            'show' => array(
-                                'effect'   => 'slide',
-                                'duration' => '500',
-                                'event'    => 'mouseover',
-                            ),
-                            'hide' => array(
-                                'effect'   => 'slide',
-                                'duration' => '500',
-                                'event'    => 'click mouseleave',
-                            ),
-                        ),
-                    )
-                );
-
-                // ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
-                $this->args['admin_bar_links'][] = array(
-                    'id'    => 'redux-docs',
-                    'href'   => 'http://docs.reduxframework.com/',
-                    'title' => __( 'Documentation', 'mixt-redux' ),
-                );
-
-                $this->args['admin_bar_links'][] = array(
-                    //'id'    => 'redux-support',
-                    'href'   => 'https://github.com/ReduxFramework/redux-framework/issues',
-                    'title' => __( 'Support', 'mixt-redux' ),
-                );
-
-                $this->args['admin_bar_links'][] = array(
-                    'id'    => 'redux-extensions',
-                    'href'   => 'reduxframework.com/extensions',
-                    'title' => __( 'Extensions', 'mixt-redux' ),
-                );
-
-                // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
-                $this->args['share_icons'][] = array(
-                    'url'   => 'https://www.facebook.com/novalexdesign',
-                    'title' => 'Like novalex on Facebook',
-                    'icon'  => 'el-icon-facebook'
-                );
-
-                // Panel Intro text -> before the form
-                // $this->args['intro_text'] = __( '', 'mixt-redux' );
-
-                // Add content after the form.
-                $this->args['footer_text'] = __( '<p>MiXT by <a href="http://novalx.com/">novalex</a></p>', 'mixt-redux' );
-            }
-
-            public function validate_callback_function( $field, $value, $existing_value ) {
-                $error = false;
-                $value = 'just testing';
-
-                /*
-              do your validation
-
-              if(something) {
-                $value = $value;
-              } elseif(something else) {
-                $error = true;
-                $value = $existing_value;
-                
-              }
-             */
-
-                $return['value'] = $value;
-                $field['msg']    = 'your custom error message';
-                if ( $error == true ) {
-                    $return['error'] = $field;
-                }
-
-                return $return;
-            }
-
-            public function class_field_callback( $field, $value ) {
-                print_r( $field );
-                echo '<br/>CLASS CALLBACK';
-                print_r( $value );
-            }
-
-        }
-
-        global $reduxConfig;
-        $reduxConfig = new Redux_MIXT_config();
-    } else {
-        echo "The class named Redux_MIXT_config has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
-    }
-
-    /**
-     * Custom function for the callback referenced above
-     */
-    if ( ! function_exists( 'redux_my_custom_field' ) ):
-        function redux_my_custom_field( $field, $value ) {
-            print_r( $field );
-            echo '<br/>';
-            print_r( $value );
-        }
-    endif;
-
-    /**
-     * Custom function for the callback validation referenced above
-     * */
-    if ( ! function_exists( 'redux_validate_callback_function' ) ):
-        function redux_validate_callback_function( $field, $value, $existing_value ) {
-            $error = false;
-            $value = 'just testing';
-
-            /*
-          do your validation
-
-          if(something) {
-            $value = $value;
-          } elseif(something else) {
-            $error = true;
-            $value = $existing_value;
-            
-          }
-         */
-
-            $return['value'] = $value;
-            $field['msg']    = 'your custom error message';
-            if ( $error == true ) {
-                $return['error'] = $field;
-            }
-
-            return $return;
-        }
-    endif;
+
+/* ------------------------------------------------ /
+MIXT Redux Config
+/ ------------------------------------------------ */
+
+if ( ! class_exists( 'Redux_MIXT_config' ) ) {
+
+	class Redux_MIXT_config {
+
+		public $args = array();
+		public $sections = array();
+		public $theme;
+		public $ReduxFramework;
+
+		public function __construct() {
+
+			if ( ! class_exists( 'ReduxFramework' ) ) {
+				return;
+			}
+
+			// This is needed. Bah WordPress bugs.  ;)
+			// if ( true == Redux_Helpers::isTheme(__FILE__) ) {
+			// 	$this->initSettings();
+			// } else {
+			// 	add_action('plugins_loaded', array($this, 'initSettings'), 10);
+			// }
+
+			$this->initSettings();
+
+		}
+
+		public function initSettings() {
+
+			// Just for demo purposes. Not needed per say.
+			$this->theme = wp_get_theme();
+
+			// Set the default arguments
+			$this->setArguments();
+
+			// Set a few help tabs so you can see how it's done
+			$this->setHelpTabs();
+
+			// Create the sections and fields
+			$this->setSections();
+
+			if ( ! isset( $this->args['opt_name'] ) ) { // No errors please
+				return;
+			}
+
+			// If Redux is running as a plugin, this will remove the demo notice and links
+			add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
+
+			// Function to test the compiler hook and demo CSS output.
+			// Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
+			add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 3);
+
+			// Change the arguments after they've been declared, but before the panel is created
+			//add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
+
+			// Change the default value of a field after it's been set, but before it's been useds
+			//add_filter('redux/options/'.$this->args['opt_name'].'/defaults', array( $this,'change_defaults' ) );
+
+			// Dynamically add a section. Can be also used to modify sections/fields
+			//add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
+
+			$this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
+		}
+
+		/**
+		 * This is a test function that will let you see when the compiler hook occurs.
+		 * It only runs if a field    set with compiler=>true is changed.
+		 * */
+		function compiler_action( $options, $css, $changed_values ) {
+			add_action('admin_notices', 'compiler_notification');
+			function compiler_notification() {
+				echo '<div id="info-notice_success" class="redux-success redux-notice-field redux-field-info" style="margin: 15px 0 0;">
+					  <p class="redux-info-desc"><b>Compiler Run</b><br>Custom CSS sucessfully compiled!</p>
+					  </div>';
+			}
+			// echo "<pre>";
+			// print_r( $changed_values ); // Values that have changed since the last save
+			// echo "</pre>";
+			//print_r($options); //Option values
+			//print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
+
+			// CUSTOM CSS FILE
+
+			global $wp_filesystem;
+
+			$filename = MIXT_UPLOAD_PATH . '/custom-style.css';
+
+			if ( empty( $wp_filesystem ) ) {
+				require_once( ABSPATH . '/wp-admin/includes/file.php' );
+				WP_Filesystem();
+			}
+
+			if ( $wp_filesystem ) {
+				$wp_filesystem->put_contents(
+					$filename,
+					$css,
+					FS_CHMOD_FILE // predefined mode settings for WP files
+				);
+			}
+		}
+
+		/**
+		 * Custom function for filtering the sections array. Good for child themes to override or add to the sections.
+		 * Simply include this function in the child themes functions.php file.
+		 * NOTE: the defined constants for URLs, and directories will NOT be available at this point in a child theme,
+		 * so you must use get_template_directory_uri() if you want to use any of the built in icons
+		 * */
+		function dynamic_section( $sections ) {
+			//$sections = array();
+			$sections[] = array(
+				'title'  => __( 'Section via hook', 'mixt' ),
+				'desc'   => __( '<p class="description">This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.</p>', 'mixt' ),
+				'icon'   => 'el-icon-paper-clip',
+				// Leave this as a blank section, no options just some intro text set above.
+				'fields' => array()
+			);
+
+			return $sections;
+		}
+
+		/**
+		 * Filter hook for filtering the args. Good for child themes to override or add to the args array. Can also be used in other functions.
+		 * */
+		function change_arguments( $args ) {
+			//$args['dev_mode'] = true;
+
+			return $args;
+		}
+
+		/**
+		 * Filter hook for filtering the default value of any given field. Very useful in development mode.
+		 * */
+		function change_defaults( $defaults ) {
+			$defaults['str_replace'] = 'Testing filter hook!';
+
+			return $defaults;
+		}
+
+		// Remove the demo link and the notice of integrated demo from the redux-framework plugin
+		function remove_demo() {
+
+			// Used to hide the demo mode link from the plugin page. Only used when Redux is a plugin.
+			if ( class_exists( 'ReduxFrameworkPlugin' ) ) {
+				remove_filter( 'plugin_row_meta', array(
+					ReduxFrameworkPlugin::instance(),
+					'plugin_metalinks'
+				), null, 2 );
+
+				// Used to hide the activation notice informing users of the demo panel. Only used when Redux is a plugin.
+				remove_action( 'admin_notices', array( ReduxFrameworkPlugin::instance(), 'admin_notices' ) );
+			}
+		}
+
+		public function setSections() {
+
+			ob_start();
+
+			$ct          = wp_get_theme();
+			$this->theme = $ct;
+			$item_name   = $this->theme->get( 'Name' );
+			$tags        = $this->theme->Tags;
+			$class       = '';
+
+			?>
+
+			<div id="current-theme" class="<?php echo esc_attr( $class ); ?>">
+
+				<h4><?php echo $this->theme->display( 'Name' ); ?></h4>
+
+				<div>
+					<ul class="theme-info">
+						<li><?php printf( __( 'By %s', 'mixt' ), $this->theme->display( 'Author' ) ); ?></li>
+						<li><?php printf( __( 'Version %s', 'mixt' ), $this->theme->display( 'Version' ) ); ?></li>
+						<li><?php echo '<strong>' . __( 'Tags', 'mixt' ) . ':</strong> '; ?><?php printf( $this->theme->display( 'Tags' ) ); ?></li>
+					</ul>
+					<p class="theme-description"><?php echo $this->theme->display( 'Description' ); ?></p>
+					<?php
+						if ( $this->theme->parent() ) {
+							printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'mixt' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'mixt' ), $this->theme->parent()->display( 'Name' ) );
+						}
+					?>
+
+				</div>
+			</div>
+
+			<?php
+			$item_info = ob_get_contents();
+
+			ob_end_clean();
+
+			$sampleHTML = '';
+			if ( file_exists( dirname( __FILE__ ) . '/info-html.html' ) ) {
+				Redux_Functions::initWpFilesystem();
+
+				global $wp_filesystem;
+
+				$sampleHTML = $wp_filesystem->get_contents( dirname( __FILE__ ) . '/info-html.html' );
+			}
+
+
+			// GET ASSETS
+
+			$page_loader_anims = array(
+				'none' => 'No Animation',
+			);
+			$css_loop_anims = mixt_css_anims('loops');
+			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
+
+			// Themes
+			$nav_themes = mixt_get_themes('nav');
+			$nav_default_themes = get_option('nav-default-themes');
+
+			// Background Patterns
+			$bg_patterns = mixt_bg_pattern_img();
+
+			// Social Networks
+			$social_profiles = mixt_preset_social_profiles();
+
+
+			// DECLARATION OF SECTIONS
+
+			// GLOBAL OPTIONS SECTION
+			$this->sections[] = array(
+				'title'  => __( 'Global Options', 'mixt' ),
+				'desc'   => __( 'Customize the site&#39;s global options and settings', 'mixt' ),
+				'icon'   => 'el-icon-off',
+				'fields' => array(
+
+					// Background Type
+					array(
+						'id'       => 'background-type',
+						'type'     => 'button_set',
+						'title'    => __( 'Site Background Type', 'mixt' ),
+						'subtitle' => __( 'Use a color, image or both for the site background', 'mixt' ),
+						'options'  => array(
+							'1' => 'Color',
+							'2' => 'Image',
+							'3' => 'Both',
+						),
+						'default'  => '1',
+					),
+
+					// Background Color
+					array(
+						'id'          => 'background-color',
+						'type'        => 'color',
+						'title'       => __( 'Site Background Color', 'mixt' ),
+						'subtitle'    => __( 'The site&#39;s background color', 'mixt' ),
+						'required'    => array( 'background-type', 'not', '2' ),
+						'transparent' => false,
+						'default'     => '#FFFFFF',
+						'validate'    => 'color',
+					),
+
+					// Background Pattern
+					array(
+						'id'       => 'background-pattern',
+						'type'     => 'image_select',
+						'title'    => __( 'Site Background Pattern', 'mixt' ),
+						'subtitle' => __( 'The site&#39;s background pattern', 'mixt' ),
+						'options'  => $bg_patterns,
+						'required' => array( 'background-type', 'not', '1' ),
+					),
+
+					// Divider
+					array(
+						'id'   => 'global-divider-1',
+						'type' => 'divide',
+					),
+
+					// Page Loader
+					array(
+						'id'       => 'page-loader',
+						'type'     => 'switch',
+						'title'    => __( 'Show Page Loader', 'mixt' ),
+						'subtitle' => __( 'Enable page (pre)loader to show animations when loading site', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => true,
+					),
+
+					// Page Loader Type
+					array(
+						'id'       => 'page-loader-type',
+						'type'     => 'button_set',
+						'title'    => __( 'Loader Type', 'mixt' ),
+						'subtitle' => __( 'Use a shape or image for the loader', 'mixt' ),
+						'options'  => array(
+							'1' => 'Shape',
+							'2' => 'Image',
+						),
+						'default'  => '1',
+						'required' => array( 'page-loader', '=', true ),
+					),
+
+					// Page Loader Shape Select
+					array(
+						'id'       => 'page-loader-shape',
+						'type'     => 'select',
+						'title'    => __( 'Loader Shape', 'mixt' ),
+						'subtitle' => __( 'Shape to use for the loader', 'mixt' ),
+						'options'  => array(
+							'circle'  => 'Circle',
+							'ring'    => 'Ring',
+							'square'  => 'Square',
+							'square2' => 'Empty Square',
+						),
+						'default'  => 'ring',
+						'required' => array( 'page-loader-type', '=', '1' ),
+					),
+
+					// Page Loader Shape Color Select
+					array(
+						'id'          => 'page-loader-color',
+						'type'        => 'color',
+						'title'       => __( 'Loader Shape Color', 'mixt' ),
+						'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
+						'required'    => array( 'page-loader-type', '=', '1' ),
+						'transparent' => false,
+						'default'     => '#ffffff',
+						'validate'    => 'color',
+					),
+
+					// Page Loader Image Select
+					array(
+						'id'       => 'page-loader-img',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Loader Image', 'mixt' ),
+						'subtitle' => __( 'Image to use for the loader', 'mixt' ),
+						'required' => array( 'page-loader-type', '=', '2' ),
+					),
+
+					// Page Loader Background Color Select
+					array(
+						'id'          => 'page-loader-bg',
+						'type'        => 'color',
+						'title'       => __( 'Loader Background Color', 'mixt' ),
+						'subtitle'    => __( 'The page loader background color', 'mixt' ),
+						'required'    => array( 'page-loader', '=', true ),
+						'transparent' => false,
+						'default'     => '#539DDD',
+						'validate'    => 'color',
+					),
+
+					// Page Loader Animation Select
+					array(
+						'id'       => 'page-loader-anim',
+						'type'     => 'select',
+						'title'    => __( 'Loader Animation', 'mixt' ),
+						'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
+						'options'  => $page_loader_anims,
+						'default'  => 'pulsate',
+						'required' => array( 'page-loader', '=', true ),
+					),
+
+					// Divider
+					array(
+						'id'   => 'global-divider-2',
+						'type' => 'divide',
+					),
+
+					// Page Metaboxes
+					array(
+						'id'       => 'page-metaboxes',
+						'type'     => 'switch',
+						'title'    => __( 'Show Page Option Metaboxes', 'mixt' ),
+						'subtitle' => __( 'Enable option metaboxes when editing pages or posts', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => true,
+					),
+				),
+			);
+
+
+			// HEADER SECTION
+			$this->sections[] = array(
+				'title'  => __( 'Header', 'mixt' ),
+				'desc'   => __( 'Customize the site header', 'mixt' ),
+				'icon'   => 'el-icon-screen',
+				'fields' => array(
+
+					// Show Admin Bar
+					array(
+						'id'       => 'show-admin-bar',
+						'type'     => 'switch',
+						'title'    => __( 'Show WP Admin Bar', 'mixt' ),
+						'subtitle' => __( 'Show or hide the Wordpress administration bar at the top of the page', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => true,
+					),
+
+					// Logo Type
+					array(
+						'id'       => 'logo-type',
+						'type'     => 'button_set',
+						'title'    => __( 'Logo Type', 'mixt' ),
+						'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
+						'options'  => array(
+							'img'  => 'Image',
+							'text' => 'Text',
+						),
+						'default'  => 'text',
+					),
+
+					// Logo Image Select
+					array(
+						'id'       => 'logo-img',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Logo Image', 'mixt' ),
+						'subtitle' => __( 'Select the image you want to use as the site&#39;s logo', 'mixt' ),
+						'required' => array( 'logo-type', '=', 'img' ),
+					),
+
+					// Logo Image Inverse Select
+					array(
+						'id'       => 'logo-img-inv',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Inverse Logo Image', 'mixt' ),
+						'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
+						'required' => array( 'logo-type', '=', 'img' ),
+					),
+
+					// Hi-Res Logo
+					array(
+						'id'       => 'logo-img-hr',
+						'type'     => 'switch',
+						'title'    => __( 'Hi-Res Logo', 'mixt' ),
+						'subtitle' => __( 'Display logo at half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => true,
+						'required' => array( 'logo-type', '=', 'img' ),
+					),
+
+					// Logo Text Field
+					array(
+						'id'       => 'logo-text',
+						'type'     => 'text',
+						'title'    => __( 'Logo Text', 'mixt' ),
+						'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
+						'required' => array( 'logo-type', '=', 'text' ),
+					),
+
+					// Logo Text Style
+					array(
+						'id'             => 'logo-text-typo',
+						'type'           => 'typography',
+						'title'          => __( 'Logo Text Style', 'mixt' ),
+						'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
+						'required'       => array( 'logo-type', '=', 'text' ),
+						'google'         => true,
+						'font-backup'    => true,
+						'line-height'    => false,
+						'text-align'     => false,
+						'text-transform' => true,
+						'units'          => 'px',
+						'default'        => array(
+							'font-style'  => '500',
+							'font-family' => 'Open Sans',
+							'google'      => true,
+							'font-size'   => '24px',
+						),
+					),
+
+					// Logo Text Inverse Color
+					array(
+						'id'       => 'logo-text-inv',
+						'type'     => 'color',
+						'title'    => __( 'Logo Text Inverse Color', 'mixt' ),
+						'subtitle' => __( 'Select an inverse logo text color for dark backgrounds', 'mixt' ),
+						'transparent' => false,
+						'validate' => 'color',
+						'required' => array( 'logo-type', '=', 'text' ),
+					),
+
+					// Logo Shrink
+					array(
+						'id'       => 'logo-shrink',
+						'type'     => 'spinner',
+						'title'    => __( 'Shrink Logo', 'mixt' ),
+						'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar is fixed <br>(0 means no shrink)', 'mixt' ),
+						'max'      => '20',
+						'step'     => '1',
+						'default'  => '6',
+					),
+
+					// Show Tagline
+					array(
+						'id'       => 'logo-show-tagline',
+						'type'     => 'switch',
+						'title'    => __( 'Show Tagline', 'mixt' ),
+						'subtitle' => __( 'Show the site&#39;s tagline (or a custom one) next to the logo', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => false,
+					),
+
+					// Logo Tagline Text
+					array(
+						'id'       => 'logo-tagline',
+						'type'     => 'text',
+						'title'    => __( 'Custom Tagline', 'mixt' ),
+						'subtitle' => __( 'Enter a custom tagline (leave empty to use the site tagline)', 'mixt' ),
+						'required' => array( 'logo-show-tagline', '=', true ),
+					),
+				),
+			);
+
+
+			// NAVBAR SECTION
+			$this->sections[] = array(
+				'title'  => __( 'Navbars', 'mixt' ),
+				'desc'   => __( 'Customize the primary and secondary navbars', 'mixt' ),
+				'icon'   => 'el-icon-minus',
+				'fields' => array(
+
+					// Global Navbar Section
+					array(
+						'id'       => 'global-nav-section',
+						'type'     => 'section',
+						'indent'   => true,
+					),
+					
+						// Navbar Icons
+						array(
+							'id'       => 'nav-menu-icons',
+							'type'     => 'switch',
+							'title'    => __( 'Show Menu Icons', 'mixt' ),
+							'subtitle' => __( 'Enable icons for menu items', 'mixt' ),
+							'on'       => 'Yes',
+							'off'      => 'No',
+							'default'  => true,
+						),
+
+						// Navbar Dropdown Arrows
+						array(
+							'id'       => 'nav-menu-arrows',
+							'type'     => 'switch',
+							'title'    => __( 'Show Menu Dropdown Arrows', 'mixt' ),
+							'subtitle' => __( 'Enable arrows for menu items with dropdowns', 'mixt' ),
+							'on'       => 'Yes',
+							'off'      => 'No',
+							'default'  => true,
+						),
+
+					// Divider
+					array(
+						'id'   => 'navbar-divider',
+						'type' => 'divide',
+					),
+
+					// Primary Navbar Section
+					array(
+						'id'       => 'primary-nav-section',
+						'type'     => 'section',
+						'title'    => __( 'Primary Navbar', 'mixt' ),
+						'subtitle' => __( 'Settings for the primary navbar', 'mixt' ),
+						'indent'   => true,
+					),
+						// Logo Alignment
+						array(
+							'id'       => 'logo-align',
+							'type'     => 'button_set',
+							'title'    => __( 'Logo Alignment', 'mixt' ),
+							'subtitle' => __( 'Where the logo will be displayed in the navbar', 'mixt' ),
+							'options'  => array(
+								'1' => 'Left',
+								'2' => 'Center',
+								'3' => 'Right',
+							),
+							'default'  => '1',
+						),
+
+						// Navbar Mode
+						array(
+							'id'       => 'nav-mode',
+							'type'     => 'button_set',
+							'title'    => __( 'Mode', 'mixt' ),
+							'subtitle' => __( 'Navbar fixed (scrolls with page) or static (stays at the top)', 'mixt' ),
+							'options'  => array(
+								'fixed'  => 'Fixed',
+								'static' => 'Static',
+							),
+							'default'  => 'fixed',
+						),
+
+						// Navbar Color Scheme
+						array(
+							'id'       => 'nav-scheme',
+							'type'     => 'button_set',
+							'title'    => __( 'Color Scheme', 'mixt' ),
+							'subtitle' => __( 'Navbar color scheme', 'mixt' ),
+							'options'  => array(
+								'1' => 'Light',
+								'2' => 'Dark',
+								'3' => 'Custom',
+							),
+							'default'  => '1',
+						),
+
+						// Navbar Theme Select
+						array(
+							'id'       => 'nav-theme',
+							'type'     => 'select',
+							'title'    => __( 'Theme', 'mixt' ),
+							'subtitle' => __( 'Select the theme for the primary navbar', 'mixt' ),
+							'options'  => $nav_themes,
+							'default'  => '',
+						),
+
+						// Navbar Dropdown (Submenu) Scheme
+						array(
+							'id'       => 'nav-sub-scheme',
+							'type'     => 'button_set',
+							'title'    => __( 'Menu Color Scheme', 'mixt' ),
+							'subtitle' => __( 'Light or dark dropdown menu color scheme', 'mixt' ),
+							'options'  => array(
+								'light' => 'Light',
+								'dark'  => 'Dark',
+							),
+							'default'  => 'light',
+						),
+
+						// Navbar Trnansparent When Possible
+						array(
+							'id'       => 'nav-transparent',
+							'type'     => 'button_set',
+							'title'    => __( 'See-Through', 'mixt' ),
+							'subtitle' => __( 'Make navbar transparent when possible', 'mixt' ),
+							'options'  => array(
+								'true'  => 'Yes',
+								'false' => 'No',
+							),
+							'default'  => 'true',
+						),
+
+					// Divider
+					array(
+						'id'   => 'navbar-divider-2',
+						'type' => 'divide',
+					),
+
+					// Secondary Navbar Section
+					array(
+						'id'       => 'secondary-nav-section',
+						'type'     => 'section',
+						'title'    => __( 'Secondary Navbar', 'mixt' ),
+						'subtitle' => __( 'Settings for the secondary navbar', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Secondary Navbar Switch
+						array(
+							'id'       => 'second-nav',
+							'type'     => 'switch',
+							'title'    => __( 'Enable Secondary Navbar', 'mixt' ),
+							'subtitle' => __( 'Show the secondary navbar above the header', 'mixt' ),
+							'on'       => 'Yes',
+							'off'      => 'No',
+							'default'  => false,
+						),
+
+						// Secondary Navbar Color Scheme
+						array(
+							'id'       => 'sec-nav-scheme',
+							'type'     => 'switch',
+							'title'    => __( 'Color Scheme', 'mixt' ),
+							'subtitle' => __( 'Light or dark navbar color scheme', 'mixt' ),
+							'on'       => 'Light',
+							'off'      => 'Dark',
+							'default'  => true,
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Secondary Navbar Background Color
+						array(
+							'id'       => 'sec-nav-background',
+							'type'     => 'color',
+							'title'    => __('Background Color', 'mixt'),
+							'subtitle' => __( 'Navbar background color', 'mixt' ),
+							'validate' => 'color',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Secondary Navbar Dropdown (Submenu) Scheme
+						array(
+							'id'       => 'sec-nav-sub-scheme',
+							'type'     => 'button_set',
+							'title'    => __( 'Menu Color Scheme', 'mixt' ),
+							'subtitle' => __( 'Light or dark dropdown menu color scheme', 'mixt' ),
+							'options'  => array(
+								'light' => 'Light',
+								'dark'  => 'Dark',
+							),
+							'default'  => 'light',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Secondary Navbar Left Side Content
+						array(
+							'id'       => 'sec-nav-left-content',
+							'type'     => 'select',
+							'title'    => __( 'Left Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the left side of the navbar', 'mixt' ),
+							'options'  => array(
+								'0' => 'No Content',
+								'1' => 'Navigation',
+								'2' => 'Social Icons',
+								'3' => 'Custom Text / Code',
+							),
+							'default'  => '0',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Secondary Navbar Left Side Code
+						array(
+							'id'           => 'sec-nav-left-code',
+							'type'         => 'textarea',
+							'title'        => __( 'Left Side Code', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display on the left side', 'mixt' ),
+							'allowed_html' => array(
+								'link'   => array(
+									'href'  => array(),
+									'title' => array(),
+								),
+								'strong' => array(),
+								'em'     => array(),
+							),
+							'placeholder'  => 'Allowed HTML tags and attributes: <a href="" title="">, <strong>, <em>',
+							'required'     => array('sec-nav-left-content', '=', '3'),
+						),
+
+						// Secondary Navbar Right Side Content
+						array(
+							'id'       => 'sec-nav-right-content',
+							'type'     => 'select',
+							'title'    => __( 'Right Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the right side of the navbar', 'mixt' ),
+							'options'  => array(
+								'0' => 'No Content',
+								'1' => 'Navigation',
+								'2' => 'Social Icons',
+								'3' => 'Custom Text / Code',
+							),
+							'default'  => '0',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Secondary Navbar Right Side Code
+						array(
+							'id'           => 'sec-nav-right-code',
+							'type'         => 'textarea',
+							'title'        => __( 'Right Side Code', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display on the right side', 'mixt' ),
+							'allowed_html' => array(
+								'link'   => array(
+									'href'  => array(),
+									'title' => array(),
+								),
+								'strong' => array(),
+								'em'     => array(),
+							),
+							'placeholder'  => 'Allowed HTML tags and attributes: <a href="" title="">, <strong>, <em>',
+							'required'     => array('sec-nav-right-content', '=', '3'),
+						),
+
+				),
+			);
+
+
+			// DIVIDER
+			$this->sections[] = array(
+				'type' => 'divide',
+			);
+
+
+			// CUSTOM THEMES SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Themes', 'mixt' ),
+				'desc'       => __( 'Create and manage custom themes', 'mixt' ),
+				'icon'       => 'el-icon-leaf',
+				'fields'     => array(
+
+					// Divider
+					array(
+						'id'   => 'themes-section',
+						'type' => 'divide',
+					),
+
+					// Sitewide Themes
+					array(
+						'id'       => 'site-themes-section',
+						'type'     => 'section',
+						'title'    => __( 'Site-Wide Themes', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Site Themes
+						array(
+							'id'       => 'site-themes',
+							'type'     => 'multi_input',
+							'add_text' => __( 'New Theme', 'mixt' ),
+							'inputs'   => array(
+								'name' => array(
+									'type'  => 'text',
+									'icon'  => 'icon-themes',
+									'label' => __( 'Theme Name', 'mixt' ),
+								),
+								'bg-color' => array(
+									'type'  => 'color',
+									'value' => '#fff',
+									'label' => 'Background Color',
+								),
+								'text-color' => array(
+									'type'  => 'color',
+									'value' => '#333',
+									'label' => 'Text Color',
+								),
+								'text-active-color' => array(
+									'type'  => 'color',
+									'value' => '#539ddd',
+									'label' => 'Active Text Color',
+								),
+							),
+						),
+
+					// Divider
+					array(
+						'id'   => 'nav-divider',
+						'type' => 'divide',
+					),
+
+					// Navbar Themes
+					array(
+						'id'       => 'nav-themes-section',
+						'type'     => 'section',
+						'title'    => __( 'Navbar Themes', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Navbar Multi Input
+						array(
+							'id'       => 'nav-themes',
+							'type'     => 'multi_input',
+							'add_text' => __( 'New Theme', 'mixt' ),
+							'inputs'   => array(
+								'name' => array(
+									'type'       => 'text',
+									'icon'       => 'el-icon-brush',
+									'label'      => __( 'Theme Name', 'mixt' ),
+									'wrap_class' => 'theme-name',
+								),
+								'bg-color' => array(
+									'type'  => 'color',
+									'value' => '',
+									'alpha' => true,
+									'label' => 'Background Color',
+								),
+								'accent' => array(
+									'type'  => 'color',
+									'value' => '',
+									'label' => 'Accent',
+								),
+								'text-color' => array(
+									'type'  => 'color',
+									'value' => '',
+									'label' => 'Text Color',
+								),
+								'text-active-color' => array(
+									'type'  => 'color',
+									'value' => '',
+									'label' => 'Active Text Color',
+								),
+							),
+							'default' => $nav_default_themes,
+						),
+
+					// Divider
+					array(
+						'id'   => 'colors-divider',
+						'type' => 'divide',
+					),
+				),
+			);
+
+
+			// FAVICON SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Favicon', 'mixt' ),
+				'desc'       => __( 'Set up the favicon (the icon that appears next to the site name in the browser)<br>MIXT will automatically generate icons in different sizes for most devices', 'mixt' ),
+				'icon'       => 'el-icon-eye-open',
+				'fields'     => array(
+
+					// Image Select
+					array(
+						'id'       => 'favicon-img',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Select Favicon', 'mixt' ),
+						'subtitle' => __( 'Select the image you want to use as the site&#39;s favicon.<br><strong>For optimal results, select an image at least 200x200 pixels big</strong>', 'mixt' ),
+					),
+
+					// Rebuild Favicons
+					array(
+						'id'       => 'favicon-rebuild',
+						'type'     => 'switch',
+						'title'    => __( 'Rebuild Favicons', 'mixt' ),
+						'subtitle' => __( 'Delete the old favicons and rebuild them', 'mixt' ),
+						'on'       => 'Yes',
+						'off'      => 'No',
+						'default'  => false,
+					),
+
+					// Saved Favicon HTML Code
+					array(
+						'id'       => 'favicon-html',
+						'type'     => 'textarea',
+						'title'    => __( 'Current Favicon Code', 'mixt' ),
+						'subtitle' => __( 'This is current favicon HTML, it <strong>will be replaced</strong> on each rebuild', 'mixt' ),
+						'allowed_html' => array(
+							'link' => array(
+								'rel'   => array(),
+								'type'  => array(),
+								'sizes' => array(),
+								'href'  => array(),
+							),
+						),
+					),
+				),
+			);
+
+			// TYPOGRAPHY
+			$this->sections[] = array(
+				'title'  => __( 'Typography', 'mixt' ),
+				'icon'   => 'el-icon-font',
+				'submenu' => false,
+				'fields' => array(
+
+					// Web Fonts
+					array(
+						'id'       => 'opt-web-fonts',
+						'type'     => 'media',
+						'title'    => __( 'Web Fonts', 'mixt' ),
+						'compiler' => 'true',
+						'mode'     => false,
+						// Can be set to false to allow any media type, or can also be set to any mime type.
+						'desc'     => __( 'Basic media uploader with disabled URL input field.', 'mixt' ),
+						'subtitle' => __( 'Upload any media using the WordPress native uploader', 'mixt' ),
+						'hint'     => array(
+							//'title'     => '',
+							'content' => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+						)
+					),
+				),
+			);
+
+			// SOCIAL PROFILES
+			$this->sections[] = array(
+				'title'   => __( 'Social Profiles', 'mixt' ),
+				'icon'    => 'el-icon-group',
+				'submenu' => false,
+				'fields'  => array(
+					
+					array(
+						'id'       => 'social-profiles',
+						'type'     => 'multi_input',
+						'title'    => __( 'Social Profiles', 'mixt' ),
+						'subtitle' => __( 'Create social profiles', 'mixt' ),
+						'add_text' => __( 'New Profile', 'mixt' ),
+						'default'  => $social_profiles,
+						'inputs'   => array(
+							'name' => array(
+								'icon'        => 'el-icon-tag',
+								'wrap_class'  => 'social-label social-name',
+								'input_class' => 'mixt-social-field network-name',
+								'placeholder' => 'Name',
+							),
+							'url' => array(
+								'icon'        => 'el-icon-globe',
+								'wrap_class'  => 'social-label social-url',
+								'input_class' => 'mixt-social-field network-url',
+								'placeholder' => 'URL',
+							),
+							'icon' => array(
+								'icon'        => 'el-icon-idea',
+								'wrap_class'  => 'social-label social-icon',
+								'input_class' => 'mixt-social-field network-icon',
+								'placeholder' => 'Icon',
+							),
+							'color' => array(
+								'type'        => 'color',
+								'wrap_class'  => 'social-label social-color',
+								'input_class' => 'mixt-social-field network-color',
+							),
+							'title' => array(
+								'icon'        => 'el-icon-comment',
+								'wrap_class'  => 'social-label social-title',
+								'input_class' => 'mixt-social-field network-title',
+								'placeholder' => 'Title',
+							),
+						),
+					),
+				),
+			);
+
+			$theme_info = '<div class="redux-framework-section-desc">';
+			$theme_info .= '<p class="redux-framework-theme-data description theme-uri">' . __( '<strong>Theme URL:</strong> ', 'mixt' ) . '<a href="' . $this->theme->get( 'ThemeURI' ) . '" target="_blank">' . $this->theme->get( 'ThemeURI' ) . '</a></p>';
+			$theme_info .= '<p class="redux-framework-theme-data description theme-author">' . __( '<strong>Author:</strong> ', 'mixt' ) . $this->theme->get( 'Author' ) . '</p>';
+			$theme_info .= '<p class="redux-framework-theme-data description theme-version">' . __( '<strong>Version:</strong> ', 'mixt' ) . $this->theme->get( 'Version' ) . '</p>';
+			$theme_info .= '<p class="redux-framework-theme-data description theme-description">' . $this->theme->get( 'Description' ) . '</p>';
+			$tabs = $this->theme->get( 'Tags' );
+			if ( ! empty( $tabs ) ) {
+				$theme_info .= '<p class="redux-framework-theme-data description theme-tags">' . __( '<strong>Tags:</strong> ', 'mixt' ) . implode( ', ', $tabs ) . '</p>';
+			}
+			$theme_info .= '</div>';
+
+			if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
+				$this->sections['theme_docs'] = array(
+					'icon'   => 'el-icon-list-alt',
+					'title'  => __( 'Documentation', 'mixt' ),
+					'fields' => array(
+						array(
+							'id'       => '17',
+							'type'     => 'raw',
+							'markdown' => true,
+							'content'  => file_get_contents( dirname( __FILE__ ) . '/../README.md' )
+						),
+					),
+				);
+			}
+
+			$this->sections[] = array(
+				'icon'            => 'el-icon-list-alt',
+				'title'           => __( 'Customizer Only', 'mixt' ),
+				'desc'            => __( '<p class="description">This Section should be visible only in Customizer</p>', 'mixt' ),
+				'customizer_only' => true,
+				'fields'          => array(
+					array(
+						'id'              => 'opt-customizer-only',
+						'type'            => 'select',
+						'title'           => __( 'Customizer Only Option', 'mixt' ),
+						'subtitle'        => __( 'The subtitle is NOT visible in customizer', 'mixt' ),
+						'desc'            => __( 'The field desc is NOT visible in customizer.', 'mixt' ),
+						'customizer_only' => true,
+						'options'         => array(
+							'1' => 'Opt 1',
+							'2' => 'Opt 2',
+							'3' => 'Opt 3'
+						),
+						'default'         => '2'
+					),
+				)
+			);
+
+			$this->sections[] = array(
+				'title'  => __( 'Import / Export', 'mixt' ),
+				'desc'   => __( 'Import and Export theme settings from file, text or URL.', 'mixt' ),
+				'icon'   => 'el-icon-refresh',
+				'fields' => array(
+					array(
+						'id'         => 'opt-import-export',
+						'type'       => 'import_export',
+						'title'      => 'Import Export',
+						'subtitle'   => 'Save and restore your theme options',
+						'full_width' => false,
+					),
+				),
+			);
+
+			$this->sections[] = array(
+				'type' => 'divide',
+			);
+
+			$this->sections[] = array(
+				'icon'   => 'el-icon-list-alt',
+				'title'  => __( 'About MIXT', 'mixt' ),
+				'desc'   => __( '<p class="description">Something about this wonderful theme here.</p>', 'mixt' ),
+				'fields' => array(
+					array(
+						'id'      => 'opt-raw-info',
+						'type'    => 'raw',
+						'content' => $item_info,
+					),
+
+					// Auto Update TF Username
+					array(
+						'id'       => 'tf-update-user',
+						'type'     => 'text',
+						'title'    => __('ThemeForest Username', 'mixt'),
+						'subtitle' => __('Your ThemeForest username for automatic updates'),
+						'default'  => '',
+					),
+
+					// Auto Update TF API Key
+					array(
+						'id'       => 'tf-update-key',
+						'type'     => 'text',
+						'title'    => __('ThemeForest API Key', 'mixt'),
+						'subtitle' => __('Your ThemeForest API key for automatic updates'),
+						'default'  => '',
+					),
+				),
+			);
+
+			if ( file_exists( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) ) {
+				$tabs['docs'] = array(
+					'icon'    => 'el-icon-book',
+					'title'   => __( 'Documentation', 'mixt' ),
+					'content' => nl2br( file_get_contents( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) )
+				);
+			}
+		}
+
+		public function setHelpTabs() {
+
+			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
+			$this->args['help_tabs'][] = array(
+				'id'      => 'redux-help-tab-1',
+				'title'   => __( 'Theme Information 1', 'mixt' ),
+				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt' )
+			);
+
+			$this->args['help_tabs'][] = array(
+				'id'      => 'redux-help-tab-2',
+				'title'   => __( 'Theme Information 2', 'mixt' ),
+				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt' )
+			);
+
+			// Set the help sidebar
+			$this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'mixt' );
+		}
+
+		/**
+		 * All the possible arguments for Redux.
+		 * For full documentation on arguments, please refer to: https://github.com/ReduxFramework/ReduxFramework/wiki/Arguments
+		 * */
+		public function setArguments() {
+
+			$theme = wp_get_theme(); // For use with some settings. Not necessary.
+
+			$this->args = array(
+				// TYPICAL -> Change these values as you need/desire
+				'opt_name'             => 'mixt_opt',
+				// This is where your data is stored in the database and also becomes your global variable name.
+				'display_name'         => $theme->get( 'Name' ),
+				// Name that appears at the top of your panel
+				'display_version'      => $theme->get( 'Version' ),
+				// Version that appears at the top of your panel
+				'menu_type'            => 'menu',
+				//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
+				'allow_sub_menu'       => true,
+				// Show the sections below the admin menu item or not
+				'menu_title'           => __( 'MIXT', 'mixt' ),
+				'page_title'           => __( 'MIXT Options', 'mixt' ),
+				// You will need to generate a Google API key to use this feature.
+				// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
+				'google_api_key'       => 'AIzaSyANZToOjYpoewv8b-GpX4LOOVZXC_08tD0',
+				// Set it you want google fonts to update weekly. A google_api_key value is required.
+				'google_update_weekly' => false,
+				// Must be defined to add google fonts to the typography module
+				'async_typography'     => true,
+				// Use a asynchronous font on the front end or font string
+				//'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
+				'admin_bar'            => true,
+				// Show the panel pages on the admin bar
+				'admin_bar_icon'     => 'dashicons-admin-generic',
+				// Choose an icon for the admin bar menu
+				'admin_bar_priority' => '31.6497',
+				// Choose an priority for the admin bar menu
+				'global_variable'      => '',
+				// Set a different name for your global variable other than the opt_name
+				'dev_mode'             => true,
+				// Show the time the page took to load, etc
+				'update_notice'        => true,
+				// If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
+				'customizer'           => true,
+				// Enable basic customizer support
+				//'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
+				//'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
+
+				// OPTIONAL -> Give you extra features
+				'page_priority'        => '59.6497',
+				// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
+				'page_parent'          => 'themes.php',
+				// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
+				'page_permissions'     => 'manage_options',
+				// Permissions needed to access the options panel.
+				'menu_icon'            => 'dashicons-screenoptions',
+				// Specify a custom URL to an icon
+				'last_tab'             => '',
+				// Force your panel to always open to a specific tab (by id)
+				'page_icon'            => 'icon-themes',
+				// Icon displayed in the admin panel next to your menu_title
+				'page_slug'            => 'mixt_options',
+				// Page slug used to denote the panel
+				'save_defaults'        => true,
+				// On load save the defaults to DB before user clicks save or not
+				'default_show'         => false,
+				// If true, shows the default value next to each field that is not the default value.
+				'default_mark'         => '',
+				// What to print by the field's title if the value shown is default. Suggested: *
+				'show_import_export'   => true,
+				// Shows the Import/Export panel when not used as a field.
+
+				'sass' => array (
+					'enabled'     => true,
+					'page_output' => false
+				),
+
+				// CAREFUL -> These options are for advanced use only
+				'transient_time'       => 60 * MINUTE_IN_SECONDS,
+				'output'               => true,
+				// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
+				'output_tag'           => true,
+				// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
+				// 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
+
+				// FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
+				'database'             => '',
+				// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
+				'system_info'          => false,
+				// REMOVE
+
+				// HINTS
+				'hints'                => array(
+					'icon'          => 'icon-question-sign',
+					'icon_position' => 'right',
+					'icon_color'    => 'lightgray',
+					'icon_size'     => 'normal',
+					'tip_style'     => array(
+						'color'   => 'light',
+						'shadow'  => true,
+						'rounded' => false,
+						'style'   => '',
+					),
+					'tip_position'  => array(
+						'my' => 'top left',
+						'at' => 'bottom right',
+					),
+					'tip_effect'    => array(
+						'show' => array(
+							'effect'   => 'slide',
+							'duration' => '500',
+							'event'    => 'mouseover',
+						),
+						'hide' => array(
+							'effect'   => 'slide',
+							'duration' => '500',
+							'event'    => 'click mouseleave',
+						),
+					),
+				)
+			);
+
+			// ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
+			$this->args['admin_bar_links'][] = array(
+				'id'    => 'redux-docs',
+				'href'   => 'http://docs.reduxframework.com/',
+				'title' => __( 'Documentation', 'mixt' ),
+			);
+
+			// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
+			// $this->args['share_icons'][] = array(
+			//     'url'   => 'https://www.facebook.com/novalexdesign',
+			//     'title' => 'Like novalex on Facebook',
+			//     'icon'  => 'el-icon-facebook'
+			// );
+
+			// Panel Intro text -> before the form
+			// $this->args['intro_text'] = __( '', 'mixt' );
+
+			// Add content after the form.
+			$this->args['footer_text'] = __( '<p>MiXT by <a href="http://novalx.com/">novalex</a></p>', 'mixt' );
+		}
+
+		public function validate_callback_function( $field, $value, $existing_value ) {
+			$error = true;
+			$value = 'just testing';
+
+			/*
+		  do your validation
+
+		  if(something) {
+			$value = $value;
+		  } elseif(something else) {
+			$error = true;
+			$value = $existing_value;
+
+		  }
+		 */
+
+			$return['value'] = $value;
+			$field['msg']    = 'your custom error message';
+			if ( $error == true ) {
+				$return['error'] = $field;
+			}
+
+			return $return;
+		}
+
+		public function class_field_callback( $field, $value ) {
+			print_r( $field );
+			echo '<br/>CLASS CALLBACK';
+			print_r( $value );
+		}
+
+	}
+
+	global $mixtConfig;
+	$mixtConfig = new Redux_MIXT_config();
+} else {
+	echo "The class named Redux_MIXT_config has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
+}
+
+/**
+ * Custom function for the callback referenced above
+ */
+if ( ! function_exists( 'redux_my_custom_field' ) ):
+	function redux_my_custom_field( $field, $value ) {
+		print_r( $field );
+		echo '<br/>';
+		print_r( $value );
+	}
+endif;
+
+/**
+ * Custom function for the callback validation referenced above
+ * */
+if ( ! function_exists( 'redux_validate_callback_function' ) ):
+	function redux_validate_callback_function( $field, $value, $existing_value ) {
+		$error = true;
+		$value = 'just testing';
+
+		/*
+	  do your validation
+
+	  if(something) {
+		$value = $value;
+	  } elseif(something else) {
+		$error = true;
+		$value = $existing_value;
+
+	  }
+	 */
+
+		$return['value'] = $value;
+		$field['msg']    = 'your custom error message';
+		if ( $error == true ) {
+			$return['error'] = $field;
+		}
+
+		return $return;
+	}
+
+endif;

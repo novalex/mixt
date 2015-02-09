@@ -18,7 +18,7 @@ $post_tags = wp_get_post_tags($post_id);
 
 	<?php if (!is_front_page() && !is_home()) : ?>
 		<header class="page-header">
-			<h1 class="page-title"><?php the_title(); ?></h1>
+			<!-- <h1 class="page-title"><?php the_title(); ?></h1> -->
 		</header><!-- .entry-header -->
 	<?php endif; ?>
 

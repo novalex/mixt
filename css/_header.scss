@@ -9,29 +9,59 @@
     overflow: hidden;
     position: relative;
     z-index: 0;
+    transition: height 0.3s;
+
+    &.media-image {
+
+        .media-container {
+
+            background-size: 100%;
+            background-repeat: repeat;
+            background-position: center;
+
+            // &.img-wide {
+            //     background-size: auto 100%;
+            // }
+
+            // &.img-tall {
+            //     background-size: 100% auto;
+            // }
+            
+            &.pattern {
+                background-size: auto;
+            }
+        }
+    }
 
     .media-container {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-size: 100%;
-        background-size: cover;
+        width: auto; height: auto;
+        min-width: 100%; min-height: 100%;
+        background-size: 100% auto;
         background-repeat: no-repeat;
+        background-attachment: fixed;
         z-index: 1;
     }
 
-    .media-inner {
-        width: 100%;
-        height: 259px;
+    video.media-container {
+        position: fixed;
+        z-index: -1;
+        object-fit: cover;
+        background-size: cover;
+    }
+
+    .container {
+        height: 100%;
         display: table;
         position: relative;
         vertical-align: middle;
         z-index: 2;
     }
 
-    .container {
+    .media-inner {
         display: table-cell;
         position: relative;
-        text-align: center;
         vertical-align: middle;
         z-index: 2;
 
@@ -56,19 +86,14 @@
     }
 }
 
-.nav-transparent .head-media {
+.nav-transparent {
+    .head-media .container {
+        padding-top: $nav-primary-height;
+    }
 
-    .media-inner { height: 169px; margin-top: $navbar-top-height; }
-}
-
-.media-image {
-
-    .media-container {
-        
-        &.pattern {
-            background-size: auto;
-            background-repeat: repeat;
-        }
+    &.nav-below-header .head-media .container {
+        padding-top: 0;
+        padding-bottom: $nav-primary-height;
     }
 }
 
@@ -82,6 +107,7 @@
     border-color: $subnav-border;
     border-color: $subnav-border-alpha;
     background-color: $subnav-bg;
+    @extend %bring-to-front;
 
     .container { height: auto; padding: 0 15px; }
 

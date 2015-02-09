@@ -1,5 +1,5 @@
 
-// MIXT CONTENT STYLESHEET
+/* - MIXT CONTENT STYLESHEET - */
 
 #main-wrap {
 	min-height: 100%;
@@ -37,8 +37,8 @@
 	color: $text-dark-color;
 	border-color: $border-color;
 	border-color: $border-color-alpha;
-
-	* { border-color: inherit; }
+	background-color: #fff;
+	@extend %bring-to-front;
 }
 
 .portfolio-sorter {
@@ -49,6 +49,11 @@
 	button {
 		width: 25%;
 	}
+}
+
+.gallery-caption,
+.bypostauthor {
+	display: inherit;
 }
 
 .grid-container {
@@ -101,38 +106,6 @@
 
 @media screen and (max-width: 782px) {
     .admin-bar #main-wrap { padding-top: 46px; }
-}
-
-// POST CONTENT
-
-.page-header {
-	margin-top: 0;
-	
-	.page-title { font-size: 26px; }
-
-	.entry-meta {
-		display: table;
-
-		> span {
-			display: table-cell;
-			vertical-align: middle;
-		}
-
-		.posted-on {
-			border: 1px solid;
-			border-color: inherit;
-			border-radius: 3px;
-			box-shadow: 0 1px 0 rgba(0,0,0,0.1);
-
-			time > span {
-				display: block;
-				padding: 0 10px;
-				text-align: center;
-				font-weight: bold;
-				line-height: 20px;
-			}
-		}
-	}
 }
 
 footer.entry-meta { clear: both; }

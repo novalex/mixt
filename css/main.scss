@@ -1,5 +1,4 @@
 
-
 /* - MIXT MASTER STYLESHEET - */
 
 // Theme Vars
@@ -20,7 +19,17 @@
 // Theme Global
 @import 'global';
 
+// Helpers
+@import 'helpers';
+
+// Animations
+@import 'anims';
+
+// UI Elements Styling
+@import 'ui';
+
 // Navbar Styling
+@import 'navbar-base';
 @import 'navbar';
 
 // Header Styling
@@ -29,16 +38,14 @@
 // Input Styling
 @import 'inputs';
 
-// UI Elements Styling
-@import 'ui';
-
 // Content Styling
 @import 'content';
+
+// Post Styling
+@import 'post';
 
 // Sidebar Styling
 @import 'sidebar';
 
 // Footer Styling
 @import 'footer';
-
-

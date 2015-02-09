@@ -1,6 +1,7 @@
 node_modules/
-framework/cmb2-mixt/
-framework/micf-mixt/
-framework/redux-mixt/
+framework/plugins/cmb2/
+framework/plugins/micf/
+framework/plugins/redux/
 *.sublime-workspace
 assets/icons/
+js/bootstrap/

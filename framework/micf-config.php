@@ -14,13 +14,18 @@ class Mixt_Menu_Item_Custom_Fields {
 	 * Initialize plugin
 	 */
 	public static function init() {
-		add_action( 'wp_nav_menu_item_custom_fields', array( __CLASS__, '_fields' ), 10, 4 );
+		add_action( 'wp_nav_menu_item_custom_fields', array( __CLASS__, '_fields' ), 2, 4 );
 		add_action( 'wp_update_nav_menu_item', array( __CLASS__, '_save' ), 10, 3 );
 		add_filter( 'manage_nav-menus_columns', array( __CLASS__, '_columns' ), 99 );
 
 		self::$fields = array(
-			'menuicon' => array(
+			'icon' => array(
 				'label' => __('Menu Icon', 'mixt'),
+				'thin'  => true,
+			),
+			'no-label' => array(
+				'label' => __('No Label', 'mixt'),
+				'type'  => 'checkbox',
 				'thin'  => true,
 			),
 			'disabled' => array(
@@ -33,6 +38,11 @@ class Mixt_Menu_Item_Custom_Fields {
 				'type'  => 'checkbox',
 				'thin'  => true,
 				'depth' => 0,
+			),
+			'type' => array(
+				'label' => 'Type',
+				'type'  => 'hidden',
+				'thin'  => true,
 			),
 		);
 	}
@@ -55,7 +65,7 @@ class Mixt_Menu_Item_Custom_Fields {
 		check_admin_referer( 'update-nav_menu', 'update-nav-menu-nonce' );
 
 		foreach ( self::$fields as $_key => $label ) {
-			$key = sprintf( 'menu-item-%s', $_key );
+			$key = sprintf( 'menu-item-mixt-%s', $_key );
 
 			// Sanitize
 			if ( ! empty( $_POST[ $key ][ $menu_item_db_id ] ) ) {
@@ -91,11 +101,11 @@ class Mixt_Menu_Item_Custom_Fields {
 	public static function _fields( $id, $item, $item_depth, $args ) {
 		foreach ( self::$fields as $_key => $arrval ) :
 
-			if (is_array($arrval)) {
-				$label = $arrval['label'];
-				$ftype = (array_key_exists('type', $arrval) ? $arrval['type'] : 'text');
-				$depth = (array_key_exists('depth', $arrval) ? $arrval['depth'] : false);
-				$fwidth = (array_key_exists('thin', $arrval) && $arrval['thin'] === true ? 'description-thin' : 'description-wide');
+			if ( is_array($arrval) ) {
+				$label  = ( array_key_exists('label', $arrval) ) ? $arrval['label'] : '';
+				$ftype  = ( array_key_exists('type', $arrval)  ) ? $arrval['type'] : 'text';
+				$depth  = ( array_key_exists('depth', $arrval) ) ? $arrval['depth'] : false;
+				$fwidth = ( array_key_exists('thin', $arrval) && $arrval['thin'] === true ) ? 'description-thin' : 'description-wide';
 			} else {
 				$label = $arrval;
 				$ftype = 'text';
@@ -103,32 +113,38 @@ class Mixt_Menu_Item_Custom_Fields {
 				$fwidth = 'description-wide';
 			}
 
-			$key   = sprintf( 'menu-item-%s', $_key );
+			$key   = sprintf( 'menu-item-mixt-%s', $_key );
+			$type  = sprintf( 'edit-%s', $key );
 			$id    = sprintf( 'edit-%s-%s', $key, $item->ID );
 			$name  = sprintf( '%s[%s]', $key, $item->ID );
-			$class = sprintf( 'field-%s', $_key ) . ' ' . $fwidth;
+			$class = sprintf( 'field-mixt-%s', $_key ) . ' ' . $fwidth;
 
-			$fval  = ($ftype == 'checkbox' ? 'true' : '');   // Set checkbox input value
-			$dbval = get_post_meta( $item->ID, $key, true ); // Value stored in the database
-			$value = ($fval != '' ? $fval : $dbval);         // The input value
+			$fval  = $ftype == 'checkbox' ? 'true' : '';     // Set checkbox input value
+			$dbval = get_post_meta( $item->ID, $key, true ); // Get value stored in database
+			$value = $fval != '' ? $fval : $dbval;           // The input value
 			$fattr = '';                                     // Additional input attribute(s)
 
-			if ($ftype == 'checkbox' && $dbval == 'true') $fattr = 'checked';
+			if ($ftype == 'checkbox' && $dbval == 'true') {
+				$fattr .= 'checked ';
+			}
+
+			$cont_attr = $ftype == 'hidden' ? 'style="display: none;"' : '';
+
+			// Output Field
 
 			if ($depth === false || $item_depth == $depth) :
-			?>
-				<p class="<?php echo esc_attr( $class ) ?> description">
-					<?php printf(
-						'<label for="%1$s">%2$s<br /><input type="%5$s" id="%1$s" class="widefat %1$s" name="%3$s" value="%4$s" %6$s/></label>',
+				echo '<p class="' . esc_attr( $class ) . ' description"' . $cont_attr . '>';
+					printf(
+						'<label for="%1$s">%3$s<br /><input type="%6$s" id="%1$s" class="widefat %2$s %1$s" name="%4$s" value="%5$s" %7$s/></label>',
 						esc_attr( $id ),
+						esc_attr( $type ),
 						esc_html( $label ),
 						esc_attr( $name ),
 						esc_attr( $value ),
 						esc_attr( $ftype ),
 						esc_attr( $fattr )
-					) ?>
-				</p>
-			<?php
+					);
+				echo '</p>';
 			endif;
 
 		endforeach;
@@ -145,7 +161,7 @@ class Mixt_Menu_Item_Custom_Fields {
 		$_fields = array();
 
 		foreach ( self::$fields as $_key => $arrval ) :
-			if (is_array($arrval)) {
+			if ( is_array($arrval) ) {
 				$_fields[$_key] = $arrval['label'];
 			} else {
 				$_fields[$_key] = $arrval;

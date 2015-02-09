@@ -1,22 +1,19 @@
 
 /*
-Theme Name: mixt
-Theme URI: http://mixt.novalx.com/
-Author: novalex
-Author URI: http://novalx.com/
-Description: MIXT - a beautiful, clean and responsive multipurpose theme for WordPress.
-Version: 1.0
-License: GNU General Public License
-License URI: see license.txt
+Theme Name:  MIXT
+Theme URI:   http://mixt.novalx.com/
+Description: <strong>Full-Featured, Intelligent and Flexible Multipurpose Theme</strong> for WordPress.
+Author:      novalex
+Author URI:  http://novalx.com/
+Version:     1.0
 */
 
 
 /* = = = = = = = = = = = = = = = = = = = = = = /
 
-DO NOT ADD STYLES TO THIS FILE!
+DO NOT ADD CODE IN THIS FILE!
 
-To keep things simple and organized, MIXT is built to be modular.
-SCSS files are in the /css/ directory. To quickly override styles,
-add your code to the user.scss file.
+In order to keep things organized, MIXT uses modular stylesheets.
+To customize styling, edit the SCSS files in the /css/ directory.
 
 / = = = = = = = = = = = = = = = = = = = = = = */

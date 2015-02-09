@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category MIXT
  * @package  Metaboxes
@@ -6,18 +7,11 @@
  * @link     https://github.com/webdevstudios/Custom-Metaboxes-and-Fields-for-WordPress
  */
 
-/**
- *
- * MIXT Custom Meta Boxes
- *
- * This file contains the options meta box displayed on the page/post edit screen.
- *
- */
+// MIXT Custom Meta Boxes
 
 // Load CMB2
-
-if ( file_exists(  __DIR__ .'/cmb2-mixt/init.php' ) ) {
-	require_once  __DIR__ .'/cmb2-mixt/init.php';
+if ( file_exists(  __DIR__ . '/plugins/cmb2/init.php' ) ) {
+	require_once( __DIR__ . '/plugins/cmb2/init.php' );
 }
 
 /**
@@ -36,6 +30,7 @@ function cmb2_hide_if_no_cats( $field ) {
 }
 
 add_filter( 'cmb2_meta_boxes', 'cmb2_mixt_metaboxes' );
+
 /**
  * Define the metabox and field configurations.
  *
@@ -44,187 +39,326 @@ add_filter( 'cmb2_meta_boxes', 'cmb2_mixt_metaboxes' );
  */
 function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
-	$prefix = 'mixt_';
+	$prefix = '_mixt-'; // Start with underscore ('_prefix_') to hide custom meta from 'Custom Fields' section
 
-	$meta_boxes['page_header'] = array(
-		'id'           => 'page_header',
-		'title'        => __('Page Header', 'cmb2'),
-		'object_types' => array( 'page', ), // Post type
+	$nav_themes_auto = array('auto' => 'Auto');
+	$nav_themes = mixt_get_themes('nav');
+
+	$nav_themes = array_merge($nav_themes_auto, $nav_themes);
+
+	// PAGE OPTIONS BOX
+	$meta_boxes['mixt_page_meta'] = array(
+		'id'           => 'page_options',
+		'title'        => __('Page Options', 'mixt'),
+		'object_types' => array( 'page', 'post' ), // Post type
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true,
 		'fields'       => array(
 
-			// Sticky Nav Switch
+			// Page Full Width Switch
 			array(
-				'name'    => __('Sticky Nav', 'cmb2'),
-				'desc'    => __('Navbar scrolls with page', 'cmb2'),
-				'id'      => $prefix . 'nav_sticky',
+				'id'      => $prefix . 'page-fullwidth',
+				'name'    => __( 'Full Width', 'mixt' ),
+				'desc'    => __( 'Display page in full width mode', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
-					'auto'  => __('Auto', 'cmb2'),
-					'true'  => __('Yes', 'cmb2'),
-					'false' => __('No', 'cmb2'),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default' => 'false',
+			),
+
+			// Sticky Nav Switch
+			array(
+				'id'      => $prefix . 'nav-mode',
+				'name'    => __('Navbar Mode', 'mixt'),
+				'desc'    => __( 'Navbar fixed (scrolls with page) or static (stays at the top)', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'   => __('Auto', 'mixt'),
+					'fixed'  => __('Fixed', 'mixt'),
+					'static' => __('Static', 'mixt'),
 				),
 				'default' => 'auto',
 			),
 
 			// Navbar Scheme
 			array(
-				'name' => __('Navbar Scheme', 'cmb2'),
-				'id'   => $prefix . 'nav_scheme',
-				'type' => 'radio_inline',
+				'id'      => $prefix . 'nav-scheme',
+				'name'    => __('Navbar Color Scheme', 'mixt'),
+				'desc'    => __( 'Light or dark navbar color scheme', 'mixt' ),
+				'type'    => 'radio_inline',
 				'options' => array(
-					'auto'  => __('Auto', 'cmb2'),
-					'light' => __('Light', 'cmb2'),
-					'dark'  => __('Dark', 'cmb2'),
+					'auto'  => __('Auto', 'mixt'),
+					'light' => __('Light', 'mixt'),
+					'dark'  => __('Dark', 'mixt'),
 				),
+				'default' => 'auto',
+			),
+
+			// Navbar Theme
+			array(
+				'id'      => $prefix . 'nav-theme',
+				'name'    => __('Navbar Theme', 'mixt'),
+				'desc'    => __( 'The navbar theme for this page', 'mixt' ),
+				'type'    => 'select',
+				'options' => $nav_themes,
 				'default' => 'auto',
 			),
 
 			// Navbar Menu Scheme
 			array(
-				'name'    => __('Navbar Menu Scheme', 'cmb2'),
-				'id'      => $prefix . 'nav_sub_scheme',
+				'id'      => $prefix . 'nav-sub-scheme',
+				'name'    => __('Navbar Menu Scheme', 'mixt'),
+				'desc'    => __( 'Light or dark dropdown menu color scheme', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
-					'auto'  => __('Auto', 'cmb2'),
-					'light' => __('Light', 'cmb2'),
-					'dark'  => __('Dark', 'cmb2'),
+					'auto'  => __('Auto', 'mixt'),
+					'light' => __('Light', 'mixt'),
+					'dark'  => __('Dark', 'mixt'),
 				),
 				'default' => 'auto',
 			),
 
+			// Transparent Nav
+			array(
+				'id'      => $prefix . 'nav-transparent',
+				'name'    => __( 'Transparent Nav', 'mixt' ),
+				'desc'    => __( 'Navbar transparent when not scrolled', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __('Auto', 'mixt'),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'auto',
+			),
+
+			// Sidebar Switch
+			array(
+				'id'      => $prefix . 'page-sidebar',
+				'name'    => __( 'Show Sidebar', 'mixt' ),
+				'desc'    => __( 'Show or hide the sidebar on this page', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default' => 'true',
+			),
+		),
+	);
+
+	$meta_boxes['mixt_header_meta'] = array(
+		'id'           => 'page-header-options',
+		'title'        => __('Page Header Options', 'mixt'),
+		'object_types' => array( 'page', 'post' ), // Post type
+		'context'      => 'normal',
+		'priority'     => 'high',
+		'show_names'   => true,
+		'fields'       => array(
+
 			// Header Media
 			array(
-				'name'       => __( 'Header Media', 'cmb2' ),
-				'desc'       => __( 'Display media, a slider & other content in the header', 'cmb2' ),
-				'id'         => $prefix . 'head_media',
-				'type'       => 'radio_inline',
+				'id'      => $prefix . 'head-media',
+				'name'    => __( 'Header Media', 'mixt' ),
+				'desc'    => __( 'Display media, a slider & other content in the header', 'mixt' ),
+				'type'    => 'radio_inline',
 				'options' => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false' => __( 'No', 'cmb2' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
 				),
 				'default' => 'false',
 			),
 
 			// Transparent Nav
 			array(
-				'name'      => __( 'Transparent Nav', 'cmb2' ),
-				'desc'      => __( 'Navbar transparent when not scrolled', 'cmb2' ),
-				'id'        => $prefix . 'nav_tsp',
-				'type'      => 'radio_inline',
-				'options'   => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false' => __( 'No', 'cmb2' ),
+				'id'      => $prefix . 'head-full-height',
+				'name'    => __( 'Full Height', 'mixt' ),
+				'desc'    => __( 'Header takes up the entire screen height', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
 				),
-				'default'   => 'false',
+				'default'    => 'false',
 				'attributes' => array(
-					'class'  => 'conditional nested',
-					'data-parent-field' => 'mixt_head_media',
-			        'data-show-on' => 'mixt_head_media',
-			    ),
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
+			),
+
+			// Nav Position (Above or Below Header)
+			array(
+				'id'      => $prefix . 'nav-position',
+				'name'    => __( 'Nav Position', 'mixt' ),
+				'desc'    => __( 'Navbar above or below header', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'above' => __( 'Above', 'mixt' ),
+					'below' => __( 'Below', 'mixt' ),
+				),
+				'default'    => 'above',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
 			),
 
 			// Media Type For Header
-	        array(
-	            'name' => __( 'Media Type', 'cmb2'),
-	            'desc' => __( 'Type of media to use for the header', 'cmb2' ),
-	            'id'   => $prefix . 'head_media_type',
-	            'type' => 'radio_inline',
-	            'options' => array(
-					'feat'   => __( 'Featured Image', 'cmb2' ),
-					'slider' => __( 'Slider', 'cmb2' ),
-					'color'  => __( 'Solid Color', 'cmb2' ),
+			array(
+				'id'      => $prefix . 'head-media-type',
+				'name'    => __( 'Media Type', 'mixt'),
+				'desc'    => __( 'Type of media to use for the header', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'color'  => __( 'Solid Color', 'mixt' ),
+					'image'  => __( 'Image', 'mixt' ),
+					'video'  => __( 'Video', 'mixt' ),
+					'slider' => __( 'Slider', 'mixt' ),
 				),
-				'default' => 'color',
+				'default'    => 'color',
 				'attributes' => array(
-					'class' => 'conditional nested',
-					'data-parent-field' => 'mixt_head_media',
-			        'data-show-on' => 'mixt_head_media',
-			    ),
-	        ),
-
-	        // Repeat / Pattern Header Image
-	        array(
-	            'name' => __('Repeat Image', 'cmb2'),
-	            'id'   => $prefix . 'head_img_repeat',
-	            'type' => 'radio_inline',
-	            'options' => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false' => __( 'No', 'cmb2' ),
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
 				),
-				'default' => 'false',
-				'attributes'  => array(
-					'class' => 'conditional nested',
-					'data-parent-field' => 'mixt_head_media_type',
-			        'data-show-on-id' => 'mixt_head_media_type1',
-			    ),
-	        ),
+			),
 
-	        // Header Slider ID Field
-	        array(
-	            'name' => __('Slider ID', 'cmb2'),
-	            'id'   => $prefix . 'head_slider',
-	            'type' => 'text',
+			// Header Color Picker
+			array(
+				'id'      => $prefix . 'head-color',
+				'name'    => __( 'Header Color', 'mixt'),
+				'desc'    => __( 'Choose a color for the header', 'mixt' ),
+				'type'    => 'colorpicker',
+				'default' => '#eeeeee',
+				'attributes' => array(
+					'class'             => 'conditional nested color-picker',
+					'data-parent-field' => $prefix . 'head-media-type',
+					'data-show-on-id'   => $prefix . 'head-media-type1',
+				),
+			),
+
+			// Header Image Source
+			array(
+				'id'      => $prefix . 'head-img-src',
+				'name'    => __( 'Image Source', 'mixt'),
+				'desc'    => __( 'What is the image source', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'gallery' => __( 'Gallery Image', 'mixt' ),
+					'feat'    => __( 'Featured Image', 'mixt' ),
+				),
+				'default'    => 'feat',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media-type',
+					'data-show-on-id'   => $prefix . 'head-media-type2',
+				),
+			),
+
+			// Header Image Gallery Select
+			array(
+				'id'    => $prefix . 'head-img',
+				'name'  => __( 'Select Image', 'mixt'),
+				'desc'  => __( 'Select an image from the gallery or upload one', 'mixt' ),
+				'type'  => 'file',
+				'allow' => array( 'attachment' ),
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-img-src',
+					'data-show-on-id'   => $prefix . 'head-img-src1',
+				),
+			),
+
+			// Repeat / Pattern Header Image
+			array(
+				'id'      => $prefix . 'head-img-repeat',
+				'name'    => __('Repeat Image', 'mixt'),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'false',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media-type',
+					'data-show-on-id'   => $prefix . 'head-media-type2',
+				),
+			),
+
+			// Header Slider ID Field
+			array(
+				'id'      => $prefix . 'head-slider',
+				'name'    => __( 'Slider ID', 'mixt' ),
+				'type'    => 'text',
 				'default' => '',
-				'attributes'  => array(
-					'class' => 'conditional nested',
-					'data-parent-field' => 'mixt_head_media_type',
-			        'data-show-on-id' => 'mixt_head_media_type2',
-			    ),
-	        ),
-
-	        // Custom HTML Wysiwyg Field
-	        array(
-	            'name' => __('Header Code', 'cmb2'),
-	            'desc' => __('Code to output in the header (can use shortcodes)', 'cmb2'),
-	            'id'   => $prefix . 'head_code',
-	            'type' => 'wysiwyg',
-	            'options' => array(
-                    'wpautop'       => false,
-                    'media_buttons' => false,
-                    'textarea_name' => 'mixt-header-code-field',
-                    'textarea_rows' => '4',
-                    'editor_class' => 'nested conditional parent__mixt_head_media',
-                ),
-	        ),
-
-	        // Page Full Width Switch
-			array(
-				'name'       => __( 'Full Width', 'cmb2' ),
-				'desc'       => __( 'Display page in full width mode', 'cmb2' ),
-				'id'         => $prefix . 'page_fullwidth',
-				'type'       => 'radio_inline',
-				'options' => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false' => __( 'No', 'cmb2' ),
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media-type',
+					'data-show-on-id'   => $prefix . 'head-media-type4',
 				),
-				'default' => 'false',
 			),
 
-			// Sidebar Switch
+			// Show Post Info In Header
 			array(
-				'name'       => __( 'Show Sidebar', 'cmb2' ),
-				'desc'       => __( 'Show or hide the sidebar on this page', 'cmb2' ),
-				'id'         => $prefix . 'page_sidebar',
-				'type'       => 'radio_inline',
+				'id'      => $prefix . 'head-content-info',
+				'name'    => __('Show Post Info', 'mixt'),
+				'type'    => 'radio_inline',
 				'options' => array(
-					'true'  => __( 'Yes', 'cmb2' ),
-					'false'  => __( 'No', 'cmb2' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
 				),
-				'default' => 'true',
+				'default'    => 'false',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'     => $prefix . 'head-media',
+				),
 			),
+
+			// Show Custom HTML
 			array(
-				'name' => __( 'Test Text Small', 'cmb2' ),
-				'desc' => __( 'field description (optional)', 'cmb2' ),
-				'id'   => $prefix . 'test_textsmall',
-				'type' => 'text_small',
+				'id'      => $prefix . 'head-content-code',
+				'name'    => __('Show Header Code', 'mixt'),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'false',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'     => $prefix . 'head-media',
+				),
 			),
+
+			// Custom HTML Field
+			array(
+				'id'      => $prefix . 'head-code',
+				'name'    => __('Header Code', 'mixt'),
+				'desc'    => __('Code to output in the header (can use shortcodes)', 'mixt'),
+				'type'    => 'wysiwyg',
+				'options' => array(
+					'wpautop'       => false,
+					'media_buttons' => false,
+					'textarea_name' => 'mixt-header-code-field',
+					'textarea_rows' => '4',
+					'editor_class'  => 'nested conditional parent_' . $prefix . 'head-content-code',
+				),
+				'attributes' => array(
+					'data-parent-field' => $prefix . 'head-content-code',
+					'data-show-on-id'   => $prefix . 'head-content-code1',
+				),
+			),
+
 		),
 	);
-
-	// Add other metaboxes as needed
 
 	return $meta_boxes;
 }

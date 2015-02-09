@@ -1,6 +1,8 @@
 
 jQuery(document).ready( function($) {
 
+	'use strict';
+
 	// Nest fields
 
 	var pageFieldsNest = function() {
@@ -15,8 +17,8 @@ jQuery(document).ready( function($) {
 					fieldCont = field.closest(fieldRow),
 					fieldParent = field.attr('data-parent-field');
 
-				if (typeof fieldParent == 'undefined' && fieldCls.indexOf('parent__') >= 0) {
-					fieldParent = fieldCls.split('parent__')[1].split(' ')[0];
+				if (typeof fieldParent == 'undefined' && fieldCls.indexOf('parent_') >= 0) {
+					fieldParent = fieldCls.split('parent_')[1].split(' ')[0];
 				}
 
 				var nestParent = (typeof fieldParent !== 'undefined' ? 'cmb2-id-' + fieldParent.replace(/_/g, '-') : false);
@@ -45,8 +47,8 @@ jQuery(document).ready( function($) {
 					trigger   = field.attr('data-show-on'),
 					triggerID = field.attr('data-show-on-id');
 
-				if (typeof trigger == 'undefined' && fieldCls.indexOf('parent__') >= 0) {
-					trigger = fieldCls.split('parent__')[1].split(' ')[0];
+				if (typeof trigger == 'undefined' && fieldCls.indexOf('parent_') >= 0) {
+					trigger = fieldCls.split('parent_')[1].split(' ')[0];
 				} else if (typeof trigger == 'undefined') {
 					trigger = false;
 				}
@@ -71,8 +73,13 @@ jQuery(document).ready( function($) {
 
 	pageFieldsVis();
 
-	$('#page_header input').on('click', function() {
+	$('.cmb2-wrap input').on('click', function() {
 		pageFieldsVis();
 	});
+
+	$('.cmb2-wrap .color-picker').wpColorPicker();
+
+	// Hide Image Gallery Select URL Input
+	$('input#_mixt-head-img').hide().next('.button').css('margin-left', '0');
 
 });

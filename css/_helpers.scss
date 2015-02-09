@@ -1,0 +1,12 @@
+
+// MIXT HELPERS
+
+.border-base {
+	border-width: 0;
+	border-style: solid;
+}
+
+%bring-to-front {
+	position: relative;
+	z-index: 1;
+}

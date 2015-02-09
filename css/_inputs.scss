@@ -1,6 +1,7 @@
 
-// MIXT INPUTS STYLING
+/* - MIXT INPUT STYLESHEET - */
 
+$btn-height: 34px;
 
 .input-group-btn .btn {
 	height: $btn-height;
@@ -37,4 +38,18 @@ button,
 .btn.active:focus,
 .btn.active.focus {
 	outline: none !important;
+}
+
+// INPUT THEMES
+
+%input-dark {
+	color: $text-light-color;
+	border-color: $input-bd-dark;
+	background-color: $input-bg-dark;
+}
+
+%button-dark {
+	color: $text-light-color;
+	border-color: $input-bd-dark;
+	background-color: $btn-bg-dark;
 }

@@ -1,128 +1,93 @@
 <?php
+
 /**
  * MIXT Header
  *
  * @package mixt
  */
+
 ?>
 
 <!DOCTYPE html>
-
 <html <?php language_attributes(); ?>>
 
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title><?php wp_title( '-', true, 'right'); ?></title>
+	
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<link rel="shortcut icon" href="<?php echo get_site_url(); ?>/wp-content/themes/mixt/favicon.ico?v=2" />
 
-	<?php wp_head(); ?>
+	<?php
+
+	// Display favicons
+	mixt_favicon_display();
+
+	wp_head();
+
+	// Print custom CSS
+	mixt_print_css();
+
+	?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class('no-js'); ?>>
+
+	<script type="text/javascript" id="mixt-test-js">
+		document.body.className = document.body.className.replace('no-js','js');
+	</script>
+
 	<?php
-		do_action( 'before' );
 
-		global $mixt_opt;
+	global $mixt_opt;
 
-		$page_ID = get_queried_object_id();
+	do_action( 'before' );
 
-		if ($mixt_opt['page-loader'] != 0) {
-			echo '<div id="load-ov"><div class="signal"></div></div>';
-			?>
-			<script type="text/javascript" id="mixt_load_class">document.getElementsByTagName('html')[0].className += ' loading';</script>
-			<?php
-		}
+	$page_options   = mixt_get_options('page');
+	$navbar_options = mixt_get_options('navbar');
+	$header_options = mixt_get_options('header');
 
-		$has_sidebar = mixt_meta('mixt_page_sidebar');
 
-		// Header & global page settings
-		$navbar_theme = '';
-		$fullwidth_class = (mixt_meta('mixt_page_fullwidth') == 'true' ? 'fullwidth' : '');
-		$navbar_tsp = (mixt_meta('mixt_nav_tsp') == 'true' ? 'nav-transparent' : '');
-		$head_media = mixt_meta('mixt_head_media');
+	// print_r($page_options  );
+	// print_r($navbar_options);
+	// print_r($header_options);
 
-		// Main wrapper classes
-		$wrap_classes = '';
-		if (strlen($fullwidth_class) > 3) $wrap_classes .= $fullwidth_class . ' ';
-		if ($head_media == 'true') $wrap_classes .= 'has-head-media ';
-		if (strlen($navbar_theme) > 3) $wrap_classes .= $navbar_theme . ' ';
-		if (strlen($navbar_tsp) > 3) $wrap_classes .= $navbar_tsp . ' ';
+	// Page Loader
+	if ( $page_options['page-loader'] ) { mixt_page_loader(); }
 
-		// Logo alignment
-		$logo_align_opt = $mixt_opt['logo-align'];
-		if ($logo_align_opt == 2) { $logo_align = 'logo-center'; }
-		elseif ($logo_align_opt == 3) { $logo_align = 'logo-right'; }
-		else { $logo_align = 'logo-left'; }
+	$wrapper_classes = $page_options['fullwidth'] . $header_options['head-full-height'];
 
-		// Navbar wrap classes
-		$navbar_wrap_classes = $logo_align . ' ' . $navbar_theme;
+	if ( $header_options['head-media'] ) {
+		$wrapper_classes .= 'has-head-media ' . $navbar_options['nav-transparent'] . $navbar_options['nav-position']['class'];
+	}
 
-		// Navbar settings
-		$navbar_sticky = false;
-		$navbar_sticky_global = $mixt_opt['nav-sticky'];
-		$navbar_sticky_page = mixt_meta('mixt_nav_sticky');
-		if ($navbar_sticky_page == 'true' || $navbar_sticky_page != 'false' && $navbar_sticky_global != 0) {
-			$navbar_sticky = true;
-		}
-		$navbar_scheme_global = $mixt_opt['nav-scheme'];
-		$navbar_scheme_page = mixt_meta('mixt_nav_scheme');
-		$navbar_scheme = 'navbar-default';
-		if ($navbar_scheme_page == 'dark' || $navbar_scheme_page != 'light' && $navbar_scheme_global == 0) {
-			$navbar_scheme = 'navbar-inverse';
-		}
-		$navbar_sub_scheme = false;
-		$navbar_sub_scheme_global = $mixt_opt['nav-sub-scheme'];
-		$navbar_sub_scheme_page = mixt_meta('mixt_nav_sub_scheme');
-		if ($navbar_sub_scheme_page == 'dark' || $navbar_sub_scheme_page != 'light' && $navbar_sub_scheme_global == 0) {
-			$navbar_sub_scheme = true;
-		}
+	$navbar_wrap_classes = $navbar_options['logo-align'];
 
-		// Navbar classes
-		$navbar_classes = '';
-		$navbar_classes .= $navbar_scheme;
-		if ($navbar_sub_scheme) $navbar_classes .= ' submenu-inverse';
-		if ($navbar_sticky) $navbar_classes .= ' sticky';
+	$navbar_classes = 'position-top navbar-default ' . $navbar_options['nav-mode'] . $navbar_options['nav-theme'] . $navbar_options['sub-scheme'];
 
-		get_template_part( 'inc/mixt', 'header' );
+	get_template_part( 'inc/mixt', 'header' );
+
 	?>
 
-<div id="main-wrap" class="<?php echo $wrap_classes; ?>">
+<div id="main-wrap" class="<?php echo $wrapper_classes; ?>">
 
-	<?php if (1 > 2) : ?>
-	<header id="masthead" class="site-header" role="banner">
-		<div class="container">
-			<div class="row">
-				<div class="site-header-inner col-sm-12">
+	<?php
 
-					<?php $header_image = get_header_image();
-					if ( ! empty( $header_image ) ) { ?>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-							<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="">
-						</a>
-					<?php } // end if ( ! empty( $header_image ) ) ?>
+	// TOP NAVIGATION AREA 
 
+	if ( $mixt_opt['second-nav'] ) {
+		mixt_nav_second();
+	}
 
-					<div class="site-branding">
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-						<h4 class="site-description"><?php bloginfo( 'description' ); ?></h4>
-					</div>
+	if ( $header_options['head-media'] && $navbar_options['nav-position']['value'] == 'below' ) {
+		mixt_head_media();
+	}
 
-				</div>
-			</div>
-		</div>
-	</header>
-	<?php endif; ?>
-
-	<?php // TOP NAVIGATION AREA ?>
-
-	<?php if ($mixt_opt['second-nav']) { mixt_nav_second(); } ?>
+	?>
 
 	<div id="top-nav-wrap" class="<?php echo $navbar_wrap_classes; ?>">
 
-		<nav id="top-nav" class="site-navigation navbar navbar-mixt <?php echo $navbar_classes; ?>" role="banner">
+		<nav id="top-nav" class="site-navigation navbar-mixt <?php echo $navbar_classes; ?>" role="banner">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -132,20 +97,34 @@
 					  <span class="icon-bar"></span>
 					</button>
 
-					<a id="nav-logo" class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"></a>
+					<a id="nav-logo" class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+						<?php mixt_display_logo(); ?>
+					</a>
 				</div>
 
 				<?php
-					wp_nav_menu(
+
+					// Top Nav Location
+
+					$top_nav_menu = wp_nav_menu(
 						array(
-							'theme_location' => 'primary',
+							'theme_location'  => 'primary',
 							'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
-							'menu_class' => 'nav navbar-nav',
-							'fallback_cb' => '',
-							'menu_id' => 'main-menu',
-							'walker' => new mixt_navwalker()
+							'menu_class'      => 'nav navbar-nav',
+							'fallback_cb'     => '__return_false',
+							'echo'            => false,
+							'menu_id'         => 'main-menu',
+							'walker'          => new mixt_navwalker()
 						)
 					);
+
+					// Check if a menu is assigned and display a message if not
+
+					if ( !empty($top_nav_menu) ) {
+						echo $top_nav_menu;
+					} else {
+						mixt_no_menu_msg(true, true);
+					}
 				?>
 
 			</div>
@@ -160,85 +139,47 @@
 
 	<?php // HEADER MEDIA
 
-	if ($head_media == 'true') :
-
-		mixt_head_media($page_ID);
-
-	/*
-
-		$head_media_type = mixt_meta('mixt_head_media_type');
-		$head_image      = mixt_meta('mixt_head_image');
-		$head_slider     = mixt_meta('mixt_head_slider');
-		$head_code       = mixt_meta('mixt_head_code');
-
-		$hm_classes      = 'head-media media-image';
-
-		$media_img = $media_slider = $media_html = '';
-
-		if ($head_media_type == 'feat') {
-			$img_url = wp_get_attachment_url( get_post_thumbnail_id($page_ID) );
-
-			$page_head_classes = '';
-			if (mixt_meta('mixt_head_img_repeat') == 'true') $page_head_classes .= 'pattern ';
-
-			$media_img = sprintf('<div class="media-container %1$s" style="background-image: url(%2$s);" data-imgsrc="%2$s"></div>',
-				$page_head_classes,
-				$img_url
-			);
-		}
-
-		?>
-		<div class="<?php echo $hm_classes; ?>">
-
-			<?php
-			echo $media_img;
-			if ($head_media_type == 'slider') {
-				$head_slider_id = mixt_meta('mixt_head_slider');
-				echo do_shortcode("[layerslider id=$head_slider_id]");
-			} else if ($head_code) {
-				printf('<div class="media-inner"><div class="container">%s</div></div>', $head_code);
-			}
-			?>
-
-		</div>
-		<?php
-
-	*/
-
-	endif;
-
-	// END HEADER MEDIA
-
+	if ( $header_options['head-media'] && $navbar_options['nav-position']['value'] != 'below' ) {
+		mixt_head_media();
+	}
 
 	// LOCATION BAR
 
-	if (!is_front_page()) : ?>
+	if ( ! is_front_page() ) : ?>
 
 	<div id="loc-head">
 		<div class="container">
 			<div class="inner">
-			<?php
-				$wp_title = wp_title('_', false, 'right');
-				$display_title = explode(' _ ', $wp_title);
-				$page_title = $display_title[0];
-			?>
-			<h1 class="page-title"><?php echo $page_title; ?></h1>
-			<?php
-			    if (class_exists('Woocommerce') && ( is_woocommerce() || is_cart() || is_checkout() ) ) {
-			        woocommerce_breadcrumb();
-			    } else {
-			        the_breadcrumb($page_title);
-			    }
-			?>
+				<?php
+					$wp_title = wp_title('_', false, 'right');
+					$display_title = explode(' _ ', $wp_title);
+					$page_title = $display_title[0];
+				?>
+				<h1 class="page-title">
+					<?php
+						if ( is_search() ) {
+							printf( __('Search Results for: ', 'mixt') );
+						}
+						echo $page_title;
+					?>
+				</h1>
+				<?php
+				    if ( class_exists('Woocommerce') && ( is_woocommerce() || is_cart() || is_checkout() ) ) {
+				        woocommerce_breadcrumb();
+				    } else {
+				        mixt_breadcrumbs($page_title);
+				    }
+				?>
 			</div>
 		</div>
 	</div>
+
 	<?php endif; ?>
 
 	<div id="content-wrap" class="main-content">
 		<div class="container">
 			<div class="row">
 				<?php
-					$cont_width = ($has_sidebar != 'false' ? 'col-md-9' : 'col-md-12');
+					$cont_width = ( $page_options['sidebar'] ? 'col-md-9' : 'col-md-12');
 				?>
 				<div id="content" class="main-content-inner col-sm-12 <?php echo $cont_width; ?>">

@@ -1,0 +1,62 @@
+
+/* - MIXT POST STYLESHEET - */
+
+.page-header {
+	padding: 0;
+	margin: $margin-l 0 0;
+	border-bottom: 0;
+	
+	.page-title {
+		font-size: 26px;
+	}
+
+	.post-image {
+		text-align: center;
+
+		img {}
+	}
+
+	.entry-meta {
+		display: table;
+		padding: 15px 0;
+
+		> span {
+			color: $text-dark-color-fade;
+			float: left;
+			margin-right: 15px;
+			padding-right: 15px;
+			display: table-cell;
+			vertical-align: middle;
+			border-right: 1px solid $border-color;
+			border-color: $border-color-alpha;
+			transition: color 0.2s;
+
+			&:hover {
+				color: $text-dark-color;
+			}
+		}
+
+		.posted-on {
+			time > span {
+				margin-left: 10px;
+
+				&:first-child { margin-left: 0; }
+			}
+		}
+
+		.posted-on.calendar {
+			border: 1px solid;
+			border-color: inherit;
+			border-radius: 3px;
+			box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+
+			time > span {
+				display: block;
+				padding: 0 10px;
+				text-align: center;
+				font-weight: bold;
+				line-height: 20px;
+			}
+		}
+	}
+}

@@ -1,29 +1,63 @@
 <?php
 
-// Global options var
+/* ------------------------------------------------ /
+MIXT - MODULES
+/ ------------------------------------------------ */
 
-// Get Social Profiles & Output Links
+/**
+ * Get Social Profiles & Output Links or Return Data
+ *
+ * @param bool $echo - if true echo links, else return them as string
+ */
 
-function mixt_social_links() {
+function mixt_social_profiles($echo = true) {
 
 	global $mixt_opt;
 
-	if (isset($mixt_opt['social-profiles'])) {
+	if ( isset($mixt_opt['social-profiles']) ) {
 		$output = '';
-		$before = '<ul class="link-list social-links">';
+
+		$before = '<ul class="nav link-list social-links">';
 		$after  = '</ul>';
 
-		foreach ($mixt_opt['social-profiles'] as $k => $profile) {
-			$data = explode(', ', $profile);
-			if (count($data) > 1) {
-				$data_url  = ( isset($data[1]) && filter_var($data[0], FILTER_VALIDATE_URL) ) ? $data[0] : '';
-				$data_icon = isset($data[1]) ? $data[1] : '';
-				$data_title = isset($data[2]) ? $data[2] : '';
+		foreach ( $mixt_opt['social-profiles'] as $profile ) {
 
-				$output .= '<li><a href="' . $data_url . '" title="' . $data_title . '"><i class="' . $data_icon . '"></i></a></li>';
+			if ( isset($profile['name']) && isset($profile['url']) && isset($profile['icon']) ) {
+
+				$profile_name = $profile['name'];
+				$profile_url  = urldecode($profile['url']);
+
+				if ( ! filter_var( $profile_url, FILTER_VALIDATE_URL ) ) {
+					if ( $profile['url'] == 'rss' ) {
+						$profile_url = get_bloginfo('rss2_url');
+					} else {
+						$profile_url = '#';
+					}
+				}
+
+				$profile_icon  = $profile['icon'];
+
+				if ( isset($profile['color']) ) {
+					$profile_color = $profile['color'];
+					$color_prop = 'style="color:' . $profile_color . '"';
+				} else {
+					$profile_color = '';
+					$color_prop = '';
+				}
+				
+				$profile_title = isset($profile['title']) ? $profile['title'] : '';
+
+				$output .= '<li><a href="' . $profile_url . '" title="' . $profile_title . '" ' . $color_prop . '><i class="' . $profile_icon . '"></i></a></li>';
 			}
+
 		}
 
-		return $before . $output . $after;
+		$return_val = $before . $output . $after;
+
+		if ( $echo ) {
+			echo $return_val;
+		} else {
+			return $return_val;
+		}
 	}
-}
+};
