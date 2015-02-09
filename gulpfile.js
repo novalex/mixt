@@ -79,7 +79,7 @@ gulp.task('sass', function() {
 
 // Compile Bootstrap Sass
 gulp.task('sassbs', function(){
-	return gulp.src( 'inc/css/bootstrap.scss' )
+	return gulp.src( 'inc/bootstrap/css/bootstrap.scss' )
 		// .pipe(sourcemaps.init())
 		.pipe(sass())
 		.pipe(concat('bootstrap.css'))
@@ -129,7 +129,7 @@ gulp.task('modules-js', function(){
 
 // Concat & Minify Bootstrap JS
 gulp.task('minifybs', function(){
-	return gulp.src([ path.js.src + '/bootstrap.js', path.js.src + '/bootstrap/*.js' ])
+	return gulp.src([ 'inc/bootstrap/js/bootstrap.js', 'inc/bootstrap/js/bootstrap/*.js' ])
 		.pipe(concat('bootstrap.js'))
 		// .pipe(uglify())
 		.pipe(gulp.dest(path.dest));
