@@ -1,8 +1,67 @@
 
-// MIXT Navbar Styling
+/* - SIDEBAR STYLESHEET - */
 
 .sidebar {
-	.sidebar-padder {
-		padding-top: 20px;
+
+	// Headings / Widget Titles
+	h3 {
+		font-size: 15px;
+		margin: 0 0 15px;
 	}
+
+	// Nav Menus
+	.nav li {
+
+		> ul,
+		.menu-item-has-children > ul {
+			border-top: 1px solid $aqua-border;
+		}
+
+		a {
+			padding: $padding-s 0;
+			&:hover { background: none !important; }
+		}
+
+		.post-date {
+			display: block;
+			font-size: $font-size-xs;
+			margin-top: -$padding-s;
+			padding-bottom: $padding-s;
+		}
+
+		.post-count {
+			float: right;
+		}
+
+		li:last-child { border-bottom: 0; }
+	}
+
+	.nav li,
+	#recentcomments li {
+		border-bottom: 1px solid $aqua-border;
+	}
+
+	#recentcomments li { padding: $padding-s 0 !important; }
+
+
+	// Widgets
+
+	.widget {
+		> select,
+		.textwidget form > select {
+			width: 100%;
+		}
+
+		h3 + ul {
+			margin-top: -$margin-s;
+		}
+	}
+
+	.widget_nav_menu {
+		.divider, .nav-search, li.btn { display: none; }
+	}
+}
+
+.sidebar-padder {
+	padding-top: $padding-l;
 }

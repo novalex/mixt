@@ -1,54 +1,65 @@
 
-/* - MIXT HEADER STYLESHEET - */
+/* - HEADER STYLESHEET - */
+
+
+// Header Media
 
 .head-media {
     width: 100%;
     height: auto;
-    min-height: 260px;
+    min-height: 140px;
     margin: 0;
     overflow: hidden;
     position: relative;
     z-index: 0;
     transition: height 0.3s;
 
+    .media-container {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05), inset 0 -1px 8px rgba(0, 0, 0, 0.05);
+        z-index: 1;
+    }
+
     &.media-image {
 
         .media-container {
-
-            background-size: 100%;
-            background-repeat: repeat;
-            background-position: center;
-
-            // &.img-wide {
-            //     background-size: auto 100%;
-            // }
-
-            // &.img-tall {
-            //     background-size: 100% auto;
-            // }
             
             &.pattern {
                 background-size: auto;
+                background-repeat: repeat;
             }
         }
     }
 
-    .media-container {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        width: auto; height: auto;
-        min-width: 100%; min-height: 100%;
-        background-size: 100% auto;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        z-index: 1;
+    &.media-video {
+        background-color: #fff;
+
+        &.bg-dark { background-color: #000; }
+
+        iframe,
+        video.media-container {
+            position: absolute;
+            top: 0; left: 0;
+            height: auto !important;
+            min-width: 100%;
+            min-height: 100%;
+        }
     }
 
-    video.media-container {
-        position: fixed;
-        z-index: -1;
-        object-fit: cover;
-        background-size: cover;
+    .media-not-found {
+        position: absolute;
+        top: 50%; left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: $font-size-l;
     }
 
     .container {
@@ -56,58 +67,91 @@
         display: table;
         position: relative;
         vertical-align: middle;
+        padding-bottom: $padding-m;
         z-index: 2;
+        transition: opacity 0.1s ease-out, transform 0.1s ease-out;
     }
 
     .media-inner {
+        width: 100%;
         display: table-cell;
         position: relative;
         vertical-align: middle;
+        padding: $padding-m 0;
         z-index: 2;
 
         > * {
-            margin-top: 15px;
+            margin-top: $margin-m;
+            margin-bottom: 0;
         }
 
-        > h1, > h2, > h3 { line-height: 30px; }
-        > h4, > h5, > h6 { line-height: 20px; }
-    }
+        .post-meta > span {
+            color: inherit;
+            margin-right: $margin-s;
+        }
 
-    &.text-dark {
-        .container {
-            color: $text-dark-color;
+        .page-title {
+            font-size: $font-size-xxl;
+            margin-top: $margin-l;
+        }
+
+        &.align-center {
+            .page-title,
+            #breadcrumbs { text-align: center; }
+            .post-meta { margin-left: auto; margin-right: auto; }
+        }
+        &.align-right {
+            .page-title,
+            #breadcrumbs { text-align: right; }
+            .post-meta { margin-left: auto; margin-right: 0; }
         }
     }
 
-    &.text-light {
-        .container {
-            color: $text-light-color;
+    .container,
+    .media-inner a:not(:hover),
+    #breadcrumbs > li + li:before {
+        color: $aqua-color;
+    }
+
+    &.bg-dark {
+
+        .media-container { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 8px rgba(0, 0, 0, 0.2); }
+
+        .container,
+        .media-inner a:not(:hover),
+        #breadcrumbs > li + li:before {
+            color: $aqua-bg-dark-color;
         }
     }
 }
 
 .nav-transparent {
-    .head-media .container {
-        padding-top: $nav-primary-height;
+    .head-media {
+        .container { padding-top: $nav-primary-height; }
+        .media-inner {
+            padding-top: 0;
+            padding-bottom: $padding-m;
+        }
     }
 
-    &.nav-below-header .head-media .container {
-        padding-top: 0;
-        padding-bottom: $nav-primary-height;
+    &.nav-below-header .head-media {
+        .container {
+            padding-top: 0;
+            padding-bottom: $nav-primary-height;
+        }
     }
 }
 
 
+// Location Bar & Breadcrumbs
 
-#loc-head {
+#location-bar {
     width: 100%;
     border-style: solid;
     border-width: 0;
     border-bottom-width: 1px;
-    border-color: $subnav-border;
-    border-color: $subnav-border-alpha;
-    background-color: $subnav-bg;
-    @extend %bring-to-front;
+    border-color: $loc-bar-bd;
+    background-color: $loc-bar-bg;
 
     .container { height: auto; padding: 0 15px; }
 
@@ -121,33 +165,62 @@
     }
 
     .page-title {
-        width: 60%;
-        font-size: 18px;
+        h1 {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: $font-size-s;
+            margin: $margin-s 0 0;
+        }
+    }
+    #breadcrumbs + .page-title { text-align: right; }
+
+    #breadcrumbs {
         margin: 0;
+        padding: 0 20px 0 0;
+    }
+    .page-title + #breadcrumbs {
+        text-align: right;
+        padding: 0 0 0 20px;
+    }
+
+    .page-title,
+    #breadcrumbs {
+        display: table-cell;
+        vertical-align: middle;
     }
 }
 
 #breadcrumbs {
-    width: 40%;
-    text-align: right;
-    margin: 0;
-    padding: 0 0 0 20px;
+    padding: 0;
     border-radius: 0;
+    margin-bottom: 0;
     background: none;
 
-    li { font-size: 13px; font-weight: 500; }
-
-    > li+li:before {
-        padding: 0 0 0 4px;
-        font-size: 16px;
-        vertical-align: -1px;
-        color: #888;
+    li {
+        cursor: default;
+        font-size: $font-size-s;
+        white-space: wrap-word;
     }
-}
 
-#loc-head .page-title,
-#breadcrumbs { display: table-cell; vertical-align: middle; }
+    a { display: inline-block; }
 
-.has-head-media #loc-head {
-    border-top-width: 1px;
+    > li + li:before {
+        width: 16px;
+        content: "/";
+        opacity: 0.6;
+        padding: 0 5px;
+        font-size: 16px;
+        display: inline-block;
+        vertical-align: -1px;
+    }
+
+    .bc-prefix {
+        padding-right: 5px;
+
+        & + li:before { display: none; }
+    }
 }

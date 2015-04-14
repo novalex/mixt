@@ -3,7 +3,7 @@
 /**
  * MIXT Admin Integration
  *
- * @package mixt
+ * @package MIXT
  */
 
 
@@ -79,6 +79,17 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 							<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="search">
 							<input type="hidden" class="menu-item-mixt-icon" name="menu-item[-1][menu-item-mixt-icon]" value="<?php echo $search_icon ?>">
 						</li>
+						<?php // Button ?>
+						<li>
+							<label class="menu-item-title">
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php printf( __('Button', 'mixt') ); ?>
+							</label>
+							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
+							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Button">
+							<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
+							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="btn">
+							<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="button">
+						</li>
 					</ul>
 				</div>
 
@@ -107,10 +118,14 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 
 								// Item For Each Social Profile Set Up
 								foreach( $social_profiles as $profile ) {
-									$name  = $profile['name'];
+									$name  = ( ! empty($profile['name']) ) ? $profile['name'] : 'No Name';
 									$url   = $profile['url'];
 									$icon  = $profile['icon'];
 									$title = $profile['title'];
+
+									if ( $url == 'rss' ) {
+										$url = get_bloginfo('rss2_url');
+									}
 
 									?>
 									<li>
@@ -126,6 +141,8 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 									</li>
 									<?php
 								}
+							} else {
+								echo '<li><label>' . __( 'No social profiles set up!', 'mixt' ) . '</lable></li>';
 							}
 						?>
 					</ul>

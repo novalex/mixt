@@ -1,31 +1,33 @@
 <?php
+
 /**
- * The template for displaying all pages.
+ * Template For Displaying All Pages
  *
  * This is the template that displays all pages by default.
  * Please note that this is the WordPress construct of pages
  * and that other 'pages' on your WordPress site will use a
  * different template.
  *
- * @package mixt
+ * @package MIXT
  */
 
-get_header(); ?>
+get_header();
 
-	<?php while ( have_posts() ) : the_post(); ?>
+	while ( have_posts() ) : // Start The Loop
 
-		<?php get_template_part( 'content', 'page' ); ?>
+		the_post();
 
-		<?php
-			// If comments are open or we have at least one comment, load up the comment template
-			if ( comments_open() || '0' != get_comments_number() )
-				comments_template();
-		?>
+		get_template_part( 'templates/content', 'page' );
 
-	<?php endwhile; // end of the loop. ?>
+		// If comments are open or we have at least one comment, load up the comment template
+		if ( comments_open() || '0' != get_comments_number() ) {
+			comments_template('/templates/comments.php');
+		}
 
-<?php
-	$has_sidebar = mixt_meta('mixt_page_sidebar');
-	if ($has_sidebar != 'false') get_sidebar();
+	endwhile; // End The Loop
+
+get_sidebar();
+
+get_footer();
+
 ?>
-<?php get_footer(); ?>

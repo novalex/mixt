@@ -162,7 +162,9 @@ class Mixt_Menu_Item_Custom_Fields {
 
 		foreach ( self::$fields as $_key => $arrval ) :
 			if ( is_array($arrval) ) {
-				$_fields[$_key] = $arrval['label'];
+				if ( empty($arrval['type']) || $arrval['type'] != 'hidden' ) {
+					$_fields[$_key] = $arrval['label'];
+				}
 			} else {
 				$_fields[$_key] = $arrval;
 			}

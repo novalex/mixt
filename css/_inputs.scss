@@ -1,35 +1,69 @@
 
-/* - MIXT INPUT STYLESHEET - */
+/* - INPUT STYLESHEET - */
 
 $btn-height: 34px;
 
-.input-group-btn .btn {
-	height: $btn-height;
+.input-group-btn .btn { height: $btn-height; }
+
+label { font-weight: normal; }
+
+// BUTTONS
+
+.btn-black {
+	border-color: #000;
+	border-color: rgba(0,0,0,0.4);
+	background-color: #333;
+
+	&, &:hover, &:focus { color: #fff; }
+
+	&:hover { background-color: #000; }
 }
 
-// GLOBAL
-
-// Inputs
+// INPUTS
 input,
 .form-control {
-	border-color: $input-bd;
+	border: 1px solid $input-bd;
 	background-color: $input-bg;
 	box-shadow: none;
-	transition: border 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+// Input & button transition
+input,
+button,
+.btn { transition: border 0.2s, background 0.2s, box-shadow 0.2s; }
+
+// SELECTS
+select {
+	padding: 6px;
+	font-size: $font-size-s;
+	border-radius: 2px;
+	background-color: #f8f8f8;
+	border: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+	// Remove default browser select styling and show custom arrow
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMdJREFUeNrslE0OhCAMhR+omBijLrwI8R5eCbyS9yBcxo3xh6ELE8eVjDGzocvXpu+DFphzDv8MFgEiQAhA13WOc451XbW1drjmpZQqTVO97zuMMexOTx5C2zQN2rZFVVXaw6gLnCKd8lR3N4IAhBBDURSo6/oL4jAnnfJU99oO9H2vsyxTy7JgmibM84w8z1GWJbwOrw/jOOpXl/CAoFlv24YkSUC7EWr+6BUQhD+5YoyBevibCDZ//AxP4/jJPH5EEYDiI8AAUTR0hYHR9dYAAAAASUVORK5CYII=');
+	background-repeat: no-repeat;
+	background-position: center right;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
 }
 
 
 // INPUT STATES
 
 // Input & Button Focus Style
-input:focus,
+input[type="text"]:focus,
 .form-control:focus {
 	border-color: $input-focus-bd;
 	box-shadow: 0 0 3px $input-focus-bs;
 }
+
 // Override input & button outline
 input,
 button,
+select,
 .button,
 .btn:focus,
 .btn.focus,
@@ -38,6 +72,16 @@ button,
 .btn.active:focus,
 .btn.active.focus {
 	outline: none !important;
+}
+
+
+// Input Styling For Aqua Theme
+.theme-aqua {
+	input,
+	select,
+	.form-control {
+		border-color: $aqua-border;
+	}
 }
 
 // INPUT THEMES

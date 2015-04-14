@@ -1,5 +1,5 @@
 
-/* - MIXT CUSTOM REDUX THEME - */
+/* - MIXT REDUX STYLING - */
 
 // COLORS
 
@@ -24,6 +24,7 @@ $blue-accent: #539DDD;
 %button {
 	display: inline-block;
 	padding: 4px 15px;
+	line-height: 20px;
 	color: #555;
 	font-weight: bold;
 	border: 1px solid #eee;
@@ -89,7 +90,7 @@ $blue-accent: #539DDD;
 	#redux-header {
 		height: 67px;
 		border-radius: 4px 4px 0 0;
-		border-bottom: 1px solid #CBCBCB;
+		border-bottom: 1px solid $bd-darker;
 		background-color: #F7F7F7;
 		box-shadow: inset 0 0 1px 1px #FFF;
 
@@ -111,6 +112,15 @@ $blue-accent: #539DDD;
 		}
 
 		.rAds { right: -100%; width: 0; height: 0; }
+
+		.redux-action_bar { margin: 18px 14px; }
+	}
+
+	#redux_ajax_overlay {
+		position: absolute;
+		top: 80px; left: 0; right: 0; bottom: 0;
+		background-color: rgba(255, 255, 255, 0.7);
+		z-index: 99;
 	}
 
 	#info_bar,
@@ -124,21 +134,34 @@ $blue-accent: #539DDD;
 		padding: 0;
 		border-width: 0;
 
-		.expand_options {
-			display: none;
-		}
-
-		.redux-action_bar {
-			position: absolute;
-			top: 24px; right: 24px;
-		}
+		.expand_options { display: none; }
 	}
 
-	#redux-footer {
-		padding: 10px 2px;
-
-		.redux-action_bar { margin-right: 8px; }
+	.notice-red {
+		color: #CB2320;
+		border-color: #DDA2A2;
+		background-color: #F7DADA;
 	}
+	.notice-green {
+		color: #72A51B;
+		border-color: #BDD048;
+		background-color: #E7F4AC;
+	}
+	.notice-yellow {
+		color: #BE8728;
+		border-color: #F4D77E;
+		background-color: #FFF1C4;
+	}
+
+	.notice-red,
+	.notice-green,
+	.notice-yellow {
+		padding: 10px 35px 10px 10px;
+	}
+
+	#redux_ajax_overlay { display: none; }
+
+	#redux-footer { padding: 10px; }
 
 	.sticky-save-warn {
 		min-height: 0;
@@ -148,7 +171,8 @@ $blue-accent: #539DDD;
 	.redux-main {
 		background-color: $bg-main;
 
-		.form-table tr {
+		.form-table tr,
+		.form-table-section-indented > tbody > tr:nth-last-child(2) {
 			border-bottom: 1px dashed $bd-light;
 		}
 
@@ -217,9 +241,11 @@ $blue-accent: #539DDD;
 	}
 
 	.redux-action_bar {
+		font-size: 0;
+
 		.button {
 			height: 32px;
-			margin-left: 6px;
+			margin-left: 10px;
 			padding: 2px 15px 3px;
 		}
 	}
@@ -238,7 +264,8 @@ $blue-accent: #539DDD;
 	}
 
 	// Logo Inverse Thumb
-	#image_logo-img-inv {
+	#image_logo-img-inv,
+	#mixt_opt-logo-img-inv .redux-option-image {
 		border-color: #333;
 		background-color: $bg-dark;
 	}
@@ -273,6 +300,11 @@ $blue-accent: #539DDD;
 		}
 	}
 
+	.button.red {
+		@extend %button;
+		@extend %button-red;
+	}
+
 	a.deletion {
 		@extend %button;
 		@extend %button-red;
@@ -281,6 +313,8 @@ $blue-accent: #539DDD;
 	}
 
 	// Select 2
+
+	.select2-container { min-width: 170px; }
 
 	.select2-container,
 	.select2-dropdown-open.select2-drop-above {
@@ -364,12 +398,13 @@ $blue-accent: #539DDD;
 
 	.redux-group-tab h3 {
 		line-height: 38px;
+		margin-top: 0 !important;
+		border-color: $bd-light;
 	}
 
 	// Divider
 
 	.hr {
-
 		padding: 0 20px !important;
 		margin: 20px 0 20px -20px !important;
 		border-top: 1px solid $bd-light;
@@ -485,10 +520,10 @@ $blue-accent: #539DDD;
 
 // CUSTOM FIELD STYLING
 
+
+// MULTI INPUT STYLING
+
 .redux-container-multi_input {
-	.redux-multi-input li label {
-		margin: 0 !important;
-	}
 
 	.redux-multi-input-add {
 		margin: 10px 0;
@@ -496,28 +531,39 @@ $blue-accent: #539DDD;
 	}
 }
 
-// MULTI INPUT STYLING
-
 .redux-multi-input {
+	float: left;
+	width: 100%;
+	margin: 0;
+	position: relative;
 
 	li {
 		float: left;
 		width: 100%;
 		padding-bottom: 20px;
-		margin-bottom: 0 !important;
-		border-bottom: 1px dashed $bd-light;
+		margin-bottom: 20px !important;
+		border-bottom: 2px dashed $bd-darker;
+
+		&.ui-sortable-helper {
+			background-color: $bg-main;
+		}
+		&.sort-placeholder {
+			background-color: darken($bg-main, 10);
+		}
 	}
 
 	label {
+		width: 100%;
 		float: left;
 		position:  relative;
+		margin: 0 !important;
 
 		.label-text {
 			display: inline-block;
 			padding: 10px 10px 10px 0;
 		}
 
-		> input {
+		> input:not(.wp-colorpicker) {
 			width: 100%;
 			height: 32px;
 			margin: 0 !important;
@@ -527,10 +573,19 @@ $blue-accent: #539DDD;
 			position: absolute;
 			left: 10px; bottom: 10px;
 		}
+
+		> input[type=checkbox] {
+			width: 24px;
+			height: 24px;
+			&:checked:before {
+				margin: 2px 2px 0 0;
+				font-size: 20px;
+			}
+		}
 	}
 
 	.has-icon > input {
-		padding-left: 32px;
+		padding-left: 32px !important;
 	}
 
 	.wp-picker-container {
@@ -540,6 +595,9 @@ $blue-accent: #539DDD;
 			position: absolute;
 			top: 28px; left: 0; right: 0;
 			min-width: 120px;
+			z-index: 1;
+
+			input.wp-colorpicker { width: 65px !important; }
 		}
 
 		.wp-picker-clear { float: right; }
@@ -550,44 +608,83 @@ $blue-accent: #539DDD;
 			z-index: 1;
 		}
 	}
+
+	.multi-input-divide {
+		float: left;
+		width: 100%;
+		margin: 10px 0 5px;
+		border: 1px dashed $bd-darker;
+		border-left-width: 0;
+		border-right-width: 0;
+
+		h3 {
+			margin: 0;
+			font-size: 13px;
+			border: 0;
+		}
+
+		&:first-child {
+			margin-top: 5px;
+			border-top: 0;
+		}
+	}
+
+	a.button {
+		margin-top: 20px;
+		margin-right: 20px;
+	}
 }
 
-.social-profiles-table,
+// Themes Section
+
+#mixt_opt-site-themes,
+#mixt_opt-nav-themes { padding-top: 0; }
+
+#section-table-site-themes-section,
 #section-table-nav-themes-section {
-	width: 100%;
-	margin-left: 0;
+	width: 100% !important;
+	margin-left: 0 !important;
 
-	th { display: none; }
-
-	.redux-field-container { padding: 0; }
+	fieldset {
+		padding-top: 0;
+	}
 }
 
-// Navbar Themes Section
-
+#site-themes-ul,
 #nav-themes-ul {
 
-	.theme-name {
-		width: 100%;
+	.sort-placeholder {
+		height: 168px;
+	}
+
+	.theme-name,
+	.theme-id {
 		max-width: none;
 		margin-top: 0 !important;
 
 		small { width: auto; }
 	}
 
-	label {
+	.theme-name {
+		width: 67%;
+		margin-right: 2% !important;
+	}
+	.theme-id { width: 31%; }
+	.rgba-field {
 		width: 8%;
+		min-width: 80px;
+	}
+
+	label {
+		width: 11.5%;
 		min-width: 130px;
 		max-width: 200px;
-		margin-top: 10px !important;
+		margin: 10px 0 0 !important;
 
 		.label-text {
 			width: 100%;
 			padding: 4px 0;
 		}
-	}
-
-	a.deletion {
-		margin-top: 20px;
 	}
 
 }
@@ -596,12 +693,9 @@ $blue-accent: #539DDD;
 
 #social-profiles-ul {
 
-	li {
-		margin-bottom: 20px !important;
-	}
-
-	.social-label {
+	label {
 		width: 35%;
+		margin: 0 !important;
 
 		> input { border-radius: 0; }
 	}
@@ -649,8 +743,8 @@ $blue-accent: #539DDD;
 	}
 }
 
-// COLORPICKER ALPHA
 
+// COLORPICKER ALPHA
 
 .cs-alpha-wrap {
 	display: none;
@@ -715,3 +809,83 @@ $blue-accent: #539DDD;
 	text-align: center;
 	color: #999;
 }
+
+// MULTI INPUT EXTENSION STYLING
+
+.redux-container-multi-input {
+	ul.redux-multi-input { margin: 0; padding: 0; }
+
+	.redux-multi-input-remove {
+		color: #F00;
+		padding: 2px 4px;
+		margin-left: 5px;
+
+		&:hover {
+			background: red;
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+
+	.redux-multi-input-add { margin: 5px 0; }
+}
+
+@media screen and (max-width: 782px) {
+	.redux-container-multi-input input { clear: both; }
+
+	.redux-container-multi-input .redux-multi-input-remove {
+		margin: 0;
+		float: right;
+	}
+}
+
+// IMAGE SELECT EXTENSION STYLING
+
+.redux-container-image_select {
+	padding-top: 10px !important;
+
+	.redux-table-container {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+
+	.redux-image-select input[type='radio'] { display: none; }
+
+	.redux-image-select-presets img { width: 100%; }
+
+	ul.redux-image-select li {
+		padding: 10px 10px 0;
+		display: inline-block;
+		padding-left: 0;
+	}
+
+	.redux-image-select li:last-child { margin-bottom: 0; }
+	.redux-image-select-selected { background-color: #f9f9f9; }
+
+	.redux-image-select,
+	.redux-image-select-selected {
+		img, .tiles {
+			width: 50px;
+			height: 50px;
+			border-width: 1px;
+			border-style: solid;
+		}
+	}
+	.redux-image-select {
+		img, .tiles { border-color: #d9d9d9; }
+	}
+	.redux-image-selected {
+		img, .tiles { border-color: #7a7a7a; }
+	}
+
+	.redux-image-select .tiles {
+		width: 40px;
+		height: 40px;
+		display: block;
+		background-color: #FFF;
+		background-repeat: repeat;
+	}
+}
+
+.redux-image-select, td fieldset .redux-image-select label { margin: 0 !important; }

@@ -29,7 +29,7 @@
 
 			&:hover,
 			&:active {
-				color: $theme-accent;
+				color: $aqua-accent;
 				text-decoration: none;
 			}
 		}
@@ -43,8 +43,6 @@
 .social-links {
 	li a {
 		padding: 5px 10px 3px;
-
-		&:not(:hover) { color: $text-dark-color-fade !important; }
 
 		i { font-size: 16px; }
 	}

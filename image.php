@@ -1,17 +1,16 @@
 <?php
+
 /**
- * The template for displaying image attachments.
+ * Template For Displaying Image Attachments
  *
- * @package mixt
+ * @package MIXT
  */
 
-get_header(); ?>
+get_header();
 
-	<?php while ( have_posts() ) : the_post(); ?>
+	while ( have_posts() ) : // Start The Loop
 
-		<?php
-		// Add the class "panel" below here to wrap the content-padder in Bootstrap style ;)
-		// Simply replace post_class() with post_class('panel') below here ?>
+		the_post(); ?>
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<header class="entry-header">
@@ -82,11 +81,14 @@ get_header(); ?>
 
 		<?php
 			// If comments are open or we have at least one comment, load up the comment template
-			if ( comments_open() || '0' != get_comments_number() )
-				comments_template();
-		?>
+			if ( comments_open() || '0' != get_comments_number() ) {
+				comments_template('/templates/comments.php');
+			}
 
-	<?php endwhile; // end of the loop. ?>
+	endwhile; // End The Loop
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+get_sidebar();
+
+get_footer();
+
+?>

@@ -77,7 +77,9 @@ jQuery(document).ready( function($) {
 		pageFieldsVis();
 	});
 
-	$('.cmb2-wrap .color-picker').wpColorPicker();
+	if ( typeof $.fn.wpColorPicker === 'function' ) {
+		$('.cmb2-wrap .color-picker').wpColorPicker();
+	}
 
 	// Hide Image Gallery Select URL Input
 	$('input#_mixt-head-img').hide().next('.button').css('margin-left', '0');

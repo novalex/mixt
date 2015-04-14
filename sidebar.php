@@ -1,19 +1,28 @@
 <?php
+
 /**
  * The sidebar containing the main widget area
  *
- * @package mixt
+ * @package MIXT
  */
-?>
 
-	</div><!-- close .main-content-inner -->
+$sidebar_options_arr = array(
+	'enabled' => array(
+		'key'  => 'page-sidebar',
+	),
+);
+$sidebar_options = mixt_get_options($sidebar_options_arr);
+
+if ( $sidebar_options['enabled'] != 'false' ) : ?>
+
+	</div><?php // Close .main-content-inner ?>
 
 	<div class="sidebar col-sm-12 col-md-3">
 
-		<?php // add the class "panel" below here to wrap the sidebar in Bootstrap style ;) ?>
 		<div class="sidebar-padder">
 
 			<?php do_action( 'before_sidebar' ); ?>
+			
 			<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
 				<aside id="search" class="widget widget_search">
@@ -38,4 +47,5 @@
 
 			<?php endif; ?>
 
-		</div><!-- close .sidebar-padder -->
+		</div><?php
+endif;

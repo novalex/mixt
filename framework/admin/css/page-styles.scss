@@ -1,0 +1,46 @@
+
+/* - MIXT METABOX STYLING - */
+
+// CMB2
+
+.postbox-container .cmb2-metabox {
+	.cmb-row.nest-parent {
+		padding-bottom: 0 !important;
+
+		> .cmb-th,
+		> .cmb-td {
+			margin-bottom: 10px;
+		}
+	}
+
+	.cmb-th + .cmb-td {
+		width: 78% !important;
+		padding-right: 2%;
+	}
+
+	.cmb-row .cmb-row {
+		float: left;
+		width: 100%;
+		padding: 10px 0;
+		border-width: 0;
+		border-style: solid;
+		border-color: #e8e8e8;
+		border-top-width: 1px;
+		background-color: #f8f8f8;
+
+		.cmb-th {
+			width: 16% !important;
+			padding-left: 2%;
+		}
+	}
+
+	> .cmb-row > .cmb-row {
+		border-left-width: 1px;
+		border-right-width: 1px;
+
+		&:last-child { border-bottom: 1px solid #e8e8e8; }
+	}
+}
+
+.cmb2-wrap input[type=checkbox], .cmb2-wrap input[type=radio] { margin-right: 0 !important; }
+.cmb2-wrap input[type=checkbox] + label, .cmb2-wrap input[type=radio] + label { padding-left: 10px; margin-left: -5px; }

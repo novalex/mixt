@@ -1,8 +1,10 @@
 <?php
 
-/* ------------------------------------------------ /
-MIXT Redux Config
-/ ------------------------------------------------ */
+/**
+ * MIXT Redux Config
+ *
+ * @package MIXT
+ */
 
 if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
@@ -212,59 +214,94 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
 
 			// Themes
-			$nav_themes = mixt_get_themes('nav');
+			$preset_themes = array(
+				'aqua'    => 'Aqua',
+				'nightly' => 'Nightly',
+			);
+
+			$site_themes = ! empty(mixt_get_themes('site')) ? mixt_get_themes('site') : $preset_themes;
+			$site_default_themes = get_option('site-default-themes');
+
+			$nav_themes = ! empty(mixt_get_themes('nav')) ? mixt_get_themes('nav') : $preset_themes;
 			$nav_default_themes = get_option('nav-default-themes');
 
-			// Background Patterns
-			$bg_patterns = mixt_bg_pattern_img();
+			// Image Patterns
+			$img_patterns = mixt_get_images('patterns');
+
+			// Image Textures
+			$img_textures = mixt_get_images('textures');
 
 			// Social Networks
-			$social_profiles = mixt_preset_social_profiles();
+			$social_profiles = '';
+			if ( function_exists('mixt_preset_social_profiles') ) {
+				$social_profiles = mixt_preset_social_profiles();
+			}
+
+			// HTML Allowed in the secondary nav custom code field
+			$sec_nav_allowed_html = array(
+				'a'   => array(
+					'href'  => array(),
+					'title' => array(),
+					'class' => array(),
+				),
+				'i'      => array( 'class' => array() ),
+				'span'   => array( 'class' => array() ),
+				'strong' => array( 'class' => array() ),
+				'em'     => array( 'class' => array() ),
+			);
+			// Secondary Nav custom code field placeholder
+			$sec_nav_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
 
 
 			// DECLARATION OF SECTIONS
 
 			// GLOBAL OPTIONS SECTION
 			$this->sections[] = array(
-				'title'  => __( 'Global Options', 'mixt' ),
-				'desc'   => __( 'Customize the site&#39;s global options and settings', 'mixt' ),
-				'icon'   => 'el-icon-off',
-				'fields' => array(
+				'title'      => __( 'Global Options', 'mixt' ),
+				'desc'       => __( 'Customize the site&#39;s global options and settings', 'mixt' ),
+				'icon'       => 'el-icon-off',
+				'customizer' => false,
+				'fields'     => array(
 
-					// Background Type
+					// Site-Wide Theme Select
 					array(
-						'id'       => 'background-type',
-						'type'     => 'button_set',
-						'title'    => __( 'Site Background Type', 'mixt' ),
-						'subtitle' => __( 'Use a color, image or both for the site background', 'mixt' ),
-						'options'  => array(
-							'1' => 'Color',
-							'2' => 'Image',
-							'3' => 'Both',
-						),
-						'default'  => '1',
+						'id'       => 'site-theme',
+						'type'     => 'select',
+						'title'    => __( 'Site Theme', 'mixt' ),
+						'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
+						'options'  => $site_themes,
+						'default'  => 'aqua',
 					),
 
-					// Background Color
+					// Site Typography
 					array(
-						'id'          => 'background-color',
-						'type'        => 'color',
-						'title'       => __( 'Site Background Color', 'mixt' ),
-						'subtitle'    => __( 'The site&#39;s background color', 'mixt' ),
-						'required'    => array( 'background-type', 'not', '2' ),
-						'transparent' => false,
-						'default'     => '#FFFFFF',
-						'validate'    => 'color',
+						'id'          => 'site-font',
+						'type'        => 'typography',
+						'title'       => __( 'Main Font', 'mixt' ),
+						'subtitle'    => __( 'Select the font to use site-wide', 'mixt' ),
+						'google'      => true,
+						'font-backup' => true,
+						'color'       => false,
+						'line-height' => false,
+						'text-align'  => false,
+						'font-size'   => false,
+						'font-style'  => false,
+						'font-weight' => false,
+						'units'       => 'px',
+						'default'     => array(
+							'font-family' => 'Roboto',
+							'google'      => true,
+						),
 					),
 
 					// Background Pattern
 					array(
-						'id'       => 'background-pattern',
+						'id'       => 'site-bg-pat',
 						'type'     => 'image_select',
 						'title'    => __( 'Site Background Pattern', 'mixt' ),
 						'subtitle' => __( 'The site&#39;s background pattern', 'mixt' ),
-						'options'  => $bg_patterns,
-						'required' => array( 'background-type', 'not', '1' ),
+						'options'  => $img_patterns,
+						'empty'    => true,
 					),
 
 					// Divider
@@ -273,91 +310,100 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type' => 'divide',
 					),
 
-					// Page Loader
+					// PAGE LOADER SECTION
 					array(
-						'id'       => 'page-loader',
-						'type'     => 'switch',
-						'title'    => __( 'Show Page Loader', 'mixt' ),
-						'subtitle' => __( 'Enable page (pre)loader to show animations when loading site', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => true,
+						'id'       => 'page-loader-section',
+						'type'     => 'section',
+						'title'    => __( 'Page Loader', 'mixt' ),
+						'subtitle' => __( 'Settings for the page (pre)loader', 'mixt' ),
+						'indent'   => true,
 					),
 
-					// Page Loader Type
-					array(
-						'id'       => 'page-loader-type',
-						'type'     => 'button_set',
-						'title'    => __( 'Loader Type', 'mixt' ),
-						'subtitle' => __( 'Use a shape or image for the loader', 'mixt' ),
-						'options'  => array(
-							'1' => 'Shape',
-							'2' => 'Image',
+						// Page Loader
+						array(
+							'id'       => 'page-loader',
+							'type'     => 'switch',
+							'title'    => __( 'Page Loader', 'mixt' ),
+							'subtitle' => __( 'Enable page loader to show animations when loading site', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
 						),
-						'default'  => '1',
-						'required' => array( 'page-loader', '=', true ),
-					),
 
-					// Page Loader Shape Select
-					array(
-						'id'       => 'page-loader-shape',
-						'type'     => 'select',
-						'title'    => __( 'Loader Shape', 'mixt' ),
-						'subtitle' => __( 'Shape to use for the loader', 'mixt' ),
-						'options'  => array(
-							'circle'  => 'Circle',
-							'ring'    => 'Ring',
-							'square'  => 'Square',
-							'square2' => 'Empty Square',
+						// Page Loader Type
+						array(
+							'id'       => 'page-loader-type',
+							'type'     => 'button_set',
+							'title'    => __( 'Loader Type', 'mixt' ),
+							'subtitle' => __( 'Use a shape or image for the loader', 'mixt' ),
+							'options'  => array(
+								'1' => __( 'Shape', 'mixt' ),
+								'2' => __( 'Image', 'mixt' ),
+							),
+							'default'  => '1',
+							'required' => array( 'page-loader', '=', true ),
 						),
-						'default'  => 'ring',
-						'required' => array( 'page-loader-type', '=', '1' ),
-					),
 
-					// Page Loader Shape Color Select
-					array(
-						'id'          => 'page-loader-color',
-						'type'        => 'color',
-						'title'       => __( 'Loader Shape Color', 'mixt' ),
-						'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
-						'required'    => array( 'page-loader-type', '=', '1' ),
-						'transparent' => false,
-						'default'     => '#ffffff',
-						'validate'    => 'color',
-					),
+						// Page Loader Shape Select
+						array(
+							'id'       => 'page-loader-shape',
+							'type'     => 'select',
+							'title'    => __( 'Loader Shape', 'mixt' ),
+							'subtitle' => __( 'Shape to use for the loader', 'mixt' ),
+							'options'  => array(
+								'circle'  => __( 'Circle', 'mixt' ),
+								'ring'    => __( 'Ring', 'mixt' ),
+								'square'  => __( 'Square', 'mixt' ),
+								'square2' => __( 'Empty Square', 'mixt' ),
+							),
+							'default'  => 'ring',
+							'required' => array( 'page-loader-type', '=', '1' ),
+						),
 
-					// Page Loader Image Select
-					array(
-						'id'       => 'page-loader-img',
-						'type'     => 'media',
-						'url'      => false,
-						'title'    => __( 'Loader Image', 'mixt' ),
-						'subtitle' => __( 'Image to use for the loader', 'mixt' ),
-						'required' => array( 'page-loader-type', '=', '2' ),
-					),
+						// Page Loader Shape Color Select
+						array(
+							'id'          => 'page-loader-color',
+							'type'        => 'color',
+							'title'       => __( 'Loader Shape Color', 'mixt' ),
+							'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
+							'required'    => array( 'page-loader-type', '=', '1' ),
+							'transparent' => false,
+							'default'     => '#ffffff',
+							'validate'    => 'color',
+						),
 
-					// Page Loader Background Color Select
-					array(
-						'id'          => 'page-loader-bg',
-						'type'        => 'color',
-						'title'       => __( 'Loader Background Color', 'mixt' ),
-						'subtitle'    => __( 'The page loader background color', 'mixt' ),
-						'required'    => array( 'page-loader', '=', true ),
-						'transparent' => false,
-						'default'     => '#539DDD',
-						'validate'    => 'color',
-					),
+						// Page Loader Image Select
+						array(
+							'id'       => 'page-loader-img',
+							'type'     => 'media',
+							'url'      => false,
+							'title'    => __( 'Loader Image', 'mixt' ),
+							'subtitle' => __( 'Image to use for the loader', 'mixt' ),
+							'required' => array( 'page-loader-type', '=', '2' ),
+						),
 
-					// Page Loader Animation Select
-					array(
-						'id'       => 'page-loader-anim',
-						'type'     => 'select',
-						'title'    => __( 'Loader Animation', 'mixt' ),
-						'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
-						'options'  => $page_loader_anims,
-						'default'  => 'pulsate',
-						'required' => array( 'page-loader', '=', true ),
-					),
+						// Page Loader Background Color Select
+						array(
+							'id'          => 'page-loader-bg',
+							'type'        => 'color',
+							'title'       => __( 'Loader Background Color', 'mixt' ),
+							'subtitle'    => __( 'The page loader background color', 'mixt' ),
+							'required'    => array( 'page-loader', '=', true ),
+							'transparent' => false,
+							'default'     => '#539DDD',
+							'validate'    => 'color',
+						),
+
+						// Page Loader Animation Select
+						array(
+							'id'       => 'page-loader-anim',
+							'type'     => 'select',
+							'title'    => __( 'Loader Animation', 'mixt' ),
+							'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
+							'options'  => $page_loader_anims,
+							'default'  => 'pulsate',
+							'required' => array( 'page-loader', '=', true ),
+						),
 
 					// Divider
 					array(
@@ -365,193 +411,659 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type' => 'divide',
 					),
 
-					// Page Metaboxes
+					// MODULES SECTION
 					array(
-						'id'       => 'page-metaboxes',
-						'type'     => 'switch',
-						'title'    => __( 'Show Page Option Metaboxes', 'mixt' ),
-						'subtitle' => __( 'Enable option metaboxes when editing pages or posts', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => true,
+						'id'       => 'modules-section',
+						'type'     => 'section',
+						'title'    => __( 'Modules', 'mixt' ),
+						'subtitle' => __( 'Configure which modules &amp; plugins to load', 'mixt' ),
+						'indent'   => true,
 					),
+
+						// Dynamic Stylesheet Mode
+						array(
+							'id'       => 'dynamic-sass',
+							'type'     => 'switch',
+							'title'    => __( 'Dynamic Sass Stylesheet', 'mixt' ),
+							'subtitle' => __( 'Use Sass for dynamic styles, or regular CSS output in the head<br> Using Sass allows caching, but requires server write permissions', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Page Metaboxes
+						array(
+							'id'       => 'page-metaboxes',
+							'type'     => 'switch',
+							'title'    => __( 'Page Option Metaboxes', 'mixt' ),
+							'subtitle' => __( 'Enable option metaboxes when editing pages or posts', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
 				),
 			);
 
 
 			// HEADER SECTION
 			$this->sections[] = array(
-				'title'  => __( 'Header', 'mixt' ),
-				'desc'   => __( 'Customize the site header', 'mixt' ),
-				'icon'   => 'el-icon-screen',
-				'fields' => array(
+				'title'      => __( 'Header', 'mixt' ),
+				'desc'       => __( 'Customize the site header', 'mixt' ),
+				'icon'       => 'el-icon-screen',
+				'customizer' => false,
+				'fields'     => array(
 
-					// Show Admin Bar
+					// HEAD MEDIA SECTION
 					array(
-						'id'       => 'show-admin-bar',
-						'type'     => 'switch',
-						'title'    => __( 'Show WP Admin Bar', 'mixt' ),
-						'subtitle' => __( 'Show or hide the Wordpress administration bar at the top of the page', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => true,
+						'id'       => 'head-media-section',
+						'type'     => 'section',
+						'title'    => __( 'Header Media', 'mixt' ),
+						'subtitle' => __( 'Configure the header media element and its appearance', 'mixt' ),
+						'indent'   => true,
 					),
 
-					// Logo Type
-					array(
-						'id'       => 'logo-type',
-						'type'     => 'button_set',
-						'title'    => __( 'Logo Type', 'mixt' ),
-						'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
-						'options'  => array(
-							'img'  => 'Image',
-							'text' => 'Text',
+						// Enable
+						array(
+							'id'   => 'head-media',
+							'type' => 'switch',
+							'title'    => __( 'Enabled', 'mixt' ),
+							'subtitle' => __( 'Display the header media element on all pages where possible', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 						),
-						'default'  => 'text',
-					),
 
-					// Logo Image Select
-					array(
-						'id'       => 'logo-img',
-						'type'     => 'media',
-						'url'      => false,
-						'title'    => __( 'Logo Image', 'mixt' ),
-						'subtitle' => __( 'Select the image you want to use as the site&#39;s logo', 'mixt' ),
-						'required' => array( 'logo-type', '=', 'img' ),
-					),
-
-					// Logo Image Inverse Select
-					array(
-						'id'       => 'logo-img-inv',
-						'type'     => 'media',
-						'url'      => false,
-						'title'    => __( 'Inverse Logo Image', 'mixt' ),
-						'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
-						'required' => array( 'logo-type', '=', 'img' ),
-					),
-
-					// Hi-Res Logo
-					array(
-						'id'       => 'logo-img-hr',
-						'type'     => 'switch',
-						'title'    => __( 'Hi-Res Logo', 'mixt' ),
-						'subtitle' => __( 'Display logo at half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => true,
-						'required' => array( 'logo-type', '=', 'img' ),
-					),
-
-					// Logo Text Field
-					array(
-						'id'       => 'logo-text',
-						'type'     => 'text',
-						'title'    => __( 'Logo Text', 'mixt' ),
-						'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
-						'required' => array( 'logo-type', '=', 'text' ),
-					),
-
-					// Logo Text Style
-					array(
-						'id'             => 'logo-text-typo',
-						'type'           => 'typography',
-						'title'          => __( 'Logo Text Style', 'mixt' ),
-						'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
-						'required'       => array( 'logo-type', '=', 'text' ),
-						'google'         => true,
-						'font-backup'    => true,
-						'line-height'    => false,
-						'text-align'     => false,
-						'text-transform' => true,
-						'units'          => 'px',
-						'default'        => array(
-							'font-style'  => '500',
-							'font-family' => 'Open Sans',
-							'google'      => true,
-							'font-size'   => '24px',
+						// Fullscreen
+						array(
+							'id'   => 'head-fullscreen',
+							'type' => 'switch',
+							'title'    => __( 'Fullscreen', 'mixt' ),
+							'subtitle' => __( 'Header fills entire screen size', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 						),
+
+						// Background Color
+						array(
+							'id'       => 'head-bg-color',
+							'type'     => 'color',
+							'title'    => __( 'Background Color', 'mixt' ),
+							'subtitle' => __( 'Select a background color for the header', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'default'  => '#fafafa',
+						),
+
+						// Text Color
+						array(
+							'id'       => 'head-text-color',
+							'type'     => 'color',
+							'title'    => __( 'Text Color', 'mixt' ),
+							'subtitle' => __( 'The color for text on light backgrounds', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'default'  => '',
+						),
+
+						// Background Color
+						array(
+							'id'       => 'head-inv-text-color',
+							'type'     => 'color',
+							'title'    => __( 'Inverse Text Color', 'mixt' ),
+							'subtitle' => __( 'The color for text on dark backgrounds', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'default'  => '',
+						),
+
+						// Media Type
+						array(
+							'id'       => 'head-media-type',
+							'type'     => 'button_set',
+							'title'    => __( 'Media Type', 'mixt' ),
+							'subtitle' => __( 'Type of media to use in the header', 'mixt' ),
+							'options'  => array(
+								'color'  => __( 'Solid Color', 'mixt' ),
+								'image'  => __( 'Image', 'mixt' ),
+								'video'  => __( 'Video', 'mixt' ),
+								'slider' => __( 'Slider', 'mixt' ),
+							),
+							'default'  => 'color',
+						),
+
+						// Image Placeholder
+						array(
+							'id'             => 'head-img-ph',
+							'type'           => 'media',
+							'title'          => __( 'Image Placeholder', 'mixt' ),
+							'subtitle'       => __( 'Select a placeholder image to show if the desired image can&#39;t be found', 'mixt' ),
+							'mode'           => 'jpg, jpeg, png',
+							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+							'required'       => array( 'head-media-type', '=', 'image' ),
+						),
+
+						// Image Source
+						array(
+							'id'       => 'head-img-src',
+							'type'     => 'button_set',
+							'title'    => __( 'Image Source', 'mixt' ),
+							'subtitle' => __( 'Select an image or use the featured one', 'mixt' ),
+							'options'  => array(
+								'gallery' => __( 'Gallery', 'mixt' ),
+								'feat'    => __( 'Featured', 'mixt' ),
+							),
+							'default'  => 'gallery',
+							'required' => array( 'head-media-type', '=', 'image' ),
+						),
+
+						// Image Select
+						array(
+							'id'       => 'head-img',
+							'type'     => 'media',
+							'title'    => __( 'Select Image', 'mixt' ),
+							'subtitle' => __( 'Select an image from the gallery or upload one', 'mixt' ),
+							'required' => array( 'head-img-src', '=', 'gallery' ),
+						),
+
+						// Repeat / Pattern Image
+						array(
+							'id'       => 'head-img-repeat',
+							'type'     => 'switch',
+							'title'    => __( 'Repeat / Pattern Image', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array( 'head-media-type', '=', 'image' ),
+						),
+
+						// Video Source
+						array(
+							'id'       => 'head-video-src',
+							'type'     => 'button_set',
+							'title'    => __( 'Video Source', 'mixt' ),
+							'subtitle' => __( 'Use an embedded video or a hosted one', 'mixt' ),
+							'options'  => array(
+								'embed' => __( 'Embedded', 'mixt' ),
+								'local' => __( 'Hosted', 'mixt' ),
+							),
+							'default'  => 'embed',
+							'required' => array( 'head-media-type', '=', 'video' ),
+						),
+
+						// Video Embed Code
+						array(
+							'id'       => 'head-video-embed',
+							'type'     => 'textarea',
+							'title'    => __( 'Video Embed Code', 'mixt' ),
+							'subtitle' => __( 'The embed code for the video you want to use', 'mixt' ),
+							'validate' => 'html_custom',
+							'allowed_html' => array( 
+								'iframe' => array(
+									'src'             => array(),
+									'width'           => array(),
+									'height'          => array(),
+									'frameborder'     => array(),
+									'allowfullscreen' => array(),
+								),
+							),
+							'required' => array( 'head-video-src', '=', 'embed' ),
+						),
+
+						// Video Select
+						array(
+							'id'             => 'head-video',
+							'type'           => 'media',
+							'title'          => __( 'Video', 'mixt' ),
+							'subtitle'       => __( 'Select a video from the gallery or upload one', 'mixt' ),
+							'mode'           => 'webm, mp4, ogg',
+							'library_filter' => array( 'webm', 'mp4', 'ogg' ),
+							'placeholder'    => __( 'No video selected', 'mixt' ),
+							'required'       => array( 'head-video-src', '=', 'local' ),
+						),
+
+						// Video Fallback Select
+						array(
+							'id'             => 'head-video-2',
+							'type'           => 'media',
+							'title'          => __( 'Video Fallback', 'mixt' ),
+							'subtitle'       => __( 'Select a fallback video from the gallery or upload one', 'mixt' ),
+							'mode'           => 'webm, mp4, ogg',
+							'library_filter' => array( 'webm', 'mp4', 'ogg' ),
+							'placeholder'    => __( 'No video selected', 'mixt' ),
+							'required'       => array( 'head-video-src', '=', 'local' ),
+						),
+
+						// Video Poster
+						array(
+							'id'             => 'head-video-poster',
+							'type'           => 'media',
+							'title'          => __( 'Video Poster', 'mixt' ),
+							'subtitle'       => __( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
+							'mode'           => 'jpg, jpeg, png',
+							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+							'required'       => array( 'head-video-src', '=', 'local' ),
+						),
+
+						// Video Loop
+						array(
+							'id'       => 'head-video-loop',
+							'type'     => 'switch',
+							'title'    => __( 'Video Loop', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array( 'head-video-src', '=', 'local' ),
+						),
+
+						// Video Luminosity
+						array(
+							'id'       => 'head-video-lum',
+							'type'     => 'switch',
+							'title'    => __( 'Video Luminosity', 'mixt' ),
+							'subtitle' => __( 'Header text color will be adjusted based on this', 'mixt' ),
+							'on'       => __( 'Light', 'mixt' ),
+							'off'      => __( 'Dark', 'mixt' ),
+							'default'  => true,
+							'required' => array( 'head-media-type', '=', 'video' ),
+						),
+
+						// Slider ID
+						array(
+							'id'       => 'head-slider',
+							'type'     => 'text',
+							'title'    => __( 'Slider ID', 'mixt' ),
+							'subtitle' => __( 'The ID of the slider to use', 'mixt' ),
+							'required' => array( 'head-media-type', '=', 'slider' ),
+						),
+
+						// Content Align
+						array(
+							'id'      => 'head-content-align',
+							'type'    => 'button_set',
+							'title'   => __( 'Content Align', 'mixt' ),
+							'options' => array(
+								'left'   => __( 'Left', 'mixt' ),
+								'center' => __( 'Center', 'mixt' ),
+								'right'  => __( 'Right', 'mixt' ),
+							),
+							'default' => 'left',
+						),
+
+						// Content Fade Effect
+						array(
+							'id'      => 'head-content-fade',
+							'type'    => 'switch',
+							'title'   => __( 'Content Fade Effect', 'mixt' ),
+							'on'      => __( 'Yes', 'mixt' ),
+							'off'     => __( 'No', 'mixt' ),
+							'default' => true,
+						),
+
+						// Post Info
+						array(
+							'id'       => 'head-content-info',
+							'type'     => 'switch',
+							'title'    => __( 'Post Info', 'mixt' ),
+							'subtitle' => __( 'Show the post title and meta in the header', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Custom Code
+						array(
+							'id'       => 'head-content-code',
+							'type'     => 'switch',
+							'title'    => __( 'Custom Code', 'mixt' ),
+							'subtitle' => __( 'Output custom code in the header (can use shortcodes)', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Custom Code Field
+						array(
+							'id'      => 'head-code',
+							'type'    => 'editor',
+							'title'   => __( 'Custom Code', 'mixt' ),
+							'args' => array(
+								'teeny'         => false,
+								'wpautop'       => false,
+								'media_buttons' => false,
+								'textarea_rows' => '4',
+							),
+							'required' => array( 'head-content-code', '=', true ),
+						),
+
+					// Divider
+					array(
+						'id'   => 'global-divider',
+						'type' => 'divide',
 					),
 
-					// Logo Text Inverse Color
+					// LOCATION BAR SECTION
 					array(
-						'id'       => 'logo-text-inv',
-						'type'     => 'color',
-						'title'    => __( 'Logo Text Inverse Color', 'mixt' ),
-						'subtitle' => __( 'Select an inverse logo text color for dark backgrounds', 'mixt' ),
-						'transparent' => false,
-						'validate' => 'color',
-						'required' => array( 'logo-type', '=', 'text' ),
+						'id'       => 'loc-bar-section',
+						'type'     => 'section',
+						'title'    => __( 'Location Bar', 'mixt' ),
+						'subtitle' => __( 'Configure the location bar (the bar underneath the header with the page title and breadcrumbs) and its appearance', 'mixt' ),
+						'indent'   => true,
 					),
 
-					// Logo Shrink
+						// On/Off Switch
+						array(
+							'id'       => 'location-bar',
+							'type'     => 'switch',
+							'title'    => __( 'Location Bar', 'mixt' ),
+							'subtitle' => __( 'Display the location bar', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
+
+						// Background Color
+						array(
+							'id'       => 'loc-bar-bg-color',
+							'type'     => 'color',
+							'title'    => __( 'Background Color', 'mixt' ),
+							'subtitle' => __( 'Select a background color for the location bar', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Background Pattern
+						array(
+							'id'       => 'loc-bar-bg-pat',
+							'type'     => 'image_select',
+							'title'    => __( 'Background Pattern', 'mixt' ),
+							'subtitle' => __( 'Select a background image for the bar', 'mixt' ),
+							'options'  => $img_patterns,
+							'empty'    => true,
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Text Color
+						array(
+							'id'       => 'loc-bar-text-color',
+							'type'     => 'color',
+							'title'    => __( 'Text Color', 'mixt' ),
+							'subtitle' => __( 'Select a text color for the location bar', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Text Color
+						array(
+							'id'       => 'loc-bar-border-color',
+							'type'     => 'color',
+							'title'    => __( 'Border Color', 'mixt' ),
+							'subtitle' => __( 'Select a border color for the location bar', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Right Side Content
+						array(
+							'id'       => 'loc-bar-left-content',
+							'type'     => 'select',
+							'title'    => __( 'Left Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the left side of the bar', 'mixt' ),
+							'options'  => array(
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Title', 'mixt' ),
+								'2' => __( 'Breadcrumbs', 'mixt' ),
+							),
+							'default'  => '1',
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Right Side Content
+						array(
+							'id'       => 'loc-bar-right-content',
+							'type'     => 'select',
+							'title'    => __( 'Right Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the right side of the bar', 'mixt' ),
+							'options'  => array(
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Title', 'mixt' ),
+								'2' => __( 'Breadcrumbs', 'mixt' ),
+							),
+							'default'  => '2',
+							'required' => array('location-bar', '=', true),
+						),
+
+						// Breadcrumbs Prefix
+						array(
+							'id'       => 'breadcrumbs-prefix',
+							'type'     => 'text',
+							'title'    => __( 'Breadcrumbs Prefix', 'mixt' ),
+							'subtitle' => __( 'Text to display before the breadcrumbs', 'mixt' ),
+							'required' => array('location-bar', '=', true),
+						),
+				),
+			);
+
+
+			// LOGO & FAVICON SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Logo & Favicon', 'mixt' ),
+				'desc'       => __( 'Configure the site&#39;s logo and favicon', 'mixt' ),
+				'icon'       => 'el-icon-globe',
+				'customizer' => false,
+				'fields'     => array(
+
+					// LOGO SECTION
 					array(
-						'id'       => 'logo-shrink',
-						'type'     => 'spinner',
-						'title'    => __( 'Shrink Logo', 'mixt' ),
-						'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar is fixed <br>(0 means no shrink)', 'mixt' ),
-						'max'      => '20',
-						'step'     => '1',
-						'default'  => '6',
+						'id'       => 'logo-section',
+						'type'     => 'section',
+						'title'    => __( 'Logo', 'mixt' ),
+						'indent'   => true,
 					),
 
-					// Show Tagline
+						// Type
+						array(
+							'id'       => 'logo-type',
+							'type'     => 'button_set',
+							'title'    => __( 'Type', 'mixt' ),
+							'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
+							'options'  => array(
+								'img'  => __( 'Image', 'mixt' ),
+								'text' => __( 'Text', 'mixt' ),
+							),
+							'default'  => 'text',
+						),
+
+						// Image Select
+						array(
+							'id'       => 'logo-img',
+							'type'     => 'media',
+							'url'      => false,
+							'title'    => __( 'Image', 'mixt' ),
+							'subtitle' => __( 'Select the image you want to use as the site&#39;s logo', 'mixt' ),
+							'required' => array( 'logo-type', '=', 'img' ),
+						),
+
+						// Inverse Image Select
+						array(
+							'id'       => 'logo-img-inv',
+							'type'     => 'media',
+							'url'      => false,
+							'title'    => __( 'Inverse Image', 'mixt' ),
+							'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
+							'required' => array( 'logo-type', '=', 'img' ),
+						),
+
+						// Hi-Res
+						array(
+							'id'       => 'logo-img-hr',
+							'type'     => 'switch',
+							'title'    => __( 'Hi-Res', 'mixt' ),
+							'subtitle' => __( 'Scale down logo to half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array( 'logo-type', '=', 'img' ),
+						),
+
+						// Text Field
+						array(
+							'id'       => 'logo-text',
+							'type'     => 'text',
+							'title'    => __( 'Text', 'mixt' ),
+							'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
+							'required' => array( 'logo-type', '=', 'text' ),
+						),
+
+						// Text Style
+						array(
+							'id'             => 'logo-text-typo',
+							'type'           => 'typography',
+							'title'          => __( 'Text Style', 'mixt' ),
+							'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
+							'required'       => array( 'logo-type', '=', 'text' ),
+							'google'         => true,
+							'font-backup'    => true,
+							'line-height'    => false,
+							'text-align'     => false,
+							'text-transform' => true,
+							'units'          => 'px',
+							'default'        => array(
+								'font-style'  => '500',
+								'font-family' => 'Open Sans',
+								'google'      => true,
+								'font-size'   => '24px',
+							),
+						),
+
+						// Text Inverse Color
+						array(
+							'id'       => 'logo-text-inv',
+							'type'     => 'color',
+							'title'    => __( 'Text Inverse Color', 'mixt' ),
+							'subtitle' => __( 'Select an inverse logo text color for dark backgrounds', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+							'required' => array( 'logo-type', '=', 'text' ),
+						),
+
+						// Shrink
+						array(
+							'id'       => 'logo-shrink',
+							'type'     => 'spinner',
+							'title'    => __( 'Shrink', 'mixt' ),
+							'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 means no shrink)', 'mixt' ),
+							'max'      => '20',
+							'step'     => '1',
+							'default'  => '6',
+						),
+
+						// Tagline
+						array(
+							'id'       => 'logo-show-tagline',
+							'type'     => 'switch',
+							'title'    => __( 'Tagline', 'mixt' ),
+							'subtitle' => __( 'Show the site&#39;s tagline (or a custom one) next to the logo', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Tagline Text
+						array(
+							'id'       => 'logo-tagline',
+							'type'     => 'text',
+							'title'    => __( 'Tagline Text', 'mixt' ),
+							'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
+							'required' => array( 'logo-show-tagline', '=', true ),
+						),
+
+					// Divider
 					array(
-						'id'       => 'logo-show-tagline',
-						'type'     => 'switch',
-						'title'    => __( 'Show Tagline', 'mixt' ),
-						'subtitle' => __( 'Show the site&#39;s tagline (or a custom one) next to the logo', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => false,
+						'id'   => 'favicon-divider',
+						'type' => 'divide',
 					),
 
-					// Logo Tagline Text
+					// FAVICON SECTION
 					array(
-						'id'       => 'logo-tagline',
-						'type'     => 'text',
-						'title'    => __( 'Custom Tagline', 'mixt' ),
-						'subtitle' => __( 'Enter a custom tagline (leave empty to use the site tagline)', 'mixt' ),
-						'required' => array( 'logo-show-tagline', '=', true ),
+						'id'       => 'favicon-section',
+						'type'     => 'section',
+						'title'    => __( 'Favicon', 'mixt' ),
+						'subtitle' => __( 'Set up the favicon (the icon that appears next to the site name in the browser)<br>MIXT will automatically generate icons in different sizes for most devices', 'mixt' ),
+						'indent'   => true,
 					),
+
+						// Image Select
+						array(
+							'id'       => 'favicon-img',
+							'type'     => 'media',
+							'url'      => false,
+							'title'    => __( 'Select Image', 'mixt' ),
+							'subtitle' => __( 'Select the image you want to use as the site&#39;s favicon.<br><strong>For optimal results, select an image at least 200x200 pixels big</strong>', 'mixt' ),
+						),
+
+						// Rebuild Favicons
+						array(
+							'id'       => 'favicon-rebuild',
+							'type'     => 'switch',
+							'title'    => __( 'Rebuild Favicons', 'mixt' ),
+							'subtitle' => __( 'Delete the old favicons and rebuild from new source', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Saved Favicon HTML Code
+						array(
+							'id'       => 'favicon-html',
+							'type'     => 'textarea',
+							'title'    => __( 'Current Favicon Code', 'mixt' ),
+							'subtitle' => __( 'This is the current favicon HTML, it <strong>will be replaced</strong> on each rebuild', 'mixt' ),
+							'allowed_html' => array(
+								'link' => array(
+									'rel'   => array(),
+									'type'  => array(),
+									'sizes' => array(),
+									'href'  => array(),
+								),
+							),
+						),
 				),
 			);
 
 
 			// NAVBAR SECTION
 			$this->sections[] = array(
-				'title'  => __( 'Navbars', 'mixt' ),
-				'desc'   => __( 'Customize the primary and secondary navbars', 'mixt' ),
-				'icon'   => 'el-icon-minus',
-				'fields' => array(
-
-					// Global Navbar Section
-					array(
-						'id'       => 'global-nav-section',
-						'type'     => 'section',
-						'indent'   => true,
-					),
+				'title'      => __( 'Navbars', 'mixt' ),
+				'desc'       => __( 'Customize the primary and secondary navbars', 'mixt' ),
+				'icon'       => 'el-icon-minus',
+				'customizer' => false,
+				'fields'     => array(
 					
-						// Navbar Icons
-						array(
-							'id'       => 'nav-menu-icons',
-							'type'     => 'switch',
-							'title'    => __( 'Show Menu Icons', 'mixt' ),
-							'subtitle' => __( 'Enable icons for menu items', 'mixt' ),
-							'on'       => 'Yes',
-							'off'      => 'No',
-							'default'  => true,
-						),
+					// Navbar Icons
+					array(
+						'id'       => 'nav-menu-icons',
+						'type'     => 'switch',
+						'title'    => __( 'Menu Icons', 'mixt' ),
+						'subtitle' => __( 'Enable icons for menu items', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
 
-						// Navbar Dropdown Arrows
-						array(
-							'id'       => 'nav-menu-arrows',
-							'type'     => 'switch',
-							'title'    => __( 'Show Menu Dropdown Arrows', 'mixt' ),
-							'subtitle' => __( 'Enable arrows for menu items with dropdowns', 'mixt' ),
-							'on'       => 'Yes',
-							'off'      => 'No',
-							'default'  => true,
-						),
+					// Navbar Dropdown Arrows
+					array(
+						'id'       => 'nav-menu-arrows',
+						'type'     => 'switch',
+						'title'    => __( 'Menu Dropdown Arrows', 'mixt' ),
+						'subtitle' => __( 'Enable arrows for menu items with dropdowns', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
 
 					// Divider
 					array(
@@ -559,7 +1071,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type' => 'divide',
 					),
 
-					// Primary Navbar Section
+					// PRIMARY NAVBAR SECTION
 					array(
 						'id'       => 'primary-nav-section',
 						'type'     => 'section',
@@ -574,74 +1086,151 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Logo Alignment', 'mixt' ),
 							'subtitle' => __( 'Where the logo will be displayed in the navbar', 'mixt' ),
 							'options'  => array(
-								'1' => 'Left',
-								'2' => 'Center',
-								'3' => 'Right',
+								'1' => __( 'Left', 'mixt' ),
+								'2' => __( 'Center', 'mixt' ),
+								'3' => __( 'Right', 'mixt' ),
 							),
 							'default'  => '1',
 						),
 
-						// Navbar Mode
+						// Mode
 						array(
 							'id'       => 'nav-mode',
 							'type'     => 'button_set',
 							'title'    => __( 'Mode', 'mixt' ),
 							'subtitle' => __( 'Navbar fixed (scrolls with page) or static (stays at the top)', 'mixt' ),
 							'options'  => array(
-								'fixed'  => 'Fixed',
-								'static' => 'Static',
+								'static' => __( 'Static', 'mixt' ),
+								'fixed'  => __( 'Fixed', 'mixt' ),
 							),
-							'default'  => 'fixed',
+							'default'  => 'static',
 						),
 
-						// Navbar Color Scheme
-						array(
-							'id'       => 'nav-scheme',
-							'type'     => 'button_set',
-							'title'    => __( 'Color Scheme', 'mixt' ),
-							'subtitle' => __( 'Navbar color scheme', 'mixt' ),
-							'options'  => array(
-								'1' => 'Light',
-								'2' => 'Dark',
-								'3' => 'Custom',
-							),
-							'default'  => '1',
-						),
-
-						// Navbar Theme Select
+						// Theme Select
 						array(
 							'id'       => 'nav-theme',
 							'type'     => 'select',
 							'title'    => __( 'Theme', 'mixt' ),
 							'subtitle' => __( 'Select the theme for the primary navbar', 'mixt' ),
 							'options'  => $nav_themes,
-							'default'  => '',
+							'default'  => 'aqua',
 						),
 
-						// Navbar Dropdown (Submenu) Scheme
+						// Texture
 						array(
-							'id'       => 'nav-sub-scheme',
-							'type'     => 'button_set',
-							'title'    => __( 'Menu Color Scheme', 'mixt' ),
-							'subtitle' => __( 'Light or dark dropdown menu color scheme', 'mixt' ),
-							'options'  => array(
-								'light' => 'Light',
-								'dark'  => 'Dark',
-							),
-							'default'  => 'light',
+							'id'       => 'nav-texture',
+							'type'     => 'image_select',
+							'title'    => __( 'Texture', 'mixt' ),
+							'subtitle' => __( 'Texture the navbar', 'mixt' ),
+							'options'  => $img_textures,
+							'empty'    => true,
 						),
 
-						// Navbar Trnansparent When Possible
+						// Padding
+						array(
+							'id'            => 'nav-padding',
+							'type'          => 'slider',
+							'title'         => __( 'Padding', 'mixt' ),
+							'subtitle'      => __( 'Set the navbar&#39;s padding (in px) when at the top', 'mixt' ),
+							'default'       => 20,
+							'min'           => 0,
+							'max'           => 50,
+							'display_value' => 'text',
+						),
+
+						// Opacity
+						array(
+							'id'            => 'nav-opacity',
+							'type'          => 'slider',
+							'title'         => __( 'Opacity', 'mixt' ),
+							'subtitle'      => __( 'Set the navbar&#39;s opacity when fixed', 'mixt' ),
+							'default'       => 0.95,
+							'step'          => 0.05,
+							'min'           => 0,
+							'max'           => 1,
+							'resolution'    => 0.01,
+							'display_value' => 'text',
+						),
+
+						// Transparent When Possible
 						array(
 							'id'       => 'nav-transparent',
 							'type'     => 'button_set',
 							'title'    => __( 'See-Through', 'mixt' ),
-							'subtitle' => __( 'Make navbar transparent when possible', 'mixt' ),
+							'subtitle' => __( 'Make navbar transparent (when possible)', 'mixt' ),
 							'options'  => array(
-								'true'  => 'Yes',
-								'false' => 'No',
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
 							),
 							'default'  => 'true',
+						),
+
+						// Position
+						array(
+							'id'   => 'nav-position',
+							'type' => 'button_set',
+							'title'    => __( 'Position', 'mixt' ),
+							'subtitle' => __( 'Display navbar above or below header (when possible)', 'mixt' ),
+							'options'  => array(
+								'above' => __( 'Above', 'mixt' ),
+								'below' => __( 'Below', 'mixt' ),
+							),
+							'default' => 'above',
+						),
+
+						// Hover Item Background
+						array(
+							'id'   => 'nav-hover-bg',
+							'type' => 'button_set',
+							'title'    => __( 'Hover Item Background', 'mixt' ),
+							'subtitle' => __( 'Item background color on hover', 'mixt' ),
+							'options'  => array(
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default' => 'true',
+						),
+
+						// Active Item Bar
+						array(
+							'id'   => 'nav-active-bar',
+							'type' => 'button_set',
+							'title'    => __( 'Active Item Bar', 'mixt' ),
+							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
+							'options'  => array(
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default' => 'true',
+						),
+
+						// Active Item Bar Position
+						array(
+							'id'   => 'nav-active-bar-pos',
+							'type' => 'button_set',
+							'title'    => __( 'Active Bar Position', 'mixt' ),
+							'subtitle' => __( 'Where will the active bar be placed', 'mixt' ),
+							'options'  => array(
+								'top'    => __( 'Top', 'mixt' ),
+								'left'   => __( 'Left', 'mixt' ),
+								'right'  => __( 'Right', 'mixt' ),
+								'bottom' => __( 'Bottom', 'mixt' ),
+							),
+							'default'  => 'bottom',
+							'required' => array('nav-active-bar', '=', 'true'),
+						),
+
+						// Border Items
+						array(
+							'id'   => 'nav-bordered',
+							'type' => 'button_set',
+							'title'    => __( 'Border Items', 'mixt' ),
+							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
+							'options'  => array(
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default'  => 'false',
 						),
 
 					// Divider
@@ -650,7 +1239,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type' => 'divide',
 					),
 
-					// Secondary Navbar Section
+					// SECONDARY NAVBAR SECTION
 					array(
 						'id'       => 'secondary-nav-section',
 						'type'     => 'section',
@@ -659,121 +1248,185 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'indent'   => true,
 					),
 
-						// Secondary Navbar Switch
+						// On/Off Switch
 						array(
 							'id'       => 'second-nav',
 							'type'     => 'switch',
 							'title'    => __( 'Enable Secondary Navbar', 'mixt' ),
 							'subtitle' => __( 'Show the secondary navbar above the header', 'mixt' ),
-							'on'       => 'Yes',
-							'off'      => 'No',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
 							'default'  => false,
 						),
 
-						// Secondary Navbar Color Scheme
+						// Theme Select
 						array(
-							'id'       => 'sec-nav-scheme',
-							'type'     => 'switch',
-							'title'    => __( 'Color Scheme', 'mixt' ),
-							'subtitle' => __( 'Light or dark navbar color scheme', 'mixt' ),
-							'on'       => 'Light',
-							'off'      => 'Dark',
-							'default'  => true,
+							'id'       => 'sec-nav-theme',
+							'type'     => 'select',
+							'title'    => __( 'Theme', 'mixt' ),
+							'subtitle' => __( 'Select the theme for the secondary navbar', 'mixt' ),
+							'options'  => $nav_themes,
+							'default'  => 'ice-white',
 							'required' => array('second-nav', '=', true),
 						),
 
-						// Secondary Navbar Background Color
+						// Texture
 						array(
-							'id'       => 'sec-nav-background',
-							'type'     => 'color',
-							'title'    => __('Background Color', 'mixt'),
-							'subtitle' => __( 'Navbar background color', 'mixt' ),
-							'validate' => 'color',
+							'id'       => 'sec-nav-texture',
+							'type'     => 'image_select',
+							'title'    => __( 'Texture', 'mixt' ),
+							'subtitle' => __( 'Texture the navbar', 'mixt' ),
+							'options'  => $img_textures,
+							'empty'    => true,
 							'required' => array('second-nav', '=', true),
 						),
 
-						// Secondary Navbar Dropdown (Submenu) Scheme
+						// Hover Item Background
 						array(
-							'id'       => 'sec-nav-sub-scheme',
-							'type'     => 'button_set',
-							'title'    => __( 'Menu Color Scheme', 'mixt' ),
-							'subtitle' => __( 'Light or dark dropdown menu color scheme', 'mixt' ),
+							'id'   => 'sec-nav-hover-bg',
+							'type' => 'button_set',
+							'title'    => __( 'Hover Item Background', 'mixt' ),
+							'subtitle' => __( 'Item background color on hover', 'mixt' ),
 							'options'  => array(
-								'light' => 'Light',
-								'dark'  => 'Dark',
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
 							),
-							'default'  => 'light',
+							'default' => 'true',
 							'required' => array('second-nav', '=', true),
 						),
 
-						// Secondary Navbar Left Side Content
+						// Active Item Bar
+						array(
+							'id'   => 'sec-nav-active-bar',
+							'type' => 'button_set',
+							'title'    => __( 'Active Item Bar', 'mixt' ),
+							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
+							'options'  => array(
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default' => 'false',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Active Item Bar Position
+						array(
+							'id'   => 'sec-nav-active-bar-pos',
+							'type' => 'button_set',
+							'title'    => __( 'Active Bar Position', 'mixt' ),
+							'subtitle' => __( 'Where will the active bar be placed', 'mixt' ),
+							'options'  => array(
+								'top'    => __( 'Top', 'mixt' ),
+								'left'   => __( 'Left', 'mixt' ),
+								'right'  => __( 'Right', 'mixt' ),
+								'bottom' => __( 'Bottom', 'mixt' ),
+							),
+							'default'  => 'bottom',
+							'required' => array('sec-nav-active-bar', '=', 'true'),
+						),
+
+						// Border Items
+						array(
+							'id'   => 'sec-nav-bordered',
+							'type' => 'button_set',
+							'title'    => __( 'Border Items', 'mixt' ),
+							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
+							'options'  => array(
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default'  => 'true',
+							'required' => array('second-nav', '=', true),
+						),
+
+						// Left Side Content
 						array(
 							'id'       => 'sec-nav-left-content',
 							'type'     => 'select',
 							'title'    => __( 'Left Side Content', 'mixt' ),
 							'subtitle' => __( 'Content to show on the left side of the navbar', 'mixt' ),
 							'options'  => array(
-								'0' => 'No Content',
-								'1' => 'Navigation',
-								'2' => 'Social Icons',
-								'3' => 'Custom Text / Code',
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Navigation', 'mixt' ),
+								'2' => __( 'Social Icons', 'mixt' ),
+								'3' => __( 'Custom Text / Code', 'mixt' ),
 							),
 							'default'  => '0',
 							'required' => array('second-nav', '=', true),
 						),
 
-						// Secondary Navbar Left Side Code
+						// Left Side Code
 						array(
 							'id'           => 'sec-nav-left-code',
 							'type'         => 'textarea',
 							'title'        => __( 'Left Side Code', 'mixt' ),
 							'subtitle'     => __( 'Text or code to display on the left side', 'mixt' ),
-							'allowed_html' => array(
-								'link'   => array(
-									'href'  => array(),
-									'title' => array(),
-								),
-								'strong' => array(),
-								'em'     => array(),
-							),
-							'placeholder'  => 'Allowed HTML tags and attributes: <a href="" title="">, <strong>, <em>',
+							'allowed_html' => $sec_nav_allowed_html,
+							'placeholder'  => $sec_nav_code_placeholder,
 							'required'     => array('sec-nav-left-content', '=', '3'),
 						),
 
-						// Secondary Navbar Right Side Content
+						// Right Side Content
 						array(
 							'id'       => 'sec-nav-right-content',
 							'type'     => 'select',
 							'title'    => __( 'Right Side Content', 'mixt' ),
 							'subtitle' => __( 'Content to show on the right side of the navbar', 'mixt' ),
 							'options'  => array(
-								'0' => 'No Content',
-								'1' => 'Navigation',
-								'2' => 'Social Icons',
-								'3' => 'Custom Text / Code',
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Navigation', 'mixt' ),
+								'2' => __( 'Social Icons', 'mixt' ),
+								'3' => __( 'Custom Text / Code', 'mixt' ),
 							),
 							'default'  => '0',
 							'required' => array('second-nav', '=', true),
 						),
 
-						// Secondary Navbar Right Side Code
+						// Right Side Code
 						array(
 							'id'           => 'sec-nav-right-code',
 							'type'         => 'textarea',
 							'title'        => __( 'Right Side Code', 'mixt' ),
 							'subtitle'     => __( 'Text or code to display on the right side', 'mixt' ),
-							'allowed_html' => array(
-								'link'   => array(
-									'href'  => array(),
-									'title' => array(),
-								),
-								'strong' => array(),
-								'em'     => array(),
-							),
-							'placeholder'  => 'Allowed HTML tags and attributes: <a href="" title="">, <strong>, <em>',
+							'allowed_html' => $sec_nav_allowed_html,
+							'placeholder'  => $sec_nav_code_placeholder,
 							'required'     => array('sec-nav-right-content', '=', '3'),
 						),
 
+				),
+			);
+
+			// SIDEBAR SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Sidebar', 'mixt' ),
+				'desc'       => __( 'Configure the sidebar and its appearance', 'mixt' ),
+				'icon'       => 'el-icon-pause',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Enable Sidebar
+					array(
+						'id'   => 'page-sidebar',
+						'type' => 'switch',
+						'title'    => __( 'Enabled', 'mixt' ),
+						'subtitle' => __( 'Display the sidebar', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
+					// Sidebar Position
+					array(
+						'id'   => 'sidebar-position',
+						'type' => 'button_set',
+						'title'    => __( 'Position', 'mixt' ),
+						'subtitle' => __( 'Sidebar to the left or to the right of the page', 'mixt' ),
+						'options'  => array(
+							'left'  => __( 'Left', 'mixt' ),
+							'right' => __( 'Right', 'mixt' ),
+						),
+						'default'  => 'right',
+					),
 				),
 			);
 
@@ -784,167 +1437,639 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 
-			// CUSTOM THEMES SECTION
+			// BLOG SECTION
 			$this->sections[] = array(
-				'title'      => __( 'Themes', 'mixt' ),
-				'desc'       => __( 'Create and manage custom themes', 'mixt' ),
-				'icon'       => 'el-icon-leaf',
+				'title'      => __( 'Blog', 'mixt' ),
+				'desc'       => __( 'Manage the blog page and post appearance', 'mixt' ),
+				'icon'       => 'el-icon-book',
+				'customizer' => false,
 				'fields'     => array(
 
+					// Blog Type
+					array(
+						'id'   => 'blog-type',
+						'type' => 'button_set',
+						'title'    => __( 'Blog Type', 'mixt' ),
+						'subtitle' => __( 'Select the blog layout type', 'mixt' ),
+						'options'  => array(
+							'standard' => __( 'Standard', 'mixt' ),
+							'grid'     => __( 'Grid', 'mixt' ),
+							'masonry'  => __( 'Masonry', 'mixt' ),
+						),
+						'default'  => 'standard',
+					),
+
+					// Blog Columns
+					array(
+						'id'   => 'blog-columns',
+						'type' => 'button_set',
+						'title'    => __( 'Blog Columns', 'mixt' ),
+						'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+						'options'  => array(
+							'col-sm-6' => '2',
+							'col-md-4' => '3',
+							'col-md-3' => '4',
+							'col-md-2' => '6',
+						),
+						'default'  => 'col-md-4',
+						'required' => array('blog-type', '!=', 'standard'),
+					),
+
+					// Post Media Size
+					array(
+						'id'   => 'post-feat-size',
+						'type' => 'button_set',
+						'title'    => __( 'Media Size', 'mixt' ),
+						'subtitle' => __( 'Select a size for the featured post media', 'mixt' ),
+						'options'  => array(
+							'blog-large'  => __( 'Large', 'mixt' ),
+							'blog-medium' => __( 'Medium', 'mixt' ),
+							'blog-small'  => __( 'Small', 'mixt' ),
+						),
+						'default'  => 'blog-large',
+						'required' => array('blog-type', '=', 'standard'),
+					),
+
+					// Post Content Type
+					array(
+						'id'   => 'post-content',
+						'type' => 'button_set',
+						'title'    => __( 'Post Content', 'mixt' ),
+						'subtitle' => __( 'Show an excerpt or the full content on the blog or posts page', 'mixt' ),
+						'options'  => array(
+							'full'      => __( 'Full', 'mixt' ),
+							'excerpt'   => __( 'Excerpt', 'mixt' ),
+						),
+						'default'  => 'full',
+					),
+
+					// Post Excerpt Limit
+					array(
+						'id'            => 'post-excerpt-length',
+						'type'          => 'slider',
+						'title'         => __( 'Excerpt Limit', 'mixt' ),
+						'subtitle'      => __( 'Set a maximum excerpt length (in words)', 'mixt' ),
+						'default'       => 55,
+						'min'           => 1,
+						'max'           => 200,
+						'display_value' => 'text',
+						'required'      => array('post-content', '=', 'excerpt'),
+					),
+				),
+			);
+
+			// POSTS SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Posts', 'mixt' ),
+				'desc'       => __( 'Configure the post&#39;s appearance', 'mixt' ),
+				'icon'       => 'el-icon-pencil',
+				'subsection' => true,
+				'customizer' => false,
+				'fields'     => array(
+
+					// About The Author
+					array(
+						'id'   => 'post-about-author',
+						'type' => 'switch',
+						'title'    => __( 'About The Author', 'mixt' ),
+						'subtitle' => __( 'Show info about the author', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
+					// Post Navigation
+					array(
+						'id'   => 'post-navigation',
+						'type' => 'switch',
+						'title'    => __( 'Post Navigation', 'mixt' ),
+						'subtitle' => __( 'Display links to the previous and next posts', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
 					// Divider
 					array(
-						'id'   => 'themes-section',
+						'id'   => 'post-divider',
 						'type' => 'divide',
 					),
 
-					// Sitewide Themes
+					// RELATED POSTS SECTION
 					array(
-						'id'       => 'site-themes-section',
+						'id'       => 'post-related-section',
 						'type'     => 'section',
-						'title'    => __( 'Site-Wide Themes', 'mixt' ),
+						'title'    => __( 'Related Posts', 'mixt' ),
 						'indent'   => true,
 					),
 
-						// Site Themes
+						// Related Posts
 						array(
-							'id'       => 'site-themes',
-							'type'     => 'multi_input',
-							'add_text' => __( 'New Theme', 'mixt' ),
-							'inputs'   => array(
-								'name' => array(
-									'type'  => 'text',
-									'icon'  => 'icon-themes',
-									'label' => __( 'Theme Name', 'mixt' ),
-								),
-								'bg-color' => array(
-									'type'  => 'color',
-									'value' => '#fff',
-									'label' => 'Background Color',
-								),
-								'text-color' => array(
-									'type'  => 'color',
-									'value' => '#333',
-									'label' => 'Text Color',
-								),
-								'text-active-color' => array(
-									'type'  => 'color',
-									'value' => '#539ddd',
-									'label' => 'Active Text Color',
-								),
-							),
+							'id'   => 'post-related',
+							'type' => 'switch',
+							'title'    => __( 'Show', 'mixt' ),
+							'subtitle' => __( 'Display related posts at the bottom of the post', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
+
+						// Related Posts Number
+						array(
+							'id'       => 'post-related-number',
+							'type'     => 'spinner',
+							'title'    => __( 'Number', 'mixt' ),
+							'subtitle' => __( 'How many related posts to display', 'mixt' ),
+							'max'      => '10',
+							'min'      => '2',
+							'step'     => '1',
+							'default'  => '3',
+							'required' => array('post-related', '=', true),
+						),
+
+						// Related Posts Featured Media
+						array(
+							'id'   => 'post-related-feat',
+							'type' => 'switch',
+							'title'    => __( 'Featured Media', 'mixt' ),
+							'subtitle' => __( 'Display featured media for the related posts', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array('post-related', '=', true),
+						),
+
+						// Related Posts Featured Media Placeholder
+						array(
+							'id'             => 'post-related-feat-ph',
+							'type'           => 'media',
+							'title'          => __( 'Featured Media Placeholder', 'mixt' ),
+							'subtitle'       => __( 'Select a placeholder image to show if a post does not have any featured media', 'mixt' ),
+							'mode'           => 'jpg, jpeg, png',
+							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+							'required'       => array('post-related-feat', '=', true),
+						),
+
+						// Related Posts Excerpt
+						array(
+							'id'   => 'post-related-excerpt',
+							'type' => 'switch',
+							'title'    => __( 'Excerpt', 'mixt' ),
+							'subtitle' => __( 'Display the excerpt for the related posts', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array('post-related', '=', true),
 						),
 
 					// Divider
 					array(
-						'id'   => 'nav-divider',
+						'id'   => 'post-divider-2',
 						'type' => 'divide',
 					),
 
-					// Navbar Themes
+					// POST META SECTION
 					array(
-						'id'       => 'nav-themes-section',
+						'id'       => 'post-meta-section',
 						'type'     => 'section',
-						'title'    => __( 'Navbar Themes', 'mixt' ),
+						'title'    => __( 'Post Meta', 'mixt' ),
 						'indent'   => true,
 					),
 
-						// Navbar Multi Input
+						// Meta Position / Display
 						array(
-							'id'       => 'nav-themes',
-							'type'     => 'multi_input',
-							'add_text' => __( 'New Theme', 'mixt' ),
-							'inputs'   => array(
-								'name' => array(
-									'type'       => 'text',
-									'icon'       => 'el-icon-brush',
-									'label'      => __( 'Theme Name', 'mixt' ),
-									'wrap_class' => 'theme-name',
-								),
-								'bg-color' => array(
-									'type'  => 'color',
-									'value' => '',
-									'alpha' => true,
-									'label' => 'Background Color',
-								),
-								'accent' => array(
-									'type'  => 'color',
-									'value' => '',
-									'label' => 'Accent',
-								),
-								'text-color' => array(
-									'type'  => 'color',
-									'value' => '',
-									'label' => 'Text Color',
-								),
-								'text-active-color' => array(
-									'type'  => 'color',
-									'value' => '',
-									'label' => 'Active Text Color',
-								),
+							'id'   => 'meta-show',
+							'type' => 'button_set',
+							'title'    => __( 'Post Meta', 'mixt' ),
+							'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+							'options'  => array(
+								'header'  => __( 'In Header', 'mixt' ),
+								'footer'  => __( 'In Footer', 'mixt' ),
+								'false'   => __( 'No', 'mixt' ),
 							),
-							'default' => $nav_default_themes,
+							'default'  => 'header',
+						),
+
+						// Meta Author
+						array(
+							'id'   => 'meta-author',
+							'type' => 'switch',
+							'title'    => __( 'Author', 'mixt' ),
+							'subtitle' => __( 'Display the post author', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array('meta-show', '!=', 'false'),
+						),
+
+						// Author Icon
+						array(
+							'id'       => 'meta-author-icon',
+							'type'     => 'text',
+							'title'    => __( 'Author Icon', 'mixt' ),
+							'default'  => 'icon-user',
+							'required' => array('meta-author', '=', true),
+						),
+
+						// Meta Date
+						array(
+							'id'   => 'meta-date',
+							'type' => 'switch',
+							'title'    => __( 'Date', 'mixt' ),
+							'subtitle' => __( 'Display the post date and time', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array('meta-show', '!=', 'false'),
+						),
+
+						// Date Icon
+						array(
+							'id'       => 'meta-date-icon',
+							'type'     => 'text',
+							'title'    => __( 'Date Icon', 'mixt' ),
+							'default'  => 'icon-clockalt-timealt',
+							'required' => array('meta-date', '=', true),
+						),
+
+						// Meta Category
+						array(
+							'id'   => 'meta-category',
+							'type' => 'switch',
+							'title'    => __( 'Category', 'mixt' ),
+							'subtitle' => __( 'Display the post category(es)', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array('meta-show', '!=', 'false'),
+						),
+
+						// Category Icon
+						array(
+							'id'       => 'meta-category-icon',
+							'type'     => 'text',
+							'title'    => __( 'Category Icon', 'mixt' ),
+							'default'  => 'icon-folderalt',
+							'required' => array('meta-category', '=', true),
+						),
+
+						// Meta Comments
+						array(
+							'id'   => 'meta-comments',
+							'type' => 'switch',
+							'title'    => __( 'Comments', 'mixt' ),
+							'subtitle' => __( 'Display the comments number', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array('meta-show', '!=', 'false'),
+						),
+
+						// Comments Icon
+						array(
+							'id'       => 'meta-comments-icon',
+							'type'     => 'text',
+							'title'    => __( 'Comments Icon', 'mixt' ),
+							'default'  => 'icon-chat',
+							'required' => array('meta-comments', '=', true),
+						),
+
+						// Meta Separator
+						array(
+							'id'       => 'meta-separator',
+							'type'     => 'text',
+							'title'    => __( 'Separator', 'mixt' ),
+							'subtitle' => __( 'Character(s) for the meta separator', 'mixt' ),
+							'required' => array('meta-show', '!=', 'false'),
 						),
 
 					// Divider
 					array(
-						'id'   => 'colors-divider',
+						'id'   => 'post-divider-3',
 						'type' => 'divide',
+					),
+
+					// POST INFO SECTION
+					array(
+						'id'       => 'post-info-section',
+						'type'     => 'section',
+						'title'    => __( 'Post Info', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Info Display
+						array(
+							'id'   => 'post-info',
+							'type' => 'switch',
+							'title'    => __( 'Post Info', 'mixt' ),
+							'subtitle' => __( 'Display the post format and date', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
+
+						// Standard Format Icon
+						array(
+							'id'       => 'format-standard-icon',
+							'type'     => 'text',
+							'title'    => __( 'Standard Format Icon', 'mixt' ),
+							'default'  => 'icon-pen',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Aside Format Icon
+						array(
+							'id'       => 'format-aside-icon',
+							'type'     => 'text',
+							'title'    => __( 'Aside Format Icon', 'mixt' ),
+							'default'  => 'icon-noteslistalt',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Image Format Icon
+						array(
+							'id'       => 'format-image-icon',
+							'type'     => 'text',
+							'title'    => __( 'Image Format Icon', 'mixt' ),
+							'default'  => 'icon-picture',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Video Format Icon
+						array(
+							'id'       => 'format-video-icon',
+							'type'     => 'text',
+							'title'    => __( 'Video Format Icon', 'mixt' ),
+							'default'  => 'icon-playvideo',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Audio Format Icon
+						array(
+							'id'       => 'format-audio-icon',
+							'type'     => 'text',
+							'title'    => __( 'Audio Format Icon', 'mixt' ),
+							'default'  => 'icon-music',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Gallery Format Icon
+						array(
+							'id'       => 'format-gallery-icon',
+							'type'     => 'text',
+							'title'    => __( 'Gallery Format Icon', 'mixt' ),
+							'default'  => 'icon-burstmode',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Quote Format Icon
+						array(
+							'id'       => 'format-quote-icon',
+							'type'     => 'text',
+							'title'    => __( 'Quote Format Icon', 'mixt' ),
+							'default'  => 'icon-quote',
+							'required' => array('post-info', '=', true),
+						),
+
+						// Link Format Icon
+						array(
+							'id'       => 'format-link-icon',
+							'type'     => 'text',
+							'title'    => __( 'Link Format Icon', 'mixt' ),
+							'default'  => 'icon-linkalt',
+							'required' => array('post-info', '=', true),
+						),
+				),
+			);
+
+			// COMMENTS SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Comments', 'mixt' ),
+				'desc'       => __( 'Configure the comments&#39; appearance', 'mixt' ),
+				'icon'       => 'el-icon-comment',
+				'subsection' => true,
+				'customizer' => false,
+				'fields'     => array(
+
+					// Comment Before Notes
+					array(
+						'id'   => 'comment-notes-before',
+						'type' => 'switch',
+						'title'    => __( 'Show Before Notes', 'mixt' ),
+						'subtitle' => __( 'Display the notes before the comment fields for users not logged in', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
+					// Show Logged In As
+					array(
+						'id'   => 'comment-logged-in',
+						'type' => 'switch',
+						'title'    => __( '&quot;Logged in as&quot;', 'mixt' ),
+						'subtitle' => __( 'Display the &quot;logged in as&quot; message', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
+					// Show Allowed Tags
+					array(
+						'id'   => 'comment-notes-after',
+						'type' => 'switch',
+						'title'    => __( 'Allowed Tags', 'mixt' ),
+						'subtitle' => __( 'Display the allowed tags in the comment form', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
 					),
 				),
 			);
 
 
-			// FAVICON SECTION
+			// DIVIDER
 			$this->sections[] = array(
-				'title'      => __( 'Favicon', 'mixt' ),
-				'desc'       => __( 'Set up the favicon (the icon that appears next to the site name in the browser)<br>MIXT will automatically generate icons in different sizes for most devices', 'mixt' ),
-				'icon'       => 'el-icon-eye-open',
+				'type' => 'divide',
+			);
+
+
+			// THEMES SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Themes', 'mixt' ),
+				'desc'       => __( 'Create and manage site-wide themes', 'mixt' ),
+				'icon'       => 'el-icon-leaf',
+				'customizer' => false,
 				'fields'     => array(
 
-					// Image Select
 					array(
-						'id'       => 'favicon-img',
-						'type'     => 'media',
-						'url'      => false,
-						'title'    => __( 'Select Favicon', 'mixt' ),
-						'subtitle' => __( 'Select the image you want to use as the site&#39;s favicon.<br><strong>For optimal results, select an image at least 200x200 pixels big</strong>', 'mixt' ),
-					),
+						'id'       => 'site-themes',
+						'type'     => 'multi_input',
+						'no_title' => true,
+						'sortable' => true,
+						'add_text' => __( 'New Theme', 'mixt' ),
+						'inputs'   => array(
 
-					// Rebuild Favicons
-					array(
-						'id'       => 'favicon-rebuild',
-						'type'     => 'switch',
-						'title'    => __( 'Rebuild Favicons', 'mixt' ),
-						'subtitle' => __( 'Delete the old favicons and rebuild them', 'mixt' ),
-						'on'       => 'Yes',
-						'off'      => 'No',
-						'default'  => false,
-					),
+							// Theme Name
+							'name' => array(
+								'type'       => 'text',
+								'icon'       => 'el-icon-brush',
+								'label'      => __( 'Theme Name', 'mixt' ),
+								'wrap_class' => 'theme-name',
+							),
 
-					// Saved Favicon HTML Code
-					array(
-						'id'       => 'favicon-html',
-						'type'     => 'textarea',
-						'title'    => __( 'Current Favicon Code', 'mixt' ),
-						'subtitle' => __( 'This is current favicon HTML, it <strong>will be replaced</strong> on each rebuild', 'mixt' ),
-						'allowed_html' => array(
+							// Theme ID
+							'id' => array(
+								'type'       => 'group-id',
+								'icon'       => 'el-icon-tags',
+								'label'      => __( 'Theme ID', 'mixt' ),
+								'wrap_class' => 'theme-id',
+							),
+
+							// Text Color
+							'text' => array(
+								'type'  => 'color',
+								'label' => __( 'Text Color' ),
+							),
+
+							// Text Color Fade
+							'text-fade' => array(
+								'type'  => 'color',
+								'label' => __( 'Text Color Fade' ),
+							),
+
+							// Text Inverse Color
+							'inv-text' => array(
+								'type'  => 'color',
+								'label' => __( 'Inverse Text Color' ),
+							),
+
+							// Text Inverse Color Fade
+							'inv-text-fade' => array(
+								'type'  => 'color',
+								'label' => __( 'Inverse Text Fade' ),
+							),
+
+							// Border Color
+							'border' => array(
+								'type'  => 'color',
+								'label' => __( 'Border Color', 'mixt' ),
+							),
+
+							// Accent
+							'accent' => array(
+								'type'  => 'color',
+								'label' => __( 'Accent', 'mixt' ),
+							),
+
+							// Link Color
 							'link' => array(
-								'rel'   => array(),
-								'type'  => array(),
-								'sizes' => array(),
-								'href'  => array(),
+								'type'  => 'color',
+								'label' => __( 'Link Color', 'mixt' ),
 							),
 						),
+						'default' => $site_default_themes,
+					),
+				),
+			);
+
+			// Navbar THEMES SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Navbar Themes', 'mixt' ),
+				'desc'       => __( 'Create and manage themes for the navbar', 'mixt' ),
+				'icon'       => 'el-icon-minus',
+				'customizer' => false,
+				'subsection' => true,
+				'fields'     => array(
+
+					array(
+						'id'       => 'nav-themes',
+						'type'     => 'multi_input',
+						'no_title' => true,
+						'sortable' => true,
+						'add_text' => __( 'New Theme', 'mixt' ),
+						'inputs'   => array(
+
+							// Theme Name
+							'name' => array(
+								'type'       => 'text',
+								'icon'       => 'el-icon-brush',
+								'label'      => __( 'Theme Name', 'mixt' ),
+								'wrap_class' => 'theme-name',
+							),
+
+							// Theme ID
+							'id' => array(
+								'type'       => 'group-id',
+								'icon'       => 'el-icon-tags',
+								'label'      => __( 'Theme ID', 'mixt' ),
+								'wrap_class' => 'theme-id',
+							),
+
+							// Background Color
+							'bg' => array(
+								'type'  => 'color',
+								'label' => __( 'Background Color', 'mixt' ),
+							),
+
+							// Border Color
+							'border' => array(
+								'type'  => 'color',
+								'label' => __( 'Border Color', 'mixt' ),
+							),
+
+							// Text Color
+							'text' => array(
+								'type'  => 'color',
+								'label' => __( 'Text Color' ),
+							),
+
+							// Inverse Text Color
+							'inv-text' => array(
+								'type'  => 'color',
+								'label' => __( 'Inverse Text Color' ),
+							),
+
+							// Accent
+							'accent' => array(
+								'type'  => 'color',
+								'label' => __( 'Accent', 'mixt' ),
+							),
+
+							// Inverse Accent
+							'inv-accent' => array(
+								'type'  => 'color',
+								'label' => __( 'Inverse Accent', 'mixt' ),
+							),
+
+							// Menu Background Color
+							'menu-bg' => array(
+								'type'  => 'color',
+								'label' => __( 'Menu Background', 'mixt' ),
+							),
+
+							// Menu Border Color
+							'menu-border' => array(
+								'type'  => 'color',
+								'label' => __( 'Menu Border', 'mixt' ),
+							),
+
+							// RGBA Check
+							'rgba' => array(
+								'type'       => 'checkbox',
+								'label'      => __( 'Enable RGBA', 'mixt' ),
+								'wrap_class' => 'rgba-field',
+							),
+						),
+						'default' => $nav_default_themes,
 					),
 				),
 			);
 
 			// TYPOGRAPHY
 			$this->sections[] = array(
-				'title'  => __( 'Typography', 'mixt' ),
-				'icon'   => 'el-icon-font',
-				'submenu' => false,
-				'fields' => array(
+				'title'   => __( 'Typography', 'mixt' ),
+				'icon'    => 'el-icon-font',
+				'fields'  => array(
 
 					// Web Fonts
 					array(
@@ -966,36 +2091,51 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// SOCIAL PROFILES
 			$this->sections[] = array(
-				'title'   => __( 'Social Profiles', 'mixt' ),
-				'icon'    => 'el-icon-group',
-				'submenu' => false,
-				'fields'  => array(
+				'title'      => __( 'Social Profiles', 'mixt' ),
+				'desc'       => __( 'Manage your social profiles and add new ones', 'mixt' ),
+				'icon'       => 'el-icon-group',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Social Icons Color On Hover
+					array(
+						'id'   => 'social-profiles-color',
+						'type' => 'button_set',
+						'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
+						'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
+						'options' => array(
+							'icon' => __( 'Icon', 'mixt' ),
+							'bg'   => __( 'Background', 'mixt' ),
+							'none' => __( 'Neither', 'mixt' ),
+						),
+						'default' => 'icon',
+					),
 					
+					// Social Profiles Multi
 					array(
 						'id'       => 'social-profiles',
 						'type'     => 'multi_input',
-						'title'    => __( 'Social Profiles', 'mixt' ),
-						'subtitle' => __( 'Create social profiles', 'mixt' ),
+						'no_title' => true,
 						'add_text' => __( 'New Profile', 'mixt' ),
-						'default'  => $social_profiles,
+						'sortable' => true,
 						'inputs'   => array(
 							'name' => array(
 								'icon'        => 'el-icon-tag',
 								'wrap_class'  => 'social-label social-name',
 								'input_class' => 'mixt-social-field network-name',
-								'placeholder' => 'Name',
+								'placeholder' => __( 'Name', 'mixt' ),
 							),
 							'url' => array(
 								'icon'        => 'el-icon-globe',
 								'wrap_class'  => 'social-label social-url',
 								'input_class' => 'mixt-social-field network-url',
-								'placeholder' => 'URL',
+								'placeholder' => __( 'URL', 'mixt' ),
 							),
 							'icon' => array(
 								'icon'        => 'el-icon-idea',
 								'wrap_class'  => 'social-label social-icon',
 								'input_class' => 'mixt-social-field network-icon',
-								'placeholder' => 'Icon',
+								'placeholder' => __( 'Icon', 'mixt' ),
 							),
 							'color' => array(
 								'type'        => 'color',
@@ -1006,9 +2146,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'icon'        => 'el-icon-comment',
 								'wrap_class'  => 'social-label social-title',
 								'input_class' => 'mixt-social-field network-title',
-								'placeholder' => 'Title',
+								'placeholder' => __( 'Title', 'mixt' ),
 							),
 						),
+						'default'  => $social_profiles,
 					),
 				),
 			);
@@ -1123,21 +2264,32 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 		public function setHelpTabs() {
 
+			$mixt_help_file = function($file) {
+				$file_path = MIXT_DIR . "/mixt-modules/help/$file.html";
+
+				if ( file_exists($file_path) ) {
+					return file_get_contents($file_path);
+				} else {
+					return "<p>Unable to find help file <strong>$file.html</strong></p>";
+				}
+			};
+
 			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
 			$this->args['help_tabs'][] = array(
-				'id'      => 'redux-help-tab-1',
-				'title'   => __( 'Theme Information 1', 'mixt' ),
-				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt' )
+				'id'      => 'help-themes',
+				'title'   => __( 'Themes', 'mixt' ),
+				'content' => $mixt_help_file('themes'),
 			);
 
 			$this->args['help_tabs'][] = array(
-				'id'      => 'redux-help-tab-2',
-				'title'   => __( 'Theme Information 2', 'mixt' ),
-				'content' => __( '<p>This is the tab content, HTML is allowed.</p>', 'mixt' )
+				'id'      => 'help-social-profiles',
+				'title'   => __( 'Social Profiles', 'mixt' ),
+				'content' => $mixt_help_file('social-profiles'),
 			);
 
 			// Set the help sidebar
-			$this->args['help_sidebar'] = __( '<p>This is the sidebar content, HTML is allowed.</p>', 'mixt' );
+			$this->args['help_sidebar'] = '<p>The latest documentation is available at the <br>' .
+										  '<a class="button button-primary" href="https://bitbucket.org/nova-inc/mixt-docs/" target="_blank">MIXT Wiki</a></p>';
 		}
 
 		/**
@@ -1216,6 +2368,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					'enabled'     => true,
 					'page_output' => false
 				),
+
+				'ajax_save' => true,
+
+				'templates_path' => MIXT_DIR . '/templates/redux-templates',
 
 				// CAREFUL -> These options are for advanced use only
 				'transient_time'       => 60 * MINUTE_IN_SECONDS,

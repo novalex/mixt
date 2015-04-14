@@ -14,10 +14,11 @@ jQuery(document).ready( function($) {
 			megaCheckVal = megaCheck.val() ? true : false,
 			defaultType;
 
-		if (megaCheckVal === true) {
+		if ( megaCheckVal === true ) {
 			defaultType = itemType.text();
-			menuItem.addClass('is-mega');
 			itemType.text('Mega Menu').attr('data-def-type', defaultType);
+
+			menuItem.addClass('is-mega');
 
 			// Handle Mega Menu Columns
 			itemSubs.each( function() {
@@ -31,9 +32,10 @@ jQuery(document).ready( function($) {
 					return;
 				}
 			});
-		} else if (menuItem.hasClass('is-mega')) {
+		} else if ( menuItem.hasClass('is-mega') ) {
 			defaultType = itemType.attr('data-def-type');
 			itemType.text(defaultType).removeAttr('data-def-type');
+			
 			menuItem.removeClass('is-mega');
 			
 			itemSubs.each( function() {
@@ -50,8 +52,7 @@ jQuery(document).ready( function($) {
 
 	function checkMegaMenu() {
 		$('.menu-item-depth-0').each( function() {
-			var menuItem = $(this);
-			megaMenuCheck(menuItem);
+			megaMenuCheck($(this));
 		});
 
 		$('.field-mixt-megamenu input').on('change', function() {
@@ -68,7 +69,7 @@ jQuery(document).ready( function($) {
 			itemTitle   = menuItem.find('.menu-item-title'),
 			newTitle;
 
-		if (disCheckVal === true) {
+		if ( disCheckVal === true ) {
 			newTitle = itemTitle.text().replace(' (disabled)', '') + ' (disabled)';
 		} else {
 			newTitle = itemTitle.text().replace(' (disabled)', '');
@@ -93,28 +94,33 @@ jQuery(document).ready( function($) {
 			var item     = this,
 				itemType = item.find('.edit-menu-item-mixt-type').val();
 
-			if ( itemType == 'divider' ) {
 			// Divider
+			if ( itemType == 'divider' ) {
 				item.find('.item-type, .description').hide();
 				item.find('.menu-item-actions').css({ 'padding-top' : '0' });
 
-			} else if ( itemType == 'search' ) {
 			// Search Form
+			} else if ( itemType == 'search' ) {
 				item.find('.item-type').text('Search Form');
 				item.find('.field-url, .field-link-target, .field-xfn, .field-mixt-megamenu').hide();
 
-			} else if ( itemType == 'cart' ) {
+			// Button
+			} else if ( itemType == 'button' ) {
+				item.find('.item-type').text('Button');
+				item.find('.field-xfn, .field-mixt-megamenu').hide();
+
 			// Shopping Cart
+			} else if ( itemType == 'cart' ) {
 				item.find('.item-type').text('Shopping Cart');
 				item.find('.field-url, .field-link-target, .field-xfn, .field-mixt-megamenu').hide();
 
-			} else if ( itemType == 'social-icon' ) {
 			// Social Icon
+			} else if ( itemType == 'social-icon' ) {
 				item.find('.item-type').text('Social Icon');
 				item.find('.field-xfn, .field-mixt-megamenu').hide();
 
-			} else if ( itemType == 'social-icons' ) {
 			// Social Icon List
+			} else if ( itemType == 'social-icons' ) {
 				item.find('.item-type').text('Social Icon List');
 				item.find('.description').hide();
 				item.find('.menu-item-actions').css({ 'padding-top' : '0' });
@@ -132,8 +138,8 @@ jQuery(document).ready( function($) {
 					metaType = itemMeta.children('.menu-item-mixt-type').val(),
 					metaIcon = itemMeta.children('.menu-item-mixt-icon').val();
 				
-				if ( metaType !== '' ) itemType.val(metaType);
-				if ( metaIcon !== '' ) itemIcon.val(metaIcon);
+				if ( metaType !== '' && itemType.val() === '' ) { itemType.val(metaType); }
+				if ( metaIcon !== '' && itemIcon.val() === '' ) { itemIcon.val(metaIcon); }
 
 				$(itemChecks).removeClass('last');
 

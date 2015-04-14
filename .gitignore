@@ -5,3 +5,4 @@ framework/plugins/redux/
 *.sublime-workspace
 assets/icons/
 js/bootstrap/
+.idea/

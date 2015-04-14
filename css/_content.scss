@@ -1,5 +1,5 @@
 
-/* - MIXT CONTENT STYLESHEET - */
+/* - CONTENT STYLESHEET - */
 
 #main-wrap {
 	min-height: 100%;
@@ -9,37 +9,68 @@
 }
 
 .admin-bar #main-wrap { padding-top: 32px; }
-
-#content-wrap > .container { padding-bottom: 0; }
-
-.fullwidth {
-
-	#content-wrap {
-		> .container {
-			width: 100%;
-			padding-left: 0; padding-right: 0;
-			margin-left: 0; margin-right: 0;
-
-			> .row {
-				margin-left: 0; margin-right: 0;
-
-				#content {
-					width: 100%;
-					padding-left: 0; padding-right: 0;
-				}
-			}
-		}
-	}
-
+.admin-bar.admin-bar-slim #main-wrap { padding-top: 28px !important; }
+@media screen and (max-width: 782px) {
+	.admin-bar #main-wrap { padding-top: 46px; }
 }
 
 #content-wrap {
 	color: $text-dark-color;
 	border-color: $border-color;
 	border-color: $border-color-alpha;
-	background-color: #fff;
-	@extend %bring-to-front;
+	
+	> .container { padding-bottom: 0; }
 }
+
+.main-content-inner { padding-bottom: 0; }
+
+
+// Fullwidth Layout
+
+.fullwidth {
+	#content-wrap .container { width: 100%; }
+}
+
+
+// Boxed Layout
+
+.boxed {
+	
+}
+
+
+// Tags
+
+.tag-list a,
+.tagcloud a {
+	float: left;
+	padding: 4px 8px;
+	margin: 0 5px 5px 0;
+	color: #fff !important;
+	font-size: $font-size-s !important;
+	border-radius: $bd-radius;
+	background-color: #555;
+	transition: color 0.2s, background 0.2s;
+
+	&:hover {
+		background-color: $aqua-accent;
+	}
+}
+
+.tagcloud {
+	width: 100%;
+	overflow: auto;
+}
+
+.tag-list {
+	display: inline;
+	font-size: 0;
+
+	a { float: none; }
+}
+
+
+// Portfolio
 
 .portfolio-sorter {
 	width: 100%;
@@ -104,8 +135,14 @@
 	}
 }
 
-@media screen and (max-width: 782px) {
-    .admin-bar #main-wrap { padding-top: 46px; }
-}
-
 footer.entry-meta { clear: both; }
+
+// Blockquotes
+blockquote {
+	font-size: $font-size;
+	padding: $padding-s;
+	border-color: $aqua-accent;
+	background-color: rgba(0,0,0,0.03);
+
+	cite { font-size: $font-size-s; }
+}

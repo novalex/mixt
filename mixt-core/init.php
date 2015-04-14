@@ -1,0 +1,370 @@
+<?php
+
+/**
+ * MIXT Init
+ *
+ * @package MIXT
+ */
+
+defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
+
+// SET DEFAULT OPTIONS
+
+function mixt_set_options() {
+	$site_default_themes = mixt_default_themes('site');
+	$nav_default_themes = mixt_default_themes('nav');
+
+	if ( ! get_option('site-default-themes') ) {
+		update_option('site-default-themes', $site_default_themes);
+	}
+
+	if ( ! get_option('nav-default-themes') ) {
+		update_option('nav-default-themes', $nav_default_themes);
+	}
+}
+
+mixt_set_options();
+
+
+// LOAD FRAMEWORK PLUGINS
+
+function mixt_plugins() {
+
+	global $mixt_opt;
+
+	$plugins = array();
+
+	// Redux Framework and Extensions
+
+		// Extension Loader
+		if ( file_exists( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' ) ) {
+			require_once( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' );
+		}
+		// Framework
+		if ( file_exists( MIXT_PLUGINS_DIR . '/redux/ReduxCore/framework.php' ) ) {
+			if ( ! class_exists( 'ReduxFramework' ) ) {
+				require_once( MIXT_PLUGINS_DIR . '/redux/ReduxCore/framework.php' );
+			}
+		} else {
+			$plugins[] = array(
+				'name'     => 'Redux Framework',
+				'slug'     => 'redux-framework',
+				'required' => true
+			);
+		}
+		// Custom Panel CSS
+		function redux_mixt_css() {
+			wp_register_style( 'redux-mixt-css', MIXT_FRAME_URI . '/admin/css/redux-mixt.css', array(), time(), 'all' );  
+			wp_enqueue_style( 'redux-mixt-css' );
+
+			wp_register_script( 'redux-mixt-js', MIXT_FRAME_URI . '/admin/js/redux-mixt.js', array( 'jquery' ), time(), 'all' );  
+			wp_enqueue_script( 'redux-mixt-js' );
+		}
+		add_action( 'redux/page/mixt_opt/enqueue', 'redux_mixt_css', 2 );
+
+		// Config
+		if ( ! isset( $mixt_opt ) && file_exists( MIXT_FRAME_DIR . '/redux-config.php' ) ) {
+			require_once( MIXT_FRAME_DIR . '/redux-config.php' );
+		}
+
+	// CMB2 Framework
+
+		if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) && file_exists( MIXT_FRAME_DIR . '/cmb2-config.php' ) ) {
+			require_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
+
+			if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php') ) {
+				$plugins[] = array(
+					'name'     => 'CMB2',
+					'slug'     => 'cmb2',
+					'required' => true
+				);
+			}
+		}
+
+	// MICF library & Config
+
+		if ( file_exists( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' ) ) {
+			require_once( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' );
+		} else {
+			$plugins[] = array(
+				'name'     => 'Menu Item Custom Fields',
+				'slug'     => 'menu-item-custom-fields',
+				'required' => true
+			);
+		}
+		if ( file_exists( MIXT_FRAME_DIR . '/micf-config.php' ) ) {
+			require_once( MIXT_FRAME_DIR . '/micf-config.php' );
+		}
+
+	// WPBakery Visual Composer
+
+		$plugins[] = array(
+			'name'     => 'WPBakery Visual Composer',
+			'slug'     => 'js_composer',
+			'source'   => MIXT_PLUGINS_DIR . '/js_composer.zip',
+			'required' => false,
+			'force_deactivation' => true
+		);
+
+	// LayerSlider
+
+		$plugins[] = array(
+			'name' => 'LayerSlider WP',
+			'slug' => 'LayerSlider',
+			'source' => MIXT_PLUGINS_DIR . '/layerslider.zip',
+			'required' => false,
+			'version' => '5.0.2',
+			'force_deactivation' => true
+		);
+
+	// Update Notifier
+
+		if ( file_exists( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' ) ) {
+
+			$username = empty($mixt_opt['tf-update-user']) ? '' : $mixt_opt['tf-update-user'];
+			$api_key  = empty($mixt_opt['tf-update-key']) ? '' : $mixt_opt['tf-update-key'];
+
+			if ( ! empty($username) && ! empty($api_key) ) {
+				load_template( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' );
+				Envato_WP_Theme_Updater::init( $username, $api_key, 'novalex' );
+			}
+		}
+
+	// Return missing plugins
+
+	return $plugins;
+}
+
+
+// Run TGMPA Function
+
+require_once( MIXT_PLUGINS_DIR . '/class-tgm-plugin-activation.php' );
+
+add_action( 'tgmpa_register', 'mixt_register_plugins' );
+
+function mixt_register_plugins() {
+
+	$plugins = mixt_plugins();
+
+	$config = array(
+		'default_path' => '',                      // Default absolute path to pre-packaged plugins.
+		'menu'         => 'tgmpa-install-plugins', // Menu slug.
+		'has_notices'  => true,                    // Show admin notices or not.
+		'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
+		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+		'message'      => '',                      // Message to output right before the plugins table.
+		'strings'      => array(
+			'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
+			'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
+			'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ), // %s = plugin name.
+			'oops'                            => __( 'Something went wrong with the plugin API.', 'tgmpa' ),
+			'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s).
+			'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s).
+			'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s).
+			'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
+			'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
+			'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s).
+			'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s).
+			'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s).
+			'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
+			'activate_link'                   => _n_noop( 'Begin activating plugin', 'Begin activating plugins' ),
+			'return'                          => __( 'Return to Required Plugins Installer', 'tgmpa' ),
+			'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
+			'complete'                        => __( 'All plugins installed and activated successfully. %s', 'tgmpa' ), // %s = dashboard link.
+			'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
+		)
+	);
+
+	tgmpa( $plugins, $config );
+}
+
+
+// RUN INIT FUNCTION
+
+add_action('init', 'mixt_on_init');
+
+/**
+ * Apply global options
+ */
+function mixt_on_init() {
+
+	global $mixt_opt;
+
+	if ( ! empty($mixt_opt) ) {
+		// Set Dynamic Sass Option
+		update_option('mixt-dynamic-sass', $mixt_opt['dynamic-sass']);
+
+		// Update Theme Arrays
+		if ( ! empty($mixt_opt['site-themes']) ) {
+			update_option('site-themes', $mixt_opt['site-themes']);
+		}
+		if ( ! empty($mixt_opt['nav-themes']) ) {
+			update_option('nav-themes', $mixt_opt['nav-themes']);
+		}
+
+		update_option('post-excerpt-length', $mixt_opt['post-excerpt-length']);
+	}
+
+	// Set Custom Excerpt Length
+	function mixt_excerpt_length( $length ) {
+		return get_option('post-excerpt-length', 55);
+	}
+	add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
+}
+
+
+// LOAD CUSTOM POST TYPES PLUGIN
+
+add_action('after_setup_theme', 'mixt_load_plugins');
+
+function mixt_load_plugins() {
+	if ( ! function_exists('mixt_posts_register') ) {
+		// MIXT Custom Post Types
+		require_once( MIXT_PLUGINS_DIR . '/mixt-posts/mixt-posts.php' );
+	}
+}
+
+
+// Initialize Visual Composer As Included With Theme
+add_action( 'vc_before_init', 'mixt_vc_overrides' );
+function mixt_vc_overrides() {
+	vc_set_as_theme();
+}
+
+// Initialize LayerSlider As Included With Theme
+add_action('layerslider_ready', 'mixt_layerslider_overrides');
+function mixt_layerslider_overrides() {
+	// Disable auto-updates
+	$GLOBALS['lsAutoUpdateBox'] = false;
+}
+
+
+// OLD WP VERSION HANDLING
+add_filter('body_class', 'mixt_wp_old_classes');
+function mixt_wp_old_classes($classes) {
+	$version = empty($wp_version) ? get_bloginfo('version') : $wp_version;
+	// Slim Admin Bar in WP < 3.8
+	if ( version_compare($version, '3.8', '<') ) { $classes[] = 'admin-bar-slim'; }
+	
+	return $classes;
+}
+
+
+// LOAD THEME INCLUDES AND MODULES
+
+$mixt_includes = array(
+	'custom-header.php', // Custom Header
+	'jetpack.php',       // Jetpack Bullshit
+	'extras.php',        // Extra Functions
+	'customizer.php',    // Customizer Additions
+);
+mixt_requires( $mixt_includes, MIXT_INC_DIR );
+
+$mixt_modules = array(
+	'head-media.php',
+	'breadcrumbs.php',
+	'social.php',
+	'favicons.php',
+	'gallery.php',
+);
+mixt_requires( $mixt_modules, MIXT_MODULES_DIR );
+
+unset($mixt_includes, $mixt_modules);
+
+// Admin Functions
+require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
+
+// Color Manipulation
+require_once MIXT_FRAME_DIR . '/libs/color-manipulation.php';
+
+// MIXT ShortGen
+// require_once MIXT_PLUGINS_DIR . '/shortcodes-mixt/mixt_shortcodes.php';
+
+// Load the dynamic CSS file or Sass parser
+if ( get_option('mixt-dynamic-sass', 0) ) {
+	require_once( MIXT_PLUGINS_DIR . '/wp-sass/wp-sass.php' );
+} else {
+	require_once( MIXT_MODULES_DIR . '/dynamic-styles/dynamic.css.php' );
+}
+
+// JS LOCALIZATION DATA
+function local_options() {
+
+	$options = array(
+		// Navbar
+		'nav-mode'        => array( 'return' => 'value' ),
+		'nav-padding'     => array( 'type' => 'str', 'return' => 'value' ),
+		'nav-transparent' => array(),
+		'nav-position'    => array( 'return' => 'value' ),
+		// Head Media
+		'head-media'        => array(),
+		'head-fullscreen'   => array(),
+		'head-content-fade' => array(),
+		// Blog
+		'blog-type' => array( 'return' => 'value' ),
+	);
+	$options = mixt_get_options($options);
+
+	$options['show-admin-bar'] = is_admin_bar_showing() === true ? 'true' : 'false';
+
+	return $options;
+}
+
+// ENQUEUE SCRIPTS AND STYLESHEETS
+
+function mixt_scripts() {
+
+	// Bootstrap CSS
+	wp_enqueue_style( 'bootstrap-style', MIXT_URI . '/dist/bootstrap.css' );
+
+	// Master CSS
+	wp_enqueue_style( 'master-style', MIXT_URI . '/dist/master.css' );
+
+	// WebHostingHub Glyphs Icon Font
+	wp_enqueue_style( 'whh-glyphs', MIXT_INC_URI . '/css/whhg.css', false, '4.1.0' );
+
+	// Dynamic Sass
+	if ( get_option('mixt-dynamic-sass', 0) ) {
+		wp_enqueue_style( 'dynamic-style', MIXT_MODULES_URI . '/dynamic-styles/dynamic.scss.php' );
+	}
+
+	// Bootstrap JS
+	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ) );
+
+	// MIXT JS Plugins
+	wp_enqueue_script( 'mixt-plugins-js', MIXT_URI . '/dist/plugins.js', array( 'jquery' ), '1.0', true );
+
+	// MIXT JS Modules
+	wp_enqueue_script( 'mixt-modules-js', MIXT_URI . '/dist/modules.js', array( 'jquery', 'mixt-plugins-js' ), '1.0', true );
+	wp_localize_script( 'mixt-modules-js', 'mixt_opt', local_options() );
+
+	// Global Functions JS
+	wp_enqueue_script( 'mixt-global-js', MIXT_URI . '/js/global.js', array( 'jquery', 'mixt-modules-js' ), '1.0', true );
+
+	// Comment Reply Js
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'mixt_scripts' );
+
+
+// ENQUEUE ADMIN SCRIPTS AND STYLESHEETS
+
+function mixt_admin_scripts($hook) {
+
+	if ( $hook == 'nav-menus.php' ) {
+	// Menu Page Scripts
+
+		wp_enqueue_script( 'mixt-admin-menu-js', MIXT_FRAME_URI . '/admin/js/menu-scripts.js', array('jquery'), '1.0' );
+	} elseif ( $hook == 'post.php' || $hook == 'post-new.php' ) {
+	// Page Admin Scripts
+
+		wp_enqueue_script( 'mixt-admin-page-js', MIXT_FRAME_URI . '/admin/js/page-scripts.js', array('jquery'), '1.0', true );
+		wp_enqueue_style( 'mixt-admin-page-styles', MIXT_FRAME_URI . '/admin/css/page-styles.css', false, '1.0' );
+	} else {
+		return;
+	}
+}
+add_action( 'admin_enqueue_scripts', 'mixt_admin_scripts' );

@@ -1,0 +1,30 @@
+
+/* - THEME COLORS - */
+
+// Text Color
+body,
+a.no-color,
+a:hover,
+a:focus { color: $aqua-color; }
+
+// Text Color Fade
+.post-meta a,
+.post-meta > span { color: $aqua-color-fade; }
+
+// Border Color
+.theme-bd { border-color: $aqua-border; }
+
+// Accent Text Color
+a,
+.accent-color,
+.post-meta a:hover,
+.head-media .media-inner a:hover { color: $aqua-accent; }
+
+// Accent Background Color
+.accent-bg,
+.tag-list a:hover,
+.tagcloud a:hover,
+.hover-accent-bg:hover { background-color: $aqua-accent; }
+
+// Accent Border Color
+.theme-accent-bd { border-color: $aqua-accent; }

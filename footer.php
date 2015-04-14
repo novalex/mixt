@@ -1,17 +1,16 @@
 <?php
+
 /**
- * The template for displaying the footer.
+ * The template for displaying the footer
  *
- * Contains the closing of the id=main div and all content after
- *
- * @package mixt
+ * @package MIXT
  */
+
 ?>
-				</div><!-- close .*-inner (main-content or sidebar, depending if sidebar is used) -->
-			</div><!-- close .row -->
-		</div><!-- close .container -->
-	</div><!-- close .main-content -->
-</div><!-- close #main-wrap -->
+			</div><?php // close main-content-inner or sidebar, depending if sidebar is used ?>
+		</div><?php // close .row ?>
+	</div><?php // close .main-content ?>
+</div><?php // close #main-wrap ?>
 
 <footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="container">
@@ -28,14 +27,20 @@
 				<div class="site-info">
 					<?php do_action( 'mixt_credits' ); ?>
 					<?php printf( __( 'Theme: %1$s by %2$s.', 'mixt' ), 'MIXT', '<a href="http://novalx.com/" rel="designer">novalex</a>' ); ?>
-				</div><!-- close .site-info -->
+				</div>
 
 			</div>
 		</div>
-	</div><!-- close .container -->
-</footer><!-- close #colophon -->
+	</div>
+</footer>
 
 <?php wp_footer(); ?>
+
+<script type='text/javascript' id="__bs_script__">
+//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.2.3.js'><\/script>".replace("HOST", location.hostname));
+//]]>
+</script>
 
 </body>
 </html>

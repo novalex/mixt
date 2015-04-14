@@ -1,5 +1,5 @@
 
-/* - MIXT GLOBAL STYLING - */
+/* - GLOBAL STYLESHEET - */
 
 // PAGE LOADER
 
@@ -7,6 +7,8 @@ body.loading {
 	overflow: hidden;
 	height: 100%;
 	max-height: 100%;
+
+	#load-overlay { transition: visibility 0s, opacity 0s; }
 }
 
 #load-overlay {
@@ -18,7 +20,7 @@ body.loading {
 	display: table;
 	opacity: 0;
 	visibility: hidden;
-	background: $theme-accent;
+	background: $aqua-accent;
 	z-index: 999999;
 
 	transition: visibility 0.2s ease 0.2s, opacity 0.2s ease 0.2s;
@@ -30,9 +32,6 @@ body.loading {
 		text-align: center;
 		vertical-align: middle;
 
-		img {
-		}
-
 		img,
 		div {
 			margin: 0 auto;
@@ -41,7 +40,7 @@ body.loading {
 		}
 	}
 
-	// SHAPES
+	// Loader Shapes
 
 	.circle {
 		border-radius: 32px;
@@ -69,14 +68,12 @@ body.loading {
 	opacity: 1;
 	visibility: visible;
 }
-.loading #load-overlay {
-	transition: visibility 0s, opacity 0s;
-}
 
-.no-visibility #load-overlay {
-	display: none;
-}
-.no-visibility.loading #load-overlay,
-.no-visibility.loading-out #load-overlay {
-	display: block;
+.no-visibility {
+	#load-overlay { display: none; }
+
+	&.loading #load-overlay,
+	&.loading-out #load-overlay {
+		display: block;
+	}
 }

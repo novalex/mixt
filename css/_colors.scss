@@ -4,8 +4,9 @@
 
 // GLOBAL
 
-// Theme Colors
-$theme-accent: #539DDD;
+$white: #fff;
+$off-white: #f0f0f0;
+$red: #D81616;
 
 // Text Colors
 $text-light-color: #FFF;
@@ -22,12 +23,10 @@ $border-color-dark: #333;
 $border-color-dark-alpha: rgba(0,0,0,0.6);
 
 
-// SUBNAV & BREADCRUMBS
-
-// Subnav
-$subnav-bg: #F5F5F5;
-$subnav-border: $border-color;
-$subnav-border-alpha: $border-color-alpha;
+// Location Bar
+$loc-bar-bg: #F5F5F5;
+$loc-bar-text: $text-dark-color;
+$loc-bar-bd: $border-color;
 
 
 // INPUTS & BUTTONS
@@ -47,15 +46,49 @@ $input-focus-bd: #BBB;
 $input-focus-bs: rgba(0,0,0,0.1);
 
 
+// MIXINS
+
+@mixin bg-color-alpha($color, $opacity: 0.9) {
+    background-color: $color;
+    background-color: rgba($color, $opacity);
+}
+
+@mixin bd-color-alpha($color, $opacity: 0.9) {
+    border-color: $color;
+    border-color: rgba($color, $opacity);
+}
+
+
 // THEMES
 
 
-// BLUE THEME (AQUA)
+// Aqua Theme (Blue Accent)
 
 $aqua-accent: #539DDD;
+$aqua-bg-dark-accent: $aqua-accent;
 
-$aqua-light-bg: #FFF;
+$aqua-bg: #FFF;
+$aqua-bg-hover: darken($aqua-bg, 5);
 
-$aqua-dark-bg: #333;
+$aqua-border: #ddd;
+$aqua-border-alpha: rgba(0,0,0,0.15);
 
+$aqua-bg-dark-border: #333;
+$aqua-bg-dark-border-alpha: rgba(0,0,0,0.8);
 
+$aqua-color: #333;
+$aqua-color-fade: lighten($aqua-color, 30);
+
+$aqua-bg-dark-color: #fff;
+$aqua-bg-dark-color-fade: darken($aqua-bg-dark-color, 4);
+
+$aqua-menu-color: #333;
+$aqua-menu-color-fade: lighten($aqua-menu-color, 4);
+
+$aqua-menu-bg: #fbfbfb;
+$aqua-menu-bg-hover: darken($aqua-menu-bg, 4);
+
+$aqua-menu-border: #e2e2e2;
+$aqua-menu-border-alpha: rgba(0,0,0,0.15);
+
+$aqua-menu-expand: rgba(0,0,0,0.05);

@@ -7,42 +7,36 @@ HEADER FUNCTIONS
 
 	'use strict';
 
-	var viewport   = $(window),
-		mainWrap   = $('#main-wrap'),
-		topNavBar  = $('#top-nav');
+	/* global mixt_opt */
+
+	var viewport  = $(window),
+		topNavBar = $('#top-nav'),
+		mediaWrap = $('.head-media');
 
 	// HEAD MEDIA FUNCTIONS
 
 	function headerFn() {
-		var mediaWrap    = $('.head-media'),
-			container    = mediaWrap.children('.container'),
+		var container    = mediaWrap.children('.container'),
 			mediaCont    = mediaWrap.children('.media-container'),
 			topNavHeight = topNavBar.outerHeight(),
-			wrapHeight   = mediaWrap.height();
+			wrapHeight   = mediaWrap.height(),
+			hmHeight     = 0;
 
-		if ( mainWrap.hasClass('full-height') ) {
-			var hmHeight = viewport.height() - mediaWrap.offset().top;
+		if ( mixt_opt['head-fullscreen'] == 'true' ) {
+			mediaWrap.css('height', wrapHeight);
+			
+			hmHeight = viewport.height() - mediaWrap.offset().top;
 
-			if ( mainWrap.hasClass('nav-below-header') && ! mainWrap.hasClass('nav-transparent') ) {
-				hmHeight -= topNavHeight;
-			}
+			if ( mixt_opt['nav-position'] == 'below' && mixt_opt['nav-transparent'] == 'false' ) { hmHeight -= topNavHeight; }
+
 			mediaWrap.css('height', hmHeight);
 			mediaCont.css('height', hmHeight);
-		} else {
-			mediaWrap.css('height', wrapHeight);
-			mediaCont.css('height', wrapHeight);
 		}
 
-		if ( mainWrap.is('.has-head-media.nav-transparent') && mediaCont.length == 1 ) {
+		if ( mixt_opt['nav-transparent'] == 'true' && mediaCont.length == 1 ) {
 			var containerPad = topNavHeight;
-			
-			if ( mediaWrap.hasClass('text-dark') ) {
-				topNavBar.addClass('text-dark').removeClass('text-light');
-			} else {
-				topNavBar.addClass('text-light').removeClass('text-dark');
-			}
 
-			if ( mainWrap.hasClass('nav-below-header') ) {
+			if ( mixt_opt['nav-position'] == 'below' ) {
 				container.css('padding-bottom', containerPad);
 			} else {
 				container.css('padding-top', containerPad);
@@ -50,10 +44,43 @@ HEADER FUNCTIONS
 		}
 	}
 
-	$(window).resize( $.debounce( 500, headerFn ));
+	// Header Fade & Parallax
 
-	$(document).ready( function() {
+	function headScroll() {
+		var header  = $('.head-media'),
+			content = $('.container', header),
+			contH   = content.innerHeight(),
+			scrollE = $.throttle( 100, scrollHandler );
+
+		function scrollHandler() {
+			var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			if ( scrollTop > contH ) {
+				content.css({
+					'opacity': 0,
+					'-webkit-transform': 'translate(0px,0px)',
+				    '-ms-transform': 'translate(0px,0px)',
+				    'transform': 'translate(0px,0px)'
+				});
+			} else {
+				var translate = 'translate(0px, ' + ( scrollTop / 3 ) + 'px)';
+				content.css({
+					'opacity': 1 - scrollTop / (contH / 1.2),
+					'-webkit-transform': translate,
+				    '-ms-transform': translate,
+				    'transform': translate
+				});
+			}
+		}
+
+		$(window).on('scroll', scrollE);
+	}
+
+	if ( mixt_opt['head-content-fade'] == 'true' ) { headScroll(); }
+
+	if ( mixt_opt['head-media'] == 'true' ) {
 		headerFn();
-	});
+		
+		$(window).resize( $.debounce( 500, headerFn ));
+	}
 
 }(jQuery);

@@ -1,32 +1,35 @@
 <?php
+
 /**
- * The template for displaying Search Results pages.
+ * Template For Displaying Search Results Pages
  *
- * @package mixt
+ * @package MIXT
  */
 
-get_header(); ?>
+get_header();
 
-	<?php if ( have_posts() ) : ?>
+	if ( have_posts() ) : ?>
 
-		<header class="page-header">
-			<h2 class="page-title"><?php printf( __( 'Search Results for: %s', 'mixt' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
-		</header><!-- .page-header -->
+		<?php
 
-		<?php // start the loop. ?>
-		<?php while ( have_posts() ) : the_post(); ?>
+		while ( have_posts() ) : // Start The Loop
 
-			<?php get_template_part( 'content', 'search' ); ?>
+			the_post();
 
-		<?php endwhile; ?>
+			get_template_part( 'templates/content', 'search' );
 
-		<?php mixt_content_nav( 'nav-below' ); ?>
+		endwhile; // End The Loop
 
-	<?php else : ?>
+		mixt_content_nav( 'nav-below' );
 
-		<?php get_template_part( 'no-results', 'search' ); ?>
+	else :
 
-	<?php endif; // end of loop. ?>
+		get_template_part( 'templates/no-results', 'search' );
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+	endif;
+
+get_sidebar();
+
+get_footer();
+
+?>

@@ -1,13 +1,13 @@
 <?php
+
 /**
- * The template for displaying 404 pages (Not Found).
+ * Template For Displaying 404 Pages (not Found)
  *
- * @package mixt
+ * @package MIXT
  */
 
 get_header(); ?>
 
-	<?php // add the class "panel" below here to wrap the content-padder in Bootstrap style ;) ?>
 	<section class="content-padder error-404 not-found">
 
 		<header class="page-header">
@@ -24,5 +24,10 @@ get_header(); ?>
 
 	</section><!-- .content-padder -->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+
+get_sidebar();
+
+get_footer();
+
+?>

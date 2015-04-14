@@ -23,6 +23,7 @@ var gulp         = require('gulp'),
 	sass         = require('gulp-sass'),
 	minCSS       = require('gulp-minify-css'),
 	sourcemaps   = require('gulp-sourcemaps'),
+	browserSync  = require('browser-sync'),
 	autoprefixer = require('gulp-autoprefixer');
 
 // Paths
@@ -67,19 +68,20 @@ gulp.task('sass', function() {
 	gulp.src(path.styles.files)
 		.pipe(sourcemaps.init())
 		.pipe(sass({ outputStyle: 'compressed' }))
-		.on('error', function(err){
+		.on('error', function(err) {
 			displayError(err);
 		})
+		.pipe(autoprefixer('last 2 versions', 'ie 8'))
 		// .pipe(minCSS({keepBreaks:true}))
 		.pipe(concat('master.css'))
-		.pipe(autoprefixer('last 2 versions', 'ie 8'))
-		.pipe(sourcemaps.write(path.maps))
-		.pipe(gulp.dest(path.dest));
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest(path.dest))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 // Compile Bootstrap Sass
 gulp.task('sassbs', function(){
-	return gulp.src( 'inc/bootstrap/css/bootstrap.scss' )
+	return gulp.src( 'framework/inc/bootstrap/css/bootstrap.scss' )
 		// .pipe(sourcemaps.init())
 		.pipe(sass())
 		.pipe(concat('bootstrap.css'))
@@ -92,7 +94,7 @@ gulp.task('adminsass', function() {
 	gulp.src(path.styles.admin, {base: './'})
 		.pipe(sourcemaps.init())
 		.pipe(sass({ outputStyle: 'compressed' }))
-		.on('error', function(err){
+		.on('error', function(err) {
 			displayError(err);
 		})
 		.pipe(autoprefixer('last 2 versions', 'ie 8'))
@@ -112,6 +114,9 @@ gulp.task('minify', function(){
 	return gulp.src(path.js.plugins)
 		.pipe(sourcemaps.init())
 		.pipe(concat('plugins.js'))
+		.on('error', function(err) {
+			displayError(err);
+		})
 		.pipe(uglify())
 		.pipe(sourcemaps.write(path.maps))
 		.pipe(gulp.dest(path.dest));
@@ -122,6 +127,9 @@ gulp.task('modules-js', function(){
 	return gulp.src(path.js.modules)
 		.pipe(sourcemaps.init())
 		.pipe(concat('modules.js'))
+		.on('error', function(err) {
+			displayError(err);
+		})
 		.pipe(uglify())
 		.pipe(sourcemaps.write(path.maps))
 		.pipe(gulp.dest(path.dest));
@@ -129,7 +137,7 @@ gulp.task('modules-js', function(){
 
 // Concat & Minify Bootstrap JS
 gulp.task('minifybs', function(){
-	return gulp.src([ 'inc/bootstrap/js/bootstrap.js', 'inc/bootstrap/js/bootstrap/*.js' ])
+	return gulp.src([ 'framework/inc/bootstrap/js/bootstrap.js', 'framework/inc/bootstrap/js/bootstrap/*.js' ])
 		.pipe(concat('bootstrap.js'))
 		// .pipe(uglify())
 		.pipe(gulp.dest(path.dest));
@@ -137,6 +145,9 @@ gulp.task('minifybs', function(){
 
 // Watch Our Files
 gulp.task('watch', function() {
+	browserSync({
+        host: '192.168.0.103'
+    });
 	gulp.watch(path.styles.files, ['sass']);
 	gulp.watch(path.styles.admin, ['adminsass']);
 	// gulp.watch([ 'inc/css/bootstrap.scss', 'inc/css/bootstrap/*.scss' ], ['sassbs']);

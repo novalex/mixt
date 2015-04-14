@@ -222,13 +222,16 @@ class wp_sass {
 		// get path and url info
 		$upload_dir = wp_upload_dir();
 
+		$mixt_dir = 'mixt/sass';
+		$original_dir = 'wp-sass-cache';
+
 		if ( $path ) {
-			$dir = apply_filters( 'wp_sass_cache_path', trailingslashit( $upload_dir[ 'basedir' ] ) . 'wp-sass-cache' );
+			$dir = apply_filters( 'wp_sass_cache_path', trailingslashit( $upload_dir[ 'basedir' ] ) . $mixt_dir );
 			// create folder if it doesn't exist yet
 			if ( ! file_exists( $dir ) )
 				wp_mkdir_p( $dir );
 		} else {
-			$dir = apply_filters( 'wp_sass_cache_url', trailingslashit( $upload_dir[ 'baseurl' ] ) . 'wp-sass-cache' );
+			$dir = apply_filters( 'wp_sass_cache_url', trailingslashit( $upload_dir[ 'baseurl' ] ) . $mixt_dir );
 		}
 
 		return rtrim( $dir, '/' );
