@@ -264,7 +264,7 @@
 			<?php
 
 			/**
-			 * TODO: Check for type of page displayed and fetch specific settings if page is archive, tag, category...
+			 * TODO: Check for type of page displayed and fetch specific settings if page is archive, tag, category....
 			 */
 
 			$cont_classes = 'main-content-inner ';
