@@ -56,7 +56,7 @@ function mixt_get_title( $echo = false ) {
  * Display navigation to next/previous pages when applicable
  *
  * @param string $nav_id ID to give the nav element
- * @param bool $archive whether the queried page is a posts page (blog, archive, etc.)
+ * @param bool $archive whether the queried page is a posts page (blog, tag, category, etc.)
  */
 function mixt_content_nav( $nav_id, $archive = false ) {
 	global $wp_query, $post;
@@ -73,6 +73,7 @@ function mixt_content_nav( $nav_id, $archive = false ) {
 	// Numbered Navigation
 
 	if ( $archive === true && $options['pagination-type'] == 'numbered' ) {
+		if ( $page_max < 2 ) return; // Don't output pagination if there's only 1 page
 		$nav_class .= 'paging-navigation numbered-paging ';
 
 		$page_links = paginate_links( array(
@@ -97,6 +98,7 @@ function mixt_content_nav( $nav_id, $archive = false ) {
 	// AJAX Navigation
 
 	} else if ( $archive === true && $options['pagination-type'] != 'classic' ) {
+		if ( $page_max < 2 ) return; // Don't output pagination if there's only 1 page
 		$nav_class .= 'paging-navigation ajax-paging ';
 
 		?>
@@ -134,7 +136,7 @@ function mixt_content_nav( $nav_id, $archive = false ) {
 
 			<?php if ( is_single() ) : // Navigation links for single posts ?>
 
-				<?php previous_post_link( '<li class="nav-previous prev">%link</li>', '<i class="icon icon-chevron-left"></i> %title' ); ?>
+				<?php previous_post_link( '<li class="nav-previous previous prev">%link</li>', '<i class="icon icon-chevron-left"></i> %title' ); ?>
 				<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <i class="icon icon-chevron-right"></i>' ); ?>
 
 			<?php elseif ( $page_max > 1 && ( is_home() || is_archive() || is_search() ) ) : ?>
@@ -166,7 +168,7 @@ function mixt_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 
 	// Pingbacks & Trackbacks
-	if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) : ?>
+	if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) { ?>
 
 	<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 		<div class="comment-body">
@@ -176,7 +178,7 @@ function mixt_comment( $comment, $args, $depth ) {
 	<?php
 
 	// Standard Comments
-	else : ?>
+	} else { ?>
 
 	<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
 		<article id="div-comment-<?php comment_ID(); ?>" class="comment-cont">
@@ -231,7 +233,8 @@ function mixt_comment( $comment, $args, $depth ) {
 			</div>
 
 		</article>
-	<?php endif;
+	<?php
+	}
 }
 
 

@@ -201,6 +201,7 @@
 		right: 10px;
 	}
 }
+.controls-alt + .lSAction > a { background-image: url('#{$img-path}/icons/lslider-controls-alt.png'); }
 .lSSlideWrapper:hover .lSAction > a {
 	opacity: 0.6;
 

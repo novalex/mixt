@@ -191,6 +191,12 @@ function mixt_on_init() {
 
 	global $mixt_opt;
 
+	// HANDLE CACHING
+	function mixt_options_changed( $value ) {
+		// var_dump($value);
+	}
+	add_action( 'redux/options/mixt_opt/settings/change', 'mixt_options_changed', 2 );
+
 	if ( ! empty($mixt_opt) ) {
 		// Set Dynamic Sass Option
 		update_option('mixt-dynamic-sass', $mixt_opt['dynamic-sass']);
@@ -291,6 +297,13 @@ if ( get_option('mixt-dynamic-sass', 0) ) {
 
 // JS LOCALIZATION DATA
 function local_options() {
+	global $mixt_opt;
+
+	$page_type = mixt_get_page_type();
+	if ( $page_type != 'blog' ) {
+		$page_type .= '-page';
+		if ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] == true ) { $page_type = 'blog'; }
+	}
 
 	$options = array(
 		// Navbar
@@ -302,8 +315,8 @@ function local_options() {
 		'head-media'        => array(),
 		'head-fullscreen'   => array(),
 		'head-content-fade' => array(),
-		// Blog
-		'blog-type'       => array( 'return' => 'value' ),
+		// Layout
+		'layout-type' => array( 'key' => $page_type . '-type', 'return' => 'value' ),
 		// Pagination
 		'pagination-type' => array( 'return' => 'value' ),
 		'show-page-nr'    => array(),

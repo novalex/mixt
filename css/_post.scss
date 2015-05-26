@@ -1,8 +1,7 @@
 
 /* - POST STYLESHEET - */
 
-.hentry,
-.product {
+.article {
 	margin: 15px 0 0;
 	padding: 0 0 15px;
 
@@ -20,14 +19,6 @@
 	.entry-body {
 		&:first-child { margin-top: 0; }
 	}
-
-	@include media('screen', 'mars') {
-		margin: $margin-l 0 0;
-		padding: 0 0 $padding-l;
-	}
-}
-
-.hentry {
 
 	embed, iframe, object { width: 100%; }
 
@@ -70,6 +61,11 @@
 	}
 
 	.read-more { border-width: 0; }
+
+	@include media('screen', 'mars') {
+		margin: $margin-l 0 0;
+		padding: 0 0 $padding-l;
+	}
 }
 
 .page-header {
@@ -89,6 +85,7 @@
 
 .post-feat {
 	width: 100%;
+	min-height: 100px;
 	display: flex;
 	flex-shrink: 1;
 	align-items: center;
@@ -103,6 +100,7 @@
 
 	img,
 	.lSSlideOuter {
+		width: 100%;
 		min-width: 100%;
 		max-width: 100%;
 		max-height: 100%;
@@ -121,6 +119,8 @@
 			margin: 0 auto;
 		}
 	}
+
+	&.post-aside { min-height: 40px; }
 
 	&.post-aside,
 	&.post-quote,
@@ -164,6 +164,7 @@
 	}
 
 	img,
+	&.post-image,
 	&.post-video,
 	&.post-audio,
 	&.post-gallery,
@@ -173,8 +174,9 @@
 		border-radius: $bd-radius;
 	}
 
-	&.post-gallery,
-	&.post-video {
+	&.post-image,
+	&.post-video,
+	&.post-gallery {
 		overflow: hidden;
 		-webkit-perspective: 1px; // Chrome border-radius bug fix
 	}
@@ -279,8 +281,7 @@
 // STANDARD BLOG
 
 .blog-standard {
-	.hentry,
-	.product {
+	.article {
 		border-bottom-width: 1px;
 		border-bottom-style: solid;
 
@@ -289,8 +290,6 @@
 			display: table;
 			clear: both;
 		}
-
-		&.has-info .post-feat { margin-top: $margin-m; }
 
 		.post-feat {
 			&.feat-blog-medium,
@@ -331,6 +330,7 @@
 			}
 		}
 	}
+	.has-info .post-feat { margin-top: $margin-m; }
 
 	.ajax-page {
 		border-bottom-width: 1px;
@@ -339,7 +339,7 @@
 	}
 
 	@include media('screen', 'mars') {
-		.hentry.has-info {
+		.has-info {
 			position: relative;
 			padding-left: 100px;
 			min-height: 143px;
@@ -389,7 +389,7 @@
 		}
 	}
 
-	.hentry {
+	.article {
 		width: 100%;
 		padding: 0;
 		margin: -1px 0 0 -1px;
@@ -440,7 +440,7 @@
 		padding-top: $padding-l - $gutter-width;
 	}
 
-	.hentry {
+	.article {
 		margin: 0;
 		padding: $gutter-width;
 		overflow: hidden;
@@ -457,7 +457,7 @@
 
 .blog-grid,
 .blog-masonry {
-	.hentry {
+	.article {
 		float: left;
 
 		.post-info {
@@ -476,17 +476,6 @@
 			width: auto;
 			margin: -1px -1px 0 -1px;
 			overflow: hidden;
-
-			img,
-			&.post-video,
-			&.post-audio,
-			&.post-gallery,
-			&.post-quote blockquote,
-			&.post-link a,
-			&.feat-format {
-				border-radius: 0;
-				-webkit-perspective: none;
-			}
 		}
 
 		$inner-padding: 15px;
@@ -497,15 +486,29 @@
 		.page-header .entry-meta,
 		.entry-body { padding-left: $inner-padding; padding-right: $inner-padding; }
 	}
+
+	.feat-format { border-radius: 1px 0 1px 0; }
+
+	.post-feat img,
+	.post-image,
+	.post-video,
+	.post-audio,
+	.post-gallery,
+	.post-quote blockquote,
+	.post-link a,
+	.feat-format {
+		border-radius: 0;
+		-webkit-perspective: none;
+	}
 }
 
-.blog-grid .hentry,
+.blog-grid .article,
 .blog-masonry .post-wrapper { padding-bottom: $padding-s; }
 
-.blog-2-col .hentry { width: 50%; }
-.blog-3-col .hentry { width: 33.33333%; }
-.blog-4-col .hentry { width: 25%; }
-.blog-5-col .hentry { width: 20%; }
+.blog-2-col .article { width: 50%; }
+.blog-3-col .article { width: 33.33333%; }
+.blog-4-col .article { width: 25%; }
+.blog-5-col .article { width: 20%; }
 
 
 // PAGINATION
@@ -541,7 +544,14 @@
 	border-top-width: 1px;
 	border-top-style: solid;
 
-	.pager { margin: $margin-m 0; }
+	.pager {
+		margin: ($margin-m - $margin-s) 0 $margin-m;
+		li a {
+			height: auto;
+			min-height: 34px;
+			margin-top: $margin-s;
+		}
+	}
 }
 
 .ajax-page {
@@ -622,6 +632,30 @@
 	@extend .border-top-btm;
 }
 
+// SOCIAL SHARING
+
+.post-share {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: $bd-radius + 1px;
+	padding: 0; margin: 0;
+
+	&,
+	li { border-color: inherit; }
+
+	li {
+		border-style: solid;
+		border-width: 0 0 0 1px;
+
+		&:first-child { border-width: 0; }
+	}
+
+	.btn {
+		padding: 10px 6px;
+		border-width: 0;
+	}
+}
+
 // ABOUT THE AUTHOR
 
 .about-the-author {
@@ -647,43 +681,47 @@
 .post-related {
 	$max-height: 200px;
 
+	.title { margin-bottom: 0; }
+	
 	.post {
 		float: left;
-		width: 32%;
-		max-height: $max-height;
-		margin-right: 2%;
-		position: relative;
 		overflow: hidden;
-		border-color: inherit;
-
-		&:last-child { margin-right: 0; }
+		position: relative;
+		max-height: $max-height;
 
 		.related-title {
 			position: absolute;
 			left: 0; right: 0; bottom: 0;
-			margin: 0;
-			padding: $padding-s;
+			margin: 0; padding: $padding-s;
 			color: $theme-bg-dark-color;
 			font-weight: bold;
 			font-size: $font-size-s;
-			opacity: 1;
-			visibility: visible;
 			border-radius: 0 0 $bd-radius $bd-radius;
 			background-color: rgba(0,0,0,0.5);
 			vertical-align: middle;
 			text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-			transition: bottom 0.4s ease-out 0.2s;
 		}
 
 		.related-content { margin: $margin-s 0 0; }
-
-		&:hover {
-			.related-title:not(:hover) {
-				bottom: -100%;
-				transition: bottom 0.4s ease-in 0.6s;
-			}
-		}
 	}
+
+	> .post,
+	.slider-cont { margin-top: $margin-m; }
+
+	.lSAction > a { margin-top: -6px; }
+
+	> .post {
+		width: 32%;
+		margin-right: 2%;
+
+		&:nth-child(3n+1) { margin-right: 0; }
+	}
+
+	.post,
+	.slider-cont,
+	.lSSlideOuter,
+	.lSSlideWrapper { border-color: inherit; }
+
 	.post-feat {
 		width: 100%;
 		max-width: 100%;
@@ -692,15 +730,18 @@
 		float: none;
 		margin: 0;
 
+		&.post-image {
+			a { height: 100%; }
+			img { height: 100%; object-fit: cover; }
+		}
+
 		&.post-video > div,
 		&.post-video > iframe {
 			min-width: 0;
 		}
 
-		&.feat-format + .related-title {
-			color: $theme-color;
-			text-shadow: none;
-			background-color: transparent;
+		&.feat-format i {
+			margin-top: (-$padding-s * 2) - $font-size-s; // Correction for the title
 		}
 	}
 }

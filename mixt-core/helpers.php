@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIXT Helpers
+ * Helper Functions
  *
  * @package MIXT
  */
@@ -18,6 +18,7 @@ define( 'MIXT_UPLOAD_URL', $wp_upload_dir['baseurl'] . '/mixt');  // Upload URL
 if ( ! is_dir( MIXT_UPLOAD_PATH ) ) {
 	wp_mkdir_p( MIXT_UPLOAD_PATH );
 }
+
 
 /**
  * Display a message when no menu is assigned to a location
@@ -49,6 +50,7 @@ function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
 	}
 }
 
+
 /**
  * Return array of theme names and ids for specified element
  *
@@ -77,6 +79,7 @@ function mixt_get_themes($elem = '') {
 	}
 }
 
+
 /**
  * Test For Server Image Manipulation Capabilities
  */
@@ -88,11 +91,86 @@ function mixt_img_edit_support() {
 			'save',
 		),
 	);
-	$img_edit_test = wp_image_editor_supports($img_edit_support);
-
-	if ( $img_edit_test ) {
-		return true;
-	} else {
-		return false;
-	}
+	return wp_image_editor_supports($img_edit_support);
 };
+
+
+/**
+ * Check If Current Page Is A Blog Page
+ */
+function mixt_is_blog() {
+	return ( ! is_front_page() && is_home() );
+}
+
+
+/**
+ * Get Current Page Type
+ */
+function mixt_get_page_type() {
+	// Author Page
+	if ( is_author() ) { return 'author'; }
+	// Blog Page
+	else if ( mixt_is_blog() ) { return 'blog'; }
+	// Category Page
+	else if ( is_category() ) { return 'category'; }
+	// Date Page
+	else if ( is_date() ) { return 'date'; }
+	// Search Page
+	else if ( is_search() ) { return 'search'; }
+	// Tag Page
+	else if ( is_tag() ) { return 'tag'; }
+	// Type Not Set Or Singular
+	else { return 'single'; }
+}
+
+
+/**
+ * Check If Current Page Is A Posts Page
+ */
+function mixt_is_posts_page() {
+	if ( mixt_get_page_type() == 'single' ) { return false; }
+	else { return true; }
+}
+
+
+/**
+ * Return Array Of Layout Options For The Current Page
+ */
+function mixt_layout_options() {
+	global $mixt_opt;
+
+	$page_type = mixt_get_page_type();
+	if ( $page_type != 'blog' ) {
+		$page_type .= '-page';
+		if ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] == true ) { $page_type = 'blog'; }
+	}
+
+	$options = array(
+		'type' => array(
+			'key'     => $page_type . '-type',
+			'return'  => 'value',
+			'default' => 'standard',
+		),
+		'columns' => array(
+			'key'     => $page_type . '-columns',
+			'return'  => 'value',
+			'default' => '2',
+		),
+		'feat-size' => array(
+			'key'     => $page_type . '-feat-size',
+			'return'  => 'value',
+			'default' => 'blog-large',
+		),
+		'post-info' => array(
+			'key'     => $page_type . '-post-info',
+			'default' => 'false',
+		),
+		'meta-show' => array(
+			'key'     => $page_type . '-meta-show',
+			'return'  => 'value',
+			'default' => 'header',
+		),
+	);
+
+	return mixt_get_options($options);
+}

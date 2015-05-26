@@ -15,10 +15,10 @@ get_header();
 
 if ( have_posts() ) {
 
-	// Determine if a blog page is displayed
-	$is_blog = ( ! is_front_page() && is_home() ) ? true : false;
+	// Determine if a posts page is displayed
+	$is_posts_page = mixt_is_posts_page();
 
-	if ( $is_blog ) { echo '<div class="posts-container">'; }
+	if ( $is_posts_page ) { echo '<div class="posts-container">'; }
 
 	while ( have_posts() ) : // Start The Loop
 
@@ -32,7 +32,7 @@ if ( have_posts() ) {
 
 	endwhile; // End The Loop
 
-	if ( $is_blog ) { echo '</div>'; } // Close .posts-container
+	if ( $is_posts_page ) { echo '</div>'; } // Close .posts-container
 
 	mixt_content_nav( 'nav-below', true );
 

@@ -10,15 +10,9 @@
 if ( post_password_required() ) { return; }
 
 $options = array(
-	'notes-before' => array(
-		'key' => 'comment-notes-before',
-	),
-	'logged-in-as' => array(
-		'key' => 'comment-logged-in',
-	),
-	'notes-after' => array(
-		'key' => 'comment-notes-after',
-	),
+	'notes-before' => array( 'key' => 'comment-notes-before' ),
+	'logged-in-as' => array( 'key' => 'comment-logged-in' ),
+	'notes-after' => array( 'key' => 'comment-notes-after' ),
 );
 $options = mixt_get_options($options);
 

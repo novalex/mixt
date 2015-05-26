@@ -155,15 +155,9 @@ function mixt_gallery_shortcode($attr) {
 		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
 
 		$output .= "<{$itemtag} class='gallery-item'>";
-		$output .= "
-				<{$icontag} class='gallery-icon'>
-						$link
-				</{$icontag}>";
+		$output .= "<{$icontag} class='gallery-icon'>$link</{$icontag}>";
 		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= "
-				<{$captiontag} class='wp-caption-text gallery-caption'>
-				" . wptexturize($attachment->post_excerpt) . "
-				</{$captiontag}>";
+			$output .= "<{$captiontag} class='wp-caption-text gallery-caption'>" . wptexturize($attachment->post_excerpt) . "</{$captiontag}>";
 		}
 		$output .= "</{$itemtag}>";
 		if ( $columns > 0 && ++$i % $columns == 0 ) {

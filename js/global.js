@@ -1,6 +1,6 @@
 
 /* ------------------------------------------------ /
-MIXT GLOBAL FUNCTIONS
+MIXT GLOBAL JS FUNCTIONS
 / ------------------------------------------------ */
 
 (function ($) {
@@ -11,26 +11,6 @@ MIXT GLOBAL FUNCTIONS
 
 	var viewport = $(window),
 		bodyEl   = $('body');
-
-
-	// Fix WPML Dropdown
-
-	$('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
-
-	// Fix PolyLang Menu Items And Make Them Dropdown
-
-	$('.menu-item.lang-item').removeClass('disabled');
-
-	function plLangDrop() {
-		var item = $('.lang-item.current-lang');
-		if (item.length === 0) {
-			item = $('.lang-item').first();
-		}
-		var langs = item.siblings('.lang-item');
-		item.addClass('dropdown drop-menu');
-		langs.wrapAll('<ul class="sub-menu dropdown-menu"></ul>').parent().appendTo(item);
-	}
-	plLangDrop();
 
 
 	// Functions To Run On Blog & Post Pages
@@ -57,6 +37,26 @@ MIXT GLOBAL FUNCTIONS
 			$('.blog-grid .post-feat, .post-related .post-feat').matchHeight();
 		}
 	}
+
+
+	// Fix WPML Dropdown
+
+	$('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
+
+	// Fix PolyLang Menu Items And Make Them Dropdown
+
+	$('.menu-item.lang-item').removeClass('disabled');
+
+	function plLangDrop() {
+		var item = $('.lang-item.current-lang');
+		if (item.length === 0) {
+			item = $('.lang-item').first();
+		}
+		var langs = item.siblings('.lang-item');
+		item.addClass('dropdown drop-menu');
+		langs.wrapAll('<ul class="sub-menu dropdown-menu"></ul>').parent().appendTo(item);
+	}
+	plLangDrop();
 
 
 	// RUN ON LOAD
@@ -120,7 +120,7 @@ MIXT GLOBAL FUNCTIONS
 			var cont = $(this);
 
 			if ( ! cont.hasClass('hover-none') ) {
-				cont.children('li').each( function() {
+				cont.children().each( function() {
 					var icon = $(this),
 						link = icon.children('a'),
 						dataColor = link.attr('data-color'),
@@ -154,13 +154,21 @@ MIXT GLOBAL FUNCTIONS
 			}
 		});
 
+		// Tooltips Init
+
+		$('.social-links [data-toggle="tooltip"]').tooltip({
+			placement: 'auto',
+			container: 'body'
+		});
+
+
 		// Isotope Masonry Init
 
-		if ( mixt_opt['blog-type'] == 'masonry' ) {
+		if ( mixt_opt['layout-type'] == 'masonry' ) {
 			var blogCont = $('.blog-masonry .posts-container');
 
 			blogCont.isotope({
-				itemSelector: '.hentry',
+				itemSelector: '.article',
 				layout: 'masonry',
 				gutter: 0
 			});
@@ -171,11 +179,24 @@ MIXT GLOBAL FUNCTIONS
 
 		postsPage();
 
+		// Related Posts Slider
+		if ( typeof $.fn.lightSlider === 'function' ) {
+			var relPostsSlider = $('.post-related .slider-cont');
+			relPostsSlider.imagesLoaded( function() {
+				relPostsSlider.lightSlider({
+					item: 3,
+					pager: false,
+					keyPress: true,
+					slideMargin: 20,
+				});
+
+				if ( typeof $.fn.matchHeight === 'function' ) {
+					$('.post-feat', relPostsSlider).matchHeight();
+					relPostsSlider.css('height', '');
+				}
+			});
+		}
 	});
-
-	// lightSlider Instances
-
-	var postGallerySlider = $('.gallery-slider');
 
 	// Resize Embedded Videos Proportionally
 
@@ -231,13 +252,13 @@ MIXT GLOBAL FUNCTIONS
 				$button.button('loading');
 
 				// Load posts
-				$('<div>').load(nextLink + ' .posts-container .hentry', function(response, status, xhr) {
+				$('<div>').load(nextLink + ' .posts-container .article', function(response, status, xhr) {
 					var newPosts = $(this);
 
 					$button.blur();
 
-					newPosts.children('.hentry').addClass('ajax-new');
-					if ( mixt_opt['blog-type'] != 'masonry' && mixt_opt['show-page-nr'] == 'true' ) {
+					newPosts.children('.article').addClass('ajax-new');
+					if ( mixt_opt['layout-type'] != 'masonry' && mixt_opt['show-page-nr'] == 'true' ) {
 						newPosts.prepend('<div class="ajax-page page-'+ pageNum +'"><a href="'+ nextLink +'">Page '+ pageNum +'</a></div>');
 					}
 					container.append(newPosts.html());
@@ -257,7 +278,12 @@ MIXT GLOBAL FUNCTIONS
 						iframeAspect();
 						postsPage();
 						newPosts.removeClass('ajax-new');
-						if ( mixt_opt['blog-type'] == 'masonry' ) { $('.blog-masonry .posts-container').isotope('appended', newPosts); }
+						if ( mixt_opt['layout-type'] == 'masonry' ) {
+							var $container = $('.blog-masonry .posts-container');
+							$container.imagesLoaded( function() {
+								$container.isotope('appended', newPosts);
+							});
+						}
 					}, 100);
 
 					if ( mixt_opt['pagination-type'] == 'ajax-scroll' ) { viewport.on('scroll', ajaxScrollHandle); }
@@ -277,9 +303,11 @@ MIXT GLOBAL FUNCTIONS
 
 	// Functions To Run On Window Resize
 
+	var lightSliderInst = $('.gallery-slider'); // lightSlider Instances
+
 	function resizeFn() {
 		iframeAspect();
-		postGallerySlider.css('height', '');
+		lightSliderInst.css('height', '');
 	}
 
 	viewport.resize( $.debounce( 500, resizeFn ));

@@ -12,22 +12,22 @@
 <html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
 	<?php
 
-	// Display favicons
+	// Display Favicons
 	if ( function_exists('mixt_favicons') ) {
 		mixt_favicons();
 	}
 
 	wp_head();
 
-	// Print custom CSS
+	// Print Custom CSS
 	if ( function_exists('mixt_print_css') ) {
 		mixt_print_css();
 	}
@@ -73,16 +73,6 @@
 			'default' => 'aqua',
 		),
 		'location-bar' => array(),
-
-		// Blog
-		'blog-type' => array(
-			'return'  => 'value',
-			'default' => 'standard',
-		),
-		'blog-columns' => array(
-			'return'  => 'value',
-			'default' => '2-col',
-		),
 	);
 	$page_options = mixt_get_options($page_options);
 
@@ -252,7 +242,6 @@
 
 	if ( $page_options['sidebar'] != 'false' ) {
 		$content_classes .= 'has-sidebar ';
-
 		if ( $page_options['sidebar-position'] == 'left' ) { $content_classes .= 'sidebar-left '; }
 	}
 
@@ -263,15 +252,12 @@
 
 			<?php
 
-			/**
-			 * TODO: Check for type of page displayed and fetch specific settings if page is archive, tag, category....
-			 */
-
 			$cont_classes = 'main-content-inner ';
 			
-			if ( ! is_front_page() && is_home() ) {
-				$cont_classes .= 'blog-' . $page_options['blog-type'] . ' ';
-				if ( $page_options['blog-type'] != 'standard' ) { $cont_classes .= 'blog-' . $page_options['blog-columns'] . '-col '; }
+			if ( mixt_is_posts_page() ) {
+				$layout_options = mixt_layout_options();
+				$cont_classes .= 'blog-' . $layout_options['type'] . ' ';
+				if ( $layout_options['type'] != 'standard' ) { $cont_classes .= 'blog-' . $layout_options['columns'] . '-col '; }
 			}
 
 			?>

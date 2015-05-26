@@ -38,7 +38,7 @@ NAVBAR FUNCTIONS
 
 			if ( navbar.is(topNavBar) ) {
 				navbarObj.navBg    = colorLum == 'dark' ? 'bg-dark' : '';
-				if ( mixt_opt['nav-transparent'] == 'true' ) {
+				if ( mixt_opt['nav-transparent'] == 'true' && mixt_opt['head-media'] == 'true' ) {
 					navbarObj.navBgTop = mediaWrap.hasClass('bg-dark') ? 'bg-dark' : '';
 				} else {
 					navbarObj.navBgTop = navbarObj.navBg;

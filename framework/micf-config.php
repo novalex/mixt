@@ -135,7 +135,7 @@ class Mixt_Menu_Item_Custom_Fields {
 			if ($depth === false || $item_depth == $depth) :
 				echo '<p class="' . esc_attr( $class ) . ' description"' . $cont_attr . '>';
 					printf(
-						'<label for="%1$s">%3$s<br /><input type="%6$s" id="%1$s" class="widefat %2$s %1$s" name="%4$s" value="%5$s" %7$s/></label>',
+						'<label for="%1$s">%3$s<br /><input type="%6$s" id="%1$s" class="widefat code %2$s %1$s" name="%4$s" value="%5$s" %7$s/></label>',
 						esc_attr( $id ),
 						esc_attr( $type ),
 						esc_html( $label ),

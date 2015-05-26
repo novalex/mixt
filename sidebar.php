@@ -6,14 +6,14 @@
  * @package MIXT
  */
 
-$sidebar_options_arr = array(
+$options = array(
 	'enabled' => array(
 		'key'  => 'page-sidebar',
 	),
 );
-$sidebar_options = mixt_get_options($sidebar_options_arr);
+$options = mixt_get_options($options);
 
-if ( $sidebar_options['enabled'] != 'false' ) : ?>
+if ( $options['enabled'] != 'false' ) : ?>
 
 	</div><?php // Close .main-content-inner ?>
 

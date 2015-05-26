@@ -8,9 +8,9 @@
 
 get_header();
 
-	if ( have_posts() ) : ?>
+	if ( have_posts() ) :
 
-		<?php
+		echo '<div class="posts-container">';
 
 		while ( have_posts() ) : // Start The Loop
 
@@ -20,7 +20,9 @@ get_header();
 
 		endwhile; // End The Loop
 
-		mixt_content_nav( 'nav-below' );
+		echo '</div>'; // Close .posts-container
+
+		mixt_content_nav( 'nav-below', true );
 
 	else :
 

@@ -118,7 +118,7 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 
 								// Item For Each Social Profile Set Up
 								foreach( $social_profiles as $profile ) {
-									$name  = ( ! empty($profile['name']) ) ? $profile['name'] : 'No Name';
+									$name  = ( ! empty($profile['name']) ) ? $profile['name'] : __( 'Unnamed Profile', 'mixt' );
 									$url   = $profile['url'];
 									$icon  = $profile['icon'];
 									$title = $profile['title'];

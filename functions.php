@@ -92,12 +92,6 @@ if ( ! function_exists( 'mixt_setup' ) ) {
 			// Enable support for Post Formats
 			add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'audio', 'gallery', 'quote', 'link', ) );
 
-			// Setup the WordPress core custom background feature
-			add_theme_support( 'custom-background', apply_filters( 'mixt_custom_background_args', array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			) ) );
-
 			// Declare WooCommerce Support
 			add_theme_support( 'woocommerce' );
 		}
@@ -147,17 +141,6 @@ function mixt_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'mixt_widgets_init' );
-
-// VARIOUS THEME OPTIONS AND FUNCTIONS
-
-// Defer JS Files
-
-// add_filter( 'clean_url', function( $url ) {
-//     if ( strpos($url, '.js') === false ) {
-//         return $url;
-//     }
-//     return "$url' defer='defer";
-// }, 11, 1 );
 
 
 // Title Tag Backwards Compatibility

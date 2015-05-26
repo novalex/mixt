@@ -7,38 +7,27 @@
  */
 
 $post_ob = new mixtPost('blog');
-$post_id = get_the_ID();
 
-$post_classes = '';
+$post_classes = $post_ob->classes();
 
-$blog_options = array(
-	'blog-type' => array(
-		'return' => 'value',
-	),
-	'blog-columns' => array(
-		'type'    => 'str',
-		'return'  => 'value',
-		'default' => 'col-md-4',
-	),
-);
-$blog_options = mixt_get_options($blog_options);
+$layout_options = mixt_layout_options();
 
-$blog_masonry = ( $blog_options['blog-type'] == 'masonry' ) ? true : false;
+$is_masonry = ( $layout_options['type'] == 'masonry' ) ? true : false;
 
 ?>
 
-<article id="post-<?php echo $post_id; ?>" <?php post_class( $post_classes . $post_ob->classes() ); ?>>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_classes ); ?>>
 
-	<?php if ( $blog_masonry ) { echo '<div class="post-wrapper">'; } ?>
+	<?php if ( $is_masonry ) { echo '<div class="post-wrapper">'; } ?>
 
 	<header class="page-header">
 		<?php $post_ob->header(); ?>
 	</header>
 
-	<?php if ( is_search() || is_archive() ) : // Only display Excerpts for Search and Archive Pages ?>
+	<?php if ( is_archive() ) : // Display Excerpts for Archive Pages ?>
 		<div class="entry-body entry-summary">
 
-			<?php the_excerpt(); ?>
+			<?php $post_ob->content('excerpt'); ?>
 			
 		</div>
 	<?php else : ?>
@@ -53,6 +42,6 @@ $blog_masonry = ( $blog_options['blog-type'] == 'masonry' ) ? true : false;
 		</div>
 	<?php endif; ?>
 
-	<?php if ( $blog_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
+	<?php if ( $is_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
 
 </article>

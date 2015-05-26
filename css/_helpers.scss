@@ -2,7 +2,7 @@
 /* - MIXT HELPERS - */
 
 
-// 1. Functions
+// Functions
 
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
@@ -22,7 +22,7 @@
 	}
 }
 
-// 2. Borders
+// Borders
 
 .border-base {
 	border-width: 0;
@@ -50,7 +50,7 @@
 	&:after { clear: both; }
 }
 
-// 3. Layering
+// Layering
 
 %bring-to-front {
 	position: relative;

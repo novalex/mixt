@@ -40,6 +40,11 @@ body.loading {
 		}
 	}
 
+	.loader {
+		&:before,
+		&:after { display: none; }
+	}
+
 	// Loader Shapes
 
 	.circle {

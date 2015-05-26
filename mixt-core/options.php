@@ -28,9 +28,13 @@ function mixt_get_options($option_arr = array(), $post_id = '') {
 
 	global $mixt_opt;
 
-	if ( $post_id == '' && ( is_category() || is_author() ) ) { $post_id = null; }
-
 	$options = array();
+
+	$is_blog       = mixt_is_blog();
+	$is_posts_page = mixt_is_posts_page();
+	$page_type     = mixt_get_page_type() . '-page';
+
+	if ( $post_id == '' && $is_posts_page && ! $is_blog ) { $post_id = null; }
 
 	if ( isset($option_arr) ) {
 		$setup_opt = $option_arr;
@@ -45,11 +49,17 @@ function mixt_get_options($option_arr = array(), $post_id = '') {
 			$prefix  = isset($option['prefix']) ? $option['prefix'] : '';
 			$suffix  = isset($option['suffix']) ? $option['suffix'] : '';
 
+			// Get Page Specific Option Value
 			$meta_key = '_mixt-' . $key;
 			if ( is_null($post_id) ) { $page_value = null; }
 			else if ( ! empty($post_id) ) { $page_value = mixt_meta($meta_key, $post_id); }
 			else { $page_value = mixt_meta($meta_key); }
 
+			if ( $is_posts_page && empty($page_value) && ! empty($mixt_opt[$page_type.'-'.$key]) ) {
+				$page_value = $mixt_opt[$page_type.'-'.$key];
+			}
+
+			// Get Global Option Value
 			$global_value = isset( $mixt_opt[$key] ) ? $mixt_opt[$key] : '';
 			if ( $type == 'bool' ) {
 				if ( $global_value == '1' ) { $global_value = 'true'; }

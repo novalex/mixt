@@ -1,7 +1,7 @@
 
 /* - MIXT UI ELEMENTS - */
 
-// SEARCH WIDGET
+// Search Widget
 
 .search-form {
 	.search-submit {
@@ -11,7 +11,7 @@
 	}
 }
 
-// LINK LISTS
+// Link Lists
 
 .link-list {
 	margin-bottom: 0;
@@ -38,7 +38,13 @@
 	}
 }
 
-// SOCIAL LINKS
+// Tooltips
+
+.tooltip.fade { transition: opacity 0.2s ease; }
+.tooltip.fade.in { transition: opacity 0.3s ease 0.4s; }
+.tooltip-inner { padding: 6px 10px; }
+
+// Social Links
 
 .social-links {
 	li a {
@@ -48,7 +54,7 @@
 	}
 }
 
-// BOOTSTRAP
+// Bootstrap
 
 .dropdown-menu li a {
     display: block;

@@ -89,6 +89,7 @@ $blue-accent: #539DDD;
 
 	#redux-header {
 		height: 67px;
+		overflow: hidden;
 		border-radius: 4px 4px 0 0;
 		border-bottom: 1px solid $bd-darker;
 		background-color: #F7F7F7;
@@ -103,12 +104,9 @@ $blue-accent: #539DDD;
 		.display_header {
 			margin: 10px;
 
-			span { color: #aaa; }
-
-			span.redux-dev-mode-notice {
-				left: 10px; bottom: -1px;
-				border-radius: 2px 2px 0 0;
-			}
+			span { color: #888; }
+			.redux-dev-mode-notice-container { top: auto; left: 15px; bottom: 2px; }
+			span.redux-dev-mode-notice { border-radius: 2px 2px 0 0; }
 		}
 
 		.rAds { right: -100%; width: 0; height: 0; }
@@ -405,10 +403,10 @@ $blue-accent: #539DDD;
 	// Divider
 
 	.hr {
-		padding: 0 20px !important;
-		margin: 20px 0 20px -20px !important;
-		border-top: 1px solid $bd-light;
-		border-bottom: 1px solid $bd-light;
+		padding: 0 0 0 20px !important;
+		margin: 20px 0 !important;
+		border: 1px solid $bd-light;
+		border-right-width: 0;
 		background-color: $bg-light;
 
 		.inner {
@@ -484,6 +482,7 @@ $blue-accent: #539DDD;
 				color: #333 !important;
 				position: relative;
 				background: $bg-main !important;
+				text-shadow: none !important;
 				z-index: 1 !important;
 			}
 
@@ -691,7 +690,8 @@ $blue-accent: #539DDD;
 
 // Social Profiles Section
 
-#social-profiles-ul {
+#social-profiles-ul,
+#post-sharing-profiles-ul {
 
 	label {
 		width: 35%;

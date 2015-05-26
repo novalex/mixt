@@ -6,23 +6,26 @@
  * @package MIXT
  */
 
-$post_id   = get_the_ID();
-$post_type = get_post_type($post_id);
-$post_ob   = new mixtPost($post_type);
+$post_ob = new mixtPost('search');
+
+$layout_options = mixt_layout_options();
+
+$is_masonry = ( $layout_options['type'] == 'masonry' ) ? true : false;
 
 ?>
 
-<article id="post-<?php echo $post_id; ?>" <?php post_class( $post_ob->classes() ); ?>>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_ob->classes() ); ?>>
+
+	<?php if ( $is_masonry ) { echo '<div class="post-wrapper">'; } ?>
 
 	<header class="page-header">
 		<?php $post_ob->header(); ?>
 	</header>
 
-	<div class="entry-body entry-content"><?php
-
-		//$post_ob->content();
-		the_excerpt(); ?>
-
+	<div class="entry-body entry-summary">
+		<?php $post_ob->content('excerpt'); ?>
 	</div>
+
+	<?php if ( $is_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
 
 </article>

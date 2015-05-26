@@ -232,9 +232,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$img_textures = mixt_get_images('textures');
 
 			// Social Networks
-			$social_profiles = '';
+			$social_profiles = $social_sharing_profiles = '';
 			if ( function_exists('mixt_preset_social_profiles') ) {
-				$social_profiles = mixt_preset_social_profiles();
+				$social_profiles = mixt_preset_social_profiles('networks');
+				$social_sharing_profiles = mixt_preset_social_profiles('sharing');
 			}
 
 			// HTML Allowed in the secondary nav custom code field
@@ -251,6 +252,153 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 			// Secondary Nav custom code field placeholder
 			$sec_nav_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
+
+			// Output Fields Array For Posts Pages
+			function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
+				if ( empty($type) ) return;
+
+				$preset_defaults = array(
+					'fullwidth' => 'auto',
+					'sidebar'   => 'auto',
+					'inherit'   => false,
+					'type'      => 'grid',
+					'columns'   => '3',
+					'feat-size' => 'blog-small',
+					'post-info' => true,
+					'meta-show' => 'header',
+				);
+				$defaults = wp_parse_args( $defaults, $preset_defaults );
+
+				$title = sprintf( __('%s Page', 'mixt'), ucfirst($type) );
+				$desc  = sprintf( __('Manage the %s page and content appearance', 'mixt'), $type );
+
+				$fields = array(
+					'title'      => $title,
+					'desc'       => $desc,
+					'icon'       => 'el-icon-'.$icon,
+					'subsection' => true,
+					'customizer' => false,
+					'fields'     => array(
+
+						// Fullwidth
+						array(
+							'id'       => $type.'-page-page-fullwidth',
+							'type'     => 'button_set',
+							'title'    => __( 'Full Width', 'mixt' ),
+							'options'  => array(
+								'auto'  => __( 'Auto', 'mixt' ),
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default'  => $defaults['fullwidth'],
+						),
+
+						// Sidebar
+						array(
+							'id'       => $type.'-page-page-sidebar',
+							'type'     => 'button_set',
+							'title'    => __( 'Show Sidebar', 'mixt' ),
+							'options'  => array(
+								'auto'  => __( 'Auto', 'mixt' ),
+								'true'  => __( 'Yes', 'mixt' ),
+								'false' => __( 'No', 'mixt' ),
+							),
+							'default'  => $defaults['sidebar'],
+						),
+
+						// Inherit Blog Settings
+						array(
+							'id'       => $type.'-page-inherit',
+							'type'     => 'switch',
+							'title'    => __( 'Inherit Blog Layout', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => $defaults['inherit'],
+						),
+
+						// Layout Type
+						array(
+							'id'       => $type.'-page-type',
+							'type'     => 'button_set',
+							'title'    => __( 'Layout Type', 'mixt' ),
+							'subtitle' => __( 'Select the layout type for this page', 'mixt' ),
+							'options'  => array(
+								'standard' => __( 'Standard', 'mixt' ),
+								'grid'     => __( 'Grid', 'mixt' ),
+								'masonry'  => __( 'Masonry', 'mixt' ),
+							),
+							'default'  => $defaults['type'],
+							'required' => array($type.'-page-inherit', '=', false),
+						),
+
+						// Columns
+						array(
+							'id'       => $type.'-page-columns',
+							'type'     => 'button_set',
+							'title'    => __( 'Columns', 'mixt' ),
+							'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+							'options'  => array(
+								'2' => '2',
+								'3' => '3',
+								'4' => '4',
+								'5' => '5',
+							),
+							'default'  => $defaults['columns'],
+							'required' => array(
+								array($type.'-page-inherit', '=', false),
+								array($type.'-page-type', '!=', 'standard'),
+							),
+						),
+
+						// Post Media Size
+						array(
+							'id'       => $type.'-page-feat-size',
+							'type'     => 'button_set',
+							'title'    => __( 'Media Size', 'mixt' ),
+							'subtitle' => __( 'Select a size for the featured post media', 'mixt' ),
+							'options'  => array(
+								'blog-large'  => __( 'Large', 'mixt' ),
+								'blog-medium' => __( 'Medium', 'mixt' ),
+								'blog-small'  => __( 'Small', 'mixt' ),
+							),
+							'default'  => $defaults['feat-size'],
+							'required' => array(
+								array($type.'-page-inherit', '=', false),
+								array($type.'-page-type', '=', 'standard'),
+							),
+						),
+
+						// Post Info Display
+						array(
+							'id'       => $type.'-page-post-info',
+							'type'     => 'switch',
+							'title'    => __( 'Post Info', 'mixt' ),
+							'subtitle' => __( 'Display the post format and date', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => $defaults['post-info'],
+							'required' => array($type.'-page-inherit', '=', false),
+						),
+
+						// Meta Position / Display
+						array(
+							'id'       => $type.'-page-meta-show',
+							'type'     => 'button_set',
+							'title'    => __( 'Post Meta', 'mixt' ),
+							'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+							'options'  => array(
+								'header'  => __( 'In Header', 'mixt' ),
+								'footer'  => __( 'In Footer', 'mixt' ),
+								'false'   => __( 'No', 'mixt' ),
+							),
+							'default'  => $defaults['meta-show'],
+							'required' => array($type.'-page-inherit', '=', false),
+						),
+					),
+				);
+
+				return $fields;
+			}
 
 
 			// DECLARATION OF SECTIONS
@@ -1436,20 +1584,60 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'type' => 'divide',
 			);
 
-
-			// BLOG SECTION
+			// POST PAGES SECTION
 			$this->sections[] = array(
-				'title'      => __( 'Blog', 'mixt' ),
-				'desc'       => __( 'Manage the blog page and post appearance', 'mixt' ),
+				'title'      => __( 'Post Pages', 'mixt' ),
+				'desc'       => __( 'Manage post and archive pages', 'mixt' ),
 				'icon'       => 'el-icon-book',
 				'customizer' => false,
 				'fields'     => array(
 
-					// Blog Type
+					// Pagination Type
+					array(
+						'id'       => 'pagination-type',
+						'type'     => 'select',
+						'title'    => __( 'Pagination', 'mixt' ),
+						'subtitle' => __( 'Select a pagination type', 'mixt' ),
+						'options'  => array(
+							'classic'     => __( 'Classic', 'mixt' ),
+							'numbered'    => __( 'Numbered', 'mixt' ),
+							'ajax-click'  => __( 'Ajax On Click', 'mixt' ),
+							'ajax-scroll' => __( 'Ajax On Scroll', 'mixt' ),
+						),
+						'default'  => 'classic',
+					),
+
+					// Show Page Numbers
+					array(
+						'id'       => 'show-page-nr',
+						'type'     => 'switch',
+						'title'    => __( 'Show Page Numbers', 'mixt' ),
+						'subtitle' => __( 'Display a link with the current page number', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+						'required' => array(
+							array('pagination-type', '!=', 'classic'),
+							array('pagination-type', '!=', 'numbered'),
+						),
+					),
+				),
+			);
+
+			// BLOG PAGE SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Blog Page', 'mixt' ),
+				'desc'       => __( 'Manage the blog page and post appearance', 'mixt' ),
+				'icon'       => 'el-icon-th-list',
+				'subsection' => true,
+				'customizer' => false,
+				'fields'     => array(
+
+					// Layout Type
 					array(
 						'id'       => 'blog-type',
 						'type'     => 'button_set',
-						'title'    => __( 'Blog Type', 'mixt' ),
+						'title'    => __( 'Layout Type', 'mixt' ),
 						'subtitle' => __( 'Select the blog layout type', 'mixt' ),
 						'options'  => array(
 							'standard' => __( 'Standard', 'mixt' ),
@@ -1459,7 +1647,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'standard',
 					),
 
-					// Blog Columns
+					// Columns
 					array(
 						'id'       => 'blog-columns',
 						'type'     => 'button_set',
@@ -1477,7 +1665,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Post Media Size
 					array(
-						'id'       => 'post-feat-size',
+						'id'       => 'blog-feat-size',
 						'type'     => 'button_set',
 						'title'    => __( 'Media Size', 'mixt' ),
 						'subtitle' => __( 'Select a size for the featured post media', 'mixt' ),
@@ -1490,12 +1678,26 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'required' => array('blog-type', '=', 'standard'),
 					),
 
+					// Meta Position / Display
+					array(
+						'id'       => 'blog-meta-show',
+						'type'     => 'button_set',
+						'title'    => __( 'Post Meta', 'mixt' ),
+						'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+						'options'  => array(
+							'header'  => __( 'In Header', 'mixt' ),
+							'footer'  => __( 'In Footer', 'mixt' ),
+							'false'   => __( 'No', 'mixt' ),
+						),
+						'default'  => 'header',
+					),
+
 					// Post Content Type
 					array(
 						'id'       => 'post-content',
 						'type'     => 'button_set',
 						'title'    => __( 'Post Content', 'mixt' ),
-						'subtitle' => __( 'Show an excerpt or the full content on the blog or posts page', 'mixt' ),
+						'subtitle' => __( 'Show the post&#39;s excerpt or full content', 'mixt' ),
 						'options'  => array(
 							'full'      => __( 'Full', 'mixt' ),
 							'excerpt'   => __( 'Excerpt', 'mixt' ),
@@ -1515,15 +1717,45 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'display_value' => 'text',
 						'required'      => array('post-content', '=', 'excerpt'),
 					),
+
+					// Post Info Display
+					array(
+						'id'       => 'blog-post-info',
+						'type'     => 'switch',
+						'title'    => __( 'Post Info', 'mixt' ),
+						'subtitle' => __( 'Display the post format and date', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
 				),
 			);
+
+			// AUTHOR PAGE SECTION
+			$author_defaults = array(
+				'sidebar'   => 'false',
+				'meta-show' => 'false',
+			);
+			$this->sections[] = postsPageFields('author', 'user', $author_defaults);
+
+			// CATEGORY PAGE SECTION
+			$this->sections[] = postsPageFields('category', 'folder-close');
+
+			// DATE PAGE SECTION
+			$this->sections[] = postsPageFields('date', 'time');
+
+			// SEARCH PAGE SECTION
+			$this->sections[] = postsPageFields('search', 'search');
+
+			// TAG PAGE SECTION
+			$this->sections[] = postsPageFields('tag', 'tag');
+
 
 			// POSTS SECTION
 			$this->sections[] = array(
 				'title'      => __( 'Posts', 'mixt' ),
 				'desc'       => __( 'Configure the post&#39;s appearance', 'mixt' ),
 				'icon'       => 'el-icon-pencil',
-				'subsection' => true,
 				'customizer' => false,
 				'fields'     => array(
 
@@ -1535,7 +1767,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Show info about the author', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
-						'default'  => true,
+						'default'  => false,
 					),
 
 					// Post Navigation
@@ -1587,16 +1819,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array('post-related', '=', true),
 						),
 
-						// Related Posts Featured Media
+						// Related Posts
 						array(
-							'id'       => 'post-related-feat',
+							'id'       => 'post-related-slider',
 							'type'     => 'switch',
-							'title'    => __( 'Featured Media', 'mixt' ),
-							'subtitle' => __( 'Display featured media for the related posts', 'mixt' ),
+							'title'    => __( 'Slider Style', 'mixt' ),
+							'subtitle' => __( 'Display related posts in a slider/carousel', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('post-related', '=', true),
+							'default'  => false,
+							'required' => array('post-related-number', '>', 3),
 						),
 
 						// Related Posts Featured Media Placeholder
@@ -1607,255 +1839,279 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle'       => __( 'Select a placeholder image to show if a post does not have any featured media', 'mixt' ),
 							'mode'           => 'jpg, jpeg, png',
 							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
-							'required'       => array('post-related-feat', '=', true),
 						),
+				),
+			);
 
-						// Related Posts Excerpt
-						array(
-							'id'       => 'post-related-excerpt',
-							'type'     => 'switch',
-							'title'    => __( 'Excerpt', 'mixt' ),
-							'subtitle' => __( 'Display the excerpt for the related posts', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => false,
-							'required' => array('post-related', '=', true),
-						),
+			// POST META SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Post Meta', 'mixt' ),
+				'desc'       => __( 'Configure the post meta appearance and icons', 'mixt' ),
+				'icon'       => 'el-icon-tasks',
+				'subsection' => true,
+				'customizer' => false,
+				'fields'     => array(
 
-					// Divider
+					// Meta Author
 					array(
-						'id'   => 'post-divider-2',
-						'type' => 'divide',
+						'id'       => 'meta-author',
+						'type'     => 'switch',
+						'title'    => __( 'Author', 'mixt' ),
+						'subtitle' => __( 'Display the post author', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+						'required' => array('meta-show', '!=', 'false'),
 					),
 
-					// POST META SECTION
+					// Author Icon
 					array(
-						'id'       => 'post-meta-section',
-						'type'     => 'section',
-						'title'    => __( 'Post Meta', 'mixt' ),
-						'indent'   => true,
+						'id'       => 'meta-author-icon',
+						'type'     => 'text',
+						'title'    => __( 'Author Icon', 'mixt' ),
+						'default'  => 'icon-user',
+						'required' => array('meta-author', '=', true),
 					),
 
-						// Meta Position / Display
-						array(
-							'id'       => 'meta-show',
-							'type'     => 'button_set',
-							'title'    => __( 'Post Meta', 'mixt' ),
-							'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
-							'options'  => array(
-								'header'  => __( 'In Header', 'mixt' ),
-								'footer'  => __( 'In Footer', 'mixt' ),
-								'false'   => __( 'No', 'mixt' ),
+					// Meta Date
+					array(
+						'id'       => 'meta-date',
+						'type'     => 'switch',
+						'title'    => __( 'Date', 'mixt' ),
+						'subtitle' => __( 'Display the post date and time', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+						'required' => array('meta-show', '!=', 'false'),
+					),
+
+					// Date Icon
+					array(
+						'id'       => 'meta-date-icon',
+						'type'     => 'text',
+						'title'    => __( 'Date Icon', 'mixt' ),
+						'default'  => 'icon-clockalt-timealt',
+						'required' => array('meta-date', '=', true),
+					),
+
+					// Meta Category
+					array(
+						'id'       => 'meta-category',
+						'type'     => 'switch',
+						'title'    => __( 'Category', 'mixt' ),
+						'subtitle' => __( 'Display the post category(es)', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+						'required' => array('meta-show', '!=', 'false'),
+					),
+
+					// Category Icon
+					array(
+						'id'       => 'meta-category-icon',
+						'type'     => 'text',
+						'title'    => __( 'Category Icon', 'mixt' ),
+						'default'  => 'icon-folderalt',
+						'required' => array('meta-category', '=', true),
+					),
+
+					// Meta Comments
+					array(
+						'id'       => 'meta-comments',
+						'type'     => 'switch',
+						'title'    => __( 'Comments', 'mixt' ),
+						'subtitle' => __( 'Display the comments number', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+						'required' => array('meta-show', '!=', 'false'),
+					),
+
+					// Comments Icon
+					array(
+						'id'       => 'meta-comments-icon',
+						'type'     => 'text',
+						'title'    => __( 'Comments Icon', 'mixt' ),
+						'default'  => 'icon-chat',
+						'required' => array('meta-comments', '=', true),
+					),
+
+					// Meta Separator
+					array(
+						'id'       => 'meta-separator',
+						'type'     => 'text',
+						'title'    => __( 'Separator', 'mixt' ),
+						'subtitle' => __( 'Character(s) for the meta separator', 'mixt' ),
+						'required' => array('meta-show', '!=', 'false'),
+					),
+				),
+			);
+
+			// POST FORMATS SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Post Formats', 'mixt' ),
+				'desc'       => __( 'Configure the post formats and icons', 'mixt' ),
+				'icon'       => 'el-icon-paper-clip',
+				'subsection' => true,
+				'customizer' => false,
+				'fields'     => array(
+
+					// Standard Format Icon
+					array(
+						'id'       => 'format-standard-icon',
+						'type'     => 'text',
+						'title'    => __( 'Standard Format Icon', 'mixt' ),
+						'default'  => 'icon-pen',
+					),
+
+					// Aside Format Icon
+					array(
+						'id'       => 'format-aside-icon',
+						'type'     => 'text',
+						'title'    => __( 'Aside Format Icon', 'mixt' ),
+						'default'  => 'icon-noteslistalt',
+					),
+
+					// Image Format Icon
+					array(
+						'id'       => 'format-image-icon',
+						'type'     => 'text',
+						'title'    => __( 'Image Format Icon', 'mixt' ),
+						'default'  => 'icon-picture',
+					),
+
+					// Video Format Icon
+					array(
+						'id'       => 'format-video-icon',
+						'type'     => 'text',
+						'title'    => __( 'Video Format Icon', 'mixt' ),
+						'default'  => 'icon-playvideo',
+					),
+
+					// Audio Format Icon
+					array(
+						'id'       => 'format-audio-icon',
+						'type'     => 'text',
+						'title'    => __( 'Audio Format Icon', 'mixt' ),
+						'default'  => 'icon-music',
+					),
+
+					// Gallery Format Icon
+					array(
+						'id'       => 'format-gallery-icon',
+						'type'     => 'text',
+						'title'    => __( 'Gallery Format Icon', 'mixt' ),
+						'default'  => 'icon-burstmode',
+					),
+
+					// Quote Format Icon
+					array(
+						'id'       => 'format-quote-icon',
+						'type'     => 'text',
+						'title'    => __( 'Quote Format Icon', 'mixt' ),
+						'default'  => 'icon-quote',
+					),
+
+					// Link Format Icon
+					array(
+						'id'       => 'format-link-icon',
+						'type'     => 'text',
+						'title'    => __( 'Link Format Icon', 'mixt' ),
+						'default'  => 'icon-linkalt',
+					),
+
+					// Page Format Icon
+					array(
+						'id'       => 'format-page-icon',
+						'type'     => 'text',
+						'title'    => __( 'Page Format Icon', 'mixt' ),
+						'default'  => 'icon-document',
+					),
+
+					// Product Format Icon
+					array(
+						'id'       => 'format-product-icon',
+						'type'     => 'text',
+						'title'    => __( 'Product Format Icon', 'mixt' ),
+						'default'  => 'icon-shopping',
+					),
+				),
+			);
+
+			// SOCIAL SHARING SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Social Sharing', 'mixt' ),
+				'desc'       => __( 'Manage your social sharing profiles and add new ones', 'mixt' ),
+				'icon'       => 'el-icon-retweet',
+				'customizer' => false,
+				'subsection' => true,
+				'fields'     => array(
+
+					// Show Share Buttons
+					array(
+						'id'       => 'post-sharing',
+						'type'     => 'switch',
+						'title'    => __( 'Show', 'mixt' ),
+						'subtitle' => __( 'Display the share buttons', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
+					// Social Icons Color On Hover
+					array(
+						'id'   => 'post-sharing-color',
+						'type' => 'button_set',
+						'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
+						'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
+						'options' => array(
+							'icon' => __( 'Icon', 'mixt' ),
+							'bg'   => __( 'Background', 'mixt' ),
+							'none' => __( 'Neither', 'mixt' ),
+						),
+						'default' => 'bg',
+					),
+					
+					// Social Sharing Profiles
+					array(
+						'id'       => 'post-sharing-profiles',
+						'type'     => 'multi_input',
+						'no_title' => true,
+						'add_text' => __( 'New Profile', 'mixt' ),
+						'sortable' => true,
+						'inputs'   => array(
+							'name' => array(
+								'icon'        => 'el-icon-tag',
+								'wrap_class'  => 'social-label social-name',
+								'input_class' => 'mixt-social-field network-name',
+								'placeholder' => __( 'Name', 'mixt' ),
 							),
-							'default'  => 'header',
+							'url' => array(
+								'icon'        => 'el-icon-globe',
+								'wrap_class'  => 'social-label social-url',
+								'input_class' => 'mixt-social-field network-url',
+								'placeholder' => __( 'Share URL', 'mixt' ),
+							),
+							'icon' => array(
+								'icon'        => 'el-icon-idea',
+								'wrap_class'  => 'social-label social-icon',
+								'input_class' => 'mixt-social-field network-icon',
+								'placeholder' => __( 'Icon', 'mixt' ),
+							),
+							'color' => array(
+								'type'        => 'color',
+								'wrap_class'  => 'social-label social-color',
+								'input_class' => 'mixt-social-field network-color',
+							),
+							'title' => array(
+								'icon'        => 'el-icon-comment',
+								'wrap_class'  => 'social-label social-title',
+								'input_class' => 'mixt-social-field network-title',
+								'placeholder' => __( 'Title', 'mixt' ),
+							),
 						),
-
-						// Meta Author
-						array(
-							'id'       => 'meta-author',
-							'type'     => 'switch',
-							'title'    => __( 'Author', 'mixt' ),
-							'subtitle' => __( 'Display the post author', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('meta-show', '!=', 'false'),
-						),
-
-						// Author Icon
-						array(
-							'id'       => 'meta-author-icon',
-							'type'     => 'text',
-							'title'    => __( 'Author Icon', 'mixt' ),
-							'default'  => 'icon-user',
-							'required' => array('meta-author', '=', true),
-						),
-
-						// Meta Date
-						array(
-							'id'       => 'meta-date',
-							'type'     => 'switch',
-							'title'    => __( 'Date', 'mixt' ),
-							'subtitle' => __( 'Display the post date and time', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('meta-show', '!=', 'false'),
-						),
-
-						// Date Icon
-						array(
-							'id'       => 'meta-date-icon',
-							'type'     => 'text',
-							'title'    => __( 'Date Icon', 'mixt' ),
-							'default'  => 'icon-clockalt-timealt',
-							'required' => array('meta-date', '=', true),
-						),
-
-						// Meta Category
-						array(
-							'id'       => 'meta-category',
-							'type'     => 'switch',
-							'title'    => __( 'Category', 'mixt' ),
-							'subtitle' => __( 'Display the post category(es)', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('meta-show', '!=', 'false'),
-						),
-
-						// Category Icon
-						array(
-							'id'       => 'meta-category-icon',
-							'type'     => 'text',
-							'title'    => __( 'Category Icon', 'mixt' ),
-							'default'  => 'icon-folderalt',
-							'required' => array('meta-category', '=', true),
-						),
-
-						// Meta Comments
-						array(
-							'id'       => 'meta-comments',
-							'type'     => 'switch',
-							'title'    => __( 'Comments', 'mixt' ),
-							'subtitle' => __( 'Display the comments number', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('meta-show', '!=', 'false'),
-						),
-
-						// Comments Icon
-						array(
-							'id'       => 'meta-comments-icon',
-							'type'     => 'text',
-							'title'    => __( 'Comments Icon', 'mixt' ),
-							'default'  => 'icon-chat',
-							'required' => array('meta-comments', '=', true),
-						),
-
-						// Meta Separator
-						array(
-							'id'       => 'meta-separator',
-							'type'     => 'text',
-							'title'    => __( 'Separator', 'mixt' ),
-							'subtitle' => __( 'Character(s) for the meta separator', 'mixt' ),
-							'required' => array('meta-show', '!=', 'false'),
-						),
-
-					// Divider
-					array(
-						'id'   => 'post-divider-3',
-						'type' => 'divide',
+						'default'  => $social_sharing_profiles,
 					),
-
-					// POST INFO SECTION
-					array(
-						'id'       => 'post-info-section',
-						'type'     => 'section',
-						'title'    => __( 'Post Info', 'mixt' ),
-						'indent'   => true,
-					),
-
-						// Info Display
-						array(
-							'id'       => 'post-info',
-							'type'     => 'switch',
-							'title'    => __( 'Post Info', 'mixt' ),
-							'subtitle' => __( 'Display the post format and date', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-						),
-
-						// Standard Format Icon
-						array(
-							'id'       => 'format-standard-icon',
-							'type'     => 'text',
-							'title'    => __( 'Standard Format Icon', 'mixt' ),
-							'default'  => 'icon-pen',
-						),
-
-						// Aside Format Icon
-						array(
-							'id'       => 'format-aside-icon',
-							'type'     => 'text',
-							'title'    => __( 'Aside Format Icon', 'mixt' ),
-							'default'  => 'icon-noteslistalt',
-						),
-
-						// Image Format Icon
-						array(
-							'id'       => 'format-image-icon',
-							'type'     => 'text',
-							'title'    => __( 'Image Format Icon', 'mixt' ),
-							'default'  => 'icon-picture',
-						),
-
-						// Video Format Icon
-						array(
-							'id'       => 'format-video-icon',
-							'type'     => 'text',
-							'title'    => __( 'Video Format Icon', 'mixt' ),
-							'default'  => 'icon-playvideo',
-						),
-
-						// Audio Format Icon
-						array(
-							'id'       => 'format-audio-icon',
-							'type'     => 'text',
-							'title'    => __( 'Audio Format Icon', 'mixt' ),
-							'default'  => 'icon-music',
-						),
-
-						// Gallery Format Icon
-						array(
-							'id'       => 'format-gallery-icon',
-							'type'     => 'text',
-							'title'    => __( 'Gallery Format Icon', 'mixt' ),
-							'default'  => 'icon-burstmode',
-						),
-
-						// Quote Format Icon
-						array(
-							'id'       => 'format-quote-icon',
-							'type'     => 'text',
-							'title'    => __( 'Quote Format Icon', 'mixt' ),
-							'default'  => 'icon-quote',
-						),
-
-						// Link Format Icon
-						array(
-							'id'       => 'format-link-icon',
-							'type'     => 'text',
-							'title'    => __( 'Link Format Icon', 'mixt' ),
-							'default'  => 'icon-linkalt',
-						),
-
-					// Divider
-					array(
-						'id'   => 'post-divider-4',
-						'type' => 'divide',
-					),
-
-					// SOCIAL SHARING SECTION
-					array(
-						'id'       => 'post-social-section',
-						'type'     => 'section',
-						'title'    => __( 'Social Sharing', 'mixt' ),
-						'indent'   => true,
-					),
-
-						// Show Share Buttons
-						array(
-							'id'       => 'post-social',
-							'type'     => 'button_set',
-							'title'    => __( 'Show', 'mixt' ),
-							'subtitle' => __( 'Display the share buttons', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-						),
 				),
 			);
 
@@ -1899,46 +2155,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
 						'default'  => false,
-					),
-				),
-			);
-
-			// POST PAGES SECTION
-			$this->sections[] = array(
-				'title'      => __( 'Post Pages', 'mixt' ),
-				'desc'       => __( 'Manage post and archive pages', 'mixt' ),
-				'icon'       => 'el-icon-th-list',
-				'customizer' => false,
-				'fields'     => array(
-
-					// Pagination Type
-					array(
-						'id'       => 'pagination-type',
-						'type'     => 'select',
-						'title'    => __( 'Pagination', 'mixt' ),
-						'subtitle' => __( 'Select a pagination type', 'mixt' ),
-						'options'  => array(
-							'classic'     => __( 'Classic', 'mixt' ),
-							'numbered'    => __( 'Numbered', 'mixt' ),
-							'ajax-click'  => __( 'Ajax On Click', 'mixt' ),
-							'ajax-scroll' => __( 'Ajax On Scroll', 'mixt' ),
-						),
-						'default'  => 'classic',
-					),
-
-					// Show Page Numbers
-					array(
-						'id'       => 'show-page-nr',
-						'type'     => 'switch',
-						'title'    => __( 'Show Page Numbers', 'mixt' ),
-						'subtitle' => __( 'Display a link with the current page number', 'mixt' ),
-						'on'       => __( 'Yes', 'mixt' ),
-						'off'      => __( 'No', 'mixt' ),
-						'default'  => false,
-						'required' => array(
-							array('pagination-type', '!=', 'classic'),
-							array('pagination-type', '!=', 'numbered'),
-						),
 					),
 				),
 			);
@@ -2168,7 +2384,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default' => 'icon',
 					),
 					
-					// Social Profiles Multi
+					// Social Profiles
 					array(
 						'id'       => 'social-profiles',
 						'type'     => 'multi_input',

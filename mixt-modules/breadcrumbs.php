@@ -59,7 +59,7 @@ function mixt_breadcrumbs($page_title = '', $extra_classes = '') {
 				echo '<li>' . $page_title . '</li>';
 			}
 
-		// Archive Page
+		// Date Page
 		} else if ( is_day() || is_month() || is_year() ) {
 			$day   = get_the_date('d');
 			$month = get_the_date('m');

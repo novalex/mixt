@@ -7,11 +7,10 @@
  */
 
 $post_ob = new mixtPost('page-single');
-$post_id = get_the_ID();
 
 ?>
 
-<article id="post-<?php echo $post_id; ?>" <?php post_class( $post_ob->classes() ); ?>>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_ob->classes() ); ?>>
 
 	<div class="entry-body entry-content">
 		<?php

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template Part For Displaying A Message That Posts Cannot Be Found
+ * Template For Displaying A Message That Posts Cannot Be Found
  *
- * @package mixt
+ * @package MIXT
  */
 
 ?>
@@ -11,7 +11,7 @@
 <section class="no-results not-found">
 	<header class="page-header">
 		<h1 class="page-title"><?php _e( 'Nothing Found', 'mixt' ); ?></h1>
-	</header><!-- .page-header -->
+	</header>
 
 	<div class="page-content">
 		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
@@ -29,5 +29,5 @@
 			<?php get_search_form(); ?>
 
 		<?php endif; ?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+	</div>
+</section>

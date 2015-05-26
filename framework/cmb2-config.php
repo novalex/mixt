@@ -171,7 +171,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			// Blog Type
 			array(
 				'id'      => $prefix . 'blog-type',
-				'name'    => __( 'Blog Type', 'mixt' ),
+				'name'    => __( 'Layout Type', 'mixt' ),
 				'desc'    => __( 'Select the blog layout type', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
@@ -201,7 +201,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 			// Post Image Size
 			array(
-				'id'      => $prefix . 'post-feat-size',
+				'id'      => $prefix . 'blog-feat-size',
 				'name'    => __( 'Media Size', 'mixt' ),
 				'desc'    => __( 'Select a size for the featured post media', 'mixt' ),
 				'type'    => 'radio_inline',
