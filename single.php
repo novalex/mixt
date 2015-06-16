@@ -14,16 +14,24 @@ get_header();
 
 		get_template_part( 'templates/content', 'single' );
 
-		$options = array(
+		$options = mixt_get_options( array(
+			'post-tags'         => array(),
 			'post-sharing'      => array(),
 			'post-about-author' => array(),
 			'post-navigation'   => array(),
 			'post-related'      => array(),
-		);
-		$options = mixt_get_options($options);
+		) );
+
+		// Post Tags
+		if ( $options['post-tags'] ) {
+			$tags = get_the_tag_list( '<p class="tag-list"><strong>' . __( 'Tags:', 'mixt' ) . '</strong>', '', '</p>' );
+			if ( $tags != '' ) {
+				echo '<footer class="entry-footer post-tags post-extra">' . $tags . '</footer>';
+			}
+		}
 
 		// Post Social Sharing Buttons
-		if ( $options['post-sharing'] == 'true' ) {
+		if ( $options['post-sharing'] ) {
 			echo '<div class="post-extra post-share-cont">';
 				// echo '<h3 class="title">' . __( 'Share this', 'mixt' ) . '</h3>';
 				mixt_social_profiles(true, 'sharing');
@@ -31,27 +39,27 @@ get_header();
 		}
 
 		// Post Navigation
-		if ( $options['post-navigation'] == 'true' ) {
-			mixt_content_nav( 'nav-below' );
+		if ( $options['post-navigation'] ) {
+			mixt_content_nav('post-nav');
 		}
 
 		// About The Author
-		if ( $options['post-about-author'] == 'true' ) {
+		if ( $options['post-about-author'] ) {
 			mixt_about_the_author();
 		}
 
 		// Related Posts
-		if ( $options['post-related'] == 'true' ) {
-			$related_options = array(
+		if ( $options['post-related'] ) {
+			$related_options = mixt_get_options( array(
+				'rel-by'  => array( 'key' => 'post-related-by', 'return' => 'value' ),
 				'slider'  => array( 'key' => 'post-related-slider' ),
 				'feat-ph' => array( 'key' => 'post-related-feat-ph', 'return' => 'value' ),
-				'number'  => array( 'key' => 'post-related-number', 'type'   => 'str', 'return' => 'value' ),
-			);
-			$related_options = mixt_get_options($related_options);
+				'number'  => array( 'key' => 'post-related-number', 'type' => 'str', 'return' => 'value' ),
+			) );
 			$args = array(
 				'number'   => $related_options['number'],
 				'slider'   => $related_options['slider'],
-				'related'  => 'cats',
+				'related'  => $related_options['rel-by'],
 			);
 			if ( ! empty($related_options['feat-ph']['id']) ) { $args['feat-ph'] = $related_options['feat-ph']['id']; }
 			mixt_related_posts($args);

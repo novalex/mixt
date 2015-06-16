@@ -8,34 +8,14 @@
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
-// SET DEFAULT OPTIONS
-
-function mixt_set_options() {
-	$site_default_themes = mixt_default_themes('site');
-	$nav_default_themes = mixt_default_themes('nav');
-
-	if ( ! get_option('site-default-themes') ) {
-		update_option('site-default-themes', $site_default_themes);
-	}
-
-	if ( ! get_option('nav-default-themes') ) {
-		update_option('nav-default-themes', $nav_default_themes);
-	}
-}
-
-mixt_set_options();
-
 
 // LOAD FRAMEWORK PLUGINS
 
 function mixt_plugins() {
-
 	global $mixt_opt;
-
 	$plugins = array();
 
 	// Redux Framework and Extensions
-
 		// Extension Loader
 		if ( file_exists( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' ) ) {
 			require_once( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' );
@@ -68,7 +48,6 @@ function mixt_plugins() {
 		}
 
 	// CMB2 Framework
-
 		if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) && file_exists( MIXT_FRAME_DIR . '/cmb2-config.php' ) ) {
 			require_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
 
@@ -79,10 +58,16 @@ function mixt_plugins() {
 					'required' => true
 				);
 			}
+			// CMB2 Extensions
+			if ( file_exists( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' ) ) {
+				require_once( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' );
+			}
+			if ( file_exists( MIXT_PLUGINS_DIR . '/cmb2-extensions/shortcode-button/shortcode-button.php' ) ) {
+				require_once( MIXT_PLUGINS_DIR . '/cmb2-extensions/shortcode-button/shortcode-button.php' );
+			}
 		}
 
 	// MICF library & Config
-
 		if ( file_exists( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' ) ) {
 			require_once( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' );
 		} else {
@@ -97,7 +82,6 @@ function mixt_plugins() {
 		}
 
 	// WPBakery Visual Composer
-
 		$plugins[] = array(
 			'name'     => 'WPBakery Visual Composer',
 			'slug'     => 'js_composer',
@@ -107,7 +91,6 @@ function mixt_plugins() {
 		);
 
 	// LayerSlider
-
 		$plugins[] = array(
 			'name' => 'LayerSlider WP',
 			'slug' => 'LayerSlider',
@@ -118,16 +101,18 @@ function mixt_plugins() {
 		);
 
 	// Update Notifier
-
-		if ( file_exists( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' ) ) {
-
-			$username = empty($mixt_opt['tf-update-user']) ? '' : $mixt_opt['tf-update-user'];
-			$api_key  = empty($mixt_opt['tf-update-key']) ? '' : $mixt_opt['tf-update-key'];
-
+		if ( file_exists( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' ) && ! empty($mixt_opt['tf-update-login']) && is_array($mixt_opt['tf-update-login']) ) {
+			$username = $mixt_opt['tf-update-login']['username'];
+			$api_key  = $mixt_opt['tf-update-login']['password'];
 			if ( ! empty($username) && ! empty($api_key) ) {
 				load_template( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' );
 				Envato_WP_Theme_Updater::init( $username, $api_key, 'novalex' );
 			}
+		}
+
+	// Shortcode Builder
+		if ( file_exists( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' ) ) {
+			require_once( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' );
 		}
 
 	// Return missing plugins
@@ -179,11 +164,6 @@ function mixt_register_plugins() {
 	tgmpa( $plugins, $config );
 }
 
-
-// RUN INIT FUNCTION
-
-add_action('init', 'mixt_on_init');
-
 /**
  * Apply global options
  */
@@ -218,6 +198,7 @@ function mixt_on_init() {
 	}
 	add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
 }
+add_action('init', 'mixt_on_init');
 
 
 // LOAD CUSTOM POST TYPES PLUGIN
@@ -232,10 +213,12 @@ function mixt_load_plugins() {
 }
 
 
-// Initialize Visual Composer As Included With Theme
-add_action( 'vc_before_init', 'mixt_vc_overrides' );
-function mixt_vc_overrides() {
-	vc_set_as_theme();
+// Initialize and Extend Visual Composer
+if ( defined( 'WPB_VC_VERSION' ) ) {
+	add_action( 'vc_before_init', 'mixt_vc_overrides' );
+	function mixt_vc_overrides() { vc_set_as_theme(); }
+	require_once( MIXT_PLUGINS_DIR . '/vc-extend/vc-extend.php' );
+	vc_set_shortcodes_templates_dir( MIXT_PLUGINS_DIR . '/vc-extend/templates' );
 }
 
 // Initialize LayerSlider As Included With Theme
@@ -260,8 +243,6 @@ function mixt_wp_old_classes($classes) {
 // LOAD THEME INCLUDES AND MODULES
 
 $mixt_includes = array(
-	'custom-header.php', // Custom Header
-	'jetpack.php',       // Jetpack Bullshit
 	'extras.php',        // Extra Functions
 	'customizer.php',    // Customizer Additions
 );
@@ -295,48 +276,6 @@ if ( get_option('mixt-dynamic-sass', 0) ) {
 }
 
 
-// JS LOCALIZATION DATA
-function local_options() {
-	global $mixt_opt;
-
-	$page_type = mixt_get_page_type();
-	if ( $page_type != 'blog' ) {
-		$page_type .= '-page';
-		if ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] == true ) { $page_type = 'blog'; }
-	}
-
-	$options = array(
-		// Navbar
-		'nav-mode'        => array( 'return' => 'value' ),
-		'nav-padding'     => array( 'type' => 'str', 'return' => 'value' ),
-		'nav-transparent' => array(),
-		'nav-position'    => array( 'return' => 'value' ),
-		// Head Media
-		'head-media'        => array(),
-		'head-fullscreen'   => array(),
-		'head-content-fade' => array(),
-		// Layout
-		'layout-type' => array( 'key' => $page_type . '-type', 'return' => 'value' ),
-		// Pagination
-		'pagination-type' => array( 'return' => 'value' ),
-		'show-page-nr'    => array(),
-	);
-	$options = mixt_get_options($options);
-
-	$options['show-admin-bar'] = is_admin_bar_showing() === true ? 'true' : 'false';
-
-	if ( $options['pagination-type'] != 'classic' ) {
-		global $wp_query;
-
-		$options['page-num'] = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
-		$options['page-max'] = $wp_query->max_num_pages;
-		$options['next-page-link'] = next_posts($wp_query->max_num_pages, false);
-	}
-
-	return $options;
-}
-
-
 // ENQUEUE SCRIPTS AND STYLESHEETS
 
 function mixt_scripts() {
@@ -344,8 +283,8 @@ function mixt_scripts() {
 	// Bootstrap CSS
 	wp_enqueue_style( 'bootstrap-style', MIXT_URI . '/dist/bootstrap.css' );
 
-	// Master CSS
-	wp_enqueue_style( 'master-style', MIXT_URI . '/dist/master.css' );
+	// Main CSS
+	wp_enqueue_style( 'mixt-main-style', MIXT_URI . '/dist/main.css' );
 
 	// WebHostingHub Glyphs Icon Font
 	wp_enqueue_style( 'whh-glyphs', MIXT_INC_URI . '/css/whhg.css', false, '4.1.0' );
@@ -358,20 +297,17 @@ function mixt_scripts() {
 	// Bootstrap JS
 	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ) );
 
-	// MIXT JS Plugins
-	wp_enqueue_script( 'mixt-plugins-js', MIXT_URI . '/dist/plugins.js', array( 'jquery' ), '1.0', true );
-
-	// MIXT JS Modules
-	wp_enqueue_script( 'mixt-modules-js', MIXT_URI . '/dist/modules.js', array( 'jquery', 'mixt-plugins-js' ), '1.0', true );
-	wp_localize_script( 'mixt-modules-js', 'mixt_opt', local_options() );
+	// Main JS
+	wp_enqueue_script( 'mixt-main-js', MIXT_URI . '/dist/main.js', array( 'jquery' ), '1.0', true );
 
 	// Global Functions JS
-	wp_enqueue_script( 'mixt-global-js', MIXT_URI . '/js/global.js', array( 'jquery', 'mixt-modules-js' ), '1.0', true );
+	wp_enqueue_script( 'mixt-global-js', MIXT_URI . '/js/global.js', array( 'jquery', 'mixt-main-js' ), '1.0', true );
+
+	// Localize Options
+	wp_localize_script( 'mixt-main-js', 'mixt_opt', mixt_local_options() );
 
 	// Comment Reply Js
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { wp_enqueue_script( 'comment-reply' ); }
 }
 add_action( 'wp_enqueue_scripts', 'mixt_scripts' );
 
@@ -379,18 +315,53 @@ add_action( 'wp_enqueue_scripts', 'mixt_scripts' );
 // ENQUEUE ADMIN SCRIPTS AND STYLESHEETS
 
 function mixt_admin_scripts($hook) {
-
-	if ( $hook == 'nav-menus.php' ) {
 	// Menu Page Scripts
-
+	if ( $hook == 'nav-menus.php' ) {
 		wp_enqueue_script( 'mixt-admin-menu-js', MIXT_FRAME_URI . '/admin/js/menu-scripts.js', array('jquery'), '1.0' );
-	} elseif ( $hook == 'post.php' || $hook == 'post-new.php' ) {
 	// Page Admin Scripts
-
+	} elseif ( $hook == 'post.php' || $hook == 'post-new.php' ) {
 		wp_enqueue_script( 'mixt-admin-page-js', MIXT_FRAME_URI . '/admin/js/page-scripts.js', array('jquery'), '1.0', true );
 		wp_enqueue_style( 'mixt-admin-page-styles', MIXT_FRAME_URI . '/admin/css/page-styles.css', false, '1.0' );
-	} else {
-		return;
+	}
+	// Custom VC Style
+	if ( defined( 'WPB_VC_VERSION' ) ) {
+		wp_enqueue_style( 'mixt-admin-vc-styles', MIXT_FRAME_URI . '/plugins/vc-extend/css/vc-mixt.css', false, '1.0' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'mixt_admin_scripts' );
+
+
+/**
+ * Localize options to JS
+ */
+function mixt_local_options() {
+	$opt = array();
+	$opt['page'] = MIXT::get('page');
+	$opt['nav'] = MIXT::get('nav');
+	$opt['header'] = MIXT::get('header');
+	$opt['layout'] = MIXT::get('layout');
+
+	// Additional nav options
+	$nav_options = mixt_get_options( array(
+		'top-opacity' => array( 'key' => 'nav-top-opacity', 'type' => 'str', 'return' => 'value' ),
+	));
+	$opt['nav'] = array_merge($opt['nav'], $nav_options);
+
+	// Pagination Options
+	global $wp_query;
+	if ( $opt['page']['posts-page'] ) {
+		if ( $opt['layout']['pagination-type'] == 'ajax-click' || $opt['layout']['pagination-type'] == 'ajax-scroll' ) {
+			$opt['layout']['next-url'] = next_posts($wp_query->max_num_pages, false);
+		}
+	}
+	if ( $opt['page']['page-type'] == 'single' ) {
+		if ( get_option('page_comments') ) {
+			if ( $opt['layout']['comment-pagination-type'] == 'ajax-click' || $opt['layout']['comment-pagination-type'] == 'ajax-scroll' ) {
+				$opt['layout']['comment-default-page'] = get_option('default_comments_page', 'newest');
+				$opt['layout']['comment-next-url'] = get_comments_pagenum_link( get_query_var('cpage', 1) + 1 );
+			}
+		}
+	}
+
+	return $opt;
+}

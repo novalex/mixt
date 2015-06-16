@@ -65,14 +65,15 @@
         var plugin = {},
             settings = $.extend(true, {}, defaults, options),
             settingsTemp = {},
-            $el = this;
+            $el = this,
+            $wrap = $el.parent();
         plugin.$el = this;
 
         if (settings.mode === 'fade') {
             settings.vertical = false;
         }
         var $children = $el.children(),
-            windowW = $(window).width(),
+            wrapperW = $wrap.width(),
             breakpoint = null,
             resposiveObj = null,
             length = 0,
@@ -92,14 +93,14 @@
         var refresh = new Object();
 
         refresh.chbreakpoint = function () {
-            windowW = $(window).width();
+            wrapperW = $wrap.width();
             if (settings.responsive.length) {
                 if (settings.autoWidth === false) {
                     var item = settings.item;
                 }
-                if (windowW < settings.responsive[0].breakpoint) {
+                if (wrapperW < settings.responsive[0].breakpoint) {
                     for (var i = 0; i < settings.responsive.length; i++) {
-                        if (windowW < settings.responsive[i].breakpoint) {
+                        if (wrapperW < settings.responsive[i].breakpoint) {
                             breakpoint = settings.responsive[i].breakpoint;
                             resposiveObj = settings.responsive[i];
                         }
@@ -113,7 +114,7 @@
                         settings[i] = resposiveObj.settings[i];
                     }
                 }
-                if (!$.isEmptyObject(settingsTemp) && windowW > settings.responsive[0].breakpoint) {
+                if (!$.isEmptyObject(settingsTemp) && wrapperW > settings.responsive[0].breakpoint) {
                     for (i in settingsTemp) {
                         settings[i] = settingsTemp[i];
                     }

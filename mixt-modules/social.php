@@ -34,10 +34,17 @@ function mixt_social_profiles( $echo = true, $type = 'networks' ) {
 			'site'   => rawurlencode( get_bloginfo('name') ),
 			'title'  => rawurlencode( get_the_title($post_id) ),
 			'link'   => get_permalink($post_id),
-			'link2'  => wp_get_shortlink($post_id),
-			'thumb'  => wp_get_attachment_image($post_id),
+			'thumb'  => '',
 		);
-		if ( empty($pattern_tags['thumb']) && get_post_format($post_id) == 'image' ) {
+		if ( ! empty($mixt_opt['post-sharing-short']) && $mixt_opt['post-sharing-short'] ) {
+			$pattern_tags['link2'] = make_bitly_url(get_permalink($post_id));
+		} else {
+			$pattern_tags['link2'] = wp_get_shortlink($post_id);
+		}
+		$post_media = wp_get_attachment_image_src($post_id, 'blog-small');
+		if ( ! empty($post_media[0]) ) {
+			$pattern_tags['thumb'] = $post_media[0];
+		} else if ( get_post_format($post_id) == 'image' ) {
 			$pattern_tags['thumb'] = mixt_get_post_image(null, 'url');
 		}
 	}
@@ -92,6 +99,27 @@ function mixt_social_profiles( $echo = true, $type = 'networks' ) {
 		} else {
 			return $return_val;
 		}
+	}
+}
+
+
+/**
+ * Bit.ly URL shortening
+ */
+function make_bitly_url($url, $format = 'json', $version = '2.0.1') {
+	global $mixt_opt;
+	if ( empty($mixt_opt['short-url-login']) && is_array($mixt_opt['short-url-login']) ) { return; }
+
+	$login  = $mixt_opt['short-url-login']['username'];
+	$appkey = $mixt_opt['short-url-login']['password'];
+	$bitly  = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
+	$response = file_get_contents($bitly);
+	if ( $format == 'json' ) {
+		$json = @json_decode($response, true);
+		return $json['results'][$url]['shortUrl'];
+	} else {
+		$xml = simplexml_load_string($response);
+		return 'http://bit.ly/'.$xml->results->nodeKeyVal->hash;
 	}
 }
 

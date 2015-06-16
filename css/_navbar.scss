@@ -1,6 +1,4 @@
 
-/* - MIXT NAVBAR STYLESHEET - */
-
 $nav-primary-height: 91px;
 $nav-primary-pad: 20px;
 $nav-primary-item-height: 50px;
@@ -12,10 +10,11 @@ $sec-nav-item-height: 32px;
 .navbar.bordered {
 	.nav {
 		> li {
-			@extend .border-base;
 			margin-left: -1px;
+			@extend .border-base;
 			border-left-width: 1px;
 			border-right-width: 1px;
+			border-color: $theme-border;
 
 			transition: border-color 0.2s;
 		}
@@ -159,10 +158,8 @@ $sec-nav-item-height: 32px;
 }
 
 // Primary Navbar Below Header Position
-.nav-below-header {
-	&.nav-transparent .navbar-mixt.position-top {
-		margin-top: ($nav-primary-height * -1);
-	}
+.nav-below.nav-transparent .navbar-mixt.position-top {
+	margin-top: ($nav-primary-height * -1);
 }
 
 // Primary Navbar Fixed State
@@ -339,10 +336,6 @@ $sec-nav-item-height: 32px;
 					background-color: transparent !important;
 				}
 			}
-
-			&.bordered .nav > li {
-				border-color: transparent;
-			}
 		}
 		.sub-menu a {
 			max-width: 300px;
@@ -363,6 +356,8 @@ $sec-nav-item-height: 32px;
 			}
 		}
 	}
+
+	.navbar-mixt.bordered.position-top .nav > li { border-color: transparent; }
 
 	// Logo Positions
 	.logo-left .navbar-mixt {
@@ -600,7 +595,7 @@ $sec-nav-item-height: 32px;
 		box-shadow: none;
 	}
 
-	.nav-below-header.nav-transparent .navbar-mixt.position-top {
+	.nav-below.nav-transparent .navbar-mixt.position-top {
 		margin-top: (($nav-primary-height - $nav-primary-pad * 2) * -1);
 	}
 

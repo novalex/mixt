@@ -1,6 +1,4 @@
 
-/* - CONTENT STYLESHEET - */
-
 #main-wrap {
 	min-height: 100%;
 	height: auto !important;
@@ -32,6 +30,13 @@
 .sidebar,
 .posts-container,
 .page-nav { border-color: inherit; }
+
+// Page Header Spacing
+.article,
+.author .about-the-author {
+	margin: 15px 0 0;
+	padding: 0 0 15px;
+}
 
 @include media('screen', 'mars') {
 	#content-wrap {
@@ -71,6 +76,12 @@
 		}
 	}
 
+	.article,
+	.author .about-the-author {
+		margin: $margin-l 0 0;
+		padding: 0 0 $padding-l;
+	}
+
 	.fullwidth #content-wrap {
 		#content,
 		.sidebar {
@@ -102,7 +113,7 @@
 
 
 // Bottom Padding Before Footer
-.no-results { padding-bottom: $gutter-l; }
+.elements-here { padding-bottom: $gutter-l; }
 
 
 // Tags
@@ -122,17 +133,26 @@
 		background-color: $theme-accent;
 	}
 }
-
 .tagcloud {
 	width: 100%;
 	overflow: auto;
 }
-
 .tag-list {
 	display: inline;
 	font-size: 0;
 
-	a { float: none; }
+	strong {
+		float: left;
+		line-height: 28px;
+		margin-right: 10px;
+		font-size: $font-size-s;
+	}
+}
+
+
+// Author Page
+.author .about-the-author {
+	margin-top: $margin-l;
 }
 
 

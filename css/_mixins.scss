@@ -1,6 +1,4 @@
 
-// MIXT Sass Mixins
-
 // VISIBILITY
 
 @mixin vis-visible {
@@ -12,6 +10,7 @@
 	visibility: hidden;
 }
 
+
 // MEDIA BREAKPOINTS
 
 $bp-mercury: 480px;
@@ -21,9 +20,9 @@ $bp-earth:   1200px;
 
 // neptune, uranus, saturn, jupiter
 
-@function translate-media-condition($c) {
+@function translate-media-condition($cond) {
 	$media-cond: (
-		// Medium
+		// Media
 		"print":   "only print",
 		"screen":  "only screen",
 		"retina":  "(-webkit-min-device-pixel-ratio: 1.5),
@@ -44,7 +43,7 @@ $bp-earth:   1200px;
 		"mercury":  "(min-width: #{$bp-mercury + 1})",
 		"<mercury": "(max-width: #{$bp-mercury})"
 	);
-	@return map-get( $media-cond, $c );
+	@return map-get( $media-cond, $cond );
 }
 
 @mixin media($args...) {
@@ -80,6 +79,7 @@ $bp-earth:   1200px;
 //   };
 // }
 
+
 // GRADIENTS
 
 @mixin gradient-linear($from, $to) {
@@ -87,6 +87,9 @@ $bp-earth:   1200px;
 	background-image: -moz-linear-gradient(top, $from 0%, $to 100%);
 	background-image: linear-gradient(to bottom, $from 0%, $to 100%);
 }
+
+
+// SHADOWS
 
 @mixin highlight($alpha:0.4) {
 	box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);

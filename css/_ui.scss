@@ -1,6 +1,4 @@
 
-/* - MIXT UI ELEMENTS - */
-
 // Search Widget
 
 .search-form {
@@ -10,6 +8,7 @@
 		border-bottom-left-radius: 0;
 	}
 }
+
 
 // Link Lists
 
@@ -38,11 +37,53 @@
 	}
 }
 
+
+// Title With Side Lines
+
+.line-title {
+	width: 100%;
+	display: table;
+	overflow: hidden;
+
+	span,
+	.title-text {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.title-text {
+		margin: 0;
+		float: left;
+		white-space: pre;
+		font-size: inherit;
+
+		&:not(:first-child) { padding-left: 15px; }
+		&:not(:last-child) { padding-right: 15px; }
+	}
+
+	span {
+		width: 100%; height: 1px;
+
+		&:after {
+			content: ' ';
+			display: block;
+			border-top: 1px solid;
+		}
+	}
+
+	&,
+	span,
+	span:after { border-color: inherit; }
+}
+
+
 // Tooltips
 
+.tooltip { z-index: 10000; }
 .tooltip.fade { transition: opacity 0.2s ease; }
 .tooltip.fade.in { transition: opacity 0.3s ease 0.4s; }
 .tooltip-inner { padding: 6px 10px; }
+
 
 // Social Links
 
@@ -53,6 +94,59 @@
 		i { font-size: 16px; }
 	}
 }
+
+
+// Gallery
+
+.lightbox-trigger {
+	position: relative;
+	cursor: pointer;
+
+	img { width: 100%; }
+
+	&:after {
+		content: ' ';
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		background-color: transparent;
+	}
+
+	&:after,
+	.inner { transition: background-color 0.4s ease 0.4s; }
+
+	.inner {
+		position: absolute;
+		top: 5px; left: 5px;
+		width: 48px; height: 48px;
+		color: #fff;
+		border-radius: $bd-radius;
+		background-color: rgba(0,0,0,0.4);
+		text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+		z-index: 9;
+	}
+	.icon {
+		width: 32px; height: 32px;
+		line-height: 48px;
+		text-align: center; font-size: 32px;
+	}
+
+	.count {
+		opacity: 0; visibility: none;
+		margin-left: 10px;
+		font-size: 15px; white-space: nowrap;
+		text-align: left; font-weight: bold;
+		transition: opacity 0.4s ease 0.4s, visibility 0.4s ease 0.4s;
+	}
+
+	&:hover {
+		&:after { background-color: rgba(0,0,0,0.6); }
+		.inner { background-color: transparent; }
+		.count { opacity: 1; visibility: visible; }
+	}
+
+	+ .gallery { display: none; }
+}
+
 
 // Bootstrap
 

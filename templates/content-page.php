@@ -6,7 +6,7 @@
  * @package MIXT
  */
 
-$post_ob = new mixtPost('page-single');
+$post_ob = new mixtPost('page');
 
 ?>
 

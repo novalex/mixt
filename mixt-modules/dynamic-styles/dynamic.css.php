@@ -13,12 +13,12 @@ require_once( MIXT_FRAME_DIR . '/libs/Color.php' );
 
 use Mexitek\PHPColors\Color;
 
-// MIXT HEADER STYLE GENERATOR
 
+/**
+ * Output dynamic CSS
+ */
 function mixt_print_css() {
-
 	global $mixt_opt;
-
 	if ( ! is_array($mixt_opt) ) { return; }
 
 	// FUNCTIONS
@@ -95,7 +95,7 @@ function mixt_print_css() {
 	$default_site_themes = mixt_default_themes('site');
 	$theme_defaults      = $default_site_themes[$default_theme];
 
-	$site_option_arr = array(
+	$site_options = array(
 		// Site Background Pattern
 		'site-bg-pat' => array(
 			'type'    => 'str',
@@ -109,7 +109,7 @@ function mixt_print_css() {
 			'default' => $default_theme,
 		),
 	);
-	$site_options = mixt_get_options($site_option_arr);
+	$site_options = mixt_get_options($site_options);
 
 	$active_site_theme = $site_options['site-theme'];
 	$site_theme = $mixt_opt['site-themes'][$active_site_theme];
@@ -151,7 +151,7 @@ function mixt_print_css() {
 			 ".hover-accent-bg:hover { background-color: $site_accent; color: " . $set_color_for_bg($site_accent, array($site_text, $site_inv_text)) . "; }\n";
 
 		// Accent Border Color
-		echo "blockquote { border-color: $site_accent; }\n";
+		echo "blockquote { border-left-color: $site_accent !important; }\n";
 
 		// Link Color
 		echo "a," .
@@ -173,26 +173,26 @@ function mixt_print_css() {
 		$font_family    = $typo_opts['font-family'];
 		$text_transform = $typo_opts['text-transform'];
 
-		if ( $typo_opts['font-backup'] != '' ) {
+		if ( ! empty($typo_opts['font-backup']) ) {
 			$font_family .= ', ' . $typo_opts['font-backup'];
 		}
 
 		echo '#nav-logo strong {';
-			if ( $color != '' ) {
+			if ( ! empty($color) ) {
 				echo "color: $color;";
 			}
 			echo "font-size: $font_size;";
 			echo "font-family: $font_family !important;";
-			if ( $font_weight != '' ) {
+			if ( ! empty($font_weight) ) {
 				echo "font-weight: $font_weight;";
 			}
-			if ( $text_transform != '' ) {
+			if ( ! empty($text_transform) ) {
 				echo "text-transform: $text_transform;";
 			}
 		echo "}\n";
 
 		// Dark Bg Logo Color
-		if ( $mixt_opt['logo-text-inv'] != '' ) {
+		if ( ! empty($mixt_opt['logo-text-inv']) ) {
 			echo '#nav-logo .logo-dark { color:' . $mixt_opt['logo-text-inv'] . '; }';
 		}
 
@@ -272,7 +272,7 @@ function mixt_print_css() {
 		}
 	}
 
-	$nav_option_arr = array(
+	$nav_options = mixt_get_options( array(
 		'nav-theme' => array(
 			'type'    => 'str',
 			'return'  => 'value',
@@ -283,14 +283,17 @@ function mixt_print_css() {
 			'return'  => 'value',
 			'default' => '0.95',
 		),
+		'nav-top-opacity' => array(
+			'type'    => 'str',
+			'return'  => 'value',
+			'default' => '0.1',
+		),
 		'sec-nav-theme' => array(
 			'type'    => 'str',
 			'return'  => 'value',
 			'default' => $default_theme,
 		),
-	);
-
-	$nav_options = mixt_get_options($nav_option_arr);
+	));
 
 	$nav_themes = array();
 	$nav_themes[] = $nav_options['nav-theme'];
@@ -299,9 +302,8 @@ function mixt_print_css() {
 		$nav_themes[] = $nav_options['sec-nav-theme'];
 	}
 
-	$nav_defaults = array(
-		'bg' => '#ffffff',
-	);
+	$default_nav_themes = mixt_default_themes('nav');
+	$nav_defaults       = $default_nav_themes[$default_theme];
 
 	foreach ( $nav_themes as $theme_id ) {
 
@@ -312,10 +314,11 @@ function mixt_print_css() {
 			$theme = $mixt_opt['nav-themes'][$first_theme];
 		}
 
-		$nav_bg      = $theme['bg'] != '' ? $theme['bg'] : $nav_defaults['bg'];
+		$nav_bg      = ! empty($theme['bg']) ? $theme['bg'] : $nav_defaults['bg'];
 		$nav_bg_ob   = new Color($nav_bg);
 		$nav_bg_rgb  = implode(',', $nav_bg_ob->getRgb());
-		echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb," . $nav_options['nav-opacity'] . "); }\n";
+		echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$nav_options['nav-top-opacity']}); }\n";
+		echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$nav_options['nav-opacity']}); }\n";
 
 		if ( $theme_id != 'aqua' && $theme_id != 'nightly' ) {
 
@@ -326,19 +329,19 @@ function mixt_print_css() {
 
 			// Get Theme Colors
 
-			$nav_border    = $theme['border'] != '' ? $theme['border'] : '#'.$nav_bg_ob->darken(10);
+			$nav_border    = ! empty($theme['border']) ? $theme['border'] : '#'.$nav_bg_ob->darken(10);
 			$nav_border_ob = new Color($nav_border);
 
-			$nav_text     = $theme['text'] != '' ? $theme['text'] : $site_text;
-			$nav_inv_text = $theme['inv-text'] != '' ? $theme['inv-text'] : $site_inv_text;
+			$nav_text     = ! empty($theme['text']) ? $theme['text'] : $site_text;
+			$nav_inv_text = ! empty($theme['inv-text']) ? $theme['inv-text'] : $site_inv_text;
 
-			$nav_accent     = $theme['accent'] != '' ? $theme['accent'] : $site_accent;
-			$nav_inv_accent = $theme['inv-accent'] != '' ? $theme['inv-accent'] : $nav_accent;
+			$nav_accent     = ! empty($theme['accent']) ? $theme['accent'] : $site_accent;
+			$nav_inv_accent = ! empty($theme['inv-accent']) ? $theme['inv-accent'] : $nav_accent;
 
-			$nav_menu_bg    = $theme['menu-bg'] != '' ? $theme['menu-bg'] : $nav_bg;
+			$nav_menu_bg    = ! empty($theme['menu-bg']) ? $theme['menu-bg'] : $nav_bg;
 			$nav_menu_bg_ob = new Color($nav_menu_bg);
 
-			$nav_menu_border    = $theme['menu-border'] != '' ? $theme['menu-border'] : '#'.$nav_menu_bg_ob->darken(20);
+			$nav_menu_border    = ! empty($theme['menu-border']) ? $theme['menu-border'] : '#'.$nav_menu_bg_ob->darken(20);
 			$nav_menu_border_ob = new Color($nav_menu_border);
 
 			// Set Effects & Text Colors According To The Background Color

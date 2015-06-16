@@ -32,7 +32,8 @@ function mixt_favicons() {
 	global $mixtConfig, $mixt_opt;
 
 	$favicon_source_url = '';
-	$rebuild = false;
+	// Check for rebuild flag
+	(bool) $rebuild = $mixt_opt['favicon-rebuild'];
 
 	$mixt_img_edit = mixt_img_edit_support();
 
@@ -41,11 +42,6 @@ function mixt_favicons() {
 		// Get selected favicon url
 		if ( array_key_exists('favicon-img', $mixt_opt) && is_array($mixt_opt['favicon-img']) ) {
 			$favicon_source_url = $mixt_opt['favicon-img']['url'];
-		}
-
-		// Check for rebuild flag
-		if ( $mixt_opt['favicon-rebuild'] ) {
-			$rebuild = true;
 		}
 	}
 

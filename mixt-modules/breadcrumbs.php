@@ -18,14 +18,11 @@ function mixt_breadcrumbs($page_title = '', $extra_classes = '') {
 
 	if ( is_front_page() ) { return; }
 
-	global $post;
-	global $mixt_opt;
+	global $post, $mixt_opt;
 
-	$prefix = $mixt_opt['breadcrumbs-prefix'];
+	$prefix = ( ! empty($mixt_opt['breadcrumbs-prefix']) ) ? $mixt_opt['breadcrumbs-prefix'] : '';
 
-	if ( empty($page_title) ) {
-		$page_title = get_the_title();
-	}
+	if ( empty($page_title) ) { $page_title = get_the_title(); }
 
 	$classes = 'breadcrumb ' . $extra_classes;
 
@@ -43,8 +40,10 @@ function mixt_breadcrumbs($page_title = '', $extra_classes = '') {
 			if ( is_attachment() ) {
 				$parent_id        = $post->post_parent;
 				$parent_title     = get_the_title( $parent_id );
-				$parent_permalink = get_permalink( $parent_id );
-				echo '<li><a href="' . $parent_permalink . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
+				if ( $parent_title != $page_title ) {
+					$parent_permalink = get_permalink( $parent_id );
+					echo '<li><a href="' . $parent_permalink . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
+				}
 			} else if ( is_category() ) {
 				$category = get_category(get_query_var('cat'), false);
 				if ( $category->parent != 0 ) {

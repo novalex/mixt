@@ -6,17 +6,12 @@
  * @package MIXT
  */
 
-$post_ob = new mixtPost('blog');
-
-$post_classes = $post_ob->classes();
-
-$layout_options = mixt_layout_options();
-
-$is_masonry = ( $layout_options['type'] == 'masonry' ) ? true : false;
+$post_ob      = new mixtPost('blog');
+$is_masonry   = MIXT::get('layout', 'type') == 'masonry';
 
 ?>
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_classes ); ?>>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_ob->classes() ); ?>>
 
 	<?php if ( $is_masonry ) { echo '<div class="post-wrapper">'; } ?>
 

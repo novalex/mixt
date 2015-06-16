@@ -52,125 +52,16 @@ function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
 
 
 /**
- * Return array of theme names and ids for specified element
- *
- * @param str $elem
+ * Output "fancy" title with lines on the side
  */
-function mixt_get_themes($elem = '') {
+function mixt_fancy_title($title = '', $classes = '', $align = 'left', $tag = 'h3', $echo = true) {
+	$classes = 'title line-title ' . $classes;
+	$output = "<div class='$classes'>";
+		if ( $align == 'center' || $align == 'right' ) { $output .= '<span class="line-left"></span>'; }
+		$output .= "<$tag class='title-text'>$title</$tag>";
+		if ( $align == 'center' || $align == 'left' ) { $output .= '<span class="line-right"></span>'; }
+	$output .= '</div>';
 
-	if ( empty($elem) ) { return false; }
-
-	$theme_list = array();
-
-	$themes = get_option($elem . '-themes');
-
-	if ( ! empty($themes) && is_array($themes) ) {
-		foreach ( $themes as $theme_id => $theme ) {
-			if ( $theme['name'] == '' ) {
-				$theme_list[$theme_id] = $theme_id;
-			} else {
-				$theme_list[$theme_id] = $theme['name'];
-			}
-		}
-
-		return $theme_list;
-	} else {
-		return false;
-	}
-}
-
-
-/**
- * Test For Server Image Manipulation Capabilities
- */
-function mixt_img_edit_support() {
-	$img_edit_support = array(
-		'mime_type' => 'image/png',
-		'methods' => array(
-			'resize',
-			'save',
-		),
-	);
-	return wp_image_editor_supports($img_edit_support);
-};
-
-
-/**
- * Check If Current Page Is A Blog Page
- */
-function mixt_is_blog() {
-	return ( ! is_front_page() && is_home() );
-}
-
-
-/**
- * Get Current Page Type
- */
-function mixt_get_page_type() {
-	// Author Page
-	if ( is_author() ) { return 'author'; }
-	// Blog Page
-	else if ( mixt_is_blog() ) { return 'blog'; }
-	// Category Page
-	else if ( is_category() ) { return 'category'; }
-	// Date Page
-	else if ( is_date() ) { return 'date'; }
-	// Search Page
-	else if ( is_search() ) { return 'search'; }
-	// Tag Page
-	else if ( is_tag() ) { return 'tag'; }
-	// Type Not Set Or Singular
-	else { return 'single'; }
-}
-
-
-/**
- * Check If Current Page Is A Posts Page
- */
-function mixt_is_posts_page() {
-	if ( mixt_get_page_type() == 'single' ) { return false; }
-	else { return true; }
-}
-
-
-/**
- * Return Array Of Layout Options For The Current Page
- */
-function mixt_layout_options() {
-	global $mixt_opt;
-
-	$page_type = mixt_get_page_type();
-	if ( $page_type != 'blog' ) {
-		$page_type .= '-page';
-		if ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] == true ) { $page_type = 'blog'; }
-	}
-
-	$options = array(
-		'type' => array(
-			'key'     => $page_type . '-type',
-			'return'  => 'value',
-			'default' => 'standard',
-		),
-		'columns' => array(
-			'key'     => $page_type . '-columns',
-			'return'  => 'value',
-			'default' => '2',
-		),
-		'feat-size' => array(
-			'key'     => $page_type . '-feat-size',
-			'return'  => 'value',
-			'default' => 'blog-large',
-		),
-		'post-info' => array(
-			'key'     => $page_type . '-post-info',
-			'default' => 'false',
-		),
-		'meta-show' => array(
-			'key'     => $page_type . '-meta-show',
-			'return'  => 'value',
-			'default' => 'header',
-		),
-	);
-
-	return mixt_get_options($options);
+	if ( $echo ) echo $output;
+	else return $output;
 }

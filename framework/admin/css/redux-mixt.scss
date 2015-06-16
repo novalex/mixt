@@ -1,5 +1,5 @@
 
-/* - MIXT REDUX STYLING - */
+// MIXT REDUX STYLING
 
 // COLORS
 
@@ -361,6 +361,10 @@ $blue-accent: #539DDD;
 		@extend %input;
 
 		border-radius: 3px;
+	}
+
+	.redux-container-password input {
+	    width: 25em;
 	}
 
 	.redux-container-spinner {

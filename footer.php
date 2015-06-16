@@ -7,7 +7,7 @@
  */
 
 ?>
-			</div><?php // close main-content-inner or sidebar, depending if sidebar is used ?>
+			</div><?php // close main-content-inner or sidebar, if sidebar is used ?>
 		</div><?php // close .row ?>
 	</div><?php // close .main-content ?>
 </div><?php // close #main-wrap ?>
@@ -37,9 +37,11 @@
 <?php wp_footer(); ?>
 
 <script type='text/javascript' id="__bs_script__">
+if ( ! (/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent) ) {
 //<![CDATA[
     document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.2.3.js'><\/script>".replace("HOST", location.hostname));
 //]]>
+}
 </script>
 
 </body>

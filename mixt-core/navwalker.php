@@ -54,7 +54,7 @@ class mixt_navwalker extends Walker_Nav_Menu {
 		global $wp_query, $mixt_opt;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-		$item_type = mixt_meta('menu-item-mixt-type', $item->ID);
+		$item_type = get_post_meta($item->ID, 'menu-item-mixt-type', true);
 
 		if ( $item_type == 'divider' ) {
 		// DIVIDER
@@ -106,13 +106,13 @@ class mixt_navwalker extends Walker_Nav_Menu {
 			else if ( $item_type == 'button' ) { $is_button = true; }
 
 			// Check If Item Label Is Disabled
-			$no_label = mixt_meta('menu-item-mixt-no-label', $item->ID);
+			$no_label = get_post_meta($item->ID, 'menu-item-mixt-no-label', true);
 			if ( $no_label == 'true' ) {
 				$class_names .= ' no-label';
 			}
 
 			// Check If Item Is Disabled
-			$is_disabled = mixt_meta('menu-item-mixt-disabled', $item->ID);
+			$is_disabled = get_post_meta($item->ID, 'menu-item-mixt-disabled', true);
 			if ( $is_disabled == 'true' ) {
 				$class_names .= ' disabled';
 			}
@@ -120,7 +120,7 @@ class mixt_navwalker extends Walker_Nav_Menu {
 			// Check If Item Is Mega Menu
 			if ( ! function_exists('is_megamenu_check') ) {
 				function is_megamenu_check( $item_ID ) {
-					return mixt_meta('menu-item-mixt-megamenu', $item_ID);
+					return get_post_meta($item_ID, 'menu-item-mixt-megamenu', true);
 				}
 			}
 			$is_megamenu = 'is_megamenu_check';
@@ -187,7 +187,7 @@ class mixt_navwalker extends Walker_Nav_Menu {
 			$item_output .= $args->link_before;
 
 			// ADD MENU ICONS
-			$menu_icon = mixt_meta('menu-item-mixt-icon', $item->ID);
+			$menu_icon = get_post_meta($item->ID, 'menu-item-mixt-icon', true);
 
 			if ( $has_menu_icons != 0 && ! empty($menu_icon) ) {
 				$item_output .= '<i class="menu-icon ' . esc_attr( $menu_icon ) . '"></i>';

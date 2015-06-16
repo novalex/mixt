@@ -7,8 +7,6 @@
  * Author: novalex
  * Author URI: http://novalx.com
  * Text Domain: mixt-posts
- * Domain Path: locale/
- * License: GPL2
  */
 
 defined( 'ABSPATH' ) or die;

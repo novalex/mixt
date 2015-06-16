@@ -1,19 +1,22 @@
 
-/* - MIXT MASTER STYLESHEET - */
+/* MIXT MAIN STYLESHEET */
 
-// Theme Vars
+// Variables
 @import 'vars';
 
-// Theme Color Schemes
+// Color Schemes
 @import 'colors';
 
-// Theme Mixins
+// Theme Colors
+@import 'theme';
+
+// Mixins
 @import 'mixins';
 
 // Base Styling & Reset
 @import 'base';
 
-// Theme Global
+// Global Styling
 @import 'global';
 
 // Helpers
@@ -28,6 +31,7 @@
 // Navbar Styling
 @import 'navbar-base';
 @import 'navbar';
+@import 'navbar-themes';
 
 // Header Styling
 @import 'header';
@@ -47,8 +51,8 @@
 // Footer Styling
 @import 'footer';
 
+// Shortcode Styling
+@import 'shortcodes';
+
 // Plugins Styling
 @import 'plugins';
-
-// Theme Colors
-@import 'theme';

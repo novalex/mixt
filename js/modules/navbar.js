@@ -32,16 +32,16 @@ NAVBAR FUNCTIONS
 			var bgColor  = navbar.css('background-color'),
 				colorLum = colorLoD(bgColor);
 
-			if ( colorLum == 'dark' ) {
-				navbar.addClass('bg-dark');
-			}
-
+			if ( colorLum == 'dark' ) { navbar.addClass('bg-dark'); }
 			if ( navbar.is(topNavBar) ) {
-				navbarObj.navBg    = colorLum == 'dark' ? 'bg-dark' : '';
-				if ( mixt_opt['nav-transparent'] == 'true' && mixt_opt['head-media'] == 'true' ) {
+				navbarObj.navBg = ( colorLum == 'dark' ) ? 'bg-dark' : '';
+				if ( mixt_opt.nav.transparent && mixt_opt.header.enabled && mixt_opt.nav['top-opacity'] <= 0.4 ) {
 					navbarObj.navBgTop = mediaWrap.hasClass('bg-dark') ? 'bg-dark' : '';
 				} else {
 					navbarObj.navBgTop = navbarObj.navBg;
+				}
+				if ( mixt_opt.nav.mode == 'static' ) {
+					topNavBar.removeClass(navbarObj.navBg).addClass('position-top ' + navbarObj.navBgTop);
 				}
 			}
 		},
@@ -59,11 +59,11 @@ NAVBAR FUNCTIONS
 			if ( isMobile === false ) { viewport.on('scroll', navScrollHandler); }
 			else { viewport.off('scroll', navScrollHandler); }
 
-			if ( mixt_opt['show-admin-bar'] == 'true' ) {
+			if ( mixt_opt.page['show-admin-bar'] ) {
 				scrollCorrection += parseFloat(mainWrap.css('padding-top'), 10);
 			}
 
-			if ( mixt_opt['nav-transparent'] == 'true' && mixt_opt['nav-position'] == 'below' ) {
+			if ( mixt_opt.nav.transparent && mixt_opt.nav.position == 'below' ) {
 				topNavHeight = topNavBar.css('height', '').outerHeight();
 				topNavPos    = parseInt(topNavBar.css('top'), 10);
 				topNavMg     = topNavHeight;
@@ -240,7 +240,7 @@ NAVBAR FUNCTIONS
 			// Enable Nav Scrolling If Navbar Height > Viewport
 
 			function navScroll() {
-				if ( mixt_opt['nav-mode'] == 'fixed' && mqNav == 2 ) {
+				if ( mixt_opt.nav.mode == 'fixed' && mqNav == 2 ) {
 					var viewportH     = viewport.height(),
 						viewportS     = viewport.scrollTop(),
 						navbarHeaderH = topNavHead.height() + 1,
@@ -252,14 +252,14 @@ NAVBAR FUNCTIONS
 
 						scrollHandler = $.throttle( 50, navStopScroll );
 
-					if ( mixt_opt['show-admin-bar'] == 'true' ) {
+					if ( mixt_opt.page['show-admin-bar'] ) {
 						var adminBarH = $('#wpadminbar').height();
 						viewportH  -= adminBarH;
 						navwrapTop -= adminBarH;
 						navbarTop  -= adminBarH;
 					}
 
-					if ( mixt_opt['nav-transparent'] == 'true' && mixt_opt['nav-position'] == 'below' ) {
+					if ( mixt_opt.nav.transparent && mixt_opt.nav.position == 'below' ) {
 						navbarMg = navbarHeaderH * -1;
 					}
 
@@ -398,7 +398,7 @@ NAVBAR FUNCTIONS
 		}
 
 		// Make primary navbar sticky if option enabled
-		if ( mixt_opt['nav-mode'] == 'fixed' ) {
+		if ( mixt_opt.nav.mode == 'fixed' ) {
 			if ( mqNav === 1 ) {
 				navbarObj.stickyNav(true);
 			} else {

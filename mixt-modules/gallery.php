@@ -106,25 +106,17 @@ function mixt_gallery_shortcode($attr) {
 
 	$gallery_style = $gallery_div = '';
 	if ( apply_filters( 'use_default_gallery_style', true ) )
-			$gallery_style = "
-			<style type='text/css'>
-					#{$selector} {
-							margin: auto;
-					}
-					#{$selector} .gallery-item {
-							float: {$float};
-							margin-top: 10px;
-							text-align: center;
-							width: {$itemwidth}%;
-					}
-					#{$selector} img {
-							border: 2px solid #cfcfcf;
-					}
-					#{$selector} .gallery-caption {
-							margin-left: 0;
-					}
-			</style>
-			<!-- see gallery_shortcode() in wp-includes/media.php -->";
+		$gallery_style = "
+		<style type='text/css'>
+				#{$selector} { margin: auto; }
+				#{$selector} .gallery-item {
+					float: {$float};
+					margin: 10px 0;
+					text-align: center;
+					width: {$itemwidth}%;
+				}
+				#{$selector} .gallery-caption { margin-left: 0; }
+		</style>";
 
 	$size_class = sanitize_html_class( $size );
 
@@ -132,36 +124,63 @@ function mixt_gallery_shortcode($attr) {
 	$br_tag = '<br style="clear: both;" />';
 	$gallery_classes = '';
 
-	if ( $type != 'standard' ) {
-		$br_tag = $gallery_style = '';
+	if ( $type != 'standard') {
+		$output = $br_tag = '';
 		$cont_tag = 'ul';
 		$itemtag = 'li';
 	}
 	if ( $type == 'slider' ) {
+		$gallery_style   = '';
 		$gallery_classes = 'gallery-slider';
 	} else if ( $type == 'lightbox' ) {
-		$gallery_classes = 'lighbox-gallery';
+		$gallery_classes = 'lightbox-gallery';
 	}
-	if ( $feat ) {
-		$gallery_classes .= ' featured';
-	}
+	if ( $feat ) { $gallery_classes .= ' featured'; }
 
-	$gallery_div = "<$cont_tag id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} $gallery_classes'>";
-
-	$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
+	$output = $gallery_style;
 
 	$i = 0;
-	foreach ( $attachments as $id => $attachment ) {
-		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
 
-		$output .= "<{$itemtag} class='gallery-item'>";
-		$output .= "<{$icontag} class='gallery-icon'>$link</{$icontag}>";
-		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= "<{$captiontag} class='wp-caption-text gallery-caption'>" . wptexturize($attachment->post_excerpt) . "</{$captiontag}>";
+	if ( $type == 'lightbox' ) {
+		global $mixt_opt;
+		$gallery_icon = '<span class="icon ' . $mixt_opt['format-gallery-icon'] . '"></span>';
+		$image_count  = '<p class="count">' . count($attachments) . __(' pictures', 'mixt' ) . '</p>';
+
+		$output .= '<div class="lightbox-trigger">' .
+						wp_get_attachment_image(key($attachments), $size) .
+						"<div class='inner'>{$gallery_icon}{$image_count}</div>" .
+					'</div>';
+		$output .= "<$cont_tag id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} $gallery_classes'>";
+
+		foreach ( $attachments as $id => $attachment ) {
+			$itemclass = 'gallery-item';
+			$image = wp_get_attachment_image_src($id, 'full')[0];
+			$thumb = wp_get_attachment_image($id, 'blog-small');
+			$itemattr = "data-src='{$image}'";
+			$output .= "<{$itemtag} class='{$itemclass}' {$itemattr}>{$thumb}";
+			if ( $captiontag && trim($attachment->post_excerpt) ) {
+				$output .= "<{$captiontag} class='wp-caption-text gallery-caption'>" . wptexturize($attachment->post_excerpt) . "</{$captiontag}>";
+			}
+			$output .= "</{$itemtag}>";
 		}
-		$output .= "</{$itemtag}>";
-		if ( $columns > 0 && ++$i % $columns == 0 ) {
-			$output .= $br_tag;
+	} else {
+		$output .= "<$cont_tag id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} $gallery_classes'>";
+		foreach ( $attachments as $id => $attachment ) {
+			if ( $attr['link'] == 'none' ) {
+				$link = wp_get_attachment_image($id, $size);
+			} else {
+				$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
+			}
+
+			$output .= "<{$itemtag} class='gallery-item'>";
+			$output .= "<{$icontag} class='gallery-icon'>$link</{$icontag}>";
+			if ( $captiontag && trim($attachment->post_excerpt) ) {
+				$output .= "<{$captiontag} class='wp-caption-text gallery-caption'>" . wptexturize($attachment->post_excerpt) . "</{$captiontag}>";
+			}
+			$output .= "</{$itemtag}>";
+			if ( $columns > 0 && ++$i % $columns == 0 ) {
+				$output .= $br_tag;
+			}
 		}
 	}
 
@@ -169,6 +188,7 @@ function mixt_gallery_shortcode($attr) {
 
 	return $output;
 }
+
 
 /**
  * Remove default WP gallery shortcode and register custom one, add gallery type setting

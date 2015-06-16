@@ -9,12 +9,11 @@
 // If the current post is protected by a password and the visitor has not yet entered the password return early without loading the comments.
 if ( post_password_required() ) { return; }
 
-$options = array(
+$options = mixt_get_options( array(
 	'notes-before' => array( 'key' => 'comment-notes-before' ),
 	'logged-in-as' => array( 'key' => 'comment-logged-in' ),
 	'notes-after' => array( 'key' => 'comment-notes-after' ),
-);
-$options = mixt_get_options($options);
+) );
 
 ?>
 
@@ -26,21 +25,13 @@ $options = mixt_get_options($options);
 $comments_num = get_comments_number();
 if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }
 else if ( $comments_num > 1 ) { $comments_text = $comments_num . __( ' comments', 'mixt' ); }
-else { $comments_text = __( '1 comment', 'mixt' ); } ?>
+else { $comments_text = __( '1 comment', 'mixt' ); }
 
-<h2 class="comments-title"><?php echo $comments_text; ?></h2>
+mixt_fancy_title($comments_text, 'comments-title');
 
-<?php if ( have_comments() ) :
+if ( have_comments() ) {
 
-	if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-	<nav id="comment-nav-above" class="comment-navigation" role="navigation">
-		<h5 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h5>
-		<ul class="pager">
-			<li class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'mixt' ) ); ?></li>
-			<li class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'mixt' ) ); ?></li>
-		</ul>
-	</nav>
-	<?php endif; ?>
+	mixt_comment_nav('top'); ?>
 
 	<ol class="comment-list">
 		<?php
@@ -54,15 +45,10 @@ else { $comments_text = __( '1 comment', 'mixt' ); } ?>
 		?>
 	</ol>
 
-	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-	<nav id="comment-nav-below" class="comment-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h1>
-		<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'mixt' ) ); ?></div>
-		<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'mixt' ) ); ?></div>
-	</nav>
-	<?php endif;
+	<?php
 
-endif;
+	mixt_comment_nav('bottom', true);
+}
 
 if ( comments_open() ) {
 
@@ -75,7 +61,7 @@ if ( comments_open() ) {
 
 	$logged_in_as = $comment_notes_before = $comment_notes_after = '';
 
-	if ( $options['logged-in-as'] == 'true' ) {
+	if ( $options['logged-in-as'] ) {
 		$logged_in_as = '<p class="logged-in-as">' .
 			sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ),
 				admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) )
@@ -83,7 +69,7 @@ if ( comments_open() ) {
 		'</p>';
 	}
 
-	if ( $options['notes-before'] == 'true' ) {
+	if ( $options['notes-before'] ) {
 		$comment_notes_before = '<p class="comment-notes">' .
 			__( 'Your email address will not be published.', 'mixt' ) . ( $req ? __( ' Required fields are marked', 'mixt' ) . $required : '' ) .
 		'</p>';
@@ -115,7 +101,7 @@ if ( comments_open() ) {
 		'<textarea placeholder="' . __( 'Type in your reply...', 'mixt' ) . '" id="comment" class="form-control" name="comment" cols="45" rows="4" aria-required="true"></textarea>' .
 	'</p>';
 
-	if ( $options['notes-after'] == 'true' ) {
+	if ( $options['notes-after'] ) {
 		$comment_notes_after  = '<p class="form-allowed-tags">' .
 			__( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'mixt' ) . '</p>' .
 		'<pre class="allowed-tags">' . allowed_tags() . '</pre>';
@@ -124,7 +110,7 @@ if ( comments_open() ) {
 	$args = array(
 		'id_form'           => 'commentform',
 		'id_submit'         => 'commentsubmit',
-		'title_reply'       => __( 'Reply', 'mixt' ),
+		'title_reply'       => '', // __( 'Reply', 'mixt' ),
 		'title_reply_to'    => __( 'Reply to %s', 'mixt' ),
 		'cancel_reply_link' => __( 'Cancel Reply', 'mixt' ),
 		'label_submit'      => __( 'Post Reply', 'mixt' ),

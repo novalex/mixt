@@ -14,22 +14,27 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * @param str $set which set of themes to return
  */
 function mixt_default_themes($set = '') {
-
 	$themes = array(
+		'names' => array(
+			'aqua' => 'Aqua', 'nightly' => 'Nightly',
+			'lava' => 'Lava', 'dark-lava' => 'Dark Lava',
+			'eco' => 'Eco',
+		),
+
 		'site' => array(
 			'aqua' => array(
 				'name' => 'Aqua', 'id' => 'aqua',
-				'text' => '#333333', 'text-fade' => '#777777',
-				'inv-text' => '#ffffff', 'inv-text-fade' => '#dddddd',
-				'border' => '#dddddd',
+				'text' => '#333', 'text-fade' => '#777',
+				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
+				'border' => '#ddd',
 				'accent' => '#539ddd',
 				'link'   => '#539ddd',
 			),
 			'lava' => array(
 				'name' => 'Lava', 'id' => 'lava',
-				'text' => '#333333', 'text-fade' => '#777777',
-				'inv-text' => '#ffffff', 'inv-text-fade' => '#dddddd',
-				'border' => '#dddddd',
+				'text' => '#333', 'text-fade' => '#777',
+				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
+				'border' => '#ddd',
 				'accent' => '#dd3e3e',
 				'link'   => '#dd3e3e',
 			),
@@ -38,25 +43,54 @@ function mixt_default_themes($set = '') {
 		'nav' => array(
 			'aqua' => array(
 				'name' => 'Aqua', 'id' => 'aqua',
-				'bg-color'          => '#ffffff',
-				'accent'            => '#539ddd',
-				'text-color'        => '#333333',
-				'text-active-color' => '#539ddd',
+				'bg' => '#fff', 'border' => '#ddd',
+				'text' => '#333', 'inv-text' => '#fff',
+				'accent' => '#539ddd', 'inv-accent' => '',
+				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
+				'rgba' => '1',
 			),
 			'nightly' => array(
 				'name' => 'Nightly', 'id' => 'nightly',
-				'bg-color'          => '#333333',
-				'accent'            => '#539ddd',
-				'text-color'        => '#eeeeee',
-				'text-active-color' => '#539ddd',
+				'bg' => '#444', 'border' => '#333',
+				'text' => '#333', 'inv-text' => '#fff',
+				'accent' => '#539ddd', 'inv-accent' => '',
+				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
+				'rgba' => '1',
 			),
 		),
 	);
+	return $themes[$set];
+}
 
-	if ( array_key_exists($set, $themes) ) {
-		return $themes[$set];
+
+/**
+ * Return array of theme names and ids for specified element
+ *
+ * @param str $elem
+ */
+function mixt_get_themes($elem = '') {
+
+	if ( empty($elem) ) { return false; }
+
+	$theme_list = array();
+
+	$themes = get_option($elem . '-themes');
+
+	if ( ! empty($themes) && is_array($themes) ) {
+		foreach ( $themes as $theme_id => $theme ) {
+			if ( $theme['name'] == '' ) {
+				$theme_list[$theme_id] = $theme_id;
+			} else {
+				$theme_list[$theme_id] = $theme['name'];
+			}
+		}
+
+		return $theme_list;
+	} else {
+		return false;
 	}
 }
+
 
 /**
  * Return array of available CSS animations
@@ -202,4 +236,19 @@ function mixt_get_images($type) {
 	}
 
 	return $images;
+}
+
+
+/**
+ * Test For Server Image Manipulation Capabilities
+ */
+function mixt_img_edit_support() {
+	$img_edit_support = array(
+		'mime_type' => 'image/png',
+		'methods' => array(
+			'resize',
+			'save',
+		),
+	);
+	return wp_image_editor_supports($img_edit_support);
 }

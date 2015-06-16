@@ -8,14 +8,18 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * @package MIXT
  */
 function mixt_head_media() {
-
-	$option_arr = array(
+	$options = mixt_get_options( array(
 		// Media Type
 		'type' => array(
 			'type'    => 'str',
 			'key'     => 'head-media-type',
 			'return'  => 'value',
 			'default' => 'color',
+		),
+		'height' => array(
+			'type'   => 'str',
+			'key'    => 'head-height',
+			'return' => 'value',
 		),
 		// Header Colors
 		'bg' => array(
@@ -46,9 +50,7 @@ function mixt_head_media() {
 			'key'    => 'head-img-ph',
 			'return' => 'value',
 		),
-		'img-repeat' => array(
-			'key' => 'head-img-repeat',
-		),
+		'img-repeat' => array( 'key' => 'head-img-repeat' ),
 		// Video
 		'video-src' => array(
 			'type'   => 'str',
@@ -79,65 +81,74 @@ function mixt_head_media() {
 			'key'     => 'head-video-lum',
 			'default' => 'true',
 		),
-		'video-loop' => array(
-			'key' => 'head-video-loop',
-		),
+		'video-loop' => array( 'key' => 'head-video-loop' ),
 		// Content
+		'content-size' => array(
+			'type'    => 'str',
+			'key'     => 'head-content-size',
+			'return'  => 'value',
+		),
 		'align' => array(
 			'type'    => 'str',
 			'key'     => 'head-content-align',
 			'return'  => 'value',
 			'default' => 'left',
 		),
-		'info' => array(
-			'key' => 'head-content-info',
+		'scroll-icon' => array(
+			'type'    => 'str',
+			'key'     => 'head-content-scroll-icon',
+			'return'  => 'value',
+			'default' => 'icon-chevron-down',
 		),
-		'code' => array(
-			'key' => 'head-content-code',
-		),
+		'info' => array( 'key' => 'head-content-info' ),
+		'code' => array( 'key' => 'head-content-code' ),
 		'code-content' => array(
 			'type'   => 'str',
 			'key'    => 'head-code',
 			'return' => 'value',
 		),
-	);
-	$options = mixt_get_options($option_arr);
+	) );
 
 	$wrap_classes = 'head-media';
 
-	$media_bg = $slider = '';
+	if ( MIXT::get('header', 'fullscreen') ) { $wrap_classes .= ' fullscreen'; }
+
+	$media_bg = $slider = $media_cont_classes = '';
 
 	// Slider Media
 
 	if ( $options['type'] == 'slider' && ! empty($options['slider']) ) {
 		$wrap_classes .= ' media-slider';
-
 		$slider_id = intval(trim($options['slider'], '"'));
-		if ( is_array(LS_Sliders::find($slider_id)) ) {
-			$slider = do_shortcode('[layerslider id="' . $slider_id . '"]');
-			// Adjust transparent navbar text color depending on slide luminosity ?>
-			<script type="text/javascript" id="mixt-slider-bg">
-				function lsBgLum(data) {
-					var navbar = jQuery('#top-nav'),
-						header = jQuery('.head-media');
-					if ( jQuery('#main-wrap').hasClass('nav-transparent') ) {
-						if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-dark").length ) {
-							header.addClass('bg-dark');
-							navbar.removeClass("slide-bg-light").addClass("slide-bg-dark");
-							if ( navbar.hasClass('position-top') ) { navbar.addClass('bg-dark'); }
-						} else {
-							header.removeClass('bg-dark');
-							navbar.addClass("slide-bg-light").removeClass("slide-bg-dark");
-							if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-dark'); }
+
+		if ( class_exists('LS_Sliders') ) {
+			if ( is_array(LS_Sliders::find($slider_id) ) ) {
+				$slider = do_shortcode('[layerslider id="' . $slider_id . '"]');
+
+				// Adjust transparent navbar text color depending on slide luminosity ?>
+				<script type="text/javascript" id="mixt-slider-bg">
+					function lsBgLum(data) {
+						var navbar = jQuery('#top-nav'),
+							header = jQuery('.head-media');
+						if ( jQuery('#main-wrap').hasClass('nav-transparent') ) {
+							if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-dark").length ) {
+								header.addClass('bg-dark');
+								navbar.removeClass("slide-bg-light").addClass("slide-bg-dark");
+								if ( navbar.hasClass('position-top') ) { navbar.addClass('bg-dark'); }
+							} else {
+								header.removeClass('bg-dark');
+								navbar.addClass("slide-bg-light").removeClass("slide-bg-dark");
+								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-dark'); }
+							}
 						}
 					}
-				}
-			</script><?php
-		} else {
-			$slider = '<p class="media-not-found">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>';
-		}
+				</script><?php
+			// Show Slider Not Found messahe
+			} else { $slider = '<p class="media-not-found">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>'; }
+		// Show LayerSlider Deactivated Message
+		} else { $slider = '<p class="media-not-found">' . __( 'LayerSlider plugin not installed or deactivated!', 'mixt' ) . '</p>'; }
+
 	} else {
-		$media_cont_classes = '';
 
 		// Image Background
 
@@ -174,7 +185,7 @@ function mixt_head_media() {
 				$img_width  = $img_meta['width'];
 				$img_height = $img_meta['height'];
 			} else {
-				$img_repeat = 'true';
+				$img_repeat = true;
 				if ( ! empty($options['img-ph']['url']) ) {
 					$img_url   = $options['img-ph']['url'];
 					$img_color = mixt_meta( '_image_color', $options['img-ph']['id'] );
@@ -187,17 +198,14 @@ function mixt_head_media() {
 			if ( $img_color == 'dark' ) { $wrap_classes .= ' bg-dark'; }
 
 			// Add pattern or image proportion class
-			if ( $img_repeat == 'true' ) {
-				$media_cont_classes .= 'pattern ';
+			if ( $img_repeat ) {
+				$media_cont_classes .= ' pattern';
 			} else {
-				if ( $img_width > $img_height ) {
-					$media_cont_classes .= 'img-wide ';
-				} else {
-					$media_cont_classes .= 'img-tall ';
-				}
+				if ( $img_width > $img_height ) { $media_cont_classes .= ' img-wide'; }
+				else { $media_cont_classes .= ' img-tall'; }
 			}
 
-			$media_bg = '<div class="media-container ' . $media_cont_classes . '" ' . $img_atts . ' style="background-image: url(' . $img_url . ');"></div>';
+			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";
 		}
 
 		// Video Background
@@ -217,9 +225,7 @@ function mixt_head_media() {
 
 				// Video Source Element
 				$video_url = $options['video'];
-				if ( is_array($options['video']) ) {
-					$video_url = $options['video']['url'];
-				}
+				if ( is_array($options['video']) ) { $video_url = $options['video']['url']; }
 				if ( ! empty($video_url) ) {
 					$video_ext = pathinfo($video_url, PATHINFO_EXTENSION);
 					$video_el  = '<source src="' . $video_url . '" type="video/' . $video_ext . '">';
@@ -227,9 +233,7 @@ function mixt_head_media() {
 
 				// Fallback Video Source Element
 				$video_url_2 = $options['video-2'];
-				if ( is_array($options['video-2']) ) {
-					$video_url_2 = $options['video-2']['url'];
-				}
+				if ( is_array($options['video-2']) ) { $video_url_2 = $options['video-2']['url']; }
 				if ( ! empty($video_url_2) ) {
 					$video_ext_2 = pathinfo($video_url_2, PATHINFO_EXTENSION);
 					$video_el .= '<source src="' . $video_url_2 . '" type="video/' . $video_ext_2 . '">';
@@ -242,11 +246,8 @@ function mixt_head_media() {
 				}
 
 				// Video Loop
-				if ( $options['video-loop'] == 'true') { $video_atts .= 'loop '; }
-
-				$media_bg  = '<video autoplay ' . $video_atts . ' class="media-container ' . $media_cont_classes . '" poster="' . $poster_url . '">' .
-								 $video_el .
-							 '</video>';
+				if ( $options['video-loop'] ) { $video_atts .= 'loop '; }
+				$media_bg  = "<video autoplay $video_atts class='media-container $media_cont_classes' poster='$poster_url'>$video_el</video>";
 			}
 		}
 
@@ -255,36 +256,38 @@ function mixt_head_media() {
 		else if ( $options['type'] == 'color' ) {
 			$wrap_classes .= ' head-color';
 			if ( hex_is_light($options['bg']) == false ) { $wrap_classes .= ' bg-dark'; }
-
-			$media_bg = '<div class="media-container ' . $media_cont_classes . '" style="background-color: ' . $options['bg'] . ';"></div>';
+			$media_bg = "<div class='media-container $media_cont_classes' style='background-color: {$options['bg']};'></div>";
 		}
 	}
 
+	if ( $options['code'] && ! empty($options['code-content']) ) { $wrap_classes .= ' media-code'; }
+
 // Output
 
-	echo '<header class="' . $wrap_classes . '">';
+	echo "<header class='$wrap_classes'>";
 		echo $media_bg;
 		echo $slider;
 
 		// Header Content (Custom Code, Post Info)
 
-		if ( $options['info'] == 'true' || $options['code'] == 'true' ) {
+		if ( $options['info'] || $options['code'] ) {
 
-			if ( $options['code'] == 'true' && ! empty($options['code-content']) ) {
-				$wrap_classes .= ' media-code';
-			}
+			$cont_classes = 'container';
+			if ( $options['content-size'] == 'fullwidth' ) { $cont_classes .= ' fullwidth'; }
+			else if ( $options['content-size'] == 'cover' ) { $cont_classes .= ' fullwidth cover'; }
 
-			$inner_classes = '';
-			if ( $options['align'] != 'left' ) {
-				$inner_classes .= 'align-' . $options['align'];
-			}
+			echo "<div class='$cont_classes'";
+			if ( $options['height'] != '' ) echo " style='min-height: {$options['height']}px;'";
+			echo '>';
 
-			echo '<div class="container">';
-				echo '<div class="media-inner ' . $inner_classes . '">';
+				$inner_classes = 'media-inner';
+				if ( $options['align'] != 'left' ) { $inner_classes .= ' align-' . $options['align']; }
 
+				echo "<div class='$inner_classes'>";
 					echo do_shortcode($options['code-content']);
 
-					if ( $options['info'] == 'true' ) {
+					// Post Info
+					if ( $options['info'] ) {
 						$page_title = mixt_get_title();
 
 						// Breadcrumbs
@@ -299,7 +302,11 @@ function mixt_head_media() {
 							mixt_post_meta(null);
 						}
 					}
-		
+
+					// Scroll To Content Icon
+					if ( MIXT::get('header', 'scroll') ) {
+						echo "<span class='header-scroll icon {$options['scroll-icon']}'></span>";
+					}
 			echo '</div></div>';
 		}
 

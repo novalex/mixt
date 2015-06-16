@@ -3,7 +3,24 @@
 MIXT JS PLUGINS
 / ------------------------------------------------ */
 
-'use strict';
+'use strict'; /* jshint unused: false */
+
+// Resize Iframes Proportionally
+function iframeAspect(selector) {
+	selector = selector || jQuery('iframe');
+
+	selector.each( function() {
+		/* jshint validthis: true */
+		var iframe = jQuery(this),
+			width  = iframe.width();
+		if ( typeof(iframe.data('ratio')) == 'undefined' ) {
+			var attrW = this.width,
+				attrH = this.height;
+			iframe.data('ratio', attrH / attrW ).removeAttr('width').removeAttr('height');
+		}
+		iframe.height( width * iframe.data('ratio') );
+	});
+}
 
 // Lighten / Darken Color - Credit "Pimp Trizkit" - http://stackoverflow.com/users/693927/pimp-trizkit
 function shadeColor(color, percent) {   

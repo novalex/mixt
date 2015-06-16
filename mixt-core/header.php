@@ -12,8 +12,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * Display Page Loader
  */
 function mixt_page_loader() {
-
-	$options = array(
+	$options = mixt_get_options( array(
 		'type' => array(
 			'key'    => 'page-loader-type',
 			'type'   => 'str',
@@ -33,8 +32,7 @@ function mixt_page_loader() {
 			'key'     => 'page-loader-img',
 			'return'  => 'value',
 		),
-	);
-	$options = mixt_get_options($options);
+	) );
 
 	$load_classes  = 'loader ';
 
@@ -69,8 +67,7 @@ function mixt_page_loader() {
  * Display Logo
  */
 function mixt_display_logo() {
-
-	$options = array(
+	$options = mixt_get_options( array(
 		// Image or Text Logo
 		'type' => array(
 			'key'     => 'logo-type',
@@ -108,8 +105,7 @@ function mixt_display_logo() {
 			'return'  => 'value',
 			'default' => get_bloginfo( 'description', 'display' ),
 		),
-	);
-	$options = mixt_get_options($options);
+	) );
 
 	// Output Logo
 
@@ -131,7 +127,7 @@ function mixt_display_logo() {
 
 	// Output Tagline
 
-	if ( $options['show-tagline'] == 'true' ) {
+	if ( $options['show-tagline'] ) {
 		echo '<small>' . $options['tagline'] . '</small>';
 	}
 }
@@ -141,8 +137,7 @@ function mixt_display_logo() {
  * Display Secondary Navbar
  */
 function mixt_second_nav() {
-
-	$option_arr = array(
+	$options = mixt_get_options( array(
 		'theme' => array(
 			'type'    => 'str',
 			'key'     => 'sec-nav-theme',
@@ -180,6 +175,7 @@ function mixt_second_nav() {
 			'key'    => 'sec-nav-left-content',
 			'return' => 'value',
 		),
+		'left-hide' => array( 'key' => 'sec-nav-left-hide' ),
 		'left-code' => array(
 			'key'    => 'sec-nav-left-code',
 			'return' => 'value',
@@ -189,19 +185,19 @@ function mixt_second_nav() {
 			'key'    => 'sec-nav-right-content',
 			'return' => 'value',
 		),
+		'right-hide' => array( 'key' => 'sec-nav-right-hide' ),
 		'right-code' => array(
 			'key'    => 'sec-nav-right-code',
 			'return' => 'value',
 		),
-	);
-
-	$options = mixt_get_options($option_arr);
+	) );
 
 	$left_el = $left_el_classes = $right_el = $right_el_classes = '';
 
 	// Navbar Theme
 	$nav_classes = $options['theme'] . $options['bordered'] . $options['hover-bg'];
 	$nav_menu_classes = 'nav navbar-nav ' . $options['active-bar'] . $options['active-bar-pos'];
+	if ( $options['left-hide'] && $options['right-hide'] ) { $nav_classes .= ' hidden-xs'; }
 
 
 	function wrap_code($code) {
@@ -209,11 +205,10 @@ function mixt_second_nav() {
 	}
 
 
-	// Left Side Content
-
-	if ( $options['left-content'] == '1' ) {
+	// LEFT SIDE CONTENT
+	
 	// Content: Navigation
-
+	if ( $options['left-content'] == '1' ) {
 		$left_el_nav = wp_nav_menu(
 			array(
 				'theme_location'  => 'sec_navbar_left',
@@ -231,25 +226,22 @@ function mixt_second_nav() {
 			$left_el = mixt_no_menu_msg(false);
 		}
 
-	} else if ( $options['left-content'] == '2' ) {
 	// Content: Social Icons
-
+	} else if ( $options['left-content'] == '2' ) {
 		$left_el = mixt_social_profiles(false);
 
-	} else if ( $options['left-content'] == '3' ) {
 	// Content: Text / Code
-
+	} else if ( $options['left-content'] == '3' ) {
 		$left_el_classes = 'content-code';
-
 		$left_el = wrap_code($options['left-code']);
 	}
+	if ( $options['left-hide'] ) { $left_el_classes .= ' hidden-xs'; }
 
 
-	// Right Side Content
+	// RIGHT SIDE CONTENT
 
-	if ( $options['right-content'] == '1' ) {
 	// Content: Navigation
-
+	if ( $options['right-content'] == '1' ) {
 		$right_el_nav = wp_nav_menu(
 			array(
 				'theme_location'  => 'sec_navbar_right',
@@ -267,18 +259,16 @@ function mixt_second_nav() {
 			$right_el = mixt_no_menu_msg(false);
 		}
 
-	} else if ( $options['right-content'] == '2' ) {
 	// Content: Social Icons
-
+	} else if ( $options['right-content'] == '2' ) {
 		$right_el = mixt_social_profiles(false);
 
-	} else if ( $options['right-content'] == '3' ) {
 	// Content: Text / Code
-
+	} else if ( $options['right-content'] == '3' ) {
 		$right_el_classes = 'content-code';
-
 		$right_el = wrap_code($options['right-code']);
 	}
+	if ( $options['right-hide'] ) { $right_el_classes .= ' hidden-xs'; }
 
 // Output
 
@@ -306,10 +296,9 @@ endif;
  * Display Location Bar
  */
 function mixt_location_bar() {
-
 	if ( is_front_page() ) { return false; }
 
-	$options = array(
+	$options = mixt_get_options( array(
 		'left-content'  => array(
 			'key'    => 'loc-bar-left-content',
 			'type'   => 'str',
@@ -320,8 +309,7 @@ function mixt_location_bar() {
 			'type'   => 'str',
 			'return' => 'value',
 		),
-	);
-	$options = mixt_get_options($options);
+	) );
 
 	$page_title  = mixt_get_title();
 	$description = term_description();
@@ -331,14 +319,14 @@ function mixt_location_bar() {
 		$title_string .= $description;
 	}
 
-
 	// Output
 
-	if ( $options['left-content'] != '0' || $options['right-content'] != '0' ) { ?>
+	if ( $options['left-content'] != '0' || $options['right-content'] != '0' ) {
+		?>
 		<div id="location-bar">
 			<div class="container">
-				<div class="inner"><?php
-
+				<div class="inner">
+				<?php
 					// Left Side Title
 					if ( $options['left-content'] == '1' ) { ?>
 						<div class="page-title"><?php
@@ -367,10 +355,11 @@ function mixt_location_bar() {
 						} else if ( function_exists('mixt_breadcrumbs') ) {
 						    mixt_breadcrumbs($page_title);
 						}
-					} ?>
-
+					}
+				?>
 				</div>
 			</div>
-		</div><?php
+		</div>
+		<?php
 	}
 }

@@ -112,11 +112,11 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'default' => 'auto',
 			),
 
-			// Transparent Nav
+			// See-Through Nav
 			array(
 				'id'      => $prefix . 'nav-transparent',
-				'name'    => __( 'Transparent Navbar', 'mixt' ),
-				'desc'    => __( 'Navbar transparent when not scrolled', 'mixt' ),
+				'name'    => __( 'See-Through Navbar', 'mixt' ),
+				'desc'    => __( 'Navbar see-through when at the top', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
 					'auto'  => __( 'Auto', 'mixt' ),
@@ -124,6 +124,20 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'false' => __( 'No', 'mixt' ),
 				),
 				'default'    => 'auto',
+			),
+
+			// See-Through Opacity
+			array(
+				'id'      => $prefix . 'nav-top-opacity',
+				'name'    => __( 'See-Through Opacity', 'mixt' ),
+				'desc'    => __( 'Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 (opaque)', 'mixt' ),
+				'type'    => 'text',
+				'default'    => '0.70',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'nav-transparent',
+					'data-show-on-id'   => $prefix . 'nav-transparent2',
+				),
 			),
 
 			// Nav Position (Above or Below Header)
@@ -199,7 +213,21 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'default' => 'auto',
 			),
 
-			// Post Image Size
+			// Post Media Display
+			array(
+				'id'      => $prefix . 'blog-feat-show',
+				'name'    => __( 'Show Media', 'mixt' ),
+				'desc'    => __( 'Display the post featured media', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'auto',
+			),
+
+			// Post Media Size
 			array(
 				'id'      => $prefix . 'blog-feat-size',
 				'name'    => __( 'Media Size', 'mixt' ),
@@ -215,6 +243,42 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			),
 		),
 	);
+
+	// POSTS PAGE OPTIONS
+
+	if ( function_exists('cmb2_post_search_render_field') ) {
+
+		$meta_boxes['mixt_posts_page_meta'] = array(
+			'id'           => 'mixt_posts_page_options',
+			'title'        => __( 'Posts', 'mixt' ),
+			'object_types' => array( 'page' ),
+			'show_on'      => array( 'key' => 'blog-tpl', 'value' => '' ),
+			'context'      => 'normal',
+			'priority'     => 'high',
+			'show_names'   => true,
+			'fields'       => array(
+
+				// Posts
+				array(
+					'id'      => $prefix . 'attached-posts',
+					'name'    => __( 'Posts', 'mixt' ),
+					'desc'    => __( 'Select the the posts to display on this page', 'mixt' ),
+					'type'    => 'post_search_text',
+					'default' => '',
+				),
+
+				// Posts Per Page
+				array(
+					'id'      => $prefix . 'posts-page',
+					'name'    => __( 'Posts Per Page', 'mixt' ),
+					'desc'    => __( 'Amount of posts to display on each page (-1 to display all)', 'mixt' ),
+					'type'    => 'text',
+					'default' => '-1',
+				),
+			),
+		);
+
+	}
 
 	// HEADER OPTIONS
 
@@ -253,6 +317,20 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'false' => __( 'No', 'mixt' ),
 				),
 				'default'    => 'auto',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
+			),
+
+			// Height
+			array(
+				'id'      => $prefix . 'head-height',
+				'name'    => __( 'Custom Height', 'mixt' ),
+				'desc'    => __( 'Set a custom height (in px) for the header', 'mixt' ),
+				'type'    => 'text',
+				'default'    => '',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'head-media',
@@ -334,7 +412,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'gallery' => __( 'Gallery', 'mixt' ),
 					'feat'    => __( 'Featured', 'mixt' ),
 				),
-				'default'    => 'gallery',
+				'default'    => 'auto',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'head-media-type',
@@ -369,7 +447,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'true'  => __( 'Yes', 'mixt' ),
 					'false' => __( 'No', 'mixt' ),
 				),
-				'default'    => 'true',
+				'default'    => 'auto',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'head-media-type',
@@ -527,6 +605,62 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 			),
 
+			// Content Size
+			array(
+				'id'      => $prefix . 'head-content-size',
+				'name'    => __( 'Content Size', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'      => __( 'Auto', 'mixt' ),
+					'normal'    => __( 'Normal', 'mixt' ),
+					'fullwidth' => __( 'Full Width', 'mixt' ),
+					'cover'     => __( 'Cover', 'mixt' ),
+				),
+				'default'    => 'auto',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
+			),
+
+			// Content Fade Effect
+			array(
+				'id'      => $prefix . 'head-content-fade',
+				'name'    => __( 'Content Fade Effect', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'auto',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
+			),
+
+			// Scroll To Content
+			array(
+				'id'      => $prefix . 'head-content-scroll',
+				'name'    => __( 'Scroll To Content', 'mixt' ),
+				'desc'    => __( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'auto',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media',
+					'data-show-on'      => $prefix . 'head-media',
+				),
+			),
+
 			// Post Info In Header
 			array(
 				'id'      => $prefix . 'head-content-info',
@@ -591,7 +725,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 
 /**
- * Show on blog template and posts page
+ * Show metabox on blog template and posts page
  *
  * @param bool $display
  * @param array $meta_box
@@ -614,10 +748,39 @@ function mixt_metabox_show_on_blog( $display, $meta_box ) {
 	$posts_page = get_option('page_for_posts');
 
 	$page_template = get_page_template_slug($post_id);
-	$page_template = substr($page_template, 0, -4);
 
-	if ( $post_id == $posts_page || $page_template == 'blog' ) {
+	if ( $post_id == $posts_page || $page_template == 'templates/blog.php' ) {
 		return true;
 	}
 }
 add_filter( 'cmb2_show_on', 'mixt_metabox_show_on_blog', 10, 2 );
+
+
+/**
+ * Show metabox on blog template page
+ *
+ * @param bool $display
+ * @param array $meta_box
+ * @return bool display metabox
+ */
+function mixt_metabox_show_on_blog_tpl( $display, $meta_box ) {
+
+	if ( empty($meta_box['show_on']['key']) || $meta_box['show_on']['key'] !== 'blog-tpl' ) {
+		return $display;
+	}
+
+	// Get the current ID
+	if ( isset( $_GET['post'] ) ) {
+		$post_id = $_GET['post'];
+	} else if ( isset( $_POST['post_ID'] ) ) {
+		$post_id = $_POST['post_ID'];
+	}
+	if ( ! isset( $post_id ) ) { return false; }
+
+	$page_template = get_page_template_slug($post_id);
+
+	if ( $page_template == 'templates/blog.php' ) {
+		return true;
+	}
+}
+add_filter( 'cmb2_show_on', 'mixt_metabox_show_on_blog_tpl', 10, 2 );

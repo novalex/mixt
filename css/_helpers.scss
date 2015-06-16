@@ -1,8 +1,5 @@
 
-/* - MIXT HELPERS - */
-
-
-// Functions
+// FUNCTIONS
 
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
@@ -15,14 +12,14 @@
 }
 
 @function set-color-for-bg($bg) {
-	@if (lightness($bg) > 75) {
+	@if (lightness($bg) > 50) {
 		@return $theme-color;
 	} @else {
 		@return $theme-bg-dark-color;
 	}
 }
 
-// Borders
+// BORDERS
 
 .border-base {
 	border-width: 0;
@@ -40,6 +37,40 @@
 	border-bottom-style: solid;
 }
 
+.border-side-left,
+.border-side-right {
+	width: 100%;
+	position: relative;
+
+	&:after {
+		content: ' ';
+		position: absolute;
+		top: 50%;
+		border-style: solid;
+		border-color: inherit;
+		border-width: 1px 0 0 0;
+	}
+}
+.border-side-left:after { right: auto; left: 0; }
+.border-side-right:after { left: auto; right: 0; }
+
+
+// IFRAME FLUID
+
+.iframe-fluid {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+}
+.iframe-fluid iframe {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	border: none;
+}
+
+
+// CLEARING
 
 %clearfix {
 	&:before,
@@ -50,7 +81,8 @@
 	&:after { clear: both; }
 }
 
-// Layering
+
+// LAYERING
 
 %bring-to-front {
 	position: relative;

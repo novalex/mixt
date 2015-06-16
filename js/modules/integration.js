@@ -59,7 +59,7 @@ jQuery( document ).ready( function( $ ) {
 			anchor.append('<span class="post-count">' + countText + '</span>');
 			contents.filter( function() {
 				return this.nodeType === 3; 
-			}).remove();​​​​​​​
+			}).remove();
 		}
 	});
 

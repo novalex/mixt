@@ -15,8 +15,7 @@ get_header();
 
 if ( have_posts() ) {
 
-	// Determine if a posts page is displayed
-	$is_posts_page = mixt_is_posts_page();
+	$is_posts_page = MIXT::get('page', 'posts-page');
 
 	if ( $is_posts_page ) { echo '<div class="posts-container">'; }
 

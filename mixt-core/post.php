@@ -25,37 +25,44 @@ class mixtPost {
 
 	/**
 	 * @param string $context the post's context (single, blog, search, etc.)
+	 * @param int $id ID of the post to load
 	 * @param array $layout the page's layout settings
 	 */
-	public function __construct( $context = 'single', $layout = null ) {
+	public function __construct( $context = 'single', $id = null, $layout = null ) {
+
 		$this->context = $context;
 
+		if ( empty($id) ) {
+			if ( $context == 'single' ) { $id = get_queried_object_id(); }
+			else { $id = get_the_ID(); }
+		}
+		$this->ID = $id;
+
 		if ( $context == 'single' ) {
-			$this->ID        = get_queried_object_id();
 			$this->content   = get_the_content($this->ID);
 		} else {
-			$this->ID        = get_the_id();
 			$this->permalink = get_permalink($this->ID);
 			$this->content   = get_the_content('<button class="btn btn-black hover-accent-bg read-more">' . __('Read More', 'mixt') . '</span>');
 		}
 
-		$type = get_post_type($this->ID);
-		$this->type = $type;
+		$this->type = get_post_type($id);
 
-		if ( empty($layout) ) { $layout = mixt_layout_options(); }
-		$layout['posts-page'] = mixt_is_posts_page();
+		if ( empty($layout) ) {
+			$layout = MIXT::get('layout');
+			$layout['posts-page'] = MIXT::get('page', 'posts-page');
+		}
 		$this->layout = $layout;
 
 		$this->format = get_post_format($this->ID);
 
 		// Page type post
-		if ( $context == 'page' || $context == 'page-single' || $type == 'page' ) {
+		if ( $context == 'page' || $this->type == 'page' ) {
 			$this->format = 'page';
 			$this->layout['meta-show'] = 'false'; // Do not display meta for page type posts
 			// $this->layout['post-info'] = 'false'; // Do not display post info for page type posts
 		}
 		// Product type post
-		if ( $type == 'product' ) { $this->format = 'product'; }
+		if ( $this->type == 'product' ) { $this->format = 'product'; }
 
 		if ( $this->format == false ) { $this->format = 'standard'; }
 
@@ -72,11 +79,27 @@ class mixtPost {
 	 * Return a string of classes for the post
 	 */
 	public function classes() {
-		$classes = 'article ';
+		$classes = 'article';
 
+		switch ( $this->context ) {
+			case 'blog':
+			case 'search':
+				$classes .= ' blog-post';
+				break;
+			case 'page':
+				$classes .= ' page-content';
+				break;
+			case 'single':
+				$classes .= ' single-content';
+				break;
+		}
 		if ( $this->layout['posts-page'] ) {
-			if ( $this->layout['post-info'] == 'true' ) { $classes .= 'has-info '; }
-			if ( $this->layout['feat-size'] != 'blog-large' ) { $classes .= 'feat-side '; }
+			if ( $this->layout['post-info'] ) $classes .= ' has-info';
+			if ( $this->layout['feat-show'] == false ) {
+				$classes .= ' no-feat';
+			} else if ( $this->layout['feat-size'] != 'blog-large' && $this->layout['type'] == 'standard' ) {
+				$classes .= ' feat-side';
+			}
 		}
 
 		return $classes;
@@ -90,7 +113,7 @@ class mixtPost {
 	public function featured( $args = array() ) {
 		if ( $this->context == 'single' ) {
 			$this->layout['feat-size'] = 'full';
-		} else if ( $this->layout['posts-page'] == 'true' && $this->layout['type'] !== 'standard' ) {
+		} else if ( $this->layout['posts-page'] && $this->layout['type'] != 'standard' ) {
 			$this->layout['feat-size'] = 'blog-medium';
 		} else if ( ! empty($args['size']) ) {
 			$this->layout['feat-size'] = $args['size'];
@@ -109,9 +132,11 @@ class mixtPost {
 		if ( ! empty($args['placeholder']) ) {
 			$placeholder_img = '<div class="' . $feat_classes . '">' . $permalink_start . wp_get_attachment_image($args['placeholder'], $feat_size) . $permalink_end . '</div>';
 		}
-		$small_feat = ( $this->context == 'related' || ( $this->layout['posts-page'] == 'true' && $this->layout['type'] == 'standard' && $this->layout['feat-size'] == 'blog-small' ) ) ? true : false;
+		$small_feat = ( $this->context == 'related' || ( $this->layout['posts-page'] && $this->layout['type'] == 'standard' && $this->layout['feat-size'] == 'blog-small' ) ) ? true : false;
 
 		$format_icon = '<a href="' . $this->permalink . '" class="' . $feat_classes . ' feat-format"><i class="format-icon ' . $this->options['format-icon'] . '"></i></a>';
+
+		$output = '';
 
 		switch ($this->format) {
 			case 'link':	
@@ -132,26 +157,25 @@ class mixtPost {
 
 					if ( $small_feat ) {
 						if ( ! empty($placeholder_img) ) {
-							echo $placeholder_img;
+							$output = $placeholder_img;
 						} else {
-							$format_link_icon = str_replace($this->permalink, $post_link, $format_icon);
-							echo $format_link_icon;
+							$output = str_replace($this->permalink, $post_link, $format_icon);
 						}
 					} else {
-						echo '<div class="' . $feat_classes . '"><a href="' . $post_link . '" class="accent-bg" target="_blank">';
-						echo '<h2 class="title">' . get_the_title() . '</h2><small>' . $post_link . '</small>';
-						echo '</a></div>';
+						$output = '<div class="' . $feat_classes . '"><a href="' . $post_link . '" class="accent-bg" target="_blank">' .
+									  '<h2 class="title">' . get_the_title() . '</h2><small>' . $post_link . '</small>' .
+								  '</a></div>';
 					}
 				} else {
 					if ( $small_feat ) {
 						if ( ! empty($placeholder_img) ) {
-							echo $placeholder_img;
+							$output = $placeholder_img;
 						} else {
-							echo $format_icon;
+							$output = $format_icon;
 						}
 					} else {
-						echo '<div class="' . $feat_classes . '">' . $this->content . '</div>';
 						$this->show_content = false;
+						$output = '<div class="' . $feat_classes . '">' . $this->content . '</div>';
 					}
 				}
 				break;
@@ -174,12 +198,12 @@ class mixtPost {
 
 						if ( $small_feat ) {
 							if ( ! empty($placeholder_img) ) {
-								echo $placeholder_img;
+								$output = $placeholder_img;
 							} else {
-								echo $format_icon;
+								$output = $format_icon;
 							}
 						} else {
-							echo '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
+							$output = '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
 						}
 
 					// Gallery Format
@@ -198,12 +222,12 @@ class mixtPost {
 
 						if ( ! empty($args['minimal']) ) {
 							if ( ! empty($placeholder_img) ) {
-								echo $placeholder_img;
+								$output = $placeholder_img;
 							} else {
-								echo $format_icon;
+								$output = $format_icon;
 							}
 						} else {
-							echo '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
+							$output = '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
 						}
 					}
 
@@ -217,12 +241,12 @@ class mixtPost {
 
 						if ( $small_feat ) {
 							if ( ! empty($placeholder_img) ) {
-								echo $placeholder_img;
+								$output = $placeholder_img;
 							} else {
-								echo $format_icon;
+								$output = $format_icon;
 							}
 						} else {
-							echo '<div class="' . $feat_classes . '">' . $video_iframe . '</div>';
+							$output = '<div class="' . $feat_classes . '">' . $video_iframe . '</div>';
 						}
 					}
 				}
@@ -233,14 +257,14 @@ class mixtPost {
 				$feat_classes .= ' post-image';
 				$feat_id = mixt_get_post_image($this->content, 'id');
 				if ( ! empty($feat_id) ) {
-					echo '<div class="' . $feat_classes . '">' .
+					$output = '<div class="' . $feat_classes . '">' .
 							 $permalink_start . wp_get_attachment_image($feat_id, $feat_size) . $permalink_end .
 						 '</div>';
 					$this->content = str_replace(mixt_get_post_image($this->content), '', $this->content);
 				} else if ( ! empty($placeholder_img) ) {
-					echo $placeholder_img;
+					$output = $placeholder_img;
 				} else {
-					echo $format_icon;
+					$output = $format_icon;
 				}
 				break;
 
@@ -255,12 +279,12 @@ class mixtPost {
 
 					if ( $small_feat ) {
 						if ( ! empty($placeholder_img) ) {
-							echo $placeholder_img;
+							$output = $placeholder_img;
 						} else {
-							echo $format_icon;
+							$output = $format_icon;
 						}
 					} else {
-						echo '<div class="' . $feat_classes . '">' . $audio_iframe . '</div>';
+						$output = '<div class="' . $feat_classes . '">' . $audio_iframe . '</div>';
 					}
 				}
 				break;
@@ -269,15 +293,20 @@ class mixtPost {
 			default:
 				if ( ! empty($feat_img) ) {
 					$feat_classes .= ' post-image';
-					echo '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
-				} else if ( $this->context != 'single' ) {
+					$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
+				} else if ( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) ) {
 					if ( ! empty($placeholder_img) ) {
-						echo $placeholder_img;
+						$output = $placeholder_img;
 					} else if ( $this->type != 'page' ) {
-						echo $format_icon;
+						$output = $format_icon;
 					}
 				}
 				break;
+		} // End Switch
+
+		// Output Featured if Enabled
+		if ( $this->layout['feat-show'] || in_array($this->context, array('single', 'related')) ) {
+			echo $output;
 		}
 	}
 
@@ -285,31 +314,7 @@ class mixtPost {
 	 * Display the post's header
 	 */
 	public function header() {
-
-		$options = array(
-			'location-bar' => array(),
-			'loc-bar-left-content' => array(
-				'type'   => 'str',
-				'return' => 'value',
-			),
-			'loc-bar-right-content' => array(
-				'type'   => 'str',
-				'return' => 'value',
-			),
-			// Media Header Options
-			'head-media' => array(),
-			'head-media-type' => array(
-				'type'    => 'str',
-				'return'  => 'value',
-				'default' => 'color',
-			),
-			'head-img-src' => array(
-				'type'   => 'str',
-				'return' => 'value',
-			),
-			'head-content-info' => array(),
-		);
-		$options = mixt_get_options($options);
+		$head_opt = MIXT::get('header');
 
 		$permalink_start = $permalink_end = '';
 		if ( $this->context != 'single' ) {
@@ -319,7 +324,7 @@ class mixtPost {
 
 		// Post Info
 
-		if ( $this->layout['posts-page'] && $this->layout['post-info'] == 'true' ) {
+		if ( $this->layout['posts-page'] && $this->layout['post-info'] ) {
 
 			echo '<div class="post-info">';
 
@@ -349,23 +354,19 @@ class mixtPost {
 
 		// Display Featured Post Media
 
-		$display_feat = ( $options['head-media'] == 'true' && $options['head-media-type'] == 'image' && $options['head-img-src'] == 'feat' ) ? 'false' : 'true';
+		$display_feat = ( $head_opt['enabled'] && $head_opt['media-type'] == 'image' && $head_opt['img-src'] == 'feat' ) ? false : true;
 
-		if ( $display_feat == 'true' || $this->context == 'single' ) {
+		if ( $display_feat || $this->context == 'single' ) {
 			$this->featured();
 		}
 
 		// Display Post Title & Meta
 
-		if ( ( $options['head-media'] != 'true' || $options['head-content-info'] != 'true' ) || $this->context == 'blog' ) {
+		if ( ( ! $head_opt['enabled'] || ! $head_opt['content-info'] ) || $this->context == 'blog' ) {
 
-			$show_title = ( $this->context != 'single' || $options['location-bar'] == 'false' || ( $options['loc-bar-left-content'] != 1 && $options['loc-bar-right-content'] != 1 ) ) ? true : false;
-			// Formats for which to not display the title
-			$no_title_formats = array(
-				'link',
-			);
+			$show_title = ( $this->context != 'single' || ! $head_opt['location-bar'] || ( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) ) ? true : false;
 
-			if ( ! in_array( $this->format, $no_title_formats ) && $show_title ) { ?>
+			if ( ( $this->format != 'link' || $this->layout['feat-show'] == false ) && $show_title ) { ?>
 				<h1 class="page-title"><?php echo $permalink_start . get_the_title() . $permalink_end; ?></h1><?php
 			}
 
@@ -384,15 +385,10 @@ class mixtPost {
 	 */
 	public function content($type = 'full') {
 
-		if ( $this->show_content != false ) {
-			$options = array(
-				'post-content' => array(
-					'return' => 'value',
-				),
-			);
-			$options = mixt_get_options($options);
-
-			if ( $options['post-content'] == 'full' && $type == 'full' ) {
+		if ( is_attachment() ) {
+			echo wp_get_attachment_image($this->ID, 'full');
+		} else if ( $this->show_content != false ) {
+			if ( $this->layout['post-content'] == 'full' && $type == 'full' ) {
 				$content = apply_filters( 'the_content', $this->content );
 				$content = str_replace( ']]>', ']]&gt;', $content );
 			} else {
@@ -411,7 +407,7 @@ class mixtPost {
 
 
 /**
- * Get the first image from the post
+ * Get image from the post content
  *
  * @param string $content content to search in for image
  * @param string $type return full image markup, ID, or URL
@@ -440,20 +436,26 @@ function mixt_get_post_image($content = null, $type = 'full') {
 
 /**
  * Display the "about the author" box
+ *
+ * @param bool $title display title
  */
-function mixt_about_the_author() {
-	$author_name = get_the_author_meta( "display_name" );
-	$author_bio  = get_the_author_meta('description');
+function mixt_about_the_author($title = true) {
+	$bio = get_the_author_meta('description');
 
-	if ( ! empty($author_bio) ) { ?>
-		<aside class="post-extra about-the-author">
-			<h3 class="title">
-				<?php echo _x('About ', 'author', 'mixt' ) . $author_name; ?>
-			</h3>
-			<div class="author-avatar"><?php echo get_avatar( get_the_author_meta('ID'), 64 ); ?></div>
-			<div class="author-bio">
-				<?php echo wpautop($author_bio); ?>
-			</div>
+	if ( ! empty($bio) ) {
+		$id     = get_the_author_meta('ID');
+		$name   = '<a href="' . get_author_posts_url($id) . '" class="author-url" rel="author">' .
+					  get_the_author_meta('display_name') .
+				  '</a>';
+		$avatar = get_avatar($id, 64);
+		?>
+		<aside class="post-extra about-the-author"><?php
+			if ( $title ) mixt_fancy_title(_x('About ', 'author', 'mixt' ) . $name);
+
+			if ( ! empty($avatar) ) {
+				echo '<div class="author-avatar">' . $avatar . '</div>';
+			} ?>
+			<div class="author-bio"><?php echo wpautop($bio); ?></div>
 		</aside>
 	<?php }
 }
@@ -467,7 +469,7 @@ function mixt_about_the_author() {
 function mixt_related_posts( $args = array() ) {
 	$defaults = array(
 		'number'  => '3',
-		'slider'  => 'false',
+		'slider'  => false,
 		'feat-ph' => '',
 		'related' => 'tags',
 	);
@@ -482,56 +484,62 @@ function mixt_related_posts( $args = array() ) {
 		$post_related = wp_get_post_categories($post->ID);
 	}
 
-	if ( $post_related ) { ?>
-		<div class="post-extra post-related post-list">
-			<h3 class="title"><?php _e( 'Related Posts', 'mixt' ); ?></h3>
+	if ( $post_related ) {
+		$related_ids = array();
+		if ( $args['related'] == 'tags' ) {
+			$related_in = 'tag__in';
+			foreach ( $post_related as $tag ) { $related_ids[] = $tag->term_id; }
+		} else {
+			$related_in = 'category__in';
+			foreach ( $post_related as $cat ) { $related_ids[] = $cat; }
+		}
+		$query_args = array(
+			$related_in           => $related_ids,
+			'orderby'             => 'rand',
+			'post__not_in'        => array($post->ID),
+			'posts_per_page'      => $args['number'],
+			'ignore_sticky_posts' => 1,
+		);
 
-			<?php
-			$related_ids = array();
-			if ( $args['related'] == 'tags' ) {
-				$related_in = 'tag__in';
-				foreach ( $post_related as $tag ) { $related_ids[] = $tag->term_id; }
-			} else {
-				$related_in = 'category__in';
-				foreach ( $post_related as $cat ) { $related_ids[] = $cat; }
-			}
-			$query_args = array(
-				$related_in           => $related_ids,
-				'orderby'             => 'rand',
-				'post__not_in'        => array($post->ID),
-				'posts_per_page'      => $args['number'],
-				'ignore_sticky_posts' => 1,
-			);
+		$rel_query = new WP_Query( $query_args );
 
-			$rel_query = new wp_query( $query_args );
-
-			if ( $args['slider'] == 'true' ) { echo '<div class="slider-cont controls-alt">'; }
-
-			while ( $rel_query->have_posts() ) :
-				$rel_query->the_post();
-
-				$post_ob = new mixtPost('related');
-
-				?>
-				<article class="post related-post">
-					<?php
-					$feat_args = array(
-						'size'        => 'blog-medium',
-						'placeholder' => $args['feat-ph'],
-					);
-					if ( $args['slider'] == 'true' ) { $feat_args['minimal'] = true; }
-					$post_ob->featured($feat_args);
-					?>
-					<a rel="external" href="<?php the_permalink(); ?>" class="related-title"><?php the_title(); ?></a>
-				</article>
-				<?php
-			endwhile;
-
-			if ( $args['slider'] == 'true' ) { echo '</div>'; } // Close .slider-cont
-
+		if ( $rel_query->have_posts() ) {
 			?>
-		</div>
-	<?php }
+			<div class="post-extra post-related post-list">
+				<?php
+
+				mixt_fancy_title(__( 'Related Posts', 'mixt' ));
+
+				if ( $args['slider'] ) { echo '<div class="slider-cont controls-alt">'; }
+
+				while ( $rel_query->have_posts() ) :
+					$rel_query->the_post();
+					$title   = get_the_title();
+					$link    = get_the_permalink();
+					$post_ob = new mixtPost('related');
+
+					?>
+					<article class="post related-post">
+						<?php
+						$feat_args = array(
+							'size'        => 'blog-medium',
+							'placeholder' => $args['feat-ph'],
+						);
+						if ( $args['slider'] ) { $feat_args['minimal'] = true; }
+						$post_ob->featured($feat_args);
+						?>
+						<a rel="external" href="<?php echo $link; ?>" class="related-title"><?php echo $title; ?></a>
+						<a rel="external" href="<?php echo $link; ?>" class="related-title-tip" title="<?php echo $title; ?>"></a>
+					</article>
+					<?php
+				endwhile;
+
+				if ( $args['slider'] ) { echo '</div>'; } // Close .slider-cont
+			?>
+			</div>
+			<?php
+		}
+	}
 
 	$post = $orig_post;
 	wp_reset_query();

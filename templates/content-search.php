@@ -6,11 +6,8 @@
  * @package MIXT
  */
 
-$post_ob = new mixtPost('search');
-
-$layout_options = mixt_layout_options();
-
-$is_masonry = ( $layout_options['type'] == 'masonry' ) ? true : false;
+$post_ob    = new mixtPost('search');
+$is_masonry = MIXT::get('layout', 'type') == 'masonry';
 
 ?>
 

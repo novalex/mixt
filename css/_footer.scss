@@ -1,8 +1,6 @@
 
-/* - MIXT FOOTER STYLESHEET - */
-
 #colophon {
-	padding-top: 15px;
+	padding: $padding-m 0;
 	background-color: #444;
 	color: #eee; text-shadow: 0 1px 1px #000;
 	@extend %bring-to-front;

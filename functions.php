@@ -49,16 +49,19 @@ if ( ! function_exists('mixt_requires') ) {
 
 $mixt_core_files = array(
 	'assets.php',
-	'init.php',
+	'helpers.php',
 	'options.php',
+	'init.php',
 	'header.php',
 	'tags.php',
 	'post.php',
-	'helpers.php',
 	'navwalker.php',
 );
 mixt_requires( $mixt_core_files, MIXT_CORE_DIR );
 unset($mixt_core_files);
+
+// Load Shortcodes
+foreach ( glob(MIXT_MODULES_DIR . '/shortcodes/*.php') as $filename ) { include $filename; }
 
 // SET UP THEME AND REGISTER FEATURES
 
