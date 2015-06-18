@@ -1,0 +1,5 @@
+//
+// Component animations
+// --------------------------------------------------
+
+.fade { @include transition(opacity .2s ease); }

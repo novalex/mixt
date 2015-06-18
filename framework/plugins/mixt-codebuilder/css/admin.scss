@@ -1,4 +1,8 @@
 
+@import 'css/mixt/colors';
+
+@import './inputs';
+
 // MIXT CodeBuilder Panel Styling
 
 $off-white: #f6f6f6;
@@ -53,8 +57,13 @@ $bd-radius: 3px;
 	}
 
 	.main-select,
-	#mcb-title,
+	.panel-load,
 	.submit { padding: $padding; }
+
+	.panel-load {
+		text-align: center;
+		img { width: 208px; height: 13px; }
+	}
 
 	.row,
 	.mcb-sortable .field,
@@ -86,7 +95,6 @@ $bd-radius: 3px;
 			border-radius: $bd-radius;
 			border: 1px solid $border;
 			background: $off-white;
-			box-shadow: 0 1px 2px #EAEAEA;
 		}
 
 		.mcb-sortable-placeholder {
@@ -131,6 +139,7 @@ $bd-radius: 3px;
 		border-top: 1px solid $border;
 		background-color: $off-white;
 	}
+	.error { padding: 0 20px; text-align: center; }
 }
 
 @media screen and (min-width: 620px) {

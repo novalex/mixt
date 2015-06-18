@@ -9,14 +9,14 @@ function mixt_map_shortcode( $atts, $content = null ) {
 		'class' => '',
 	), $atts ) );
 
-	$classes = 'mixt-map shortcode-map';
+	$classes = 'mixt-map map-sc';
 	if ( ! empty($class) ) $classes .= ' ' . $class;
 
 	$content = html_entity_decode( $content );
 
-	$output = "<div class='$classes' style='height: $height'>";
-		$output .= $content;
-	$output .= '</div>';
+	$html = "<div class='$classes' style='height: $height'>";
+		$html .= $content;
+	$html .= '</div>';
 	
-	return $output;
+	return $html;
 }

@@ -1,0 +1,92 @@
+
+// COLORS
+
+
+$white: #FFFFFF;
+$off-white: #f0f0f0;
+$grey: #EBEBEB;
+$black: #2A2A2A;
+
+$blue: #5472D2;
+$sky: #5AA1E3;
+$turquoise: #00C1CF;
+$peacoc: #4CADC9;
+$vista-blue: #75D69C;
+$violet: #8D6DC4;
+$purple: #B97EBB;
+
+$green: #6DAB3C;
+$grace: #AED13B;
+
+$pink: #FE6C61;
+$juicy-pink: #F4524D;
+$mulled-wine: #50485B;
+
+$chino: #CEC2AB;
+$orange: #F7BE68;
+$sandy-brown: #F79468;
+
+$red: #D81616;
+
+
+// TEXT COLORS
+$text-light-color: #FFF;
+$text-light-color-fade: #AAA;
+
+$text-dark-color: #333;
+$text-dark-color-fade: #999;
+
+
+// BORDER COLORS
+$border-color: #E0E0E0;
+$border-color-alpha: rgba(0,0,0,0.15);
+
+$border-color-dark: #333;
+$border-color-dark-alpha: rgba(0,0,0,0.6);
+
+
+// Location Bar
+$loc-bar-bg: #F5F5F5;
+$loc-bar-text: $text-dark-color;
+$loc-bar-bd: $border-color;
+
+
+// INPUTS & BUTTONS
+
+// Global
+$input-bd: #CCC;
+$input-bg: #FDFDFD;
+
+// Dark Theme
+$input-bd-dark: $border-color-dark;
+$input-bg-dark: #5F5F5F;
+
+$btn-bg-dark: #555;
+
+// Input States
+$input-focus-bd: #BBB; 
+$input-focus-bs: rgba(0,0,0,0.1);
+
+
+// FUNCTIONS
+
+@function set-color-for-bg($bg, $color: $theme-color, $dark-color: $theme-bg-dark-color) {
+	@if ( lightness($bg) > 50 ) {
+		@return $color;
+	} @else {
+		@return $dark-color;
+	}
+}
+
+
+// MIXINS
+
+@mixin bg-color-alpha($color, $opacity: 0.9) {
+    background-color: $color;
+    background-color: rgba($color, $opacity);
+}
+
+@mixin bd-color-alpha($color, $opacity: 0.9) {
+    border-color: $color;
+    border-color: rgba($color, $opacity);
+}

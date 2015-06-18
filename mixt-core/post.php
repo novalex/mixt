@@ -450,7 +450,7 @@ function mixt_about_the_author($title = true) {
 		$avatar = get_avatar($id, 64);
 		?>
 		<aside class="post-extra about-the-author"><?php
-			if ( $title ) mixt_fancy_title(_x('About ', 'author', 'mixt' ) . $name);
+			if ( $title ) echo do_shortcode('[mixt_headline]' . _x('About ', 'author', 'mixt' ) . $name . '[/mixt_headline]');
 
 			if ( ! empty($avatar) ) {
 				echo '<div class="author-avatar">' . $avatar . '</div>';
@@ -508,7 +508,7 @@ function mixt_related_posts( $args = array() ) {
 			<div class="post-extra post-related post-list">
 				<?php
 
-				mixt_fancy_title(__( 'Related Posts', 'mixt' ));
+				echo do_shortcode('[mixt_headline text="' . __( 'Related Posts', 'mixt' ) . '"]');
 
 				if ( $args['slider'] ) { echo '<div class="slider-cont controls-alt">'; }
 

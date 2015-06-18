@@ -49,19 +49,3 @@ function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
 		echo $no_menu_msg;
 	}
 }
-
-
-/**
- * Output "fancy" title with lines on the side
- */
-function mixt_fancy_title($title = '', $classes = '', $align = 'left', $tag = 'h3', $echo = true) {
-	$classes = 'title line-title ' . $classes;
-	$output = "<div class='$classes'>";
-		if ( $align == 'center' || $align == 'right' ) { $output .= '<span class="line-left"></span>'; }
-		$output .= "<$tag class='title-text'>$title</$tag>";
-		if ( $align == 'center' || $align == 'left' ) { $output .= '<span class="line-right"></span>'; }
-	$output .= '</div>';
-
-	if ( $echo ) echo $output;
-	else return $output;
-}

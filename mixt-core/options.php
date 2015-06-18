@@ -29,8 +29,6 @@ class MIXT {
 		self::set('nav', null, $this->options('nav'));
 		self::set('header', null, $this->options('header'));
 		self::set('layout', null, $this->options('layout'));
-
-		remove_action('get_header', array($this, 'init_page')); // Only run once
 	}
 
 	public static function get($group, $key = null) {
@@ -207,4 +205,4 @@ class MIXT {
 new MIXT;
 
 function mixt_get_options($option_arr) { return MIXT::get_options($option_arr); }
-function mixt_meta($key, $post_id = null, $single = true) { return MIXT::mixt_meta( $key, $post_id, $single); }
+function mixt_meta($key, $post_id = null, $single = true) { return MIXT::mixt_meta($key, $post_id, $single); }

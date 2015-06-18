@@ -17,13 +17,11 @@ define( 'MIXT_CORE_DIR', MIXT_DIR . '/mixt-core' );        // Core Files Path
 define( 'MIXT_FRAME_DIR', MIXT_DIR . '/framework' );       // Framework Path
 define( 'MIXT_MODULES_DIR', MIXT_DIR . '/mixt-modules' );  // Modules Path
 define( 'MIXT_PLUGINS_DIR', MIXT_FRAME_DIR . '/plugins' ); // Plugins Path
-define( 'MIXT_INC_DIR', MIXT_FRAME_DIR . '/inc' );         // Includes Path
 
 define( 'MIXT_CORE_URI', MIXT_URI . '/mixt-core' );        // Core Files URI
 define( 'MIXT_FRAME_URI', MIXT_URI . '/framework' );       // Framework URI
 define( 'MIXT_MODULES_URI', MIXT_URI . '/mixt-modules' );  // Modules URI
 define( 'MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins' ); // Plugins URI
-define( 'MIXT_INC_URI', MIXT_FRAME_URI . '/inc' );         // Includes URI
 
 
 // LOAD MIXT CORE FILES & FRAMEWORK

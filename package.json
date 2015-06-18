@@ -10,7 +10,6 @@
     "gulp-autoprefixer": "^1.0.1",
     "gulp-concat": "^2.4.1",
     "gulp-if": "^1.2.5",
-    "gulp-jshint": "^1.8.5",
     "gulp-sass": "^1.2.0",
     "gulp-sourcemaps": "^1.2.4",
     "gulp-uglify": "^1.0.1",

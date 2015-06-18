@@ -5,22 +5,22 @@
 
 /* TASKS ####################################
  *
- * sass       - compile sass files
- * sass-bs    - compile bootstrap sass files
- * sass-frame - compile framework sass files (admin, plugins, etc)
+ * sass        - compile sass files
+ * sass-admin  - compile admin sass files
+ * sass-plugin - compile plugin sass files
  *
- * plugins-js - concat plugins js
- * modules-js - concat modules js
+ * minify      - concat & minify js
+ * minify-bs   - concat & minify Bootstrap js
  *
  * OPTIONS ##################################
  *
  * env - prod or dev (default)
+ *
  */
 
 // Plugins and dependencies
 var gulp         = require('gulp'),
 	gulpif       = require('gulp-if'),
-	jshint       = require('gulp-jshint'),
 	concat       = require('gulp-concat'),
 	uglify       = require('gulp-uglify'),
 	sass         = require('gulp-sass'),
@@ -32,16 +32,18 @@ var gulp         = require('gulp'),
 // Paths
 var path = {
 	js: {
-		src:     './js/',
-		inc:     './js/*.js',
-		plugins: './js/plugins/*.js',
-		modules: './js/modules/*.js',
+		src:       './js/',
+		inc:       './js/*.js',
+		plugins:   './js/plugins/*.js',
+		modules:   './js/modules/*.js',
+		bootstrap: './js/bootstrap/*.js',
 	},
 	styles: {
-		src:     './css',
-		files:   './css/*.scss',
-		admin:   './framework/admin/css/*.scss',
-		plugins: './framework/plugins/*/css/*.scss',
+		src:         './css',
+		files:       './css/**/*.scss',
+		admin:       './framework/admin/css/*.scss',
+		pluginAdmin: './framework/plugins/**/admin.scss',
+		plugins:     './framework/plugins/**/main.scss',
 	},
 	dest: './dist'
 };
@@ -74,33 +76,27 @@ gulp.task('sass', function() {
 		.pipe( browserSync.reload({stream:true}) );
 });
 
-// Compile Bootstrap Sass
-gulp.task('sass-bs', function(){
-	gulp.src('framework/inc/bootstrap/css/bootstrap.scss')
+// Compile Admin Sass
+gulp.task('sass-admin', function() {
+	gulp.src([path.styles.admin, path.styles.pluginAdmin])
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', function(err) { displayError(err); } )
-		.pipe( concat('bootstrap.css') )
+		.pipe( concat('admin.css') )
 		.pipe( gulpif(isDev, sourcemaps.write(), autoprefixer('last 2 versions', 'ie 8')) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( browserSync.reload({stream:true}) );
 });
 
-// Compile Framework Sass
-gulp.task('sass-frame', function() {
-	gulp.src([path.styles.admin, path.styles.plugins], {base: './'})
+// Compile Plugin Sass
+gulp.task('sass-plugin', function() {
+	gulp.src(path.styles.plugins, {base: './'})
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', function(err) { displayError(err); } )
 		.pipe( gulpif(isDev, sourcemaps.write(), autoprefixer('last 2 versions', 'ie 8')) )
-		.pipe(gulp.dest('./'))
+		.pipe( gulp.dest('./') )
 		.pipe( browserSync.reload({stream:true}) );
-});
-
-// Lint JS
-gulp.task('lint-js', function() {
-	gulp.src([path.js.plugins, path.js.modules])
-		.pipe( jshint.reporter('default') );
 });
 
 // Concat & minify JS
@@ -111,12 +107,12 @@ gulp.task('minify', function(){
 		.on( 'error', function(err) { displayError(err); } )
 		.pipe( gulpif(isDev, sourcemaps.write(), uglify()) )
 		.pipe( gulp.dest(path.dest) )
-		.pipe( browserSync.reload() );
+		.pipe( browserSync.reload({stream:true}) );
 });
 
 // Concat & minify Bootstrap JS
 gulp.task('minify-bs', function(){
-	gulp.src([ 'framework/inc/bootstrap/js/bootstrap.js', 'framework/inc/bootstrap/js/bootstrap/*.js' ])
+	gulp.src(path.js.bootstrap)
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( concat('bootstrap.js') )
 		.pipe( gulpif(isDev, sourcemaps.write(), uglify()) )
@@ -128,18 +124,11 @@ gulp.task('watch', function() {
 	browserSync.init({
 		host: '192.168.0.103'
 	});
-	gulp.watch(path.styles.files, ['sass']);
-	gulp.watch([path.styles.admin, path.styles.plugins], ['sass-frame']);
+	gulp.watch([path.styles.files], ['sass']);
+	gulp.watch([path.styles.admin, path.styles.pluginAdmin], ['sass-admin']);
 	gulp.watch([path.js.plugins, path.js.modules], ['minify']);
-});
-
-// Watch Bootstrap Sass & JS files
-gulp.task('watch-bs', function() {
-	gulp.watch([ 'inc/css/bootstrap.scss', 'inc/css/bootstrap/*.scss' ], ['sass-bs']);
-	gulp.watch([ 'inc/js/bootstrap.js', 'inc/js/bootstrap/*.js' ], ['minify-bs']);
+	gulp.watch([path.js.bootstrap], ['minify-bs']);
 });
 
 // Default
 gulp.task('default', ['sass', 'minify']);
-gulp.task('js', ['lint-js', 'minify']);
-gulp.task('bootstrap', ['sass-bs', 'minify-bs']);

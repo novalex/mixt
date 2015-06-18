@@ -18,12 +18,12 @@ jQuery(document).ready(function() {
 	})();
 
 	function htmlEscape(str) {
-	    return String(str)
-	            .replace(/&/g, '&amp;')
-	            .replace(/"/g, '&quot;')
-	            .replace(/'/g, '&#39;')
-	            .replace(/</g, '&lt;')
-	            .replace(/>/g, '&gt;');
+		return String(str)
+				.replace(/&/g, '&amp;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;');
 	}
 
 	function addShortcode() {
@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 		for ( var i = 0; i < fields.length; i++ ) {
 			var field   = jQuery(fields[i]),
 				isChild = field.hasClass('child-field'),
-				elems   = field.find('input, select, textarea'),
+				elems   = field.find('.mcb-input'),
 				content = '';
 
 			attributes = jQuery.map(elems, function(el, index) {
@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
 
 		// Insert built content into the parent template
 		if ( childTemplate ) {
-			contentToEditor = contentToEditor.replace('{{child_shortcode}}', childContent);
+			contentToEditor = contentToEditor.replace('{{nested}}', childContent);
 		}
 
 		// Send the shortcode to the content editor and reset the fields
@@ -75,11 +75,8 @@ jQuery(document).ready(function() {
 
 	// Set the inputs to empty state
 	function resetPanel() {
-		jQuery('#mcb-main-select').prop('selectedIndex', 0).val('');
-		jQuery('#mixt-cb-wrap').find('input[type=text]').val('');
-		jQuery('#mixt-cb-wrap').find('textarea').text('');
-		jQuery('.mcb-cloned').remove();
-		jQuery('.mcb-element-field').hide();
+		jQuery('#mcb-main-select').val(0);
+		jQuery('#mixt-cb-wrap .panel-body').empty();
 	}
 
 	// Function to redraw the thickbox for new content
@@ -111,41 +108,81 @@ jQuery(document).ready(function() {
 	}
 
 	jQuery(document).ready( function($) {
-		var mainSelect = $('#mcb-main-select'),
-			fields = $('.mcb-element-field').hide();
+		var panel = $('#mixt-cb-wrap'),
+			mainSelect = $('#mcb-main-select'),
+			panelBody  = panel.children('.panel-body'),
+			panelLoad  = panel.children('.panel-load');
+
+		panelLoad.hide();
 
 		$('#mcb-add-shortcode').click( function() { addShortcode(); });
 
-		$('.field.preset').each( function() {
-			if ( $(this).children('.field-title.toggle').length ) {
-				$(this).children('.field-content').slideToggle(400);
-				collapseFields();
-			}
-		});
+		mainSelect.change( function() {
+			panelLoad.slideDown(400);
+			panelBody.slideUp(400);
 
-	    mainSelect.change( function() {
-	    	fields.hide();
-	    	$('#' + mainSelect.val()).show();
-	        resizePanel();
-	    });
+			/* global ajaxurl */
+			$.ajax({
+				url: ajaxurl,
+				data: {
+					'action': 'mixtcb_element',
+					'mixtcb-key': mainSelect.val()
+				},
+				method: 'post',
+				dataType: 'xml',
+				success: function(data) {
+					var $data = $(data).find('mixtcb_element response_data').text(),
+						html = $.parseHTML($data);
 
-	    // Clone a set of input fields
-	    $('.field-repeat').on('click', function() {
-			cloneElement($(this).parent());
-			resizePanel();
-			$('.mcb-sortable').sortable('refresh');
-			collapseFields();
-		});
+					panelLoad.slideUp(400);
+					panelBody.empty().append(html).slideDown(400);
 
-	    // Remove a set of input fields
-		$('.mcb-remove').on('click', function() {
-			$(this).parent('.field').remove();
-		});
+					resizePanel();
 
-		// Make content sortable using the jQuery UI Sortable method
-		$('.mcb-sortable').sortable({
-			items: '.field:not(".hidden")',
-			placeholder: 'mcb-sortable-placeholder'
+					panel.find('.field.preset').each( function() {
+						if ( $(this).children('.field-title.toggle').length ) {
+							$(this).children('.field-content').slideToggle(0);
+							collapseFields();
+						}
+					});
+
+					if ( typeof $.fn.wpColorPicker === 'function' ) {
+						$('.mcb-color').wpColorPicker();
+					}
+
+					$('.mcb-input.color-select').on('change', function() {
+						var select = $(this),
+							selOption = select.children('option:selected');
+						select.css({
+							'color': selOption.css('color')
+						});
+					});
+
+					// Clone a set of input fields
+					$('.field-repeat').on('click', function() {
+						cloneElement($(this).parent());
+						resizePanel();
+						$('.mcb-sortable').sortable('refresh');
+						collapseFields();
+					});
+
+					// Remove a set of input fields
+					$('.mcb-remove').on('click', function() {
+						$(this).parent('.field').remove();
+					});
+
+					// Make content sortable using the jQuery UI Sortable method
+					$('.mcb-sortable').sortable({
+						items: '.field:not(".hidden")',
+						placeholder: 'mcb-sortable-placeholder'
+					});
+				},
+				error: function(data) {
+					panelLoad.slideUp(400);
+					panelBody.empty().append('<p class="error">An error occurred! <br><strong>' + data.status + ' ' + data.statusText + '</strong></p>').slideDown(400);
+					console.log(data);
+				}
+			});
 		});
 	});
 

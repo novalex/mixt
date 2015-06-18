@@ -1,0 +1,207 @@
+
+html,
+body {
+	margin: 0 !important;
+}
+body {
+	font-size: $font-size;
+	line-height: 1.618;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	font-family: 'Roboto', 'Verdana', sans-serif;
+}
+
+a {
+	transition: color 0.2s;
+
+	&,
+	&:hover,
+	&:focus { text-decoration: none; }
+}
+
+
+// Focus Styles
+a:focus,
+.navbar .dropdown-toggle:focus {
+	outline: thin dashed;
+}
+
+a:hover,
+a:active,
+.no-outline a { outline: none !important; }
+
+// Alignment
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+
+// Images And Wp-captions Should Always Fit And Be Responsive
+img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+}
+img[class*="wp-image-"] {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.wp-caption {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	max-width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0 10px;
+
+	&.aligncenter {
+		margin-bottom: 10px;
+	}
+
+	img[class*="wp-image-"] {
+		display: block;
+	}
+
+	.wp-caption-text {
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+
+
+// Make Sure Embeds And Iframes Fit Their Containers
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+
+// Text Meant Only For Screen Readers
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: #f1f1f1;
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+		clip: auto !important;
+		color: #21759b;
+		display: block;
+		font-size: 14px;
+		font-weight: bold;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; /* Above WP toolbar */
+	}
+}
+
+
+// Local Font
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('#{$font-path}/roboto/Roboto-Regular-webfont.eot');
+    src: url('#{$font-path}/roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-path}/roboto/Roboto-Regular-webfont.woff') format('woff'),
+         url('#{$font-path}/roboto/Roboto-Regular-webfont.ttf') format('truetype'),
+         url('#{$font-path}/roboto/Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('#{$font-path}/roboto/Roboto-Medium-webfont.eot');
+    src: url('#{$font-path}/roboto/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-path}/roboto/Roboto-Medium-webfont.woff') format('woff'),
+         url('#{$font-path}/roboto/Roboto-Medium-webfont.ttf') format('truetype'),
+         url('#{$font-path}/roboto/Roboto-Medium-webfont.svg#robotomedium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('#{$font-path}/roboto/Roboto-Bold-webfont.eot');
+    src: url('#{$font-path}/roboto/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$font-path}/roboto/Roboto-Bold-webfont.woff') format('woff'),
+         url('#{$font-path}/roboto/Roboto-Bold-webfont.ttf') format('truetype'),
+         url('#{$font-path}/roboto/Roboto-Bold-webfont.svg#robotobold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+// Clearing
+
+.clear { clear: both; }
+
+// Navigation
+
+.dropdown-submenu {
+	position:relative;
+
+	> .dropdown-menu {
+		top: 0; left: 100%;
+		border-radius:0 6px 6px 6px;
+	}
+
+	&:hover,
+	&:active {
+		> .dropdown-menu {
+			display: block
+		}
+	}
+
+	&:active > a:after { border-left-color: #ffffff; }
+
+	&.pull-left {
+		float: none;
+
+		> .dropdown-menu {
+			left: -100%;
+			margin-left: 10px;
+			border-radius: 6px 0 6px 6px;
+		}
+	}
+
+	> a:after {
+		display: block;
+		content: " ";
+		float: right;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 5px 0 5px 5px;
+		border-left-color: #cccccc;
+		margin-top: 5px; margin-right: -10px;
+	}
+}
+
+.widget { margin-bottom: 25px; }
+.widget_nav_menu ul.sub-menu li, .widget_pages ul.children li { padding-left: 15px; }
+
+.widget select {
+	max-width: 100%;
+}

@@ -1,58 +1,38 @@
 
 /* MIXT MAIN STYLESHEET */
 
-// Variables
-@import 'vars';
+@import 'mixt/vars';
 
-// Color Schemes
-@import 'colors';
+@import 'mixt/colors';
+@import 'mixt/theme';
 
-// Theme Colors
-@import 'theme';
+// Bootstrap
+@import 'bootstrap/bootstrap';
 
-// Mixins
-@import 'mixins';
+@import 'mixt/mixins';
+@import 'mixt/helpers';
 
-// Base Styling & Reset
-@import 'base';
+@import 'mixt/base';
+@import 'mixt/global';
 
-// Global Styling
-@import 'global';
+@import 'mixt/anims';
+@import 'mixt/ui';
 
-// Helpers
-@import 'helpers';
+@import 'mixt/navbar-base';
+@import 'mixt/navbar';
+@import 'mixt/navbar-themes';
 
-// Animations
-@import 'anims';
+@import 'mixt/header';
 
-// UI Elements Styling
-@import 'ui';
+@import 'mixt/inputs';
 
-// Navbar Styling
-@import 'navbar-base';
-@import 'navbar';
-@import 'navbar-themes';
+@import 'mixt/content';
+@import 'mixt/post';
+@import 'mixt/sidebar';
+@import 'mixt/footer';
 
-// Header Styling
-@import 'header';
+@import 'mixt/elements';
+@import 'mixt/plugins';
 
-// Input Styling
-@import 'inputs';
-
-// Content Styling
-@import 'content';
-
-// Post Styling
-@import 'post';
-
-// Sidebar Styling
-@import 'sidebar';
-
-// Footer Styling
-@import 'footer';
-
-// Shortcode Styling
-@import 'shortcodes';
-
-// Plugins Styling
-@import 'plugins';
+// Font Icons
+@import 'icons/whhg';

@@ -1,0 +1,29 @@
+
+// Inputs
+
+.mcb-input.color-select {
+	option {
+		@mixin headline_variants($selector, $color) {
+			&[value="#{$selector}"] {
+				color: $color;
+			}
+		}
+		//Color variations
+		@include headline_variants('blue', $blue);
+		@include headline_variants('turquoise', $turquoise);
+		@include headline_variants('pink', $pink);
+		@include headline_variants('violet', $violet);
+		@include headline_variants('peacoc', $peacoc);
+		@include headline_variants('chino', $chino);
+		@include headline_variants('mulled-wine', $mulled-wine);
+		@include headline_variants('vista-blue', $vista-blue);
+		@include headline_variants('black', $black);
+		@include headline_variants('grey', #888);
+		@include headline_variants('orange', $orange);
+		@include headline_variants('sky', $sky);
+		@include headline_variants('green', $green);
+		@include headline_variants('juicy-pink', $juicy-pink);
+		@include headline_variants('sandy-brown', $sandy-brown);
+		@include headline_variants('purple', $purple);
+	}
+}

@@ -27,7 +27,7 @@ if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }
 else if ( $comments_num > 1 ) { $comments_text = $comments_num . __( ' comments', 'mixt' ); }
 else { $comments_text = __( '1 comment', 'mixt' ); }
 
-mixt_fancy_title($comments_text, 'comments-title');
+echo do_shortcode('[mixt_headline text="' . $comments_text . '" class="comments-title"]');
 
 if ( have_comments() ) {
 

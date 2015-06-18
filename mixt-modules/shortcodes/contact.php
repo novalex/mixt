@@ -40,10 +40,12 @@ function mixt_form_shortcode($atts, $content = null) {
 		}
 	}
 
-	echo "<form action='$action' method='post' class='$classes'>";
-		echo do_shortcode($content);
-		echo '<div class="submit-box col-sm-12">' . $form_message . $submit_button . '</div>';
-	echo '</form>';
+	$html = "<form action='$action' method='post' class='$classes'>";
+		$html .= do_shortcode($content);
+		$html .= '<div class="submit-box col-sm-12">' . $form_message . $submit_button . '</div>';
+	$html .= '</form>';
+
+	return $html;
 }
 
 

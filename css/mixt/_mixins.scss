@@ -1,0 +1,75 @@
+
+// VISIBILITY
+
+@mixin vis-visible {
+	opacity: 1;
+	visibility: visible;
+}
+@mixin vis-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+// MEDIA BREAKPOINTS
+
+$bp-mercury: 480px;
+$bp-mars:    767px;
+$bp-venus:   992px;
+$bp-earth:   1200px;
+
+// neptune, uranus, saturn, jupiter
+
+@function translate-media-condition($cond) {
+	$media-cond: (
+		// Media
+		"print":   "only print",
+		"screen":  "only screen",
+		"retina":  "(-webkit-min-device-pixel-ratio: 1.5),
+					(min--moz-device-pixel-ratio: 1.5),
+					(-o-min-device-pixel-ratio: 3/2),
+					(min-device-pixel-ratio: 1.5),
+					(min-resolution: 120dpi)",
+		// Desktops
+		"earth":    "(min-width: #{$bp-earth + 1})",
+		"<earth":   "(max-width: #{$bp-earth})",
+		// Laptops
+		"venus":    "(min-width: #{$bp-venus + 1})",
+		"<venus":   "(max-width: #{$bp-venus})",
+		// Tablets
+		"mars":     "(min-width: #{$bp-mars + 1})",
+		"<mars":    "(max-width: #{$bp-mars})",
+		// Phones
+		"mercury":  "(min-width: #{$bp-mercury + 1})",
+		"<mercury": "(max-width: #{$bp-mercury})"
+	);
+	@return map-get( $media-cond, $cond );
+}
+
+@mixin media($args...) {
+	$query: "";
+	@each $arg in $args {
+		$op: "";
+		@if ( $query != "" ) {
+			$op: " and ";
+		}
+		$query: $query + $op + translate-media-condition($arg);
+	}
+	@media #{$query}  { @content; }
+}
+
+
+// GRADIENTS
+
+@mixin gradient-linear($from, $to) {
+	background-image: -webkit-linear-gradient(top, $from, 0%, $to, 100%);
+	background-image: -moz-linear-gradient(top, $from 0%, $to 100%);
+	background-image: linear-gradient(to bottom, $from 0%, $to 100%);
+}
+
+
+// SHADOWS
+
+@mixin highlight($alpha:0.4) {
+	box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);
+}

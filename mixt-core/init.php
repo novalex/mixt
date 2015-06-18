@@ -33,14 +33,11 @@ function mixt_plugins() {
 			);
 		}
 		// Custom Panel CSS
-		function redux_mixt_css() {
-			wp_register_style( 'redux-mixt-css', MIXT_FRAME_URI . '/admin/css/redux-mixt.css', array(), time(), 'all' );  
-			wp_enqueue_style( 'redux-mixt-css' );
-
+		function redux_mixt() {
 			wp_register_script( 'redux-mixt-js', MIXT_FRAME_URI . '/admin/js/redux-mixt.js', array( 'jquery' ), time(), 'all' );  
 			wp_enqueue_script( 'redux-mixt-js' );
 		}
-		add_action( 'redux/page/mixt_opt/enqueue', 'redux_mixt_css', 2 );
+		add_action( 'redux/page/mixt_opt/enqueue', 'redux_mixt', 2 );
 
 		// Config
 		if ( ! isset( $mixt_opt ) && file_exists( MIXT_FRAME_DIR . '/redux-config.php' ) ) {
@@ -61,9 +58,6 @@ function mixt_plugins() {
 			// CMB2 Extensions
 			if ( file_exists( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' ) ) {
 				require_once( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' );
-			}
-			if ( file_exists( MIXT_PLUGINS_DIR . '/cmb2-extensions/shortcode-button/shortcode-button.php' ) ) {
-				require_once( MIXT_PLUGINS_DIR . '/cmb2-extensions/shortcode-button/shortcode-button.php' );
 			}
 		}
 
@@ -217,8 +211,8 @@ function mixt_load_plugins() {
 if ( defined( 'WPB_VC_VERSION' ) ) {
 	add_action( 'vc_before_init', 'mixt_vc_overrides' );
 	function mixt_vc_overrides() { vc_set_as_theme(); }
-	require_once( MIXT_PLUGINS_DIR . '/vc-extend/vc-extend.php' );
 	vc_set_shortcodes_templates_dir( MIXT_PLUGINS_DIR . '/vc-extend/templates' );
+	require_once( MIXT_PLUGINS_DIR . '/vc-extend/vc-extend.php' );
 }
 
 // Initialize LayerSlider As Included With Theme
@@ -240,13 +234,7 @@ function mixt_wp_old_classes($classes) {
 }
 
 
-// LOAD THEME INCLUDES AND MODULES
-
-$mixt_includes = array(
-	'extras.php',        // Extra Functions
-	'customizer.php',    // Customizer Additions
-);
-mixt_requires( $mixt_includes, MIXT_INC_DIR );
+// LOAD THEME MODULES
 
 $mixt_modules = array(
 	'head-media.php',
@@ -254,10 +242,11 @@ $mixt_modules = array(
 	'social.php',
 	'favicons.php',
 	'gallery.php',
+	'extras.php',
+	'customizer.php',
 );
 mixt_requires( $mixt_modules, MIXT_MODULES_DIR );
-
-unset($mixt_includes, $mixt_modules);
+unset($mixt_modules);
 
 // Admin Functions
 require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
@@ -276,18 +265,26 @@ if ( get_option('mixt-dynamic-sass', 0) ) {
 }
 
 
+// BrowserSync Script
+function mixt_browsersync() {
+echo <<<EOT
+<script type="text/javascript" id="__bs_script__">
+if ( ! (/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent) ) {
+	//<![CDATA[
+	document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.2.3.js'><\/script>".replace("HOST", location.hostname));
+	//]]>
+}
+</script>
+EOT;
+}
+
+
 // ENQUEUE SCRIPTS AND STYLESHEETS
 
 function mixt_scripts() {
 
-	// Bootstrap CSS
-	wp_enqueue_style( 'bootstrap-style', MIXT_URI . '/dist/bootstrap.css' );
-
 	// Main CSS
 	wp_enqueue_style( 'mixt-main-style', MIXT_URI . '/dist/main.css' );
-
-	// WebHostingHub Glyphs Icon Font
-	wp_enqueue_style( 'whh-glyphs', MIXT_INC_URI . '/css/whhg.css', false, '4.1.0' );
 
 	// Dynamic Sass
 	if ( get_option('mixt-dynamic-sass', 0) ) {
@@ -315,20 +312,19 @@ add_action( 'wp_enqueue_scripts', 'mixt_scripts' );
 // ENQUEUE ADMIN SCRIPTS AND STYLESHEETS
 
 function mixt_admin_scripts($hook) {
+	// Admin Styles
+	wp_enqueue_style( 'mixt-admin-styles', MIXT_URI . '/dist/admin.css', false, '1.0' );
+
 	// Menu Page Scripts
 	if ( $hook == 'nav-menus.php' ) {
 		wp_enqueue_script( 'mixt-admin-menu-js', MIXT_FRAME_URI . '/admin/js/menu-scripts.js', array('jquery'), '1.0' );
 	// Page Admin Scripts
 	} elseif ( $hook == 'post.php' || $hook == 'post-new.php' ) {
 		wp_enqueue_script( 'mixt-admin-page-js', MIXT_FRAME_URI . '/admin/js/page-scripts.js', array('jquery'), '1.0', true );
-		wp_enqueue_style( 'mixt-admin-page-styles', MIXT_FRAME_URI . '/admin/css/page-styles.css', false, '1.0' );
-	}
-	// Custom VC Style
-	if ( defined( 'WPB_VC_VERSION' ) ) {
-		wp_enqueue_style( 'mixt-admin-vc-styles', MIXT_FRAME_URI . '/plugins/vc-extend/css/vc-mixt.css', false, '1.0' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'mixt_admin_scripts' );
+add_action( 'admin_footer', 'mixt_browsersync' );
 
 
 /**
