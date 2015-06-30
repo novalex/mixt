@@ -45,20 +45,13 @@ body.loading {
 
 	// Loader Shapes
 
-	.circle {
-		border-radius: 32px;
-	}
-
+	.circle { border-radius: 32px; }
 	.circle, .square {
 		width: 36px;
 		height: 36px;
 		background-color: #fff;
 	}
-
-	.ring {
-		border-radius: 32px;
-	}
-
+	.ring {	border-radius: 32px; }
 	.ring, .square2 {
 		width: 32px;
 		height: 32px;
@@ -78,5 +71,38 @@ body.loading {
 	&.loading #load-overlay,
 	&.loading-out #load-overlay {
 		display: block;
+	}
+}
+
+// Text Color
+body,
+a.no-color,
+a:hover,
+a:focus { @extend .theme-color; }
+
+// Text Color Fade
+.post-meta a,
+.post-meta > span { @extend .theme-color-fade; }
+
+// Accent Text Color
+a,
+.post-meta a:hover,
+.head-media .media-inner a:hover { @extend .accent-color; }
+
+// Accent Background Color
+.accent-bg:hover,
+.tag-list a:hover,
+.tagcloud a:hover,
+.hover-accent-bg:hover {
+	@extend .accent-bg;
+}
+
+
+// Disable map scrolling on small screens
+@include media('screen', '<mars') {
+	.mixt-map {
+		&, iframe {
+			pointer-events: none;
+		}
 	}
 }

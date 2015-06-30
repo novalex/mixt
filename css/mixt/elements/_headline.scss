@@ -40,4 +40,13 @@
 		&.double:after { border-top-width: 3px; border-style: double; }
 	}
 	&.center span { width: 50%; }
+
+	// Color Variants
+	@mixin headline_variants($selector, $color) {
+		span.#{$selector}:after { border-color: $color; }
+	}
+	@include headline_variants('color-auto', $theme-border);
+	@each $selector, $color in $vc-colors {
+		@include headline_variants($selector, $color);
+	}
 }

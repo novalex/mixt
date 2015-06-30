@@ -1,0 +1,29 @@
+
+// Visual Composer Custom Styling
+
+@import 'js_composer/progress-bars';
+@import 'js_composer/tabs-tour-accordion';
+
+
+.wpb_row,
+.wpb_column,
+.wpb_wrapper,
+.wpb_text_column,
+.compose-mode .vc_element,
+.view-mode .vc_element { border-color: inherit; }
+
+.wpb_wrapper .mixt-element.mixt-headline { margin-bottom: 20px; }
+
+
+// Separator
+
+.vc_separator {
+	&.theme-bd .vc_sep_holder .vc_sep_line { border-color: $theme-border; }
+}
+
+
+// Rows & Columns
+
+.vc_row {
+	@include make-custom-grid-columns;
+}

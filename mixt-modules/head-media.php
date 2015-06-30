@@ -98,7 +98,7 @@ function mixt_head_media() {
 			'type'    => 'str',
 			'key'     => 'head-content-scroll-icon',
 			'return'  => 'value',
-			'default' => 'icon-chevron-down',
+			'default' => 'fa fa-chevron-down',
 		),
 		'info' => array( 'key' => 'head-content-info' ),
 		'code' => array( 'key' => 'head-content-code' ),

@@ -1,0 +1,32 @@
+
+// Profile Element
+
+.mixt-profile {
+
+	.profile-image {
+		.profile-social .btn {
+			i { width: 18px; }
+			@extend .btn-lg;
+		}
+	}
+
+	.header {
+		.name {
+			float: left;
+			line-height: 1.4;
+			font-size: $font-size-l;
+
+			small { font-size: $font-size-s; }
+			&:not(:last-child) { padding-right: 10px; }
+		}
+		.profile-social {
+			float: right;
+			margin: 5px 0;
+		}
+	}
+
+	.desc { margin-bottom: 0; }
+
+	.header:not(:first-child),
+	.desc { margin-top: $margin-s; }
+}

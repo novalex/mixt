@@ -1,13 +1,14 @@
 
+@import 'theme';
+
 // COLORS
 
-
 $white: #FFFFFF;
-$off-white: #f0f0f0;
+$off-white: #f6f6f6;
 $grey: #EBEBEB;
 $black: #2A2A2A;
 
-$blue: #5472D2;
+$blue: #5991CE;
 $sky: #5AA1E3;
 $turquoise: #00C1CF;
 $peacoc: #4CADC9;
@@ -15,7 +16,7 @@ $vista-blue: #75D69C;
 $violet: #8D6DC4;
 $purple: #B97EBB;
 
-$green: #6DAB3C;
+$green: #7CAD24;
 $grace: #AED13B;
 
 $pink: #FE6C61;
@@ -27,6 +28,55 @@ $orange: #F7BE68;
 $sandy-brown: #F79468;
 
 $red: #D81616;
+
+$basic-colors: (
+	'white': $white,
+	'black': $black,
+	'accent': $theme-accent,
+	'red': $red,
+	'green': $green,
+	'blue': $blue,
+);
+
+$vc-colors: (
+	'white': #FFFFFF,
+	'off-white': #f0f0f0,
+	'grey': #EBEBEB,
+	'black': #2A2A2A,
+
+	'blue': #5472D2,
+	'sky': #5AA1E3,
+	'turquoise': #00C1CF,
+	'peacoc': #4CADC9,
+	'vista-blue': #75D69C,
+	'violet': #8D6DC4,
+	'purple': #B97EBB,
+
+	'green': #6DAB3C,
+	'grace': #AED13B,
+
+	'pink': #FE6C61,
+	'juicy-pink': #F4524D,
+	'mulled-wine': #50485B,
+
+	'chino': #CEC2AB,
+	'orange': #F7BE68,
+	'sandy-brown': #F79468,
+
+	'red': #D81616,
+);
+
+$button-colors: (
+	'default': $off-white,
+	'minimal': $theme-bg,
+	'primary': $theme-accent,
+	'white': $white,
+	'grey': $grey,
+	'black': $black,
+	'red': $red,
+	'green': $green,
+	'blue': $blue,
+);
 
 
 // TEXT COLORS
@@ -70,21 +120,71 @@ $input-focus-bs: rgba(0,0,0,0.1);
 
 // FUNCTIONS
 
-@function set-color-for-bg($bg, $color: $theme-color, $dark-color: $theme-bg-dark-color) {
-	@if ( lightness($bg) > 50 ) {
-		@return $color;
+@function lumin($color) {
+	// Colors for which to override luminance
+	$override-colors: (
+		$blue: 0,
+		$green: 0,
+	);
+	@if map-has-key($override-colors, $color) {
+		$lumin: map-get($override-colors, $color);
 	} @else {
-		@return $dark-color;
+		$local-red: red($color);
+		$local-green: green($color);
+		$local-blue: blue($color);
+		$lumin: (0.2126 * $local-red  + 0.7152 * $local-green + 0.0722 * $local-blue) / 255;
+		@if ( $lumin > 1 ) { $lumin: 1; }
+		@if ( $lumin < 0 ) { $lumin: 0; }
 	}
+	@return $lumin;
+}
+@function contrast-color($bg, $c1, $c2) {
+	$bg-lumin: lumin($bg);
+	$c1-diff: abs($bg-lumin - lumin($c1));
+	$c2-diff: abs($bg-lumin - lumin($c2));
+	@if ( $c1-diff > $c2-diff ) {
+		@return $c1;
+	} @else {
+		@return $c2;
+	}
+}
+// lumin and contrast-color functions based on https://lnikki.la/articles/sass-better-colour-based-on-brightness/
+
+@function set-color-for-bg( $bg, $light: $theme-bg-dark-color, $dark: $theme-color ) {
+	@if ( lumin($bg) <= 0.5 ) { @return $light; }
+	@else { @return $dark; }
+}
+@function color-fade-for-bg( $bg, $light: lighten($bg, 30), $dark: darken($bg, 50) ) {
+	@if ( lumin($bg) <= 0.5 ) { @return $light; }
+	@else { @return $dark; }
+}
+
+@mixin text-shadow-for-bg( $bg, $light: lighten($bg, 20), $dark: darken($bg, 20) ) {
+	@if ( lumin($bg) <= 0.5 ) { $color: $dark; }
+	@else { $color: $light; }
+	text-shadow: 0 1px 1px $color;
 }
 
 
 // MIXINS
 
+// Background
+
 @mixin bg-color-alpha($color, $opacity: 0.9) {
     background-color: $color;
     background-color: rgba($color, $opacity);
 }
+
+@mixin mixt-bg-variant($selector, $color, $set-color: false, $set-text-shadow: false) {
+	#{$selector} {
+		background-color: $color;
+		@if ( $set-color ) { color: set-color-for-bg($color); }
+		@if ( opacity($color) < 1 ) { $color: fade-in($color, 1); }
+		@if ( $set-text-shadow ) { @include text-shadow-for-bg($color); }
+	}
+}
+
+// Border
 
 @mixin bd-color-alpha($color, $opacity: 0.9) {
     border-color: $color;

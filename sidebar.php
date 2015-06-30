@@ -6,7 +6,11 @@
  * @package MIXT
  */
 
-if ( MIXT::get('page', 'sidebar') ) : ?>
+if ( MIXT::get('page', 'sidebar') ) {
+
+	$active_sidebar = MIXT::get('page', 'sidebar-id');
+
+	?>
 
 	</div><?php // Close .main-content-inner ?>
 
@@ -16,7 +20,7 @@ if ( MIXT::get('page', 'sidebar') ) : ?>
 
 			<?php do_action( 'before_sidebar' ); ?>
 			
-			<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
+			<?php if ( ! dynamic_sidebar($active_sidebar) ) : ?>
 
 				<aside id="search" class="widget widget_search">
 					<?php get_search_form(); ?>
@@ -41,4 +45,4 @@ if ( MIXT::get('page', 'sidebar') ) : ?>
 			<?php endif; ?>
 
 		</div><?php
-endif;
+}

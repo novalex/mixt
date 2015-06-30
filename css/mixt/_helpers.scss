@@ -9,6 +9,22 @@
 	@return $string;
 }
 
+
+// THEME COLORS
+
+.theme-color { color: $theme-color; }
+.theme-color-fade { color: $theme-color-fade; }
+
+.accent-color { color: $theme-accent; }
+.accent-bg {
+	color: set-color-for-bg($theme-accent);
+	background-color: $theme-accent;
+}
+
+.theme-bd { border-color: $theme-border; }
+.theme-accent-bd { border-color: $theme-accent; }
+
+
 // BORDERS
 
 .border-base {
@@ -26,6 +42,12 @@
 	.border-dashed { border-style: dashed; }
 	.border-dotted { border-style: dotted; }
 	.border-double { border-style: double; }
+
+	// Border Radius
+	.border-rad { border-radius: $bd-radius; }
+	.border-rad-s { border-radius: $bd-radius-s; }
+	.border-rad-l { border-radius: $bd_radius-l; }
+	.border-circle { border-radius: 50%; }
 
 
 // IFRAME FLUID

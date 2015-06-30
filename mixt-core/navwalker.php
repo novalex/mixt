@@ -210,15 +210,15 @@ class mixt_navwalker extends Walker_Nav_Menu {
 				}
 
 				if ( $depth === 0 ) {
-					$item_output .= '<i class="icon-chevron-down' . $arrow_classes . '"></i>';
+					$item_output .= '<i class="fa fa-chevron-down' . $arrow_classes . '"></i>';
 				} else if ( $depth > 0 ) {
 					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
 						if ( ! strpos($arrow_classes, 'visible-xs-inline-block') ) {
 							$arrow_classes .= ' visible-xs-inline-block';
 						}
-						$item_output .= '<i class="icon-chevron-down' . $arrow_classes . '"></i>';
+						$item_output .= '<i class="fa fa-chevron-down' . $arrow_classes . '"></i>';
 					} else {
-						$item_output .= '<i class="icon-chevron-right' . $arrow_classes . '"></i>';
+						$item_output .= '<i class="fa fa-chevron-right' . $arrow_classes . '"></i>';
 					}
 				}
 			}

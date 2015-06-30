@@ -53,8 +53,8 @@ MIXT GLOBAL JS FUNCTIONS
 		});
 
 		// Set Content Min Height
-		var contentMinH = viewport.height() - content.offset().top - $('#colophon').outerHeight(true);
-		content.css('min-height', contentMinH);
+		// var contentMinH = viewport.height() - content.offset().top - $('#colophon').outerHeight(true);
+		// content.css('min-height', contentMinH);
 
 		// Sort portfolio items
 		$('.portfolio-sorter button').click( function(event) {
@@ -78,7 +78,7 @@ MIXT GLOBAL JS FUNCTIONS
 		});
 
 		// Social Icons
-		$('.social-links:not(.hover-none)').each( function() {
+		$('.social-links').not('.hover-none').each( function() {
 			var cont = $(this);
 
 			cont.children().each( function() {
@@ -93,7 +93,7 @@ MIXT GLOBAL JS FUNCTIONS
 					hoverBgColor = '';
 
 					link.hover( function() {
-						if ( cont.parents('.position-top').length === 0 ) {
+						if ( cont.parents('.navbar.position-top').length === 0 ) {
 							link.css({ color: hoverColor, backgroundColor: hoverBgColor, zIndex: 1 });
 						}
 					}, function() {
@@ -114,11 +114,76 @@ MIXT GLOBAL JS FUNCTIONS
 			});
 		});
 
+
 		// Tooltips Init
-		$('.social-links [data-toggle="tooltip"], .related-title-tip').tooltip({
+		$('[data-toggle="tooltip"], .related-title-tip').tooltip({
 			placement: 'auto',
 			container: 'body'
 		});
+
+
+		// Animations Init
+		var animHoverEl = $('.anim-on-hover');
+		animHoverEl.hoverIntent( function() {
+			$(this).addClass('hovered');
+			var inner   = $(this).children('.on-hover'),
+				animIn  = inner.data('anim-in') || 'fadeIn',
+				animOut = inner.data('anim-out') || 'fadeOut';
+			inner.removeClass(animOut).addClass('animated ' + animIn);
+		}, function() {
+			$(this).removeClass('hovered');
+			var inner   = $(this).children('.on-hover'),
+				animIn  = inner.data('anim-in') || 'fadeIn',
+				animOut = inner.data('anim-out') || 'fadeOut';
+			inner.removeClass(animIn).addClass(animOut);
+		}, 300);
+		animHoverEl.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
+			if ( ! $(this).hasClass('hovered') ) {
+				$(this).children('.on-hover').removeClass('animated');
+			}
+		});
+
+
+		// Image Carousels
+		if ( typeof $.fn.lightSlider === 'function' ) {
+			var carousels = $('.carousel-slider').not('.lightSlider');
+			carousels.each( function() {
+				var slider = $(this),
+					vertical = ( slider.data('direction') == 'vertical' ) ? true : false;
+
+				slider.imagesLoaded( function() {
+					slider.lightSlider({
+						item: ( slider.data('items') > 1 ) ? slider.data('items') : 1,
+						auto: ( slider.data('auto') === true ) ? true : false,
+						loop: ( slider.data('loop') === true ) ? true : false,
+						pause: ( slider.data('interval') > 0 ) ? slider.data('interval') : 5000,
+						vertical: vertical,
+						pager: ( slider.data('pagination') === true ) ? true : false,
+						controls: ( slider.data('navigation') === true ) ? true : false,
+						keyPress: true,
+						slideMargin: 15,
+						responsive : [{
+							breakpoint: 768,
+							settings: { item: ( slider.data('items-tablet') > 1 ) ? slider.data('items-tablet') : 1 }
+						}, {
+							breakpoint:480,
+							settings: { item: ( slider.data('items-mobile') > 1 ) ? slider.data('items-mobile') : 1 }
+						}],
+						onSliderLoad: function(el) {
+							var slides = slider.children('.lslide');
+							if ( slider.data('lightbox') === true && typeof $.fn.lightGallery === 'function' ) {
+								el.lightGallery({ selector: slides });
+							}
+							if ( typeof $.fn.matchHeight === 'function' && ! vertical ) {
+								slides.matchHeight();
+								slider.css('height', '');
+							}
+						}
+					});
+				});
+			});
+		}
+
 	});
 
 	// Functions To Run On Window Resize

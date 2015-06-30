@@ -1,0 +1,135 @@
+
+// Spacing & Gutters
+
+$gutter-lg: $main-gutter;
+$row-spacing-lg: 40px;
+
+$gutter-sm: $main-gutter-sm;
+$row-spacing-sm: 30px;
+
+
+// Custom Gutter Rows
+
+@mixin make-custom-grid-columns($i: 1, $list: '.col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}', $gutter: $grid-gutter-width) {
+	padding-left: $grid-gutter-width / 2 - $gutter / 2;
+	padding-right: $grid-gutter-width / 2 - $gutter / 2;
+
+	@for $i from (1 + 1) through $grid-columns {
+		$list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+	}
+	#{$list} {
+	    padding-left:  ($gutter / 2);
+	    padding-right: ($gutter / 2);
+	}
+}
+
+
+// Main Content
+
+#content,
+.sidebar {
+	padding-left: $gutter-lg / 2;
+	padding-right: $gutter-lg / 2;
+}
+
+.sidebar-padder { padding-top: $gutter-lg; }
+
+
+// Page Header Spacing
+
+.article,
+.author .about-the-author {
+	margin: $gutter-lg 0 0;
+	padding: 0 0 $row-spacing-lg;
+}
+
+
+// Fullwidth Layout
+
+.fullwidth {
+	.blog-grid .paging-navigation { padding: 0 $gutter-lg; }
+}
+
+
+// Bottom Padding Before Footer
+
+.elements-here { padding-bottom: $gutter-lg; } // TODO
+
+
+// Rows & Containers
+
+.widget,
+.post-extra,
+.wpb_row,
+.wpb_content_element,
+ul.wpb_thumbnails-fluid > li,
+.last_toggle_el_margin,
+.wpb_button,
+.wpb_wrapper .mixt-element { margin-bottom: $row-spacing-lg; }
+
+
+@include media('screen', 'mars') {
+	#content-wrap {
+		&.has-sidebar {
+			#content { padding-right: $gutter-lg; }
+			.sidebar { padding-left: $gutter-lg; }
+		}
+
+		&.sidebar-left {
+			#content { padding-left: $gutter-lg; }
+			.sidebar { padding-right: $gutter-lg; }
+		}
+	}
+
+	.blog-grid {
+		.posts-container {
+			padding-top: $gutter-lg;
+		}
+	}
+}
+
+
+// Small Gutters
+
+@include media('screen', '<mars') {
+	#content,
+	.sidebar {
+		padding-left: $gutter-sm / 2;
+		padding-right: $gutter-sm / 2;
+	}
+
+	.article,
+	.author .about-the-author {
+		margin: $gutter-sm 0 0;
+		padding: 0 0 $row-spacing-sm;
+	}
+
+	.sidebar-padder { padding-top: $gutter-sm; }
+
+	.container,
+	.container-fluid {
+		padding-left: $gutter-sm / 2;
+		padding-right: $gutter-sm / 2;
+	}
+	.row {
+		margin-left: ($gutter-sm / -2);
+		margin-right: ($gutter-sm / -2);
+	}
+
+	form.form-cols.row {
+		padding-left: ($gutter-sm / 2) - ($form-gutter / 2);
+		padding-right: ($gutter-sm / 2) - ($form-gutter / 2);
+	}
+
+	.widget,
+	.post-extra,
+	.wpb_row,
+	.wpb_content_element,
+	ul.wpb_thumbnails-fluid > li,
+	.last_toggle_el_margin,
+	.wpb_button,
+	.wpb_wrapper .mixt-element,
+	.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child {
+		margin-bottom: $row-spacing-sm;
+	}
+}

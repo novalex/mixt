@@ -228,7 +228,7 @@ function mixt_second_nav() {
 
 	// Content: Social Icons
 	} else if ( $options['left-content'] == '2' ) {
-		$left_el = mixt_social_profiles(false);
+		$left_el = mixt_social_profiles(false, array('style' => 'nav'));
 
 	// Content: Text / Code
 	} else if ( $options['left-content'] == '3' ) {
@@ -261,7 +261,7 @@ function mixt_second_nav() {
 
 	// Content: Social Icons
 	} else if ( $options['right-content'] == '2' ) {
-		$right_el = mixt_social_profiles(false);
+		$right_el = mixt_social_profiles(false, array('style' => 'nav'));
 
 	// Content: Text / Code
 	} else if ( $options['right-content'] == '3' ) {

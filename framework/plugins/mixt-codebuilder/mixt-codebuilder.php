@@ -17,7 +17,6 @@ class MIXTCodeBuilder {
 
 	function __construct() {
 		define( 'MIXTCB_VERSION', '1.0' );
-
 		define( 'MIXTCB_DIR', MIXT_PLUGINS_DIR . '/mixt-codebuilder' );
 		define( 'MIXTCB_URL', MIXT_PLUGINS_URI . '/mixt-codebuilder' );
 
@@ -26,7 +25,7 @@ class MIXTCodeBuilder {
 	}
 
 	/**
-	 * Enqueue CSS & JS
+	 * Enqueue frontend CSS & JS
 	 */
 	function init() {
 		if ( ! is_admin() ) {
@@ -35,17 +34,17 @@ class MIXTCodeBuilder {
 	}
 
 	/**
-	 * Enqueue admin CSS & JS
+	 * Load admin panel & assets
 	 */
 	function admin_init() {
-		include_once( MIXTCB_DIR . '/admin.php' );
-		add_action( 'wp_ajax_mixtcb_element', 'mixtcb_render_element' );
+		require_once( MIXTCB_DIR . '/panel.php' );
 
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
 		$local = array(
 			'dir'          => MIXTCB_URL,
 			'button_title' => __( 'Build Shortcode', 'mixt' ),
+			'media_frame_title' => __( 'Select Media', 'mixt' ),
 		);
 		wp_localize_script( 'jquery', 'mixt_cb', $local );
 	}

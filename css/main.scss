@@ -4,7 +4,6 @@
 @import 'mixt/vars';
 
 @import 'mixt/colors';
-@import 'mixt/theme';
 
 // Bootstrap
 @import 'bootstrap/bootstrap';
@@ -14,6 +13,7 @@
 
 @import 'mixt/base';
 @import 'mixt/global';
+@import 'mixt/spacing';
 
 @import 'mixt/anims';
 @import 'mixt/ui';
@@ -24,7 +24,8 @@
 
 @import 'mixt/header';
 
-@import 'mixt/inputs';
+@import 'mixt/inputs/inputs';
+@import 'mixt/inputs/buttons';
 
 @import 'mixt/content';
 @import 'mixt/post';
@@ -32,7 +33,4 @@
 @import 'mixt/footer';
 
 @import 'mixt/elements';
-@import 'mixt/plugins';
-
-// Font Icons
-@import 'icons/whhg';
+@import 'plugins/plugins';

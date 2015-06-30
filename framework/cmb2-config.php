@@ -74,20 +74,6 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'default' => 'auto',
 			),
 
-			// Sidebar Switch
-			array(
-				'id'      => $prefix . 'page-sidebar',
-				'name'    => __( 'Sidebar', 'mixt' ),
-				'desc'    => __( 'Show the sidebar on this page', 'mixt' ),
-				'type'    => 'radio_inline',
-				'options' => array(
-					'auto'  => __( 'Auto', 'mixt' ),
-					'true'  => __( 'Yes', 'mixt' ),
-					'false' => __( 'No', 'mixt' ),
-				),
-				'default' => 'auto',
-			),
-
 			// Sticky Nav Switch
 			array(
 				'id'      => $prefix . 'nav-mode',
@@ -167,8 +153,39 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 				'default' => 'auto',
 			),
+
+			// Sidebar Switch
+			array(
+				'id'      => $prefix . 'page-sidebar',
+				'name'    => __( 'Sidebar', 'mixt' ),
+				'desc'    => __( 'Show the sidebar on this page', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default' => 'auto',
+			),
 		),
 	);
+
+	// Add custom sidebar select if there are any
+	$custom_sidebars = get_option('mixt-sidebars');
+	if ( $custom_sidebars ) {
+		$sidebar_options = array(
+			'sidebar-1' => __( 'Default', 'mixt' ),
+		);
+		foreach ( $custom_sidebars as $sidebar ) { $sidebar_options[$sidebar['id']] = $sidebar['name']; }
+		$meta_boxes['mixt_page_meta']['fields'][] = array(
+			'id'      => $prefix . 'sidebar-id',
+			'name'    => __( 'Sidebar', 'mixt' ),
+			'desc'    => __( 'The sidebar to use for this page', 'mixt' ),
+			'type'    => 'select',
+			'options' => $sidebar_options,
+			'default' => 'sidebar-1',
+		);
+	}
 
 	// BLOG OPTIONS
 

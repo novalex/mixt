@@ -7,6 +7,11 @@
 		margin: 0 0 15px;
 	}
 
+	ul {
+		padding: 0;
+		list-style: none;
+	}
+
 	// Nav Menus
 	.nav li {
 
@@ -58,8 +63,4 @@
 	.widget_nav_menu {
 		.divider, .nav-search, li.btn { display: none; }
 	}
-}
-
-.sidebar-padder {
-	padding-top: $padding-l;
 }

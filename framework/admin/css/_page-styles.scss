@@ -26,10 +26,7 @@
 		border-top-width: 1px;
 		background-color: #f8f8f8;
 
-		.cmb-th {
-			width: 16% !important;
-			padding-left: 2%;
-		}
+		.cmb-th > label { padding-left: 10px; }
 	}
 
 	> .cmb-row > .cmb-row {

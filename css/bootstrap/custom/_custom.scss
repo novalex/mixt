@@ -1,5 +1,17 @@
-//
+
 // Component animations
-// --------------------------------------------------
 
 .fade { @include transition(opacity .2s ease); }
+
+
+// Tooltips
+
+.tooltip { z-index: 10000; }
+.tooltip.fade { transition: opacity 0.2s ease; }
+.tooltip.fade.in { transition: opacity 0.3s ease 0.4s; }
+.tooltip-inner { font-size: $font-size; padding: 6px 10px; }
+
+
+// Headings
+
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }

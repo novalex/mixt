@@ -22,8 +22,8 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 			global $mixt_opt; // todo: change to asset global ($mixt_assets?)
 
 			// Define Custom Menu Item Icons
-			$cart_icon   = 'icon-shopping';
-			$search_icon = 'icon-search';
+			$cart_icon   = 'fa fa-shopping-cart';
+			$search_icon = 'fa fa-search';
 			?>
 
 			<div id="posttype-mixt-elem" class="posttypediv">

@@ -12,23 +12,22 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * Get Social Profiles & Output Links or Return Data
  *
  * @param bool $echo true to echo links, false to return them as a string
- * @param string $type output networks or sharing buttons
+ * @param string $type output network profiles or sharing buttons
+ * @param array $args additional arguments (hover type, container class, profiles array)
  */
-function mixt_social_profiles( $echo = true, $type = 'networks' ) {
-
-	global $mixt_opt;
-
-	// Social Network Profiles
-	if ( $type == 'networks' ) {
-		$profiles     = ( ! empty($mixt_opt['social-profiles']) ) ? $mixt_opt['social-profiles'] : '';
-		$cont_classes = $type == 'networks' ? 'nav link-list social-links ' : 'nav link-list social-sharing ';
-		$hover_color = isset($mixt_opt['social-profiles-color']) ? $mixt_opt['social-profiles-color'] : 'icon';
+function mixt_social_profiles( $echo = true, $args = array() ) {
+	extract( wp_parse_args( $args, array(
+		'hover'    => '',
+		'class'    => '',
+		'color'    => 'default',
+		'btn_size' => 'default',
+		'type'     => 'networks',
+		'style'    => 'plain',
+		'profiles' => array(),
+	) ) );
 
 	// Social Sharing Profiles
-	} else if ( $type == 'sharing' ) {
-		$profiles     = ( ! empty($mixt_opt['post-sharing-profiles']) ) ? $mixt_opt['post-sharing-profiles'] : '';
-		$cont_classes = 'post-share social-links btn-group btn-group-justified ';
-		$hover_color  = isset($mixt_opt['post-sharing-color']) ? $mixt_opt['post-sharing-color'] : 'icon';
+	if ( $type == 'sharing' ) {
 		$post_id      = get_the_ID();
 		$pattern_tags = array(
 			'site'   => rawurlencode( get_bloginfo('name') ),
@@ -49,21 +48,46 @@ function mixt_social_profiles( $echo = true, $type = 'networks' ) {
 		}
 	}
 
+	if ( empty($hover) || empty($profiles) ) global $mixt_opt;
+
+	if ( empty($hover) ) {
+		if ( $type == 'networks' ) { $hover  = isset($mixt_opt['social-profiles-color']) ? $mixt_opt['social-profiles-color'] : 'icon'; }
+		else if ( $type == 'sharing' ) { $hover  = isset($mixt_opt['post-sharing-color']) ? $mixt_opt['post-sharing-color'] : 'icon'; }
+	}
+
+	if ( empty($profiles) ) {
+		if ( $type == 'networks' && ! empty($mixt_opt['social-profiles']) ) { $profiles = $mixt_opt['social-profiles']; }
+		else if ( $type == 'sharing' && ! empty($mixt_opt['post-sharing-profiles']) ) { $profiles = $mixt_opt['post-sharing-profiles']; }
+	}
+
+	$cont_classes = "social-links hover-$hover $class";
+
+	if ( $style == 'plain' ) { $cont_classes .= ' plain'; }
+	else if ( $style == 'nav' ) { $cont_classes .= ' nav link-list'; }
+	else if ( $style == 'group' ) { $cont_classes .= ' btn-group'; }
+	else if ( $style == 'buttons' ) { $cont_classes .= ' buttons'; }
+
 	if ( is_array($profiles) ) {
-		$items = $link_atts = '';
-		$cont_classes .= "hover-$hover_color ";
+		$items = $item_class = '';
+
+		$link_atts = 'data-toggle="tooltip" role="button"';
+		if ( $style == 'buttons' || $style == 'group' ) {
+			$btn_size = ( empty($btn_size) || $btn_size == 'default' ) ? '' : $btn_size;
+			$link_atts .= " class='btn btn-$color $btn_size'";
+
+			if ( $style == 'group' ) { $item_class .= 'btn-group'; }
+		} else {
+			$item_class .= ' no-color';
+		}
 
 		foreach ( $profiles as $profile ) {
 
 			if ( ! empty($profile['url']) && ! empty($profile['icon']) ) {
-
-				$profile_name = $profile['name'];
-				$profile_url  = str_replace(' ', '%20', $profile['url']);
-
-				$link_atts = 'data-toggle="tooltip" ';
+				$link_atts_now = $link_atts;
+				$profile_name  = $profile['name'];
+				$profile_url   = str_replace(' ', '%20', $profile['url']);
 
 				if ( $type == 'sharing' ) {
-					$link_atts .= 'class="btn no-color" role="button" ';
 					foreach ( $pattern_tags as $tag => $value ) {
 						$profile_url = str_replace('{'.$tag.'}', $value, $profile_url);
 					}
@@ -73,32 +97,27 @@ function mixt_social_profiles( $echo = true, $type = 'networks' ) {
 					if ( $profile['url'] == 'rss' ) { $profile_url = get_bloginfo('rss2_url'); }
 				}
 
-				$profile_icon  = $profile['icon'];
+				$profile_icon = $profile['icon'];
 
-				if ( isset($profile['color']) ) { $link_atts .= 'data-color="' . $profile['color'] . '"'; }
+				if ( isset($profile['color']) ) { $link_atts_now .= "data-color='{$profile['color']}'"; }
 				
 				$profile_title = isset($profile['title']) ? $profile['title'] : '';
 
-				$item = '<a href="' . $profile_url . '" title="' . $profile_title . '" target="_blank" ' . $link_atts . '><i class="' . $profile_icon . '"></i></a>';
+				$item = "<a href='$profile_url' title='$profile_title' target='_blank' $link_atts_now><i class='$profile_icon'></i></a>";
 
-				if ( $type == 'networks' ) {
-					$items .= '<li>' . $item . '</li>';
-				} else {
-					$items .= '<li class="btn-group" role="group">' . $item . '</li>';
-				}
+				$items .= "<li class='$item_class'>$item</li>";
 			}
 		}
 
-		$before = '<ul class="'.$cont_classes.'">';
+		$before = "<ul class='$cont_classes'>";
 		$after  = '</ul>';
 
 		$return_val = $before . $items . $after;
 
-		if ( $echo ) {
-			echo $return_val;
-		} else {
-			return $return_val;
-		}
+		if ( $echo ) { echo $return_val; }
+		else { return $return_val; }
+	} else {
+		return null;
 	}
 }
 
@@ -130,7 +149,6 @@ function make_bitly_url($url, $format = 'json', $version = '2.0.1') {
  * @param string $type profile group to return (networks or sharing)
  */
 function mixt_preset_social_profiles( $type = 'networks' ) {
-
 	$profiles = array(
 
 		// SOCIAL NETWORK PROFILES
@@ -139,7 +157,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'facebook'  => array(
 				'name'  => 'Facebook',
 				'url'   => 'https://www.facebook.com/',
-				'icon'  => 'icon-facebook',
+				'icon'  => 'fa fa-facebook',
 				'color' => '#3b5998',
 				'title' => __('Like us on Facebook', 'mixt'),
 			),
@@ -147,7 +165,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'twitter'  => array(
 				'name'  => 'Twitter',
 				'url'   => 'https://twitter.com/',
-				'icon'  => 'icon-twitter',
+				'icon'  => 'fa fa-twitter',
 				'color' => '#00aced',
 				'title' => __('Follow us on Twitter', 'mixt'),
 			),
@@ -155,7 +173,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'google+'  => array(
 				'name'  => 'Google+',
 				'url'   => 'https://plus.google.com/',
-				'icon'  => 'icon-googleplus',
+				'icon'  => 'fa fa-google-plus',
 				'color' => '#dd4b39',
 				'title' => __('Follow us on Google+', 'mixt'),
 			),
@@ -163,7 +181,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'youtube'  => array(
 				'name'  => 'YouTube',
 				'url'   => 'https://www.youtube.com/',
-				'icon'  => 'icon-youtube',
+				'icon'  => 'fa fa-youtube-play',
 				'color' => '#bb0000',
 				'title' => __('Subscribe to us on Youtube', 'mixt'),
 			),
@@ -171,7 +189,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'linkedin'  => array(
 				'name'  => 'LinkedIn',
 				'url'   => 'https://www.linkedin.com/',
-				'icon'  => 'icon-linkedin',
+				'icon'  => 'fa fa-linkedin',
 				'color' => '#007bb6',
 				'title' => __('Connect on LinkedIn', 'mixt'),
 			),
@@ -179,7 +197,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'instagram'  => array(
 				'name'  => 'Instagram',
 				'url'   => 'https://instagram.com/',
-				'icon'  => 'icon-instagram',
+				'icon'  => 'fa fa-instagram',
 				'color' => '#517fa4',
 				'title' => __('Follow us on Instagram', 'mixt'),
 			),
@@ -187,7 +205,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'pinterest'  => array(
 				'name'  => 'Pinterest',
 				'url'   => 'https://www.pinterest.com/',
-				'icon'  => 'icon-pinterest',
+				'icon'  => 'fa fa-pinterest-p',
 				'color' => '#cb2027',
 				'title' => __('Follow us on Pinterest', 'mixt'),
 			),
@@ -195,7 +213,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'tumblr'  => array(
 				'name'  => 'Tumblr',
 				'url'   => 'https://www.tumblr.com/',
-				'icon'  => 'icon-tumblr',
+				'icon'  => 'fa fa-tumblr',
 				'color' => '#32506d',
 				'title' => __('Follow us on Tumblr', 'mixt'),
 			),
@@ -207,7 +225,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'facebook'  => array(
 				'name'  => 'Facebook',
 				'url'   => 'http://www.facebook.com/sharer.php?u={link}&amp;t={title}',
-				'icon'  => 'icon-facebook',
+				'icon'  => 'fa fa-facebook',
 				'color' => '#3b5998',
 				'title' => __('Share on Facebook', 'mixt'),
 			),
@@ -215,7 +233,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'twitter'  => array(
 				'name'  => 'Twitter',
 				'url'   => 'http://twitter.com/home/?status={title} - {link2}',
-				'icon'  => 'icon-twitter',
+				'icon'  => 'fa fa-twitter',
 				'color' => '#00aced',
 				'title' => __('Share on Twitter', 'mixt'),
 			),
@@ -223,7 +241,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'google+'  => array(
 				'name'  => 'Google+',
 				'url'   => 'https://plus.google.com/share?url={link}',
-				'icon'  => 'icon-googleplus',
+				'icon'  => 'fa fa-google-plus',
 				'color' => '#dd4b39',
 				'title' => __('Share on Google+', 'mixt'),
 			),
@@ -231,7 +249,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'reddit' => array(
 				'name'  => 'Reddit',
 				'url'   => 'http://www.reddit.com/submit?url={link}&amp;title={title}',
-				'icon'  => 'icon-reddit',
+				'icon'  => 'fa fa-reddit',
 				'color' => '#ff5700',
 				'title' => __('Share on reddit', 'mixt'),
 			),
@@ -239,7 +257,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'linkedin'  => array(
 				'name'  => 'LinkedIn',
 				'url'   => 'http://www.linkedin.com/shareArticle?mini=true&amp;title={title}&amp;url={link}',
-				'icon'  => 'icon-linkedin',
+				'icon'  => 'fa fa-linkedin',
 				'color' => '#007bb6',
 				'title' => __('Share on LinkedIn', 'mixt'),
 			),
@@ -247,7 +265,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'pinterest'  => array(
 				'name'  => 'Pinterest',
 				'url'   => 'http://pinterest.com/pin/create/button/?url={link}&media={thumb}',
-				'icon'  => 'icon-pinterest',
+				'icon'  => 'fa fa-pinterest-p',
 				'color' => '#cb2027',
 				'title' => __('Share on Pinterest', 'mixt'),
 			),
@@ -255,7 +273,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'tumblr' => array(
 				'name'  => 'Tumblr',
 				'url'   => 'https://www.tumblr.com/widgets/share/tool?posttype=link&content={link}&title={title}&caption={title}',
-				'icon'  => 'icon-tumblr',
+				'icon'  => 'fa fa-tumblr',
 				'color' => '#35465c',
 				'title' => __('Share on Tumblr', 'mixt'),
 			),
@@ -263,7 +281,7 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'stumbleupon' => array(
 				'name'  => 'StumbleUpon',
 				'url'   => 'http://www.stumbleupon.com/submit?url={link}&amp;title={title}',
-				'icon'  => 'icon-stumbleupon',
+				'icon'  => 'fa fa-stumbleupon',
 				'color' => '#eb4823',
 				'title' => __('Share on StumbleUpon', 'mixt'),
 			),
@@ -271,12 +289,11 @@ function mixt_preset_social_profiles( $type = 'networks' ) {
 			'email' => array(
 				'name'  => 'Email',
 				'url'   => 'mailto:person@example.com?subject={site} - {title}&body={link}',
-				'icon'  => 'icon-emailalt',
+				'icon'  => 'fa fa-envelope',
 				'color' => '#555555',
 				'title' => __('Share via email', 'mixt'),
 			),
 		),
 	);
-
 	return $profiles[$type];
 }

@@ -1,0 +1,138 @@
+
+label { font-weight: normal; }
+
+// INPUTS
+
+input,
+textarea,
+.form-control {
+	border: 1px solid $input-bd;
+	background-color: $input-bg;
+	box-shadow: none;
+
+	&:required:focus {
+		&:valid { @extend .input-success; }
+		&:invalid { @extend .input-error; }
+		&:out-of-range { @extend .input-warn; }
+	}
+}
+
+input:not([type=checkbox]):not([type=radio]),
+textarea { -webkit-appearance: none; }
+
+// Transitions
+input,
+button,
+textarea,
+.form-control,
+.btn { transition: color 0.2s, border 0.2s, background 0.2s, box-shadow 0.2s; }
+
+
+// SELECTS
+
+select {
+	padding: 6px;
+	font-size: $font-size-s;
+	border-radius: 2px;
+	background-color: #f8f8f8;
+	border: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+	// Remove default browser select styling and show custom arrow
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMdJREFUeNrslE0OhCAMhR+omBijLrwI8R5eCbyS9yBcxo3xh6ELE8eVjDGzocvXpu+DFphzDv8MFgEiQAhA13WOc451XbW1drjmpZQqTVO97zuMMexOTx5C2zQN2rZFVVXaw6gLnCKd8lR3N4IAhBBDURSo6/oL4jAnnfJU99oO9H2vsyxTy7JgmibM84w8z1GWJbwOrw/jOOpXl/CAoFlv24YkSUC7EWr+6BUQhD+5YoyBevibCDZ//AxP4/jJPH5EEYDiI8AAUTR0hYHR9dYAAAAASUVORK5CYII=');
+	background-repeat: no-repeat;
+	background-position: center right;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+
+// INPUT STATES
+
+	// Success
+	.input-success { border-bottom-color: $green !important; }
+	// Warning
+	.input-warn { border-bottom-color: $orange !important; }
+	// Error
+	.input-error { border-bottom-color: $red !important; }
+
+	// Focus Style
+	input[type="text"]:focus,
+	textarea:focus,
+	.form-control:focus {
+		border-color: $input-focus-bd;
+		box-shadow: 0 0 3px $input-focus-bs;
+	}
+
+
+// Override input & button outline
+input,
+button,
+select,
+textarea,
+.button,
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
+	outline: none !important;
+}
+
+
+// INPUT THEMES
+
+%input-dark {
+	color: $text-light-color;
+	border-color: $input-bd-dark;
+	background-color: $input-bg-dark;
+}
+
+%button-dark {
+	color: $text-light-color;
+	border-color: $input-bd-dark;
+	background-color: $btn-bg-dark;
+}
+
+
+// FORMS
+
+.form-group {
+	label {
+		font-size: $font-size-s;
+
+		.req { color: red; }
+	}
+}
+
+.form-labels-left,
+.form-labels-right {
+	.form-group {
+		$label-width: 80px;
+		label {
+			float: left;
+			width: $label-width;
+			padding-right: 10px;
+		}
+		.form-control {
+			width: auto;
+			width: calc(100% - #{$label-width});
+		}
+	}
+}
+.form-labels-right .form-group label {
+	float: right;
+	padding-left: 10px;
+	padding-right: 0;
+}
+
+.form-no-labels label { @extend .sr-only; }
+
+
+// Small Gutter Width for Forms
+
+form.form-cols {
+	@include make-custom-grid-columns($gutter: $form-gutter);
+}

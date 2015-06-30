@@ -1,14 +1,10 @@
 
+// Wrappers
+
 #main-wrap {
 	min-height: 100%;
 	height: auto !important;
 	margin: 0 auto;
-}
-
-.admin-bar #main-wrap { padding-top: 32px; }
-.admin-bar.admin-bar-slim #main-wrap { padding-top: 28px !important; }
-@media screen and (max-width: 782px) {
-	.admin-bar #main-wrap { padding-top: 46px; }
 }
 
 #content-wrap {
@@ -18,10 +14,15 @@
 	> .row { border-color: inherit; }
 }
 
+.admin-bar #main-wrap { padding-top: 32px; }
+.admin-bar.admin-bar-slim #main-wrap { padding-top: 28px !important; }
+@media screen and (max-width: 782px) { .admin-bar #main-wrap { padding-top: 46px; } }
+
+
+// Main Content
+
 #content,
 .sidebar {
-	padding-left: $gutter;
-	padding-right: $gutter;
 	border-width: 0;
 	border-style: solid;
 }
@@ -31,65 +32,6 @@
 .posts-container,
 .page-nav { border-color: inherit; }
 
-// Page Header Spacing
-.article,
-.author .about-the-author {
-	margin: 15px 0 0;
-	padding: 0 0 15px;
-}
-
-@include media('screen', 'mars') {
-	#content-wrap {
-		&.has-sidebar {
-			#content {
-				float: left;
-				width: 70%;
-				padding-left: $gutter;
-				padding-right: $gutter-l;
-				border-right-width: 1px;
-			}
-			.sidebar {
-				width: 30%;
-				margin-left: -1px;
-				padding-right: $gutter;
-				padding-left: $gutter-l;
-				border-left-width: 1px;
-			}
-		}
-
-		&.sidebar-left {
-			#content {
-				float: right;
-				padding-left: $gutter-l;
-				padding-right: $gutter;
-				border-left-width: 1px;
-				border-right-width: 0;
-			}
-			.sidebar {
-				margin-left: 0;
-				padding-left: $gutter;
-				padding-right: $gutter-l;
-				border-left-width: 0;
-				box-shadow: 1px 0 0 $border-color;
-
-			}
-		}
-	}
-
-	.article,
-	.author .about-the-author {
-		margin: $margin-l 0 0;
-		padding: 0 0 $padding-l;
-	}
-
-	.fullwidth #content-wrap {
-		#content,
-		.sidebar {
-			padding-left: $gutter-l;
-			padding-right: $gutter-l;
-		}
-	}
-}
 
 // Fullwidth Layout
 
@@ -97,11 +39,7 @@
 	#content-wrap,
 	#content-wrap .container { width: 100%; }
 
-	.blog-grid {
-		padding: 0 !important;
-
-		.paging-navigation { padding: 0 $gutter; }
-	}
+	.blog-grid { padding: 0 !important; }
 }
 
 
@@ -110,10 +48,6 @@
 .boxed {
 	
 }
-
-
-// Bottom Padding Before Footer
-.elements-here { padding-bottom: $gutter-l; }
 
 
 // Tags
@@ -150,10 +84,13 @@
 }
 
 
-// Author Page
-.author .about-the-author {
-	margin-top: $margin-l;
+// Widgets
+
+.widget {
+	select { max-width: 100%; }
 }
+.widget_nav_menu ul.sub-menu li,
+.widget_pages ul.children li { padding-left: 15px; }
 
 
 // Portfolio
@@ -173,6 +110,7 @@
 	display: inherit;
 }
 
+// TODO ???
 .grid-container {
 	width: 100%;
 
@@ -223,7 +161,62 @@
 
 footer.entry-meta { clear: both; }
 
+
+// Alignment
+
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+
+// Images and Captions
+
+img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+}
+img[class*="wp-image-"] {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.wp-caption {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	max-width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0 10px;
+
+	&.aligncenter {
+		margin-bottom: 10px;
+	}
+
+	img[class*="wp-image-"] {
+		display: block;
+	}
+
+	.wp-caption-text {
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+
+
 // Blockquotes
+
 blockquote {
 	font-size: $font-size;
 	padding: $padding-s;
@@ -235,5 +228,39 @@ blockquote {
 		margin-top: 6px;
 		opacity: 0.8;
 		font-size: $font-size-s;
+	}
+}
+
+
+// Responsive
+
+@include media('screen', 'mars') {
+	#content-wrap {
+		&.has-sidebar {
+			#content {
+				float: left;
+				width: 70%;
+				border-right-width: 1px;
+			}
+			.sidebar {
+				width: 30%;
+				margin-left: -1px;
+				border-left-width: 1px;
+			}
+		}
+
+		&.sidebar-left {
+			#content {
+				float: right;
+				border-left-width: 1px;
+				border-right-width: 0;
+			}
+			.sidebar {
+				margin-left: 0;
+				border-left-width: 0;
+				box-shadow: 1px 0 0 $border-color;
+
+			}
+		}
 	}
 }

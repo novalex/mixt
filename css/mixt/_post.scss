@@ -2,6 +2,7 @@
 .article {
 	&,
 	.page-header,
+	.entry-body,
 	.post-wrapper { border-color: inherit; }
 
 	.page-title,
@@ -431,10 +432,6 @@
 		padding-top: 15px;
 		padding-left: 0;
 		padding-right: 0;
-
-		@include media('screen', 'mars') {
-			padding-top: $padding-l;
-		}
 	}
 
 	.blog-post {
@@ -570,8 +567,8 @@
 	&, li, li a, li span { border-color: inherit; }
 	li a, li span { height: 34px; background-color: transparent; }
 	li a, li > span { font-size: 13px; border-radius: $bd-radius; }
-	.icon { vertical-align: middle; margin-right: 10px; }
-	.next .icon { margin-left: 10px; margin-right: 0; }
+	i { vertical-align: middle; margin-right: 10px; }
+	.next i { margin-left: 10px; margin-right: 0; }
 }
 
 .numbered-paging {
@@ -642,30 +639,10 @@
 
 // POST SLIDER GALLERY
 
-.gallery-slider {
-	margin: 0;
+.gallery-slider { margin: 0; }
 
-	a img { max-width: 100%; }
 
-	li {
-		position: relative;
-
-		img { min-width: 100%; }
-
-		.gallery-caption {
-			position: absolute;
-			left: 0; bottom: 0;
-			width: 100%;
-			margin: 0;
-			padding: 10px;
-			color: #fff;
-			text-align: center;
-			background: rgba(0,0,0,0.4);
-		}
-	}
-
-	&:not(.lightSlider) li:not(:first-child) { display: none; }
-}
+// TODO
 
 .sticky {}
 .bypostauthor {}
@@ -675,7 +652,6 @@
 
 .post-extra {
 	border-color: inherit;
-	margin-bottom: $margin-l;
 	@extend %clearfix;
 }
 
@@ -684,27 +660,7 @@
 
 // SOCIAL SHARING
 
-.post-share {
-	border-width: 1px;
-	border-style: solid;
-	border-radius: $bd-radius + 1px;
-	padding: 0; margin: 0;
-
-	&,
-	li { border-color: inherit; }
-
-	li {
-		border-style: solid;
-		border-width: 0 0 0 1px;
-
-		&:first-child { border-width: 0; }
-	}
-
-	.btn {
-		padding: 10px 6px;
-		border-width: 0;
-	}
-}
+.post-share .btn { padding: 10px 6px; }
 
 
 // ABOUT THE AUTHOR
@@ -926,3 +882,4 @@
 		}
 	}
 }
+.headline + .comment-list > .comment:first-child > .comment-cont:first-child { border-top-width: 0; padding-top: 0; }

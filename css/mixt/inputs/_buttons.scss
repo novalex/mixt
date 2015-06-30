@@ -1,0 +1,55 @@
+
+$btn-height: 34px;
+
+.btn {
+	transition: color 0.2s, border 0.1s, background 0.2s, box-shadow 0.2s;
+
+	i:first-child:last-child { margin: 0; }
+}
+
+.input-group-btn .btn { height: $btn-height; }
+
+// Button Colors
+
+@mixin button-color($selector, $color) {
+	.btn-#{$selector} {
+		background-color: $color;
+		border-color: darken($color, 5);
+
+		&,
+		&:hover,
+		&:focus,
+		&:active {
+			color: set-color-for-bg($color);
+			@include text-shadow-for-bg($color);
+		}
+
+		&:hover {
+			border-color: darken($color, 7);
+			@if ( lumin($color) >= 0.5 ) {
+				background-color: darken($color, 5);
+			} @else {
+				background-color: lighten($color, 5);
+			}
+		}
+		&:active { box-shadow: inset 0 1px 6px darken($color, 10); }
+	}
+}
+
+@each $selector, $color in $button-colors {
+	@include button-color($selector, $color);
+}
+
+	.btn-success { @extend .btn-green; }
+
+// Button Styles
+
+	// Embossed
+	.btn-emboss {
+		&:not(:active) { border-bottom-width: 2px; }
+	}
+
+	// Inset
+	.btn-inset {
+		box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+	}

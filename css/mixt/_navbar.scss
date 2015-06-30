@@ -524,10 +524,12 @@ $sec-nav-item-height: 32px;
 		.menu-item {
 			transition: background-color 0.2s;
 
-			a .drop-arrow:before { content: '\f48b'; }
+			// Replace chevron left and right with chevron down
+			a .drop-arrow:before { content: '\f078'; }
 
 			&.expand {
-				> a .drop-arrow:before { content: '\f48a'; }
+				// Replace chevron down with chevron up
+				> a .drop-arrow:before { content: '\f077'; }
 				> .sub-menu { display: block !important; }
 			}
 		}
@@ -562,8 +564,9 @@ $sec-nav-item-height: 32px;
 			position: absolute;
 			top: 0; right: 0; bottom: 0;
 			width: $nav-primary-item-height;
-			font-size: 14px;
+			font-size: 16px;
 			text-align: center;
+			line-height: $nav-primary-item-height - 2px;
 			margin-left: 0;
 		}
 

@@ -876,7 +876,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'head-content-scroll-icon',
 							'type'     => 'text',
 							'title'    => __( 'Scroll To Content Icon', 'mixt' ),
-							'default'  => 'icon-chevron-down',
+							'default'  => 'fa fa-chevron-down',
 							'required' => array( 'head-content-scroll', '=', true ),
 						),
 
@@ -1647,6 +1647,26 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						),
 						'default'  => 'right',
 					),
+
+					// Additional Sidebars
+					array(
+						'id'       => 'reg-sidebars',
+						'type'     => 'multi_input',
+						'title'    => __( 'Custom Sidebars', 'mixt' ),
+						'subtitle' => __( 'Register custom sidebars to use on different pages or locations', 'mixt' ),
+						'add_text' => __( 'New Sidebar', 'mixt' ),
+						'sortable' => true,
+						'inputs'   => array(
+							'name' => array(
+								'wrap_class'  => 'sidebar-custom sidebar-name',
+								'placeholder' => __( 'Name', 'mixt' ),
+							),
+							'id' => array(
+								'wrap_class'  => 'sidebar-custom sidebar-id',
+								'placeholder' => __( 'ID', 'mixt' ),
+							),
+						),
+					),
 				),
 			);
 
@@ -1978,7 +1998,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'meta-author-icon',
 						'type'     => 'text',
 						'title'    => __( 'Author Icon', 'mixt' ),
-						'default'  => 'icon-user',
+						'default'  => 'fa fa-user',
 						'required' => array('meta-author', '=', true),
 					),
 
@@ -1998,7 +2018,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'meta-date-icon',
 						'type'     => 'text',
 						'title'    => __( 'Date Icon', 'mixt' ),
-						'default'  => 'icon-clockalt-timealt',
+						'default'  => 'fa fa-clock-o',
 						'required' => array('meta-date', '=', true),
 					),
 
@@ -2018,7 +2038,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'meta-category-icon',
 						'type'     => 'text',
 						'title'    => __( 'Category Icon', 'mixt' ),
-						'default'  => 'icon-folderalt',
+						'default'  => 'fa fa-folder-open',
 						'required' => array('meta-category', '=', true),
 					),
 
@@ -2038,7 +2058,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'meta-comments-icon',
 						'type'     => 'text',
 						'title'    => __( 'Comments Icon', 'mixt' ),
-						'default'  => 'icon-chat',
+						'default'  => 'fa fa-comments',
 						'required' => array('meta-comments', '=', true),
 					),
 
@@ -2066,7 +2086,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-standard-icon',
 						'type'     => 'text',
 						'title'    => __( 'Standard Format Icon', 'mixt' ),
-						'default'  => 'icon-pen',
+						'default'  => 'fa fa-align-left',
 					),
 
 					// Aside Format Icon
@@ -2074,7 +2094,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-aside-icon',
 						'type'     => 'text',
 						'title'    => __( 'Aside Format Icon', 'mixt' ),
-						'default'  => 'icon-noteslistalt',
+						'default'  => 'fa fa-pencil',
 					),
 
 					// Image Format Icon
@@ -2082,7 +2102,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-image-icon',
 						'type'     => 'text',
 						'title'    => __( 'Image Format Icon', 'mixt' ),
-						'default'  => 'icon-picture',
+						'default'  => 'fa fa-picture-o',
 					),
 
 					// Video Format Icon
@@ -2090,7 +2110,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-video-icon',
 						'type'     => 'text',
 						'title'    => __( 'Video Format Icon', 'mixt' ),
-						'default'  => 'icon-playvideo',
+						'default'  => 'fa fa-play',
 					),
 
 					// Audio Format Icon
@@ -2098,7 +2118,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-audio-icon',
 						'type'     => 'text',
 						'title'    => __( 'Audio Format Icon', 'mixt' ),
-						'default'  => 'icon-music',
+						'default'  => 'fa fa-music',
 					),
 
 					// Gallery Format Icon
@@ -2106,7 +2126,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-gallery-icon',
 						'type'     => 'text',
 						'title'    => __( 'Gallery Format Icon', 'mixt' ),
-						'default'  => 'icon-burstmode',
+						'default'  => 'fa fa-camera',
 					),
 
 					// Quote Format Icon
@@ -2114,7 +2134,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-quote-icon',
 						'type'     => 'text',
 						'title'    => __( 'Quote Format Icon', 'mixt' ),
-						'default'  => 'icon-quote',
+						'default'  => 'fa fa-quote-right',
 					),
 
 					// Link Format Icon
@@ -2122,7 +2142,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-link-icon',
 						'type'     => 'text',
 						'title'    => __( 'Link Format Icon', 'mixt' ),
-						'default'  => 'icon-linkalt',
+						'default'  => 'fa fa-link',
 					),
 
 					// Page Format Icon
@@ -2130,7 +2150,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-page-icon',
 						'type'     => 'text',
 						'title'    => __( 'Page Format Icon', 'mixt' ),
-						'default'  => 'icon-document',
+						'default'  => 'fa fa-file-text',
 					),
 
 					// Product Format Icon
@@ -2138,7 +2158,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'       => 'format-product-icon',
 						'type'     => 'text',
 						'title'    => __( 'Product Format Icon', 'mixt' ),
-						'default'  => 'icon-shopping',
+						'default'  => 'fa fa-shopping-cart',
 					),
 				),
 			);

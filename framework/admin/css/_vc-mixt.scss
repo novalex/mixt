@@ -7,8 +7,6 @@ $modal-bg: #e4e4e4;
 $modal-bd-color: #333;
 $item-bd-color: #eee;
 
-$icon-path: '../mixt-modules/shortcodes/icons';
-
 .vc_modal.vc_modal-content,
 .vc_panel {
 	border-radius: $bd-radius;
@@ -59,17 +57,10 @@ $icon-path: '../mixt-modules/shortcodes/icons';
 	.wpb-elements-list-modal .wpb-content-layouts li { width: 50%; }
 }
 
-
-// ELEMENT ICONS
-
-.mixt_flipcard.vc_element-icon {
-	background-image: url('#{$icon-path}/flipcard.png');
-}
-
-.mixt_headline.vc_element-icon {
-	background-image: url('#{$icon-path}/headline.png');
-}
-
-.mixt_form.vc_element-icon {
-	background-image: url('#{$icon-path}/form.png');
+// Checkbox Param Type
+.vc_wrapper-param-type-checkbox .vc_checkbox-label {
+	min-width: 100px;
+	display: inline-block;
+	padding: 5px 10px 5px 0;
+	white-space: nowrap;
 }

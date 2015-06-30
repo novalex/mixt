@@ -2,6 +2,17 @@ jQuery(document).ready(function() {
 
 	'use strict'; /* jshint unused: false */
 
+	// Redraw the thickbox for new content
+	function resizePanel() {
+		var	panel = jQuery('#TB_window'),
+			content = jQuery('#TB_ajaxContent');
+
+		panel.add(content).css({
+			height: 'auto',
+			overflow: 'auto'
+		});
+	}
+
 	(function() {
 		/* global tinymce, mixt_cb */
 		tinymce.PluginManager.add('mixt_cb', function( editor ) {
@@ -12,6 +23,7 @@ jQuery(document).ready(function() {
 				onclick: function() {
 					jQuery('#mixt-cb-trigger').click();
 					jQuery('#TB_window').addClass('mixt-cb-panel');
+					resizePanel();
 				}
 			});
 		});
@@ -27,8 +39,7 @@ jQuery(document).ready(function() {
 	}
 
 	function addShortcode() {
-		var select          = jQuery('#mcb-main-select').val(),
-			element         = jQuery('#' + select),
+		var element         = jQuery('.mcb-element-cont'),
 			template        = element.data('shortcode-template'),
 			childTemplate   = element.data('shortcode-child-template'),
 			fields          = element.find('.field').not('.mcb-clone-template'),
@@ -40,18 +51,21 @@ jQuery(document).ready(function() {
 		for ( var i = 0; i < fields.length; i++ ) {
 			var field   = jQuery(fields[i]),
 				isChild = field.hasClass('child-field'),
-				elems   = field.find('.mcb-input'),
+				elems   = field.find('.row').not('.disabled').find('.mcb-input'),
 				content = '';
 
 			attributes = jQuery.map(elems, function(el, index) {
 				var input = jQuery(el),
+					attr  = input.data('attr'),
 					value = input.val();
-				if ( input.attr('id') == 'content' ) {
+				if ( input.is('[type="checkbox"]:not(:checked)') ) { value = ''; }
+				if ( input.data('encode') === true ) { value = htmlEscape(value); }
+				if ( input.data('explode') === true ) { value = value.replace(/\n+/g, ','); }
+				if ( attr == 'content' ) {
 					content = value;
-					if ( input.attr('data-encode') == 1 ) { content = htmlEscape(content); }
 					return '';
 				} else if ( value !== '' ) {
-					return input.attr('id') + '="' + value + '"';
+					return attr + '="' + value + '"';
 				}
 			});
 			attributes = attributes.join(' ').trim();
@@ -75,28 +89,17 @@ jQuery(document).ready(function() {
 
 	// Set the inputs to empty state
 	function resetPanel() {
-		jQuery('#mcb-main-select').val(0);
+		jQuery('#mcb-main-select .el-button').removeClass('active');
 		jQuery('#mixt-cb-wrap .panel-body').empty();
 	}
 
-	// Function to redraw the thickbox for new content
-	function resizePanel() {
-		var	panel = jQuery('#TB_window'),
-			content = jQuery('#TB_ajaxContent');
-
-		panel.add(content).css({
-			height: 'auto',
-			overflow: 'auto'
-		});
-	}
-
-	// Simple function to clone an included template
+	// Clone field from template
 	function cloneElement(el) {
 		var clone = jQuery(el).find('.mcb-clone-template').clone().removeClass('hidden mcb-clone-template').removeAttr('id').addClass('mcb-cloned');
 		jQuery(el).children('.field-repeat').before(clone);
 	}
 
-	// Collapse Fields
+	// Collapse fields
 	function collapseFields() {
 		jQuery('.field-title.toggle').off().on('click', function(e) {
 			if ( jQuery(e.target).is('.mcb-remove') ) {
@@ -107,26 +110,80 @@ jQuery(document).ready(function() {
 		});
 	}
 
+	// Field dependencies
+	function elementDepends() {
+		jQuery('.row.requires').each( function() {
+			var row     = jQuery(this),
+				reqData = row.data('required').split(','),
+				parent  = reqData[0],
+				reqType = reqData[1],
+				reqVal  = reqData[2].split('|');
+			jQuery('.mcb-input[data-attr="' + parent + '"]').on('change init', function() {
+				var parentVal = jQuery(this).val();
+				if ( reqType == '=' ) {
+					if ( jQuery.inArray(parentVal, reqVal) > -1 ) { row.slideDown(400).removeClass('disabled'); }
+					else { row.slideUp(300).addClass('disabled'); }
+				} else {
+					if ( jQuery.inArray(parentVal, reqVal) == -1 ) { row.slideDown(400).removeClass('disabled'); }
+					else { row.slideUp(300).addClass('disabled'); }
+				}
+			}).trigger('init');
+		});
+	}
+
+	// Media Frame
+	function mediaLibrary() {
+		var media_frame;
+
+		jQuery('.mcb-media-select').click(function(e) {
+			var input = jQuery(this),
+				multiple = input.data('multiple') === true ? true : false;
+			e.preventDefault();
+
+			if ( media_frame ) {
+				media_frame.open();
+				return;
+			}
+
+			/* global wp */
+			media_frame = wp.media({
+				title: mixt_cb.media_frame_title,
+				multiple: multiple
+			});
+
+			media_frame.on('select', function() {
+				var media = media_frame.state().get('selection').toJSON(),
+					ids   = jQuery.map(media, function(ob) {
+						return ob.id;
+					});
+				input.val(ids.join(','));
+			});
+
+			media_frame.open();
+		});
+	}
+
 	jQuery(document).ready( function($) {
 		var panel = $('#mixt-cb-wrap'),
-			mainSelect = $('#mcb-main-select'),
-			panelBody  = panel.children('.panel-body'),
-			panelLoad  = panel.children('.panel-load');
+			elButtons = $('#mcb-main-select .el-button'),
+			panelBody = panel.children('.panel-body'),
+			panelLoad = panel.children('.panel-load');
 
 		panelLoad.hide();
 
 		$('#mcb-add-shortcode').click( function() { addShortcode(); });
 
-		mainSelect.change( function() {
+		elButtons.click( function() {
 			panelLoad.slideDown(400);
 			panelBody.slideUp(400);
+			$(this).addClass('active').siblings().removeClass('active');
 
 			/* global ajaxurl */
 			$.ajax({
 				url: ajaxurl,
 				data: {
 					'action': 'mixtcb_element',
-					'mixtcb-key': mainSelect.val()
+					'mixtcb-key': $(this).children('a').attr('href').replace('#', '')
 				},
 				method: 'post',
 				dataType: 'xml',
@@ -138,6 +195,9 @@ jQuery(document).ready(function() {
 					panelBody.empty().append(html).slideDown(400);
 
 					resizePanel();
+					$('.mcb-input').off('change');
+					$('.mcb-multi-input').off('click');
+					elementDepends();
 
 					panel.find('.field.preset').each( function() {
 						if ( $(this).children('.field-title.toggle').length ) {
@@ -146,11 +206,10 @@ jQuery(document).ready(function() {
 						}
 					});
 
-					if ( typeof $.fn.wpColorPicker === 'function' ) {
-						$('.mcb-color').wpColorPicker();
-					}
+					// Colorpicker
+					if ( typeof $.fn.wpColorPicker === 'function' ) { $('.mcb-color').wpColorPicker(); }
 
-					$('.mcb-input.color-select').on('change', function() {
+					$('.mcb-input.color-select').change( function() {
 						var select = $(this),
 							selOption = select.children('option:selected');
 						select.css({
@@ -159,7 +218,7 @@ jQuery(document).ready(function() {
 					});
 
 					// Clone a set of input fields
-					$('.field-repeat').on('click', function() {
+					$('.field-repeat').click( function() {
 						cloneElement($(this).parent());
 						resizePanel();
 						$('.mcb-sortable').sortable('refresh');
@@ -167,7 +226,7 @@ jQuery(document).ready(function() {
 					});
 
 					// Remove a set of input fields
-					$('.mcb-remove').on('click', function() {
+					$('.mcb-remove').click( function() {
 						$(this).parent('.field').remove();
 					});
 
@@ -175,6 +234,25 @@ jQuery(document).ready(function() {
 					$('.mcb-sortable').sortable({
 						items: '.field:not(".hidden")',
 						placeholder: 'mcb-sortable-placeholder'
+					});
+
+					// Media Select
+					mediaLibrary();
+
+					// Multi input val
+					$('.mcb-multi-input').on('click', 'label input', function() {
+						var cont = $(this).parents('.mcb-multi-input'),
+							main = cont.children('.mcb-input'),
+							inputs = cont.find('.mcb-multi-child'),
+							value = $.map(inputs, function(el) {
+								var $el = $(el);
+								if ( $el.is('.mcb-checkbox') ) {
+									return $el.is(':checked') ? $el.val() : '';
+								} else {
+									return $el.val();
+								}
+							});
+						main.val($.grep(value, Boolean).join(','));
 					});
 				},
 				error: function(data) {

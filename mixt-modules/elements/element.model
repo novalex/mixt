@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * Model Element
+ */
+class MixtElement {
+
+	public function __construct() {
+		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
+		add_action('vc_before_init', array($this, 'vc_extend'));
+		add_shortcode('mixt_element', array($this, 'shortcode'));
+	}
+
+	/**
+	 * Add Element to CodeBuilder
+	 */
+	public function mixtcb_extend() {
+		mixtcb_map( array(
+			'id'       => 'mixt_element',
+			'title'    => __( 'Element', 'mixt' ),
+			'template' => '[mixt_element {{attributes}}]{{content}}[/mixt_element]',
+			'params'   => array(
+				'class' => array(
+					'type'  => 'text',
+					'label' => __( 'Extra Classes', 'mixt' ),
+				),
+			),
+		) );
+	}
+
+	/**
+	 * Add Element to Visual Composer
+	 */
+	public function vc_extend() {
+		vc_map( array(
+			'name'        => __( 'Element', 'mixt' ),
+			'description' => __( 'Element description', 'mixt' ),
+			'base'        => 'mixt_element',
+			'icon'        => 'mixt_element',
+			'category'    => 'MIXT',
+			'params'      => array(
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Extra Classes', 'mixt' ),
+					'param_name' => 'class',
+				),
+			),
+		) );
+	}
+
+	/**
+	 * Render shortcode
+	 */
+	public function shortcode( $atts, $content = null ) {
+		extract( shortcode_atts( array(
+			'class' => '',
+		), $atts ) );
+
+		$classes = '';
+		if ( ! empty($class) ) $classes .= ' ' . $class;
+
+		$html = '';
+		
+		return $html;
+	}
+}
+new MixtElement;
+
+if ( class_exists('WPBakeryShortCode') ) {
+	class WPBakeryShortCode_Mixt_Element extends WPBakeryShortCode {}
+}

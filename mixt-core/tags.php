@@ -79,8 +79,8 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 			'current'   => $page_now,
 			'total'     => $page_max,
 			'type'      => 'array',
-			'prev_text' => '<i class="icon icon-chevron-left"></i>' . __('Previous'),
-			'next_text' => __('Next') . '<i class="icon icon-chevron-right"></i>',
+			'prev_text' => '<i class="fa fa-chevron-left"></i>' . __('Previous'),
+			'next_text' => __('Next') . '<i class="fa fa-chevron-right"></i>',
 		) );
 
 		if ( ! empty($page_links) ) {
@@ -108,7 +108,7 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 					data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 					data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
 					data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
-				><i class="icon icon-chevron-down"></i><?php _e( 'Load more posts', 'mixt' ); ?></a></li>
+				><i class="fa fa-chevron-down"></i><?php _e( 'Load more posts', 'mixt' ); ?></a></li>
 			</ul>
 		</nav>
 		<?php
@@ -137,16 +137,16 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 
 			<?php if ( $is_single ) : // Navigation links for single posts ?>
 
-				<?php previous_post_link( '<li class="nav-previous previous prev">%link</li>', '<i class="icon icon-chevron-left"></i> %title' ); ?>
-				<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <i class="icon icon-chevron-right"></i>' ); ?>
+				<?php previous_post_link( '<li class="nav-previous previous prev">%link</li>', '<i class="fa fa-chevron-left"></i> %title' ); ?>
+				<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <i class="fa fa-chevron-right"></i>' ); ?>
 
 			<?php else : ?>
 				<?php if ( get_previous_posts_link() ) : ?>
-					<li class="nav-previous prev"><?php previous_posts_link( __( '<i class="icon icon-chevron-left"></i> Previous posts', 'mixt' ) ); ?></li>
+					<li class="nav-previous prev"><?php previous_posts_link( __( '<i class="fa fa-chevron-left"></i> Previous posts', 'mixt' ) ); ?></li>
 				<?php endif; ?>
 
 				<?php if ( get_next_posts_link(null, $page_max) ) : ?>
-					<li class="nav-next next"><?php next_posts_link( __( 'Next posts <i class="icon icon-chevron-right"></i>', 'mixt' ), $page_max ); ?></li>
+					<li class="nav-next next"><?php next_posts_link( __( 'Next posts <i class="fa fa-chevron-right"></i>', 'mixt' ), $page_max ); ?></li>
 				<?php endif; ?>
 			<?php endif; ?>
 
@@ -272,8 +272,8 @@ function mixt_comment_nav($id, $ajax = false) {
 				'type'         => 'array',
 				'total'        => $page_max,
 				'echo'         => false,
-				'prev_text'    => '<i class="icon icon-chevron-left"></i>' . __('Previous'),
-				'next_text'    => __('Next') . '<i class="icon icon-chevron-right"></i>',
+				'prev_text'    => '<i class="fa fa-chevron-left"></i>' . __('Previous'),
+				'next_text'    => __('Next') . '<i class="fa fa-chevron-right"></i>',
 			) );
 
 			if ( ! empty($page_links) ) {
@@ -303,7 +303,7 @@ function mixt_comment_nav($id, $ajax = false) {
 						data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 						data-complete-text="<?php _e( 'No more comments to load', 'mixt' ); ?>" 
 						data-error-text="<?php _e( 'An error occured while trying to load the comments!', 'mixt' ); ?>"
-					><i class="icon icon-chevron-down"></i><?php _e( 'Load more', 'mixt' ); ?></a></li>
+					><i class="fa fa-chevron-down"></i><?php _e( 'Load more', 'mixt' ); ?></a></li>
 				</ul>
 			</nav>
 			<?php
@@ -317,8 +317,8 @@ function mixt_comment_nav($id, $ajax = false) {
 			<nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
 				<h5 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h5>
 				<ul class="pager">
-					<li class="nav-previous prev"><?php previous_comments_link( __( '<i class="icon icon-chevron-left"></i> Older comments', 'mixt' ) ); ?></li>
-					<li class="nav-next next"><?php next_comments_link( __( 'Newer comments <i class="icon icon-chevron-right"></i>', 'mixt' ) ); ?></li>
+					<li class="nav-previous prev"><?php previous_comments_link( __( '<i class="fa fa-chevron-left"></i> Older comments', 'mixt' ) ); ?></li>
+					<li class="nav-next next"><?php next_comments_link( __( 'Newer comments <i class="fa fa-chevron-right"></i>', 'mixt' ) ); ?></li>
 				</ul>
 			</nav>
 

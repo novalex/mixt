@@ -33,8 +33,12 @@ get_header();
 		// Post Social Sharing Buttons
 		if ( $options['post-sharing'] ) {
 			echo '<div class="post-extra post-share-cont">';
-				// echo '<h3 class="title">' . __( 'Share this', 'mixt' ) . '</h3>';
-				mixt_social_profiles(true, 'sharing');
+				echo do_shortcode('[mixt_headline text="' . __( 'Share this', 'mixt' ) . '"]');
+				mixt_social_profiles(true, array(
+					'type'  => 'sharing',
+					'style' => 'group',
+					'class' => 'post-share btn-group-lg btn-group-justified',
+				));
 			echo '</div>';
 		}
 

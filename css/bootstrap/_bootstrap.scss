@@ -15,7 +15,8 @@
 @import 'grid';
 @import 'tables';
 @import 'forms';
-@import 'buttons';
+// @import 'buttons';
+@import 'custom/buttons';
 
 // Components
 @import 'component-animations';
@@ -23,7 +24,8 @@
 @import 'custom/dropdowns';
 @import 'button-groups';
 @import 'input-groups';
-@import 'navs';
+// @import 'navs';
+@import 'custom/navs';
 // @import 'navbar';
 @import 'custom/navbar';
 @import 'breadcrumbs';

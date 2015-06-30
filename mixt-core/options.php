@@ -16,8 +16,11 @@ class MIXT {
 	protected static $config = array();
 
 	// Initialize object and set options once all data becomes available
-	function __construct() { add_action('get_header', array($this, 'init')); }
-	function init() {
+	function __construct() {
+		add_action('get_header', array($this, 'init'));
+	}
+
+	public function init() {
 		$queried = get_queried_object();
 		self::set('page', null, array(
 			'page-type'      => self::page_type(),
@@ -63,6 +66,7 @@ class MIXT {
 				'page-loader'      => array(),
 				'fullwidth'        => array( 'key' => 'page-fullwidth' ),
 				'sidebar'          => array( 'key' => 'page-sidebar' ),
+				'sidebar-id'       => array( 'type' => 'str', 'return' => 'value', 'default' => 'sidebar-1' ),
 				'sidebar-position' => array( 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
 				'location-bar'     => array(),
 			),

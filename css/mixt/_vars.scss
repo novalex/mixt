@@ -4,14 +4,19 @@
 $img-path: '../assets/img';
 $font-path: '../assets/fonts';
 
-$bd-radius: 3px;
+$bd-radius-s: 1px;
+$bd-radius: 2px;
+$bd-radius-l: 3px;
 
 // TYPOGRAPHY
 
-$font-size-xs: 12px;
-$font-size-s: 13px;
-$font-size: 14px;
-$font-size-l: 17px;
+$font-family-base: 'Roboto', 'Verdana', sans-serif;
+
+$font-size-xs: 11px;
+$font-size-s: 12px;
+$font-size: 13px;
+$font-size-m: 14px;
+$font-size-l: 16px;
 $font-size-xl: 20px;
 $font-size-xxl: 26px;
 
@@ -19,8 +24,10 @@ $font-size-h1: 22px;
 
 // SPACING, MARGINS & PADDINGS
 
-$gutter: 15px;
-$gutter-l: 30px;
+$main-gutter: 40px;
+$main-gutter-sm: 30px;
+
+$form-gutter: 15px;
 
 $margin-xs: 5px;
 $margin-s: 10px;

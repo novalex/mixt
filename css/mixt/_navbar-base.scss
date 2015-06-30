@@ -14,10 +14,7 @@
 	background-position: center center;
 	@include bg-color-alpha($theme-bg, 0.95);
 
-	.container {
-		padding: 0 15px;
-		border-color: inherit;
-	}
+	.container { border-color: inherit; }
 	.navbar-inner { padding: 0; }
 	.navbar-collapse.in { overflow-y: visible; }
 
@@ -120,6 +117,7 @@
 		font-size: 16px;
 		vertical-align: middle;
 		margin-right: 8px;
+		line-height: 1.2;
 
 		&:last-child { margin-right: 0; }
 
@@ -155,7 +153,7 @@
 
 	.nav > li > a,
 	.sub-menu > li > a {
-		font-weight: 500;
+		font-weight: bold;
 	}
 
 	// Standard Dropdown Menus
@@ -194,7 +192,7 @@
 			clear: both;
 			padding: 10px;
 			font-size: 13px;
-			font-weight: 500;
+			font-weight: bold;
 			line-height: 16px;
 			border-bottom: 1px solid;
 		}
@@ -378,16 +376,15 @@
 		&.arrow-left {
 			> a { padding-left: 30px !important; }
 
-			.drop-arrow {
-				right: auto; left: 10px;
-			}
-			.drop-arrow:before { content: '\f489'; }
+			.drop-arrow { right: auto; left: 10px; }
+			// Replace chevron right with chevron left
+			.drop-arrow:before { content: '\f053'; }
 		}
 
 		.drop-arrow {
 			position: absolute;
 			top: 50%; right: 10px;
-			margin: -8px 0 0;
+			margin: -5px 0 0;
 		}
 	}
 
@@ -418,6 +415,7 @@
 				margin-left: 0;
 				background: transparent;
 				box-shadow: none !important;
+				text-shadow: none !important;
 			}
 
 			button {
@@ -435,7 +433,7 @@
 	.no-menu-msg {
 		float: right;
 		margin: 0;
-		font-weight: 500;
+		font-weight: bold;
 	}
 
 	// DARK BACKGROUND

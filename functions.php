@@ -10,6 +10,8 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 // DEFINE THEME CONSTANTS
 
+define( 'MIXT_VERSION', '1.0' );
+
 define( 'MIXT_DIR', get_template_directory() );            // Base Theme Path
 define( 'MIXT_URI', get_template_directory_uri() );        // Base Theme URI
 
@@ -51,15 +53,17 @@ $mixt_core_files = array(
 	'options.php',
 	'init.php',
 	'header.php',
+	'navwalker.php',
 	'tags.php',
 	'post.php',
-	'navwalker.php',
 );
 mixt_requires( $mixt_core_files, MIXT_CORE_DIR );
 unset($mixt_core_files);
 
-// Load Shortcodes
-foreach ( glob(MIXT_MODULES_DIR . '/shortcodes/*.php') as $filename ) { include $filename; }
+// Load Elements
+foreach ( glob( MIXT_MODULES_DIR . '/elements/*.php' ) as $filename ) {
+	include $filename;
+}
 
 // SET UP THEME AND REGISTER FEATURES
 
@@ -140,6 +144,21 @@ function mixt_widgets_init() {
 		'before_title' => '<h2 class="rounded">',
 		'after_title' => '</h2>',
 	) );
+
+	// Custom Sidebars
+	$custom_sidebars = get_option('mixt-sidebars');
+	if ( is_array($custom_sidebars) ) {
+		foreach ( $custom_sidebars as $sidebar ) {
+			register_sidebar( array(
+				'name'          => $sidebar['name'],
+				'id'            => $sidebar['id'],
+				'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</aside>',
+				'before_title'  => '<h3 class="widget-title">',
+				'after_title'   => '</h3>',
+			) );
+		}
+	}
 }
 add_action( 'widgets_init', 'mixt_widgets_init' );
 
@@ -154,18 +173,18 @@ if ( ! function_exists( '_wp_render_title_tag' ) ) {
 
 // Protected Post Title
 function protected_title_format($title) {
-	return '<i class="icon icon-key" title="Password Protected"></i>&nbsp;%s';
+	return '<i class="fa fa-lock" title="Password Protected"></i>&nbsp;%s';
 }
 add_filter('protected_title_format', 'protected_title_format');
 
 // Private Post Title
 function private_title_format($title) {
-	return '<i class="icon icon-eye-close" title="Private"></i>&nbsp;%s';
+	return '<i class="fa fa-eye-slash" title="Private"></i>&nbsp;%s';
 }
 add_filter('private_title_format', 'private_title_format');
 
 // Remove admin bar inline styles
-add_action( 'get_header', 'remove_adminbar_styles' );
 function remove_adminbar_styles() {
 	remove_action('wp_head', '_admin_bar_bump_cb');
 }
+add_action( 'get_header', 'remove_adminbar_styles' );

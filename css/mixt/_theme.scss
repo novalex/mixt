@@ -1,4 +1,33 @@
 
+// Lava Theme (Red Accent)
+$theme-lava: (
+	'accent': #dd3e3e,
+	'bg-dark-accent': #dd3e3e,
+
+	'bg': #fff,
+	'bg-hover': darken(#fff, 5),
+
+	'color': #333,
+	'color-fade': lighten(#333, 30),
+	'bg-dark-color': #fff,
+	'bg-dark-color-fade': darken(#fff, 4),
+
+	'border': #ddd,
+	'border-alpha': rgba(0,0,0,0.15),
+	'bg-dark-border': #333,
+	'bg-dark-border-alpha': rgba(0,0,0,0.8),
+
+	'menu-bg': #fbfbfb,
+	'menu-bg-hover': darken(#fbfbfb, 4),
+	'menu-expand': rgba(0,0,0,0.05),
+
+	'menu-border': #e2e2e2,
+	'menu-border-alpha': rgba(0,0,0,0.15),
+
+	'menu-color': #333,
+	'menu-color-fade': lighten(#333, 4),
+);
+
 // Aqua Theme (Blue Accent)
 $theme-aqua: (
 	'accent': #539DDD,
@@ -25,7 +54,7 @@ $theme-aqua: (
 	'menu-border-alpha': rgba(0,0,0,0.15),
 
 	'menu-color': #333,
-	'menu-color-fade': lighten(#333, 4)
+	'menu-color-fade': lighten(#333, 4),
 );
 
 // Nightly Theme (Blue Accent)
@@ -54,11 +83,11 @@ $theme-nightly: (
 	'menu-border-alpha': rgba(0,0,0,0.8),
 
 	'menu-color': #eee,
-	'menu-color-fade': #bbb
+	'menu-color-fade': #bbb,
 );
 
 // ACTIVE THEME
-$active-theme: $theme-aqua;
+$active-theme: $theme-lava;
 
 @function theme-color($color, $theme: $active-theme) {
 	@if not map-has-key($theme, $color) {
@@ -92,38 +121,3 @@ $theme-menu-border-alpha: theme-color('menu-border-alpha');
 
 $theme-menu-color: theme-color('menu-color');
 $theme-menu-color-fade: theme-color('menu-color-fade');
-
-
-// Text Color
-body,
-a.no-color,
-a:hover,
-a:focus,
-.theme-color { color: $theme-color; }
-
-// Text Color Fade
-.post-meta a,
-.post-meta > span,
-.theme-color-fade { color: $theme-color-fade; }
-
-// Accent Text Color
-a,
-.accent-color,
-.post-meta a:hover,
-.head-media .media-inner a:hover { color: $theme-accent; }
-
-// Accent Background Color
-.accent-bg,
-.accent-bg:hover,
-.tag-list a:hover,
-.tagcloud a:hover,
-.hover-accent-bg:hover {
-	color: set-color-for-bg($theme-accent);
-	background-color: $theme-accent;
-}
-
-// Border Color
-.theme-bd { border-color: $theme-border; }
-
-// Accent Border Color
-.theme-accent-bd { border-color: $theme-accent; }

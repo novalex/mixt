@@ -1,0 +1,55 @@
+@import 'css/mixt/colors';
+
+// ELEMENTS
+
+$icon-path: '../mixt-modules/elements/icons';
+
+// Icons
+
+@mixin element_icon($element) {
+	.mixt_#{$element} .el-icon,
+	.mixt_#{$element}.vc_element-icon { background-image: url('#{$icon-path}/#{$element}.png'); }
+}
+
+@include element_icon('button');
+@include element_icon('carousel');
+@include element_icon('flipcard');
+@include element_icon('form');
+@include element_icon('headline');
+@include element_icon('map');
+@include element_icon('pricing');
+@include element_icon('profile');
+@include element_icon('social');
+
+
+// Color Selects
+
+.color-select {
+	option { color: $black; }
+
+	@mixin option_color_variant($selector, $color) {
+		@if ( lumin($color) < 0.4 ) {
+			option[value="#{$selector}"] {
+				color: $color;
+			}
+		}
+	}
+
+	&.basic-colors {
+		@each $selector, $color in $basic-colors {
+			@include option_color_variant($selector, $color);
+		}
+	}
+
+	&.button-colors {
+		@each $selector, $color in $button-colors {
+			@include option_color_variant($selector, $color);
+		}
+	}
+
+	&.all-colors {
+		@each $selector, $color in $vc-colors {
+			@include option_color_variant($selector, $color);
+		}
+	}
+}
