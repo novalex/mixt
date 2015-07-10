@@ -335,7 +335,7 @@ class mixtPost {
 				} else {
 					$format_link = get_post_format_link($this->format);
 				}
-				echo '<a href="' . $format_link . '" class="post-format"><i class="icon ' . $this->options['format-icon'] . '"></i></a>';
+				echo '<a href="' . $format_link . '" class="post-format"><i class="' . $this->options['format-icon'] . '"></i></a>';
 			}
 
 			// Post Date
@@ -510,7 +510,12 @@ function mixt_related_posts( $args = array() ) {
 
 				echo do_shortcode('[mixt_headline text="' . __( 'Related Posts', 'mixt' ) . '"]');
 
-				if ( $args['slider'] ) { echo '<div class="slider-cont controls-alt">'; }
+				if ( $args['slider'] ) {
+					// Enqueue lightslider JS
+					wp_enqueue_script('mixt-lightslider');
+					
+					echo '<div class="slider-cont controls-alt">';
+				}
 
 				while ( $rel_query->have_posts() ) :
 					$rel_query->the_post();
@@ -584,7 +589,7 @@ function mixt_post_meta( $args = array() ) {
 	// Author
 	if ( $args['author'] ) {
 		$author_name   = get_the_author();
-		$author_icon   = empty($mixt_opt['meta-author-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-author-icon'] . '"></i>';
+		$author_icon   = empty($mixt_opt['meta-author-icon']) ? '' : '<i class="' . $mixt_opt['meta-author-icon'] . '"></i>';
 		if ( empty($author_name) ) {
 			$author_id   = get_queried_object()->post_author;
 			$author_name = get_the_author_meta( 'display_name', $author_id );
@@ -605,7 +610,7 @@ function mixt_post_meta( $args = array() ) {
 		$date_iso    = esc_attr( get_the_date('c') );
 		$date_format = esc_html( get_the_date('F jS, Y') );
 		$date_url    = get_day_link( get_the_date('Y'), get_the_date('m'), get_the_date('d') );
-		$date_icon   = empty($mixt_opt['meta-date-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-date-icon'] . '"></i>';
+		$date_icon   = empty($mixt_opt['meta-date-icon']) ? '' : '<i class="' . $mixt_opt['meta-date-icon'] . '"></i>';
 
 		$date = '<time class="entry-date published" datetime="' . $date_iso . '">' . $date_format . '</time>';
 		$date = '<a href="' . esc_url( $date_url ) . '" title="' . esc_attr( get_the_time() ) . '" rel="bookmark">' . $date . '</a>';
@@ -625,7 +630,7 @@ function mixt_post_meta( $args = array() ) {
 	// Category
 	if ( $args['category'] ) {
 		$cats     = get_the_category();
-		$cat_icon = empty($mixt_opt['meta-category-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-category-icon'] . '"></i>';
+		$cat_icon = empty($mixt_opt['meta-category-icon']) ? '' : '<i class="' . $mixt_opt['meta-category-icon'] . '"></i>';
 		if ( ! empty($cats) && is_array($cats) ) {
 			$category = '<span class="cat">' . $cat_icon;
 			foreach ( $cats as $cat ) {
@@ -638,7 +643,7 @@ function mixt_post_meta( $args = array() ) {
 	// Comments
 	if ( $args['comments'] && ( comments_open() || '0' != get_comments_number() ) ) {
 		$comments_num  = get_comments_number();
-		$comments_icon = empty($mixt_opt['meta-comments-icon']) ? '' : '<i class="icon ' . $mixt_opt['meta-comments-icon'] . '"></i>';
+		$comments_icon = empty($mixt_opt['meta-comments-icon']) ? '' : '<i class="' . $mixt_opt['meta-comments-icon'] . '"></i>';
 
 		
 		if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }

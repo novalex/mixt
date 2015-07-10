@@ -19,6 +19,8 @@ $bd-radius: 2px;
 
 .mixt-cb-panel {
 	max-height: 90%;
+	border-radius: 2px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	z-index: 111111 !important;
 
 	&,

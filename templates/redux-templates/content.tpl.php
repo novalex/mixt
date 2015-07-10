@@ -6,7 +6,7 @@
 	 *
 	 * @author 		Redux Framework
 	 * @package 	ReduxFramework/Templates
-	 * @version     3.4.3
+	 * @version     3.5.4.18
 	 */
 ?>
 <!-- Header Block -->
@@ -21,7 +21,6 @@
 <?php if ( isset( $this->parent->args['intro_text'] ) ) : ?>
 	<div id="redux-intro-text"><?php echo $this->parent->args['intro_text']; ?></div>
 <?php endif; ?>
-
 
 <?php $this->get_template( 'menu_container.tpl.php' ); ?>
 

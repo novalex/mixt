@@ -1,7 +1,37 @@
 
 #colophon {
-	padding: $padding-m 0;
-	background-color: #444;
-	color: #eee; text-shadow: 0 1px 1px #000;
-	@extend %bring-to-front;
+	$top-bg: #3a3a3a;
+	$btm-bg: #444;
+	$border: #333;
+	$spacing: 20px;
+
+	.footer-row {
+		padding: $spacing 0;
+		border-top: 1px solid $border;
+		color: set-color-for-bg($top-bg, $light: lighten($top-bg, 50), $dark: darken($top-bg, 50));
+		@include text-shadow-for-bg($top-bg);
+	}
+
+	.widget-row {
+		background-color: $top-bg;
+	}
+
+	.copyright-row {
+		background-color: $btm-bg;
+	}
+
+	.widget-area div { border-color: #222; }
+	.widget { margin-bottom: $spacing; }
+	.widget-title {
+		margin-top: 0;
+		color: set-color-for-bg($top-bg);
+	}
+
+	.widget-area:last-of-type .widget:last-child { margin-bottom: 0; }
+
+	@include media('screen', 'mars') {
+		.widget:last-child,
+		.wpb_content_element,
+		.mixt-element { margin-bottom: 0; }
+	}
 }

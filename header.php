@@ -35,7 +35,7 @@
 	?>
 </head>
 
-<body <?php body_class('no-js'); ?>>
+<body <?php body_class('mixt no-js'); ?>>
 
 	<script type="text/javascript" id="mixt-test-js">
 		document.body.className = document.body.className.replace('no-js','js');
@@ -88,12 +88,12 @@
 	if ( ! $nav_options['hover-bg'] ) $nav_classes .= ' no-hover-bg';
 	?>
 
-	<div id="top-nav-wrap" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
+	<div id="main-nav-wrap" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
 
-		<nav id="top-nav" class="navbar navbar-mixt site-navigation <?php echo $nav_classes; ?>" role="banner">
+		<nav id="main-nav" class="navbar navbar-mixt site-navigation <?php echo $nav_classes; ?>" role="banner">
 			<div class="container">
 
-				<?php // Top Navbar Header ?>
+				<?php // Main Navbar Header ?>
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 						<span class="icon-bar"></span>
@@ -106,7 +106,7 @@
 					</a>
 				</div>
 
-				<?php // Top Navbar Menu
+				<?php // Main Navbar Menu
 
 				$nav_menu_classes = 'nav navbar-nav';
 				if ( $nav_options['active-bar'] ) { $nav_menu_classes .= ' active-' . $nav_options['active-bar-pos']; }
@@ -128,10 +128,10 @@
 				else { mixt_no_menu_msg(true, true); } ?>
 
 			</div>
-		</nav><?php // Close #top-nav ?>
+		</nav><?php // Close #main-nav ?>
 
 		<div id="navbar-check"></div>
-	</div><?php // Close #top-nav-wrap
+	</div><?php // Close #main-nav-wrap
 
 	// Show Header Media (Below Navbar)
 	if ( $header_options['enabled'] && $nav_options['position'] == 'above' ) {

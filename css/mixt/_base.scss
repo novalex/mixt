@@ -12,6 +12,11 @@ body {
 }
 
 
+// Lists
+
+ol, ul { padding-left: 30px; }
+
+
 // Anchors
 
 a {
@@ -68,3 +73,6 @@ a:active,
 
 // Make Sure Embeds And Iframes Fit Their Containers
 embed, iframe, object { max-width: 100%; }
+
+// Miscellaneous
+p:empty { display: none; }

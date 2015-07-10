@@ -16,10 +16,13 @@ $icon-path: '../mixt-modules/elements/icons';
 @include element_icon('flipcard');
 @include element_icon('form');
 @include element_icon('headline');
+@include element_icon('iconbox');
 @include element_icon('map');
 @include element_icon('pricing');
 @include element_icon('profile');
 @include element_icon('social');
+@include element-icon('stat');
+@include element_icon('timeline');
 
 
 // Color Selects
@@ -28,7 +31,7 @@ $icon-path: '../mixt-modules/elements/icons';
 	option { color: $black; }
 
 	@mixin option_color_variant($selector, $color) {
-		@if ( lumin($color) < 0.4 ) {
+		@if ( lumin($color) < 0.8 ) {
 			option[value="#{$selector}"] {
 				color: $color;
 			}

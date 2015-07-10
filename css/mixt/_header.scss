@@ -2,14 +2,23 @@
 // HEADER MEDIA
 
 .head-media {
+	$spacing: 25px;
+	$spacing-sm: 15px;
+
 	width: 100%;
 	height: auto;
-	min-height: 140px;
+	min-height: 90px;
 	margin: 0;
 	overflow: hidden;
 	position: relative;
 	z-index: 0;
 	transition: height 0.3s;
+
+	&:after {
+		content: ' '; z-index: 2;
+		position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05), 0 -1px 8px rgba(0, 0, 0, 0.15);
+	}
 
 	.media-container {
 		position: absolute;
@@ -20,9 +29,10 @@
 		min-height: 100%;
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-position: center;
-		box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05), inset 0 -1px 8px rgba(0, 0, 0, 0.05);
+		background-position: center top;
 		z-index: 1;
+
+		&.has-parallax { transition: transform 0.05s ease-out; }
 	}
 
 	&.media-image {
@@ -61,12 +71,14 @@
 
 	.container {
 		height: 100%;
-		display: table;
+		min-height: 40px;
 		position: relative;
+		display: table;
+		table-layout: fixed;
 		vertical-align: middle;
-		padding-bottom: $padding-m;
+		padding-bottom: $spacing;
+		transition: opacity 0.05s ease-out, transform 0.05s ease-out;
 		z-index: 2;
-		transition: opacity 0.1s ease-out, transform 0.1s ease-out;
 
 		&.fullwidth {
 			width: 100% !important;
@@ -86,11 +98,11 @@
 		display: table-cell;
 		position: relative;
 		vertical-align: middle;
-		padding: $padding-m 0;
+		padding: ($spacing * 2 - $spacing-sm) 0 $spacing 0;
 		z-index: 2;
 
 		> * {
-			margin-top: $margin-m;
+			margin-top: $spacing-sm;
 			margin-bottom: 0;
 		}
 
@@ -131,7 +143,6 @@
 	}
 
 	.container,
-	.media-inner a:not(:hover),
 	#breadcrumbs > li + li:before {
 		color: $theme-color;
 	}
@@ -140,12 +151,19 @@
 
 	&.bg-dark {
 
-		.media-container { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.2), inset 0 -1px 8px rgba(0, 0, 0, 0.2); }
+		&:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
 
 		.container,
-		.media-inner a:not(:hover),
+		.media-inner a,
 		#breadcrumbs > li + li:before {
 			color: $theme-bg-dark-color;
+		}
+	}
+
+	@include media('screen', '<mars') {
+		.container { padding-bottom: $spacing-sm; }
+		.media-inner {
+			padding: $spacing-sm 0;
 		}
 	}
 }
@@ -169,10 +187,9 @@
 #location-bar {
 	width: 100%;
 	border-style: solid;
-	border-width: 0;
-	border-bottom-width: 1px;
-	border-color: $loc-bar-bd;
-	background-color: $loc-bar-bg;
+	border-width: 0 0 1px 0;
+	border-color: $theme-border;
+	background-color: darken($theme-bg, 5);
 
 	.container { height: auto; }
 
@@ -188,8 +205,7 @@
 	.page-title {
 		h1 {
 			margin: 0;
-			font-size: 18px;
-			line-height: 1.2;
+			font-size: 16px;
 		}
 
 		p {
@@ -227,7 +243,12 @@
 		white-space: wrap-word;
 	}
 
-	a { display: inline-block; }
+	a {
+		color: inherit;
+		display: inline-block;
+
+		&:hover { color: $theme-accent; }
+	}
 
 	> li + li:before {
 		width: 16px;

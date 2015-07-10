@@ -2,11 +2,10 @@
 /* MIXT MAIN STYLESHEET */
 
 @import 'mixt/vars';
-
 @import 'mixt/colors';
 
 // Bootstrap
-@import 'bootstrap/bootstrap';
+@import 'bootstrap';
 
 @import 'mixt/mixins';
 @import 'mixt/helpers';
@@ -16,13 +15,12 @@
 @import 'mixt/spacing';
 
 @import 'mixt/anims';
-@import 'mixt/ui';
 
-@import 'mixt/navbar-base';
-@import 'mixt/navbar';
-@import 'mixt/navbar-themes';
+@import 'mixt/navbar/navbar';
 
 @import 'mixt/header';
+
+@import 'mixt/ui/ui';
 
 @import 'mixt/inputs/inputs';
 @import 'mixt/inputs/buttons';
@@ -32,5 +30,8 @@
 @import 'mixt/sidebar';
 @import 'mixt/footer';
 
-@import 'mixt/elements';
+@import 'mixt/elements/elements';
 @import 'plugins/plugins';
+
+// Specific Page Styling
+@import 'mixt/pages';

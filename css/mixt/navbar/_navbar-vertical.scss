@@ -1,0 +1,22 @@
+
+// Vertical Navbar
+
+@include media('screen', 'venus') {
+	#main-wrap{
+		&.nav-left { margin-left: 260px; }
+		&.nav-right { margin-right: 260px; }
+	}
+}
+
+@include media('screen', 'mars') {
+	#main-wrap {
+		&.nav-left,
+		&.nav-right {
+			.container {
+				width: 100%;
+			}
+		}
+		&.nav-left { margin-left: 25%; }
+		&.nav-right { margin-right: 25%; }
+	}
+}

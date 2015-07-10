@@ -1,0 +1,197 @@
+
+// Timeline
+
+.mixt-timeline {
+	$line-style: dashed;
+	$line-width: 2px;
+	$line-color: $theme-border;
+	$arrow-size: 8px;
+	$anchor-size: 42px;
+	$content-bg: darken($theme-bg, 5);
+	$content-border: darken($content-bg, 6);
+
+	float: left;
+	width: 100%;
+	position: relative;
+
+	&:after {
+		content: ' ';
+		display: block;
+		clear: both;
+	}
+
+
+	// BLOCK STYLING
+
+	$block-padding: $anchor-size / 2 + $arrow-size + 5px;
+
+	@mixin block-left {
+		float: left;
+		padding-left: 0;
+		padding-right: $block-padding;
+
+		&:before {
+			left: auto;
+			right: $line-width / -2;
+		}
+
+		.anchor {
+			left: auto;
+			right: $anchor-size / -2;
+		}
+
+		// Arrow
+		.content:before {
+			left: auto;
+			right: -$arrow-size - 1px;
+			border-left-width: $arrow-size + 1px;
+			border-right-width: 0;
+		}
+		.content:after {
+			left: auto;
+			right: -$arrow-size;
+			border-left-width: $arrow-size;
+			border-right-width: 0;
+		}
+	}
+	@mixin block-right {
+		float: right;
+		padding-left: $block-padding;
+		padding-right: 0;
+
+		&:before {
+			right: auto;
+			left: $line-width / -2;
+		}
+
+		.anchor {
+			right: auto;
+			left: $anchor-size / -2;
+		}
+
+		// Arrow
+		.content:before {
+			right: auto;
+			left: -$arrow-size - 1px;
+			border-left-width: 0;
+			border-right-width: $arrow-size + 1px;
+		}
+		.content:after {
+			right: auto;
+			left: -$arrow-size;
+			border-left-width: 0;
+			border-right-width: $arrow-size;
+		}
+	}
+
+	.timeline-block {
+		width: 100%;
+		position: relative;
+		padding-bottom: 30px;
+
+		// Line
+		&:before {
+			content: ' '; width: 1px;
+			position: absolute; top: 0; bottom: 0;
+			border-width: 0 $line-width 0 0;
+			border-style: $line-style;
+			border-color: $line-color;
+		}
+
+		.anchor {
+			position: absolute; top: 0;
+			width: $anchor-size; height: $anchor-size;
+			font-size: $anchor-size / 2; line-height: $anchor-size - 1px;
+			text-align: center; border-radius: $bd-radius;
+
+			// Color Variants
+			@extend .basic-color-bg-variants;
+		}
+
+
+		// BLOCK CONTENT
+
+		.content {
+			position: relative;
+			padding: 15px;
+			color: set-color-for-bg($content-bg);
+			border-radius: $bd-radius;
+			border: 1px solid $content-border;
+			background-color: $content-bg;
+
+			// Arrow
+			&:before,
+			&:after {
+				content: ' ';
+				position: absolute;
+				display: inline-block;
+				border-width: 0; border-style: solid;
+			}
+			&:before {
+				top: $anchor-size / 2 - $arrow-size - 1px;
+				border-color: $content-border;
+				border-top: ($arrow-size + 1px) solid transparent;
+				border-left-width: $arrow-size + 1px;
+				border-bottom: ($arrow-size + 1px) solid transparent;
+			}
+			&:after {
+				top: $anchor-size / 2 - $arrow-size;
+				border-color: $content-bg;
+				border-top: $arrow-size solid transparent;
+				border-left-width: $arrow-size;
+				border-bottom: $arrow-size solid transparent;
+			}
+
+			> :last-child { margin-bottom: 0; }
+			> :not(:last-child) { margin-bottom: 15px; }
+
+			h1, h2, h3, h4, h5, h6, p {
+				&:first-child { margin-top: 0 !important; }
+			}
+		}
+
+		&:last-child {
+			padding-bottom: 0;
+			&:before { display: none; }
+		}
+	}
+
+	&.timeline-left { padding-right: $anchor-size / 2; }
+	&.timeline-right { padding-left: $anchor-size / 2; }
+	&.timeline-double .timeline-block { width: 50%; clear: both; }
+
+	&.timeline-left .timeline-block,
+	&.timeline-double .align-left,
+	&.timeline-double .align-auto:nth-child(odd) {
+		@include block-left;
+	}
+
+	&.timeline-right .timeline-block,
+	&.timeline-double .align-right,
+	&.timeline-double .align-auto:nth-child(even) {
+		@include block-right;
+	}
+
+	@include media('screen', '<mars') {
+		.timeline-block {
+			width: 100% !important;
+			padding-bottom: 20px;
+		}
+
+		&.single-left {
+			padding-right: $anchor-size / 2;
+			.timeline-block {
+				&.align-right,
+				&.align-auto:nth-child(even) { @include block-left; }
+			}
+		}
+
+		&.single-right {
+			padding-left: $anchor-size / 2;
+			.timeline-block {
+				&.align-left,
+				&.align-auto:nth-child(odd) { @include block-right; }
+			}
+		}
+	}
+}

@@ -75,10 +75,9 @@ body.loading {
 }
 
 // Text Color
-body,
-a.no-color,
-a:hover,
-a:focus { @extend .theme-color; }
+body { @extend .theme-color; }
+
+a.no-color, a:hover, a:focus { color: inherit; }
 
 // Text Color Fade
 .post-meta a,
@@ -86,8 +85,7 @@ a:focus { @extend .theme-color; }
 
 // Accent Text Color
 a,
-.post-meta a:hover,
-.head-media .media-inner a:hover { @extend .accent-color; }
+.post-meta a:hover { @extend .accent-color; }
 
 // Accent Background Color
 .accent-bg:hover,
@@ -97,12 +95,9 @@ a,
 	@extend .accent-bg;
 }
 
-
-// Disable map scrolling on small screens
-@include media('screen', '<mars') {
-	.mixt-map {
-		&, iframe {
-			pointer-events: none;
-		}
-	}
+// Selection Color
+::selection {
+	color: #fff;
+	background: $theme-accent;
+	background: fade-out($theme-accent, 0.2);
 }

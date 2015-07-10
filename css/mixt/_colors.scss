@@ -3,10 +3,10 @@
 
 // COLORS
 
-$white: #FFFFFF;
+$white: #fff;
 $off-white: #f6f6f6;
-$grey: #EBEBEB;
-$black: #2A2A2A;
+$grey: #EFEFEF;
+$black: #333;
 
 $blue: #5991CE;
 $sky: #5AA1E3;
@@ -24,18 +24,39 @@ $juicy-pink: #F4524D;
 $mulled-wine: #50485B;
 
 $chino: #CEC2AB;
-$orange: #F7BE68;
+$orange: #FF911E;
 $sandy-brown: #F79468;
 
 $red: #D81616;
 
+
+// =====================================================
+// When adding or removing colors from the maps below,
+// also update the assets array in mixt-core/assets.php
+// =====================================================
+
 $basic-colors: (
 	'white': $white,
+	'grey': $grey,
 	'black': $black,
 	'accent': $theme-accent,
 	'red': $red,
 	'green': $green,
 	'blue': $blue,
+);
+
+$button-colors: (
+	'default': $off-white,
+	'minimal': $theme-bg,
+	'accent': $theme-accent,
+	'white': $white,
+	'grey': $grey,
+	'black': $black,
+	'red': $red,
+	'orange': $orange,
+	'green': $green,
+	'blue': $blue,
+	'violet': $violet,
 );
 
 $vc-colors: (
@@ -66,65 +87,16 @@ $vc-colors: (
 	'red': #D81616,
 );
 
-$button-colors: (
-	'default': $off-white,
-	'minimal': $theme-bg,
-	'primary': $theme-accent,
-	'white': $white,
-	'grey': $grey,
-	'black': $black,
-	'red': $red,
-	'green': $green,
-	'blue': $blue,
-);
-
-
-// TEXT COLORS
-$text-light-color: #FFF;
-$text-light-color-fade: #AAA;
-
-$text-dark-color: #333;
-$text-dark-color-fade: #999;
-
-
-// BORDER COLORS
-$border-color: #E0E0E0;
-$border-color-alpha: rgba(0,0,0,0.15);
-
-$border-color-dark: #333;
-$border-color-dark-alpha: rgba(0,0,0,0.6);
-
-
-// Location Bar
-$loc-bar-bg: #F5F5F5;
-$loc-bar-text: $text-dark-color;
-$loc-bar-bd: $border-color;
-
-
-// INPUTS & BUTTONS
-
-// Global
-$input-bd: #CCC;
-$input-bg: #FDFDFD;
-
-// Dark Theme
-$input-bd-dark: $border-color-dark;
-$input-bg-dark: #5F5F5F;
-
-$btn-bg-dark: #555;
-
-// Input States
-$input-focus-bd: #BBB; 
-$input-focus-bs: rgba(0,0,0,0.1);
-
 
 // FUNCTIONS
 
+// Calculate a color's luminance
 @function lumin($color) {
 	// Colors for which to override luminance
 	$override-colors: (
-		$blue: 0,
-		$green: 0,
+		$blue: 0.4,
+		$green: 0.4,
+		$orange: 0.4,
 	);
 	@if map-has-key($override-colors, $color) {
 		$lumin: map-get($override-colors, $color);
@@ -138,6 +110,9 @@ $input-focus-bs: rgba(0,0,0,0.1);
 	}
 	@return $lumin;
 }
+
+
+// Return one of 2 colors which contrasts most with the background color
 @function contrast-color($bg, $c1, $c2) {
 	$bg-lumin: lumin($bg);
 	$c1-diff: abs($bg-lumin - lumin($c1));
@@ -148,21 +123,19 @@ $input-focus-bs: rgba(0,0,0,0.1);
 		@return $c2;
 	}
 }
+
 // lumin and contrast-color functions based on https://lnikki.la/articles/sass-better-colour-based-on-brightness/
+
 
 @function set-color-for-bg( $bg, $light: $theme-bg-dark-color, $dark: $theme-color ) {
 	@if ( lumin($bg) <= 0.5 ) { @return $light; }
 	@else { @return $dark; }
 }
-@function color-fade-for-bg( $bg, $light: lighten($bg, 30), $dark: darken($bg, 50) ) {
+
+
+@function color-fade-for-bg( $bg, $light: lighten($bg, 40), $dark: darken($bg, 50) ) {
 	@if ( lumin($bg) <= 0.5 ) { @return $light; }
 	@else { @return $dark; }
-}
-
-@mixin text-shadow-for-bg( $bg, $light: lighten($bg, 20), $dark: darken($bg, 20) ) {
-	@if ( lumin($bg) <= 0.5 ) { $color: $dark; }
-	@else { $color: $light; }
-	text-shadow: 0 1px 1px $color;
 }
 
 
@@ -175,6 +148,7 @@ $input-focus-bs: rgba(0,0,0,0.1);
     background-color: rgba($color, $opacity);
 }
 
+
 @mixin mixt-bg-variant($selector, $color, $set-color: false, $set-text-shadow: false) {
 	#{$selector} {
 		background-color: $color;
@@ -183,6 +157,16 @@ $input-focus-bs: rgba(0,0,0,0.1);
 		@if ( $set-text-shadow ) { @include text-shadow-for-bg($color); }
 	}
 }
+
+
+// Text Shadow
+
+@mixin text-shadow-for-bg( $bg, $light: lighten($bg, 10), $dark: darken($bg, 10) ) {
+	@if ( lumin($bg) <= 0.5 ) { $color: $dark; }
+	@else { $color: $light; }
+	text-shadow: 0 1px 1px $color;
+}
+
 
 // Border
 

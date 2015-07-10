@@ -236,6 +236,30 @@ $blue-accent: #539DDD;
 			position: relative;
 			z-index: 1;
 		}
+
+		// Divider
+
+		.divide {
+			margin: -1px 0 0 0;
+			height: 1px;
+			line-height: 1px;
+
+			.inner {
+				width: 100% !important;
+				left: 0 !important;
+				margin-left: 0;
+				background-color: transparent;
+				border-color: $bd-light;
+				position: absolute;
+				height: 1px;
+				top: 50%;
+				margin-top: -1px;
+				border-top-width: 1px;
+				border-top-style: solid;
+
+				span { display: none; }
+			}
+		}
 	}
 
 	.redux-action_bar {

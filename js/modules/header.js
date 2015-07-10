@@ -10,14 +10,14 @@ HEADER FUNCTIONS
 	/* global mixt_opt */
 
 	var viewport  = $(window),
-		topNavBar = $('#top-nav'),
+		mainNavBar = $('#main-nav'),
 		mediaWrap = $('.head-media');
 
 	// Head Media Functions
 	function headerFn() {
 		var container    = mediaWrap.children('.container'),
 			mediaCont    = mediaWrap.children('.media-container'),
-			topNavHeight = topNavBar.outerHeight(),
+			topNavHeight = mainNavBar.outerHeight(),
 			wrapHeight   = mediaWrap.height(),
 			hmHeight     = 0;
 
@@ -43,42 +43,11 @@ HEADER FUNCTIONS
 		}
 	}
 
-	// Header Fade Effect
-	function headerFade() {
-		var content = $('.container', mediaWrap),
-			contH   = content.innerHeight(),
-			scrollE = $.throttle( 100, scrollHandler );
-
-		function scrollHandler() {
-			var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			if ( scrollTop > contH ) {
-				content.css({
-					'opacity': 0,
-					'-webkit-transform': 'translate(0px,0px)',
-				    '-ms-transform': 'translate(0px,0px)',
-				    'transform': 'translate(0px,0px)'
-				});
-			} else {
-				var translate = 'translate(0px, ' + ( scrollTop / 3 ) + 'px)';
-				content.css({
-					'opacity': 1 - scrollTop / (contH / 1.2),
-					'-webkit-transform': translate,
-				    '-ms-transform': translate,
-				    'transform': translate
-				});
-			}
-		}
-
-		$(window).on('scroll', scrollE);
-	}
-	if ( mixt_opt.header['content-fade'] ) { headerFade(); }
-
-
 	// Header Scroll To Content
 	function headerScroll() {
 		var page   = $('html, body'),
 			offset = $('#content-wrap').offset().top;
-		if ( mixt_opt.nav.mode == 'fixed' ) { offset -= topNavBar.children('.container').height(); }
+		if ( mixt_opt.nav.mode == 'fixed' ) { offset -= mainNavBar.children('.container').height(); }
 		$('.header-scroll').on('click', function() {
 			page.animate({ scrollTop: offset }, 800);
 		});

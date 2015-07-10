@@ -34,8 +34,7 @@
 			&:nth-child(odd):not(.header):not(.footer) { background-color: lighten($bg, 2); }
 		}
 		.header {
-			border-top-left-radius: $bd-radius;
-			border-top-right-radius: $bd-radius;
+			@extend %bd-radius-top;
 		}
 		.plan-name {
 			margin: 5px 0;
@@ -71,7 +70,10 @@
 			font-size: 30%;
 		}
 
-		.footer { border-width: 0; }
+		.footer {
+			border-width: 0;
+			@extend %bd-radius-bottom;
+		}
 		.header,
 		.footer { background-color: lighten($bg, 4); }
 	}
@@ -83,7 +85,7 @@
 		background-color: $bg;
 
 		&,
-		.plan-desc { border-color: darken($bg, 10); }
+		.plan-desc { border-color: darken($bg, 20); }
 
 		.plan-desc,
 		.plan-time { color: lighten($bg, 50); }
@@ -119,7 +121,8 @@
 
 .pricing-row {
 	&,
-	> .wpb_wrapper {
+	> .wpb_wrapper,
+	> .wpb_column > .wpb_wrapper {
 		width: 100%;
 		clear: both;
 		display: table;
@@ -141,7 +144,8 @@
 	}
 }
 
-.pricing-row[max-width="580px"] {
+.pricing-row[max-width="580px"],
+.pricing-row.pricing-5-col[max-width="800px"] {
 	&,
 	> .wpb_wrapper,
 	.mixt-pricing { display: block !important; }

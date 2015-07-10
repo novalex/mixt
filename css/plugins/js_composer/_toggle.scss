@@ -1,0 +1,30 @@
+// Toggle
+
+.vc_toggle {
+	$padding: 10px;
+	$padding-content: 20px;
+
+	margin-bottom: 5px;
+	padding-left: $padding;
+	border-radius: $bd-radius;
+	border-width: 1px;
+	border-style: solid;
+	background-color: rgba(0,0,0,0.01);
+
+	.vc_toggle_title {
+		padding-top: $padding;
+		padding-right: $padding;
+		padding-bottom: $padding;
+
+		> h4 { font-size: $font-size; }
+	}
+
+	.vc_toggle_content {
+		margin: 0;
+		$padding-diff: abs($padding-content - $padding);
+		padding: $padding-diff $padding-content $padding-content;
+		padding-left: $padding-diff !important;
+
+		p:last-child { margin-bottom: 0; }
+	}
+}

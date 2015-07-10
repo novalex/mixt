@@ -128,7 +128,7 @@ function mixt_print_css() {
 
 	$site_link_color = ! empty($site_theme['link']) ? $site_theme['link'] : $site_accent;
 
-	if ( ! array_key_exists($active_site_theme, $default_site_themes) || 0 < 1 ) { ////////////////////////////////////////////////////////////////////////////////
+	if ( ! array_key_exists($active_site_theme, $default_site_themes) || 0 > 1 ) { ////////////////////////////////////////////////////////////////////////////////
 
 		// Text Color
 		echo "body, a.no-color, a:hover, a:focus { color: $site_text; }\n";
@@ -155,8 +155,7 @@ function mixt_print_css() {
 
 		// Link Color
 		echo "a," .
-			 ".post-meta a:hover," .
-			 ".head-media .media-inner a:hover { color: $site_link_color; }\n";
+			 ".post-meta a:hover { color: $site_link_color; }\n";
 	}
 
 
@@ -267,7 +266,7 @@ function mixt_print_css() {
 			$nav_pad_px = $nav_pad . 'px';
 			$nav_wrap_height = $nav_height + ($nav_pad * 2) . 'px';
 
-			echo "#top-nav-wrap { min-height: $nav_wrap_height; }\n";
+			echo "#main-nav-wrap { min-height: $nav_wrap_height; }\n";
 			echo ".navbar-mixt { padding-top: $nav_pad_px; padding-bottom: $nav_pad_px; }\n";
 		}
 	}
@@ -320,7 +319,7 @@ function mixt_print_css() {
 		echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$nav_options['nav-top-opacity']}); }\n";
 		echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$nav_options['nav-opacity']}); }\n";
 
-		if ( $theme_id != 'aqua' && $theme_id != 'nightly' ) {
+		if ( ! array_key_exists($theme_id, mixt_default_themes('names')) ) { /////////////////////////////////////////////////////////
 
 			$theme_id    = 'theme-' . $theme_id;
 			$navbar      = '.navbar.' . $theme_id;
@@ -547,13 +546,12 @@ function mixt_print_css() {
 	if ( $hm_options['text'] != $theme_defaults['text'] ) {
 		$hm_text = $hm_options['text'];
 		echo "$hm_el .container," .
-			 "$hm_el .media-inner a:not(:hover)," .
 			 "$hm_el #breadcrumbs li + li:before { color: $hm_text; }\n";
 	}
 	if ( $hm_options['inv-text'] != $theme_defaults['inv-text'] ) {
 		$hm_inv_text = $hm_options['inv-text'];
 		echo "$hm_el.bg-dark .container," .
-			 "$hm_el.bg-dark .media-inner a:not(:hover)," .
+			 "$hm_el.bg-dark .media-inner a," .
 			 "$hm_el.bg-dark #breadcrumbs li + li:before { color: $hm_inv_text; }\n";
 	}
 

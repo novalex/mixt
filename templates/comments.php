@@ -98,7 +98,7 @@ if ( comments_open() ) {
 
 	// Comment Textarea
 	$comment_field = '<p class="comment-field clearfix">' .
-		'<textarea placeholder="' . __( 'Type in your reply...', 'mixt' ) . '" id="comment" class="form-control" name="comment" cols="45" rows="4" aria-required="true"></textarea>' .
+		'<textarea placeholder="' . __( 'Type in your reply...', 'mixt' ) . '" id="comment" class="form-control" name="comment" cols="45" rows="4" required aria-required="true"></textarea>' .
 	'</p>';
 
 	if ( $options['notes-after'] ) {
@@ -122,7 +122,7 @@ if ( comments_open() ) {
 		'comment_notes_after'  => $comment_notes_after,
 
 		// Submit Button Classes
-		'class_submit' => 'submit btn btn-black hover-accent-bg',
+		'class_submit' => 'submit btn btn-black btn-hover-accent',
 	);
 
 	comment_form($args);

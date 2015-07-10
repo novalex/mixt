@@ -1,6 +1,15 @@
 
 label { font-weight: normal; }
 
+$input-bg: $off-white;
+$input-bd: darken($input-bg, 10);
+
+$input-bg-dark: $black;
+$input-bd-dark: darken($input-bg, 20);
+
+$input-focus-bd: $input-bd; 
+$input-focus-bs: rgba(0,0,0,0.1);
+
 // INPUTS
 
 input,
@@ -85,15 +94,9 @@ textarea,
 // INPUT THEMES
 
 %input-dark {
-	color: $text-light-color;
+	color: $theme-bg-dark-color;
 	border-color: $input-bd-dark;
 	background-color: $input-bg-dark;
-}
-
-%button-dark {
-	color: $text-light-color;
-	border-color: $input-bd-dark;
-	background-color: $btn-bg-dark;
 }
 
 

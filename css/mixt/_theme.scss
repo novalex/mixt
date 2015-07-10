@@ -1,99 +1,102 @@
 
-// Lava Theme (Red Accent)
-$theme-lava: (
-	'accent': #dd3e3e,
-	'bg-dark-accent': #dd3e3e,
+$site-themes: (
+	// Lava Theme (Red Accent)
+	'lava': (
+		'accent': #dd3e3e,
+		'bg-dark-accent': #dd3e3e,
 
-	'bg': #fff,
-	'bg-hover': darken(#fff, 5),
+		'bg': #fff,
+		'bg-hover': darken(#fff, 5),
 
-	'color': #333,
-	'color-fade': lighten(#333, 30),
-	'bg-dark-color': #fff,
-	'bg-dark-color-fade': darken(#fff, 4),
+		'color': #333,
+		'color-fade': lighten(#333, 30),
+		'color-inv': #fff,
+		'color-inv-fade': darken(#fff, 20),
 
-	'border': #ddd,
-	'border-alpha': rgba(0,0,0,0.15),
-	'bg-dark-border': #333,
-	'bg-dark-border-alpha': rgba(0,0,0,0.8),
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.8),
 
-	'menu-bg': #fbfbfb,
-	'menu-bg-hover': darken(#fbfbfb, 4),
-	'menu-expand': rgba(0,0,0,0.05),
+		'menu-bg': #fbfbfb,
+		'menu-bg-hover': darken(#fbfbfb, 4),
+		'menu-expand': rgba(0,0,0,0.05),
 
-	'menu-border': #e2e2e2,
-	'menu-border-alpha': rgba(0,0,0,0.15),
+		'menu-border': #e2e2e2,
+		'menu-border-alpha': rgba(0,0,0,0.15),
 
-	'menu-color': #333,
-	'menu-color-fade': lighten(#333, 4),
-);
+		'menu-color': #333,
+		'menu-color-fade': lighten(#333, 4),
+	),
 
-// Aqua Theme (Blue Accent)
-$theme-aqua: (
-	'accent': #539DDD,
-	'bg-dark-accent': #539DDD,
+	// Aqua Theme (Blue Accent)
+	'aqua': (
+		'accent': #539DDD,
+		'bg-dark-accent': #539DDD,
 
-	'bg': #fff,
-	'bg-hover': darken(#fff, 5),
+		'bg': #fff,
+		'bg-hover': darken(#fff, 5),
 
-	'color': #333,
-	'color-fade': lighten(#333, 30),
-	'bg-dark-color': #fff,
-	'bg-dark-color-fade': darken(#fff, 4),
+		'color': #333,
+		'color-fade': lighten(#333, 30),
+		'color-inv': #fff,
+		'color-inv-fade': darken(#fff, 4),
 
-	'border': #ddd,
-	'border-alpha': rgba(0,0,0,0.15),
-	'bg-dark-border': #333,
-	'bg-dark-border-alpha': rgba(0,0,0,0.8),
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.8),
 
-	'menu-bg': #fbfbfb,
-	'menu-bg-hover': darken(#fbfbfb, 4),
-	'menu-expand': rgba(0,0,0,0.05),
+		'menu-bg': #fbfbfb,
+		'menu-bg-hover': darken(#fbfbfb, 4),
+		'menu-expand': rgba(0,0,0,0.05),
 
-	'menu-border': #e2e2e2,
-	'menu-border-alpha': rgba(0,0,0,0.15),
+		'menu-border': #e2e2e2,
+		'menu-border-alpha': rgba(0,0,0,0.15),
 
-	'menu-color': #333,
-	'menu-color-fade': lighten(#333, 4),
-);
+		'menu-color': #333,
+		'menu-color-fade': lighten(#333, 4),
+	),
 
-// Nightly Theme (Blue Accent)
-$theme-nightly: (
-	'accent': #539DDD,
-	'bg-dark-accent': #539DDD,
+	// Nightly Theme (Blue Accent)
+	'nightly': (
+		'accent': #539DDD,
+		'bg-dark-accent': #539DDD,
 
-	'bg': #444,
-	'bg-hover': lighten(#444, 5),
+		'bg': #444,
+		'bg-hover': lighten(#444, 5),
 
-	'color': #333,
-	'color-fade': lighten(#333, 30),
-	'bg-dark-color': #fff,
-	'bg-dark-color-fade': darken(#fff, 4),
+		'color': #333,
+		'color-fade': lighten(#333, 30),
+		'color-inv': #fff,
+		'color-inv-fade': darken(#fff, 4),
 
-	'border': #ddd,
-	'border-alpha': rgba(0,0,0,0.15),
-	'bg-dark-border': #333,
-	'bg-dark-border-alpha': rgba(0,0,0,0.8),
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.8),
 
-	'menu-bg': #4a4a4a,
-	'menu-bg-hover': darken(#4a4a4a, 4),
-	'menu-expand': rgba(0,0,0,0.05),
+		'menu-bg': #4a4a4a,
+		'menu-bg-hover': darken(#4a4a4a, 4),
+		'menu-expand': rgba(0,0,0,0.05),
 
-	'menu-border': #333,
-	'menu-border-alpha': rgba(0,0,0,0.8),
+		'menu-border': #333,
+		'menu-border-alpha': rgba(0,0,0,0.8),
 
-	'menu-color': #eee,
-	'menu-color-fade': #bbb,
+		'menu-color': #eee,
+		'menu-color-fade': #bbb,
+	),
 );
 
 // ACTIVE THEME
-$active-theme: $theme-lava;
+$active-theme: 'lava';
 
 @function theme-color($color, $theme: $active-theme) {
-	@if not map-has-key($theme, $color) {
+	$theme-map: map-get($site-themes, $theme);
+	@if not map-has-key($theme-map, $color) {
 		@warn "Key #{$color} not found for the '#{$theme}' theme!";
 	}
-	@return map-get($theme, $color);
+	@return map-get($theme-map, $color);
 }
 
 $theme-accent: theme-color('accent');
@@ -104,8 +107,8 @@ $theme-bg-hover: theme-color('bg-hover');
 
 $theme-color: theme-color('color');
 $theme-color-fade: theme-color('color-fade');
-$theme-bg-dark-color: theme-color('bg-dark-color');
-$theme-bg-dark-color-fade: theme-color('bg-dark-color-fade');
+$theme-color-inv: theme-color('color-inv');
+$theme-color-inv-fade: theme-color('color-inv-fade');
 
 $theme-border: theme-color('border');
 $theme-border-alpha: theme-color('border-alpha');
@@ -121,3 +124,15 @@ $theme-menu-border-alpha: theme-color('menu-border-alpha');
 
 $theme-menu-color: theme-color('menu-color');
 $theme-menu-color-fade: theme-color('menu-color-fade');
+
+@if ( lightness(theme-color('color')) > lightness(theme-color('color-inv')) ) {
+	$theme-bg-light-color: theme-color('color-inv');
+	$theme-bg-light-color-fade: theme-color('color-inv-fade');
+	$theme-bg-dark-color: theme-color('color');
+	$theme-bg-dark-color-fade: theme-color('color-fade');
+} @else {
+	$theme-bg-light-color: theme-color('color');
+	$theme-bg-light-color-fade: theme-color('color-fade');
+	$theme-bg-dark-color: theme-color('color-inv');
+	$theme-bg-dark-color-fade: theme-color('color-inv-fade');
+}

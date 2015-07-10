@@ -724,6 +724,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array( 'head-media-type', '=', 'image' ),
 						),
 
+						// Parallax Effect
+						array(
+							'id'       => 'head-img-parallax',
+							'type'     => 'switch',
+							'title'    => __( 'Parallax Effect', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array( 'head-media-type', '=', 'image' ),
+						),
+
 						// Video Source
 						array(
 							'id'       => 'head-video-src',
@@ -803,11 +814,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array( 'head-video-src', '=', 'local' ),
 						),
 
-						// Video Luminosity
+						// Video Luminance
 						array(
 							'id'       => 'head-video-lum',
 							'type'     => 'switch',
-							'title'    => __( 'Video Luminosity', 'mixt' ),
+							'title'    => __( 'Video Luminance', 'mixt' ),
 							'subtitle' => __( 'Header text color will be adjusted based on this', 'mixt' ),
 							'on'       => __( 'Light', 'mixt' ),
 							'off'      => __( 'Dark', 'mixt' ),
@@ -871,7 +882,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => false,
 						),
 
-						// Scroll To Content
+						// Scroll To Content Icon
 						array(
 							'id'       => 'head-content-scroll-icon',
 							'type'     => 'text',

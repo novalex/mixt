@@ -1,13 +1,13 @@
 
 // Headline
 
-.headline {
+.mixt-headline {
 	width: 100%;
 	display: table;
 	overflow: hidden;
 	margin: 0 0 $margin-m;
 
-	span,
+	> span,
 	.title-text {
 		display: table-cell;
 		vertical-align: middle;
@@ -17,13 +17,13 @@
 		margin: 0;
 		float: left;
 		white-space: pre;
-		font-size: inherit;
+		padding-bottom: 4px;
 
 		&:not(:first-child) { padding-left: 15px; }
 		&:not(:last-child) { padding-right: 15px; }
 	}
 
-	span {
+	> span {
 		width: 100%; height: 1px;
 
 		&:after {
@@ -39,7 +39,7 @@
 		&.dotted:after { border-style: dotted; }
 		&.double:after { border-top-width: 3px; border-style: double; }
 	}
-	&.center span { width: 50%; }
+	&.center > span { width: 50%; }
 
 	// Color Variants
 	@mixin headline_variants($selector, $color) {

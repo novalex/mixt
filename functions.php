@@ -127,22 +127,10 @@ function mixt_widgets_init() {
 
 	// Main Sidebar
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'mixt' ),
-		'id'            => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
-
-	// Footer Sidebar
-	register_sidebar( array(
-		'name' => 'Footer Widgets',
-		'id' => 'footer-1',
-		'before_widget' => '<div>',
-		'after_widget' => '</div>',
-		'before_title' => '<h2 class="rounded">',
-		'after_title' => '</h2>',
+		'name' => __( 'Sidebar', 'mixt' ),
+		'id'   => 'sidebar-1',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h3 class="widget-title">', 'after_title' => '</h3>',
 	) );
 
 	// Custom Sidebars
@@ -150,15 +138,39 @@ function mixt_widgets_init() {
 	if ( is_array($custom_sidebars) ) {
 		foreach ( $custom_sidebars as $sidebar ) {
 			register_sidebar( array(
-				'name'          => $sidebar['name'],
-				'id'            => $sidebar['id'],
-				'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</aside>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
+				'name' => $sidebar['name'],
+				'id'   => $sidebar['id'],
+				'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+				'before_title' => '<h3 class="widget-title">', 'after_title' => '</h3>',
 			) );
 		}
 	}
+
+	// Footer Sidebars
+	register_sidebar( array(
+		'name' => __( 'Footer Column 1', 'mixt' ),
+		'id'   => 'footer-1',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer Column 2', 'mixt' ),
+		'id'   => 'footer-2',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer Column 3', 'mixt' ),
+		'id'   => 'footer-3',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer Column 4', 'mixt' ),
+		'id'   => 'footer-4',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
 }
 add_action( 'widgets_init', 'mixt_widgets_init' );
 

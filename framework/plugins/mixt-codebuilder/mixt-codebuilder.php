@@ -28,6 +28,7 @@ class MIXTCodeBuilder {
 	 * Enqueue frontend CSS & JS
 	 */
 	function init() {
+		return; // No use for this yet
 		if ( ! is_admin() ) {
 			wp_enqueue_script( 'mixt-cb-script', MIXTCB_URL . '/js/mixt-cb.js', 'jquery', '1.0', true );
 		}

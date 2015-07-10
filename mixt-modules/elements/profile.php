@@ -7,10 +7,12 @@ class MixtProfile {
 
 	public $colors;
 	public $anims;
+	public $image_styles;
 
 	public function __construct() {
-		$this->colors = mixt_get_colors('basic');
+		$this->colors = array_merge(array('auto' => __( 'Auto', 'mixt' )), mixt_get_assets('colors', 'basic'));
 		$this->anims  = array('in' => mixt_css_anims('trans-in'), 'out' => mixt_css_anims('trans-out'));
+		$this->image_styles = mixt_element_assets('image-styles');
 
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -38,6 +40,30 @@ class MixtProfile {
 					'type'  => 'media',
 					'label' => __( 'Image', 'mixt' ),
 				),
+				'image_align' => array(
+					'type'    => 'select',
+					'label'   => __( 'Image Align', 'mixt' ),
+					'options' => array(
+						'align-left'   => __( 'Left', 'mixt' ),
+						'align-center' => __( 'Center', 'mixt' ),
+						'align-right'  => __( 'Right', 'mixt' ),
+					),
+					'std' => 'align-center',
+				),
+				'image_style' => array(
+					'type'    => 'select',
+					'label'   => __( 'Image Style', 'mixt' ),
+					'options' => $this->image_styles,
+				),
+				'image_border_color' => array(
+					'type'    => 'select',
+					'label'   => __( 'Border Color', 'mixt' ),
+					'options' => $this->colors,
+					'class' => 'color-select basic-colors',
+					'required' => array('image_style', '=',
+						'image-border|image-outline|image-rounded image-border|image-rounded image-outline|image-circle image-border|image-circle image-outline'
+					),
+				),
 				'image_hover_color' => array(
 					'type'    => 'select',
 					'label'   => __( 'Image Hover Color', 'mixt' ),
@@ -63,7 +89,7 @@ class MixtProfile {
 					'type'  => 'exploded_textarea',
 					'label' => __( 'Social Networks', 'mixt' ),
 					'desc'  => __( 'Type in this person\'s social network profiles as url|icon|tooltip, each network separated by a line break (Enter)', 'mixt' ),
-					'std'   => 'https://facebook.com|icon-facebook,https://twitter.com|icon-twitter',
+					'std'   => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
 				),
 				'class' => array(
 					'type'  => 'text',
@@ -102,10 +128,40 @@ class MixtProfile {
 				),
 				array(
 					'type'       => 'dropdown',
+					'heading'    => __( 'Image Align', 'mixt' ),
+					'param_name' => 'image_align',
+					'value'      => array(
+						__( 'Left', 'mixt' )   => 'align-left',
+						__( 'Center', 'mixt' ) => 'align-center',
+						__( 'Right', 'mixt' )  => 'align-right',
+					),
+					'std' => 'align-center',
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Image Style', 'mixt' ),
+					'param_name' => 'image_style',
+					'value'      => array_flip($this->image_styles),
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Border Color', 'mixt' ),
+					'param_name' => 'image_border_color',
+					'value'      => array_flip($this->colors),
+					'param_holder_class' => 'color-select basic-colors',
+					'dependency' => array(
+						'element' => 'image_style',
+						'value'   => array(
+							'image-border', 'image-outline', 'image-rounded image-border', 'image-rounded image-outline', 'image-circle image-border', 'image-circle image-outline'
+						),
+					),
+				),
+				array(
+					'type'       => 'dropdown',
 					'heading'    => __( 'Image Hover Color', 'mixt' ),
 					'param_name' => 'image_hover_color',
 					'value'      => array_flip($this->colors),
-					'param_holder_class' => 'vc_colored-dropdown',
+					'param_holder_class' => 'color-select basic-colors',
 				),
 				array(
 					'type'       => 'dropdown',
@@ -130,7 +186,7 @@ class MixtProfile {
 					'heading'     => __( 'Social Networks', 'mixt' ),
 					'description' => __( 'Type in this person\'s social network profiles as url|icon|tooltip, each network separated by a line break (Enter)', 'mixt' ),
 					'param_name'  => 'social',
-					'std' => 'https://facebook.com|facebook,https://twitter.com|twitter',
+					'std' => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
 				),
 				array(
 					'type'       => 'textfield',
@@ -151,9 +207,12 @@ class MixtProfile {
 			'image'  => '',
 			'social' => '',
 			'class'  => '',
-			'image_hover_color' => '',
-			'image_hover_in'    => '',
-			'image_hover_out'   => '',
+			'image_align' => 'align-center',
+			'image_style' => 'rounded',
+			'image_border_color' => 'auto',
+			'image_hover_color'  => '',
+			'image_hover_in'     => '',
+			'image_hover_out'    => '',
 		), $atts ) );
 
 		$classes = 'mixt-profile mixt-element';
@@ -169,9 +228,9 @@ class MixtProfile {
 			foreach ( $networks as $network ) {
 				$network = explode('|', $network);
 				if ( empty($network[0]) ) return;
-				$icon = ( empty($network[1]) ) ? 'link' : $network[1];
+				$icon = ( empty($network[1]) ) ? 'fa fa-link' : $network[1];
 				$atts = ( empty($network[2]) ) ? '' : "title='{$network[2]}' data-toggle='tooltip'";
-				$links .= "<a href='{$network[0]}' $atts class='btn btn-default'><i class='fa fa-$icon'></i></a>";
+				$links .= "<a href='{$network[0]}' $atts class='btn btn-default' target='_blank'><i class='$icon'></i></a>";
 			}
 			return $links . '</div>';
 		};
@@ -181,7 +240,8 @@ class MixtProfile {
 		
 		<div class="<?php echo $classes; ?>">
 			<?php if ( $has_image ) { ?>
-				<div class="profile-image hover-content anim-on-hover border-rad">
+				<div class="mixt-image profile-image <?php echo $image_align; ?>">
+					<div class="image-wrap hover-content anim-on-hover <?php echo $image_style . ' ' . $image_border_color; ?>">
 					<?php echo wp_get_attachment_image($image, 'full');
 					if ( ! empty($social) ) { ?>
 						<div class="<?php echo 'on-hover ' . $image_hover_color; ?>" data-anim-in="<?php echo $image_hover_in; ?>" data-anim-out="<?php echo $image_hover_out; ?>">
@@ -190,12 +250,13 @@ class MixtProfile {
 							</div>
 						</div>
 					<?php } ?>
+					</div>
 				</div>
 			<?php } ?>
 			<div class="header clearfix">
 				<strong class="name">
 					<?php echo $name; ?><br>
-					<small class="theme-color-fade"><?php echo $title; ?></small>
+					<small class="color-fade"><?php echo $title; ?></small>
 				</strong>
 				<?php if ( ! $has_image ) echo $social_links($social); ?>
 			</div>

@@ -62,7 +62,7 @@ class MIXTCBAdmin {
 
 					<div class="submit">
 						<input type="button" id="mcb-add-shortcode" class="button add-sc" value="<?php _e('Add Shortcode', 'mixt'); ?>" />
-						<a href="#" id="mcb-cancel" class="button cancel-sc" onclick="tb_remove();"><?php _e('Cancel', 'mixt'); ?></a>
+						<a href="#mixt-cb-wrap" id="mcb-cancel" class="button cancel-sc" onclick="tb_remove();"><?php _e('Cancel', 'mixt'); ?></a>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,35 @@
+
+// Flip Card
+@import 'flipcard';
+
+// Headline
+@import 'headline';
+
+// Pricing Table
+@import 'pricing';
+
+// Profile
+@import 'profile';
+
+// Stat
+@import 'stat';
+
+// Timeline
+@import 'timeline';
+
+// Google Maps
+.mixt-map {
+	iframe {
+		width: 100% !important;
+		height: 100% !important;
+		border: 0 !important;
+	}
+}
+// Disable map scrolling on small screens
+@include media('screen', '<mars') {
+	.mixt-map {
+		&, iframe {
+			pointer-events: none;
+		}
+	}
+}

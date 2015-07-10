@@ -1,0 +1,8 @@
+// Frontend Elements Styling
+
+.vc_element div[class*=' col-'] { width: 100%; }
+
+.pricing-row .wpb_wrapper.vc_element-container {
+	width: 100%;
+	display: table;
+}

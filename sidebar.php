@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The sidebar containing the main widget area
+ * The sidebar template
  *
  * @package MIXT
  */
@@ -9,19 +9,15 @@
 if ( MIXT::get('page', 'sidebar') ) {
 
 	$active_sidebar = MIXT::get('page', 'sidebar-id');
-
 	?>
 
 	</div><?php // Close .main-content-inner ?>
 
 	<div class="sidebar col-sm-12 col-md-3">
-
 		<div class="sidebar-padder">
-
 			<?php do_action( 'before_sidebar' ); ?>
 			
 			<?php if ( ! dynamic_sidebar($active_sidebar) ) : ?>
-
 				<aside id="search" class="widget widget_search">
 					<?php get_search_form(); ?>
 				</aside>
@@ -41,7 +37,6 @@ if ( MIXT::get('page', 'sidebar') ) {
 						<?php wp_meta(); ?>
 					</ul>
 				</aside>
-
 			<?php endif; ?>
 
 		</div><?php

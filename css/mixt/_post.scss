@@ -231,9 +231,9 @@
 
 .post-meta {
 	padding: 0;
+	font-size: 12px;
 	display: table;
 	table-layout: fixed;
-	font-size: $font-size-s;
 
 	a:hover { color: $theme-accent; }
 
@@ -250,14 +250,9 @@
 
 		a { display: inline-block; }
 
-		.icon {
-			margin-right: $margin-xs;
-			vertical-align: middle;
-		}
+		i { margin-right: 6px; }
 
-		&:last-child {
-			margin-right: 0;
-		}
+		&:last-child { margin-right: 0; }
 	}
 
 	.meta-sep {
@@ -622,8 +617,7 @@
 // GALLERY STYLING
 
 .gallery {
-	padding: 0;
-	list-style: none;
+	@extend %reset-list;
 	margin-bottom: 1.5em;
 
 	a img {
@@ -654,8 +648,6 @@
 	border-color: inherit;
 	@extend %clearfix;
 }
-
-#content .title { font-size: $font-size-l; }
 
 
 // SOCIAL SHARING

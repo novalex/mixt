@@ -46,58 +46,6 @@ MIXT POST FUNCTIONS
 		}
 	}
 
-	postsPage();
-
-
-	// Isotope Masonry Init
-	if ( mixt_opt.layout.type == 'masonry' ) {
-		var blogCont = $('.blog-masonry .posts-container');
-
-		blogCont.isotope({
-			itemSelector: '.article',
-			layout: 'masonry',
-			gutter: 0
-		});
-
-		blogCont.imagesLoaded( function() { blogCont.isotope('layout'); });
-		viewport.resize( $.debounce( 500, function() { blogCont.isotope('layout'); } ));
-	}
-
-
-	// Trigger Lightbox On Featured Image Click
-	$('.lightbox-trigger').on('click', function() {
-		$(this).siblings('.gallery').find('li').first().click();
-	});
-
-
-	// Related Posts Slider
-	if ( typeof $.fn.lightSlider === 'function' ) {
-		var relPostsSlider = $('.post-related .slider-cont');
-		relPostsSlider.imagesLoaded( function() {
-			relPostsSlider.lightSlider({
-				item: 5,
-				pager: false,
-				keyPress: true,
-				slideMargin: 20,
-				responsive: [
-					{
-						breakpoint: 960,
-						settings: { item: 3 }
-					},
-					{
-						breakpoint: 500,
-						settings: { item: 2 }
-					}
-				]
-			});
-
-			if ( typeof $.fn.matchHeight === 'function' ) {
-				$('.post-feat', relPostsSlider).matchHeight();
-				relPostsSlider.css('height', '');
-			}
-		});
-	}
-
 	
 	// Resize Embedded Videos Proportionally
 	iframeAspect( $('.post iframe') );
@@ -235,10 +183,65 @@ MIXT POST FUNCTIONS
 		mixtAjaxLoad('comments');
 	}
 
+
 	// Functions To Run On Window Resize
 	function resizeFn() {
 		iframeAspect();
 	}
 	viewport.resize( $.debounce( 500, resizeFn ));
+
+
+	// Functions To Run On Load
+	viewport.load( function() {
+
+		postsPage();
+
+		// Isotope Masonry Init
+		if ( mixt_opt.layout.type == 'masonry' && typeof $.fn.isotope === 'function' ) {
+			var blogCont = $('.blog-masonry .posts-container');
+
+			blogCont.isotope({
+				itemSelector: '.article',
+				layout: 'masonry',
+				gutter: 0
+			});
+
+			blogCont.imagesLoaded( function() { blogCont.isotope('layout'); });
+			viewport.resize( $.debounce( 500, function() { blogCont.isotope('layout'); } ));
+		}
+
+
+		// Trigger Lightbox On Featured Image Click
+		$('.lightbox-trigger').on('click', function() {
+			$(this).siblings('.gallery').find('li').first().click();
+		});
+
+
+		// Related Posts Slider
+		if ( typeof $.fn.lightSlider === 'function' ) {
+			var relPostsSlider = $('.post-related .slider-cont');
+			relPostsSlider.imagesLoaded( function() {
+				relPostsSlider.lightSlider({
+					item: 3,
+					pager: false,
+					keyPress: true,
+					slideMargin: 20,
+					responsive: [{
+						breakpoint: 960,
+						settings: { item: 3 }
+					}, {
+						breakpoint: 500,
+						settings: { item: 2 }
+					}],
+					onSliderLoad: function(el) {
+						if ( typeof $.fn.matchHeight === 'function' ) {
+							$('.post-feat', relPostsSlider).matchHeight();
+							relPostsSlider.css('height', '');
+						}
+					}
+				});
+			});
+		}
+	});
 
 }(jQuery);

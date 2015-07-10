@@ -47,6 +47,14 @@ function mixt_default_themes($set = '') {
 				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
 				'rgba' => '1',
 			),
+			'dark-lava' => array(
+				'name' => 'Dark Lava', 'id' => 'dark-lava',
+				'bg' => '#444', 'border' => '#333',
+				'text' => '#fff', 'inv-text' => '#333',
+				'accent' => '#dd3e3e', 'inv-accent' => '#dd3e3e',
+				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
+				'rgba' => '1',
+			),
 			'aqua' => array(
 				'name' => 'Aqua', 'id' => 'aqua',
 				'bg' => '#fff', 'border' => '#ddd',
@@ -58,7 +66,7 @@ function mixt_default_themes($set = '') {
 			'nightly' => array(
 				'name' => 'Nightly', 'id' => 'nightly',
 				'bg' => '#444', 'border' => '#333',
-				'text' => '#333', 'inv-text' => '#fff',
+				'text' => '#fff', 'inv-text' => '#333',
 				'accent' => '#539ddd', 'inv-accent' => '#539ddd',
 				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
 				'rgba' => '1',
@@ -70,7 +78,7 @@ function mixt_default_themes($set = '') {
 
 
 /**
- * Return different assets by groups
+ * Return various assets by groups
  */
 function mixt_get_assets($group, $subgroup) {
 	$assets = array(
@@ -90,8 +98,42 @@ function mixt_get_assets($group, $subgroup) {
 				'grey'    => __( 'Grey', 'mixt' ),
 				'black'   => __( 'Black', 'mixt' ),
 				'red'     => __( 'Red', 'mixt' ),
+				'orange'  => __( 'Orange', 'mixt' ),
 				'green'   => __( 'Green', 'mixt' ),
 				'blue'    => __( 'Blue', 'mixt' ),
+				'violet'  => __( 'Violet', 'mixt' ),
+			),
+		),
+		
+		'colors' => array(
+			'basic' => array(
+				'white'  => __( 'White', 'mixt' ),
+				'grey'   => __( 'Grey', 'mixt' ),
+				'black'  => __( 'Black', 'mixt' ),
+				'accent' => __( 'Theme Accent', 'mixt' ),
+				'red'    => __( 'Red', 'mixt' ),
+				'green'  => __( 'Green', 'mixt' ),
+				'blue'   => __( 'Blue', 'mixt' ),
+			),
+			'elements' => array(
+				'color-auto'  => __( 'Auto', 'mixt' ),
+				'blue'        => __( 'Blue', 'mixt' ),
+				'turquoise'   => __( 'Turquoise', 'mixt' ),
+				'pink'        => __( 'Pink', 'mixt' ),
+				'violet'      => __( 'Violet', 'mixt' ),
+				'peacoc'      => __( 'Peacoc', 'mixt' ),
+				'chino'       => __( 'Chino', 'mixt' ),
+				'mulled-wine' => __( 'Mulled Wine', 'mixt' ),
+				'vista-blue'  => __( 'Vista Blue', 'mixt' ),
+				'black'       => __( 'Black', 'mixt' ),
+				'grey'        => __( 'Grey', 'mixt' ),
+				'orange'      => __( 'Orange', 'mixt' ),
+				'sky'         => __( 'Sky', 'mixt' ),
+				'green'       => __( 'Green', 'mixt' ),
+				'juicy-pink'  => __( 'Juicy pink', 'mixt' ),
+				'sandy-brown' => __( 'Sandy brown', 'mixt' ),
+				'purple'      => __( 'Purple', 'mixt' ),
+				'white'       => __( 'White', 'mixt' ),
 			),
 		),
 	);
@@ -101,44 +143,6 @@ function mixt_get_assets($group, $subgroup) {
 	} else {
 		return $assets[$group][$subgroup];
 	}
-}
-
-
-/**
- * Return array of element colors
- */
-function mixt_get_colors($group) {
-	$colors = array(
-		'basic' => array(
-			'white'  => __( 'White', 'mixt' ),
-			'black'  => __( 'Black', 'mixt' ),
-			'accent' => __( 'Theme Accent', 'mixt' ),
-			'red'    => __( 'Red', 'mixt' ),
-			'green'  => __( 'Green', 'mixt' ),
-			'blue'   => __( 'Blue', 'mixt' ),
-		),
-		'elements' => array(
-			'color-auto'  => __( 'Auto', 'mixt' ),
-			'blue'        => __( 'Blue', 'mixt' ),
-			'turquoise'   => __( 'Turquoise', 'mixt' ),
-			'pink'        => __( 'Pink', 'mixt' ),
-			'violet'      => __( 'Violet', 'mixt' ),
-			'peacoc'      => __( 'Peacoc', 'mixt' ),
-			'chino'       => __( 'Chino', 'mixt' ),
-			'mulled-wine' => __( 'Mulled Wine', 'mixt' ),
-			'vista-blue'  => __( 'Vista Blue', 'mixt' ),
-			'black'       => __( 'Black', 'mixt' ),
-			'grey'        => __( 'Grey', 'mixt' ),
-			'orange'      => __( 'Orange', 'mixt' ),
-			'sky'         => __( 'Sky', 'mixt' ),
-			'green'       => __( 'Green', 'mixt' ),
-			'juicy-pink'  => __( 'Juicy pink', 'mixt' ),
-			'sandy-brown' => __( 'Sandy brown', 'mixt' ),
-			'purple'      => __( 'Purple', 'mixt' ),
-			'white'       => __( 'White', 'mixt' ),
-		),
-	);
-	return $colors[$group];
 }
 
 

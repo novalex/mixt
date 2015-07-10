@@ -8,7 +8,7 @@ class MixtHeadline {
 	public $colors;
 	
 	public function __construct() {
-		$this->colors = array_merge( mixt_get_colors('elements'), array( 'custom' => __( 'Custom color', 'mixt' ) ) );
+		$this->colors = array_merge( mixt_get_assets('colors', 'elements'), array( 'custom' => __( 'Custom color', 'mixt' ) ) );
 		
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -138,10 +138,7 @@ class MixtHeadline {
 					'type'       => 'colorpicker',
 					'heading'    => __( 'Custom Color', 'js_composer' ),
 					'param_name' => 'color_custom',
-					'dependency' => array(
-						'element' => 'color',
-						'value'   => array( 'custom' ),
-					),
+					'dependency' => array( 'element' => 'color', 'value' => array( 'custom' ) ),
 				),
 				array(
 					'type'        => 'textfield',

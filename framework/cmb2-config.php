@@ -118,7 +118,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'name'    => __( 'See-Through Opacity', 'mixt' ),
 				'desc'    => __( 'Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 (opaque)', 'mixt' ),
 				'type'    => 'text',
-				'default'    => '0.70',
+				'default'    => '0.25',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'nav-transparent',
@@ -170,7 +170,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 		),
 	);
 
-	// Add custom sidebar select if there are any
+	// Custom sidebar select
 	$custom_sidebars = get_option('mixt-sidebars');
 	if ( $custom_sidebars ) {
 		$sidebar_options = array(
@@ -472,6 +472,24 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 			),
 
+			// Image Parallax Effect
+			array(
+				'id'      => $prefix . 'head-img-parallax',
+				'name'    => __( 'Parallax Effect', 'mixt' ),
+				'type'    => 'radio_inline',
+				'options' => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'    => 'auto',
+				'attributes' => array(
+					'class'             => 'conditional nested',
+					'data-parent-field' => $prefix . 'head-media-type',
+					'data-show-on-id'   => $prefix . 'head-media-type3',
+				),
+			),
+
 			// Video Source
 			array(
 				'id'      => $prefix . 'head-video-src',
@@ -571,10 +589,10 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 			),
 
-			// Video Luminosity
+			// Video Luminance
 			array(
 				'id'         => $prefix . 'head-video-lum',
-				'name'       => __( 'Video Luminosity', 'mixt' ),
+				'name'       => __( 'Video Luminance', 'mixt' ),
 				'desc'       => __( 'Header text color will be adjusted based on this', 'mixt' ),
 				'type'       => 'radio_inline',
 				'options'    => array(
@@ -723,9 +741,8 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'type'    => 'wysiwyg',
 				'options' => array(
 					'wpautop'       => false,
-					'media_buttons' => false,
-					'textarea_name' => 'mixt-header-code-field',
 					'textarea_rows' => '4',
+					'textarea_name' => 'mixt-header-code-field',
 					'editor_class'  => 'nested conditional parent_' . $prefix . 'head-content-code',
 				),
 				'attributes' => array(

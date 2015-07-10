@@ -8,8 +8,8 @@
 }
 
 #content-wrap {
-	color: $text-dark-color;
-	border-color: $border-color;
+	color: $theme-color;
+	border-color: $theme-border;
 	
 	> .row { border-color: inherit; }
 }
@@ -215,25 +215,9 @@ img[class*="wp-image-"] {
 }
 
 
-// Blockquotes
-
-blockquote {
-	font-size: $font-size;
-	padding: $padding-s;
-	border-color: $theme-accent;
-	background-color: rgba(0,0,0,0.03);
-
-	cite {
-		display: block;
-		margin-top: 6px;
-		opacity: 0.8;
-		font-size: $font-size-s;
-	}
-}
-
-
 // Responsive
 
+// Tablet & Desktop
 @include media('screen', 'mars') {
 	#content-wrap {
 		&.has-sidebar {
@@ -258,9 +242,18 @@ blockquote {
 			.sidebar {
 				margin-left: 0;
 				border-left-width: 0;
-				box-shadow: 1px 0 0 $border-color;
+				box-shadow: 1px 0 0 $theme-border;
 
 			}
 		}
 	}
+}
+
+// Mobile
+@include media('screen', '<mars') {
+	.sidebar {
+		margin-top: -1px;
+		border-top-width: 1px;
+	}
+
 }

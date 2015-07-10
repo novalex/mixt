@@ -51,6 +51,7 @@ function mixt_head_media() {
 			'return' => 'value',
 		),
 		'img-repeat' => array( 'key' => 'head-img-repeat' ),
+		'parallax' => array( 'key' => 'head-img-parallax' ),
 		// Video
 		'video-src' => array(
 			'type'   => 'str',
@@ -88,6 +89,7 @@ function mixt_head_media() {
 			'key'     => 'head-content-size',
 			'return'  => 'value',
 		),
+		'content-fade' => array( 'key' => 'head-content-fade' ),
 		'align' => array(
 			'type'    => 'str',
 			'key'     => 'head-content-align',
@@ -127,9 +129,9 @@ function mixt_head_media() {
 
 				// Adjust transparent navbar text color depending on slide luminosity ?>
 				<script type="text/javascript" id="mixt-slider-bg">
+					var navbar = jQuery('#main-nav'),
+						header = jQuery('.head-media');
 					function lsBgLum(data) {
-						var navbar = jQuery('#top-nav'),
-							header = jQuery('.head-media');
 						if ( jQuery('#main-wrap').hasClass('nav-transparent') ) {
 							if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-dark").length ) {
 								header.addClass('bg-dark');
@@ -143,7 +145,7 @@ function mixt_head_media() {
 						}
 					}
 				</script><?php
-			// Show Slider Not Found messahe
+			// Show Slider Not Found Message
 			} else { $slider = '<p class="media-not-found">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>'; }
 		// Show LayerSlider Deactivated Message
 		} else { $slider = '<p class="media-not-found">' . __( 'LayerSlider plugin not installed or deactivated!', 'mixt' ) . '</p>'; }
@@ -205,6 +207,12 @@ function mixt_head_media() {
 				else { $media_cont_classes .= ' img-tall'; }
 			}
 
+			// Parallax
+			if ( $options['parallax'] ) {
+				$media_cont_classes .= ' has-parallax';
+				$img_atts .= 'data-top="transform: translate3d(0, 0%, 0);" data-top-bottom="transform: translate3d(0, 25%, 0);" ';
+			}
+
 			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";
 		}
 
@@ -262,6 +270,9 @@ function mixt_head_media() {
 
 	if ( $options['code'] && ! empty($options['code-content']) ) { $wrap_classes .= ' media-code'; }
 
+	// Load Skrollr.js if parallax or content fade effect is enabled
+	if ( ( $options['type'] == 'image' && $options['parallax'] ) || ( ( $options['info'] || $options['code'] ) && $options['content-fade'] ) ) { wp_enqueue_script( 'mixt-skrollr' ); }
+
 // Output
 
 	echo "<header class='$wrap_classes'>";
@@ -273,11 +284,13 @@ function mixt_head_media() {
 		if ( $options['info'] || $options['code'] ) {
 
 			$cont_classes = 'container';
-			if ( $options['content-size'] == 'fullwidth' ) { $cont_classes .= ' fullwidth'; }
-			else if ( $options['content-size'] == 'cover' ) { $cont_classes .= ' fullwidth cover'; }
+			if ( $options['content-size'] == 'fullwidth' ) $cont_classes .= ' fullwidth';
+			else if ( $options['content-size'] == 'cover' ) $cont_classes .= ' fullwidth cover';
+			if ( $options['content-fade'] ) $cont_classes .= ' has-parallax';
 
 			echo "<div class='$cont_classes'";
-			if ( $options['height'] != '' ) echo " style='min-height: {$options['height']}px;'";
+				if ( $options['height'] != '' ) echo " style='height: {$options['height']}px;'";
+				if ( $options['content-fade'] ) echo " data-top='opacity: 1; transform: translate3d(0, 0%, 0);' data--200-top-bottom='opacity: 0; transform: translate3d(0, 80%, 0);'";
 			echo '>';
 
 				$inner_classes = 'media-inner';

@@ -132,8 +132,14 @@ function mixt_gallery_shortcode($attr) {
 	if ( $type == 'slider' ) {
 		$gallery_style   = '';
 		$gallery_classes = 'gallery-slider';
+
+		// Enqueue the lightslider script
+		wp_enqueue_script('mixt-lightslider');
 	} else if ( $type == 'lightbox' ) {
 		$gallery_classes = 'lightbox-gallery';
+
+		// Enqueue the lightGallery script
+		wp_enqueue_script('mixt-lightGallery');
 	}
 	if ( $feat ) { $gallery_classes .= ' featured'; }
 

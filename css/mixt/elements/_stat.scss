@@ -1,0 +1,49 @@
+
+// Stat
+
+.mixt-stat {
+	text-align: center;
+
+	&.type-box {
+		padding: 15px 5px;
+		border-radius: $bd-radius;
+		border: 1px solid $theme-border;
+	}
+
+	p { margin-bottom: 0; }
+
+	.stat-header {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 1.2;
+
+		> span {
+			opacity: 0.8;
+			font-size: 16px;
+		}
+	}
+
+	.stat-desc {
+		font-size: $font-size-s;
+	}
+
+	.stat-circle {
+		position: relative;
+		canvas {
+			width: 100%;
+			height: auto;
+			max-width: 200px;
+			max-height: 200px;
+		}
+		.circle-inner {
+			position: absolute;
+			top: 50%; left: 0;
+			width: 100%;
+			margin-top: -20px;
+		}
+	}
+
+	// Color Variants
+	&.color-bg { @extend .basic-color-bg-variants; }
+	&.color-outline { @extend .basic-color-outline-variants; }
+}

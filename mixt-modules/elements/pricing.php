@@ -11,7 +11,7 @@ class MixtPricing {
 	public function __construct() {
 		$this->colors = array_merge( array(
 			'default' => __( 'Default', 'mixt' ) ),
-			mixt_get_colors('basic')
+			mixt_get_assets('colors', 'basic')
 		);
 		$this->btn_colors = mixt_get_assets('button', 'colors');
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));

@@ -93,6 +93,7 @@ class MIXT {
 				'scroll'       => array( 'key' => 'head-content-scroll' ),
 				'media-type'   => array( 'key' => 'head-media-type', 'type' => 'str', 'return' => 'value', 'default' => 'color' ),
 				'img-src'      => array( 'key' => 'head-img-src', 'type' => 'str', 'return' => 'value' ),
+				'parallax'     => array( 'key' => 'head-img-parallax' ),
 
 				'location-bar' => array(),
 				'loc-bar-left-content' => array( 'type' => 'str', 'return' => 'value' ),

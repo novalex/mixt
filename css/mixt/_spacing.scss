@@ -7,8 +7,10 @@ $row-spacing-lg: 40px;
 $gutter-sm: $main-gutter-sm;
 $row-spacing-sm: 30px;
 
+$row-grid-sm-gutter: 20px;
 
-// Custom Gutter Rows
+
+// Custom Gutter Columns & Rows
 
 @mixin make-custom-grid-columns($i: 1, $list: '.col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}', $gutter: $grid-gutter-width) {
 	padding-left: $grid-gutter-width / 2 - $gutter / 2;
@@ -21,6 +23,17 @@ $row-spacing-sm: 30px;
 	    padding-left:  ($gutter / 2);
 	    padding-right: ($gutter / 2);
 	}
+}
+.row-grid-sm {
+	@include make-custom-grid-columns($gutter: $row-grid-sm-gutter);
+}
+.row-spacing-sm {
+	&,
+	&.wpb_row,
+	.wpb_content_element,
+	.wpb_wrapper .mixt-element { margin-bottom: $row-grid-sm-gutter; }
+	
+	.wpb_column > .wpb_wrapper > *:last-child { margin-bottom: 0; }
 }
 
 
@@ -42,6 +55,7 @@ $row-spacing-sm: 30px;
 	margin: $gutter-lg 0 0;
 	padding: 0 0 $row-spacing-lg;
 }
+.article .first-row { margin-top: -$gutter-lg; }
 
 
 // Fullwidth Layout
@@ -51,15 +65,11 @@ $row-spacing-sm: 30px;
 }
 
 
-// Bottom Padding Before Footer
-
-.elements-here { padding-bottom: $gutter-lg; } // TODO
-
-
 // Rows & Containers
 
 .widget,
 .post-extra,
+.gutter-btm,
 .wpb_row,
 .wpb_content_element,
 ul.wpb_thumbnails-fluid > li,
@@ -103,11 +113,13 @@ ul.wpb_thumbnails-fluid > li,
 		margin: $gutter-sm 0 0;
 		padding: 0 0 $row-spacing-sm;
 	}
+	.article .first-row { margin-top: -$gutter-sm; }
 
 	.sidebar-padder { padding-top: $gutter-sm; }
 
 	.container,
-	.container-fluid {
+	.container-fluid,
+	.vc_column_container {
 		padding-left: $gutter-sm / 2;
 		padding-right: $gutter-sm / 2;
 	}
@@ -116,6 +128,10 @@ ul.wpb_thumbnails-fluid > li,
 		margin-right: ($gutter-sm / -2);
 	}
 
+	.row-grid-sm {
+		padding-left: ($gutter-sm / 2) - ($row-grid-sm-gutter / 2);
+		padding-right: ($gutter-sm / 2) - ($row-grid-sm-gutter / 2);
+	}
 	form.form-cols.row {
 		padding-left: ($gutter-sm / 2) - ($form-gutter / 2);
 		padding-right: ($gutter-sm / 2) - ($form-gutter / 2);
@@ -123,6 +139,7 @@ ul.wpb_thumbnails-fluid > li,
 
 	.widget,
 	.post-extra,
+	.gutter-btm,
 	.wpb_row,
 	.wpb_content_element,
 	ul.wpb_thumbnails-fluid > li,
@@ -132,4 +149,21 @@ ul.wpb_thumbnails-fluid > li,
 	.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child {
 		margin-bottom: $row-spacing-sm;
 	}
+
+	.row-spacing-sm {
+		&,
+		&.wpb_row,
+		.wpb_content_element,
+		.wpb_wrapper .mixt-element,
+		.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child { margin-bottom: $row-grid-sm-gutter; }
+	}
+}
+
+
+// Spacing Classes
+
+.margin-sep-sm {
+	$margin: 10px;
+	margin-top: -$margin;
+	> * { margin-top: $margin; margin-right: $margin; }
 }

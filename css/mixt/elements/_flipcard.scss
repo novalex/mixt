@@ -1,33 +1,40 @@
 
 // Flip Card
 
-.flip-card {
+.mixt-flipcard {
 	cursor: pointer;
+	perspective: 1000px;
 
-	.inner, .front, .back { width: 100%; }
-
+	// Where the magic happens
 	&:hover,
+	&:focus,
 	&.hover {
+		user-select: none;
+		-webkit-touch-callout: none;
 		.inner {
-			transform: perspective(2000px) rotateX(180deg);
+			transform: rotateX(180deg);
 		}
 	}
 
 	.inner {
 		position: relative;
-		transition: transform 0.6s ease 0.2s;
+		transition: transform 0.4s ease-out 0.1s;
 		transform-style: preserve-3d;
-	}
 
-	.front, .back {
-		height: auto;
-		padding: $padding-m;
-		color: #333;
-		border: 1px solid rgba(0,0,0,0.2);
-		border-radius: $bd-radius;
-		background: #fff;
-		box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-		backface-visibility: hidden;
+		> div {
+			height: auto;
+			padding: $padding-m;
+			text-align: center;
+			@extend .flex-middle;
+			flex-direction: column;
+			border-width: 1px;
+			border-style: solid;
+			border-radius: $bd-radius;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+			backface-visibility: hidden;
+
+			> :last-child { margin-bottom: 0; }
+		}
 	}
 
 	.front {
@@ -43,10 +50,28 @@
 
 	&.flipY {
 		&:hover,
+		&:focus,
 		&.hover {
-			.inner { transform: perspective(2000px) rotateY(180deg); }
+			.inner { transform: rotateY(180deg); }
 		}
 		.front { transform: rotateY(0deg); }
 		.back { transform: rotateY(180deg); }
+	}
+
+	.inner, .front, .back { width: 100%; }
+
+	&.no-border .inner > div { border: 0; }
+
+	// Color Variations
+
+	@mixin flipcard-color($sel, $color) {
+		.inner > .#{$sel} {
+			color: set-color-for-bg($color);
+			background-color: $color;
+			border-color: darken($color, 10);
+		}
+	}
+	@each $sel, $color in $basic-colors {
+		@include flipcard-color($sel, $color);
 	}
 }

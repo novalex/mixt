@@ -1,4 +1,9 @@
 
+@import 'navbar-base';
+@import 'navbar-themes';
+@import 'navbar-vertical';
+
+
 $nav-primary-height: 91px;
 $nav-primary-pad: 20px;
 $nav-primary-item-height: 50px;
@@ -11,9 +16,8 @@ $sec-nav-item-height: 32px;
 	.nav {
 		> li {
 			margin-left: -1px;
-			@extend .border-base;
-			border-left-width: 1px;
-			border-right-width: 1px;
+			border-style: solid;
+			border-width: 0 1px 0 1px;
 			border-color: $theme-border;
 
 			transition: border-color 0.2s;
@@ -39,7 +43,7 @@ $sec-nav-item-height: 32px;
 
 // PRIMARY NAVIGATION
 
-#top-nav-wrap {
+#main-nav-wrap {
 	min-height: 90px;
 	position: relative;
 	z-index: 9999;
@@ -191,8 +195,8 @@ $sec-nav-item-height: 32px;
 	}
 }
 
-.nav-transparent #top-nav-wrap,
-.fixed-nav .nav-transparent #top-nav-wrap {
+.nav-transparent #main-nav-wrap,
+.fixed-nav .nav-transparent #main-nav-wrap {
 	height: 0 !important;
 	min-height: 0 !important;
 }
@@ -343,7 +347,7 @@ $sec-nav-item-height: 32px;
 
 	// Primary Navbar Fixed State
 	.fixed-nav {
-		#top-nav-wrap.logo-center {
+		#main-nav-wrap.logo-center {
 			min-height: 101px;
 
 			.navbar-header, #nav-logo {
@@ -357,6 +361,12 @@ $sec-nav-item-height: 32px;
 	}
 
 	.navbar-mixt.bordered.position-top .nav > li { border-color: transparent; }
+
+	// Transparent
+	.nav-transparent .navbar-mixt.position-top {
+		.nav > li > a { text-shadow: 0 1px 1px rgba(255,255,255,0.1); }
+		&.bg-dark { .nav > li > a { text-shadow: 0 1px 1px rgba(0,0,0,0.15); } }
+	}
 
 	// Logo Positions
 	.logo-left .navbar-mixt {
@@ -393,7 +403,7 @@ $sec-nav-item-height: 32px;
 		}
 		.no-menu-msg { float: none; }
 	}
-	#top-nav-wrap.logo-center {
+	#main-nav-wrap.logo-center {
 		min-height: 121px;
 	}
 }
@@ -402,7 +412,7 @@ $sec-nav-item-height: 32px;
 
 @include media('screen', '<mars') {
 
-	#top-nav-wrap { min-height: 51px; }
+	#main-nav-wrap { min-height: 51px; }
 
 	.navbar-mixt {
 		padding: 0 !important;
@@ -624,10 +634,10 @@ $sec-nav-item-height: 32px;
 	// Navbar Fixed State
 
 	.fixed-nav {
-		#top-nav-wrap {
+		#main-nav-wrap {
 			min-height: $nav-primary-item-height;
 		}
-		.nav-transparent #top-nav-wrap {
+		.nav-transparent #main-nav-wrap {
 			height: 0;
 			min-height: 0;
 		}
