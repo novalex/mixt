@@ -13,16 +13,16 @@
 	}
 
 	.mixt-pricing-inner {
-		$bg: #f4f4f4;
+		$bg: #f8f8f8;
 		$color: #555;
 
 		color: $color;
-		margin: 0; padding: 0;
-		list-style: none;
+		margin: 0;
 		background-color: $bg;
-		border-radius: $bd-radius;
+		border-radius: $bd-radius-l;
 		border: 1px solid darken($bg, 10);
-		text-shadow: 0 1px 1px lighten($bg, 10);
+
+		@extend %reset-list;
 
 		li {
 			padding: 10px;
@@ -31,10 +31,11 @@
 			border-style: solid;
 			border-color: inherit;
 
-			&:nth-child(odd):not(.header):not(.footer) { background-color: lighten($bg, 2); }
+			&:nth-child(odd):not(.header):not(.footer) { background-color: rgba(0,0,0,0.02); }
 		}
 		.header {
-			@extend %bd-radius-top;
+			$bd-radius: $bd-radius-l - 1px;
+			border-radius: $bd-radius $bd-radius 0 0;
 		}
 		.plan-name {
 			margin: 5px 0;
@@ -42,10 +43,10 @@
 		}
 		.plan-desc {
 			padding-bottom: 5px; margin-bottom: 5px;
-			border-bottom: 1px solid darken($bg, 5);
+			border-bottom: 1px solid rgba(0,0,0,0.15);
 		}
 		.plan-desc,
-		.plan-time { color: lighten($color, 20); }
+		.plan-time { opacity: 0.75; }
 		.price {
 			line-height: 1.1;
 			font-size: 54px;
@@ -75,7 +76,7 @@
 			@extend %bd-radius-bottom;
 		}
 		.header,
-		.footer { background-color: lighten($bg, 4); }
+		.footer { background-color: rgba(255,255,255,0.4); }
 	}
 
 	// Dark Scheme
@@ -84,21 +85,10 @@
 		$color: #fff;
 		background-color: $bg;
 
-		&,
-		.plan-desc { border-color: darken($bg, 20); }
-
-		.plan-desc,
-		.plan-time { color: lighten($bg, 50); }
-
-		li {
-			color: $color;
-			text-shadow: 0 1px 1px darken($bg, 20);
-
-			&:nth-child(odd):not(.header):not(.footer) { background-color: darken($bg, 2); }
-		}
+		li { color: $color; }
 
 		.header,
-		.footer { background-color: lighten($bg, 3); }
+		.footer { background-color: rgba(0,0,0,0.1); }
 	}
 
 	// Color Variants
@@ -109,13 +99,14 @@
 			background-color: $color;
 			box-shadow: 0 0 0 1px darken($color, 10);
 			@include text-shadow-for-bg($color);
-			.plan-desc { border-color: darken($color, 5); }
-			.plan-desc,
-			.plan-time { color: color-fade-for-bg($color); }
 		}
 	}
 	@each $selector, $color in $basic-colors {
 		@include pricing-table-variant($selector, $color);
+	}
+
+	// Styler Integration
+	&.styler-custom {
 	}
 }
 
@@ -135,15 +126,6 @@
 	}
 }
 
-.compose-mode .pricing-row {
-	.vc_element.vc_mixt_pricing {
-		display: table-cell;
-		vertical-align: middle;
-
-		> .mixt-pricing { display: block; }
-	}
-}
-
 .pricing-row[max-width="580px"],
 .pricing-row.pricing-5-col[max-width="800px"] {
 	&,
@@ -151,4 +133,20 @@
 	.mixt-pricing { display: block !important; }
 
 	.mixt-pricing.highlight { padding: 5px 0; }
+}
+
+.mixt-pricing.no-border {
+	.mixt-pricing-inner { border-width: 0; }
+	.header { box-shadow: none !important; }
+}
+
+// Visual Composer Integration
+
+.vc_editor .pricing-row {
+	.vc_element.vc_mixt_pricing {
+		display: table-cell;
+		vertical-align: middle;
+
+		> .mixt-pricing { display: block; }
+	}
 }

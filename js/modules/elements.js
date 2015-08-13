@@ -9,8 +9,31 @@ ELEMENT FUNCTIONS
 
 	var viewport = $(window);
 
-	// Stat / Counter Element
 
+	// Element Animations
+	function mixtAnimations() {
+		var animElems = $('.mixt-animate');
+
+		if ( animElems.length === 0 ) { return; }
+
+		viewport.load( function() {
+			if ( typeof $.fn.waypoint === 'function' ) {
+				window.setTimeout( function() {
+					animElems.waypoint( function() {
+						$(this).removeClass('anim-pre').addClass('anim-start');
+						if ( typeof this.destroy === 'function' ) this.destroy();
+					}, {
+						offset: '90%',
+						triggerOnce: true
+					});
+				}, 1000 );
+			}
+		});
+	}
+	mixtAnimations();
+
+
+	// Stat / Counter Element
 	function mixtStats() {
 		var statElems = $('.mixt-stat');
 

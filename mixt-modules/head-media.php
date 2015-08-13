@@ -113,7 +113,7 @@ function mixt_head_media() {
 
 	$wrap_classes = 'head-media';
 
-	if ( MIXT::get('header', 'fullscreen') ) { $wrap_classes .= ' fullscreen'; }
+	if ( Mixt_Options::get('header', 'fullscreen') ) { $wrap_classes .= ' fullscreen'; }
 
 	$media_bg = $slider = $media_cont_classes = '';
 
@@ -129,10 +129,12 @@ function mixt_head_media() {
 
 				// Adjust transparent navbar text color depending on slide luminosity ?>
 				<script type="text/javascript" id="mixt-slider-bg">
-					var navbar = jQuery('#main-nav'),
-						header = jQuery('.head-media');
+					var wrapper = jQuery('#main-wrap'),
+						navbar = jQuery('#main-nav'),
+						runFn = wrapper.hasClass('nav-transparent');
 					function lsBgLum(data) {
-						if ( jQuery('#main-wrap').hasClass('nav-transparent') ) {
+						var header = jQuery('.head-media');
+						if ( runFn ) {
 							if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-dark").length ) {
 								header.addClass('bg-dark');
 								navbar.removeClass("slide-bg-light").addClass("slide-bg-dark");
@@ -315,12 +317,12 @@ function mixt_head_media() {
 							mixt_post_meta(null);
 						}
 					}
-
-					// Scroll To Content Icon
-					if ( MIXT::get('header', 'scroll') ) {
-						echo "<span class='header-scroll icon {$options['scroll-icon']}'></span>";
-					}
 			echo '</div></div>';
+		}
+
+		// Scroll To Content Icon
+		if ( Mixt_Options::get('header', 'scroll') ) {
+			echo "<span class='header-scroll icon {$options['scroll-icon']}'></span>";
 		}
 
 	echo '</header>';

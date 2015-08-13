@@ -30,8 +30,9 @@ $class = $this->getExtraClass( $el_class );
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class, $this->settings['base'], $atts );
 $css_class .= $this->getCSSAnimation( $css_animation );
 
-// Enqueue needed icon font (except Font Awesome which is packaged with MIXT)
-if ( $type != 'fontawesome' ) vc_icon_element_fonts_enqueue( $type );
+// Enqueue needed icon font (except ones already loaded by MIXT)
+$mixt_fonts = Mixt_Options::get('assets', 'icon-fonts');
+if ( empty($mixt_fonts[$type]) || ! $mixt_fonts[$type] ) vc_icon_element_fonts_enqueue( $type );
 
 $url = vc_build_link( $link );
 $has_style = false;

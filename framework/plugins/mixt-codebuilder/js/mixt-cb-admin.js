@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
 				if ( attr == 'content' ) {
 					content = value;
 					return '';
-				} else if ( value !== '' ) {
+				} else if ( value !== '' && value != input.data('std') ) {
 					return attr + '="' + value + '"';
 				}
 			});
@@ -118,7 +118,7 @@ jQuery(document).ready(function() {
 				parent  = reqData[0],
 				reqType = reqData[1],
 				reqVal  = reqData[2].split('|');
-			jQuery('.mcb-input[data-attr="' + parent + '"]').on('change init', function() {
+			jQuery('.mcb-input[data-attr="' + parent + '"]').on('change', function() {
 				var parentVal = jQuery(this).val();
 				if ( reqType == '=' ) {
 					if ( jQuery.inArray(parentVal, reqVal) > -1 ) { row.slideDown(400).removeClass('disabled'); }
@@ -127,7 +127,7 @@ jQuery(document).ready(function() {
 					if ( jQuery.inArray(parentVal, reqVal) == -1 ) { row.slideDown(400).removeClass('disabled'); }
 					else { row.slideUp(300).addClass('disabled'); }
 				}
-			}).trigger('init');
+			}).trigger('change');
 		});
 	}
 
@@ -240,17 +240,19 @@ jQuery(document).ready(function() {
 					mediaLibrary();
 
 					// Multi input val
-					$('.mcb-multi-input').on('click', 'label input', function() {
+					$('.mcb-multi-input').on('click', '.mcb-child-input', function() {
 						var cont = $(this).parents('.mcb-multi-input'),
 							main = cont.children('.mcb-input'),
-							inputs = cont.find('.mcb-multi-child'),
+							inputs = cont.find('.mcb-child-input'),
 							value = $.map(inputs, function(el) {
-								var $el = $(el);
+								var $el = $(el),
+									val = $el.val();
 								if ( $el.is('.mcb-checkbox') ) {
-									return $el.is(':checked') ? $el.val() : '';
-								} else {
-									return $el.val();
+									if ( $el.not(':checked') ) val = '';
+								} else if ( ! _.isEmpty($el.data('child-attr')) && val !== '' ) {
+									val = $el.data('child-attr') + ':' + val;
 								}
+								return val;
 							});
 						main.val($.grep(value, Boolean).join(','));
 					});

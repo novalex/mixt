@@ -1,0 +1,59 @@
+
+// Pagination Styling
+
+.pager {
+	margin: $margin-l 0;
+
+	&, li, li a, li span { border-color: inherit; }
+	li a, li span { height: 34px; background-color: transparent; }
+	li a, li > span { font-size: 13px; border-radius: $bd-radius; }
+	i { vertical-align: middle; margin-right: 10px; }
+	.next i { margin-left: 10px; margin-right: 0; }
+}
+
+.numbered-paging {
+	.pager { text-align: center; }
+	li { display: inline-block; margin: 2px; }
+
+	@include media('screen', 'mars') {
+		li { margin: 0 0 0 -1px; }
+		li a, li span { border-radius: 0; }
+		li:first-child {
+			a, span { border-radius: $bd-radius 0 0 $bd-radius; }
+		}
+		li:last-child {
+			a, span { border-radius: 0 $bd-radius $bd-radius 0; }
+		}
+	}
+}
+
+.classic-paging .pager { text-align: left; }
+
+.post-navigation {
+	margin: 0 !important;
+	border-top-width: 1px;
+	border-top-style: solid;
+}
+
+.classic-paging,
+.post-navigation {
+	.pager {
+		margin: ($margin-m - $margin-s) 0 $margin-m;
+		li a {
+			height: auto;
+			min-height: 34px;
+			margin-top: $margin-s;
+		}
+	}
+}
+
+.ajax-page {
+	width: 100%;
+	display: block;
+	clear: both;
+
+	a {
+		display: inline-block;
+		padding: $padding-s 0;
+	}
+}

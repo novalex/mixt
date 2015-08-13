@@ -8,10 +8,11 @@
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
+
+// Load Modules
+foreach ( glob( __DIR__ . '/modules/*.php' ) as $file ) { require_once $file; }
 // Load Custom Fields
-foreach ( glob( __DIR__ . '/fields/*.php' ) as $filename ) {
-	require_once $filename;
-}
+foreach ( glob( __DIR__ . '/fields/*.php' ) as $file ) { require_once $file; }
 
 
 /**
@@ -27,6 +28,7 @@ function mixt_vc_extend() {
 			'heading'     => __( 'Row Separator', 'mixt' ),
 			'description' => __( 'Apply a separator to this row. Use inverted separators when using a background image for this row.', 'mixt' ),
 			'param_name'  => 'separator',
+			'std'         => '',
 			'value'       => array_flip(mixt_element_assets('row-separators')),
 		),
 		array(
@@ -68,6 +70,9 @@ function mixt_vc_extend() {
 
 	// Remove VC Image Carousel
 	vc_remove_element( 'vc_images_carousel' );
+
+	// Set Editor Post Types
+	vc_set_default_editor_post_types( array('page', 'post', 'portfolio') );
 }
 add_action( 'vc_before_init', 'mixt_vc_extend' );
 

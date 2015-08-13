@@ -1,0 +1,59 @@
+
+// Aqua Theme (Blue Accent)
+
+$theme-aqua: (
+	'aqua': (
+		'accent': #539ddd,
+		'bg-dark-accent': #539ddd,
+
+		'bg': #fff,
+		'bg-hover': darken(#fff, 5),
+
+		'color': #333,
+		'color-fade': #777,
+		'color-inv': #fff,
+		'color-inv-fade': #ddd,
+
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-bg': #fbfbfb,
+		'menu-expand': rgba(0,0,0,0.05),
+
+		'menu-border': #e2e2e2,
+		'menu-border-alpha': rgba(0,0,0,0.15),
+
+		'menu-color': #333,
+		'menu-color-fade': #777,
+	),
+
+	'nightly': (
+		'accent': #539ddd,
+		'bg-dark-accent': #539ddd,
+
+		'bg': #444,
+		'bg-hover': lighten(#444, 5),
+
+		'color': #333,
+		'color-fade': #777,
+		'color-inv': #fff,
+		'color-inv-fade': #ddd,
+
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-bg': #4a4a4a,
+		'menu-expand': rgba(0,0,0,0.05),
+
+		'menu-border': #333,
+		'menu-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-color': #eee,
+		'menu-color-fade': #bbb,
+	)
+);
+$themes: map-merge($themes, $theme-aqua);

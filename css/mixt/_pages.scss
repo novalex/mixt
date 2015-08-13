@@ -1,19 +1,12 @@
 
 // Specific Page Styling
 
-// Pricing Page
-.pricing-page-tables .mixt-pricing-inner {
-	border-width: 0;
-	.header { box-shadow: none !important; }
-}
-
 // Services Page
 .services-testimonial-carousel {
-	&,
-	.slider-item { width: 100%; }
 	blockquote { display: inline-block; }
 }
 @media screen and (max-width: 400px) {
+	.home-icons-row .col-xs-6,
 	.services-icons-row .col-xs-6 {
 		width: 100%;
 	}

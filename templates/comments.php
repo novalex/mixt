@@ -56,8 +56,7 @@ if ( comments_open() ) {
 
 	$commenter = wp_get_current_commenter();
 	$req       = get_option( 'require_name_email' );
-	$aria_req  = ( $req ? " aria-required='true'" : '' );
-	$required  = ' <span class="required">*</span>';
+	$aria_req  = $req ? ' required aria-required="true"' : '';
 
 	$logged_in_as = $comment_notes_before = $comment_notes_after = '';
 
@@ -71,28 +70,32 @@ if ( comments_open() ) {
 
 	if ( $options['notes-before'] ) {
 		$comment_notes_before = '<p class="comment-notes">' .
-			__( 'Your email address will not be published.', 'mixt' ) . ( $req ? __( ' Required fields are marked', 'mixt' ) . $required : '' ) .
+			__( 'Your email address will not be published.', 'mixt' ) . ( $req ? __( ' Required fields are marked *', 'mixt' ) : '' ) .
 		'</p>';
 	}
 
 	// Author Name, Email and Website Fields
+	$name_label = __( 'Name', 'mixt' ) . ( $req ? ' *' : '' );
+	$mail_label = __( 'Email', 'mixt' ) . ( $req ? ' *' : '' );
+	$site_label = __( 'Website', 'mixt' );
 	$author_fields = array(
 		'author' =>
 			'<p class="author-field comment-form-author">' .
-				'<label for="author">' . __( 'Name', 'mixt' ) . ( $req ? $required : '' ) . '</label>' .
-				'<input id="author" name="author" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author'] ) .
-				'" size="30"' . $aria_req . ' />' .
+				'<label for="author" class="sr-only">' . $name_label . '</label>' .
+				'<input id="author" name="author" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author'] ) . '" ' .
+				'placeholder="' . $name_label . '" size="30"' . $aria_req . ' />' .
 			'</p>',
 		'email' =>
 			'<p class="author-field comment-form-email">' .
-				'<label for="email">' . __( 'Email', 'mixt' ) . ( $req ? $required : '' ) . '</label>' .
-				'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) .
-				'" size="30"' . $aria_req . ' />' .
+				'<label for="email" class="sr-only">' . $mail_label . '</label>' .
+				'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' .
+				'placeholder="' . $mail_label . '" size="30"' . $aria_req . ' />' .
 			'</p>',
 		'url' =>
-			'<p class="author-field comment-form-url last"><label for="url">' . __( 'Website', 'mixt' ) . '</label>' .
-				'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) .
-				'" size="30" />' .
+			'<p class="author-field comment-form-url last">' .
+				'<label for="url" class="sr-only">' . $site_label . '</label>' .
+				'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" ' .
+				'placeholder="' . $site_label . '" size="30" />' .
 			'</p>',
 	);
 

@@ -1,8 +1,10 @@
 <?php
 
-// Carousel Element
+/**
+ * Carousel Element
+ */
+class Mixt_Carousel {
 
-class MixtCarousel {
 	function __construct() {
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -76,7 +78,7 @@ class MixtCarousel {
 						'auto' => __( 'Autoplay', 'mixt' ),
 						'loop' => _x( 'Loop', 'slider', 'mixt' ),
 					),
-					'std' => 'auto,loop',
+					'std' => '',
 				),
 				'speed' => array(
 					'type'  => 'text',
@@ -109,7 +111,7 @@ class MixtCarousel {
 						'dark-nav' => __( 'Dark Nav Buttons', 'mixt' ),
 						'eqslides' => __( 'Equal Slide Height', 'mixt' ),
 					),
-					'std' => 'nav,dark-nav',
+					'std' => '',
 				),
 				'action' => array(
 					'type'    => 'select',
@@ -160,30 +162,21 @@ class MixtCarousel {
 					'heading'     => __( 'Content', 'mixt' ),
 					'description' => __( 'Content for each slide, separated by 3 underscores (___)', 'mixt' ),
 					'param_name'  => 'content',
-					'dependency'  => array(
-						'element' => 'type',
-						'value' => array( 'html' )
-					),
+					'dependency'  => array( 'element' => 'type', 'value' => 'html' ),
 				),
 				array(
 					'type'        => 'attach_images',
 					'heading'     => __( 'Images', 'mixt' ),
 					'description' => __( 'Select images from library', 'mixt' ),
 					'param_name'  => 'images',
-					'dependency'  => array(
-						'element' => 'type',
-						'value' => array( 'img' )
-					),
+					'dependency'  => array( 'element' => 'type', 'value' => 'img' ),
 				),
 				array(
 					'type'        => 'textfield',
 					'heading'     => __( 'Image Size', 'mixt' ),
 					'description' => __( 'Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use "thumbnail" size. If used slides per view, this will be used to define carousel wrapper size.', 'js_composer' ),
 					'param_name'  => 'img_size',
-					'dependency'  => array(
-						'element' => 'type',
-						'value' => array( 'img' )
-					),
+					'dependency'  => array( 'element' => 'type', 'value' => 'img' ),
 				),
 				array(
 					'type'        => 'dropdown',
@@ -223,7 +216,7 @@ class MixtCarousel {
 						__( 'Autoplay', 'mixt' ) => 'auto',
 						_x( 'Loop', 'slider', 'mixt' ) => 'loop',
 					),
-					'std' => 'auto,loop',
+					'std' => '',
 				),
 				array(
 					'type'        => 'textfield',
@@ -261,7 +254,7 @@ class MixtCarousel {
 						__( 'Dark Nav Buttons', 'mixt' ) => 'dark-nav',
 						__( 'Equal Slide Height', 'mixt' ) => 'eqslides',
 					),
-					'std' => 'nav,dark-nav',
+					'std' => '',
 				),
 				array(
 					'type'        => 'dropdown',
@@ -278,10 +271,7 @@ class MixtCarousel {
 					'heading'     => __( 'Custom links', 'js_composer' ),
 					'description' => __( 'Enter links for each slide (Note: divide links with linebreaks (Enter)).', 'js_composer' ),
 					'param_name'  => 'links',
-					'dependency'  => array(
-						'element' => 'action',
-						'value' => array( 'custom' )
-					),
+					'dependency'  => array( 'element' => 'action', 'value' => 'custom' ),
 				),
 				array(
 					'type'       => 'textfield',
@@ -306,8 +296,8 @@ class MixtCarousel {
 			'mode'         => 'slide',
 			'style'        => 'plain',
 			'orient'       => 'horizontal',
-			'settings'     => 'auto,loop',
-			'ui_settings'  => 'nav,dark-nav',
+			'settings'     => '',
+			'ui_settings'  => '',
 			'speed'        => '5000',
 			'action'       => 'none',
 			'links'        => '',
@@ -425,7 +415,7 @@ class MixtCarousel {
 		return ob_get_clean();
 	}
 }
-new MixtCarousel;
+new Mixt_Carousel;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Carousel extends WPBakeryShortCode {}

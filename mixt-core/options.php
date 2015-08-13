@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIXT Options Framework
+ * Options Framework
  *
  * @package MIXT
  */
@@ -10,14 +10,14 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 
 /**
- * Theme configuration class with helper methods
+ * Theme configuration class
  */
-class MIXT {
+class Mixt_Options {
 	protected static $config = array();
 
 	// Initialize object and set options once all data becomes available
 	function __construct() {
-		add_action('get_header', array($this, 'init'));
+		add_action('wp', array($this, 'init'));
 	}
 
 	public function init() {
@@ -27,18 +27,23 @@ class MIXT {
 			'posts-page'     => self::is_posts_page(),
 			'show-admin-bar' => is_admin_bar_showing(),
 		));
-		self::add('page', $this->options('page'));
-		self::set('theme', null, $this->options('theme'));
-		self::set('nav', null, $this->options('nav'));
-		self::set('header', null, $this->options('header'));
-		self::set('layout', null, $this->options('layout'));
+		self::add('page', self::options('page'));
+		self::set('themes', null, self::options('themes'));
+		self::set('assets', null, self::options('assets'));
+		self::set('nav', null, self::options('nav'));
+		self::set('header', null, self::options('header'));
+		self::set('layout', null, self::options('layout'));
 	}
 
 	public static function get($group, $key = null) {
-		if ( $group == 'all' ) { return self::$config; }
-		else {
-			if ( empty($key) ) { return self::$config[$group]; }
-			else { return self::$config[$group][$key]; }
+		if ( $group == 'all' ) {
+			return self::$config;
+		} else {
+			if ( ! empty($key) ) {
+				if ( ! empty(self::$config[$group]) && array_key_exists($key, self::$config[$group]) ) { return self::$config[$group][$key]; }
+			}
+			else if ( array_key_exists($group, self::$config) ) { return self::$config[$group]; }
+			else { return array(); }
 		}
 	}
 	public static function set($group, $key, $val) {
@@ -49,7 +54,7 @@ class MIXT {
 		self::$config[$group] = array_merge(self::$config[$group], $val);
 	}
 
-	private function options($group) {
+	public static function options($group) {
 		$page_type = self::$config['page']['page-type'];
 		if ( $group == 'layout' && $page_type != 'blog' && self::$config['page']['posts-page'] ) {
 			global $mixt_opt;
@@ -58,9 +63,13 @@ class MIXT {
 		}
 
 		$options = array(
-			'theme' => array(
-				'site' => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => 'aqua' ),
-				'nav'  => array( 'key' => 'nav-theme', 'type' => 'str', 'return' => 'value', 'default' => 'aqua' ),
+			'themes' => array(
+				'site' => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
+				'nav'  => array( 'key' => 'nav-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
+				'sec-nav'  => array( 'key' => 'sec-nav-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
+			),
+			'assets' => array(
+				'icon-fonts' => array( 'return' => 'value' ),
 			),
 			'page' => array(
 				'page-loader'      => array(),
@@ -69,6 +78,7 @@ class MIXT {
 				'sidebar-id'       => array( 'type' => 'str', 'return' => 'value', 'default' => 'sidebar-1' ),
 				'sidebar-position' => array( 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
 				'location-bar'     => array(),
+				'child-page-nav'   => array(),
 			),
 			'nav' => array(
 				'mode'           => array( 'key' => 'nav-mode', 'return' => 'value' ),
@@ -123,7 +133,9 @@ class MIXT {
 		else if ( is_date() ) { return 'date'; }
 		else if ( is_search() ) { return 'search'; }
 		else if ( is_tag() ) { return 'tag'; }
+		else if ( is_tax() ) { return 'taxonomy'; }
 		else if ( self::is_blog() ) { return 'blog'; }
+		else if ( get_page_template_slug() == 'templates/one-page.php' ) { return 'onepage'; }
 		else { return 'single'; }
 	}
 	// Check if page is a blog page
@@ -131,12 +143,18 @@ class MIXT {
 		return ( ! is_front_page() && is_home() || get_page_template_slug() == 'templates/blog.php' );
 	}
 	// Check if page is a posts page
-	public static function is_posts_page() { return ( self::page_type() != 'single' ); }
+	public static function is_posts_page() {
+		$single_pages = array(
+			'single',
+			'onepage',
+		);
+		return ( ! in_array(self::page_type(), $single_pages) );
+	}
 
 	/**
 	 * WP get_post_meta() helper function
 	 */
-	public static function mixt_meta( $key, $id = null, $single = true ) {
+	public static function get_meta( $key, $id = null, $single = true ) {
 		if ( ! $id || $id == '' ) { $id = get_queried_object_id(); }
 		return get_post_meta( intval($id), $key, $single );
 	}
@@ -152,9 +170,14 @@ class MIXT {
 
 		$options = array();
 
-		$is_posts_page = self::$config['page']['posts-page'];
-		$page_type     = self::$config['page']['page-type'];
-		if ( $page_type != 'blog' ) { $page_type .= '-page'; }
+		if ( empty(self::$config['page']) ) {
+			$is_posts_page = false;
+			$page_type = 'single';
+		} else {
+			$is_posts_page = self::$config['page']['posts-page'];
+			$page_type     = self::$config['page']['page-type'];
+			if ( $page_type != 'blog' ) { $page_type .= '-page'; }
+		}
 
 		if ( ! empty($option_arr) && is_array($option_arr) ) {
 			foreach ( $option_arr as $k => $option ) {
@@ -173,8 +196,14 @@ class MIXT {
 				// Get Page Specific Option Value
 				$meta_key = '_mixt-' . $key;
 				if ( ! empty($post_id) ) { $page_value = get_post_meta($post_id, $meta_key, true); }
-				else if ( $is_posts_page && ! empty($mixt_opt[$page_type.'-'.$key]) ) { $page_value = $mixt_opt[$page_type.'-'.$key]; }
-				else { $page_value = get_post_meta(get_queried_object_id(), $meta_key, true); }
+				else if ( ! empty($mixt_opt[$page_type.'-'.$key]) ) { $page_value = $mixt_opt[$page_type.'-'.$key]; }
+				else {
+					if ( $is_posts_page && $page_type != 'blog' ) {
+						$page_value = null;
+					} else {
+						$page_value = get_post_meta(get_queried_object_id(), $meta_key, true);
+					}
+				}
 				
 				// Get Global Option Value
 				$global_value = isset( $mixt_opt[$key] ) ? $mixt_opt[$key] : '';
@@ -207,7 +236,7 @@ class MIXT {
 		return $options;
 	}
 }
-new MIXT;
+new Mixt_Options;
 
-function mixt_get_options($option_arr) { return MIXT::get_options($option_arr); }
-function mixt_meta($key, $post_id = null, $single = true) { return MIXT::mixt_meta($key, $post_id, $single); }
+function mixt_get_options($option_arr) { return Mixt_Options::get_options($option_arr); }
+function mixt_meta($key, $post_id = null, $single = true) { return Mixt_Options::get_meta($key, $post_id, $single); }

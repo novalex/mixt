@@ -10,68 +10,28 @@
 }
 
 
-// COLOR CLASSES
-
-.theme-color { color: $theme-color; }
-.theme-color-fade { color: $theme-color-fade; }
-.theme-color-inv { color: $theme-color-inv; }
-.theme-color-inv-fade { color: $theme-color-inv-fade; }
-
-.theme-bg-light-color { color: $theme-bg-light-color; }
-.theme-bg-light-color-fade { color: $theme-bg-light-color-fade; }
-.theme-bg-dark-color { color: $theme-bg-dark-color; }
-.theme-bg-dark-color-fade { color: $theme-bg-dark-color-fade; }
-
-.accent-color { color: $theme-accent; }
-.accent-bg {
-	color: set-color-for-bg($theme-accent);
-	background-color: $theme-accent;
-}
-
-.theme-bd { border-color: $theme-border; }
-.theme-accent-bd { border-color: $theme-accent; }
-
-.color-fade { @extend .theme-color-fade; }
-
-.bg-light {
-	color: $theme-bg-light-color;
-	.color-fade { color: $theme-bg-light-color-fade; }
-}
-.bg-dark {
-	color: $theme-bg-dark-color;
-	.color-fade { color: $theme-bg-dark-color-fade; }
-}
-
-
 // COLOR VARIANTS
 
-.basic-color-bg-variants {
+%basic-color-text-variants {
+	@each $sel, $color in $basic-colors {
+		&.#{$sel} {
+			color: $color;
+		}
+	}
+}
+%basic-color-bg-variants {
 	@each $sel, $color in $basic-colors {
 		&.#{$sel} {
 			color: set-color-for-bg($color);
 			border-color: darken($color, 10);
 			background-color: $color;
 			@include text-shadow-for-bg($color);
-
-			.color-fade { color: color-fade-for-bg($color); }
 		}
 	}
 }
-.basic-color-outline-variants {
+%basic-color-border-variants {
 	@each $sel, $color in $basic-colors {
-		&.#{$sel} {
-			color: $color;
-			border-color: $color;
-
-			.color-fade { color: $color; opacity: 0.8; }
-		}
-	}
-}
-.basic-color-border-variants {
-	@each $sel, $color in $basic-colors {
-		&.#{$sel} {
-			border-color: $color;
-		}
+		&.#{$sel} { border-color: $color; }
 	}
 }
 
@@ -109,6 +69,7 @@
 	%bd-radius-bottom { border-radius: 0 0 $bd-radius $bd-radius; }
 
 	.no-border { border: 0 !important; }
+	.no-border-rad { border-radius: 0 !important; }
 
 
 // SPACING
@@ -133,6 +94,8 @@ $spacing-margin-sizes: (
 %reset-list {
 	padding-left: 0;
 	list-style: none;
+
+	li:not(:last-child) { margin: 0; }
 }
 
 // IFRAME FLUID
@@ -163,3 +126,5 @@ $spacing-margin-sizes: (
 
 .text-shadow-inset { text-shadow: 0 1px 1px rgba(255,255,255,0.1); }
 .text-shadow-outset { text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+
+.bg-fixed { background-attachment: fixed; }

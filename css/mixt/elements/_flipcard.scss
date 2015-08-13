@@ -2,6 +2,8 @@
 // Flip Card
 
 .mixt-flipcard {
+	$spacing: $padding-m;
+
 	cursor: pointer;
 	perspective: 1000px;
 
@@ -11,19 +13,19 @@
 	&.hover {
 		user-select: none;
 		-webkit-touch-callout: none;
-		.inner {
+		> .inner {
 			transform: rotateX(180deg);
 		}
 	}
 
-	.inner {
+	> .inner {
 		position: relative;
 		transition: transform 0.4s ease-out 0.1s;
 		transform-style: preserve-3d;
 
 		> div {
 			height: auto;
-			padding: $padding-m;
+			padding: $spacing;
 			text-align: center;
 			@extend .flex-middle;
 			flex-direction: column;
@@ -35,6 +37,9 @@
 
 			> :last-child { margin-bottom: 0; }
 		}
+
+		.mixt-element,
+		.wpb_content_element { margin-bottom: $spacing; }
 	}
 
 	.front {
@@ -52,20 +57,20 @@
 		&:hover,
 		&:focus,
 		&.hover {
-			.inner { transform: rotateY(180deg); }
+			> .inner { transform: rotateY(180deg); }
 		}
 		.front { transform: rotateY(0deg); }
 		.back { transform: rotateY(180deg); }
 	}
 
-	.inner, .front, .back { width: 100%; }
+	> .inner, .front, .back { width: 100%; }
 
-	&.no-border .inner > div { border: 0; }
+	&.no-border > .inner > div { border: 0; }
 
 	// Color Variations
 
 	@mixin flipcard-color($sel, $color) {
-		.inner > .#{$sel} {
+		> .inner > .#{$sel} {
 			color: set-color-for-bg($color);
 			background-color: $color;
 			border-color: darken($color, 10);

@@ -1,0 +1,93 @@
+
+// Google Map
+
+.mixt-map {
+	width: 100%;
+	position: relative;
+	color: $theme-bg-light-color;
+
+	iframe {
+		width: 100% !important;
+		height: 100% !important;
+		border: 0 !important;
+	}
+
+	// Disable map scrolling on small screens
+	@include media('screen', '<mars') {
+		&, iframe {
+			pointer-events: none;
+		}
+	}
+
+	$border-width: 5px;
+	$outline-width: 5px;
+
+	// Styles
+
+	// Bordered
+	&.map-border,
+	&.map-outline {
+		border-width: 1px;
+		border-style: solid;
+	}
+	&.map-border {
+		border-width: $border-width;
+	}
+
+	// Outline
+	&.map-outline {
+		padding: $outline-width;
+	}
+
+	// Eclipse
+	&.map-eclipse {
+		&:after {
+			content: ' ';
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			border-radius: inherit;
+			box-shadow: inset 0 0 0 $border-width rgba(255,255,255,0.4);
+		}
+	}
+
+	// Shadow
+	&.map-shadow {
+		box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+	}
+
+	// Rounded
+	&.map-rounded {
+		overflow: hidden;
+		border-radius: $rounded-radius;
+		z-index: 1;
+	}
+
+	// 3D Shadow
+	&.map-shadow-3d {
+		max-width: 100%;
+		display: inline-block;
+		margin-bottom: 15px;
+		overflow: visible;
+		z-index: 0;
+		&:after,
+		&:before {
+			content: ' ';
+			height: 30%;
+			position: absolute;
+			left: 5px; right: 50%; bottom: 8px;
+			border-radius: inherit;
+			transform-origin: 0 0;
+			transform: skewY(-6deg);
+			box-shadow: 0 15px 10px rgba(0,0,0,0.4);
+			z-index: -1;
+		}
+		&:after {
+			left: 50%; right: 5px;
+			transform-origin: 100% 0;
+			transform: skewY(6deg);
+		}
+	}
+	
+	// Color Variants
+	@extend %basic-color-border-variants;
+}

@@ -73,3 +73,111 @@ $bp-earth:   1200px;
 @mixin highlight($alpha:0.4) {
 	box-shadow: inset 0 1px 1px rgba(255,255,255,$alpha);
 }
+
+
+// ARROWS
+
+// Border Arrow
+// Based on http://codepen.io/MichaelArestad/pen/IxFGj
+@mixin border-arrow($dir: top, $size: 10px, $color: auto, $origin: 50%, $margin: -1px, $pseudo: before) {
+	position: relative;
+
+	@if $color != auto {
+		border-color: $color;
+	}
+
+	&:#{$pseudo} {
+		content: ' ';
+		position: absolute;
+		width: 0; height: 0;
+		border-color: inherit;
+
+		@if $dir == top {
+			left: $origin;
+			bottom: 100%;
+			margin-left: $size * -1;
+			margin-bottom: $margin;
+			border-left: $size solid transparent;
+			border-right: $size solid transparent;
+			border-bottom: $size solid transparent;
+			border-bottom-color: inherit;
+		} @else if $dir == left {
+			top: $origin;
+			right: 100%;
+			margin-right: $margin;
+			margin-top: $size * -1;
+			border-top: $size solid transparent;
+			border-bottom: $size solid transparent; 
+			border-right: $size solid transparent;
+			border-right-color: inherit;
+		} @else if $dir == right {
+			top: $origin;
+			left: 100%;
+			margin-top: $size * -1;
+			margin-left: $margin;
+			border-top: $size solid transparent;
+			border-bottom: $size solid transparent;
+			border-left: $size solid transparent;
+			border-left-color: inherit;
+		} @else {
+			top: 100%;
+			left: $origin;
+			margin-top: $margin;
+			margin-left: $size * -1;
+			border-left: $size solid transparent;
+			border-right: $size solid transparent;
+			border-top: $size solid transparent;
+			border-top-color: inherit;
+		}
+	}
+}
+
+// Square Arrow
+@mixin square-arrow($dir: top, $size: 10px, $bg: none, $border: none, $origin: 50%, $offset: $size / -2, $pseudo: before) {
+	position: relative;
+
+	&:#{$pseudo} {
+		content: ' ';
+		position: absolute;
+		width: $size; height: $size;
+		border-width: 1px;
+		border-style: solid;
+		border-color: transparent;
+
+		@if $border != none {
+			border-color: $border;
+		}
+
+		@if $bg != none {
+			background-color: $bg;
+		}
+
+		transform: rotate(45deg);
+
+		@if $dir == top {
+			left: $origin;
+			top: $size / -2;
+			margin-left: $offset;
+			border-right-width: 0;
+			border-bottom-width: 0;
+		} @else if $dir == left {
+			top: $origin;
+			left: $size / -2;
+			margin-top: $offset;
+			border-top-width: 0;
+			border-right-width: 0;
+		} @else if $dir == right {
+			top: $origin;
+			right: $size / -2;
+			margin-top: $offset;
+			border-left-width: 0;
+			border-bottom-width: 0;
+		} @else {
+			left: $origin;
+			bottom: $size / -2;
+			margin-left: $offset;
+			border-top-width: 0;
+			border-left-width: 0;
+		}
+	}
+}

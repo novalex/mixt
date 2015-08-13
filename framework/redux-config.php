@@ -202,13 +202,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
 
 			// Themes
-			$preset_themes = mixt_default_themes('names');
+			$site_themes = $nav_themes = '';
+			$themes_enabled = get_option('mixt-themes-enabled', true);
+			if ( $themes_enabled ) {
+				$themes_ob = new Mixt_Themes;
+				$preset_themes = $themes_ob->default_themes['names'];
 
-			$site_themes = ! empty(mixt_get_themes('site')) ? mixt_get_themes('site') : $preset_themes;
-			$site_default_themes = mixt_default_themes('site');
+				$site_themes = ! empty(mixt_get_themes('site')) ? mixt_get_themes('site') : $preset_themes;
+				$site_default_themes = $themes_ob->default_themes['site'];
 
-			$nav_themes = ! empty(mixt_get_themes('nav')) ? mixt_get_themes('nav') : $preset_themes;
-			$nav_default_themes = mixt_default_themes('nav');
+				$nav_themes = ! empty(mixt_get_themes('nav')) ? mixt_get_themes('nav') : $preset_themes;
+				$nav_default_themes = $themes_ob->default_themes['nav'];
+			}
 
 			// Image Patterns
 			$img_patterns = mixt_get_images('patterns');
@@ -246,7 +251,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					'fullwidth' => 'auto',
 					'sidebar'   => 'auto',
 					'inherit'   => false,
-					'type'      => 'grid',
+					'type'      => 'standard',
 					'columns'   => '3',
 					'feat-show' => true,
 					'feat-size' => 'blog-small',
@@ -417,28 +422,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'title'    => __( 'Site Theme', 'mixt' ),
 						'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
 						'options'  => $site_themes,
-						'default'  => 'aqua',
-					),
-
-					// Site Typography
-					array(
-						'id'          => 'site-font',
-						'type'        => 'typography',
-						'title'       => __( 'Main Font', 'mixt' ),
-						'subtitle'    => __( 'Select the font to use site-wide', 'mixt' ),
-						'google'      => true,
-						'font-backup' => true,
-						'color'       => false,
-						'line-height' => false,
-						'text-align'  => false,
-						'font-size'   => false,
-						'font-style'  => false,
-						'font-weight' => false,
-						'units'       => 'px',
-						'default'     => array(
-							'font-family' => 'Roboto',
-							'google'      => true,
-						),
+						'default'  => MIXT_THEME,
 					),
 
 					// Background Pattern
@@ -515,7 +499,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
 							'required'    => array( 'page-loader-type', '=', '1' ),
 							'transparent' => false,
-							'default'     => '#ffffff',
+							'default'     => '#333333',
 							'validate'    => 'color',
 						),
 
@@ -537,7 +521,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle'    => __( 'The page loader background color', 'mixt' ),
 							'required'    => array( 'page-loader', '=', true ),
 							'transparent' => false,
-							'default'     => '#539DDD',
+							'default'     => '#ffffff',
 							'validate'    => 'color',
 						),
 
@@ -566,6 +550,32 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Configure which modules &amp; plugins to load', 'mixt' ),
 						'indent'   => true,
 					),
+
+						// Icon Fonts
+						array(
+							'id'       => 'icon-fonts',
+							'type'     => 'checkbox',
+							'title'    => __( 'Icon Font Sets', 'mixt' ),
+							'subtitle' => __( 'Select which icon font sets you want to use.', 'mixt' ),
+							'options'  => array(
+								'fontawesome' => __( 'Font Awesome', 'mixt' ),
+								'linecons'    => __( 'Linecons', 'mixt' ),
+							),
+							'default'  => array(
+								'fontawesome' => '1',
+							),
+						),
+
+						// Themes Master Switch
+						array(
+							'id'       => 'themes-master',
+							'type'     => 'switch',
+							'title'    => __( 'Enable Themes', 'mixt' ),
+							'subtitle' => __( 'Add theme sections and management. Disable if customizing themes in CSS directly.', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
 
 						// Dynamic Stylesheet Mode
 						array(
@@ -1115,7 +1125,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'           => 'typography',
 							'title'          => __( 'Text Style', 'mixt' ),
 							'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
-							'required'       => array( 'logo-type', '=', 'text' ),
 							'google'         => true,
 							'font-backup'    => true,
 							'line-height'    => false,
@@ -1123,14 +1132,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'text-transform' => true,
 							'units'          => 'px',
 							'default'        => array(
-								'color'       => '#333333',
-								'font-weight' => '500',
-								'font-family' => 'Open Sans',
-								'font-backup' => '',
-								'google'      => true,
-								'font-size'   => '24px',
-								'text-transform' => '',
+								'color'  => '#333333',
+								'google' => false,
 							),
+							'required'       => array( 'logo-type', '=', 'text' ),
 						),
 
 						// Text Inverse Color
@@ -1174,6 +1179,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Tagline Text', 'mixt' ),
 							'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
 							'required' => array( 'logo-show-tagline', '=', true ),
+						),
+
+						// Tagline Style
+						array(
+							'id'             => 'logo-tagline-typo',
+							'type'           => 'typography',
+							'title'          => __( 'Tagline Style', 'mixt' ),
+							'google'         => true,
+							'font-backup'    => true,
+							'line-height'    => false,
+							'text-align'     => false,
+							'text-transform' => true,
+							'units'          => 'px',
+							'default'        => array(
+								'color'  => '#333333',
+								'google' => false,
+							),
+							'required'       => array( 'logo-show-tagline', '=', true ),
 						),
 
 					// Divider
@@ -1308,7 +1331,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Theme', 'mixt' ),
 							'subtitle' => __( 'Select the theme for the primary navbar', 'mixt' ),
 							'options'  => $nav_themes,
-							'default'  => 'aqua',
+							'default'  => MIXT_THEME,
 						),
 
 						// Texture
@@ -1331,6 +1354,19 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'min'           => 0,
 							'max'           => 50,
 							'display_value' => 'text',
+						),
+
+						// Fixed Padding
+						array(
+							'id'            => 'nav-fixed-padding',
+							'type'          => 'slider',
+							'title'         => __( 'Padding When Fixed', 'mixt' ),
+							'subtitle'      => __( 'Set the navbar\'s padding (in px) when fixed', 'mixt' ),
+							'default'       => 0,
+							'min'           => 0,
+							'max'           => 50,
+							'display_value' => 'text',
+							'required'      => array('nav-mode', '=', 'fixed'),
 						),
 
 						// Opacity
@@ -1659,6 +1695,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'right',
 					),
 
+					// Child Page Navigation
+					array(
+						'id'       => 'child-page-nav',
+						'type'     => 'switch',
+						'title'    => __( 'Child Pages Menu', 'mixt' ),
+						'subtitle' => __( 'Display a navigation menu of child pages in the sidebar, when available', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
 					// Additional Sidebars
 					array(
 						'id'       => 'reg-sidebars',
@@ -1852,7 +1899,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$this->sections[] = postsPageFields('author', 'user', array( 'meta-show' => 'false' ));
 
 			// CATEGORY PAGE SECTION
-			$this->sections[] = postsPageFields('category', 'folder-close');
+			$this->sections[] = postsPageFields('category', 'folder-open');
 
 			// DATE PAGE SECTION
 			$this->sections[] = postsPageFields('date', 'time');
@@ -1862,6 +1909,9 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// TAG PAGE SECTION
 			$this->sections[] = postsPageFields('tag', 'tag');
+
+			// TAXONOMY PAGE SECTION
+			$this->sections[] = postsPageFields('taxonomy', 'tags', array( 'post-info' => false ));
 
 
 			// POSTS SECTION
@@ -1883,17 +1933,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => false,
 					),
 
-					// About The Author
-					array(
-						'id'       => 'post-about-author',
-						'type'     => 'switch',
-						'title'    => __( 'About The Author', 'mixt' ),
-						'subtitle' => __( 'Show info about the author', 'mixt' ),
-						'on'       => __( 'Yes', 'mixt' ),
-						'off'      => __( 'No', 'mixt' ),
-						'default'  => false,
-					),
-
 					// Post Navigation
 					array(
 						'id'       => 'post-navigation',
@@ -1903,6 +1942,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
 						'default'  => false,
+					),
+
+					// About The Author
+					array(
+						'id'       => 'post-about-author',
+						'type'     => 'switch',
+						'title'    => __( 'About The Author', 'mixt' ),
+						'subtitle' => __( 'Show info about the author', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
 					),
 
 					// Divider
@@ -2357,182 +2407,259 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 
 			// THEMES SECTION
-			$this->sections[] = array(
-				'title'      => __( 'Themes', 'mixt' ),
-				'desc'       => __( 'Create and manage site-wide themes', 'mixt' ),
-				'icon'       => 'el-icon-leaf',
-				'customizer' => false,
-				'fields'     => array(
 
-					array(
-						'id'       => 'site-themes',
-						'type'     => 'multi_input',
-						'no_title' => true,
-						'sortable' => true,
-						'add_text' => __( 'New Theme', 'mixt' ),
-						'inputs'   => array(
+			if ( $themes_enabled ) {
 
-							// Theme Name
-							'name' => array(
-								'type'       => 'text',
-								'icon'       => 'el-icon-brush',
-								'label'      => __( 'Theme Name', 'mixt' ),
-								'wrap_class' => 'theme-name',
+				// SITE-WIDE THEMES SECTION
+				$this->sections[] = array(
+					'title'      => __( 'Themes', 'mixt' ),
+					'desc'       => __( 'Create and manage site-wide themes', 'mixt' ),
+					'icon'       => 'el-icon-leaf',
+					'customizer' => false,
+					'fields'     => array(
+
+						array(
+							'id'       => 'site-themes',
+							'type'     => 'multi_input',
+							'no_title' => true,
+							'sortable' => true,
+							'add_text' => __( 'New Theme', 'mixt' ),
+							'inputs'   => array(
+
+								// Theme Name
+								'name' => array(
+									'type'       => 'text',
+									'icon'       => 'el-icon-brush',
+									'label'      => __( 'Theme Name', 'mixt' ),
+									'wrap_class' => 'theme-name',
+								),
+
+								// Theme ID
+								'id' => array(
+									'type'       => 'group-id',
+									'icon'       => 'el-icon-tags',
+									'label'      => __( 'Theme ID', 'mixt' ),
+									'wrap_class' => 'theme-id',
+								),
+
+								// Background Color
+								'bg' => array(
+									'type'  => 'color',
+									'label' => __( 'Background Color', 'mixt' ),
+								),
+
+								// Border Color
+								'border' => array(
+									'type'  => 'color',
+									'label' => __( 'Border Color', 'mixt' ),
+								),
+
+								// Text Color
+								'text' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color' ),
+								),
+
+								// Text Color Fade
+								'text-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color Fade' ),
+								),
+
+								// Text Inverse Color
+								'inv-text' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color' ),
+								),
+
+								// Text Inverse Color Fade
+								'inv-text-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Fade' ),
+								),
+
+								// Accent
+								'accent' => array(
+									'type'  => 'color',
+									'label' => __( 'Accent', 'mixt' ),
+								),
+
+								// Link Color
+								'link' => array(
+									'type'  => 'color',
+									'label' => __( 'Link Color', 'mixt' ),
+								),
 							),
-
-							// Theme ID
-							'id' => array(
-								'type'       => 'group-id',
-								'icon'       => 'el-icon-tags',
-								'label'      => __( 'Theme ID', 'mixt' ),
-								'wrap_class' => 'theme-id',
-							),
-
-							// Text Color
-							'text' => array(
-								'type'  => 'color',
-								'label' => __( 'Text Color' ),
-							),
-
-							// Text Color Fade
-							'text-fade' => array(
-								'type'  => 'color',
-								'label' => __( 'Text Color Fade' ),
-							),
-
-							// Text Inverse Color
-							'inv-text' => array(
-								'type'  => 'color',
-								'label' => __( 'Inverse Text Color' ),
-							),
-
-							// Text Inverse Color Fade
-							'inv-text-fade' => array(
-								'type'  => 'color',
-								'label' => __( 'Inverse Text Fade' ),
-							),
-
-							// Border Color
-							'border' => array(
-								'type'  => 'color',
-								'label' => __( 'Border Color', 'mixt' ),
-							),
-
-							// Accent
-							'accent' => array(
-								'type'  => 'color',
-								'label' => __( 'Accent', 'mixt' ),
-							),
-
-							// Link Color
-							'link' => array(
-								'type'  => 'color',
-								'label' => __( 'Link Color', 'mixt' ),
-							),
+							'default' => $site_default_themes,
 						),
-						'default' => $site_default_themes,
 					),
-				),
-			);
+				);
 
-			// Navbar THEMES SECTION
-			$this->sections[] = array(
-				'title'      => __( 'Navbar Themes', 'mixt' ),
-				'desc'       => __( 'Create and manage themes for the navbar', 'mixt' ),
-				'icon'       => 'el-icon-minus',
-				'customizer' => false,
-				'subsection' => true,
-				'fields'     => array(
+				// NAVBAR THEMES SECTION
+				$this->sections[] = array(
+					'title'      => __( 'Navbar Themes', 'mixt' ),
+					'desc'       => __( 'Create and manage themes for the navbar', 'mixt' ),
+					'icon'       => 'el-icon-minus',
+					'customizer' => false,
+					'subsection' => true,
+					'fields'     => array(
 
-					array(
-						'id'       => 'nav-themes',
-						'type'     => 'multi_input',
-						'no_title' => true,
-						'sortable' => true,
-						'add_text' => __( 'New Theme', 'mixt' ),
-						'inputs'   => array(
+						array(
+							'id'       => 'nav-themes',
+							'type'     => 'multi_input',
+							'no_title' => true,
+							'sortable' => true,
+							'add_text' => __( 'New Theme', 'mixt' ),
+							'inputs'   => array(
 
-							// Theme Name
-							'name' => array(
-								'type'       => 'text',
-								'icon'       => 'el-icon-brush',
-								'label'      => __( 'Theme Name', 'mixt' ),
-								'wrap_class' => 'theme-name',
+								// Theme Name
+								'name' => array(
+									'type'       => 'text',
+									'icon'       => 'el-icon-brush',
+									'label'      => __( 'Theme Name', 'mixt' ),
+									'wrap_class' => 'theme-name',
+								),
+
+								// Theme ID
+								'id' => array(
+									'type'       => 'group-id',
+									'icon'       => 'el-icon-tags',
+									'label'      => __( 'Theme ID', 'mixt' ),
+									'wrap_class' => 'theme-id',
+								),
+
+								// Background Color
+								'bg' => array(
+									'type'  => 'color',
+									'label' => __( 'Background Color', 'mixt' ),
+								),
+
+								// Border Color
+								'border' => array(
+									'type'  => 'color',
+									'label' => __( 'Border Color', 'mixt' ),
+								),
+
+								// Text Color
+								'text' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color' ),
+								),
+
+								// Inverse Text Color
+								'inv-text' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color' ),
+								),
+
+								// Accent
+								'accent' => array(
+									'type'  => 'color',
+									'label' => __( 'Accent', 'mixt' ),
+								),
+
+								// Inverse Accent
+								'inv-accent' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Accent', 'mixt' ),
+								),
+
+								// Menu Background Color
+								'menu-bg' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Background', 'mixt' ),
+								),
+
+								// Menu Border Color
+								'menu-border' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Border', 'mixt' ),
+								),
+
+								// RGBA Check
+								'rgba' => array(
+									'type'       => 'checkbox',
+									'label'      => __( 'Enable RGBA', 'mixt' ),
+									'wrap_class' => 'rgba-field',
+								),
 							),
-
-							// Theme ID
-							'id' => array(
-								'type'       => 'group-id',
-								'icon'       => 'el-icon-tags',
-								'label'      => __( 'Theme ID', 'mixt' ),
-								'wrap_class' => 'theme-id',
-							),
-
-							// Background Color
-							'bg' => array(
-								'type'  => 'color',
-								'label' => __( 'Background Color', 'mixt' ),
-							),
-
-							// Border Color
-							'border' => array(
-								'type'  => 'color',
-								'label' => __( 'Border Color', 'mixt' ),
-							),
-
-							// Text Color
-							'text' => array(
-								'type'  => 'color',
-								'label' => __( 'Text Color' ),
-							),
-
-							// Inverse Text Color
-							'inv-text' => array(
-								'type'  => 'color',
-								'label' => __( 'Inverse Text Color' ),
-							),
-
-							// Accent
-							'accent' => array(
-								'type'  => 'color',
-								'label' => __( 'Accent', 'mixt' ),
-							),
-
-							// Inverse Accent
-							'inv-accent' => array(
-								'type'  => 'color',
-								'label' => __( 'Inverse Accent', 'mixt' ),
-							),
-
-							// Menu Background Color
-							'menu-bg' => array(
-								'type'  => 'color',
-								'label' => __( 'Menu Background', 'mixt' ),
-							),
-
-							// Menu Border Color
-							'menu-border' => array(
-								'type'  => 'color',
-								'label' => __( 'Menu Border', 'mixt' ),
-							),
-
-							// RGBA Check
-							'rgba' => array(
-								'type'       => 'checkbox',
-								'label'      => __( 'Enable RGBA', 'mixt' ),
-								'wrap_class' => 'rgba-field',
-							),
+							'default' => $nav_default_themes,
 						),
-						'default' => $nav_default_themes,
 					),
-				),
-			);
+				);
+
+			}
+			// END THEMES SECTION
+
 
 			// TYPOGRAPHY
 			$this->sections[] = array(
-				'title'   => __( 'Typography', 'mixt' ),
-				'icon'    => 'el-icon-font',
+				'title'      => __( 'Typography', 'mixt' ),
+				'desc'       => __( 'Manage the site\'s typography options and fonts.', 'mixt' ),
+				'icon'       => 'el-icon-font',
+				'customizer' => false,
 				'fields'  => array(
+
+					// Site-Wide Font
+					array(
+						'id'          => 'font-sitewide',
+						'type'        => 'typography',
+						'title'       => __( 'Main Font', 'mixt' ),
+						'subtitle'    => __( 'Select the font to use site-wide', 'mixt' ),
+						'google'      => true,
+						'font-backup' => true,
+						'color'       => false,
+						'line-height' => false,
+						'text-align'  => false,
+						'font-size'   => false,
+						'font-style'  => false,
+						'font-weight' => false,
+						'units'       => 'px',
+						'default'     => array(
+							'google'      => false,
+						),
+					),
+
+					// Nav Font
+					array(
+						'id'          => 'font-nav',
+						'type'        => 'typography',
+						'title'       => __( 'Nav Menu Font', 'mixt' ),
+						'subtitle'    => __( 'Select the font to use for the navigation menu', 'mixt' ),
+						'google'      => true,
+						'font-backup' => true,
+						'color'       => false,
+						'line-height' => false,
+						'text-align'  => false,
+						'font-size'   => true,
+						'font-style'  => false,
+						'font-weight' => true,
+						'text-transform' => true,
+						'units'       => 'px',
+						'default'     => array(
+							'google'      => false,
+						),
+					),
+
+					// Heading Font
+					array(
+						'id'          => 'font-heading',
+						'type'        => 'typography',
+						'title'       => __( 'Heading Font', 'mixt' ),
+						'subtitle'    => __( 'Select the font to use for headings', 'mixt' ),
+						'google'      => true,
+						'font-backup' => true,
+						'color'       => false,
+						'line-height' => true,
+						'text-align'  => false,
+						'font-size'   => false,
+						'font-style'  => true,
+						'font-weight' => false,
+						'units'       => 'px',
+						'default'     => array(
+							'google'      => false,
+						),
+					),
 
 					// Web Fonts
 					array(

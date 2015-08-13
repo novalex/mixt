@@ -87,12 +87,13 @@ $sec-nav-item-height: 32px;
 
 		// Logo Tagline
 		small {
-			margin-left: 15px;
+			margin-left: 5px;
 			display: inline-block;
 		}
 
-		strong, img {
+		strong, img, small {
 			max-width: 240px;
+			line-height: 1;
 			vertical-align: middle;
 		}
 	}
@@ -101,7 +102,7 @@ $sec-nav-item-height: 32px;
 	.nav > li > a,
 	.no-menu-msg {
 		height: $nav-primary-item-height;
-		line-height: $nav-primary-item-height - 2px;
+		line-height: $nav-primary-item-height;
 	}
 
 	// Nav Menu
@@ -163,7 +164,7 @@ $sec-nav-item-height: 32px;
 
 // Primary Navbar Below Header Position
 .nav-below.nav-transparent .navbar-mixt.position-top {
-	margin-top: ($nav-primary-height * -1);
+	margin-top: -$nav-primary-height;
 }
 
 // Primary Navbar Fixed State
@@ -171,7 +172,15 @@ $sec-nav-item-height: 32px;
 	.navbar-mixt {
 		padding: 0;
 		margin-top: 0 !important;
+		border-bottom-width: 0;
 		z-index: 9999;
+
+		.nav > .active > a:before { bottom: 0; }
+
+		.menu-item:hover,
+		.menu-item.hover {
+			> .dropdown-menu { margin-top: -1px; }
+		}
 	}
 }
 
@@ -512,8 +521,7 @@ $sec-nav-item-height: 32px;
 			opacity: 1;
 			margin: 0 !important;
 			background-color: transparent !important;
-			box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
-			-webkit-box-shadow: inset 0 1px 6px rgba(0,0,0,0.1) !important;
+			box-shadow: inset 0 1px 4px rgba(0,0,0,0.06) !important;
 
 			li > a,
 			li .menu-item > a,
@@ -589,7 +597,6 @@ $sec-nav-item-height: 32px;
 				display: block;
 				width: 100%;
 				box-shadow: none !important;
-				-webkit-box-shadow: none !important;
 			}
 
 			input { padding-left: 40px; }
@@ -646,7 +653,7 @@ $sec-nav-item-height: 32px;
 			position: fixed;
 			top: 0; left: 0; right: 0;
 			padding: 0;
-			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 		}
 
 		&.admin-bar .navbar-mixt { top: 32px; }

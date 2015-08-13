@@ -1,0 +1,108 @@
+
+// Standard Blog Styling
+
+.blog-standard {
+	.blog-post {
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+
+		&:after {
+			content: " ";
+			display: table;
+			clear: both;
+		}
+
+		.post-feat {
+
+			&.feat-format { display: inline-block; }
+
+			// Featured Sizes
+
+			$blog-large-w: 900px;
+			$blog-large-h: 600px;
+			$blog-medium-w: 320px;
+			$blog-medium-h: 240px;
+			$blog-small-w: 120px;
+			$blog-small-h: 120px;
+
+			&.feat-blog-large {
+				max-width: $blog-large-w;
+				max-height: $blog-large-h;
+
+				img,
+				.lightbox-trigger { width: auto; }
+			}
+
+			&.feat-blog-medium {
+				max-width: $blog-medium-w;
+				max-height: $blog-medium-h;
+
+				&.post-video > div,
+				&.post-video > iframe {
+					min-width: $blog-medium-w;
+				}
+			}
+
+			&.feat-blog-small {
+				max-width: $blog-small-w;
+				max-height: $blog-small-h;
+
+				&.feat-format {
+					width: $blog-small-w;
+					height: $blog-small-h;
+					line-height: $blog-small-h - 4px;
+				}
+			}
+
+			&.feat-blog-medium,
+			&.feat-blog-small {
+				float: left;
+				margin-right: $margin-m;
+				margin-bottom: $margin-s;
+			}
+		}
+	}
+	.has-info .post-feat { margin-top: $margin-m; }
+
+	.ajax-page {
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+		border-color: inherit;
+	}
+
+	@include media('screen', 'mars') {
+		.has-info {
+			position: relative;
+			padding-left: 100px;
+			min-height: 143px;
+
+			.post-feat { margin-top: 0; }
+		}
+		.post-info {
+			position: absolute;
+			top: 0; left: 0;
+			width: 80px;
+			display: block;
+			overflow: hidden;
+
+			> a {
+				display: block;
+				border-left-width: 0;
+				border-top-width: 1px;
+				font-size: $font-size;
+
+				&:first-child { border-top-width: 0; }
+			}
+
+			.post-format i { font-size: 23px; }
+
+			.post-date strong {
+				display: block;
+				line-height: 1;
+				margin-right: 0;
+				margin-bottom: 5px;
+				font-size: $font-size-xxl;
+			}
+		}
+	}
+}

@@ -2,26 +2,35 @@
 // Profile
 
 .mixt-profile {
+	$spacing: $margin-s;
+	
 	.header {
+		text-align: left;
+
 		.name {
 			float: left;
 			line-height: 1.4;
+			margin-top: $spacing;
 			font-size: $font-size-l;
-			margin-top: $margin-s;
 
 			small { font-size: $font-size-s; }
 			&:not(:last-child) { padding-right: 10px; }
 		}
 		.profile-social {
 			float: right;
-			margin-top: $margin-s + 5px;
+			margin-top: $spacing + 5px;
 		}
 
-		&:first-child { margin-top: - $margin-s; }
+		&:first-child { margin-top: -$spacing; }
 	}
 
-	.desc {
-		margin-top: $margin-s;
-		margin-bottom: 0;
+	.content {
+		text-align: left;
+		margin-top: $spacing;
+
+		.profile-social:not(:first-child) { margin-top: $spacing; }
 	}
+	.desc { margin-bottom: 0; }
+
+	.profile-social i { width: 16px; }
 }

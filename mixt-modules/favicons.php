@@ -9,7 +9,7 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 /**
- * Generate Favicons From Source Image And Output Links For Each
+ * Generate favicons from source image and output links for each
  */
 function mixt_favicons() {
 

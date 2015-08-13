@@ -27,10 +27,8 @@
 
 	wp_head();
 
-	// Print Custom CSS
-	if ( function_exists('mixt_print_css') ) {
-		mixt_print_css();
-	}
+	// Print Header CSS
+	do_action('mixt_head_css');
 
 	?>
 </head>
@@ -45,17 +43,17 @@
 
 	do_action( 'before' );
 
-	$nav_options    = MIXT::get('nav');
-	$page_options   = MIXT::get('page');
-	$header_options = MIXT::get('header');
-	$theme_options  = MIXT::get('theme');
-	$layout_options = MIXT::get('layout');
+	$nav_options    = Mixt_Options::get('nav');
+	$page_options   = Mixt_Options::get('page');
+	$header_options = Mixt_Options::get('header');
+	$theme_options  = Mixt_Options::get('themes');
+	$layout_options = Mixt_Options::get('layout');
 
 	// Show Page Loader
 	if ( $page_options['page-loader'] ) { mixt_page_loader(); }
 
 	// Main Wrapper Classes
-	$wrapper_classes = $theme_options['site'] . '-theme';
+	$wrapper_classes = 'theme-' . $theme_options['site'];
 	if ( $page_options['fullwidth'] ) $wrapper_classes .= ' fullwidth';
 
 	// Header Media Wrapper Classes
@@ -111,20 +109,24 @@
 				$nav_menu_classes = 'nav navbar-nav';
 				if ( $nav_options['active-bar'] ) { $nav_menu_classes .= ' active-' . $nav_options['active-bar-pos']; }
 				else { $nav_menu_classes .= ' no-active'; }
-				$top_nav_menu = wp_nav_menu(
+
+				$main_nav_loc = 'primary';
+				if ( $page_options['page-type'] == 'onepage' ) $main_nav_loc = 'onepage';
+
+				$main_nav_menu = wp_nav_menu(
 					array(
-						'theme_location'  => 'primary',
+						'theme_location'  => $main_nav_loc,
 						'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
 						'menu_class'      => $nav_menu_classes,
 						'fallback_cb'     => '__return_false',
 						'echo'            => false,
 						'menu_id'         => 'main-menu',
-						'walker'          => new mixt_navwalker()
+						'walker'          => new Mixt_Navwalker()
 					)
 				);
 
 				// Check if a menu is assigned and display a message if not
-				if ( ! empty($top_nav_menu) ) { echo $top_nav_menu; }
+				if ( ! empty($main_nav_menu) ) { echo $main_nav_menu; }
 				else { mixt_no_menu_msg(true, true); } ?>
 
 			</div>
@@ -145,7 +147,7 @@
 
 	// Start Content Wrapper
 	$content_classes = 'main-content container';
-	if ( $page_options['sidebar'] ) {
+	if ( $page_options['sidebar'] && $page_options['page-type'] != 'onepage' ) {
 		$content_classes .= ' has-sidebar';
 		if ( $page_options['sidebar-position'] == 'left' ) { $content_classes .= ' sidebar-left'; }
 	}

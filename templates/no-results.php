@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template For Displaying A Message That Posts Cannot Be Found
+ * Template for displaying a message that posts cannot be found
  *
  * @package MIXT
  */

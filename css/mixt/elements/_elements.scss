@@ -1,9 +1,24 @@
 
+// Carousel
+@import 'carousel';
+
 // Flip Card
 @import 'flipcard';
 
+// VC Grid Item
+@import 'gitem';
+
 // Headline
 @import 'headline';
+
+// Icon Box
+@import 'iconbox';
+
+// Icon List
+@import 'iconlist';
+
+// Google Map
+@import 'map';
 
 // Pricing Table
 @import 'pricing';
@@ -11,25 +26,48 @@
 // Profile
 @import 'profile';
 
+// Review
+@import 'review';
+
 // Stat
 @import 'stat';
 
 // Timeline
 @import 'timeline';
 
-// Google Maps
-.mixt-map {
-	iframe {
-		width: 100% !important;
-		height: 100% !important;
-		border: 0 !important;
+// Animations
+.mixt-animate {
+	opacity: 1;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+
+	&.anim-pre {
+		opacity: 0;
+		animation-name: none;
 	}
 }
-// Disable map scrolling on small screens
-@include media('screen', '<mars') {
-	.mixt-map {
-		&, iframe {
-			pointer-events: none;
-		}
+
+// Form
+.mixt-form {
+	.submit-box {
+		&:last-child { margin-bottom: 0; }
+
+		.btn { width: 100%; }
 	}
+
+	.alert-box .alert { margin-bottom: 0; }
 }
+
+// VC Integration
+.vc_mixt_form,
+.vc_mixt_pricing,
+.vc_mixt_iconlist,
+.vc_mixt_timeline_block {
+	.vc_controls-out-tl { top: 0 !important; }
+}
+
+.vc_mixt_form .vc_mixt_field {
+	@extend %clearfix;
+}
+
+.vc_editor .mixt-animate.anim-pre { opacity: 1; }

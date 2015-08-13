@@ -1,0 +1,112 @@
+
+// Review
+
+.mixt-review {
+	$spacing: 15px;
+	$image-size: 80px;
+	$boxed-radius: $bd-radius;
+	$bubble-radius: $bd-radius-l;
+	$arrow-size: 18px;
+	$arrow-offset: $image-size / 2;
+
+	.author-image {
+		line-height: 0.1;
+		
+		.image-wrap {
+			width: $image-size;
+			height: $image-size;
+		}
+	}
+
+	.author-info { width: 100%; }
+
+	.name {
+		float: left;
+		line-height: 1.4;
+		font-size: $font-size-l;
+	}
+	.title { font-size: $font-size-s; }
+
+	.name,
+	.title,
+	.website { display: block; width: 100%; }
+
+	.review-content {
+		p:last-child,
+		blockquote { margin-bottom: 0; }
+	}
+
+	// Vertical Layout
+	&.layout-v {
+		width: 100%;
+		display: table;
+		table-layout: fixed;
+
+		.review-author,
+		.review-content {
+			display: table-cell;
+			vertical-align: top;
+		}
+
+		.review-author {
+			width: 140px;
+			text-align: center;
+			padding: 0 $spacing 0 0;
+
+			&:last-child { padding: 0 0 0 $spacing; }
+		}
+
+		.author-image {
+			&:first-child { padding-bottom: $spacing; }
+			&:last-child { padding-top: $spacing; }
+		}
+	}
+
+	// Horizontal Layout
+	&.layout-h {
+		.review-author {
+			display: table;
+			width: 100%;
+			padding: 0 0 $spacing 0;
+
+			&:last-child { padding: $spacing 0 0 0; }
+		}
+		.author-image,
+		.author-info {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.author-image {
+			&:first-child { padding-right: $spacing; }
+			&:last-child { padding-left: $spacing; }
+		}
+	}
+
+	// Styles
+	&.boxed {
+		@extend %basic-color-bg-variants;
+	}
+
+	&.bubble {
+		.review-content {
+			&,
+			&:before { @extend %basic-color-bg-variants; }
+		}
+		&.layout-h .review-content {
+			&:first-child { @include square-arrow(bottom, $arrow-size, $border: inherit, $origin: $arrow-offset); }
+			&:last-child { @include square-arrow(top, $arrow-size, $border: inherit, $origin: $arrow-offset); }
+		}
+		&.layout-v .review-content {
+			&:first-child { @include square-arrow(right, $arrow-size, $border: inherit, $origin: $arrow-offset); }
+			&:last-child { @include square-arrow(left, $arrow-size, $border: inherit, $origin: $arrow-offset); }
+		}
+	}
+
+	&.boxed,
+	&.bubble .review-content {
+		padding: $spacing;
+		border-width: 1px;
+		border-style: solid;
+		border-radius: $bubble-radius;
+	}
+}

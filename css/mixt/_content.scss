@@ -7,13 +7,6 @@
 	margin: 0 auto;
 }
 
-#content-wrap {
-	color: $theme-color;
-	border-color: $theme-border;
-	
-	> .row { border-color: inherit; }
-}
-
 .admin-bar #main-wrap { padding-top: 32px; }
 .admin-bar.admin-bar-slim #main-wrap { padding-top: 28px !important; }
 @media screen and (max-width: 782px) { .admin-bar #main-wrap { padding-top: 46px; } }
@@ -30,7 +23,8 @@
 #content,
 .sidebar,
 .posts-container,
-.page-nav { border-color: inherit; }
+.page-nav,
+#content-wrap > .row { border-color: inherit; }
 
 
 // Fullwidth Layout
@@ -62,10 +56,6 @@
 	border-radius: $bd-radius;
 	background-color: #555;
 	transition: color 0.2s, background 0.2s;
-
-	&:hover {
-		background-color: $theme-accent;
-	}
 }
 .tagcloud {
 	width: 100%;
@@ -91,75 +81,6 @@
 }
 .widget_nav_menu ul.sub-menu li,
 .widget_pages ul.children li { padding-left: 15px; }
-
-
-// Portfolio
-
-.portfolio-sorter {
-	width: 100%;
-	padding: 20px;
-	background-color: #fff;
-
-	button {
-		width: 25%;
-	}
-}
-
-.gallery-caption,
-.bypostauthor {
-	display: inherit;
-}
-
-// TODO ???
-.grid-container {
-	width: 100%;
-
-	article {
-		min-width: 200px;
-		min-height: 100px;
-		width: 25%; float: left;
-		padding: 0; margin: 0;
-		position: relative;
-		overflow: hidden;
-		background-color: #f6f6f6;
-
-		&.sticky { width: 50%; }
-
-		&:hover .post-content { bottom: 0; }
-
-		.main-anchor {
-			position: absolute;
-			top: 0; left: 0; right: 0; bottom: 0;
-		}
-
-		.post-image img {
-			min-width: 100%;
-			max-width: 100%;
-			min-height: 100%;
-		}
-
-		.post-content {
-			position: absolute;
-			left: 0; right: 0; bottom: -100%;
-			padding: 15px 15px 0;
-			background-color: rgba(0,0,0,0.7);
-			transition: bottom 0.4s ease 0.3s;
-		}
-
-		.post-title {
-			font-size: 16px;
-			margin: 0 0 15px;
-		}
-
-		.post-date {
-			font-size: 14px;
-			color: #999;
-			margin: 0 0 15px;
-		}
-	}
-}
-
-footer.entry-meta { clear: both; }
 
 
 // Alignment
@@ -227,6 +148,7 @@ img[class*="wp-image-"] {
 				border-right-width: 1px;
 			}
 			.sidebar {
+				float: left;
 				width: 30%;
 				margin-left: -1px;
 				border-left-width: 1px;
@@ -240,9 +162,10 @@ img[class*="wp-image-"] {
 				border-right-width: 0;
 			}
 			.sidebar {
-				margin-left: 0;
+				margin-left: 1px;
+				margin-right: -1px;
 				border-left-width: 0;
-				box-shadow: 1px 0 0 $theme-border;
+				border-right-width: 1px;
 
 			}
 		}

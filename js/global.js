@@ -7,8 +7,6 @@ MIXT GLOBAL JS FUNCTIONS
 
 	'use strict';
 
-	/* global mixt_opt */
-
 	var viewport = $(window),
 		htmlEl   = $('html'),
 		bodyEl   = $('body');
@@ -88,9 +86,9 @@ MIXT GLOBAL JS FUNCTIONS
 				if ( cont.hasClass('hover-bg') ) {
 					link.hover( function() {
 						if ( cont.parents('.position-top').length === 0 && cont.parents('.no-hover-bg').length === 0 ) {
-							link.css({ backgroundColor: dataColor, boxShadow: '0 0 0 1px ' + dataColor, zIndex: 1 });
+							link.css({ backgroundColor: dataColor, borderColor: dataColor, zIndex: 1 });
 						}
-					}, function() { link.css({ backgroundColor: '', boxShadow: '', zIndex: '' }); });
+					}, function() { link.css({ backgroundColor: '', borderColor: '', zIndex: '' }); });
 				} else {
 					link.hover( function() {
 						if ( cont.parents('.navbar.position-top').length === 0 ) {
@@ -166,6 +164,7 @@ MIXT GLOBAL JS FUNCTIONS
 			var carousels = $('.carousel-slider').not('.lightSlider');
 			carousels.each( function() {
 				var slider = $(this),
+					loop     = ( slider.data('loop') === true ) ? true : false,
 					autoplay = ( slider.data('auto') === true ) ? true : false,
 					vertical = ( slider.data('direction') == 'vertical' ) ? true : false,
 					eqslides = ( slider.data('eq-slides') === true ) ? true : false;
@@ -175,7 +174,7 @@ MIXT GLOBAL JS FUNCTIONS
 						item: ( slider.data('items') > 1 ) ? slider.data('items') : 1,
 						mode: ( slider.data('mode') == 'slide' ) ? 'slide' : 'fade',
 						auto: autoplay,
-						loop: ( slider.data('loop') === true ) ? true : false,
+						loop: loop,
 						pause: ( slider.data('interval') > 0 ) ? slider.data('interval') : 5000,
 						pager: ( slider.data('pagination') === true ) ? true : false,
 						controls: ( slider.data('navigation') === true ) ? true : false,
@@ -201,11 +200,21 @@ MIXT GLOBAL JS FUNCTIONS
 									slides.matchHeight();
 								}
 							}
-							if ( autoplay ) { el.play(); el.goToSlide(1); }
+							if ( autoplay ) {
+								el.play();
+								if ( loop ) { el.goToSlide(1); }
+								else { el.goToSlide(0); }
+							}
 						}
 					});
 				});
 			});
+		}
+
+
+		// Lightbox Galleries
+		if ( typeof $.fn.lightGallery === 'function' ) {
+			$('.lightbox-gallery').lightGallery();
 		}
 
 	});
@@ -224,8 +233,10 @@ MIXT GLOBAL JS FUNCTIONS
 		var hash = window.location.hash;
 
 		if ( hash.length ) {
+			var target = $(hash);
+			if ( target.length === 0 ) return;
 			var hashOffset = $(hash).offset().top;
-			if ( mixt_opt.nav.mode == 'fixed' ) { hashOffset -= $('#main-nav').height(); }
+			// if ( mixt_opt.nav.mode == 'fixed' ) { hashOffset -= $('#main-nav').height(); }
 			htmlEl.add(bodyEl).animate({ scrollTop: hashOffset }, 100);
 		}
 		return false;

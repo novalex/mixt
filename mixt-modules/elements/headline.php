@@ -3,12 +3,22 @@
 /**
  * Headline Element
  */
-class MixtHeadline {
+class Mixt_Headline {
 
-	public $colors;
+	/**
+	 * @var array $colors
+	 * @var array $styles
+	 */
+	public $colors, $styles;
 	
 	public function __construct() {
-		$this->colors = array_merge( mixt_get_assets('colors', 'elements'), array( 'custom' => __( 'Custom color', 'mixt' ) ) );
+		$this->colors = mixt_get_assets('colors', 'elements');
+		$this->styles = array(
+			'sideline'  => __( 'Lines on the side', 'mixt' ),
+			'line'      => __( 'Line separator', 'mixt' ),
+			'icon'      => __( 'Icon separator', 'mixt' ),
+			'icon-line' => __( 'Icon separator with lines', 'mixt' ),
+		);
 		
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -28,6 +38,7 @@ class MixtHeadline {
 					'type'  => 'text',
 					'label' => __( 'Text', 'mixt' ),
 					'desc'  => __( 'Heading text', 'mixt' ),
+					'std'   => 'Text',
 				),
 				'align' => array(
 					'type'    => 'select',
@@ -64,11 +75,6 @@ class MixtHeadline {
 					'options' => $this->colors,
 					'class'   => 'color-select all-colors',
 				),
-				'color_custom' => array(
-					'type'     => 'colorpicker',
-					'label'    => __( 'Custom Color', 'mixt' ),
-					'required' => array( 'color', '=', 'custom' ),
-				),
 				'class' => array(
 					'type'  => 'text',
 					'label' => __( 'Extra Classes', 'mixt' ),
@@ -83,17 +89,25 @@ class MixtHeadline {
 	public function vc_extend() {
 		vc_map( array(
 			'name'        => __( 'Headline', 'mixt' ),
-			'description' => __( 'Heading with lines on the side', 'mixt' ),
+			'description' => __( 'Heading with separator', 'mixt' ),
 			'base'        => 'mixt_headline',
 			'icon'        => 'mixt_headline',
 			'category'    => 'MIXT',
 			'params'      => array(
 				array(
+					'type'        => 'dropdown',
+					'heading'     => __( 'Style', 'mixt' ),
+					'param_name'  => 'style',
+					'std'         => 'sideline',
+					'value'       => array_flip($this->styles),
+				),
+				array(
 					'type'        => 'textarea_html',
-					'heading'     => __( 'Text', 'mixt' ),
-					'description' => __( 'Heading text', 'mixt' ),
+					'heading'     => __( 'Content', 'mixt' ),
+					'description' => __( 'Heading text and, optionally, subheading, separated by 3 underscores (___)', 'mixt' ),
 					'param_name'  => 'content',
 					'admin_label' => true,
+					'std'         => 'Text',
 				),
 				array(
 					'type'        => 'dropdown',
@@ -105,6 +119,7 @@ class MixtHeadline {
 						__( 'Center', 'mixt' ) => 'center',
 						__( 'Right', 'mixt' )  => 'right',
 					),
+					'std'         => 'left',
 				),
 				array(
 					'type'        => 'dropdown',
@@ -114,36 +129,142 @@ class MixtHeadline {
 					'value'       => array(
 						'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
 					),
-					'std' => 'h3',
+					'std'         => 'h3',
 				),
 				array(
 					'type'        => 'dropdown',
 					'heading'     => __( 'Line Style', 'mixt' ),
-					'param_name'  => 'style',
+					'param_name'  => 'line_style',
 					'value'       => array(
 						__( 'Solid', 'mixt' )  => 'solid',
 						__( 'Dashed', 'mixt' ) => 'dashed',
 						__( 'Dotted', 'mixt' ) => 'dotted',
 						__( 'Double', 'mixt' ) => 'double',
 					),
+					'std'         => 'solid',
+					'dependency'  => array(
+						'element' => 'style',
+						'value'   => array('sideline', 'line', 'icon-line'),
+					),
 				),
 				array(
-					'type'               => 'dropdown',
-					'heading'            => __( 'Color', 'js_composer' ),
-					'param_name'         => 'color',
-					'value'              => array_flip($this->colors),
+					'type'        => 'dropdown',
+					'heading'     => __( 'Separator Position', 'mixt' ),
+					'param_name'  => 'sep_position',
+					'value'       => array(
+						__( 'Top', 'mixt' )    => 'top',
+						__( 'Middle', 'mixt' ) => 'middle',
+						__( 'Bottom', 'mixt' ) => 'bottom',
+					),
+					'std'         => 'middle',
+					'dependency'  => array(
+						'element' => 'style',
+						'value'   => array('line', 'icon', 'icon-line'),
+					),
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Color', 'mixt' ),
+					'param_name' => 'color',
+					'value'      => array_flip($this->colors),
 					'param_holder_class' => 'vc_colored-dropdown',
-				),
-				array(
-					'type'       => 'colorpicker',
-					'heading'    => __( 'Custom Color', 'js_composer' ),
-					'param_name' => 'color_custom',
-					'dependency' => array( 'element' => 'color', 'value' => array( 'custom' ) ),
 				),
 				array(
 					'type'        => 'textfield',
 					'heading'     => __( 'Extra Classes', 'mixt' ),
 					'param_name'  => 'class',
+				),
+
+				// Icon Tab
+				array(
+					'type'        => 'dropdown',
+					'heading'     => __( 'Icon Type', 'mixt' ),
+					'value'       => array(
+						__( 'Image', 'mixt' ) => 'image',
+						__( 'Font Awesome', 'js_composer' ) => 'fontawesome',
+						// __( 'Open Iconic', 'js_composer' ) => 'openiconic',
+						// __( 'Typicons', 'js_composer' ) => 'typicons',
+						// __( 'Entypo', 'js_composer' ) => 'entypo',
+						__( 'Linecons', 'js_composer' ) => 'linecons',
+						// __( 'Pixel', 'js_composer' ) => 'pixelicons',
+					),
+					'param_name'  => 'icon_type',
+					'std'         => 'fontawesome',
+					'dependency'  => array(
+						'element' => 'style',
+						'value'   => array('icon', 'icon-line'),
+					),
+					'group'       => __( 'Icon', 'mixt' ),
+				),
+				array(
+					'type'        => 'iconpicker',
+					'heading'     => __( 'Icon', 'mixt' ),
+					'param_name'  => 'icon_fontawesome',
+					'settings'    => array( 'emptyIcon' => false ),
+					'dependency'  => array( 'element' => 'icon_type', 'value' => 'fontawesome' ),
+					'group'       => __( 'Icon', 'mixt' ),
+				),
+				array(
+					'type'        => 'iconpicker',
+					'heading'     => __( 'Icon', 'mixt' ),
+					'param_name'  => 'icon_linecons',
+					'settings'    => array(
+						'emptyIcon' => false,
+						'type'      => 'linecons',
+					),
+					'dependency'  => array( 'element' => 'icon_type', 'value' => 'linecons' ),
+					'group'       => __( 'Icon', 'mixt' ),
+				),
+				array(
+					'type'        => 'attach_image',
+					'heading'     => __( 'Icon', 'mixt' ),
+					'param_name'  => 'image',
+					'dependency'  => array( 'element' => 'icon_type', 'value' => 'image' ),
+					'group'       => __( 'Icon', 'mixt' ),
+				),
+
+				// Styler
+				array(
+					'type'       => 'styler',
+					'param_name' => 'styler',
+					'fields'     => array(
+						'color' => array(
+							'selector' => '.headline-content',
+							'label'    => __( 'Text Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+						),
+						'line-color' => array(
+							'selector' => '.sideline:after',
+							'label'    => __( 'Line Color', 'mixt' ),
+							'pattern'  => 'border-color: {{val}}',
+							'cols'     => '3',
+							'group'    => __( 'Separator', 'mixt' ),
+						),
+						'thickness' => array(
+							'type'     => 'unit',
+							'selector' => '.sideline:after',
+							'label'    => __( 'Thickness', 'mixt' ),
+							'pattern'  => 'border-top-width: {{val}}',
+							'cols'     => '3',
+							'group'    => __( 'Separator', 'mixt' ),
+						),
+						'icon-color' => array(
+							'selector' => '.sep-icon',
+							'label'    => __( 'Icon Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+							'cols'     => '3',
+							'group'    => __( 'Separator', 'mixt' ),
+						),
+						'sep-width' => array(
+							'type'     => 'unit',
+							'selector' => '.separator',
+							'label'    => __( 'Separator Width', 'mixt' ),
+							'pattern'  => 'width: {{val}}',
+							'cols'     => '3',
+							'group'    => __( 'Separator', 'mixt' ),
+						),
+					),
+					'group'      => 'Styler',
 				),
 			),
 		));
@@ -153,39 +274,104 @@ class MixtHeadline {
 	 * Render shortcode
 	 */
 	public function shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'text'         => '',
-			'align'        => 'left',
-			'tag'          => 'h3',
-			'color'        => '',
-			'style'        => '',
-			'color'        => '',
-			'color_custom' => '',
-			'class'        => '',
-		), $atts ) );
+		$args = shortcode_atts( array(
+			'style'            => 'sideline',
+			'text'             => '',
+			'desc'             => '',
+			'align'            => 'left',
+			'tag'              => 'h3',
+			'line_style'       => '',
+			'color'            => '',
+			'sep_position'     => 'middle',
+			'class'            => '',
+			
+			'icon'             => '',
+			'image'            => '',
+			'icon_type'        => 'fontawesome',
+			'icon_fontawesome' => '',
+			'icon_linecons'    => '',
 
-		$classes = 'title headline mixt-headline mixt-element';
-		if ( $align == 'center' ) $classes .= ' center';
+			'styler'           => '',
+		), $atts );
+
+		extract($args);
+
+		// Styler custom design
+		if ( $styler != '' ) {
+			$class .= mixt_element_styler($styler);
+		}
+
+		$classes = "title headline mixt-headline mixt-element align-$align style-$style";
 		if ( ! empty($class) ) $classes .= ' ' . $class;
 
-		if ( empty($text) ) $text = do_shortcode($content);
+		$content = explode('___', $content);
+
+		if ( $text == '' ) $text = trim($content[0]);
+
+		if ( $desc == '' && array_key_exists(1, $content) ) $desc = trim($content[1]);
+		if ( $desc != '' ) $classes .= ' has-desc';
 
 		$line_class = '';
 		if ( $color == '' ) $line_class .= 'theme-bd';
 		else if ( $color == 'accent' ) $line_class .= 'theme-accent-bd';
 		else { $line_class .= ' ' . $color; }
-		if ( ! empty($style) ) $line_class .= ' ' . $style;
+		if ( $line_style != '' ) $line_class .= ' ' . $line_style;
+		$line = '<span class="sideline ' . $line_class . '"></span>';
 
-		$html = "<div class='$classes'>";
-			if ( $align == 'center' || $align == 'right' ) { $html .= '<span class="line-left ' . $line_class . '"></span>'; }
-			$html .= "<$tag class='title-text'>$text</$tag>";
-			if ( $align == 'center' || $align == 'left' ) { $html .= '<span class="line-right ' . $line_class . '"></span>'; }
-		$html .= '</div>';
+		$left_content = $right_content = $separator = '';
 
-		return $html;
+		if ( $style == 'sideline' ) {
+			$left_content = '<div class="headline-left">' . $line . '</div>';
+			$right_content = '<div class="headline-right">' . $line . '</div>';
+		} else {
+			$left_content = '<div class="headline-left"></div>';
+			$right_content = '<div class="headline-right"></div>';
+			
+			if ( $style == 'line' ) {
+				$separator = $line;
+			} else {
+				$icon = '<span class="sep-icon">';
+				if ( $icon_type == 'image' ) {
+					$icon .= wp_get_attachment_image($image, 'full');
+				} else {
+					$icon .= '<i class="' . mixt_element_icon_class($args) . '"></i>';
+				}
+				$icon .= '</span>';
+
+				if ( $style == 'icon' || $style == 'icon-line' ) {
+					$separator = $icon;
+
+					if ( $style == 'icon-line' ) {
+						if ( $align == 'center' || $align == 'right' ) { $separator = $line . $separator; }
+						if ( $align == 'center' || $align == 'left' ) { $separator .= $line; }
+					}
+				}
+			}
+			$separator = '<div class="separator">' . $separator . '</div>';
+		}
+
+		ob_start();
+
+		?>
+
+		<div class="<?php echo $classes; ?>">
+			<?php if ( $align == 'center' || $align == 'right' ) { echo $left_content; } ?>
+			<div class="headline-content">
+				<?php if ( $sep_position == 'top' ) { echo $separator; } ?>
+				<?php echo "<$tag class='heading'>$text</$tag>"; ?>
+				<?php if ( $sep_position == 'middle' ) { echo $separator; } ?>
+				<?php if ( $desc != '' ) echo '<p class="subheading color-fade">' . mixt_unautop($desc) . '</p>'; ?>
+				<?php if ( $sep_position == 'bottom' ) { echo $separator; } ?>
+			</div>
+			<?php if ( $align == 'center' || $align == 'left' ) { echo $right_content; } ?>
+		</div>
+
+		<?php
+
+		return ob_get_clean();
 	}
 }
-new MixtHeadline;
+new Mixt_Headline;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Headline extends WPBakeryShortCode {}

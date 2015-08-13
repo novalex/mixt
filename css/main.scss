@@ -7,6 +7,9 @@
 // Bootstrap
 @import 'bootstrap';
 
+// Theme Styling
+@import 'mixt/themes/site-wide';
+
 @import 'mixt/mixins';
 @import 'mixt/helpers';
 
@@ -26,7 +29,9 @@
 @import 'mixt/inputs/buttons';
 
 @import 'mixt/content';
-@import 'mixt/post';
+
+@import 'mixt/post/post';
+
 @import 'mixt/sidebar';
 @import 'mixt/footer';
 

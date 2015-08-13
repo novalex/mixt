@@ -3,12 +3,16 @@
 /**
  * Flipcard Element
  */
-class MixtFlipcard {
+class Mixt_Flipcard {
 
+	/** @var array */
 	public $colors;
 	
 	public function __construct() {
-		$this->colors = array_merge(mixt_get_assets('colors', 'basic'), array('transparent' => __( 'Transparent', 'mixt' )));
+		$this->colors = array_merge(
+			mixt_get_assets('colors', 'basic'),
+			array('transparent' => __( 'Transparent', 'mixt' ))
+		);
 
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -116,6 +120,53 @@ class MixtFlipcard {
 					'heading'     => __( 'Extra Classes', 'mixt' ),
 					'param_name'  => 'class',
 				),
+
+				// Styler
+				array(
+					'type'       => 'styler',
+					'param_name' => 'styler',
+					'fields'     => array(
+						'front-bg' => array(
+							'selector' => '.front',
+							'label'    => __( 'Background Color', 'mixt' ),
+							'pattern'  => 'background-color: {{val}}',
+							'group'    => __( 'Front Side', 'mixt' ),
+						),
+						'front-color' => array(
+							'selector' => '.front',
+							'label'    => __( 'Text Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+							'group'    => __( 'Front Side', 'mixt' ),
+						),
+						'front-border' => array(
+							'selector' => '.front',
+							'label'    => __( 'Border Color', 'mixt' ),
+							'pattern'  => 'border-color: {{val}}',
+							'group'    => __( 'Front Side', 'mixt' ),
+						),
+						'back-bg' => array(
+							'selector' => '.back',
+							'label'    => __( 'Background Color', 'mixt' ),
+							'pattern'  => 'background-color: {{val}}',
+							'group'    => __( 'Back Side', 'mixt' ),
+						),
+						'back-color' => array(
+							'selector' => '.back',
+							'label'    => __( 'Text Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+							'group'    => __( 'Back Side', 'mixt' ),
+						),
+						'back-border' => array(
+							'selector' => '.back',
+							'label'    => __( 'Border Color', 'mixt' ),
+							'pattern'  => 'border-color: {{val}}',
+							'group'    => __( 'Back Side', 'mixt' ),
+						),
+					),
+					'group'      => 'Styler',
+				),
+
+				// Design Tab
 				array(
 					'type'       => 'css_editor',
 					'heading'    => __( 'CSS', 'mixt' ),
@@ -130,27 +181,35 @@ class MixtFlipcard {
 	 * Render shortcode
 	 */
 	public function shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array(
+		$args = shortcode_atts( array(
 			'dir'         => 'vertical',
 			'front_color' => 'white',
 			'back_color'  => 'black',
+			'styler'      => '',
 			'css'         => '',
 			'class'       => '',
-		), $atts ) );
-
-		$classes = 'flip-card mixt-flipcard mixt-element';
-		if ( ! empty($class) ) $classes .= ' ' . $class;
-		if ( $dir == 'horizontal' ) $classes .= ' flipY';
+		), $atts );
 
 		// VC custom design options
 		if ( ! empty($args['css']) && defined( 'WPB_VC_VERSION' ) ) {
 			$args['class'] .= apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, vc_shortcode_custom_css_class( $args['css'], ' ' ), 'mixt_flipcard', $atts );
 		}
 
+		// Styler custom design
+		if ( $args['styler'] != '' ) {
+			$args['class'] .= mixt_element_styler($args['styler']);
+		}
+
+		extract($args);
+
+		$classes = 'flip-card mixt-flipcard mixt-element';
+		if ( ! empty($class) ) $classes .= ' ' . $class;
+		if ( $dir == 'horizontal' ) $classes .= ' flipY';
+
 		$content_front = $content_back = '';
 		$content = explode('___', $content);
-		if ( ! empty($content[0]) ) $content_front = do_shortcode($content[0]);
-		if ( ! empty($content[1]) ) $content_back = do_shortcode($content[1]);
+		if ( ! empty($content[0]) ) $content_front = do_shortcode(mixt_unautop($content[0]));
+		if ( ! empty($content[1]) ) $content_back = do_shortcode(mixt_unautop($content[1]));
 		$classes_front = 'front ' . $front_color;
 		$classes_back  = 'back ' . $back_color;
 
@@ -160,7 +219,7 @@ class MixtFlipcard {
 			   "</div></div>";
 	}
 }
-new MixtFlipcard;
+new Mixt_Flipcard;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Flipcard extends WPBakeryShortCode {}

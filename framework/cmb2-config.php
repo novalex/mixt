@@ -269,7 +269,10 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			'id'           => 'mixt_posts_page_options',
 			'title'        => __( 'Posts', 'mixt' ),
 			'object_types' => array( 'page' ),
-			'show_on'      => array( 'key' => 'blog-tpl', 'value' => '' ),
+			'show_on'      => array(
+				'key'   => 'page-template',
+				'value' => 'templates/blog.php'
+			),
 			'context'      => 'normal',
 			'priority'     => 'high',
 			'show_names'   => true,
@@ -279,7 +282,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				array(
 					'id'      => $prefix . 'attached-posts',
 					'name'    => __( 'Posts', 'mixt' ),
-					'desc'    => __( 'Select the the posts to display on this page', 'mixt' ),
+					'desc'    => __( 'Select the posts to display on this page (empty to display all)', 'mixt' ),
 					'type'    => 'post_search_text',
 					'default' => '',
 				),
@@ -288,7 +291,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				array(
 					'id'      => $prefix . 'posts-page',
 					'name'    => __( 'Posts Per Page', 'mixt' ),
-					'desc'    => __( 'Amount of posts to display on each page (-1 to display all)', 'mixt' ),
+					'desc'    => __( 'Number of posts to display on each page (-1 to display all)', 'mixt' ),
 					'type'    => 'text',
 					'default' => '-1',
 				),
@@ -788,33 +791,3 @@ function mixt_metabox_show_on_blog( $display, $meta_box ) {
 	}
 }
 add_filter( 'cmb2_show_on', 'mixt_metabox_show_on_blog', 10, 2 );
-
-
-/**
- * Show metabox on blog template page
- *
- * @param bool $display
- * @param array $meta_box
- * @return bool display metabox
- */
-function mixt_metabox_show_on_blog_tpl( $display, $meta_box ) {
-
-	if ( empty($meta_box['show_on']['key']) || $meta_box['show_on']['key'] !== 'blog-tpl' ) {
-		return $display;
-	}
-
-	// Get the current ID
-	if ( isset( $_GET['post'] ) ) {
-		$post_id = $_GET['post'];
-	} else if ( isset( $_POST['post_ID'] ) ) {
-		$post_id = $_POST['post_ID'];
-	}
-	if ( ! isset( $post_id ) ) { return false; }
-
-	$page_template = get_page_template_slug($post_id);
-
-	if ( $page_template == 'templates/blog.php' ) {
-		return true;
-	}
-}
-add_filter( 'cmb2_show_on', 'mixt_metabox_show_on_blog_tpl', 10, 2 );

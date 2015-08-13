@@ -8,6 +8,12 @@
 // Gallery & Carousel
 @import 'gallery';
 
+// Icon Styles
+@import 'icon';
+
+// Hover Effects
+@import 'effects';
+
 
 // Search Widget
 
@@ -34,19 +40,15 @@
 		a {
 			display: block;
 			padding: 5px 10px;
-			color: $theme-color-fade;
 			transition: color 0.25s;
 
 			&:hover,
 			&:active {
-				color: $theme-accent;
 				text-decoration: none;
 			}
 		}
 
 		&:first-child { border-left-width: 1px; }
-
-		&.active > a { color: $theme-accent; }
 	}
 }
 
@@ -62,42 +64,36 @@
 		> a i {
 			width: 16px;
 			font-size: 16px;
+			padding-top: 2px;
 		}
 	}
 
 	&.plain,
 	&.nav {
 		li > a {
-			padding: 5px 10px 3px;
+			padding: 4px 10px;
 			i { vertical-align: middle; }
 		}
 	}
 
 	&.buttons {
-		margin-top: -10px;
+		$spacing: 6px;
+
+		margin-top: -$spacing;
 		li {
-			margin-top: 10px;
-			margin-right: 10px;
+			margin-top: $spacing;
+			margin-right: $spacing;
 		}
 	}
 
 	&.btn-group {
-		border-width: 1px;
-		border-style: solid;
-		border-radius: $bd-radius;
-		padding: 0; margin: 0;
+		padding: 0;
 
-		&,
-		li { border-color: inherit; }
+		&.text-center {
+			display: block;
 
-		li {
-			border-style: solid;
-			border-width: 0 0 0 1px;
-
-			&:first-child { border-width: 0; }
+			li { float: none; }
 		}
-
-		.btn { border-width: 0; }
 	}
 
 	&.hover-bg li a:hover {
@@ -135,7 +131,7 @@
 
 		// Color Variants
 		@each $key, $color in $basic-colors {
-			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.2), true, true);
+			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.5), true, true);
 		}
 	}
 
@@ -180,15 +176,11 @@ blockquote {
 	border-style: solid;
 	border-radius: $bd-radius;
 	border-width: 1px 1px 1px 2px;
-	border-color: darken($theme-bg, 10);
-	border-left-color: $theme-accent;
-	background-color: darken($theme-bg, 2);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 
 	cite {
 		display: block;
 		margin-top: 6px;
-		color: $theme-color-fade;
 		font-size: $font-size-s;
 	}
 }

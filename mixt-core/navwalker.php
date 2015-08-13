@@ -1,10 +1,10 @@
 <?php
 
 /**
- * MIXT Nav Walker
+ * Nav Walker
  *
- * Class Name: mixt_navwalker
- * Description: Custom WordPress Nav Walker Class For The MIXT Theme
+ * Class Name: Mixt_Navwalker
+ * Description: MIXT Custom Nav Walker Class
  * Version: 1.0
  *
  * @package MIXT
@@ -14,7 +14,7 @@
  * License: GPL-2.0+
  */
 
-class mixt_navwalker extends Walker_Nav_Menu {
+class Mixt_Navwalker extends Walker_Nav_Menu {
 
 	/**
 	 * @see Walker::start_lvl()

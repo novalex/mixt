@@ -57,7 +57,7 @@
 			&,
 			img {
 				overflow: hidden;
-				border-radius: $bd-radius-l;
+				border-radius: $rounded-radius;
 			}
 		}
 		&.image-rounded.image-border img { border-radius: 0; }
@@ -100,7 +100,7 @@
 		}
 
 		// Color Variants
-		@extend .basic-color-border-variants;
+		@extend %basic-color-border-variants;
 	}
 
 	&.align-left { text-align: left; }

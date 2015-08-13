@@ -1,0 +1,59 @@
+
+// Eco Theme (Green Accent)
+
+$theme-eco: (
+	'eco': (
+		'accent': #7cad24,
+		'bg-dark-accent': #7cad24,
+
+		'bg': #fff,
+		'bg-hover': darken(#fff, 5),
+
+		'color': #333,
+		'color-fade': #777,
+		'color-inv': #fff,
+		'color-inv-fade': #ddd,
+
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-bg': #fbfbfb,
+		'menu-expand': rgba(0,0,0,0.05),
+
+		'menu-border': #e2e2e2,
+		'menu-border-alpha': rgba(0,0,0,0.15),
+
+		'menu-color': #333,
+		'menu-color-fade': #777,
+	),
+
+	'dark-eco': (
+		'accent': #7cad24,
+		'bg-dark-accent': #7cad24,
+
+		'bg': #222,
+		'bg-hover': #333,
+
+		'color': #fff,
+		'color-fade': #ddd,
+		'color-inv': #333,
+		'color-inv-fade': #777,
+
+		'border': #ddd,
+		'border-alpha': rgba(0,0,0,0.15),
+		'bg-dark-border': #333,
+		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-bg': #333,
+		'menu-expand': rgba(0,0,0,0.05),
+
+		'menu-border': #222,
+		'menu-border-alpha': rgba(0,0,0,0.4),
+
+		'menu-color': #eee,
+		'menu-color-fade': #ddd,
+	)
+);
+$themes: map-merge($themes, $theme-eco);

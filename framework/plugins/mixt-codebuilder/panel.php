@@ -1,16 +1,22 @@
 <?php
 
 /**
- * Add shortcode button to editor and render the element panel
+ * Add CodeBuilder button to editor and render the panel
  *
  * @package MIXT CodeBuilder
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class MIXTCBAdmin {
-	public $editor_page = false;
+class Mixt_CB_Admin {
+
+	/** @var boolean */
+	protected $editor_page = false;
+
+	/** @var array mapped elements */
 	public static $elements = array();
+	/** @var array available field types */
+	public static $fields = array();
 
 	public function __construct() {
 		global $pagenow;
@@ -20,6 +26,7 @@ class MIXTCBAdmin {
 
 		// Add editor button and render panel HTML only if user can edit posts and pages, is on an editor page, and has rich editing enabled
 		if ( ! $this->editor_page || ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) || get_user_option('rich_editing') == 'false' ) { return; }
+
 		add_action('admin_head',  array($this, 'mixt_cb_add_button') );
 		add_action( 'admin_footer', array($this, 'mixt_cb_panel') );
 	}
@@ -76,6 +83,15 @@ class MIXTCBAdmin {
 	public static function map($element) {
 		$key = $element['id'];
 		self::$elements[$key] = $element;
+	}
+
+	/**
+	 * Add a field type
+	 */
+	public static function add_field($name, $callback) {
+		if ( is_callable($callback) ) {
+			self::$fields[$name] = $callback;
+		}
 	}
 
 	/**
@@ -158,8 +174,8 @@ class MIXTCBAdmin {
 	 * Render element field HTML
 	 *
 	 * @param string $key
-	 * @param array $param
-	 * @param array $preset
+	 * @param array  $param
+	 * @param array  $preset
 	 */
 	public static function render_field($key, $param, $preset = '') {
 		$defaults = array(
@@ -187,6 +203,8 @@ class MIXTCBAdmin {
 			$html .= "<label class='label'>{$param['label']}</label>";
 
 			$field_atts  = "data-attr='$key'";
+			if ( $param['std'] != '' ) $field_atts .= " data-std='{$param['std']}'";
+
 			$field_class = 'mcb-input';
 			if ( ! empty($param['class']) ) $field_class .= ' ' . $param['class'];
 
@@ -212,7 +230,7 @@ class MIXTCBAdmin {
 						foreach ( $param['options'] as $value => $label ) {
 							$is_checked = in_array($value, $checked_std);
 							$html .= "<label class='mcb-input-cont'>$label" .
-										 "<input type='checkbox' class='mcb-multi-child mcb-checkbox' value='$value' " . ( $is_checked ? 'checked' : '' ) . ">" .
+										 "<input type='checkbox' class='mcb-child-input mcb-checkbox' value='$value' " . ( $is_checked ? 'checked' : '' ) . ">" .
 									 "</label>\n";
 						}
 						$html .= "<input type='hidden' $field_atts class='$field_class mcb-checkbox' value='{$param['std']}'></div>";
@@ -246,6 +264,12 @@ class MIXTCBAdmin {
 					$html .= "</select>\n";
 					break;
 				default:
+					if ( array_key_exists($param['type'], self::$fields) ) {
+						$param['key'] = $key;
+						$html .= call_user_func(self::$fields[$param['type']], $param);
+					} else {
+						$html .= '<span class="no-field-type-msg">' . __( 'No field of type', 'mixt' ) . ' ' . $param['type'] . '!</span>';
+					}
 					break;
 			}
 			if ( ! empty($param['desc']) ) { $html .= "<span class='mcb-subtitle'>{$param['desc']}</span>\n"; }
@@ -254,25 +278,36 @@ class MIXTCBAdmin {
 		return $html;
 	}
 }
-new MIXTCBAdmin;
+new Mixt_CB_Admin;
 
 /**
  * Map additional elements to CodeBuilder
+ *
+ * @param array $element
  */
 function mixtcb_map($element) {
-	if ( is_array($element) ) MIXTCBAdmin::map($element);
+	if ( is_array($element) ) Mixt_CB_Admin::map($element);
+}
+
+/**
+ * Add a field type to CodeBuilder
+ * 
+ * @param  string   $name     the name of the field
+ * @param  callback $callback function that returns the field's markup
+ */
+function mixtcb_field($name, $callback) {
+	Mixt_CB_Admin::add_field($name, $callback);
 }
 
 /**
  * AJAX Action to render element fields by key
  */
 function mixtcb_render_element() {
-	new MIXTCBAdmin;
 	$key = $_POST['mixtcb-key'];
 	$data = array(
 	   'what'   => 'mixtcb_element',
 	   'action' => 'render_'.$key,
-	   'data'   => MIXTCBAdmin::render_element($key)
+	   'data'   => Mixt_CB_Admin::render_element($key)
 	);
 	$response = new WP_Ajax_Response($data);
 	$response->send();

@@ -1,0 +1,37 @@
+
+// Icon List
+
+.mixt-iconlist {
+	@extend %reset-list;
+
+	li {
+		display: table;
+
+		.icon-wrap,
+		.content-wrap {
+			display: table-cell;
+			vertical-align: middle;
+		}
+
+		.icon-wrap {
+			width: 1%;
+			padding-left: 0;
+			padding-right: 10px;
+
+			&:last-child {
+				padding-right: 0;
+				padding-left: 10px;
+			}
+		}
+
+		.mixt-icon.default { padding-left: 0; padding-right: 0; }
+
+		.mixt-image img { vertical-align: middle; }
+
+		// Image Sizes
+		.image-wrap { &, img { max-width: 32px; } }
+		.icon-xl .image-wrap { &, img { max-width: 96px; } }
+		.icon-lg .image-wrap { &, img { max-width: 64px; } }
+		.icon-sm .image-wrap { &, img { max-width: 16px; } }
+	}
+}

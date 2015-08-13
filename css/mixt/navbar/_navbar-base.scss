@@ -1,4 +1,6 @@
 
+$menu-hover-bg: rgba(0,0,0,0.05);
+
 .nav > li > a { transition: background 0.2s, color 0.2s; }
 
 .navbar {
@@ -8,8 +10,8 @@
 	border-width: 0;
 	border-style: solid;
 	border-bottom-width: 1px;
-	border-color: $theme-border;
-	border-color: $theme-border-alpha;
+	border-color: $site-border;
+	border-color: $site-border-alpha;
 	background-repeat: repeat;
 	background-position: center center;
 	@include bg-color-alpha($theme-bg, 0.95);
@@ -20,6 +22,8 @@
 
 	.navbar-header,
 	.navbar-nav { margin: 0; }
+
+	ul { @extend %reset-list; }
 
 	// NAV MENU
 
@@ -32,26 +36,12 @@
 			.menu-label { vertical-align: middle; }
 		}
 
-		// Hover State
-
-		> li > a:hover,
-		> li:hover > a,
-		> li.hover > a,
-		.navbar-toggle:hover {
-			background-color: $theme-bg-hover;
-		}
-
 		// Active State
-
-		> .active {
-			> a,
-			> a:hover,
-			> a:focus {
-				color: $theme-accent;
-				position: relative;
-				border-color: transparent;
-				background-color: transparent;
-			}
+		> .active > a {
+			color: $theme-accent;
+			position: relative;
+			border-color: transparent;
+			background-color: transparent;
 		}
 
 		&,
@@ -83,17 +73,7 @@
 		}
 		&.no-active > .active > a:before { display: none; }
 
-		// Border Colors
-
-		.nav > li,
-		.nav > li > a,
-		.navbar-toggle {
-			border-color: $theme-border;
-			border-color: $theme-border-alpha;
-		}
-
 		// Disabled State
-
 		.disabled {
 			> a {
 				opacity: 0.6;
@@ -104,6 +84,22 @@
 		}
 	}
 
+	// Hover State
+	.nav > li > a:hover,
+	.nav > li:hover > a,
+	.nav > li.hover > a,
+	.navbar-toggle:hover {
+		background-color: $menu-hover-bg;
+	}
+
+	// Border Colors
+	.nav > li,
+	.nav > li > a,
+	.navbar-toggle {
+		border-color: $theme-border;
+		border-color: $theme-border-alpha;
+	}
+
 	&.no-hover-bg {
 		.nav > li > a:hover,
 		.nav > li:hover > a,
@@ -112,7 +108,6 @@
 	}
 
 	// Menu Icons
-
 	.menu-icon {
 		font-size: 16px;
 		vertical-align: middle;
@@ -125,7 +120,6 @@
 	}
 
 	// Menu Button
-
 	.menu-btn {
 		.btn-cont {
 			display: inline-block;
@@ -140,7 +134,6 @@
 	}
 
 	// Text Color
-
 	.nav > li > a,
 	.text-cont,
 	.text-cont a:hover,
@@ -153,17 +146,15 @@
 
 	.nav > li > a,
 	.sub-menu > li > a {
-		font-weight: bold;
+		font-weight: inherit;
 	}
 
 	// Standard Dropdown Menus
-
 	.nav > li > .sub-menu {
 		margin-top: 10px;
 	}
 
 	// Submenus
-
 	.sub-menu {
 		display: block;
 		padding: 0;
@@ -181,9 +172,8 @@
 			overflow: hidden;
 			transition: background 0.3s, color 0.3s;
 
-			&:hover { background-color: $theme-menu-bg-hover; }
-
-			&:focus { background-color: transparent; }
+			&:hover,
+			&:focus { background-color: $menu-hover-bg; }
 		}
 
 		li > a,
@@ -252,7 +242,6 @@
 	}
 
 	// Mega Menus
-
 	.mega-menu {
 
 		> .sub-menu {
@@ -297,7 +286,7 @@
 		}
 
 		.mega-menu-column {
-			> a { background-color: $theme-menu-bg-hover; }
+			> a { background-color: $menu-hover-bg; }
 
 			> .sub-menu {
 				visibility: inherit;
@@ -322,14 +311,12 @@
 	}
 
 	// Submenu Dropping On The Left
-
 	.dropdown > .sub-menu.drop-left,
 	.dropdown:last-child > .sub-menu {
 		left: auto; right: 0;
 	}
 
 	// Level 2+ Submenus
-
 	.drop-submenu {
 		position: relative;
 		z-index: 1;
@@ -361,7 +348,6 @@
 	}
 
 	// Submenu Drop Arrows
-
 	.drop-arrow {
 		font-size: 10px;
 		margin-left: 5px;
@@ -441,7 +427,6 @@
 	&.bg-dark {
 
 		// Text Colors
-
 		.nav > li > a,
 		.text-cont,
 		.text-cont a:hover,
@@ -454,7 +439,6 @@
 		}
 
 		// Hover & Active State
-
 		.nav > li:hover > a,
 		.nav > li.hover > a,
 		.nav > li > a:hover,
@@ -464,7 +448,6 @@
 		}
 
 		// Border Colors
-
 		.nav > li,
 		.nav > li > a,
 		.navbar-toggle {
@@ -473,7 +456,6 @@
 		}
 
 		// Divider
-
 		.divider {
 			background-color: $theme-bg-dark-border;
 			background-color: $theme-bg-dark-border-alpha;
@@ -507,11 +489,10 @@
 			}
 
 			// Hover State
-
 			.nav > li > a:hover,
 			.nav > li:hover > a,
 			.nav > li.hover > a {
-				background-color: $theme-menu-bg-hover;
+				background-color: $menu-hover-bg;
 			}
 
 			.nav > li:hover > a,
@@ -521,7 +502,6 @@
 			.navbar-inner .text-cont a { color: $theme-accent; }
 
 			// Border Colors
-
 			.navbar-inner,
 			.nav > li,
 			.nav > li > a {

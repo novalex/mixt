@@ -32,14 +32,17 @@ get_header();
 
 		// Post Social Sharing Buttons
 		if ( $options['post-sharing'] ) {
-			echo '<div class="post-extra post-share-cont">';
-				echo do_shortcode('[mixt_headline text="' . __( 'Share this', 'mixt' ) . '"]');
-				mixt_social_profiles(true, array(
-					'type'  => 'sharing',
-					'style' => 'group',
-					'class' => 'post-share btn-group-lg btn-group-justified',
-				));
-			echo '</div>';
+			$icons = mixt_social_profiles(false, array(
+				'type'  => 'sharing',
+				'style' => 'group',
+				'class' => 'post-share btn-group-lg btn-group-justified',
+			));
+			if ( $icons != '' ) {
+				echo '<div class="post-extra post-share-cont">';
+					echo do_shortcode('[mixt_headline text="' . __( 'Share this', 'mixt' ) . '"]');
+					echo $icons;
+				echo '</div>';
+			}
 		}
 
 		// Post Navigation

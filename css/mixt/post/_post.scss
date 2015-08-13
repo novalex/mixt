@@ -1,0 +1,220 @@
+
+@import 'featured';
+
+@import 'meta';
+
+@import 'post-related';
+
+@import 'pagination';
+
+@import 'comments';
+
+
+.article {
+	&,
+	.page-header,
+	.entry-body,
+	.post-wrapper { border-color: inherit; }
+
+	.page-title,
+	.post-meta,
+	.entry-body,
+	footer.entry-meta { margin: $margin-m 0 0; }
+
+	.page-title + .post-meta { margin-top: $margin-s; }
+
+	.entry-body {
+		&:first-child { margin-top: 0; }
+	}
+
+	embed, iframe, object { width: 100%; }
+
+	blockquote { overflow: hidden; }
+
+	.post-info {
+		width: 100%;
+		display: table;
+		border-radius: $bd-radius;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		border-color: inherit;
+
+		> a {
+			display: table-cell;
+			text-align: center;
+			padding: 10px 0;
+			border-width: 0;
+			border-style: solid;
+			border-left-width: 1px;
+			border-color: inherit;
+			vertical-align: middle;
+			font-size: $font-size-l;
+
+			&:first-child { border-left-width: 0; }
+		}
+
+		.post-format {
+			padding: 5px;
+
+			i { font-size: 16px; line-height: 1.6; }
+		}
+
+		.post-date {
+			background-color: $off-white;
+
+			strong {
+				margin-right: 6px;
+			}
+		}
+	}
+}
+
+.page-header {
+	padding: 0;
+	margin: 0;
+	border-bottom: 0;
+}
+	
+.page-title {
+	font-size: $font-size-l;
+
+	i { font-size: 80%; }
+}
+
+
+// BLOG STYLING
+
+@import 'blog-grid';
+@import 'blog-masonry';
+@import 'blog-standard';
+
+// Blog Common
+.blog-grid,
+.blog-masonry {
+	.blog-post {
+		float: left;
+
+		.post-info {
+			&,
+			&.post-link a,
+			&.post-quote blockquote {
+				border-width: 0;
+				border-radius: 0;
+			}
+			.post-date {
+				border-bottom-width: 1px;
+			}
+		}
+
+		.post-feat {
+			width: auto;
+			margin: -1px -1px 0 -1px;
+			overflow: hidden;
+
+			> a,
+			> img,
+			> a > img,
+			blockquote {
+				height: 100%;
+				min-height: 100px;
+			}
+
+			.lightbox-trigger { width: 100%; }
+
+			.gallery .gallery-item { margin: 0 !important; }
+		}
+
+		$inner-padding: 15px;
+		.page-title,
+		.page-header .entry-meta,
+		.entry-body { padding-left: $inner-padding; padding-right: $inner-padding; }
+	}
+
+	.feat-format { border-width: 1px 0 1px 0; }
+
+	.post-feat,
+	.post-feat img,
+	.post-quote blockquote,
+	.post-link a,
+	.feat-format {
+		border-radius: 0;
+		-webkit-perspective: none;
+	}
+}
+
+.blog-grid .blog-post,
+.blog-masonry .post-wrapper { padding-bottom: $padding-s; }
+
+.blog-2-col .blog-post { width: 50%; }
+.blog-3-col .blog-post { width: 33.33333%; }
+.blog-4-col .blog-post { width: 25%; }
+.blog-5-col .blog-post { width: 20%; }
+
+
+// FEATURED HOVER EFFECT
+//.posts-container,
+.post-related {
+	.post-feat > a > img {
+		@extend %img-effect-hover;
+	}
+}
+
+
+// GALLERY STYLING
+
+.gallery {
+	@extend %reset-list;
+	margin-bottom: 1.5em;
+
+	a img {
+		border: none;
+		height: auto;
+		max-width: 90%;
+	}
+
+	dd { margin: 0; }
+
+	.gallery-caption {}
+}
+
+// POST SLIDER GALLERY
+
+.gallery-slider { margin: 0; }
+
+
+// TODO
+
+.sticky {}
+.bypostauthor {}
+
+
+// POST EXTRA ELEMENTS
+
+.post-extra {
+	border-color: inherit;
+	@extend %clearfix;
+}
+
+
+// SOCIAL SHARING
+
+.post-share .btn { padding: 10px 6px; }
+
+
+// ABOUT THE AUTHOR
+
+.about-the-author {
+	.author-avatar {
+		float: left;
+		margin: 0 $margin-m $margin-s 0;
+
+		img { border-radius: $bd-radius; }
+	}
+
+	.author-bio p:last-child { margin-bottom: 0; }
+
+	.author-links {
+		a {
+			margin-top: $margin-s;
+		}
+	}
+}

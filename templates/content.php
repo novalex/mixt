@@ -1,13 +1,13 @@
 <?php
 
 /**
- * General Content Template
+ * General template for displaying content
  *
  * @package MIXT
  */
 
-$post_ob      = new mixtPost('blog');
-$is_masonry   = MIXT::get('layout', 'type') == 'masonry';
+$post_ob      = new Mixt_Post('blog');
+$is_masonry   = Mixt_Options::get('layout', 'type') == 'masonry';
 
 ?>
 

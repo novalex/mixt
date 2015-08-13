@@ -16,15 +16,15 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * @param array $args additional arguments (hover type, container class, profiles array)
  */
 function mixt_social_profiles( $echo = true, $args = array() ) {
-	extract( wp_parse_args( $args, array(
+	extract( wp_parse_args($args, array(
 		'hover'    => '',
 		'class'    => '',
 		'color'    => 'default',
-		'btn_size' => 'default',
+		'size'     => '',
 		'type'     => 'networks',
 		'style'    => 'plain',
 		'profiles' => array(),
-	) ) );
+	)) );
 
 	// Social Sharing Profiles
 	if ( $type == 'sharing' ) {
@@ -67,13 +67,13 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 	else if ( $style == 'group' ) { $cont_classes .= ' btn-group'; }
 	else if ( $style == 'buttons' ) { $cont_classes .= ' buttons'; }
 
-	if ( is_array($profiles) ) {
+	if ( is_array($profiles) && ! empty($profiles) ) {
 		$items = $item_class = '';
 
 		$link_atts = 'data-toggle="tooltip" role="button"';
 		if ( $style == 'buttons' || $style == 'group' ) {
-			$btn_size = ( empty($btn_size) || $btn_size == 'default' ) ? '' : $btn_size;
-			$link_atts .= " class='btn btn-$color $btn_size'";
+			$size = ( empty($size) ) ? '' : $size;
+			$link_atts .= " class='btn btn-$color $size'";
 
 			if ( $style == 'group' ) { $item_class .= 'btn-group'; }
 		} else {
@@ -113,6 +113,8 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		$after  = '</ul>';
 
 		$return_val = $before . $items . $after;
+
+		if ( empty($items) ) return '';
 
 		if ( $echo ) { echo $return_val; }
 		else { return $return_val; }

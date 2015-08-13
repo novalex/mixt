@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Search Results Template
+ * Template for displaying search results
  *
  * @package MIXT
  */
 
-$post_ob    = new mixtPost('search');
-$is_masonry = MIXT::get('layout', 'type') == 'masonry';
+$post_ob    = new Mixt_Post('search');
+$is_masonry = Mixt_Options::get('layout', 'type') == 'masonry';
 
 ?>
 

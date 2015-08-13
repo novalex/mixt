@@ -13,7 +13,7 @@
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
-class MIXTCodeBuilder {
+class Mixt_CodeBuilder {
 
 	function __construct() {
 		define( 'MIXTCB_VERSION', '1.0' );
@@ -40,6 +40,11 @@ class MIXTCodeBuilder {
 	function admin_init() {
 		require_once( MIXTCB_DIR . '/panel.php' );
 
+		// Load Fields
+		foreach ( glob( __DIR__ . '/includes/fields/*.php' ) as $file ) { include_once $file; }
+
+		do_action('mixtcb_load');
+
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
 		$local = array(
@@ -51,6 +56,6 @@ class MIXTCodeBuilder {
 	}
 }
 
-new MIXTCodeBuilder;
+new Mixt_CodeBuilder;
 
 ?>

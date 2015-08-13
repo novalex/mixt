@@ -3,17 +3,17 @@
 /**
  * Pricing Tables
  */
-class MixtPricing {
+class Mixt_Pricing {
 
+	/** @var array */
 	public $colors;
-	public $btn_colors;
 
 	public function __construct() {
 		$this->colors = array_merge( array(
-			'default' => __( 'Default', 'mixt' ) ),
+			'' => __( 'Default', 'mixt' ) ),
 			mixt_get_assets('colors', 'basic')
 		);
-		$this->btn_colors = mixt_get_assets('button', 'colors');
+
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
 		add_shortcode('mixt_pricing', array($this, 'table_shortcode'));
@@ -37,6 +37,7 @@ class MixtPricing {
 				'plan_desc' => array(
 					'type'  => 'text',
 					'label' => __( 'Plan Description', 'mixt' ),
+					'std'   => 'Our standard plan, for individual needs',
 				),
 				'price' => array(
 					'type'  => 'text',
@@ -68,17 +69,15 @@ class MixtPricing {
 					'options' => $this->colors,
 					'class'   => 'color-select basic-colors',
 				),
+				'button' => array(
+					'type'  => 'button',
+					'label' => __( 'Button Style', 'mixt' ),
+				),
 				'btn_text' => array(
 					'type'    => 'text',
 					'label'   => __( 'Button Text', 'mixt' ),
 					'desc'    => __( 'Text for the CTA button', 'mixt' ),
 					'std'     => 'Buy Now',
-				),
-				'btn_color' => array(
-					'type'    => 'select',
-					'label'   => __( 'Button Color', 'mixt' ),
-					'options' => $this->btn_colors,
-					'class'   => 'color-select button-colors',
 				),
 				'btn_link' => array(
 					'type'    => 'text',
@@ -146,6 +145,11 @@ class MixtPricing {
 					'std'         => '$25.99',
 				),
 				array(
+					'type'        => 'textfield',
+					'heading'     => __( 'Plan Duration', 'mixt' ),
+					'param_name'  => 'plan_time',
+				),
+				array(
 					'type'        => 'checkbox',
 					'heading'     => __( 'Highlighted', 'mixt' ),
 					'description' => __( 'Check to make this plan stand out from the rest', 'mixt' ),
@@ -169,18 +173,16 @@ class MixtPricing {
 					'param_holder_class' => 'color-select basic-colors',
 				),
 				array(
+					'type'       => 'button',
+					'heading'    => __( 'Button Style', 'mixt' ),
+					'param_name' => 'button',
+				),
+				array(
 					'type'        => 'textfield',
 					'heading'     => __( 'Button Text', 'mixt' ),
 					'description' => __( 'Text for the CTA button', 'mixt' ),
 					'param_name'  => 'btn_text',
 					'std'         => 'Buy Now',
-				),
-				array(
-					'type'       => 'dropdown',
-					'heading'    => __( 'Button Color', 'mixt' ),
-					'value'      => array_flip($this->btn_colors),
-					'param_name' => 'btn_color',
-					'param_holder_class' => 'color-select button-colors',
 				),
 				array(
 					'type'        => 'textfield',
@@ -189,6 +191,55 @@ class MixtPricing {
 					'param_name'  => 'btn_link',
 					'std'         => 'http://example.com',
 				),
+
+				// Styler
+				array(
+					'type'       => 'styler',
+					'param_name' => 'styler',
+					'fields'     => array(
+						'bg' => array(
+							'selector' => '.mixt-pricing-inner',
+							'label'    => __( 'Background Color', 'mixt' ),
+							'pattern'  => 'background-color: {{val}}',
+						),
+						'color' => array(
+							'selector' => '.mixt-pricing-inner',
+							'label'    => __( 'Text Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+						),
+						'border' => array(
+							'selector' => '.mixt-pricing-inner',
+							'label'    => __( 'Border Color', 'mixt' ),
+							'pattern'  => 'border-color: {{val}}',
+						),
+
+						'header-bg' => array(
+							'selector' => '.header',
+							'label'    => __( 'Background Color', 'mixt' ),
+							'pattern'  => 'background-color: {{val}}',
+							'group'    => __( 'Header', 'mixt' ),
+						),
+						'header-color' => array(
+							'selector' => '.header',
+							'label'    => __( 'Text Color', 'mixt' ),
+							'pattern'  => 'color: {{val}}',
+							'group'    => __( 'Header', 'mixt' ),
+						),
+						'header-border' => array(
+							'selector' => '.header',
+							'label'    => __( 'Border Color', 'mixt' ),
+							'pattern'  => 'border-color: {{val}}',
+							'group'    => __( 'Header', 'mixt' ),
+						),
+						'custom' => array(
+							'type'     => 'custom',
+							'selector' => '.mixt-pricing-inner',
+							'label'    => __( 'Custom CSS', 'mixt' ),
+						),
+					),
+					'group'      => 'Styler',
+				),
+
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Extra Classes', 'mixt' ),
@@ -225,35 +276,48 @@ class MixtPricing {
 	 * Render table shortcode
 	 */
 	public function table_shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'plan_name' => 'Plan',
-			'plan_desc' => '',
-			'price'     => '$9,99',
+		$args = shortcode_atts( array(
+			'plan_name' => 'Standard Plan',
+			'plan_desc' => 'Our standard plan, for individual needs',
+			'price'     => '$25.99',
 			'plan_time' => '',
 			'highlight' => false,
 			'scheme'    => '',
 			'color'     => '',
 			'btn_text'  => 'Buy Now',
 			'btn_link'  => 'http://example.com',
-			'btn_color' => 'default',
+			'button'    => '',
+			'styler'    => '',
 			'class'     => '',
-		), $atts ) );
+		), $atts );
+
+		// Styler custom design
+		if ( $args['styler'] != '' ) {
+			$args['class'] .= mixt_element_styler($args['styler']);
+		}
+
+		extract($args);
 
 		$classes = 'pricing-table mixt-pricing mixt-element';
 		if ( ! empty($class) ) $classes .= ' ' . $class;
 		if ( $highlight ) $classes .= ' highlight';
 		if ( $scheme == 'dark' ) $classes .= ' dark';
-		if ( ! empty($color) && $color != 'default' ) $classes .= ' ' . $color;
+		if ( ! empty($color) ) $classes .= ' ' . $color;
 
-		preg_match('/^(\D*)\s*([\d,\.]+)\s*(\D*)$/', $price, $price_arr);
-		if ( empty($price_arr[1]) ) {
-			$currency = $price_arr[3];
-			$currency_position = 'after';
+		if ( $price != '' ) {
+			preg_match('/^(\D*)\s*([\d,\.]+)\s*(\D*)$/', $price, $price_arr);
+			if ( empty($price_arr[1]) ) {
+				$currency = $price_arr[3];
+				$currency_position = 'after';
+			} else {
+				$currency = $price_arr[1];
+				$currency_position = 'before';
+			}
+			$price_amount = explode('.', $price_arr[2]);
 		} else {
-			$currency = $price_arr[1];
-			$currency_position = 'before';
+			$currency_position = null;
+			$price_amount = array('', '');
 		}
-		$price_amount = explode('.', $price_arr[2]);
 
 		ob_start();
 		?>
@@ -276,7 +340,7 @@ class MixtPricing {
 				echo do_shortcode($content);
 				?>
 				<li class="footer">
-					<a href="<?php echo esc_url($btn_link); ?>" class="btn btn-<?php echo $btn_color; ?>"><?php echo $btn_text; ?></a>
+					<a href="<?php echo esc_url($btn_link); ?>" class="<?php echo mixt_element_button($button); ?>"><?php echo $btn_text; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -299,7 +363,7 @@ class MixtPricing {
 		return "<li class='$classes'>$content</li>";
 	}
 }
-new MixtPricing;
+new Mixt_Pricing;
 
 if ( class_exists('WPBakeryShortCodesContainer') ) {
 	class WPBakeryShortCode_Mixt_Pricing extends WPBakeryShortCodesContainer {}

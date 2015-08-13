@@ -11,7 +11,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 /**
  * Class for setting up and displaying the post and its components
  */
-class mixtPost {
+class Mixt_Post {
 
 	public $ID;
 	public $type;
@@ -42,14 +42,14 @@ class mixtPost {
 			$this->content   = get_the_content($this->ID);
 		} else {
 			$this->permalink = get_permalink($this->ID);
-			$this->content   = get_the_content('<button class="btn btn-black hover-accent-bg read-more">' . __('Read More', 'mixt') . '</span>');
+			$this->content   = get_the_content('<button class="btn btn-black btn-hover-accent read-more">' . __('Read More', 'mixt') . '</span>');
 		}
 
 		$this->type = get_post_type($id);
 
 		if ( empty($layout) ) {
-			$layout = MIXT::get('layout');
-			$layout['posts-page'] = MIXT::get('page', 'posts-page');
+			$layout = Mixt_Options::get('layout');
+			$layout['posts-page'] = Mixt_Options::get('page', 'posts-page');
 		}
 		$this->layout = $layout;
 
@@ -78,8 +78,9 @@ class mixtPost {
 	/**
 	 * Return a string of classes for the post
 	 */
-	public function classes() {
+	public function classes( $extra_classes = '' ) {
 		$classes = 'article';
+		if ( $extra_classes != '' ) $classes .= ' ' . $extra_classes;
 
 		switch ( $this->context ) {
 			case 'blog':
@@ -255,16 +256,18 @@ class mixtPost {
 			// Image Format
 			case 'image':
 				$feat_classes .= ' post-image';
-				$feat_id = mixt_get_post_image($this->content, 'id');
-				if ( ! empty($feat_id) ) {
-					$output = '<div class="' . $feat_classes . '">' .
-							 $permalink_start . wp_get_attachment_image($feat_id, $feat_size) . $permalink_end .
-						 '</div>';
-					$this->content = str_replace(mixt_get_post_image($this->content), '', $this->content);
-				} else if ( ! empty($placeholder_img) ) {
-					$output = $placeholder_img;
+				if ( ! empty($feat_img) ) {
+					$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
 				} else {
-					$output = $format_icon;
+					$feat_id = mixt_get_post_image($this->content, 'id');
+					if ( ! empty($feat_id) ) {
+						$output = '<div class="' . $feat_classes . '">' . $permalink_start . wp_get_attachment_image($feat_id, $feat_size) . $permalink_end . '</div>';
+						$this->content = str_replace(mixt_get_post_image($this->content), '', $this->content);
+					} else if ( ! empty($placeholder_img) ) {
+						$output = $placeholder_img;
+					} else {
+						$output = $format_icon;
+					}
 				}
 				break;
 
@@ -294,7 +297,7 @@ class mixtPost {
 				if ( ! empty($feat_img) ) {
 					$feat_classes .= ' post-image';
 					$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
-				} else if ( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) ) {
+				} else if ( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) && ! $this->layout['post-info'] ) {
 					if ( ! empty($placeholder_img) ) {
 						$output = $placeholder_img;
 					} else if ( $this->type != 'page' ) {
@@ -314,7 +317,7 @@ class mixtPost {
 	 * Display the post's header
 	 */
 	public function header() {
-		$head_opt = MIXT::get('header');
+		$head_opt = Mixt_Options::get('header');
 
 		$permalink_start = $permalink_end = '';
 		if ( $this->context != 'single' ) {
@@ -420,6 +423,8 @@ function mixt_get_post_image($content = null, $type = 'full') {
 	$img = '';
 	$pattern = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
 
+	if ( empty($matches[0]) ) return;
+
 	if ( $type == 'full' ) {
 		$img = $matches[0][0];
 	} else if ( $type == 'id' ) {
@@ -515,13 +520,15 @@ function mixt_related_posts( $args = array() ) {
 					wp_enqueue_script('mixt-lightslider');
 					
 					echo '<div class="slider-cont controls-alt">';
+				} else {
+					echo "<div class='related-inner post-list related-{$args['number']}-col'>";
 				}
 
 				while ( $rel_query->have_posts() ) :
 					$rel_query->the_post();
 					$title   = get_the_title();
 					$link    = get_the_permalink();
-					$post_ob = new mixtPost('related');
+					$post_ob = new Mixt_Post('related');
 
 					?>
 					<article class="post related-post">
@@ -538,9 +545,9 @@ function mixt_related_posts( $args = array() ) {
 					</article>
 					<?php
 				endwhile;
+				?>
 
-				if ( $args['slider'] ) { echo '</div>'; } // Close .slider-cont
-			?>
+				</div><?php // Close .related-inner or .slider-cont ?>
 			</div>
 			<?php
 		}

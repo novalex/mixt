@@ -230,7 +230,7 @@ MIXT POST FUNCTIONS
 						breakpoint: 960,
 						settings: { item: 3 }
 					}, {
-						breakpoint: 500,
+						breakpoint: 540,
 						settings: { item: 2 }
 					}],
 					onSliderLoad: function(el) {

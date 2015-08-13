@@ -3,16 +3,17 @@
 /**
  * Social Icons Element
  */
-class MixtSocialIcons {
+class Mixt_Social {
 
-	public $profiles = array();
-	public $btn_colors = array();
-	public $btn_sizes = array();
+	/**
+	 * @var array $profiles
+	 * @var array $btn_colors
+	 * @var array $btn_sizes
+	 */
+	public $profiles;
 
 	public function __construct() {
 		$this->profiles = $this->profiles_array();
-		$this->btn_colors = mixt_get_assets('button', 'colors');
-		$this->btn_sizes = mixt_get_assets('button', 'sizes');
 
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -49,21 +50,14 @@ class MixtSocialIcons {
 						'nav'     => __( 'Nav Menu', 'mixt' ),
 					),
 				),
-				'color' => array(
-					'type'     => 'select',
-					'label'    => __( 'Button Color', 'mixt' ),
-					'options'  => $this->btn_colors,
-					'required' => array( 'style', '=', 'buttons|group' ),
-				),
-				'btn_size' => array(
-					'type'     => 'select',
-					'label'    => __( 'Button Size', 'mixt' ),
-					'options'  => $this->btn_sizes,
+				'button' => array(
+					'type'     => 'button',
+					'label'    => __( 'Button Style', 'mixt' ),
 					'required' => array( 'style', '=', 'buttons|group' ),
 				),
 				'hover' => array(
 					'type' => 'select',
-					'label' => __( 'Hover Type', 'mixt' ),
+					'label' => __( 'Hover Color', 'mixt' ),
 					'options' => array(
 						'icon' => __( 'Icon', 'mixt' ),
 						'bg'   => __( 'Background', 'mixt' ),
@@ -99,29 +93,25 @@ class MixtSocialIcons {
 					'heading'    => __( 'Icon Style', 'mixt' ),
 					'param_name' => 'style',
 					'value'      => array(
-						__( 'Plain', 'mixt' ) => 'plain',
-						__( 'Buttons', 'mixt' ) => 'buttons',
+						__( 'Plain', 'mixt' )        => 'plain',
+						__( 'Buttons', 'mixt' )      => 'buttons',
 						__( 'Button Group', 'mixt' ) => 'group',
-						__( 'Nav Menu', 'mixt' ) => 'nav',
+						__( 'Nav Menu', 'mixt' )     => 'nav',
+					),
+					'std'        => 'buttons',
+				),
+				array(
+					'type'       => 'button',
+					'heading'    => __( 'Button Style', 'mixt' ),
+					'param_name' => 'button',
+					'dependency' => array(
+						'element' => 'style',
+						'value'   => array('buttons', 'group')
 					),
 				),
 				array(
-					'type'       => 'dropdown',
-					'heading'    => __( 'Button Color', 'mixt' ),
-					'param_name' => 'color',
-					'value'      => array_flip($this->btn_colors),
-					'dependency' => array( 'element' => 'style', 'value' => array('buttons', 'group') ),
-				),
-				array(
-					'type'       => 'dropdown',
-					'heading'    => __( 'Button Size', 'mixt' ),
-					'param_name' => 'btn_size',
-					'value'      => array_flip($this->btn_sizes),
-					'dependency' => array( 'element' => 'style', 'value' => array('buttons', 'group') ),
-				),
-				array(
 					'type'        => 'dropdown',
-					'heading'     => __( 'Hover Type', 'mixt' ),
+					'heading'     => __( 'Hover Color', 'mixt' ),
 					'param_name'  => 'hover',
 					'value'       => array(
 						__( 'Icon', 'mixt' )       => 'icon',
@@ -156,17 +146,19 @@ class MixtSocialIcons {
 	 */
 	public function shortcode( $atts ) {
 		$args = shortcode_atts( array(
+			'style'    => 'buttons',
 			'hover'    => 'icon',
 			'profiles' => '',
-			'color'    => 'default',
-			'btn_size' => 'default',
-			'type'     => 'networks',
-			'style'    => 'buttons',
+			'button'   => '',
 			'class'    => '',
 			'css'      => '',
 		), $atts );
 
 		$args['class'] = 'mixt-social mixt-element ' . $args['class'];
+		$args['type'] = 'networks';
+		if ( $args['style'] == 'plain' && $args['hover'] == 'bg' ) $args['hover'] = 'icon';
+
+		$args = array_merge($args, mixt_element_button($args['button'], 'value'));
 
 		// VC custom design options
 		if ( ! empty($args['css']) && defined( 'WPB_VC_VERSION' ) ) {
@@ -187,7 +179,7 @@ class MixtSocialIcons {
 		return mixt_social_profiles(false, $args);
 	}
 }
-new MixtSocialIcons;
+new Mixt_Social;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Social extends WPBakeryShortCode {}

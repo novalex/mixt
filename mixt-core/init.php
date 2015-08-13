@@ -9,10 +9,25 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 
+// LOAD THEME MODULES
+
+$mixt_modules = array(
+	'head-media.php',
+	'breadcrumbs.php',
+	'social.php',
+	'favicons.php',
+	'gallery.php',
+	'extras.php',
+	'customizer.php',
+	'dcss/class-dcss.php',
+);
+mixt_requires( $mixt_modules, MIXT_MODULES_DIR );
+
+
 /**
  * Initialize and load framework plugins
  */
-class MixtPlugins {
+class Mixt_Plugins {
 	public $required = array();
 
 	public function __construct() {
@@ -32,16 +47,16 @@ class MixtPlugins {
 				require_once( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' );
 			}
 			// Framework
-			if ( file_exists( MIXT_PLUGINS_DIR . '/redux/ReduxCore/framework.php' ) ) {
-				if ( ! class_exists( 'ReduxFramework' ) ) {
+			if ( ! class_exists( 'ReduxFramework' ) ) {
+				if ( file_exists( MIXT_PLUGINS_DIR . '/redux/ReduxCore/framework.php' ) ) {
 					require_once( MIXT_PLUGINS_DIR . '/redux/ReduxCore/framework.php' );
+				} else {
+					$this->required[] = array(
+						'name'     => 'Redux Framework',
+						'slug'     => 'redux-framework',
+						'required' => true
+					);
 				}
-			} else {
-				$this->required[] = array(
-					'name'     => 'Redux Framework',
-					'slug'     => 'redux-framework',
-					'required' => true
-				);
 			}
 			add_action( 'redux/page/mixt_opt/enqueue', array($this, 'redux_scripts'), 2 );
 			// Config
@@ -171,26 +186,36 @@ class MixtPlugins {
 		tgmpa( $this->required, $config );
 	}
 }
-new MixtPlugins;
+new Mixt_Plugins;
 
 
 // Set options that need to be accessed before Redux is initialized (themes, sidebars)
 function mixt_options_changed( $mixt_opt ) {
 	// Dynamic Sass Option
-	if ( ! empty($mixt_opt['dynamic-sass']) ) { update_option('mixt-dynamic-sass', $mixt_opt['dynamic-sass']); }
+	if ( array_key_exists('dynamic-sass', $mixt_opt) ) { update_option('mixt-dynamic-sass', $mixt_opt['dynamic-sass']); }
+	// Themes Enabled
+	if ( array_key_exists('themes-master', $mixt_opt) ) {
+		update_option('mixt-themes-enabled', $mixt_opt['themes-master']);
+
+		if ( $mixt_opt['themes-master'] == false ) {
+			global $mixtConfig;
+			$mixtConfig->ReduxFramework->set('site-theme', '');
+			$mixtConfig->ReduxFramework->set('nav-theme', '');
+		}
+	}
 	// Custom Sidebars
 	if ( ! empty($mixt_opt['reg-sidebars']) ) { update_option('mixt-sidebars', $mixt_opt['reg-sidebars']); }
 	// Post Excerpt Length
-	if ( ! empty($mixt_opt['post-excerpt-length']) ) { update_option('post-excerpt-length', $mixt_opt['post-excerpt-length']); }
+	if ( ! empty($mixt_opt['post-excerpt-length']) ) { update_option('mixt-post-excerpt-length', $mixt_opt['post-excerpt-length']); }
 	// Themes
-	if ( ! empty($mixt_opt['site-themes']) ) { update_option('site-themes', $mixt_opt['site-themes']); }
-	if ( ! empty($mixt_opt['nav-themes']) ) { update_option('nav-themes', $mixt_opt['nav-themes']); }
+	if ( ! empty($mixt_opt['site-themes']) ) { update_option('mixt-site-themes', $mixt_opt['site-themes']); }
+	if ( ! empty($mixt_opt['nav-themes']) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
 }
 add_action('redux/options/mixt_opt/settings/change', 'mixt_options_changed', 2);
 
 // Set Custom Excerpt Length
 function mixt_excerpt_length( $length ) {
-	return get_option('post-excerpt-length', 55);
+	return get_option('mixt-post-excerpt-length', 55);
 }
 add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
 
@@ -222,32 +247,8 @@ function mixt_wp_old_classes($classes) {
 }
 
 
-// LOAD THEME MODULES
-
-$mixt_modules = array(
-	'head-media.php',
-	'breadcrumbs.php',
-	'social.php',
-	'favicons.php',
-	'gallery.php',
-	'extras.php',
-	'customizer.php',
-);
-mixt_requires( $mixt_modules, MIXT_MODULES_DIR );
-unset($mixt_modules);
-
 // Admin Integration
 require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
-
-// Color Manipulation
-require_once MIXT_FRAME_DIR . '/libs/color-manipulation.php';
-
-// Load the dynamic CSS file or Sass parser
-if ( get_option('mixt-dynamic-sass', 0) ) {
-	require_once( MIXT_PLUGINS_DIR . '/wp-sass/wp-sass.php' );
-} else {
-	require_once( MIXT_MODULES_DIR . '/dynamic-styles/dynamic.css.php' );
-}
 
 
 // BrowserSync Script
@@ -267,25 +268,31 @@ EOT;
 // ENQUEUE SCRIPTS AND STYLESHEETS
 
 function mixt_scripts() {
-	// Main CSS
-	wp_enqueue_style( 'mixt-main-style', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
+	// Define resource paths as filtered array so they can be overridden from child themes
+	$resources = array(
+		'main-css'     => MIXT_URI . '/dist/main.css',
+		'main-js'      => MIXT_URI . '/dist/main.js',
+		'global-js'    => MIXT_URI . '/js/global.js',
+		'bootstrap-js' => MIXT_URI . '/dist/bootstrap.js',
+	);
+	$resources = apply_filters('mixt_resources', $resources, $resources);
 
-	// Font Awesome Icons
-	wp_enqueue_style( 'mixt-fa-icons', MIXT_URI . '/assets/fonts/font-awesome/font-awesome.css', array(), MIXT_VERSION );
+	// Main CSS
+	wp_enqueue_style( 'mixt-main-style', $resources['main-css'], array(), MIXT_VERSION );
 
 	// Dynamic Sass
 	if ( get_option('mixt-dynamic-sass', 0) ) {
-		wp_enqueue_style( 'mixt-dynamic-style', MIXT_MODULES_URI . '/dynamic-styles/dynamic.scss.php' );
+		wp_enqueue_style( 'mixt-dynamic-style', MIXT_MODULES_URI . '/dcss/dynamic.scss.php' );
 	}
 
 	// Bootstrap JS
-	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-bootstrap-js', $resources['bootstrap-js'], array( 'jquery' ), MIXT_VERSION, true );
 
 	// Main JS
-	wp_enqueue_script( 'mixt-main-js', MIXT_URI . '/dist/main.js', array( 'jquery' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-main-js', $resources['main-js'], array( 'jquery' ), MIXT_VERSION, true );
 
 	// Global Functions JS
-	wp_enqueue_script( 'mixt-global-js', MIXT_URI . '/js/global.js', array( 'jquery', 'mixt-main-js' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-global-js', $resources['global-js'], array( 'jquery', 'mixt-main-js' ), MIXT_VERSION, true );
 
 	// Localize Options
 	wp_localize_script( 'mixt-main-js', 'mixt_opt', mixt_local_options() );
@@ -293,16 +300,20 @@ function mixt_scripts() {
 	// Comment Reply JS
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { wp_enqueue_script( 'comment-reply' ); }
 
+	// Icon Fonts
+	$icon_fonts = Mixt_Options::get('assets', 'icon-fonts');
+	foreach ( $icon_fonts as $font => $val ) {
+		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
+	}
 
 	// JS Plugins
-
 	foreach ( array_diff(scandir( MIXT_DIR . '/dist/plugins' ), array('.', '..')) as $filename ) {
 		$plugin_handle = 'mixt-' . explode('.', $filename)[0];
 		wp_register_script( $plugin_handle, MIXT_URI . '/dist/plugins/' . $filename, MIXT_VERSION );
 	}
 
 	// Isotope Masonry
-	if ( MIXT::get('layout', 'type') == 'masonry' ) { wp_enqueue_script('mixt-isotope'); }
+	if ( Mixt_Options::get('layout', 'type') == 'masonry' ) { wp_enqueue_script('mixt-isotope'); }
 }
 add_action('wp_enqueue_scripts', 'mixt_scripts', 99);
 
@@ -329,11 +340,14 @@ add_action('admin_footer', 'mixt_browsersync');
  * Localize options to be used by scripts
  */
 function mixt_local_options() {
-	$opt = array();
-	$opt['page'] = MIXT::get('page');
-	$opt['nav'] = MIXT::get('nav');
-	$opt['header'] = MIXT::get('header');
-	$opt['layout'] = MIXT::get('layout');
+	$opt = array(
+		'page'   => Mixt_Options::get('page'),
+		'nav'    => Mixt_Options::get('nav'),
+		'header' => Mixt_Options::get('header'),
+		'layout' => Mixt_Options::get('layout'),
+	);
+
+	if ( $opt['header']['enabled'] == false ) $opt['header'] = array( 'enabled' => false );
 
 	// Additional nav options
 	$nav_options = mixt_get_options( array(
@@ -343,12 +357,12 @@ function mixt_local_options() {
 
 	// Pagination Options
 	global $wp_query;
-	if ( $opt['page']['posts-page'] ) {
+	if ( ! empty($opt['page']['posts-page']) && $opt['page']['posts-page'] ) {
 		if ( $opt['layout']['pagination-type'] == 'ajax-click' || $opt['layout']['pagination-type'] == 'ajax-scroll' ) {
 			$opt['layout']['next-url'] = next_posts($wp_query->max_num_pages, false);
 		}
 	}
-	if ( $opt['page']['page-type'] == 'single' ) {
+	if ( ! empty($opt['page']['page-type']) && $opt['page']['page-type'] == 'single' ) {
 		if ( get_option('page_comments') ) {
 			if ( $opt['layout']['comment-pagination-type'] == 'ajax-click' || $opt['layout']['comment-pagination-type'] == 'ajax-scroll' ) {
 				$opt['layout']['comment-default-page'] = get_option('default_comments_page', 'newest');

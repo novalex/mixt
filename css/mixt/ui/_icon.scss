@@ -1,0 +1,136 @@
+
+$icon-sizes: (
+	'icon-sm': 16px,
+	'icon-lg': 32px,
+	'icon-xl': 64px,
+);
+$icon-size-base: 20px;
+$icon-el-padding: 8px;
+
+.mixt-icon {
+	padding: $icon-el-padding;
+	text-align: center;
+
+	&.default { padding: 5px; }
+
+	&,
+	i {
+		display: inline-block;
+		line-height: 1;
+	}
+
+	// Icon Colors
+	i { @extend %basic-color-text-variants; }
+
+	// Icon Styles
+	&.icon-solid,
+	&.icon-outline {
+		border-width: 1px; border-style: solid;
+	}
+	&.icon-rounded { border-radius: $rounded-radius; }
+	&.icon-circle { border-radius: 100px; border-radius: 50%; }
+
+	// Icon Sizes
+	@mixin icon-size($size) {
+		i {
+			width: $size;
+			height: $size;
+			font-size: $size;
+		}
+	}
+
+	@include icon-size($icon-size-base);
+	@each $sel, $size in $icon-sizes {
+		&.#{$sel} { @include icon-size($size); }
+	}
+
+
+	// Animations
+	&.anim {
+		cursor: pointer;
+		position: relative;
+		transition: color 0.2s, border 0.2s, background 0.2s;
+	}
+	
+	&.anim-pop,
+	&.anim-focus {
+		overflow: visible !important;
+		&:after {
+			content: ' ';
+			position: absolute;
+			top: -9px; left: -9px;
+			right: -9px; bottom: -9px;
+			opacity: 0;
+			border-style: solid;
+			border-width: 3px;
+			border-color: inherit;
+			border-radius: inherit;
+			transform: scale(0.8);
+			transition: transform 0.2s, opacity 0.2s;
+		}
+		&:hover:after,
+		.icon-cont:hover &:after {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		&.icon-circle:after { border-radius: 50%; }
+		&.icon-rounded:after { border-radius: $rounded-radius + 4px; }
+	}
+	&.anim-focus:after { transform: scale(1.2); }
+
+	&.anim-rise,
+	&.anim-fall,
+	&.anim-go-left,
+	&.anim-go-right { overflow: hidden; }
+	&.anim-rise:hover i,
+	.icon-cont:hover &.anim-rise i { animation: riseUp 0.3s forwards; }
+	&.anim-fall:hover i,
+	.icon-cont:hover &.anim-fall i { animation: fallDown 0.3s forwards; }
+	&.anim-go-left:hover i,
+	.icon-cont:hover &.anim-go-left i { animation: goLeft 0.3s forwards; }
+	&.anim-go-right:hover i,
+	.icon-cont:hover &.anim-go-right i { animation: goRight 0.3s forwards; }
+
+	&.anim-rotate,
+	&.anim-grow,
+	&.anim-shrink {
+		i { transition: transform 0.3s; }
+	}
+	&.anim-rotate:hover i,
+	.icon-cont:hover &.anim-rotate i { transform: rotate(30deg); }
+
+	&.anim-grow i,
+	&.anim-shrink i { transform: scale(1); }
+	&.anim-grow:hover i,
+	.icon-cont:hover &.anim-grow i { transform: scale(1.2); }
+	&.anim-shrink:hover i,
+	.icon-cont:hover &.anim-shrink i { transform: scale(0.8); }
+
+	&.anim-spin:hover i,
+	.icon-cont:hover &.anim-spin i { animation: spin 1.8s linear infinite; }
+
+	// Color Variants
+	@each $sel, $color in $basic-colors {
+		$text: set-color-for-bg($color);
+		$border: darken($color, 10);
+		&.#{$sel}.icon-solid {
+			color: $text;
+			border-color: $border;
+			background-color: $color;
+			@include text-shadow-for-bg($color);
+
+			&.anim-invert:hover,
+			.icon-cont:hover &.anim-invert {
+				color: $color;
+				border-color: darken($text, 10);
+				background-color: $text;
+				@include text-shadow-for-bg($text);
+			}
+		}
+	}
+
+	&.icon-outline {
+		@extend %basic-color-border-variants;
+	}
+}

@@ -3,7 +3,7 @@
 /**
  * Model Element
  */
-class MixtElement {
+class Mixt_Element {
 
 	public function __construct() {
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
@@ -64,7 +64,7 @@ class MixtElement {
 		return $html;
 	}
 }
-new MixtElement;
+new Mixt_Element;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Element extends WPBakeryShortCode {}

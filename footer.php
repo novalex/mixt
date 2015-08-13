@@ -9,6 +9,9 @@
 ?>
 			</div><?php // close main-content-inner or sidebar, if sidebar is used ?>
 		</div><?php // close .row ?>
+
+		<?php do_action('mixt_body_css'); ?>
+
 	</div><?php // close .main-content ?>
 
 	<footer id="colophon" class="site-footer" role="contentinfo">

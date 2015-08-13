@@ -3,12 +3,16 @@
 /**
  * Stats Element
  */
-class MixtStat {
+class Mixt_Stat {
 
+	/** @var array */
 	public $colors;
 	
 	public function __construct() {
-		$this->colors = array_merge(mixt_get_assets('colors', 'basic'), array('transparent' => __( 'Transparent', 'mixt' )));
+		$this->colors = array_merge(
+			mixt_get_assets('colors', 'basic'),
+			array( 'transparent' => __( 'Transparent', 'mixt' ) )
+		);
 
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
@@ -38,7 +42,7 @@ class MixtStat {
 					'label'     => __( 'Stat Text', 'mixt' ),
 					'desc' => __( 'The stat\'s content. Use {value} to show the counter value.', 'mixt' ),
 					'admin_label' => true,
-					'std' => 'Value: {value}% <i class="fa fa-check"></i>',
+					'std' => 'Value: {value}%',
 				),
 				'desc' => array(
 					'type'        => 'text',
@@ -142,7 +146,7 @@ class MixtStat {
 					'description' => __( 'The stat\'s content. Use {value} to show the counter value.', 'mixt' ),
 					'param_name'  => 'content',
 					'admin_label' => true,
-					'std' => 'Value: {value}% <i class="fa fa-check"></i>',
+					'std' => 'Value: {value}%',
 				),
 				array(
 					'type'        => 'textfield',
@@ -227,6 +231,27 @@ class MixtStat {
 					'heading'     => __( 'Extra Classes', 'mixt' ),
 					'param_name'  => 'class',
 				),
+
+				// Styler
+				array(
+					'type'       => 'styler',
+					'param_name' => 'styler',
+					'fields'     => array(
+						'bg' => array(
+							'label'   => __( 'Background Color', 'mixt' ),
+							'pattern' => 'background-color: {{val}}',
+						),
+						'color' => array(
+							'label'   => __( 'Text Color', 'mixt' ),
+							'pattern' => 'color: {{val}}',
+						),
+						'border' => array(
+							'label'   => __( 'Border Color', 'mixt' ),
+							'pattern' => 'border-color: {{val}}',
+						),
+					),
+					'group'      => 'Styler',
+				),
 			),
 		) );
 	}
@@ -235,20 +260,29 @@ class MixtStat {
 	 * Render shortcode
 	 */
 	public function shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'type'  => 'box',
-			'desc'  => '',
-			'from'  => 0,
-			'value' => 100,
-			'speed' => 2000,
-			'style' => 'color-bg',
-			'color' => 'white',
+		$args = shortcode_atts( array(
+			'type'        => 'box',
+			'desc'        => '',
+			'from'        => 0,
+			'value'       => 100,
+			'speed'       => 2000,
+			'style'       => 'color-bg',
+			'color'       => 'white',
 			'circle_from' => 0.0,
 			'circle_to'   => 1.0,
 			'circle_fill' => '#444',
 			'circle_bg'   => 'rgba(0,0,0,0.1)',
-			'class'  => '',
-		), $atts ) );
+			'class'       => '',
+			
+			'styler'      => '',
+		), $atts);
+
+		// Styler custom design
+		if ( $args['styler'] ) {
+			$args['class'] .= mixt_element_styler($args['styler']);
+		}
+
+		extract($args);
 
 		if ( $type == 'circle' ) {
 			$style = 'type-circle';
@@ -291,7 +325,7 @@ class MixtStat {
 		return ob_get_clean();
 	}
 }
-new MixtStat;
+new Mixt_Stat;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Stat extends WPBakeryShortCode {}

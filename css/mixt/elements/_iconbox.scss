@@ -1,0 +1,150 @@
+
+// Icon Box
+
+.mixt-iconbox {
+	$spacing: 15px;
+
+	.inner {
+		width: 100%;
+		position: relative;
+		text-align: center;
+	}
+	.content {
+		text-align: left;
+
+		:first-child { margin-top: 0; }
+	}
+
+	.icon { display: block; }
+
+	// Image Sizes
+	.image-wrap { &, img { max-width: 32px; } }
+	&.icon-xl .image-wrap { &, img { max-width: 96px; } }
+	&.icon-lg .image-wrap { &, img { max-width: 64px; } }
+	&.icon-sm .image-wrap { &, img { max-width: 16px; } }
+
+	// Box Styles
+	.inner {
+		&.solid { @extend %basic-color-bg-variants; }
+		&.bordered { @extend %basic-color-border-variants; }
+
+		&.solid,
+		&.bordered {
+			padding: $spacing;
+			border-radius: $bd-radius;
+			border-width: 1px;
+			border-style: solid;
+		}
+	}
+
+	// Title
+	.title-wrap {
+		width: 100%;
+		display: table;
+		text-align: left;
+		margin-bottom: $spacing;
+
+		.title {
+			width: 100%;
+			line-height: 1.3;
+			font-size: $font-size-l;
+		}
+		.title,
+		.icon-wrap {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+
+	// Icon Positions
+	&.icon-top .icon-wrap { padding-bottom: $spacing; display: inline-block; }
+	&.icon-left .icon-wrap { padding-right: $spacing; }
+	&.icon-right .icon-wrap { padding-left: $spacing; }
+	&.icon-left,
+	&.icon-right {
+		.inner { display: table; }
+		.icon-wrap,
+		.content {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+	&.icon-bottom .icon-wrap { padding-top: $spacing; display: inline-block; }
+
+	&.icon-title-left .icon-wrap { padding-right: 10px; }
+	&.icon-title-right .icon-wrap { padding-left: 10px; }
+
+	// Alignment
+	.valign-top {
+		.icon-wrap, .content { vertical-align: top; }
+	}
+	.valign-bottom {
+		.icon-wrap, .content { vertical-align: bottom; }
+	}
+	.halign-left { text-align: left; }
+	.halign-right { text-align: right; }
+
+	// Icon Styles
+	&.icon-background .inner {
+		$bg-size: 94px;
+		position: relative;
+		overflow: hidden;
+
+		.content {
+			position: relative;
+			z-index: 1;
+		}
+
+		.icon-wrap {
+			position: absolute;
+			right: -10px; bottom: 5px;
+			z-index: 0;
+			color: rgba(0,0,0,0.6);
+
+			.mixt-icon {
+				padding: 0;
+				opacity: 0.15;
+
+				i {
+					width: $bg-size; height: $bg-size;
+					font-size: $bg-size;
+					text-shadow: none;
+				}
+			}
+		}
+	}
+
+	&.icon-outside {
+		&.icon-top .icon,
+		&.icon-bottom .icon { float: left; }
+	}
+
+	// Icon Size Variants
+	@mixin icon-size-variant($size) {
+		$padding: $size / 2 + $icon-el-padding;
+		$offset: $padding + $icon-el-padding + $spacing - 2px;
+		&.icon-outside {
+			&.icon-top {
+				padding-top: $padding;
+				.icon { margin-top: -$offset; }
+			}
+			&.icon-left {
+				padding-left: $padding;
+				.icon { margin-left: -$offset; }
+			}
+			&.icon-right {
+				padding-right: $padding;
+				.icon { margin-right: -$offset; }
+			}
+			&.icon-bottom {
+				padding-bottom: $padding;
+				.icon { margin-bottom: -$offset; }
+			}
+		}
+	}
+
+	@include icon-size-variant($icon-size-base);
+	@each $sel, $size in $icon-sizes {
+		&.#{$sel} { @include icon-size-variant($size); }
+	}
+}

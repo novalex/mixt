@@ -8,74 +8,6 @@
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
-/**
- * Return array of default themes
- *
- * @param str $set which set of themes to return
- */
-function mixt_default_themes($set = '') {
-	$themes = array(
-		'names' => array(
-			'aqua' => 'Aqua', 'nightly' => 'Nightly',
-			'lava' => 'Lava', 'dark-lava' => 'Dark Lava',
-			'eco' => 'Eco',
-		),
-
-		'site' => array(
-			'aqua' => array(
-				'name' => 'Aqua', 'id' => 'aqua',
-				'text' => '#333', 'text-fade' => '#777',
-				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
-				'border' => '#ddd',
-				'accent' => '#539ddd', 'link'   => '#539ddd',
-			),
-			'lava' => array(
-				'name' => 'Lava', 'id' => 'lava',
-				'text' => '#333', 'text-fade' => '#777',
-				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
-				'border' => '#ddd',
-				'accent' => '#dd3e3e', 'link'   => '#dd3e3e',
-			),
-		),
-
-		'nav' => array(
-			'lava' => array(
-				'name' => 'Lava', 'id' => 'lava',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'inv-text' => '#fff',
-				'accent' => '#dd3e3e', 'inv-accent' => '#dd3e3e',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'dark-lava' => array(
-				'name' => 'Dark Lava', 'id' => 'dark-lava',
-				'bg' => '#444', 'border' => '#333',
-				'text' => '#fff', 'inv-text' => '#333',
-				'accent' => '#dd3e3e', 'inv-accent' => '#dd3e3e',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'aqua' => array(
-				'name' => 'Aqua', 'id' => 'aqua',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'inv-text' => '#fff',
-				'accent' => '#539ddd', 'inv-accent' => '#539ddd',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'nightly' => array(
-				'name' => 'Nightly', 'id' => 'nightly',
-				'bg' => '#444', 'border' => '#333',
-				'text' => '#fff', 'inv-text' => '#333',
-				'accent' => '#539ddd', 'inv-accent' => '#539ddd',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-		),
-	);
-	return $themes[$set];
-}
-
 
 /**
  * Return various assets by groups
@@ -84,7 +16,7 @@ function mixt_get_assets($group, $subgroup) {
 	$assets = array(
 		'button' => array(
 			'sizes' => array(
-				'default' => __( 'Normal', 'mixt' ),
+				''       => __( 'Normal', 'mixt' ),
 				'btn-lg' => __( 'Large', 'mixt' ),
 				'btn-xl' => __( 'Extra Large', 'mixt' ),
 				'btn-sm' => __( 'Small', 'mixt' ),
@@ -102,15 +34,18 @@ function mixt_get_assets($group, $subgroup) {
 				'green'   => __( 'Green', 'mixt' ),
 				'blue'    => __( 'Blue', 'mixt' ),
 				'violet'  => __( 'Violet', 'mixt' ),
+				'shine'   => __( 'Shine', 'mixt' ),
+				'shade'   => __( 'Shade', 'mixt' ),
 			),
 		),
 		
 		'colors' => array(
 			'basic' => array(
+				'accent' => __( 'Theme Accent', 'mixt' ),
 				'white'  => __( 'White', 'mixt' ),
 				'grey'   => __( 'Grey', 'mixt' ),
 				'black'  => __( 'Black', 'mixt' ),
-				'accent' => __( 'Theme Accent', 'mixt' ),
+				'orange' => __( 'Orange', 'mixt' ),
 				'red'    => __( 'Red', 'mixt' ),
 				'green'  => __( 'Green', 'mixt' ),
 				'blue'   => __( 'Blue', 'mixt' ),
@@ -155,7 +90,7 @@ function mixt_get_themes($elem = '') {
 	if ( empty($elem) ) { return false; }
 
 	$theme_list = array();
-	$themes = get_option($elem . '-themes');
+	$themes = get_option("mixt-$elem-themes");
 
 	if ( ! empty($themes) && is_array($themes) ) {
 		foreach ( $themes as $theme_id => $theme ) {
@@ -175,10 +110,9 @@ function mixt_get_themes($elem = '') {
 /**
  * Return array of available CSS animations
  *
- * @param str $type type of animations to return (default: 'all')
+ * @param str $type type of animations to return
  */
 function mixt_css_anims($type = 'all') {
-
 	$anims = array(
 		'loops' => array(
 			'bounce'     => 'Bounce',

@@ -92,8 +92,8 @@
 .gallery-slider,
 .carousel-slider {
 	margin: 0;
-	padding: 0;
-	list-style: none;
+
+	@extend %reset-list;
 
 	li {
 		position: relative;
@@ -115,6 +115,6 @@
 	&:not(.lightSlider) li {
 		float: left;
 
-		&:not(:first-child) { display: none; }
+		.js &:not(:first-child) { display: none; }
 	}
 }

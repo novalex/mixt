@@ -1,23 +1,22 @@
 
 .sidebar {
 
-	// Headings / Widget Titles
+	// Widget Titles
 	h3 {
 		font-size: 15px;
 		margin: 0 0 15px;
 	}
 
-	ul {
-		padding: 0;
-		list-style: none;
-	}
+	ul { @extend %reset-list; }
 
 	// Nav Menus
 	.nav li {
+		margin-bottom: 0;
 
 		> ul,
 		.menu-item-has-children > ul {
-			border-top: 1px solid $theme-border;
+			border-top-width: 1px;
+			border-top-style: solid;
 		}
 
 		a {
@@ -41,7 +40,10 @@
 
 	.nav li,
 	#recentcomments li {
-		border-bottom: 1px solid $theme-border;
+		border-width: 0;
+		border-style: solid;
+		border-color: inherit;
+		border-bottom-width: 1px;
 	}
 
 	#recentcomments li { padding: $padding-s 0 !important; }
@@ -62,5 +64,58 @@
 
 	.widget_nav_menu {
 		.divider, .nav-search, li.btn { display: none; }
+	}
+
+
+	// Child Page Nav Menu
+	.child-page-nav {
+
+		li {
+			border-top-width: 1px;
+			margin-top: -1px !important;
+
+			a { color: inherit; }
+
+			a:hover,
+			&.current_page_item a { color: $theme-accent; }
+		}
+
+		.current_page_item {
+			border-width: 1px;
+			padding-left: 15px;
+			padding-right: 15px;
+
+			a { cursor: default; }
+
+			&,
+			&:before { background-color: darken($theme-bg, 3); }
+		}
+	}
+
+	@include media('screen', 'mars') {
+		.child-page-nav {
+			.current_page_item {
+				margin-left: -$gutter-lg;
+				padding-left: $gutter-lg;
+
+				border-left-width: 0;
+
+				@include square-arrow('left', 12px, $border: inherit);
+			}
+
+			.sidebar-left & {
+				.current_page_item {
+					margin-left: 0;
+					margin-right: -$gutter-lg;
+					padding-left: 15px;
+					padding-right: $gutter-lg;
+
+					border-left-width: 1px;
+					border-right-width: 0;
+
+					@include square-arrow('right', 12px, $border: inherit);
+				}
+			}
+		}
 	}
 }

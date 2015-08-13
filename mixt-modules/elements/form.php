@@ -3,9 +3,29 @@
 /**
  * Form Element
  */
-class MixtForm {
+class Mixt_Form {
+
+	/**
+	 * @var array $field_types
+	 * @var array $columns
+	 */
+	public $field_types, $columns;
 	
 	function __construct() {
+		$this->field_types = array(
+			'text'     => __( 'Text', 'mixt' ),
+			'password' => __( 'Password', 'mixt' ),
+			'textarea' => __( 'Textarea', 'mixt' ),
+			'checkbox' => __( 'Checkbox', 'mixt' ),
+		);
+		$this->columns = array(
+			'col-sm-2'  => __( '2 Columns', 'mixt' ),
+			'col-sm-4'  => __( '4 Columns', 'mixt' ),
+			'col-sm-6'  => __( '6 Columns', 'mixt' ),
+			'col-sm-8'  => __( '8 Columns', 'mixt' ),
+			'col-sm-10' => __( '10 Columns', 'mixt' ),
+			'col-sm-12' => __( '12 Columns', 'mixt' ),
+		);
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
 		add_shortcode('mixt_form', array($this, 'form_shortcode'));
@@ -18,18 +38,35 @@ class MixtForm {
 	public function mixtcb_extend() {
 		mixtcb_map( array(
 			'id'       => 'mixt_form',
-			'title'    => __( 'Custom Form', 'mixt' ),
+			'title'    => __( 'Form', 'mixt' ),
 			'template' => '[mixt_form {{attributes}}]{{nested}}[/mixt_form]',
 			'params'   => array(
+				'form_type' => array(
+					'type'    => 'select',
+					'label'   => __( 'Form Type', 'mixt' ),
+					'std'     => 'contact',
+					'options' => array(
+						'contact' => __( 'Contact', 'mixt' ),
+						'custom'  => __( 'Custom', 'mixt' ),
+					),
+				),
 				'address' => array(
-					'type'  => 'text',
-					'label' => __( 'Email Address', 'mixt' ),
-					'desc'  => __( 'Address to send the message to', 'mixt' ),
-					'std'   => get_option('admin_email'),
+					'type'     => 'text',
+					'label'    => __( 'Email Address', 'mixt' ),
+					'desc'     => __( 'Address to send the message to', 'mixt' ),
+					'std'      => get_option('admin_email'),
+					'required' => array('form_type', '=', 'contact'),
+				),
+				'action' => array(
+					'type'     => 'text',
+					'label'    => __( 'Form Action', 'mixt' ),
+					'desc'     => __( 'Set a custom action for the form', 'mixt' ),
+					'required' => array('form_type', '=', 'custom'),
 				),
 				'labels' => array(
 					'type'    => 'select',
 					'label'   => __( 'Label Display', 'mixt' ),
+					'std'     => 'top',
 					'options' => array(
 						'top'  => __( 'Top', 'mixt' ),
 						'left' => __( 'Left', 'mixt' ),
@@ -42,10 +79,16 @@ class MixtForm {
 					'desc'  => __( 'Text on the submit button', 'mixt' ),
 					'std'   => __( 'Submit', 'mixt' ),
 				),
-				'action' => array(
-					'type'  => 'text',
-					'label' => __( 'Form Action', 'mixt' ),
-					'desc'  => __( 'Set a custom action for the form', 'mixt' ),
+				'button' => array(
+					'type'  => 'button',
+					'label' => __( 'Button Style', 'mixt' ),
+					'std'   => 'color:primary',
+				),
+				'btn_cols' => array(
+					'type'    => 'select',
+					'label'   => __( 'Button Columns', 'mixt' ),
+					'options' => $this->columns,
+					'std'     => 'col-sm-4',
 				),
 				'class' => array(
 					'type'  => 'text',
@@ -62,11 +105,8 @@ class MixtForm {
 					'type' => array(
 						'type'    => 'select',
 						'label'   => __( 'Field Type', 'mixt' ),
-						'options' => array(
-							'text'     => __( 'Text', 'mixt' ),
-							'textarea' => __( 'Textarea', 'mixt' ),
-							'checkbox' => __( 'Checkbox', 'mixt' ),
-						),
+						'options' => $this->field_types,
+						'std'     => 'text',
 					),
 					'label' => array(
 						'type'  => 'text',
@@ -83,14 +123,8 @@ class MixtForm {
 					'cols' => array(
 						'type'    => 'select',
 						'label'   => __( 'Columns', 'mixt' ),
-						'options' => array(
-							'col-sm-2'  => '2',
-							'col-sm-4'  => '4',
-							'col-sm-6'  => '6',
-							'col-sm-8'  => '8',
-							'col-sm-10' => '10',
-							'col-sm-12' => '12',
-						),
+						'options' => $this->columns,
+						'std'     => 'col-sm-12',
 					),
 				),
 				'presets' => array(
@@ -148,11 +182,28 @@ class MixtForm {
 			'js_view'     => 'VcColumnView',
 			'params'      => array(
 				array(
+					'type'        => 'dropdown',
+					'heading'     => __( 'Form Type', 'mixt' ),
+					'param_name'  => 'form_type',
+					'value'       => array(
+						__( 'Contact', 'mixt' ) => 'contact',
+						__( 'Custom', 'mixt' )  => 'custom',
+					),
+				),
+				array(
 					'type'        => 'textfield',
 					'heading'     => __( 'Email Address', 'mixt' ),
 					'description' => __( 'Address to send the message to', 'mixt' ),
 					'param_name'  => 'address',
 					'value'       => get_option('admin_email'),
+					'dependency'  => array( 'element' => 'form_type', 'value' => 'contact' ),
+				),
+				array(
+					'type'        => 'textfield',
+					'heading'     => __( 'Form Action', 'mixt' ),
+					'description' => __( 'Set a custom action for the form', 'mixt' ),
+					'param_name'  => 'action',
+					'dependency'  => array( 'element' => 'form_type', 'value' => 'custom' ),
 				),
 				array(
 					'type'        => 'dropdown',
@@ -171,10 +222,17 @@ class MixtForm {
 					'param_name'  => 'btn_text',
 				),
 				array(
-					'type'        => 'textfield',
-					'heading'     => __( 'Form Action', 'mixt' ),
-					'description' => __( 'Set a custom action for the form', 'mixt' ),
-					'param_name'  => 'action',
+					'type'       => 'button',
+					'heading'    => __( 'Button Style', 'mixt' ),
+					'param_name' => 'button',
+					'std'        => 'color:primary',
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Button Columns', 'mixt' ),
+					'param_name' => 'btn_cols',
+					'value'      => array_flip($this->columns),
+					'std'        => 'col-sm-4',
 				),
 				array(
 					'type'        => 'textfield',
@@ -202,11 +260,8 @@ class MixtForm {
 					'type'       => 'dropdown',
 					'heading'    => __( 'Field Type', 'mixt' ),
 					'param_name' => 'type',
-					'value'      => array(
-						__( 'Text', 'mixt' ) => 'text',
-						__( 'Textarea', 'mixt' ) => 'textarea',
-						__( 'Checkbox', 'mixt' ) => 'checkbox',
-					),
+					'value'      => array_flip($this->field_types),
+					'std'        => 'text',
 				),
 				array(
 					'type'       => 'textfield',
@@ -227,14 +282,8 @@ class MixtForm {
 					'type'       => 'dropdown',
 					'heading'    => __( 'Columns', 'mixt' ),
 					'param_name' => 'cols',
-					'value'      => array(
-						__( '2 Columns', 'mixt' )  => 'col-sm-2',
-						__( '4 Columns', 'mixt' )  => 'col-sm-4',
-						__( '6 Columns', 'mixt' )  => 'col-sm-6',
-						__( '8 Columns', 'mixt' )  => 'col-sm-8',
-						__( '10 Columns', 'mixt' ) => 'col-sm-10',
-						__( '12 Columns', 'mixt' ) => 'col-sm-12',
-					),
+					'value'      => array_flip($this->columns),
+					'std'        => 'col-sm-12',
 				),
 			),
 		) );
@@ -245,11 +294,14 @@ class MixtForm {
 	 */
 	public function form_shortcode($atts, $content = null) {
 		extract( shortcode_atts( array(
-			'address'  => '',
-			'class'    => '',
-			'labels'   => 'top',
-			'action'   => esc_url($_SERVER['REQUEST_URI']),
-			'btn_text' => __( 'Submit', 'mixt' ),
+			'form_type' => 'contact',
+			'address'   => '',
+			'action'    => esc_url($_SERVER['REQUEST_URI']),
+			'labels'    => 'top',
+			'btn_text'  => __( 'Submit', 'mixt' ),
+			'button'    => 'color:primary',
+			'btn_cols'  => 'col-sm-4',
+			'class'     => '',
 		), $atts ) );
 
 		$classes = 'mixt-form mixt-element form-cols row';
@@ -257,11 +309,11 @@ class MixtForm {
 		if ( $labels == 'none' ) { $classes .= ' form-no-labels'; }
 		else if ( $labels != 'top' ) $classes .= ' form-labels-' . $labels;
 
-		$submit_button = '<button type="submit" name="mixt-form-submit" class="btn btn-primary">' . $btn_text . '</button>';
+		$submit_button = '<button type="submit" name="mixt-form-submit" class="' . mixt_element_button($button) . '">' . $btn_text . '</button>';
 		$form_message = '';
 
 		// Send the email
-		if ( $address != '' && isset($_POST['mixt-form-submit']) ) {
+		if ( $form_type == 'contact' && $address != '' && isset($_POST['mixt-form-submit']) ) {
 			$name    = sanitize_text_field($_POST['mixt-field-name']);
 			$from    = sanitize_email($_POST['mixt-field-email']);
 			$subject = sanitize_text_field($_POST['mixt-field-subject']);
@@ -283,7 +335,8 @@ class MixtForm {
 
 		$html = "<form action='$action' method='post' class='$classes'>";
 			$html .= do_shortcode($content);
-			$html .= '<div class="submit-box col-sm-12">' . $form_message . $submit_button . '</div>';
+			$html .= '<div class="submit-box form-group ' . $btn_cols . '">' . $submit_button . '</div>';
+			if ( $form_message != '' ) $html .= '<div class="alert-box col-sm-12">' . $form_message . '</div>';
 		$html .= '</form>';
 
 		return $html;
@@ -300,7 +353,7 @@ class MixtForm {
 			'placeholder' => '',
 			'std'         => '',
 			'required'    => false,
-			'cols'        => 'col-s-6',
+			'cols'        => 'col-sm-12',
 		), $atts ) );
 
 		if ( ! empty($id) ) {
@@ -317,32 +370,33 @@ class MixtForm {
 			$input_atts .= " placeholder='$placeholder'";
 		}
 
+		$label_html = '';
+		if ( $label != '' ) {
+			if ( $required ) $label .= ' <small class="req">*</small>';
+			$label_html = "<label for='$id'>$label</label>";
+		}
+
 		switch ( $type ) {
 			case 'text':
-				$input = "<input type='text' $input_atts class='$input_classes' value='$std' />";
+			case 'password':
+				$input = "$label_html <input type='$type' $input_atts class='$input_classes' value='$std' />";
 				break;
 			case 'textarea':
-				$input = "<textarea $input_atts rows='4' class='$input_classes'>$std</textarea>";
+				$input = "$label_html <textarea $input_atts rows='4' class='$input_classes'>$std</textarea>";
 				break;
 			case 'checkbox':
-				$input = "<input type='checkbox' $input_atts class='$input_classes' value='true' " . ( $std == true ? 'checked' : '' ) . ">";
+				$input_classes = trim(str_replace('form-control', '', $input_classes));
+				$input = "<input type='checkbox' $input_atts class='$input_classes' value='true' " . ( $std == true ? 'checked' : '' ) . "> $label_html";
 				break;
 			default:
 				$input = '<p>Invalid input type!</p>';
 				break;
 		}
 
-		$html = "<fieldset class='$classes'>";
-		if ( ! empty($label) ) {
-			if ( $required ) $label .= ' <small class="req">*</small>';
-			$html .= "<label for='$id'>$label</label>";
-		}
-		$html .= "$input</fieldset>";
-
-		return $html;
+		return "<fieldset class='$classes'>$input</fieldset>";
 	}
 }
-new MixtForm;
+new Mixt_Form;
 
 if ( class_exists('WPBakeryShortCodesContainer') ) {
 	class WPBakeryShortCode_Mixt_Form extends WPBakeryShortCodesContainer {}

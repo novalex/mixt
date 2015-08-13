@@ -6,11 +6,14 @@ $icon-path: '../mixt-modules/elements/icons';
 
 // Icons
 
+.el-button .el-icon { background-image: url('#{$icon-path}/element.png'); }
+
 @mixin element_icon($element) {
 	.mixt_#{$element} .el-icon,
 	.mixt_#{$element}.vc_element-icon { background-image: url('#{$icon-path}/#{$element}.png'); }
 }
 
+@include element-icon('element');
 @include element_icon('button');
 @include element_icon('carousel');
 @include element_icon('flipcard');
@@ -20,6 +23,7 @@ $icon-path: '../mixt-modules/elements/icons';
 @include element_icon('map');
 @include element_icon('pricing');
 @include element_icon('profile');
+@include element_icon('review');
 @include element_icon('social');
 @include element-icon('stat');
 @include element_icon('timeline');

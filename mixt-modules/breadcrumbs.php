@@ -83,12 +83,20 @@ function mixt_breadcrumbs($page_title = '', $extra_classes = '') {
 
 		// Tag Page
 		} else if ( is_tag() ) {
-			echo '<li>' . single_tag_title('', false) . '</li>';
+			echo '<li>' . _x( 'Tag: ', 'breadcrumb', 'mixt' ) . single_tag_title('', false) . '</li>';
+
+		// Taxonomy Page
+		} else if ( is_tax() ) {
+			$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
+			echo '<li>';
+				if ( taxonomy_exists('post_format') ) { echo _x( 'Format: ', 'breadcrumb', 'mixt' ); }
+				echo $term->name;
+			echo '</li>';
 
 		// Author Archive Page
 		} else if ( is_author() ) {
 			$author = get_queried_object();
-			echo '<li>' . $author->display_name . '</li>';
+			echo '<li>' . _x('Author: ', 'breadcrumb', 'mixt') . $author->display_name . '</li>';
 
 		// Search Page
 		} else if ( is_search() ) {

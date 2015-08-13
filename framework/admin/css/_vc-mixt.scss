@@ -64,3 +64,20 @@ $item-bd-color: #eee;
 	padding: 5px 10px 5px 0;
 	white-space: nowrap;
 }
+
+
+// Styler Param Type
+.mixt-styler {
+	.vc_column { padding-top: 15px !important; }
+	.vc_col-sm-12:first-child { padding-top: 0 !important; }
+
+	.styler-field-cont {
+		label {
+			width: 120px;
+			display: inline-block;
+			margin: 0 6px 6px 0;
+		}
+
+		> * { vertical-align: middle; }
+	}
+}

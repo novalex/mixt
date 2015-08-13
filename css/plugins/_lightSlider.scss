@@ -86,11 +86,6 @@
 				z-index: 99;
 				transition: background 0.2s;
 			}
-
-			&:hover a,
-			&.active a {
-				background-color: $theme-accent;
-			}
 		}
 	}
 

@@ -40,13 +40,15 @@ $row-grid-sm-gutter: 20px;
 // Main Content
 
 #content,
-.sidebar {
+.sidebar-padder {
 	padding-left: $gutter-lg / 2;
 	padding-right: $gutter-lg / 2;
 }
 
-.sidebar-padder { padding-top: $gutter-lg; }
+.sidebar-padder,
+.blog-grid .posts-container:first-child { padding-top: $gutter-lg; }
 
+#content > .article:last-child { padding-bottom: 0 !important; }
 
 // Page Header Spacing
 
@@ -56,6 +58,11 @@ $row-grid-sm-gutter: 20px;
 	padding: 0 0 $row-spacing-lg;
 }
 .article .first-row { margin-top: -$gutter-lg; }
+
+
+// Pre-Footer Spacing
+
+.posts-container:last-child { padding-bottom: $gutter-lg; }
 
 
 // Fullwidth Layout
@@ -82,18 +89,18 @@ ul.wpb_thumbnails-fluid > li,
 	#content-wrap {
 		&.has-sidebar {
 			#content { padding-right: $gutter-lg; }
-			.sidebar { padding-left: $gutter-lg; }
+			.sidebar-padder { padding-left: $gutter-lg; }
 		}
 
 		&.sidebar-left {
-			#content { padding-left: $gutter-lg; }
-			.sidebar { padding-right: $gutter-lg; }
-		}
-	}
-
-	.blog-grid {
-		.posts-container {
-			padding-top: $gutter-lg;
+			#content {
+				padding-left: $gutter-lg;
+				padding-right: $gutter-lg / 2;
+			}
+			.sidebar-padder {
+				padding-left: $gutter-lg / 2;
+				padding-right: $gutter-lg;
+			}
 		}
 	}
 }
@@ -103,7 +110,7 @@ ul.wpb_thumbnails-fluid > li,
 
 @include media('screen', '<mars') {
 	#content,
-	.sidebar {
+	.sidebar-padder {
 		padding-left: $gutter-sm / 2;
 		padding-right: $gutter-sm / 2;
 	}
@@ -115,7 +122,10 @@ ul.wpb_thumbnails-fluid > li,
 	}
 	.article .first-row { margin-top: -$gutter-sm; }
 
-	.sidebar-padder { padding-top: $gutter-sm; }
+	.sidebar-padder,
+	.blog-grid .posts-container:first-child { padding-top: $gutter-sm; }
+
+	.posts-container:last-child { padding-bottom: $gutter-sm; }
 
 	.container,
 	.container-fluid,

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * The template used for displaying page content in page.php
+ * Template used for displaying page content
  *
  * @package MIXT
  */
 
-$post_ob = new mixtPost('page');
+$post_ob = new Mixt_Post('page');
 
 ?>
 
@@ -22,5 +22,4 @@ $post_ob = new mixtPost('page');
 			) );
 		?>
 	</div>
-	<?php // edit_post_link( __( 'Edit', 'mixt' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
 </article>

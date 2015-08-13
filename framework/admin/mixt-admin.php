@@ -9,9 +9,13 @@
 
 // CUSTOM MENU PAGE ELEMENTS
 
-if ( ! class_exists('MIXT_Nav_Meta') ) {
+if ( ! class_exists('Mixt_Nav_Meta') ) {
 
-	class MIXT_Nav_Meta {
+	class Mixt_Nav_Meta {
+
+		public function __construct() {
+			add_action('admin_init', array($this, 'add_nav_menu_meta_boxes'));
+		}
 
 		public function add_nav_menu_meta_boxes() {
 			add_meta_box( 'mixt_nav_meta', __('MIXT Elements', 'mixt'), array( $this, 'nav_menu_link'), 'nav-menus', 'side', 'high' );
@@ -158,28 +162,23 @@ if ( ! class_exists('MIXT_Nav_Meta') ) {
 		<?php }
 	}
 }
-
-$mixt_nav_meta = new MIXT_Nav_Meta;
-
-add_action('admin_init', array($mixt_nav_meta, 'add_nav_menu_meta_boxes'));
+new Mixt_Nav_Meta;
 
 
 // CUSTOM MEDIA META FIELDS
 
-if ( ! class_exists('MIXT_Media_Meta')) {
-
-	class MIXT_Media_Meta {
-	
+if ( ! class_exists('Mixt_Media_Meta')) {
+	class Mixt_Media_Meta {
 		private $media_fields = array();
 	
-		function __construct( $fields ) {
+		public function __construct( $fields ) {
 			$this->media_fields = $fields;
 		
-			add_filter( 'attachment_fields_to_edit', array( $this, 'applyFilter' ), 11, 2 );
-			add_filter( 'attachment_fields_to_save', array( $this, 'saveFields' ), 11, 2 );
+			add_filter( 'attachment_fields_to_edit', array($this, 'apply_filter'), 11, 2 );
+			add_filter( 'attachment_fields_to_save', array($this, 'save_fields'), 11, 2 );
 		}
 	
-		public function applyFilter( $form_fields, $post = null ) {
+		public function apply_filter( $form_fields, $post = null ) {
 			if ( ! empty( $this->media_fields ) ) {
 				foreach ( $this->media_fields as $field => $values ) {
 					if ( preg_match( '/' . $values['application'] . '/', $post->post_mime_type) && ! in_array( $post->post_mime_type, $values['exclusions'] ) ) {
@@ -214,7 +213,7 @@ if ( ! class_exists('MIXT_Media_Meta')) {
 			return $form_fields;
 		}
 	
-		function saveFields( $post, $attachment ) {
+		public function save_fields( $post, $attachment ) {
 			if ( ! empty( $this->media_fields ) ) {
 				foreach ( $this->media_fields as $field => $values ) {
 					if ( isset( $attachment[$field] ) ) {
@@ -249,20 +248,17 @@ if ( ! class_exists('MIXT_Media_Meta')) {
 		)
 	);
 }
+new Mixt_Media_Meta( $media_meta_options );
 
-$mixt_media_meta = new MIXT_Media_Meta( $media_meta_options );
 
-
-// Calculate Image Predominant Color After Upload And Set Meta
-
-add_action( 'add_attachment', 'mixt_media_upload' );
+// Calculate image predominant color after upload and set meta
 function mixt_media_upload($id) {
-	if ( wp_attachment_is_image($id) && file_exists( MIXT_FRAME_DIR . '/libs/color-manipulation.php') ) {
-		require_once( MIXT_FRAME_DIR . '/libs/color-manipulation.php' );
+	if ( wp_attachment_is_image($id) && file_exists( MIXT_FRAME_DIR . '/libs/color-helpers.php') ) {
+		require_once( MIXT_FRAME_DIR . '/libs/color-helpers.php' );
 
 		$src = wp_get_attachment_image_src( $id, 'full' );
 
-		$img_lum = get_avg_luminance( $src[0] );
+		$img_lum = get_img_luminance( $src[0] );
 		$img_lum_val = 'none';
 
 		if ( $img_lum < 170 ) {
@@ -274,3 +270,16 @@ function mixt_media_upload($id) {
 		update_post_meta( $id, '_' . 'image_color', $img_lum_val );
 	}
 }
+add_action('add_attachment', 'mixt_media_upload');
+
+
+// Add editor stylesheets
+function mixt_editor_styles() {
+	global $mixt_opt;
+	// Icon Fonts
+	$icon_fonts = $mixt_opt['icon-fonts'];
+	foreach ( $icon_fonts as $font => $val ) {
+		if ( $val ) add_editor_style(MIXT_URI . "/assets/fonts/$font/$font.css");
+	}
+}
+add_action('admin_init', 'mixt_editor_styles');

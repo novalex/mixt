@@ -50,11 +50,17 @@ var path = {
 
 // Task arguments
 var options = {
-		string: 'env',
-		default: { env: 'dev' }
+		boolean: true,
+		default: {
+			prod: false,
+			prefix: false,
+		}
 	},
 	options = minimist(process.argv.slice(2), options),
-	isDev   = options.env === 'dev' ? true : false;
+	isDev   = ! options.prod,
+	prefix  = options.prefix;
+
+var autoprefix = autoprefixer('last 2 versions', 'ie 8');
 
 function displayError(error) {
 	var errorString = '[' + error.plugin + ']';
@@ -72,7 +78,8 @@ gulp.task('sass', function() {
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
 		.pipe( concat('main.css') )
-		.pipe( gulpif(isDev, sourcemaps.write(), autoprefixer('last 2 versions', 'ie 8')) )
+		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( bsync.stream() );
 });
@@ -84,7 +91,8 @@ gulp.task('sass-admin', function() {
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
 		.pipe( concat('admin.css') )
-		.pipe( gulpif(isDev, sourcemaps.write(), autoprefixer('last 2 versions', 'ie 8')) )
+		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( bsync.stream() );
 });
@@ -95,7 +103,8 @@ gulp.task('sass-plugin', function() {
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
-		.pipe( gulpif(isDev, sourcemaps.write(), autoprefixer('last 2 versions', 'ie 8')) )
+		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest('./') )
 		.pipe( bsync.stream() );
 });

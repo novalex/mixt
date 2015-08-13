@@ -16,7 +16,7 @@ extract( shortcode_atts( array(
 	'el_id' => '',
 
 	// MIXT Custom
-	'separator' => 'none',
+	'separator' => '',
 	'separator_color' => '',
 	'separator_icon' => '',
 	'first_row' => false,
@@ -33,7 +33,7 @@ $el_class = $this->getExtraClass( $el_class );
 
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'vc_row wpb_row ' . ( $this->settings( 'base' ) === 'vc_row_inner' ? 'vc_inner ' : '' ) . get_row_css_class() . $el_class . vc_shortcode_custom_css_class( $css, ' ' ), $this->settings['base'], $atts );
 
-if ( $separator != 'none' ) { $css_class .= ' mixt-row-has-separator'; }
+if ( $separator != '' ) { $css_class .= ' mixt-row-has-separator'; }
 if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) { $css_class .= ' first-row'; }
 if ( filter_var($cols_matchheight, FILTER_VALIDATE_BOOLEAN) === true ) { $css_class .= ' cols-match-height'; }
 

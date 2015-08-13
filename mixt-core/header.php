@@ -217,7 +217,7 @@ function mixt_second_nav() {
 				'fallback_cb'     => '__return_false',
 				'echo'            => false,
 				'menu_id'         => 'sec-navbar-menu-left',
-				'walker'          => new mixt_navwalker()
+				'walker'          => new Mixt_Navwalker()
 			)
 		);
 		if ( ! empty($left_el_nav) ) {
@@ -250,7 +250,7 @@ function mixt_second_nav() {
 				'fallback_cb'     => '__return_false',
 				'echo'            => false,
 				'menu_id'         => 'sec-navbar-menu-right',
-				'walker'          => new mixt_navwalker()
+				'walker'          => new Mixt_Navwalker()
 			)
 		);
 		if ( ! empty($right_el_nav) ) {

@@ -1,5 +1,7 @@
 
-@import 'theme';
+// THEMES
+
+@import 'themes/themes';
 
 // COLORS
 
@@ -36,10 +38,11 @@ $red: #D81616;
 // =====================================================
 
 $basic-colors: (
+	'accent': $theme-accent,
 	'white': $white,
 	'grey': $grey,
 	'black': $black,
-	'accent': $theme-accent,
+	'orange': $orange,
 	'red': $red,
 	'green': $green,
 	'blue': $blue,
@@ -56,7 +59,7 @@ $button-colors: (
 	'orange': $orange,
 	'green': $green,
 	'blue': $blue,
-	'violet': $violet,
+	'violet': #9B27BF,
 );
 
 $vc-colors: (
@@ -161,7 +164,7 @@ $vc-colors: (
 
 // Text Shadow
 
-@mixin text-shadow-for-bg( $bg, $light: lighten($bg, 10), $dark: darken($bg, 10) ) {
+@mixin text-shadow-for-bg( $bg, $light: rgba(255,255,255,0.1), $dark: rgba(0,0,0,0.1) ) {
 	@if ( lumin($bg) <= 0.5 ) { $color: $dark; }
 	@else { $color: $light; }
 	text-shadow: 0 1px 1px $color;

@@ -7,24 +7,78 @@
 	overflow: hidden;
 	margin: 0 0 $margin-m;
 
-	> span,
-	.title-text {
+	> div,
+	.separator > span {
 		display: table-cell;
 		vertical-align: middle;
 	}
 
-	.title-text {
-		margin: 0;
-		float: left;
-		white-space: pre;
-		padding-bottom: 4px;
+	.heading { white-space: pre; }
 
-		&:not(:first-child) { padding-left: 15px; }
-		&:not(:last-child) { padding-right: 15px; }
+	.heading,
+	.subheading,
+	.separator {
+		clear: both;
+		margin: 0;
+		padding: 5px 0;
 	}
 
-	> span {
-		width: 100%; height: 1px;
+	.separator {
+		width: 100%;
+		clear: both;
+		display: table;
+
+		.sideline { width: 100%; }
+		.sep-icon {
+			font-size: 16px;
+			line-height: 1;
+
+			img { max-width: none; }
+
+			&:not(:first-child) { padding-left: 10px; }
+			&:not(:last-child) { padding-right: 10px; }
+		}
+	}
+
+	.headline-content {
+		width: 100%;
+
+		&:not(:first-child) .heading { padding-left: 15px; }
+		&:not(:last-child) .heading { padding-right: 15px; }
+	}
+
+	.headline-left,
+	.headline-right { width: 100%; }
+
+	&.align-left {
+		.heading,
+		.separator { float: left; }
+	}
+
+	&.align-center {
+		.headline-left,
+		.headline-right,
+		.separator .sideline { width: 50%; }
+
+		.heading,
+		.separator { margin: 0 auto; }
+
+		.headline-content { text-align: center; }
+	}
+
+	&.align-right {
+		.heading,
+		.separator { float: right; }
+
+		.headline-content { text-align: right; }
+	}
+
+	// Styles
+	&.style-sideline .headline-content { width: auto; }
+
+	// Line Styles
+	.sideline {
+		width: 100%; min-height: 1px;
 
 		&:after {
 			content: ' ';
@@ -39,14 +93,35 @@
 		&.dotted:after { border-style: dotted; }
 		&.double:after { border-top-width: 3px; border-style: double; }
 	}
-	&.center > span { width: 50%; }
 
 	// Color Variants
 	@mixin headline_variants($selector, $color) {
-		span.#{$selector}:after { border-color: $color; }
+		.sideline.#{$selector}:after { border-color: $color; }
 	}
-	@include headline_variants('color-auto', $theme-border);
 	@each $selector, $color in $vc-colors {
 		@include headline_variants($selector, $color);
+	}
+
+	// Flexbox Styling
+	.flexbox & {
+		display: flex;
+		align-items: center;
+
+		> div { display: flex; }
+
+		.heading { white-space: normal; }
+
+		.headline-left,
+		.headline-right {
+			width: auto !important;
+			flex-grow: 1;
+		}
+		.headline-content {
+			flex-direction: column;
+		}
+
+		&.align-left .headline-content { align-items: flex-start; }
+		&.align-center .headline-content { align-items: center; }
+		&.align-right .headline-content { align-items: flex-end; }
 	}
 }

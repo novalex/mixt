@@ -36,13 +36,9 @@
 	}
 
 	&.media-image {
-
-		.media-container {
-			
-			&.pattern {
-				background-size: auto;
-				background-repeat: repeat;
-			}
+		.media-container.pattern {
+			background-size: auto;
+			background-repeat: repeat;
 		}
 	}
 
@@ -59,6 +55,10 @@
 			min-width: 100%;
 			min-height: 100%;
 		}
+	}
+
+	&.media-slider {
+		> div { z-index: 1; }
 	}
 
 	.media-not-found {
@@ -131,34 +131,21 @@
 	}
 
 	.header-scroll {
-		display: block;
-		width: 32px; height: 32px;
-		margin-top: $margin-l;
+		$size: 32px;
+		position: absolute;
+		bottom: 15px; left: 50%;
+		margin-left: $size / -2;
+		width: $size; height: $size;
 		cursor: pointer; font-size: 22px;
-		text-align: center; line-height: 32px;
-		animation-duration: 2.5s;
-		animation-name: floating;
-		animation-timing-function: ease;
-		animation-iteration-count: infinite;
-	}
+		text-align: center; line-height: 1;
+		z-index: 9;
 
-	.container,
-	#breadcrumbs > li + li:before {
-		color: $theme-color;
+		@extend %anim-goDown;
 	}
 
 	&.fullscreen { height: 100vh; }
 
-	&.bg-dark {
-
-		&:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
-
-		.container,
-		.media-inner a,
-		#breadcrumbs > li + li:before {
-			color: $theme-bg-dark-color;
-		}
-	}
+	&.bg-dark:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
 
 	@include media('screen', '<mars') {
 		.container { padding-bottom: $spacing-sm; }
@@ -173,14 +160,6 @@
 	&.nav-below .head-media .container { padding-top: 0; padding-bottom: $nav-primary-height; }
 }
 
-@keyframes floating {
-	0% { transform: translate(0, 0); }
-	10% { transform: translate(0, 6px); }
-	25% { transform: translate(0, 0); }
-	40% { transform: translate(0, 6px); }
-	55%, 100% { transform: translate(0, 0); }
-}
-
 
 // LOCATION BAR & BREADCRUMBS
 
@@ -188,8 +167,6 @@
 	width: 100%;
 	border-style: solid;
 	border-width: 0 0 1px 0;
-	border-color: $theme-border;
-	background-color: darken($theme-bg, 5);
 
 	.container { height: auto; }
 
@@ -232,10 +209,11 @@
 }
 
 #breadcrumbs {
-	padding: 0;
 	border-radius: 0;
 	margin-bottom: 0;
 	background: none;
+
+	@extend %reset-list;
 
 	li {
 		cursor: default;
@@ -246,8 +224,6 @@
 	a {
 		color: inherit;
 		display: inline-block;
-
-		&:hover { color: $theme-accent; }
 	}
 
 	> li + li:before {

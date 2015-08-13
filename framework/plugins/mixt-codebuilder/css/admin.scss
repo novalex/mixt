@@ -242,11 +242,7 @@ $bd-radius: 2px;
 			margin-right: 0;
 			padding: 5px 10px 0 0 !important;
 		}
-		select,
-		input[type="text"],
-		textarea:not(.mcb-html),
-		.wp-editor-wrap,
-		.mcb-multi-input {
+		.label + * {
 			float: right;
 			width: auto;
 			width: calc(100% - #{$label-width} - 10px);

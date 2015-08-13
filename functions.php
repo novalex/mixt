@@ -25,6 +25,8 @@ define( 'MIXT_FRAME_URI', MIXT_URI . '/framework' );       // Framework URI
 define( 'MIXT_MODULES_URI', MIXT_URI . '/mixt-modules' );  // Modules URI
 define( 'MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins' ); // Plugins URI
 
+define( 'MIXT_THEME', 'lava' );
+
 
 // LOAD MIXT CORE FILES & FRAMEWORK
 
@@ -39,11 +41,10 @@ if ( ! function_exists('mixt_requires') ) {
 		foreach ( $files as $file ) {
 			$file = $dir . '/' . $file;
 			if ( ! file_exists( $file ) ) {
-				trigger_error( __('Error locating file for inclusion', 'mixt') . ': ' . $file, E_USER_ERROR );
+				trigger_error( __( 'Error locating file for inclusion', 'mixt' ) . ': ' . $file, E_USER_ERROR );
 			}
 			require_once $file;
 		}
-		unset( $file );
 	}
 }
 
@@ -58,7 +59,6 @@ $mixt_core_files = array(
 	'post.php',
 );
 mixt_requires( $mixt_core_files, MIXT_CORE_DIR );
-unset($mixt_core_files);
 
 // Load Elements
 foreach ( glob( MIXT_MODULES_DIR . '/elements/*.php' ) as $filename ) {
@@ -79,9 +79,6 @@ if ( ! function_exists( 'mixt_setup' ) ) {
 	function mixt_setup() {
 
 		global $cap, $content_width;
-
-		// This theme styles the visual editor with editor-style.css to match the theme style.
-		add_editor_style();
 
 		if ( function_exists( 'add_theme_support' ) ) {
 
@@ -106,9 +103,10 @@ if ( ! function_exists( 'mixt_setup' ) ) {
 
 		// Register Navigation Menus
 		register_nav_menus( array(
-			'primary'          => __( 'Primary Navbar', 'mixt' ),
-			'sec_navbar_left'  => __( 'Secondary Navbar Left Side', 'mixt' ),
-			'sec_navbar_right' => __( 'Secondary Navbar Right Side', 'mixt' ),
+			'primary'          => __( 'Main Nav', 'mixt' ),
+			'sec_navbar_left'  => __( 'Secondary Nav Left Side', 'mixt' ),
+			'sec_navbar_right' => __( 'Secondary Nav Right Side', 'mixt' ),
+			'onepage'          => __( 'One-Page Layout Nav', 'mixt' ),
 		) );
 
 		// Custom Blog Image Sizes
@@ -200,3 +198,8 @@ function remove_adminbar_styles() {
 	remove_action('wp_head', '_admin_bar_bump_cb');
 }
 add_action( 'get_header', 'remove_adminbar_styles' );
+
+// Redirect to Options Page After Activation
+if ( is_admin() && isset($_GET['activated']) && $pagenow == 'themes.php' ) {
+	wp_redirect(admin_url('admin.php?page=mixt_options&tab=0'));
+}

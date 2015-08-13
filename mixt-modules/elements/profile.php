@@ -3,15 +3,21 @@
 /**
  * Profile Element
  */
-class MixtProfile {
+class Mixt_Profile {
 
-	public $colors;
-	public $anims;
-	public $image_styles;
+	/**
+	 * @var array $anims
+	 * @var array $colors
+	 * @var array $image_styles
+	 */
+	public $anims, $colors, $image_styles;
 
 	public function __construct() {
-		$this->colors = array_merge(array('auto' => __( 'Auto', 'mixt' )), mixt_get_assets('colors', 'basic'));
-		$this->anims  = array('in' => mixt_css_anims('trans-in'), 'out' => mixt_css_anims('trans-out'));
+		$this->colors = mixt_get_assets('colors', 'basic');
+		$this->anims  = array(
+			'in' => mixt_css_anims('trans-in'),
+			'out' => mixt_css_anims('trans-out')
+		);
 		$this->image_styles = mixt_element_assets('image-styles');
 
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
@@ -36,6 +42,11 @@ class MixtProfile {
 					'type'  => 'text',
 					'label' => __( 'Title / Position', 'mixt' ),
 				),
+				'content' => array(
+					'type'  => 'encoded_textarea',
+					'label' => __( 'Description', 'mixt' ),
+					'desc'  => __( 'Enter a description about this person (HTML allowed)', 'mixt' ),
+				),
 				'image' => array(
 					'type'  => 'media',
 					'label' => __( 'Image', 'mixt' ),
@@ -58,7 +69,10 @@ class MixtProfile {
 				'image_border_color' => array(
 					'type'    => 'select',
 					'label'   => __( 'Border Color', 'mixt' ),
-					'options' => $this->colors,
+					'options' => array_merge(
+						array( 'auto' => __( 'Auto', 'mixt' ) ),
+						$this->colors
+					),
 					'class' => 'color-select basic-colors',
 					'required' => array('image_style', '=',
 						'image-border|image-outline|image-rounded image-border|image-rounded image-outline|image-circle image-border|image-circle image-outline'
@@ -80,16 +94,24 @@ class MixtProfile {
 					'label'   => __( 'Hover Animation Out', 'mixt' ),
 					'options' => $this->anims['out'],
 				),
-				'content' => array(
-					'type'  => 'encoded_textarea',
-					'label' => __( 'Description', 'mixt' ),
-					'desc'  => __( 'Enter a description about this person (HTML allowed)', 'mixt' ),
+				'button' => array(
+					'type'  => 'button',
+					'label' => __( 'Button Style', 'mixt' ),
 				),
 				'social' => array(
 					'type'  => 'exploded_textarea',
 					'label' => __( 'Social Networks', 'mixt' ),
 					'desc'  => __( 'Type in this person\'s social network profiles as url|icon|tooltip, each network separated by a line break (Enter)', 'mixt' ),
 					'std'   => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
+				),
+				'social_pos' => array(
+					'type'    => 'select',
+					'label'   => __( 'Social Networks Position', 'mixt' ),
+					'options' => array(
+						'overlay' => __( 'Image overlay', 'mixt' ),
+						'header'  => __( 'Next to name', 'mixt' ),
+						'bottom'  => __( 'Bottom', 'mixt' ),
+					),
 				),
 				'class' => array(
 					'type'  => 'text',
@@ -122,6 +144,12 @@ class MixtProfile {
 					'param_name' => 'title',
 				),
 				array(
+					'type'        => 'textarea_html',
+					'heading'     => __( 'Description', 'mixt' ),
+					'description' => __( 'Enter a description about this person (HTML allowed)', 'mixt' ),
+					'param_name'  => 'content',
+				),
+				array(
 					'type'       => 'attach_image',
 					'heading'    => __( 'Image', 'mixt' ),
 					'param_name' => 'image',
@@ -147,7 +175,10 @@ class MixtProfile {
 					'type'       => 'dropdown',
 					'heading'    => __( 'Border Color', 'mixt' ),
 					'param_name' => 'image_border_color',
-					'value'      => array_flip($this->colors),
+					'value'      => array_merge(
+						array( __( 'Auto', 'mixt' ) => 'auto' ),
+						array_flip( $this->colors )
+					),
 					'param_holder_class' => 'color-select basic-colors',
 					'dependency' => array(
 						'element' => 'image_style',
@@ -176,17 +207,26 @@ class MixtProfile {
 					'value'      => array_flip($this->anims['out']),
 				),
 				array(
-					'type'        => 'textarea_html',
-					'heading'     => __( 'Description', 'mixt' ),
-					'description' => __( 'Enter a description about this person (HTML allowed)', 'mixt' ),
-					'param_name'  => 'content',
+					'type'       => 'button',
+					'heading'    => __( 'Button Style', 'mixt' ),
+					'param_name' => 'button',
 				),
 				array(
 					'type'        => 'exploded_textarea',
 					'heading'     => __( 'Social Networks', 'mixt' ),
 					'description' => __( 'Type in this person\'s social network profiles as url|icon|tooltip, each network separated by a line break (Enter)', 'mixt' ),
 					'param_name'  => 'social',
-					'std' => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
+					'std'         => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Social Networks Position', 'mixt' ),
+					'param_name' => 'social_pos',
+					'value'      => array(
+						__( 'Image overlay', 'mixt' ) => 'overlay',
+						__( 'Next to name', 'mixt' )  => 'header',
+						__( 'Bottom', 'mixt' )        => 'bottom',
+					),
 				),
 				array(
 					'type'       => 'textfield',
@@ -202,27 +242,33 @@ class MixtProfile {
 	 */
 	public function shortcode( $atts, $content = null ) {
 		extract( shortcode_atts( array(
-			'name'   => '',
-			'title'  => '',
-			'image'  => '',
-			'social' => '',
-			'class'  => '',
-			'image_align' => 'align-center',
-			'image_style' => 'rounded',
+			'name'               => '',
+			'title'              => '',
+			'image'              => '',
+			'social'             => 'https://facebook.com|fa fa-facebook,https://twitter.com|fa fa-twitter',
+			'social_pos'         => 'overlay',
+			'class'              => '',
+			'button'             => '',
+			'image_align'        => 'align-center',
+			'image_style'        => 'rounded',
 			'image_border_color' => 'auto',
-			'image_hover_color'  => '',
-			'image_hover_in'     => '',
-			'image_hover_out'    => '',
+			'image_hover_color'  => key($this->colors),
+			'image_hover_in'     => key($this->anims['in']),
+			'image_hover_out'    => key($this->anims['out']),
 		), $atts ) );
 
 		$classes = 'mixt-profile mixt-element';
 		if ( ! empty($class) ) $classes .= ' ' . $class;
 
+		$btn_classes = mixt_element_button($button);
+
 		$has_image = ( ! empty($image) && $image > 0 );
 		$content = html_entity_decode($content);
 
-		$social = ( $social == '' ) ? '' : explode(',', $social);
-		$social_links = function($networks) {
+		if ( ! $has_image && $social_pos == 'overlay' ) { $social_pos == 'header'; }
+
+		$social = explode(',', $social);
+		$social_links = function($networks, $btn_classes = 'btn btn-default') {
 			if ( empty($networks) ) return;
 			$links = '<div class="profile-social btn-group">';
 			foreach ( $networks as $network ) {
@@ -230,7 +276,7 @@ class MixtProfile {
 				if ( empty($network[0]) ) return;
 				$icon = ( empty($network[1]) ) ? 'fa fa-link' : $network[1];
 				$atts = ( empty($network[2]) ) ? '' : "title='{$network[2]}' data-toggle='tooltip'";
-				$links .= "<a href='{$network[0]}' $atts class='btn btn-default' target='_blank'><i class='$icon'></i></a>";
+				$links .= "<a href='{$network[0]}' $atts class='$btn_classes' target='_blank'><i class='$icon'></i></a>";
 			}
 			return $links . '</div>';
 		};
@@ -243,10 +289,10 @@ class MixtProfile {
 				<div class="mixt-image profile-image <?php echo $image_align; ?>">
 					<div class="image-wrap hover-content anim-on-hover <?php echo $image_style . ' ' . $image_border_color; ?>">
 					<?php echo wp_get_attachment_image($image, 'full');
-					if ( ! empty($social) ) { ?>
+					if ( ! empty($social) && $social_pos == 'overlay' ) { ?>
 						<div class="<?php echo 'on-hover ' . $image_hover_color; ?>" data-anim-in="<?php echo $image_hover_in; ?>" data-anim-out="<?php echo $image_hover_out; ?>">
 							<div class="inner">
-								<?php echo $social_links($social); ?>
+								<?php echo $social_links($social, $btn_classes); ?>
 							</div>
 						</div>
 					<?php } ?>
@@ -255,19 +301,26 @@ class MixtProfile {
 			<?php } ?>
 			<div class="header clearfix">
 				<strong class="name">
-					<?php echo $name; ?><br>
+					<?php if ( $name != '' ) echo $name . '<br>'; ?>
 					<small class="color-fade"><?php echo $title; ?></small>
 				</strong>
-				<?php if ( ! $has_image ) echo $social_links($social); ?>
+				<?php if ( $social_pos == 'header' ) echo $social_links($social, $btn_classes); ?>
 			</div>
-			<p class="desc"><?php echo $content; ?></p>
+
+			<?php if ( ! empty($content) || ( $social_pos == 'bottom' && ! empty($social) ) ) { ?>
+				<div class="content"><?php
+					if ( ! empty($content) ) echo '<p class="desc">' . $content . '</p>';
+
+					if ( $social_pos == 'bottom' ) echo $social_links($social, $btn_classes);
+				?></div>
+			<?php } ?>
 		</div>
 
 		<?php
 		return ob_get_clean();
 	}
 }
-new MixtProfile;
+new Mixt_Profile;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Profile extends WPBakeryShortCode {}

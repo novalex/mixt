@@ -3,8 +3,7 @@
 
 .animated.pulsate {
 	opacity: 0;
-	animation: pulsate 0.8s ease;
-	animation-iteration-count: infinite;
+	animation: pulsate 0.8s ease 0 infinite;
 }
 @keyframes pulsate {
 	0% {
@@ -17,6 +16,21 @@
 		transform: scale(1.2);
 		opacity: 0;
 	}
+}
+
+%anim-goDown,
+.animated.goDown {
+	animation-name: goDown;
+	animation-duration: 2.5s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+}
+@keyframes goDown {
+	0% { transform: translate(0, 0); }
+	10% { transform: translate(0, 6px); }
+	25% { transform: translate(0, 0); }
+	40% { transform: translate(0, 6px); }
+	55%, 100% { transform: translate(0, 0); }
 }
 
 @keyframes flipY {
@@ -46,6 +60,32 @@
 	backface-visibility: visible;
 }
 
+@keyframes fallDown {
+	49% { transform: translateY(100%); }
+	50% { opacity: 0; transform: translateY(-100%); }
+	51% { opacity: 1; }
+}
+@keyframes riseUp {
+	49% { transform: translateY(-100%); }
+	50% { opacity: 0; transform: translateY(100%); }
+	51% { opacity: 1; }
+}
+
+@keyframes goLeft {
+	49% { transform: translateX(-100%); }
+	50% { opacity: 0; transform: translateX(100%); }
+	51% { opacity: 1; }
+}
+@keyframes goRight {
+	49% { transform: translateX(100%); }
+	50% { opacity: 0; transform: translateX(-100%); }
+	51% { opacity: 1; }
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
 
 /*!
 Animate.css - http://daneden.me/animate

@@ -1,6 +1,128 @@
 <?php
 
-// Elements Common Assets
+// Element Common Assets & Functions
+
+
+/**
+ * Remove misplaced p tags added by the wpautop function
+ */
+function mixt_unautop($string) {
+	$string = force_balance_tags($string);
+	$string = str_replace(array('<p></p>', '<br />'), '', $string);
+	return trim($string);
+}
+
+
+/**
+ * Parse styler properties and enqueue CSS
+ * 
+ * @param  string   $css
+ * @param  callback $callback Custom function to parse Styler CSS
+ * @return string   class name
+ */
+function mixt_element_styler($css, $callback = null) {
+	preg_match('/\.(styler-.{7})/', $css, $matches);
+	$selector = $matches[1];
+
+	if ( is_callable($callback) ) {
+		$parsed_css = call_user_func($callback, $css);
+	} else {
+		$parsed_css = str_replace(array('|', ';'), array('', ' !important;'), $css);
+	}
+
+	if ( ! Mixt_DCSS::is_duplicate($selector) ) Mixt_DCSS::add($parsed_css);
+
+	return $selector;
+}
+
+
+/**
+ * Parse a Styler CSS string and return array of rules and selectors
+ * 
+ * @param  string $css
+ * @return array
+ */
+function mixt_styler_parse($css) {
+	// Get selector
+	preg_match('/\.(styler-.{7})/', $css, $matches);
+	$selector = $matches[1];
+
+	// Parse top-level selectors
+	preg_match_all('/([^\s]+?){(.*?)}/', $css, $matches);
+	if ( empty($matches[1]) || empty($matches[2]) ) return null;
+	$rules = array_combine($matches[1], $matches[2]);
+
+	// Parse properties and attributes
+	foreach ( $rules as $sel => $props ) {
+		preg_match_all('/([^\s]+?):(.+?);/', $props, $matches);
+		$rules[$sel] = array_combine($matches[1], $matches[2]);
+		$rules[$sel]['raw'] = $props;
+	}
+
+	return array(
+		'selector' => $selector,
+		'rules' => $rules,
+	);
+}
+
+
+/**
+ * Parse button attributes
+ * 
+ * @param string $atts
+ * @param string $return return parsed values or classes
+ */
+function mixt_element_button($atts, $return = 'class') {
+	$values = array(
+		'color' => 'default',
+		'size'  => '',
+	);
+	preg_match_all('/([^,]+):([^,]+)/', $atts, $matches);
+	if ( ! empty($matches[1]) ) {
+		$values = wp_parse_args(array_combine($matches[1], $matches[2]), $values);
+	}
+
+	if ( $return == 'value' ) {
+		return $values;
+	} else {
+		$classes = 'btn';
+		foreach ( $values as $att => $value ) {
+			switch ( $att ) {
+				case 'color':
+					$classes .= ' btn-' . $value;
+					break;
+				default:
+					$classes .= ' ' . $value;
+					break;
+			}
+		}
+		return trim($classes);
+	}
+}
+
+
+/**
+ * Element icon class
+ */
+function mixt_element_icon_class($args) {
+	if ( $args['icon'] == '' && $args['icon_type'] != 'icon' && $args['icon_type'] != 'image' ) {
+		global $mixt_opt;
+		$icon_fonts = $mixt_opt['icon-fonts'];
+		if ( ! empty($icon_fonts['linecons']) && $icon_fonts['linecons'] ) {
+			$icon = str_replace(array('vc_li ', 'vc_li-'), array('icon-li ', 'li_'), $args["icon_{$args['icon_type']}"]);
+		} else {
+			$icon = $args["icon_{$args['icon_type']}"];
+
+			if ( ( ! array_key_exists($args['icon_type'], $icon_fonts) || ! $icon_fonts[$args['icon_type']] ) && function_exists('vc_icon_element_fonts_enqueue') ) {
+				vc_icon_element_fonts_enqueue($args['icon_type']);
+			}
+		}
+	} else {
+		$icon = $args['icon'];
+	}
+	return $icon;
+}
+
 
 /**
  * Retreive assets by group
@@ -8,7 +130,7 @@
 function mixt_element_assets($group) {
 	$assets = array(
 		'image-styles' => array(
-			'default' => __( 'Default', 'mixt' ),
+			'' => __( 'Default', 'mixt' ),
 
 			'image-border'  => __( 'Bordered', 'mixt' ),
 			'image-outline' => __( 'Outlined', 'mixt' ),
@@ -31,16 +153,19 @@ function mixt_element_assets($group) {
 		),
 
 		'icon-styles' => array(
-			'default' => __( 'Default', 'mixt' ),
-
-			'icon-solid' => __( 'Solid', 'mixt' ),
+			'default'      => __( 'Default', 'mixt' ),
+			'icon-solid'   => __( 'Solid', 'mixt' ),
 			'icon-outline' => __( 'Outlined', 'mixt' ),
-
-			'icon-rounded' => __( 'Rounded', 'mixt' ),
-			'icon-rounded icon-outline' => __( 'Rounded with outline', 'mixt' ),
-
-			'icon-circle' => __( 'Circle', 'mixt' ),
-			'icon-circle icon-outline' => __( 'Circle with outline', 'mixt' ),
+			'icon-solid icon-rounded'   => __( 'Rounded', 'mixt' ),
+			'icon-outline icon-rounded' => __( 'Rounded outline', 'mixt' ),
+			'icon-solid icon-circle'    => __( 'Circle', 'mixt' ),
+			'icon-outline icon-circle'  => __( 'Circle outline', 'mixt' ),
+		),
+		'icon-sizes' => array(
+			''        => __( 'Normal', 'mixt' ),
+			'icon-sm' => __( 'Small', 'mixt' ),
+			'icon-lg' => __( 'Large', 'mixt' ),
+			'icon-xl' => __( 'Extra Large', 'mixt' ),
 		),
 
 		'row-separators' => array(
@@ -53,6 +178,15 @@ function mixt_element_assets($group) {
 			'triangle-inv'     => __( 'Triangle (inverted)', 'mixt' ),
 			'big-triangle'     => __( 'Big Triangle', 'mixt' ),
 			'big-triangle-inv' => __( 'Big Triangle (inverted)', 'mixt' ),
+		),
+
+		'animations' => array(
+			__( 'No', 'js_composer' ) => '',
+			__( 'Top to bottom', 'js_composer' ) => 'top-to-bottom',
+			__( 'Bottom to top', 'js_composer' ) => 'bottom-to-top',
+			__( 'Left to right', 'js_composer' ) => 'left-to-right',
+			__( 'Right to left', 'js_composer' ) => 'right-to-left',
+			__( 'Appear from center', 'js_composer' ) => 'appear',
 		),
 	);
 

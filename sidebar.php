@@ -1,23 +1,30 @@
 <?php
 
 /**
- * The sidebar template
+ * The Sidebar Template
  *
  * @package MIXT
  */
 
-if ( MIXT::get('page', 'sidebar') ) {
+if ( Mixt_Options::get('page', 'sidebar') ) {
 
-	$active_sidebar = MIXT::get('page', 'sidebar-id');
+	$active_sidebar = Mixt_Options::get('page', 'sidebar-id');
+
 	?>
 
 	</div><?php // Close .main-content-inner ?>
 
-	<div class="sidebar col-sm-12 col-md-3">
+	<div class="sidebar">
+
 		<div class="sidebar-padder">
-			<?php do_action( 'before_sidebar' ); ?>
+			<?php
+
+			// Child Page Navigation
+			if ( Mixt_Options::get('page', 'child-page-nav') ) { mixt_child_page_nav(); }
+
+			do_action( 'before_sidebar' );
 			
-			<?php if ( ! dynamic_sidebar($active_sidebar) ) : ?>
+			if ( ! dynamic_sidebar($active_sidebar) ) : ?>
 				<aside id="search" class="widget widget_search">
 					<?php get_search_form(); ?>
 				</aside>

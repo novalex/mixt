@@ -3,20 +3,46 @@
 /**
  * Google Maps Element
  */
-class MixtGoogleMaps {
+class Mixt_Map {
+
+	/**
+	 * @var array $styles
+	 * @var array $colors
+	 */
+	public $styles, $colors;
 	
 	public function __construct() {
+		$this->styles = array(
+			'' => __( 'Default', 'mixt' ),
+
+			'map-border'  => __( 'Bordered', 'mixt' ),
+			'map-outline' => __( 'Outlined', 'mixt' ),
+			'map-eclipse' => __( 'Eclipse', 'mixt' ),
+			'map-shadow'  => __( 'Shadow', 'mixt' ),
+
+			'map-rounded' => __( 'Rounded', 'mixt' ),
+			'map-rounded map-border'  => __( 'Rounded with border', 'mixt' ),
+			'map-rounded map-outline' => __( 'Rounded with outline', 'mixt' ),
+			'map-rounded map-eclipse' => __( 'Rounded with eclipse', 'mixt' ),
+			'map-rounded map-shadow'  => __( 'Rounded with shadow', 'mixt' ),
+
+			'map-shadow-3d' => __( '3D Shadow', 'mixt' ),
+		);
+		$this->colors = array_merge(
+			array( 'auto' => __( 'Auto', 'mixt' ) ),
+			mixt_get_assets('colors', 'basic')
+		);
+
 		add_action('mixtcb_init', array($this, 'mixtcb_extend'));
 		add_action('vc_before_init', array($this, 'vc_extend'));
 		add_shortcode('mixt_map', array($this, 'shortcode'));
-		add_action('wp_enqueue_scripts', array($this, 'reg_api_script'));
 	}
 
 	/**
-	 * Register Google Maps API Script
+	 * Print Google Maps API Script
 	 */
-	public function reg_api_script() {
-		wp_register_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', array(), MIXTCB_VERSION, false);
+	public function print_api_script() {
+		echo '<script id="google-maps-api" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>';
 	}
 
 	/**
@@ -28,54 +54,57 @@ class MixtGoogleMaps {
 			'title'    => __( 'Map', 'mixt' ),
 			'template' => '[mixt_map {{attributes}}]{{content}}[/mixt_map]',
 			'params'   => array(
+				'style' => array(
+					'type'    => 'select',
+					'label'   => __( 'Style', 'mixt' ),
+					'options' => $this->styles,
+				),
+				'color' => array(
+					'type'     => 'select',
+					'label'    => __( 'Border Color', 'mixt' ),
+					'options'  => $this->colors,
+					'class'    => 'color-select basic-colors',
+					'required' => array('style', '=', 'map-border|map-outline|map-rounded map-border|map-rounded map-outline'),
+				),
 				'height' => array(
 					'type'  => 'text',
 					'label' => __( 'Height', 'mixt' ),
 					'std'   => '300px',
 				),
-				'lat' => array(
-					'type'     => 'text',
-					'label'    => __( 'Latitude', 'mixt' ),
-					'desc'     => __( 'You can find out the coordinates of an address <a href="http://www.latlong.net/" target="_blank">here</a>', 'mixt' ),
-					'required'  => array( 'data_type', '=', 'adv' ),
-				),
-				'lng' => array(
-					'type'     => 'text',
-					'label'    => __( 'Longitude', 'mixt' ),
-					'required' => array( 'data_type', '=', 'adv' ),
+				'locations' => array(
+					'type'     => 'exploded_textarea',
+					'label'    => __( 'Locations', 'mixt' ),
+					'desc'     => __( 'Enter the location(s) as latitude longitude, e.g. "34.05 -118.24". Separate multiple locations with a line break.
+									   You can find out the coordinates of an address <a href="http://www.latlong.net/" target="_blank">here</a>', 'mixt' ),
 				),
 				'zoom' => array(
-					'type'     => 'text',
-					'label'    => __( 'Map Zoom', 'mixt' ),
-					'std'      => '16',
-					'required' => array( 'data_type', '=', 'adv' ),
+					'type'  => 'text',
+					'label' => __( 'Map Zoom', 'mixt' ),
 				),
 				'marker_icon' => array(
-					'type'     => 'media',
-					'label'    => __( 'Marker Image', 'mixt' ),
-					'required' => array( 'data_type', '=', 'adv' ),
+					'type'  => 'media',
+					'label' => __( 'Marker Image', 'mixt' ),
 				),
 				'style_hue' => array(
-					'type'     => 'colorpicker',
-					'label'    => __( 'Map Hue', 'mixt' ),
-					'required' => array( 'data_type', '=', 'adv' ),
+					'type'  => 'colorpicker',
+					'label' => __( 'Map Hue', 'mixt' ),
 				),
 				'content' => array(
-					'type'     => 'encoded_textarea',
-					'label'    => __( 'Info Window HTML', 'mixt' ),
-					'required' => array( 'data_type', '=', 'adv' ),
+					'type'  => 'encoded_textarea',
+					'label' => __( 'Info Content', 'mixt' ),
+					'desc'  => __( 'Enter any content you wish to display inside an info window when clicking on a marker.
+									If you have multiple locations, separate content for each with 3 underscores (___). HTML is allowed.', 'mixt' ),
 				),
 				'ui_controls' => array(
-					'type'     => 'checkbox',
-					'label'    => __( 'UI Controls', 'mixt' ),
-					'options'  => array(
+					'type'    => 'checkbox',
+					'label'   => __( 'UI Controls', 'mixt' ),
+					'options' => array(
 						'zoom'     => __( 'Zoom', 'mixt' ),
 						'pan'      => __( 'Panning', 'mixt' ),
 						'stview'   => __( 'Street View', 'mixt' ),
 						'map_type' => __( 'Map Type', 'mixt' ),
 					),
-					'std'      => 'zoom',
-					'required' => array( 'data_type', '=', 'adv' ),
+					'std'     => '',
 				),
 				'class' => array(
 					'type'  => 'text',
@@ -97,61 +126,70 @@ class MixtGoogleMaps {
 			'category'    => 'MIXT',
 			'params'      => array(
 				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Style', 'mixt' ),
+					'param_name' => 'style',
+					'value'      => array_flip($this->styles),
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Border Color', 'mixt' ),
+					'param_name' => 'color',
+					'value'      => array_flip($this->colors),
+					'param_holder_class' => 'color-select basic-colors',
+					'dependency' => array(
+						'element' => 'style',
+						'value'   => array(
+							'map-border', 'map-outline', 'map-rounded map-border', 'map-rounded map-outline'
+						),
+					),
+				),
+				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Height', 'mixt' ),
 					'param_name' => 'height',
 					'std'        => '300px',
 				),
 				array(
-					'type'        => 'textfield',
-					'heading'     => __( 'Latitude', 'mixt' ),
-					'description' => __( 'You can find out the coordinates of an address <a href="http://www.latlong.net/" target="_blank">here</a>', 'mixt' ),
-					'param_name'  => 'lat',
-					'dependency'  => array( 'element' => 'data_type', 'value' => array('adv') ),
-				),
-				array(
-					'type'       => 'textfield',
-					'heading'    => __( 'Longitude', 'mixt' ),
-					'param_name' => 'lng',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
+					'type'        => 'exploded_textarea',
+					'heading'     => __( 'Locations', 'mixt' ),
+					'description' => __( 'Enter the location(s) as latitude longitude, e.g. "34.05 -118.24". Separate multiple locations with a line break.
+										  You can find out the coordinates of an address <a href="http://www.latlong.net/" target="_blank">here</a>', 'mixt' ),
+					'param_name'  => 'locations',
 				),
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Map Zoom', 'mixt' ),
 					'param_name' => 'zoom',
-					'std'        => '16',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
 				),
 				array(
 					'type'       => 'attach_image',
 					'heading'    => __( 'Marker Image', 'mixt' ),
 					'param_name' => 'marker_icon',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
 				),
 				array(
 					'type'       => 'colorpicker',
 					'heading'    => __( 'Map Hue', 'mixt' ),
 					'param_name' => 'style_hue',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
 				),
 				array(
-					'type'       => 'textarea_html',
-					'heading'    => __( 'Info Window HTML', 'mixt' ),
-					'param_name' => 'content',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
+					'type'        => 'textarea_html',
+					'heading'     => __( 'Info Content', 'mixt' ),
+					'description' => __( 'Enter any content you wish to display inside an info window when clicking on a marker.
+										  If you have multiple locations, separate content for each with 3 underscores (___). HTML is allowed.', 'mixt' ),
+					'param_name'  => 'content',
 				),
 				array(
 					'type'       => 'checkbox',
 					'heading'    => __( 'UI Controls', 'mixt' ),
 					'param_name' => 'ui_controls',
 					'value'      => array(
-						__( 'Zoom', 'mixt' ) => 'zoom',
-						__( 'Panning', 'mixt' ) => 'pan',
+						__( 'Zoom', 'mixt' )        => 'zoom',
+						__( 'Panning', 'mixt' )     => 'pan',
 						__( 'Street View', 'mixt' ) => 'stview',
-						__( 'Map Type', 'mixt' ) => 'map_type',
+						__( 'Map Type', 'mixt' )    => 'map_type',
 					),
-					'std'        => 'zoom',
-					'dependency' => array( 'element' => 'data_type', 'value' => array('adv') ),
+					'std'        => '',
 				),
 				array(
 					'type'        => 'textfield',
@@ -167,14 +205,15 @@ class MixtGoogleMaps {
 	 */
 	public function shortcode( $atts, $content = null ) {
 		$options = shortcode_atts( array(
+			'style'       => '',
+			'color'       => '',
 			'height'      => '300px',
-			'lat'         => '34.058475',
-			'lng'         => '-118.246587',
-			'zoom'        => '16',
+			'locations'   => '34.058475 -118.246587',
+			'zoom'        => '',
 			'marker_text' => '',
 			'marker_icon' => '',
 			'style_hue'   => '',
-			'ui_controls' => 'zoom',
+			'ui_controls' => '',
 			'class'       => '',
 		), $atts );
 		extract($options);
@@ -182,12 +221,17 @@ class MixtGoogleMaps {
 		$map_id = 'mixt_map_' . uniqid();
 
 		$classes = 'mixt-map mixt-element';
+		if ( $style != '' ) $classes .= " $style $color";
 		if ( ! empty($class) ) $classes .= ' ' . $class;
 
-		wp_print_scripts('google-maps-api');
-		$options['content'] = preg_replace('/\r|\n/', '', html_entity_decode($content));
-		$html = "<div id='$map_id' class='$classes' style='height: $height'></div>\n" .
-				$this->print_map_script($map_id, $options);
+		add_action('wp_print_footer_scripts', array($this, 'print_api_script'));
+
+		$content = preg_replace('/<br(?:\s\/)?>/', '', html_entity_decode($content));
+		$content = preg_replace('/\r|\n/', '<br>', $content);
+		$options['content'] = str_replace("'", '"', $content);
+		$html = "<div class='$classes'><div id='$map_id' class='map-wrapper' style='height: $height'>" .
+					$this->print_map_script($map_id, $options) .
+				'</div></div>';
 		
 		return $html;
 	}
@@ -197,55 +241,86 @@ class MixtGoogleMaps {
 	 */
 	public function print_map_script($map_id, $options) {
 		extract($options);
+
+		// UI Controls
 		$ui_controls = explode(',', $ui_controls);
 		$ui_pan = (in_array('pan', $ui_controls)) ? 'true' : 'false';
 		$ui_zoom = (in_array('zoom', $ui_controls)) ? 'true' : 'false';
 		$ui_map_type = (in_array('map_type', $ui_controls)) ? 'true' : 'false';
 		$ui_stview = (in_array('stview', $ui_controls)) ? 'true' : 'false';
 		$options = "var mapOptions = { " .
-					   "zoom: $zoom," .
-					   "center: setPosition, " .
 					   "panControl: $ui_pan, " .
 					   "zoomControl: $ui_zoom, " .
 					   "mapTypeControl: $ui_map_type, " .
 					   "streetViewControl: $ui_stview, " .
 				   "}";
-		$marker  = "var marker = new google.maps.Marker({ position: setPosition, map: map, animation: google.maps.Animation.DROP ";
-			if ( $marker_text != '' ) $marker .= ", title: '$marker_text' ";
-			if ( $marker_icon != '' ) {
-				$marker_icon = wp_get_attachment_image_src($marker_icon, 'full');
-				$marker .= ", icon: '{$marker_icon[0]}' ";
-			}
-		$marker .= "});";
-		$info = '';
-		if ( ! empty($content) ) {
-			$info = "var infowindow = new google.maps.InfoWindow({ content: \"$content\" });" .
-					"google.maps.event.addListener(marker, 'click', function() { infowindow.open(map, marker); });";
+
+		// Locations
+		$markers = '';
+		$marker_atts = 'animation: google.maps.Animation.DROP';
+		if ( $marker_text != '' ) $marker_atts .= ", title: '$marker_text' ";
+		if ( $marker_icon != '' ) {
+			$marker_icon = wp_get_attachment_image_src($marker_icon, 'full');
+			$marker_atts .= ", icon: '{$marker_icon[0]}' ";
 		}
+
+		// Styles
 		$styles = '';
 		if ( ! empty($style_hue) ) {
-			$styles = "var styles = [ { featureType: \"all\", stylers: [ { hue: \"$style_hue\" } ] } ]; map.setOptions({styles: styles});";
+			$styles = "var styles = [ { featureType: 'all', stylers: [ { hue: '$style_hue' } ] } ]; map.setOptions({ styles: styles });";
 		}
 
 		return "<script type='text/javascript'>
-			function initialize() {
-				var setPosition = new google.maps.LatLng($lat,$lng);
+			function init_$map_id() {
+				var bounds = new google.maps.LatLngBounds();
 				$options
+
 				var map = new google.maps.Map(document.getElementById('$map_id'), mapOptions);
 				$styles
-				$marker
-				$info
+
+				var i,
+					locations = '$locations'.split(','),
+					infoContent = '$content'.split('___'),
+					infoWindow = new google.maps.InfoWindow();
+				for ( i = 0; i < locations.length; i++ ) {
+					var coords = locations[i].split(' ');
+					var marker = new google.maps.Marker({ position: new google.maps.LatLng(coords[0], coords[1]), map: map, $marker_atts});
+					bounds.extend(marker.position);
+
+					if ( infoContent[i].length ) {
+						google.maps.event.addListener(marker, 'click', ( function(marker, i) {
+							return function() {
+								infoWindow.setContent(infoContent[i].replace(/^(<br>)|(<br>)$/, ''));
+								infoWindow.open(map, marker);
+							}
+						})(marker, i));
+					}
+				}
+				map.fitBounds(bounds);
+
 				google.maps.event.addDomListener(window, 'resize', function() {
 					var center = map.getCenter();
 					google.maps.event.trigger(map, 'resize');
 					map.setCenter(center); 
 				});
+
+				if ( '$zoom' != '' ) {
+					var zoomLevel = google.maps.event.addListener(map, 'idle', function () {
+						map.setZoom($zoom);
+						google.maps.event.removeListener(zoomLevel);
+					});
+				}
 			}
-			google.maps.event.addDomListener(window, 'load', initialize);
+
+			if ( typeof google === 'object' ) {
+				init_$map_id();
+			} else {
+				jQuery(window).load( function() { if ( typeof google === 'object' ) { init_$map_id(); } });
+			}
 		</script>";
 	}
 }
-new MixtGoogleMaps;
+new Mixt_Map;
 
 if ( class_exists('WPBakeryShortCode') ) {
 	class WPBakeryShortCode_Mixt_Map extends WPBakeryShortCode {}

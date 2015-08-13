@@ -1,0 +1,79 @@
+
+// Post Meta Styling
+
+.post-meta {
+	padding: 0;
+	font-size: 12px;
+	display: table;
+	table-layout: fixed;
+
+	$meta-spacing: 14px;
+
+	> span {
+		float: left;
+		min-height: 22px;
+		cursor: default;
+		display: table-cell;
+		vertical-align: middle;
+		transition: color 0.2s;
+		margin-right: $meta-spacing;
+
+		a { display: inline-block; }
+
+		i { margin-right: 6px; }
+
+		&:last-child { margin-right: 0; }
+	}
+
+	.meta-sep {
+		height: 22px;
+		opacity: 0.6;
+		margin-left: -$meta-spacing / 2;
+		margin-right: $meta-spacing / 2;
+
+		&:last-child { display: none; }
+	}
+
+	.posted-on {
+		time > span {
+			margin-left: 5px;
+
+			&:first-child { margin-left: 0; }
+		}
+
+		.updated {
+			cursor: pointer;
+			font-weight: bold;
+			padding: 0 0 0 5px;
+		}
+	}
+
+	.posted-on.calendar {
+		border: 1px solid;
+		border-color: inherit;
+		border-radius: 3px;
+		box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+
+		time > span {
+			display: block;
+			padding: 0 10px;
+			text-align: center;
+			font-weight: bold;
+			line-height: 20px;
+		}
+	}
+}
+
+.post-meta .cat a {
+	margin-right: 5px;
+
+	&:after {
+		content: ',';
+		margin-left: 1px;
+	}
+
+	&:last-child {
+		margin-right: 0;
+		&:after { content: ''; }
+	}
+}

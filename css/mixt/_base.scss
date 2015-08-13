@@ -14,7 +14,11 @@ body {
 
 // Lists
 
-ol, ul { padding-left: 30px; }
+ol, ul {
+	padding-left: 30px;
+
+	li:not(:last-child) { margin-bottom: 10px; }
+}
 
 
 // Anchors

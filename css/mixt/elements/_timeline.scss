@@ -4,11 +4,9 @@
 .mixt-timeline {
 	$line-style: dashed;
 	$line-width: 2px;
-	$line-color: $theme-border;
-	$arrow-size: 8px;
+	$arrow-size: 18px;
 	$anchor-size: 42px;
-	$content-bg: darken($theme-bg, 5);
-	$content-border: darken($content-bg, 6);
+	$arrow-offset: $anchor-size / 2;
 
 	float: left;
 	width: 100%;
@@ -41,17 +39,11 @@
 		}
 
 		// Arrow
-		.content:before {
-			left: auto;
-			right: -$arrow-size - 1px;
-			border-left-width: $arrow-size + 1px;
-			border-right-width: 0;
-		}
-		.content:after {
-			left: auto;
-			right: -$arrow-size;
-			border-left-width: $arrow-size;
-			border-right-width: 0;
+		.content.bubble {
+			@include square-arrow(right, $arrow-size, $border: inherit, $origin: $arrow-offset);
+			&:before {
+				left: auto;
+			}
 		}
 	}
 	@mixin block-right {
@@ -70,17 +62,11 @@
 		}
 
 		// Arrow
-		.content:before {
-			right: auto;
-			left: -$arrow-size - 1px;
-			border-left-width: 0;
-			border-right-width: $arrow-size + 1px;
-		}
-		.content:after {
-			right: auto;
-			left: -$arrow-size;
-			border-left-width: 0;
-			border-right-width: $arrow-size;
+		.content.bubble {
+			@include square-arrow(left, $arrow-size, $border: inherit, $origin: $arrow-offset);
+			&:before {
+				right: auto;
+			}
 		}
 	}
 
@@ -92,20 +78,19 @@
 		// Line
 		&:before {
 			content: ' '; width: 1px;
-			position: absolute; top: 0; bottom: 0;
+			position: absolute; top: $anchor-size; bottom: 0;
 			border-width: 0 $line-width 0 0;
 			border-style: $line-style;
-			border-color: $line-color;
 		}
 
 		.anchor {
 			position: absolute; top: 0;
-			width: $anchor-size; height: $anchor-size;
-			font-size: $anchor-size / 2; line-height: $anchor-size - 1px;
-			text-align: center; border-radius: $bd-radius;
-
-			// Color Variants
-			@extend .basic-color-bg-variants;
+			width: $anchor-size;
+			height: $anchor-size;
+			padding: 0;
+			font-size: $anchor-size / 2;
+			line-height: $anchor-size - 3px;
+			text-align: center;
 		}
 
 
@@ -113,40 +98,21 @@
 
 		.content {
 			position: relative;
-			padding: 15px;
-			color: set-color-for-bg($content-bg);
-			border-radius: $bd-radius;
-			border: 1px solid $content-border;
-			background-color: $content-bg;
-
-			// Arrow
-			&:before,
-			&:after {
-				content: ' ';
-				position: absolute;
-				display: inline-block;
-				border-width: 0; border-style: solid;
-			}
-			&:before {
-				top: $anchor-size / 2 - $arrow-size - 1px;
-				border-color: $content-border;
-				border-top: ($arrow-size + 1px) solid transparent;
-				border-left-width: $arrow-size + 1px;
-				border-bottom: ($arrow-size + 1px) solid transparent;
-			}
-			&:after {
-				top: $anchor-size / 2 - $arrow-size;
-				border-color: $content-bg;
-				border-top: $arrow-size solid transparent;
-				border-left-width: $arrow-size;
-				border-bottom: $arrow-size solid transparent;
-			}
 
 			> :last-child { margin-bottom: 0; }
 			> :not(:last-child) { margin-bottom: 15px; }
 
 			h1, h2, h3, h4, h5, h6, p {
 				&:first-child { margin-top: 0 !important; }
+			}
+
+			// Content Styles
+			&.boxed,
+			&.bubble {
+				padding: 15px;
+				border-width: 1px;
+				border-style: solid;
+				border-radius: $bd-radius;
 			}
 		}
 
@@ -168,8 +134,18 @@
 
 	&.timeline-right .timeline-block,
 	&.timeline-double .align-right,
-	&.timeline-double .align-auto:nth-child(even) {
+	&.timeline-double .align-auto:nth-child(even),
+	&.timeline-double .vc_element:nth-child(even) .align-auto {
 		@include block-right;
+	}
+
+	// Color Variants
+	.timeline-block .content {
+		&.boxed,
+		&.bubble,
+		&.bubble:before {
+			@extend %basic-color-bg-variants;
+		}
 	}
 
 	@include media('screen', '<mars') {
@@ -194,4 +170,12 @@
 			}
 		}
 	}
+}
+
+
+// Visual Composer Integration
+
+.vc_mixt_timeline,
+.vc_mixt_timeline_block {
+	@extend %clearfix;
 }

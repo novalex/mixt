@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIXT Template Tags
+ * Template Tags
  *
  * @package MIXT
  */
@@ -35,7 +35,7 @@ function mixt_get_title( $echo = false ) {
 			$title = __('Yearly Archives: ', 'mixt') . get_the_date('Y');
 		} else if ( is_author() ) {
 			$author = get_queried_object();
-			$title = __('Author: ', 'mixt') . $author->display_name;
+			$title = $author->display_name;
 		} else {
 			$title = single_cat_title('', false);
 		}
@@ -118,7 +118,7 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 	} else {
 		$nav_class .= 'classic-paging ';
 
-		$is_single = ( is_single() && ! MIXT::get('page', 'posts-page') );
+		$is_single = ( is_single() && ! Mixt_Options::get('page', 'posts-page') );
 
 		// Don't print empty markup
 		if ( $is_single ) {
@@ -352,6 +352,27 @@ function mixt_categorized_blog() {
 		return false;
 	}
 }
+
+
+/**
+ * Return navigation menu for child pages
+ */
+function mixt_child_page_nav() {
+	if ( ! is_page() ) return;
+
+	global $post;
+
+	$parent_id = $post->post_parent ? $post->post_parent : $post->ID;
+
+	$args = array(
+		'echo'     => false,
+		'title_li' => '',
+		'child_of' => $parent_id
+	);
+	$children = wp_list_pages($args);
+	if ( $children ) echo "<div class='child-page-nav widget'><ul class='nav'>$children</ul></div>";
+}
+
 
 /**
  * Flush out the transients used in mixt_categorized_blog

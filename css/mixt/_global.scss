@@ -18,7 +18,6 @@ body.loading {
 	display: table;
 	opacity: 0;
 	visibility: hidden;
-	background: $theme-accent;
 	z-index: 999999;
 
 	transition: visibility 0.2s ease 0.2s, opacity 0.2s ease 0.2s;
@@ -74,30 +73,7 @@ body.loading {
 	}
 }
 
-// Text Color
-body { @extend .theme-color; }
+
+// General Styling
 
 a.no-color, a:hover, a:focus { color: inherit; }
-
-// Text Color Fade
-.post-meta a,
-.post-meta > span { @extend .theme-color-fade; }
-
-// Accent Text Color
-a,
-.post-meta a:hover { @extend .accent-color; }
-
-// Accent Background Color
-.accent-bg:hover,
-.tag-list a:hover,
-.tagcloud a:hover,
-.hover-accent-bg:hover {
-	@extend .accent-bg;
-}
-
-// Selection Color
-::selection {
-	color: #fff;
-	background: $theme-accent;
-	background: fade-out($theme-accent, 0.2);
-}
