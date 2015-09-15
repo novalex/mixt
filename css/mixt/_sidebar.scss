@@ -1,71 +1,7 @@
 
+// Sidebar Styles
+
 .sidebar {
-
-	// Widget Titles
-	h3 {
-		font-size: 15px;
-		margin: 0 0 15px;
-	}
-
-	ul { @extend %reset-list; }
-
-	// Nav Menus
-	.nav li {
-		margin-bottom: 0;
-
-		> ul,
-		.menu-item-has-children > ul {
-			border-top-width: 1px;
-			border-top-style: solid;
-		}
-
-		a {
-			padding: $padding-s 0;
-			&:hover { background: none !important; }
-		}
-
-		.post-date {
-			display: block;
-			font-size: $font-size-xs;
-			margin-top: -$padding-s;
-			padding-bottom: $padding-s;
-		}
-
-		.post-count {
-			float: right;
-		}
-
-		li:last-child { border-bottom: 0; }
-	}
-
-	.nav li,
-	#recentcomments li {
-		border-width: 0;
-		border-style: solid;
-		border-color: inherit;
-		border-bottom-width: 1px;
-	}
-
-	#recentcomments li { padding: $padding-s 0 !important; }
-
-
-	// Widgets
-
-	.widget {
-		> select,
-		.textwidget form > select {
-			width: 100%;
-		}
-
-		h3 + ul {
-			margin-top: -$margin-s;
-		}
-	}
-
-	.widget_nav_menu {
-		.divider, .nav-search, li.btn { display: none; }
-	}
-
 
 	// Child Page Nav Menu
 	.child-page-nav {
@@ -75,9 +11,6 @@
 			margin-top: -1px !important;
 
 			a { color: inherit; }
-
-			a:hover,
-			&.current_page_item a { color: $theme-accent; }
 		}
 
 		.current_page_item {
@@ -86,9 +19,6 @@
 			padding-right: 15px;
 
 			a { cursor: default; }
-
-			&,
-			&:before { background-color: darken($theme-bg, 3); }
 		}
 	}
 

@@ -1,0 +1,298 @@
+
+// Site-Wide Theme Colors
+
+@mixin site-theme($name, $theme) {
+	$accent: map-get($theme, 'accent');
+	$bg-dark-accent: map-get($theme, 'bg-dark-accent');
+
+	$bg: map-get($theme, 'bg');
+	$bg-hover: map-get($theme, 'bg-hover');
+
+	$color: map-get($theme, 'color');
+	$color-fade: map-get($theme, 'color-fade');
+	$color-inv: map-get($theme, 'color-inv');
+	$color-inv-fade: map-get($theme, 'color-inv-fade');
+
+	$border: map-get($theme, 'border');
+	$border-alpha: map-get($theme, 'border-alpha');
+	$bg-dark-border: map-get($theme, 'bg-dark-border');
+	$bg-dark-border-alpha: map-get($theme, 'bg-dark-border-alpha');
+
+	@if ( lightness(map-get($theme, 'color')) > lightness(map-get($theme, 'color-inv')) ) {
+		$bg-light-color: map-get($theme, 'color-inv');
+		$bg-light-color-fade: map-get($theme, 'color-inv-fade');
+		$bg-dark-color: map-get($theme, 'color');
+		$bg-dark-color-fade: map-get($theme, 'color-fade');
+	} @else {
+		$bg-light-color: map-get($theme, 'color');
+		$bg-light-color-fade: map-get($theme, 'color-fade');
+		$bg-dark-color: map-get($theme, 'color-inv');
+		$bg-dark-color-fade: map-get($theme, 'color-inv-fade');
+	}
+
+	@if ( map-has-key($theme, 'bg-alt') ) {
+		$bg-alt: map-get($theme, 'bg-alt');
+		$color-alt: contrast-color($bg-alt, $color, $color-inv);
+	} @else {
+		$bg-alt: darken($bg, 3);
+		$color-alt: $color;
+	}
+	@if ( map-has-key($theme, 'color-alt') ) {
+		$color-alt: map-get($theme, 'color-alt');
+	}
+	@if ( lumin($bg) > 0.5 ) {
+		$site-border: $border;
+		$site-border-alpha: $border-alpha;
+	} @else {
+		$site-border: $bg-dark-border;
+		$site-border-alpha: $bg-dark-border-alpha;
+	}
+
+	.theme-#{$name} {
+		&,
+		#main-wrap {
+			background-color: $bg;
+		}
+
+		// COLOR HELPER CLASSES
+
+		.theme-color { color: $color; }
+		.theme-color-fade { color: $color-fade; }
+		.theme-color-inv { color: $color-inv; }
+		.theme-color-inv-fade { color: $color-inv-fade; }
+
+		.theme-bg-light-color { color: $bg-light-color; }
+		.theme-bg-light-color-fade { color: $bg-light-color-fade; }
+		.theme-bg-dark-color { color: $bg-dark-color; }
+		.theme-bg-dark-color-fade { color: $bg-dark-color-fade; }
+
+		.accent-color { color: $accent; }
+		.accent-bg {
+			color: set-color-for-bg($accent);
+			background-color: $accent;
+		}
+
+		.theme-bd { border-color: $site-border; }
+		.theme-accent-bd { border-color: $accent; }
+
+		.color-fade { opacity: 0.8; }
+
+
+		// THEME PRESET COLORS
+		
+		.theme-color-main {
+			color: $color;
+			background-color: $bg;
+			border-color: $border;
+		}
+		.theme-color-alt {
+			color: $color-alt;
+			background-color: $bg-alt;
+			border-color: darken($bg-alt, 10);
+		}
+		.theme-color-accent {
+			@extend .accent-bg;
+			border-color: darken($accent, 10);
+		}
+
+
+		// TEXT COLORS
+
+		a,
+		.post-meta a:hover,
+		#breadcrumbs a:hover,
+		.pager a:hover,
+		.pager li > span,
+		.hover-accent-color:hover { color: $accent; }
+
+		&,
+		#content-wrap { color: $color; }
+
+		.head-media {
+			.container,
+			#breadcrumbs > li + li:before { color: $color; }
+
+			&.bg-dark {
+				.container,
+				.media-inner a,
+				.header-scroll,
+				#breadcrumbs > li + li:before { color: $bg-dark-color; }
+			}
+		}
+
+		.post-related .related-title { color: $bg-dark-color; }
+
+		.post-meta {
+			a,
+			> span { color: $color-fade; }
+		}
+
+		.link-list li a { color: $color-fade; }
+
+		.link-list li {
+			a:hover,
+			a:active,
+			&.active > a { color: $accent; }
+		}
+
+
+		// BORDER COLORS
+		
+		&,
+		#content-wrap,
+		.sidebar ul {
+			border-color: $site-border;
+		}
+
+
+		// BACKGROUND COLORS
+		
+		.accent-bg:hover,
+		.hover-accent-bg:hover,
+		.tag-list a:hover,
+		.tagcloud a:hover {
+			background-color: $accent;
+		}
+
+
+		// OTHER COLORS
+		
+		::selection {
+			background: $accent;
+			background: fade-out($accent, 0.2);
+			color: set-color-for-bg($accent, #fff, #000);
+			text-shadow: none;
+		}
+
+		#location-bar {
+			border-color: $site-border;
+			background-color: darken($bg, 5);
+		}
+
+		.sidebar .child-page-nav {
+			li {
+				a:hover,
+				&.current_page_item a { color: $accent; }
+			}
+			.current_page_item {
+				&,
+				&:before { background-color: darken($bg, 3); }
+			}
+		}
+
+		blockquote {
+			border-color: darken($bg, 10);
+			border-left-color: $accent;
+			background-color: darken($bg, 2);
+
+			cite { color: $color-fade; }
+		}
+
+		.alert-default {
+			@include alert-variant(darken($bg, 3), $border, $color);
+
+			a { color: $accent; }
+		}
+
+		.well {
+			background-color: darken($bg, 3);
+			border-color: $border;
+		}
+
+
+		// BACKGROUND VARIANTS
+		
+		.bg-light {
+			color: $bg-light-color;
+			.color-fade { color: $bg-light-color-fade; }
+		}
+		.bg-dark {
+			color: $bg-dark-color;
+			.color-fade { color: $bg-dark-color-fade; }
+		}
+
+
+		// ELEMENT COLORS
+		
+		.mixt-stat.type-box,
+		.mixt-headline span.color-auto:after,
+		.mixt-timeline .timeline-block:before { border-color: $site-border; }
+
+		.mixt-row-separator.no-fill svg { fill: $bg; }
+
+		.mixt-map { color: $bg-light-color; }
+
+
+		// PLUGIN COLORS
+
+		// LightSlider
+		@if $lightslider {
+			.lSSlideOuter .lSPager.lSpg > li {
+				&:hover a,
+				&.active a {
+					background-color: $accent;
+				}
+			}
+		}
+
+		// LightGallery
+		@if $lightgallery {
+			.lg-outer .lg-thumb-item {
+				&.active,
+				&:hover {
+					border-color: $accent;
+				}
+			}
+			.lg-progress-bar .lg-progress {
+				background-color: $accent;
+			}
+		}
+
+		// Visual Composer
+		@if $vcomposer {
+			.wpb_content_element {
+				.wpb_tour_tabs_wrapper .wpb_tabs_nav a,
+				.wpb_accordion_header a {
+					&:hover { color: $accent; }
+				}
+			}
+			.vc_separator.theme-bd .vc_sep_holder .vc_sep_line { border-color: $border; }
+		}
+
+		// WooCommerce
+		@if $woocommerce {
+			.woocommerce,
+			&.woocommerce {
+				.price .amount,
+				.total .amount,
+				.woo-cart .amount,
+				.nav li .amount { color: $accent; }
+
+				.nav li del .amount { color: $color-fade; }
+
+				.widget_price_filter .ui-slider .ui-slider-range { background-color: $accent; }
+
+				.badge-cont .badge.sale-badge { background-color: $accent; }
+
+				.woocommerce-tabs {
+					ul.tabs li.active { border-bottom-color: $bg !important; }
+					ul.tabs li.active,
+					.wc-tab {
+						color: $color !important;
+						background-color: $bg !important;
+					}
+				}
+
+				p.demo_store {
+					color: set-color-for-bg($accent);
+					background-color: $accent;
+				}
+			}
+		}
+	}
+}
+
+// Generate navbar themes
+@each $name, $theme in $themes {
+	@include site-theme($name, $theme);
+}

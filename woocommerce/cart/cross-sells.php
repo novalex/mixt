@@ -35,9 +35,9 @@ $woocommerce_loop['columns'] = apply_filters( 'woocommerce_cross_sells_columns',
 
 if ( $products->have_posts() ) : ?>
 
-	<div class="cross-sells">
+	<div class="cross-sells products columns-2">
 
-		<h2><?php _e( 'You may be interested in&hellip;', 'woocommerce' ) ?></h2>
+		<?php echo do_shortcode('[mixt_headline tag="h2"]' . __( 'You may also like', 'mixt' ) . '[/mixt_headline]'); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 

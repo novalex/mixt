@@ -1,0 +1,118 @@
+
+// Cart
+.widget_shopping_cart,
+&.widget_shopping_cart {
+	.cart_list li {
+		padding-bottom: 0;
+		margin-bottom: 10px;
+		border-color: inherit;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+
+		> a { color: inherit; }
+
+		.quantity {
+			opacity: 0.7;
+			font-size: 85%;
+		}
+
+		&.empty {
+			padding-left: 0;
+			border-bottom: 0;
+		}
+	}
+
+	.total {
+		border-top: 0;
+		padding-top: 0;
+
+		.amount { font-weight: bold; }
+	}
+
+	.btn {
+		padding: 6px 10px;
+		font-size: $font-size;
+	}
+}
+
+// Layered Nav
+.widget_layered_nav {
+	ul li a {
+		padding: 5px 0;
+		display: block;
+
+		.count { float: right; }
+	}
+}
+
+// Price Filter Slider
+.widget_price_filter {
+	$slider-height: 4px;
+	$handle-size: 16px;
+
+	.ui-slider {
+		background-color: rgba(0,0,0,0.1) !important;
+
+		&.ui-slider-horizontal { height: $slider-height; }
+
+		.ui-slider-handle {
+			width: $handle-size;
+			height: $handle-size;
+			top: ( $handle-size - $slider-height ) / -2;
+			margin-left: $handle-size / -2;
+			border-radius: $handle-size / 2;
+			background-color: $black;
+		}
+	}
+
+	.price_slider_amount {
+		font-size: $font-size;
+
+		.button { font-size: inherit; }
+	}
+}
+
+// Active Filters
+.widget_layered_nav_filters {
+	li.chosen {
+		margin-right: 15px;
+
+		a {
+			color: inherit;
+			font-size: 11px;
+
+			&:before {
+				color: $red;
+				margin-right: 5px;
+				font-size: 16px;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+// Product Lists
+.product_list_widget {
+	li {
+		> a {
+			color: inherit;
+			font-weight: bold;
+			padding-bottom: 0 !important;
+		}
+
+		.star-rating { margin: 5px 0 !important; }
+
+		> .amount,
+		ins .amount { font-size: 110%; }
+
+		del .amount {
+			color: inherit;
+			opacity: 0.5;
+		}
+		ins {
+			float: left;
+			margin-right: 10px;
+			text-decoration: none;
+		}
+	}
+}

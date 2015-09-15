@@ -6,6 +6,11 @@
  * @package MIXT
  */
 
+$options = mixt_get_options( array(
+	'back-to-top'      => array(),
+	'back-to-top-icon' => array( 'return' => 'value' ),
+) );
+
 ?>
 			</div><?php // close main-content-inner or sidebar, if sidebar is used ?>
 		</div><?php // close .row ?>
@@ -59,6 +64,15 @@
 		</div>
 		
 	</footer>
+
+	<?php
+		// Back To Top Button
+		if ( $options['back-to-top'] ) {
+			echo '<a href="#" id="back-to-top" class="btn btn-accent btn-lg">';
+				echo '<i class="' . $options['back-to-top-icon'] . '"></i>';
+			echo '</a>';
+		}
+	?>
 
 </div><?php // close #main-wrap ?>
 

@@ -222,11 +222,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$img_textures = mixt_get_images('textures');
 
 			// Social Networks
-			$social_profiles = $social_sharing_profiles = '';
-			if ( function_exists('mixt_preset_social_profiles') ) {
-				$social_profiles = mixt_preset_social_profiles('networks');
-				$social_sharing_profiles = mixt_preset_social_profiles('sharing');
-			}
+			$social_profiles = get_option('mixt-social-profiles', array());
+			$social_sharing_profiles = get_option('mixt-sharing-profiles', array());
+			$social_sharing_profile_names = array();
+			foreach( $social_sharing_profiles as $key => $profile ) { $social_sharing_profile_names[$key] = $profile['name']; }
 
 			// HTML Allowed in the secondary nav custom code field
 			$sec_nav_allowed_html = array(
@@ -242,6 +241,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 			// Secondary Nav custom code field placeholder
 			$sec_nav_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
+
+			// Sidebars
+			$available_sidebars = array(
+				'sidebar-1' => __( 'Default', 'mixt' ),
+			);
+			$custom_sidebars = get_option('mixt-sidebars');
+			if ( $custom_sidebars ) {
+				foreach ( $custom_sidebars as $sidebar ) { $available_sidebars[$sidebar['id']] = $sidebar['name']; }
+			}
+
 
 			// Output Fields Array For Posts Pages
 			function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
@@ -333,6 +342,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'3' => '3',
 								'4' => '4',
 								'5' => '5',
+								'6' => '6',
 							),
 							'default'  => $defaults['columns'],
 							'required' => array(
@@ -415,6 +425,45 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'customizer' => false,
 				'fields'     => array(
 
+					// Site Layout
+					array(
+						'id'       => 'site-layout',
+						'type'     => 'button_set',
+						'title'    => __( 'Site Layout', 'mixt' ),
+						'subtitle' => __( 'Choose the layout for the site', 'mixt' ),
+						'options'  => array(
+							'wide'  => __( 'Wide', 'mixt' ),
+							'boxed' => __( 'Boxed', 'mixt' ),
+						),
+						'default'  => 'wide',
+					),
+
+					// Site Background
+					array(
+						'id'       => 'site-bg',
+						'type'     => 'background',
+						'title'    => __( 'Site Background', 'mixt' ),
+						'subtitle' => __( 'Choose a color, image and other options for the site background', 'mixt' ),
+						'default'  => array(
+							'background-attachment' => 'fixed',
+							'background-size'       => 'cover',
+							'background-repeat'     => 'no-repeat',
+							'background-position'   => 'center top',
+						),
+						'required' => array('site-layout', '=', 'boxed'),
+					),
+
+					// Site Background Pattern
+					array(
+						'id'       => 'site-bg-pat',
+						'type'     => 'image_select',
+						'title'    => __( 'Background Pattern', 'mixt' ),
+						'subtitle' => __( 'The site\'s background pattern', 'mixt' ),
+						'options'  => $img_patterns,
+						'empty'    => true,
+						'required' => array('site-layout', '=', 'boxed'),
+					),
+
 					// Site-Wide Theme Select
 					array(
 						'id'       => 'site-theme',
@@ -423,16 +472,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
 						'options'  => $site_themes,
 						'default'  => MIXT_THEME,
-					),
-
-					// Background Pattern
-					array(
-						'id'       => 'site-bg-pat',
-						'type'     => 'image_select',
-						'title'    => __( 'Site Background Pattern', 'mixt' ),
-						'subtitle' => __( 'The site\'s background pattern', 'mixt' ),
-						'options'  => $img_patterns,
-						'empty'    => true,
 					),
 
 					// Divider
@@ -472,7 +511,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'2' => __( 'Image', 'mixt' ),
 							),
 							'default'  => '1',
-							'required' => array( 'page-loader', '=', true ),
+							'required' => array('page-loader', '=', true),
 						),
 
 						// Page Loader Shape Select
@@ -488,7 +527,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'square2' => __( 'Empty Square', 'mixt' ),
 							),
 							'default'  => 'ring',
-							'required' => array( 'page-loader-type', '=', '1' ),
+							'required' => array('page-loader-type', '=', '1'),
 						),
 
 						// Page Loader Shape Color Select
@@ -497,10 +536,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'        => 'color',
 							'title'       => __( 'Loader Shape Color', 'mixt' ),
 							'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
-							'required'    => array( 'page-loader-type', '=', '1' ),
 							'transparent' => false,
 							'default'     => '#333333',
 							'validate'    => 'color',
+							'required'    => array('page-loader-type', '=', '1'),
 						),
 
 						// Page Loader Image Select
@@ -510,7 +549,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'url'      => false,
 							'title'    => __( 'Loader Image', 'mixt' ),
 							'subtitle' => __( 'Image to use for the loader', 'mixt' ),
-							'required' => array( 'page-loader-type', '=', '2' ),
+							'required' => array('page-loader-type', '=', '2'),
 						),
 
 						// Page Loader Background Color Select
@@ -519,10 +558,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'        => 'color',
 							'title'       => __( 'Loader Background Color', 'mixt' ),
 							'subtitle'    => __( 'The page loader background color', 'mixt' ),
-							'required'    => array( 'page-loader', '=', true ),
 							'transparent' => false,
 							'default'     => '#ffffff',
 							'validate'    => 'color',
+							'required'    => array('page-loader', '=', true),
 						),
 
 						// Page Loader Animation Select
@@ -533,7 +572,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
 							'options'  => $page_loader_anims,
 							'default'  => 'pulsate',
-							'required' => array( 'page-loader', '=', true ),
+							'required' => array('page-loader', '=', true),
 						),
 
 					// Divider
@@ -696,8 +735,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'          => __( 'Image Placeholder', 'mixt' ),
 							'subtitle'       => __( 'Select a placeholder image to show if the desired image can\'t be found', 'mixt' ),
 							'mode'           => 'jpg, jpeg, png',
-							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
-							'required'       => array( 'head-media-type', '=', 'image' ),
+							'library_filter' => array('jpg', 'jpeg', 'png'),
+							'required'       => array('head-media-type', '=', 'image'),
 						),
 
 						// Image Source
@@ -711,7 +750,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'feat'    => __( 'Featured', 'mixt' ),
 							),
 							'default'  => 'gallery',
-							'required' => array( 'head-media-type', '=', 'image' ),
+							'required' => array('head-media-type', '=', 'image'),
 						),
 
 						// Image Select
@@ -720,7 +759,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'media',
 							'title'    => __( 'Select Image', 'mixt' ),
 							'subtitle' => __( 'Select an image from the gallery or upload one', 'mixt' ),
-							'required' => array( 'head-img-src', '=', 'gallery' ),
+							'required' => array('head-img-src', '=', 'gallery'),
 						),
 
 						// Repeat / Pattern Image
@@ -731,7 +770,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => true,
-							'required' => array( 'head-media-type', '=', 'image' ),
+							'required' => array('head-media-type', '=', 'image'),
 						),
 
 						// Parallax Effect
@@ -742,7 +781,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => false,
-							'required' => array( 'head-media-type', '=', 'image' ),
+							'required' => array('head-media-type', '=', 'image'),
 						),
 
 						// Video Source
@@ -756,7 +795,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'local' => __( 'Hosted', 'mixt' ),
 							),
 							'default'  => 'embed',
-							'required' => array( 'head-media-type', '=', 'video' ),
+							'required' => array('head-media-type', '=', 'video'),
 						),
 
 						// Video Embed Code
@@ -775,7 +814,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'allowfullscreen' => array(),
 								),
 							),
-							'required' => array( 'head-video-src', '=', 'embed' ),
+							'required' => array('head-video-src', '=', 'embed'),
 						),
 
 						// Video Select
@@ -785,9 +824,9 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'          => __( 'Video', 'mixt' ),
 							'subtitle'       => __( 'Select a video from the gallery or upload one', 'mixt' ),
 							'mode'           => 'webm, mp4, ogg',
-							'library_filter' => array( 'webm', 'mp4', 'ogg' ),
+							'library_filter' => array('webm', 'mp4', 'ogg'),
 							'placeholder'    => __( 'No video selected', 'mixt' ),
-							'required'       => array( 'head-video-src', '=', 'local' ),
+							'required'       => array('head-video-src', '=', 'local'),
 						),
 
 						// Video Fallback Select
@@ -797,9 +836,9 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'          => __( 'Video Fallback', 'mixt' ),
 							'subtitle'       => __( 'Select a fallback video from the gallery or upload one', 'mixt' ),
 							'mode'           => 'webm, mp4, ogg',
-							'library_filter' => array( 'webm', 'mp4', 'ogg' ),
+							'library_filter' => array('webm', 'mp4', 'ogg'),
 							'placeholder'    => __( 'No video selected', 'mixt' ),
-							'required'       => array( 'head-video-src', '=', 'local' ),
+							'required'       => array('head-video-src', '=', 'local'),
 						),
 
 						// Video Poster
@@ -809,8 +848,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'          => __( 'Video Poster', 'mixt' ),
 							'subtitle'       => __( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
 							'mode'           => 'jpg, jpeg, png',
-							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
-							'required'       => array( 'head-video-src', '=', 'local' ),
+							'library_filter' => array('jpg', 'jpeg', 'png'),
+							'required'       => array('head-video-src', '=', 'local'),
 						),
 
 						// Video Loop
@@ -821,7 +860,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => true,
-							'required' => array( 'head-video-src', '=', 'local' ),
+							'required' => array('head-video-src', '=', 'local'),
 						),
 
 						// Video Luminance
@@ -833,7 +872,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Light', 'mixt' ),
 							'off'      => __( 'Dark', 'mixt' ),
 							'default'  => true,
-							'required' => array( 'head-media-type', '=', 'video' ),
+							'required' => array('head-media-type', '=', 'video'),
 						),
 
 						// Slider ID
@@ -842,7 +881,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Slider ID', 'mixt' ),
 							'subtitle' => __( 'The ID of the slider to use', 'mixt' ),
-							'required' => array( 'head-media-type', '=', 'slider' ),
+							'required' => array('head-media-type', '=', 'slider'),
 						),
 
 						// Content Align
@@ -898,7 +937,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Scroll To Content Icon', 'mixt' ),
 							'default'  => 'fa fa-chevron-down',
-							'required' => array( 'head-content-scroll', '=', true ),
+							'required' => array('head-content-scroll', '=', true),
 						),
 
 						// Post Info
@@ -934,7 +973,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'media_buttons' => false,
 								'textarea_rows' => '4',
 							),
-							'required' => array( 'head-content-code', '=', true ),
+							'required' => array('head-content-code', '=', true),
 						),
 
 					// Divider
@@ -1085,7 +1124,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'url'      => false,
 							'title'    => __( 'Image', 'mixt' ),
 							'subtitle' => __( 'Select the image you want to use as the site\'s logo', 'mixt' ),
-							'required' => array( 'logo-type', '=', 'img' ),
+							'required' => array('logo-type', '=', 'img'),
 						),
 
 						// Inverse Image Select
@@ -1095,7 +1134,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'url'      => false,
 							'title'    => __( 'Inverse Image', 'mixt' ),
 							'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
-							'required' => array( 'logo-type', '=', 'img' ),
+							'required' => array('logo-type', '=', 'img'),
 						),
 
 						// Hi-Res
@@ -1107,7 +1146,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => true,
-							'required' => array( 'logo-type', '=', 'img' ),
+							'required' => array('logo-type', '=', 'img'),
 						),
 
 						// Text Field
@@ -1116,7 +1155,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Text', 'mixt' ),
 							'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
-							'required' => array( 'logo-type', '=', 'text' ),
+							'required' => array('logo-type', '=', 'text'),
 						),
 
 						// Text Style
@@ -1135,7 +1174,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'color'  => '#333333',
 								'google' => false,
 							),
-							'required'       => array( 'logo-type', '=', 'text' ),
+							'required'       => array('logo-type', '=', 'text'),
 						),
 
 						// Text Inverse Color
@@ -1147,7 +1186,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'transparent' => false,
 							'validate' => 'color',
 							'default'  => '#ffffff',
-							'required' => array( 'logo-type', '=', 'text' ),
+							'required' => array('logo-type', '=', 'text'),
 						),
 
 						// Shrink
@@ -1178,7 +1217,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'text',
 							'title'    => __( 'Tagline Text', 'mixt' ),
 							'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
-							'required' => array( 'logo-show-tagline', '=', true ),
+							'required' => array('logo-show-tagline', '=', true),
 						),
 
 						// Tagline Style
@@ -1196,7 +1235,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'color'  => '#333333',
 								'google' => false,
 							),
-							'required'       => array( 'logo-show-tagline', '=', true ),
+							'required'       => array('logo-show-tagline', '=', true),
 						),
 
 					// Divider
@@ -1253,7 +1292,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 
-			// NAVBAR SECTION
+			// NAVBARS SECTION
 			$this->sections[] = array(
 				'title'      => __( 'Navbars', 'mixt' ),
 				'desc'       => __( 'Customize the primary and secondary navbars', 'mixt' ),
@@ -1346,41 +1385,38 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// Padding
 						array(
-							'id'            => 'nav-padding',
-							'type'          => 'slider',
-							'title'         => __( 'Padding', 'mixt' ),
-							'subtitle'      => __( 'Set the navbar\'s padding (in px) when at the top', 'mixt' ),
-							'default'       => 20,
-							'min'           => 0,
-							'max'           => 50,
-							'display_value' => 'text',
+							'id'       => 'nav-padding',
+							'type'     => 'slider',
+							'title'    => __( 'Padding', 'mixt' ),
+							'subtitle' => __( 'Set the navbar\'s padding (in px) when at the top', 'mixt' ),
+							'default'  => 20,
+							'min'      => 0,
+							'max'      => 50,
 						),
 
 						// Fixed Padding
 						array(
-							'id'            => 'nav-fixed-padding',
-							'type'          => 'slider',
-							'title'         => __( 'Padding When Fixed', 'mixt' ),
-							'subtitle'      => __( 'Set the navbar\'s padding (in px) when fixed', 'mixt' ),
-							'default'       => 0,
-							'min'           => 0,
-							'max'           => 50,
-							'display_value' => 'text',
-							'required'      => array('nav-mode', '=', 'fixed'),
+							'id'       => 'nav-fixed-padding',
+							'type'     => 'slider',
+							'title'    => __( 'Padding When Fixed', 'mixt' ),
+							'subtitle' => __( 'Set the navbar\'s padding (in px) when fixed', 'mixt' ),
+							'default'  => 0,
+							'min'      => 0,
+							'max'      => 50,
+							'required' => array('nav-mode', '=', 'fixed'),
 						),
 
 						// Opacity
 						array(
-							'id'            => 'nav-opacity',
-							'type'          => 'slider',
-							'title'         => __( 'Opacity', 'mixt' ),
-							'subtitle'      => __( 'Set the navbar\'s opacity when fixed', 'mixt' ),
-							'default'       => 0.95,
-							'step'          => 0.05,
-							'min'           => 0,
-							'max'           => 1,
-							'resolution'    => 0.01,
-							'display_value' => 'text',
+							'id'         => 'nav-opacity',
+							'type'       => 'slider',
+							'title'      => __( 'Opacity', 'mixt' ),
+							'subtitle'   => __( 'Set the navbar\'s opacity when fixed', 'mixt' ),
+							'default'    => 0.95,
+							'step'       => 0.05,
+							'min'        => 0,
+							'max'        => 1,
+							'resolution' => 0.01,
 						),
 
 						// See-Through When Possible
@@ -1398,17 +1434,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						// See-Through Opacity
 						array(
-							'id'            => 'nav-top-opacity',
-							'type'          => 'slider',
-							'title'         => __( 'See-Through Opacity', 'mixt' ),
-							'subtitle'      => __( 'Set the navbar\'s see-through opacity', 'mixt' ),
-							'default'       => 0.25,
-							'step'          => 0.05,
-							'min'           => 0,
-							'max'           => 1,
-							'resolution'    => 0.01,
-							'display_value' => 'text',
-							'required' => array('nav-transparent', '=', 'true'),
+							'id'         => 'nav-top-opacity',
+							'type'       => 'slider',
+							'title'      => __( 'See-Through Opacity', 'mixt' ),
+							'subtitle'   => __( 'Set the navbar\'s see-through opacity', 'mixt' ),
+							'default'    => 0.25,
+							'step'       => 0.05,
+							'min'        => 0,
+							'max'        => 1,
+							'resolution' => 0.01,
+							'required'   => array('nav-transparent', '=', 'true'),
 						),
 
 						// Position
@@ -1663,10 +1698,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				),
 			);
 
-			// SIDEBAR SECTION
+
+			// SIDEBARS SECTION
 			$this->sections[] = array(
-				'title'      => __( 'Sidebar', 'mixt' ),
-				'desc'       => __( 'Configure the sidebar and its appearance', 'mixt' ),
+				'title'      => __( 'Sidebars', 'mixt' ),
+				'desc'       => __( 'Configure the sidebars and their appearance', 'mixt' ),
 				'icon'       => 'el-icon-pause',
 				'customizer' => false,
 				'fields'     => array(
@@ -1729,10 +1765,41 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 
+			// FOOTER SECTION
+			$this->sections[] = array(
+				'title'      => __( 'Footer', 'mixt' ),
+				'desc'       => __( 'Customize the site footer', 'mixt' ),
+				'icon'       => 'el-icon-download-alt',
+				'customizer' => false,
+				'fields'     => array(
+					
+					// Back To Top Button
+					array(
+						'id'       => 'back-to-top',
+						'type'     => 'switch',
+						'title'    => __( 'Back To Top Button', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
+					// Back To Top Icon
+					array(
+						'id'       => 'back-to-top-icon',
+						'type'     => 'text',
+						'title'    => __( 'Back To Top Icon', 'mixt' ),
+						'default'  => 'fa fa-chevron-up',
+						'required' => array('back-to-top', '=', true),
+					),
+				),
+			);
+
+
 			// DIVIDER
 			$this->sections[] = array(
 				'type' => 'divide',
 			);
+
 
 			// POST PAGES SECTION
 			$this->sections[] = array(
@@ -1808,6 +1875,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'3' => '3',
 							'4' => '4',
 							'5' => '5',
+							'6' => '6',
 						),
 						'default'  => '2',
 						'required' => array('blog-type', '!=', 'standard'),
@@ -1871,15 +1939,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Post Excerpt Limit
 					array(
-						'id'            => 'post-excerpt-length',
-						'type'          => 'slider',
-						'title'         => __( 'Excerpt Limit', 'mixt' ),
-						'subtitle'      => __( 'Set a maximum excerpt length (in words)', 'mixt' ),
-						'default'       => 55,
-						'min'           => 1,
-						'max'           => 200,
-						'display_value' => 'text',
-						'required'      => array('post-content', '=', 'excerpt'),
+						'id'       => 'post-excerpt-length',
+						'type'     => 'slider',
+						'title'    => __( 'Excerpt Limit', 'mixt' ),
+						'subtitle' => __( 'Set a maximum excerpt length (in words)', 'mixt' ),
+						'default'  => 55,
+						'min'      => 1,
+						'max'      => 200,
+						'required' => array('post-content', '=', 'excerpt'),
 					),
 
 					// Post Info Display
@@ -1986,8 +2053,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'spinner',
 							'title'    => __( 'Number', 'mixt' ),
 							'subtitle' => __( 'How many related posts to display', 'mixt' ),
-							'max'      => '10',
-							'min'      => '2',
+							'max'      => '15',
+							'min'      => '1',
 							'step'     => '1',
 							'default'  => '3',
 							'required' => array('post-related', '=', true),
@@ -2006,7 +2073,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => 'tags',
 						),
 
-						// Related Posts
+						// Related Posts Slider
 						array(
 							'id'       => 'post-related-slider',
 							'type'     => 'switch',
@@ -2028,7 +2095,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'          => __( 'Featured Media Placeholder', 'mixt' ),
 							'subtitle'       => __( 'Select a placeholder image to show if a post does not have any featured media', 'mixt' ),
 							'mode'           => 'jpg, jpeg, png',
-							'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+							'library_filter' => array('jpg', 'jpeg', 'png'),
 							'required' => array('post-related', '=', true),
 						),
 				),
@@ -2379,7 +2446,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					array(
 						'id'       => 'comment-logged-in',
 						'type'     => 'switch',
-						'title'    => __( '&quot;Logged in as&quot;', 'mixt' ),
+						'title'    => __( 'Logged in as', 'mixt' ),
 						'subtitle' => __( 'Display the &quot;logged in as&quot; message', 'mixt' ),
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
@@ -2398,6 +2465,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					),
 				),
 			);
+
+
+			// ADD PORTFOLIO FIELDS IF ENABLED
+			if ( class_exists('Mixt_Portfolio') ) {
+				include_once( MIXT_PLUGINS_DIR . '/mixt-portfolio/redux-fields.php' );
+			}
+
+
+			// ADD SHOP FIELDS IF WOOCOMMERCE ENABLED
+			if ( class_exists('WooCommerce') ) {
+				include_once( MIXT_PLUGINS_DIR . '/woocommerce/redux-fields.php' );
+			}
 
 
 			// DIVIDER
@@ -2589,7 +2668,72 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				);
 
 			}
-			// END THEMES SECTION
+			
+
+			// SOCIAL PROFILES
+			$this->sections[] = array(
+				'title'      => __( 'Social Profiles', 'mixt' ),
+				'desc'       => __( 'Manage your social profiles and add new ones', 'mixt' ),
+				'icon'       => 'el-icon-group',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Social Icons Color On Hover
+					array(
+						'id'   => 'social-profiles-color',
+						'type' => 'button_set',
+						'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
+						'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
+						'options' => array(
+							'icon' => __( 'Icon', 'mixt' ),
+							'bg'   => __( 'Background', 'mixt' ),
+							'none' => __( 'Neither', 'mixt' ),
+						),
+						'default' => 'bg',
+					),
+					
+					// Social Profiles
+					array(
+						'id'       => 'social-profiles',
+						'type'     => 'multi_input',
+						'no_title' => true,
+						'add_text' => __( 'New Profile', 'mixt' ),
+						'sortable' => true,
+						'inputs'   => array(
+							'name' => array(
+								'icon'        => 'el-icon-tag',
+								'wrap_class'  => 'social-label social-name',
+								'input_class' => 'mixt-social-field network-name',
+								'placeholder' => __( 'Name', 'mixt' ),
+							),
+							'url' => array(
+								'icon'        => 'el-icon-globe',
+								'wrap_class'  => 'social-label social-url',
+								'input_class' => 'mixt-social-field network-url',
+								'placeholder' => __( 'URL', 'mixt' ),
+							),
+							'icon' => array(
+								'icon'        => 'el-icon-idea',
+								'wrap_class'  => 'social-label social-icon',
+								'input_class' => 'mixt-social-field network-icon',
+								'placeholder' => __( 'Icon', 'mixt' ),
+							),
+							'color' => array(
+								'type'        => 'color',
+								'wrap_class'  => 'social-label social-color',
+								'input_class' => 'mixt-social-field network-color',
+							),
+							'title' => array(
+								'icon'        => 'el-icon-comment',
+								'wrap_class'  => 'social-label social-title',
+								'input_class' => 'mixt-social-field network-title',
+								'placeholder' => __( 'Title', 'mixt' ),
+							),
+						),
+						'default'  => $social_profiles,
+					),
+				),
+			);
 
 
 			// TYPOGRAPHY
@@ -2662,85 +2806,20 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					),
 
 					// Web Fonts
-					array(
-						'id'       => 'opt-web-fonts',
-						'type'     => 'media',
-						'title'    => __( 'Web Fonts', 'mixt' ),
-						'compiler' => 'true',
-						'mode'     => false,
-						// Can be set to false to allow any media type, or can also be set to any mime type.
-						'desc'     => __( 'Basic media uploader with disabled URL input field.', 'mixt' ),
-						'subtitle' => __( 'Upload any media using the WordPress native uploader', 'mixt' ),
-						'hint'     => array(
-							//'title'     => '',
-							'content' => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
-						)
-					),
-				),
-			);
-
-			// SOCIAL PROFILES
-			$this->sections[] = array(
-				'title'      => __( 'Social Profiles', 'mixt' ),
-				'desc'       => __( 'Manage your social profiles and add new ones', 'mixt' ),
-				'icon'       => 'el-icon-group',
-				'customizer' => false,
-				'fields'     => array(
-
-					// Social Icons Color On Hover
-					array(
-						'id'   => 'social-profiles-color',
-						'type' => 'button_set',
-						'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
-						'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
-						'options' => array(
-							'icon' => __( 'Icon', 'mixt' ),
-							'bg'   => __( 'Background', 'mixt' ),
-							'none' => __( 'Neither', 'mixt' ),
-						),
-						'default' => 'bg',
-					),
-					
-					// Social Profiles
-					array(
-						'id'       => 'social-profiles',
-						'type'     => 'multi_input',
-						'no_title' => true,
-						'add_text' => __( 'New Profile', 'mixt' ),
-						'sortable' => true,
-						'inputs'   => array(
-							'name' => array(
-								'icon'        => 'el-icon-tag',
-								'wrap_class'  => 'social-label social-name',
-								'input_class' => 'mixt-social-field network-name',
-								'placeholder' => __( 'Name', 'mixt' ),
-							),
-							'url' => array(
-								'icon'        => 'el-icon-globe',
-								'wrap_class'  => 'social-label social-url',
-								'input_class' => 'mixt-social-field network-url',
-								'placeholder' => __( 'URL', 'mixt' ),
-							),
-							'icon' => array(
-								'icon'        => 'el-icon-idea',
-								'wrap_class'  => 'social-label social-icon',
-								'input_class' => 'mixt-social-field network-icon',
-								'placeholder' => __( 'Icon', 'mixt' ),
-							),
-							'color' => array(
-								'type'        => 'color',
-								'wrap_class'  => 'social-label social-color',
-								'input_class' => 'mixt-social-field network-color',
-							),
-							'title' => array(
-								'icon'        => 'el-icon-comment',
-								'wrap_class'  => 'social-label social-title',
-								'input_class' => 'mixt-social-field network-title',
-								'placeholder' => __( 'Title', 'mixt' ),
-							),
-						),
-						'default'  => $social_profiles,
-					),
+					// array(
+					// 	'id'       => 'opt-web-fonts',
+					// 	'type'     => 'media',
+					// 	'title'    => __( 'Web Fonts', 'mixt' ),
+					// 	'compiler' => 'true',
+					// 	'mode'     => false,
+					// 	// Can be set to false to allow any media type, or can also be set to any mime type.
+					// 	'desc'     => __( 'Basic media uploader with disabled URL input field.', 'mixt' ),
+					// 	'subtitle' => __( 'Upload any media using the WordPress native uploader', 'mixt' ),
+					// 	'hint'     => array(
+					// 		//'title'     => '',
+					// 		'content' => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
+					// 	)
+					// ),
 				),
 			);
 
@@ -2769,6 +2848,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					),
 				);
 			}
+
+			$this->sections[] = array(
+				'type' => 'divide',
+			);
 
 			$this->sections[] = array(
 				'icon'            => 'el-icon-list-alt',
@@ -2809,10 +2892,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 			$this->sections[] = array(
-				'type' => 'divide',
-			);
-
-			$this->sections[] = array(
 				'icon'   => 'el-icon-list-alt',
 				'title'  => __( 'About MIXT', 'mixt' ),
 				'desc'   => __( '<p class="description">Something about this wonderful theme here.</p>', 'mixt' ),
@@ -2850,7 +2929,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 		public function setHelpTabs() {
 
 			$mixt_help_file = function($file) {
-				$file_path = MIXT_DIR . "/mixt-modules/help/$file.html";
+				$file_path = MIXT_DIR . "/modules/help/$file.html";
 
 				if ( file_exists($file_path) ) {
 					return file_get_contents($file_path);

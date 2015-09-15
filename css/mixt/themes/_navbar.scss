@@ -1,0 +1,200 @@
+
+// Navbar Theme Colors
+
+$main-nav-opacity: 0.95;
+
+@mixin navbar-theme($name, $theme) {
+	$bg: map-get($theme, 'bg');
+	$accent: map-get($theme, 'accent');
+	$color: map-get($theme, 'color');
+	$color-inv: map-get($theme, 'color-inv');
+	$border: map-get($theme, 'border');
+	$border-alpha: map-get($theme, 'border-alpha');
+
+	$menu-bg: map-get($theme, 'menu-bg');
+	$menu-bg-hover: rgba(0,0,0,0.02);
+	$menu-bg-expand: map-get($theme, 'menu-expand');
+	$menu-color: map-get($theme, 'menu-color');
+	$menu-color-fade: map-get($theme, 'menu-color-fade');
+	$menu-border: map-get($theme, 'menu-border');
+	$menu-border-alpha: map-get($theme, 'menu-border-alpha');
+
+	.navbar.theme-#{$name} {
+		border-color: $border;
+		border-color: $border-alpha;
+		background-color: $bg;
+
+		.nav {
+			&,
+			&.active-top {
+				> .active > a:before { background-color: $accent; }
+			}
+		}
+
+		// Text Color
+		.nav > li > a,
+		.text-cont,
+		.text-cont a:hover,
+		.text-cont a.no-color { color: $color; }
+
+		.nav > li > a:hover,
+		.nav > .active > a,
+		.text-cont a { color: $accent; }
+
+		// Border Colors
+		.nav > li,
+		.nav > li > a,
+		.navbar-toggle {
+			border-color: $border;
+			border-color: $border-alpha;
+		}
+
+		// SUBMENUS
+		
+		.sub-menu {
+			background-color: $menu-bg;
+
+			li > a {
+				&:hover,
+				&:focus { background-color: $menu-bg-hover; }
+			}
+
+			li > a,
+			input { color: $menu-color; }
+
+			&,
+			> li,
+			> li > a {
+				border-color: $menu-border;
+				border-color: $menu-border-alpha;
+			}
+
+			li > a:hover,
+			.active > a,
+			.active > a:hover {
+				color: $accent;
+			}
+		}
+
+		// OTHER ELEMENTS
+
+		.navbar-toggle .icon-bar {
+			background-color: $color;
+		}
+
+		// Divider
+		.divider {
+			background-color: $border;
+			background-color: $border-alpha;
+		}
+
+		// Nav Search Form
+		.nav-search .search-form {
+			button {
+				color: $menu-color;
+				border-color: $menu-border;
+				border-color: $menu-border-alpha;
+			}
+
+			::placeholder { color: $menu-color-fade; }
+		}
+
+		// DARK BACKGROUND
+
+		&.bg-dark {
+			$bg-dark-accent: map-get($theme, 'bg-dark-accent');
+			$bg-dark-border: map-get($theme, 'bg-dark-border');
+			$bg-dark-border-alpha: map-get($theme, 'bg-dark-border-alpha');
+			@if ( lightness($color) > lightness($color-inv) ) {
+				$bg-dark-color: $color;
+			} @else {
+				$bg-dark-color: $color-inv;
+			}
+
+			.nav > li > a,
+			.text-cont,
+			.text-cont a:hover,
+			.text-cont a.no-color {
+				color: $bg-dark-color;
+			}
+
+			.navbar-toggle .icon-bar {
+				background-color: $bg-dark-color;
+			}
+
+			.nav > li:hover > a,
+			.nav > li.hover > a,
+			.nav > li > a:hover,
+			.nav > .active > a,
+			.text-cont a {
+				color: $bg-dark-accent;
+			}
+
+			.nav > li,
+			.nav > li > a,
+			.navbar-toggle {
+				border-color: $bg-dark-border;
+				border-color: $bg-dark-border-alpha;
+			}
+
+			.divider {
+				background-color: $bg-dark-border;
+				background-color: $bg-dark-border-alpha;
+			}
+		}
+
+		
+		// MAIN NAVBAR STYLES
+		
+		&.navbar-mixt {
+			background-color: rgba($bg, $main-nav-opacity);
+
+			.sub-menu { background-color: rgba($menu-bg, $main-nav-opacity); }
+
+			@include media('screen', '<mars') {
+				.navbar-inner {
+					background-color: $menu-bg;
+				}
+
+				.navbar-inner .text-cont,
+				.navbar-inner .text-cont a:hover,
+				.navbar-inner .text-cont a.no-color,
+				.nav > li > a {
+					color: $menu-color;
+				}
+
+				// Hover State
+				.nav > li > a:hover,
+				.nav > li:hover > a,
+				.nav > li.hover > a {
+					background-color: $menu-bg-hover;
+				}
+
+				.nav > li:hover > a,
+				.nav > li.hover > a,
+				.nav > li > a:hover,
+				.nav > li.active > a,
+				.navbar-inner .text-cont a { color: $accent; }
+
+				// Border Colors
+				.navbar-inner,
+				.nav > li,
+				.nav > li > a {
+					border-color: $menu-border;
+					border-color: $menu-border-alpha;
+				}
+
+				// Menu Expanded State
+				.nav li.expand,
+				.nav li.expand .sub-menu a:hover {
+					background-color: $menu-bg-expand;
+				}
+			};
+		}
+	}
+}
+
+// Generate navbar themes
+@each $name, $theme in $themes {
+	@include navbar-theme($name, $theme);
+}

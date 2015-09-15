@@ -39,7 +39,7 @@ if ( have_comments() ) {
 			 * to use mixt_comment() to format the comments.
 			 * If you want to overload this in a child theme then you can
 			 * define mixt_comment() and that will be used instead.
-			 * See mixt_comment() in mixt-core/tags.php
+			 * See mixt_comment() in core/tags.php
 			 */
 			wp_list_comments( array( 'callback' => 'mixt_comment', 'avatar_size' => 50 ) );
 		?>

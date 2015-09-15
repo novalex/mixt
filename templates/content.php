@@ -15,26 +15,24 @@ $is_masonry   = Mixt_Options::get('layout', 'type') == 'masonry';
 
 	<?php if ( $is_masonry ) { echo '<div class="post-wrapper">'; } ?>
 
-	<header class="page-header">
-		<?php $post_ob->header(); ?>
-	</header>
+	<header class="page-header"><?php
+
+		$post_ob->header();
+
+	?></header>
 
 	<?php if ( is_archive() ) : // Display Excerpts for Archive Pages ?>
-		<div class="entry-body entry-summary">
+		<div class="entry-body entry-summary"><?php
 
-			<?php $post_ob->content('excerpt'); ?>
-			
-		</div>
+			$post_ob->content('excerpt');
+
+		?></div>
 	<?php else : ?>
 		<div class="entry-body entry-content"><?php
 
 			$post_ob->content();
 
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'mixt' ),
-				'after'  => '</div>',
-			) ); ?>
-		</div>
+		?></div>
 	<?php endif; ?>
 
 	<?php if ( $is_masonry ) { echo '</div>'; } // Close .post-wrapper ?>

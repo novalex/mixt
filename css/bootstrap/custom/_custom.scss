@@ -4,6 +4,15 @@
 .fade { @include transition(opacity .2s ease); }
 
 
+// Alerts
+.alert {
+	a {
+		color: inherit;
+		font-weight: bold;
+	}
+}
+
+
 // Tooltips
 
 .tooltip { z-index: 10000; }

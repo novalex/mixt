@@ -1,0 +1,50 @@
+
+.mixt {
+	.select2-container {
+		a.select2-choice {
+			height: $input-height-base;
+			color: $input-color;
+			padding: $padding-base-vertical $padding-base-horizontal;
+			padding-right: 0;
+			line-height: $line-height-base;
+			border: 1px solid $input-border;
+			border-radius: $input-border-radius;
+			background-color: $input-bg;
+		}
+
+		.select2-arrow {
+			width: 32px;
+
+			b:after {
+				width: 32px;
+				height: 16px;
+				border: 0 !important;
+				margin-left: -16px;
+				margin-top: -8px;
+				@extend %select-arrow;
+			}
+		}
+
+		&.select2-dropdown-open {
+			.select2-choice { box-shadow: none; }
+		}
+	}
+
+	.select2-drop {
+		color: $input-color;
+		background-color: $input-bg;
+
+		&,
+		&.select2-drop-active {
+			border-color: $input-border;
+		}
+	}
+
+	.select2-results {
+		.select2-highlighted {
+			color: $input-color;
+			border-color: $bd-radius;
+			background-color: darken($input-bg, 5);
+		}
+	}
+}

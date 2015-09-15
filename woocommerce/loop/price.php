@@ -14,6 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 ?>
 
-<?php if ( $price_html = $product->get_price_html() ) : ?>
-	<span class="price"><?php echo $price_html; ?></span>
-<?php endif; ?>
+
+<div class="price-cont"><?php
+	if ( $price_html = $product->get_price_html() ) { ?>
+		<span class="price"><?php echo $price_html; ?></span>
+	<?php }
+
+	// Stock
+	if ( mixt_wc_option('stock') ) mixt_wc_product_stock();
+	?>
+</div>

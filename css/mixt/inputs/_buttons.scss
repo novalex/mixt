@@ -1,19 +1,27 @@
 
 $btn-height: 34px;
 
-.btn {
+%button-base {
+	@extend %bs-button-base; // Bootstrap base styling
+
 	transition: color 0.2s, border 0.3s, background 0.2s, box-shadow 0.3s, text-shadow 0.3s;
 
 	&.icon-l i { margin: 0 6px 0 0; }
-
 	&.icon-r i { margin: 0 0 0 6px; }
 }
 
-.input-group-btn .btn { height: $btn-height; }
+.btn,
+.button { @extend %button-base; }
 
 
-// Solid Color Variants
+// Justified button group double border fix
+.btn-group-justified > .btn + .btn,
+.btn-group-justified > .btn-group + .btn-group > .btn { border-left-width: 0; }
+
+
+// Color Variants
 @mixin button-color($selector, $color) {
+	// Solid Color
 	.btn-#{$selector} {
 		@include text-shadow-for-bg($color);
 		border-color: darken($color, 5);
@@ -48,22 +56,13 @@ $btn-height: 34px;
 	}
 
 	.btn-#{$selector},
+	a.btn-#{$selector},
 	.btn-#{$selector}:hover,
 	.btn-#{$selector}:focus,
 	.btn-hover-#{$selector}:hover,
 	.btn-hover-#{$selector}:focus { color: set-color-for-bg($color); }
-}
-@each $selector, $color in $button-colors {
-	@include button-color($selector, $color);
-}
-@include button-color('shine', rgba(255,255,255,0.6));
-@include button-color('shade', rgba(0,0,0,0.6));
-.btn-primary { @extend .btn-accent; }
-.btn-success { @extend .btn-green; }
 
-
-// Outline Color Variants
-@mixin button-outline-color($selector, $color) {
+	// Outline
 	.btn-outline-#{$selector}:hover {
 		@if ( lumin($color) >= 0.3 ) {
 			background-color: rgba(darken($color, 5), 0.05);
@@ -82,16 +81,28 @@ $btn-height: 34px;
 			box-shadow: inset 0 1px 16px rgba(0,0,0,0.05);
 		}
 	}
-
 	.btn-outline-#{$selector},
+	a.btn-outline-#{$selector},
 	.btn-outline-#{$selector}:hover,
 	.btn-outline-#{$selector}:focus,
 	.btn-hover-outline-#{$selector}:hover,
 	.btn-hover-outline-#{$selector}:hover:focus { color: $color; }
 }
 @each $selector, $color in $button-colors {
-	@include button-outline-color($selector, $color);
+	@include button-color($selector, $color);
 }
+@each $name, $theme in $themes {
+	.theme-#{$name} {
+		@include button-color('minimal', map-get($theme, 'bg'));
+		@include button-color('accent', map-get($theme, 'accent'));
+		.btn-primary { @extend .btn-accent; }
+	}
+}
+@include button-color('shine', rgba(255,255,255,0.6));
+@include button-color('shade', rgba(0,0,0,0.6));
+
+.btn-default { @extend .btn-grey; }
+.btn-success { @extend .btn-green; }
 
 
 // Button Styles
@@ -162,7 +173,14 @@ $btn-height: 34px;
 	}
 }
 @each $selector, $color in $button-colors {
-	@include button-effect-colors($selector, $color);
+	.mixt {
+		@include button-effect-colors($selector, $color);
+	}
+}
+@each $name, $theme in $themes {
+	.theme-#{$name} {
+		@include button-effect-colors('accent', map-get($theme, 'accent'));
+	}
 }
 
 

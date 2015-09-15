@@ -13,14 +13,21 @@
 
 // MEDIA BREAKPOINTS
 
-$bp-mercury: 480px;
-$bp-mars:    767px;
-$bp-venus:   992px;
-$bp-earth:   1200px;
+$breakpoints: (
+	'mercury': 480px,
+	'mars':    767px,
+	'venus':   992px,
+	'earth':   1200px,
+);
 
 // neptune, uranus, saturn, jupiter
 
 @function translate-media-condition($cond) {
+	$bp-mercury: map-get($breakpoints, 'mercury');
+	$bp-mars:    map-get($breakpoints, 'mars');
+	$bp-venus:   map-get($breakpoints, 'venus');
+	$bp-earth:   map-get($breakpoints, 'earth');
+
 	$media-cond: (
 		// Media
 		"print":   "only print",
@@ -43,7 +50,12 @@ $bp-earth:   1200px;
 		"mercury":  "(min-width: #{$bp-mercury + 1})",
 		"<mercury": "(max-width: #{$bp-mercury})"
 	);
-	@return map-get( $media-cond, $cond );
+
+	@if map-has-key($media-cond, $cond) {
+		@return map-get($media-cond, $cond);
+	} @else {
+		@return $cond;
+	}
 }
 
 @mixin media($args...) {
@@ -56,6 +68,18 @@ $bp-earth:   1200px;
 		$query: $query + $op + translate-media-condition($arg);
 	}
 	@media #{$query}  { @content; }
+}
+
+
+// CLEARFIX
+
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after { clear: both; }
 }
 
 

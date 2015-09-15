@@ -10,32 +10,6 @@
 }
 
 
-// COLOR VARIANTS
-
-%basic-color-text-variants {
-	@each $sel, $color in $basic-colors {
-		&.#{$sel} {
-			color: $color;
-		}
-	}
-}
-%basic-color-bg-variants {
-	@each $sel, $color in $basic-colors {
-		&.#{$sel} {
-			color: set-color-for-bg($color);
-			border-color: darken($color, 10);
-			background-color: $color;
-			@include text-shadow-for-bg($color);
-		}
-	}
-}
-%basic-color-border-variants {
-	@each $sel, $color in $basic-colors {
-		&.#{$sel} { border-color: $color; }
-	}
-}
-
-
 // ALIGNMENT
 
 .flex-middle {
@@ -116,12 +90,7 @@ $spacing-margin-sizes: (
 // MISCELLANEOUS
 
 %clearfix {
-	&:before,
-	&:after {
-		content: " ";
-		display: table;
-	}
-	&:after { clear: both; }
+	@include clearfix;
 }
 
 .text-shadow-inset { text-shadow: 0 1px 1px rgba(255,255,255,0.1); }

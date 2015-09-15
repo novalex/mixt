@@ -11,4 +11,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-echo '<div class="shop-wrap">';
+echo '<div id="shop-wrapper" class="page-padding columns-' . mixt_wc_option('cols', 3) . '">';

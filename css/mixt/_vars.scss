@@ -5,6 +5,16 @@ $img-path: '../assets/img';
 $font-path: '../assets/fonts';
 
 
+// PLUGIN CONFIG
+
+$portfolio: true;
+$lightgallery: true;
+$lightslider: true;
+$vcomposer: true;
+$woocommerce: true;
+$wpcf: false;
+
+
 // MISCELLANEOUS
 
 $bd-radius-s: 1px;
@@ -18,6 +28,8 @@ $rounded-radius: $bd-radius-l;
 
 $font-family-base: 'Roboto', 'Verdana', sans-serif;
 
+$line-height-base: 1.618;
+
 $font-size-xs: 11px;
 $font-size-s: 12px;
 $font-size: 13px;
@@ -25,6 +37,8 @@ $font-size-m: 14px;
 $font-size-l: 16px;
 $font-size-xl: 20px;
 $font-size-xxl: 26px;
+
+$font-size-base: $font-size;
 
 $font-size-h1: 20px;
 $font-size-h2: 18px;
@@ -50,3 +64,5 @@ $padding-xs: 5px;
 $padding-s: 10px;
 $padding-m: 20px;
 $padding-l: 30px;
+
+$post-inner-pad: 15px;

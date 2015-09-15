@@ -31,6 +31,8 @@
 			border-style: solid;
 			border-color: inherit;
 
+			:last-child { margin-bottom: 0; }
+
 			&:nth-child(odd):not(.header):not(.footer) { background-color: rgba(0,0,0,0.02); }
 		}
 		.header {
@@ -92,8 +94,8 @@
 	}
 
 	// Color Variants
-	@mixin pricing-table-variant($selector, $color) {
-		&.#{$selector} .mixt-pricing-inner .header {
+	@mixin pricing-table-variant($sel, $color) {
+		#{$sel} {
 			color: set-color-for-bg($color);
 			border-color: transparent;
 			background-color: $color;
@@ -101,12 +103,13 @@
 			@include text-shadow-for-bg($color);
 		}
 	}
-	@each $selector, $color in $basic-colors {
-		@include pricing-table-variant($selector, $color);
+	// Basic Colors
+	@each $sel, $color in $basic-colors {
+		@include pricing-table-variant('&.#{$sel} .mixt-pricing-inner .header', $color);
 	}
-
-	// Styler Integration
-	&.styler-custom {
+	// Accent Colors
+	@each $theme, $colors in $themes {
+		@include pricing-table-variant('.theme-#{$theme} &.accent .mixt-pricing-inner .header', map-get($colors, 'accent'));
 	}
 }
 

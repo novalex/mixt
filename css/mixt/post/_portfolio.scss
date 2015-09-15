@@ -1,0 +1,42 @@
+
+// Archive / Catalog
+.portfolio-wrap {
+	border-color: inherit;
+
+	// Portfolio sorting
+	.portfolio-sorter {
+		width: 100%;
+		font-size: $font-size-m;
+
+		li:not(:last-child) {
+			&:after { content: '/'; }
+
+			a { display: inline-block; }
+		}
+
+		li.active > a {
+			border-bottom-width: 2px;
+			border-bottom-style: solid;
+			border-bottom-color: inherit;
+		}
+	}
+}
+
+.blog-grid,
+.blog-masonry {
+	.portfolio .page-title a {
+		color: inherit;
+		font-size: $font-size;
+	}
+}
+
+// Project Styling
+.single-portfolio .article {
+}
+
+// Media
+@include media('screen', 'mars') {
+	.portfolio.has-columns {
+		.entry-body { margin-top: 0; }
+	}
+}

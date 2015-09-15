@@ -1,14 +1,43 @@
 
 // Pagination Styling
 
+.paging-navigation {
+	width: 100%;
+	clear: both;
+	@extend %clearfix;
+}
+
 .pager {
 	margin: $margin-l 0;
 
-	&, li, li a, li span { border-color: inherit; }
-	li a, li span { height: 34px; background-color: transparent; }
-	li a, li > span { font-size: 13px; border-radius: $bd-radius; }
 	i { vertical-align: middle; margin-right: 10px; }
 	.next i { margin-left: 10px; margin-right: 0; }
+
+	&, li, li a, li span { border-color: inherit; }
+
+	li {
+		margin-bottom: 0 !important;
+
+		> a,
+		> span {
+			height: 34px;
+			font-size: $font-size;
+			border-radius: $bd-radius;
+			background-color: transparent;
+		}
+
+		> a {
+			transition: color 0.2s, background 0.2s;
+
+			&:hover { background-color: rgba(0,0,0,0.05); }
+		}
+
+		> span {
+			cursor: default;
+		}
+	}
+
+	a { color: inherit; }
 }
 
 .numbered-paging {

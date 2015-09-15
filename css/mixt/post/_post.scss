@@ -17,11 +17,8 @@
 	.post-wrapper { border-color: inherit; }
 
 	.page-title,
-	.post-meta,
 	.entry-body,
 	footer.entry-meta { margin: $margin-m 0 0; }
-
-	.page-title + .post-meta { margin-top: $margin-s; }
 
 	.entry-body {
 		&:first-child { margin-top: 0; }
@@ -66,12 +63,26 @@
 			}
 		}
 	}
+
+	&.no-title {
+		.page-title { display: none; }
+		.entry-body {
+			&:first-child { margin-top: $margin-m; }
+			&:empty { margin-top: 0; }
+		}
+	}
+	&.no-content {
+		.page-title { margin-bottom: $margin-m; }
+		.entry-body { display: none; }
+	}
+
+	#post-split-nav .pager { margin-bottom: 0; }
 }
 
 .page-header {
-	padding: 0;
 	margin: 0;
 	border-bottom: 0;
+	padding-bottom: 0;
 }
 	
 .page-title {
@@ -86,75 +97,58 @@
 @import 'blog-grid';
 @import 'blog-masonry';
 @import 'blog-standard';
+@import 'blog-common';
 
-// Blog Common
-.blog-grid,
-.blog-masonry {
-	.blog-post {
-		float: left;
+// PORTFOLIO STYLING
 
-		.post-info {
-			&,
-			&.post-link a,
-			&.post-quote blockquote {
-				border-width: 0;
-				border-radius: 0;
-			}
-			.post-date {
-				border-bottom-width: 1px;
-			}
-		}
-
-		.post-feat {
-			width: auto;
-			margin: -1px -1px 0 -1px;
-			overflow: hidden;
-
-			> a,
-			> img,
-			> a > img,
-			blockquote {
-				height: 100%;
-				min-height: 100px;
-			}
-
-			.lightbox-trigger { width: 100%; }
-
-			.gallery .gallery-item { margin: 0 !important; }
-		}
-
-		$inner-padding: 15px;
-		.page-title,
-		.page-header .entry-meta,
-		.entry-body { padding-left: $inner-padding; padding-right: $inner-padding; }
-	}
-
-	.feat-format { border-width: 1px 0 1px 0; }
-
-	.post-feat,
-	.post-feat img,
-	.post-quote blockquote,
-	.post-link a,
-	.feat-format {
-		border-radius: 0;
-		-webkit-perspective: none;
-	}
+@if $portfolio {
+	@import 'portfolio';
 }
-
-.blog-grid .blog-post,
-.blog-masonry .post-wrapper { padding-bottom: $padding-s; }
-
-.blog-2-col .blog-post { width: 50%; }
-.blog-3-col .blog-post { width: 33.33333%; }
-.blog-4-col .blog-post { width: 25%; }
-.blog-5-col .blog-post { width: 20%; }
 
 
 // FEATURED HOVER EFFECT
+
 //.posts-container,
 .post-related {
 	.post-feat > a > img {
 		@extend %img-effect-hover;
+	}
+}
+
+
+// ROLLOVER
+
+.post-rollover {
+	$spacing: 8px;
+
+	.hover-content {
+		width: 100%;
+	}
+
+	.inner {
+		.title,
+		.excerpt,
+		.view-post,
+		.full-image {
+			margin-top: $spacing;
+			margin-bottom: $spacing;
+		}
+	}
+
+	.view-post,
+	.full-image {
+		font-size: 16px;
+		padding: 10px 12px;
+		line-height: 1;
+		margin-left: $spacing;
+		margin-right: $spacing;
+	}
+
+	.title {
+		font-size: $font-size-m;
+	}
+	.excerpt {
+		font-size: $font-size-s;
 	}
 }
 
@@ -216,5 +210,20 @@
 		a {
 			margin-top: $margin-s;
 		}
+	}
+}
+
+
+// MISCELLANEOUS
+
+// Password Form
+.post-password-form {
+	input[type="password"] {
+		@extend %input-base;
+		@extend %form-control;
+	}
+	input[type="submit"] {
+		@extend %button-base;
+		@extend .btn-default;
 	}
 }

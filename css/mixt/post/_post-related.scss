@@ -11,14 +11,19 @@
 		float: left;
 		overflow: hidden;
 		position: relative;
+		min-height: 30px;
 		max-height: $max-height;
 	}
 
-	.title + div { margin-top: $gutter; }
+	.title + div:not(.related-inner),
+	.related-inner .post { margin-top: $gutter; }
 
 	.related-inner {
 		margin-left: $gutter / -2;
 		margin-right: $gutter / -2;
+
+		@extend %clearfix;
+
 		.post {
 			width: 33.333%;
 			padding-left: $gutter / 2;

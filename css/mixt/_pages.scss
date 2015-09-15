@@ -1,6 +1,46 @@
 
 // Specific Page Styling
 
+body.one-page { position: relative; }
+
+// Author Page
+.author .about-the-author { margin-bottom: 0; }
+
+// 404 Page
+.error-404 {
+	padding: $row-spacing-lg 0;
+
+	.page-header {
+		text-align: center;
+
+		.page-title {
+			font-size: 96px;
+			margin-top: 0;
+		}
+	}
+
+	.page-content > div { padding-top: $row-spacing-lg; }
+
+	#menu-404 li a { padding: 0; }
+}
+
+// Blank Page
+.page-template-blank {
+
+	.entry-body > .row:last-child {
+		margin-bottom: 0;
+	}
+
+	.flexbox & {
+		display: flex;
+		align-items: center;
+
+		#main-wrap {
+			padding-top: 0;
+		}
+	}
+}
+
 // Services Page
 .services-testimonial-carousel {
 	blockquote { display: inline-block; }
@@ -12,6 +52,6 @@
 	}
 }
 
-@media screen and (max-width: $bp-mars) {
+@include media('screen', 'mars') {
 	.services-icons-row .gutter-btm:not(:last-child) { margin-bottom: 0; }
 }

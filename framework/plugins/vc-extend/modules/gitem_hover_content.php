@@ -114,10 +114,10 @@ function mixt_gitem_hover_shortcode($atts) {
 	?>
 		<div class="mixt-gitem-hover hover-content hovered">
 			<div class="on-hover <?php echo $color; ?>">
-				<?php if ( in_array('image', $items) ) { ?>
-				<a href="{{ post_image_url }}" class="<?php echo $item_classes; ?>"><i class="<?php echo $image_icon; ?>"></i></a>
-				<?php } if ( in_array('post', $items) ) { ?>
-				<a href="{{ post_link_url }}" class="<?php echo $item_classes; ?>"><i class="<?php echo $post_icon; ?>"></i></a>
+				<?php if ( in_array('post', $items) ) { ?>
+				<a href="{{ post_link_url }}" class="<?php echo $item_classes; ?>" title="<?php _e('View Post', 'mixt'); ?>" data-toggle="tooltip"><i class="<?php echo $post_icon; ?>"></i></a>
+				<?php } if ( in_array('image', $items) ) { ?>
+				<a href="{{ post_image_url }}" class="<?php echo $item_classes; ?>" title="<?php _e('Full Image', 'mixt'); ?>" data-toggle="tooltip"><i class="<?php echo $image_icon; ?>"></i></a>
 				<?php } if ( in_array('comments', $items) ) { ?>
 				<a href="{{ post_link_url }}#comments" class="<?php echo $item_classes; ?> comments"><i class="<?php echo $comm_icon; ?>"></i>&nbsp;<small>{{ post_data:comment_count }}</small></a>
 				<?php } ?>

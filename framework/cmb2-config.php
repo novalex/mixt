@@ -54,7 +54,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 	$meta_boxes['mixt_page_meta'] = array(
 		'id'           => 'mixt_page_options',
 		'title'        => __( 'Page Options', 'mixt' ),
-		'object_types' => array( 'page', 'post' ),
+		'object_types' => array( 'page', 'post', 'portfolio', 'product' ),
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true,
@@ -174,6 +174,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 	$custom_sidebars = get_option('mixt-sidebars');
 	if ( $custom_sidebars ) {
 		$sidebar_options = array(
+			'auto'      => __( 'Auto', 'mixt' ),
 			'sidebar-1' => __( 'Default', 'mixt' ),
 		);
 		foreach ( $custom_sidebars as $sidebar ) { $sidebar_options[$sidebar['id']] = $sidebar['name']; }
@@ -183,9 +184,10 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			'desc'    => __( 'The sidebar to use for this page', 'mixt' ),
 			'type'    => 'select',
 			'options' => $sidebar_options,
-			'default' => 'sidebar-1',
+			'default' => 'auto',
 		);
 	}
+
 
 	// BLOG OPTIONS
 
@@ -206,7 +208,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'desc'    => __( 'Select the blog layout type', 'mixt' ),
 				'type'    => 'radio_inline',
 				'options' => array(
-					'auto'   => __( 'Auto', 'mixt' ),
+					'auto'     => __( 'Auto', 'mixt' ),
 					'standard' => __( 'Standard', 'mixt' ),
 					'grid'     => __( 'Grid', 'mixt' ),
 					'masonry'  => __( 'Masonry', 'mixt' ),
@@ -226,6 +228,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'3'    => '3',
 					'4'    => '4',
 					'5'    => '5',
+					'6'    => '6',
 				),
 				'default' => 'auto',
 			),
@@ -261,6 +264,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 		),
 	);
 
+
 	// POSTS PAGE OPTIONS
 
 	if ( function_exists('cmb2_post_search_render_field') ) {
@@ -291,21 +295,22 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				array(
 					'id'      => $prefix . 'posts-page',
 					'name'    => __( 'Posts Per Page', 'mixt' ),
-					'desc'    => __( 'Number of posts to display on each page (-1 to display all)', 'mixt' ),
+					'desc'    => __( 'Number of posts to display on each page (-1 to display all, auto to display number set in options)', 'mixt' ),
 					'type'    => 'text',
-					'default' => '-1',
+					'default' => 'auto',
 				),
 			),
 		);
 
 	}
 
+
 	// HEADER OPTIONS
 
 	$meta_boxes['mixt_header_meta'] = array(
 		'id'           => 'mixt_header_options',
 		'title'        => __( 'Header Options', 'mixt' ),
-		'object_types' => array( 'page', 'post' ),
+		'object_types' => array( 'page', 'post', 'portfolio', 'product' ),
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true,
@@ -756,6 +761,14 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 		),
 	);
+
+
+	// PORTFOLIO OPTIONS
+	
+	if ( class_exists('Mixt_Portfolio') ) {
+		include_once( MIXT_PLUGINS_DIR . '/mixt-portfolio/cmb2-fields.php' );
+	}
+
 
 	return $meta_boxes;
 }

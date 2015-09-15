@@ -40,10 +40,11 @@ var path = {
 	},
 	styles: {
 		src:         'css',
+		main:        'css/main.scss',
 		files:       'css/**/*.scss',
+		plugins:     'framework/plugins/**/main.scss',
 		admin:       'framework/admin/css/*.scss',
 		pluginAdmin: 'framework/plugins/**/admin.scss',
-		plugins:     'framework/plugins/**/main.scss',
 	},
 	dest: 'dist'
 };
@@ -73,7 +74,7 @@ function displayError(error) {
 
 // Compile Sass
 gulp.task('sass', function() {
-	return gulp.src(path.styles.files)
+	return gulp.src(path.styles.main)
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )

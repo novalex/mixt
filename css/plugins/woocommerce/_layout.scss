@@ -1,0 +1,290 @@
+
+.mixt {
+
+	// GENERAL
+	.col2-set {
+		margin-left: $gutter-lg / -2;
+		margin-right: $gutter-lg / -2;
+
+		.col-1,
+		.col-2 {
+			float: left;
+			width: 50%;
+			padding-left: $gutter-lg / 2;
+			padding-right: $gutter-lg / 2;
+		}
+	}
+
+	.col2-set,
+	#shop-wrapper,
+	div.product .thumbnails,
+	div.product #reviews .comment,
+	.cart-collaterals,
+	.shipping_calculator,
+	form .form-row {
+		@include clearfix;
+	}
+
+
+	// Row spacing
+	div.product {
+		div.images,
+		div.summary,
+		div.woocommerce-tabs { margin-bottom: $row-spacing-lg; }
+	}
+
+	.woocommerce-checkout {
+		.woocommerce {
+			> div,
+			form.login,
+			.coupon-cont,
+			form.checkout,
+			#customer_details,
+			.shop_table {
+				margin-bottom: $row-spacing-lg;
+			}
+
+			> .clear { margin: 0; }
+
+			form.login { margin-top: $row-spacing-lg / -2; }
+		}
+	}
+
+	.woocommerce-edit-address {
+		.woocommerce > form { margin-bottom: $row-spacing-lg; }
+	}
+
+
+	// Columns
+	ul.products {
+		$gutter: $padding-l;
+
+		clear: both;
+		margin: 0 $gutter / -2;
+
+		li.product {
+			float: left;
+			width: 100%;
+			position: relative;
+			padding: 0 $gutter / 2;
+			margin: 0 0 $gutter 0 !important;
+
+			&.first { clear: both; }
+		}
+	}
+	.columns-2 ul.products li.product { width: 50%; }
+	.columns-3 ul.products li.product { width: 33.333%; }
+	.columns-4 ul.products li.product { width: 25%; }
+	.columns-5 ul.products li.product { width: 20%; }
+	.columns-6 ul.products li.product { width: 16.666%; }
+
+
+	// PRODUCT PAGE
+	div.product {
+		float: left;
+		width: 100%;
+
+		// Spacing
+		div.images,
+		div.summary:first-child {
+			padding-right: $gutter-lg;
+		}
+
+		// Product Images & Thumbnails
+		.thumbnails {
+			$spacing: 10px;
+
+			margin-left: $spacing / -2;
+			margin-right: $spacing / -2;
+			padding: 0 !important;
+			list-style: none;
+
+			&:empty { display: none; }
+
+			li {
+				float: left;
+				width: 33.333%;
+				margin: 0 !important;
+				padding: $spacing ($spacing / 2) 0 ($spacing / 2);
+			}
+
+			li.first { clear: both; }
+
+			&.columns-1 li {
+				width: 100%;
+				float: none;
+			}
+			&.columns-2 li { width: 50%; }
+			&.columns-4 li { width: 25%; }
+			&.columns-5 li { width: 20%; }
+			&.columns-6 li { width: 16.666%; }
+		}
+
+		> div {
+			clear: both;
+		}
+
+		.images,
+		.summary {
+			float: left;
+			width: 50%;
+			clear: none;
+		}
+
+		@include media('screen', 'venus') {
+			// Tabs
+			.woocommerce-tabs {
+				float: right;
+				width: 50%;
+				clear: none;
+			}
+		}
+	}
+
+
+	// CART PAGE
+	table.cart,
+	#content table.cart {
+		img {
+			height: auto;
+		}
+
+		td.actions {
+			text-align: right;
+
+			.input-text {
+				width: 80px;
+			}
+
+			.coupon {
+				float: left;
+
+				label {
+					display: none;
+				}
+			}
+		}
+	} 
+
+	.cart-collaterals {
+		width: 100%;
+
+		.related {
+			width: 30.75%;
+			float: left;
+		}
+
+		.cross-sells {
+			width: 48%;
+			float: left;
+
+			ul.products {
+				float: none;
+
+				li {
+					width: 48%;
+				}
+			}
+		}
+
+		.shipping_calculator {
+			width: 48%;
+			clear: right;
+			float: right;
+
+			.col2-set {
+				.col-1,
+				.col-2 {
+					width: 47%;
+				}
+			}
+		}
+
+		.cart_totals {
+			float: right;
+			width: 48%;
+
+			table { width: 100%; }
+		}
+	}
+
+	/**
+	 * Cart sidebar
+	 */
+	ul.cart_list,
+	ul.product_list_widget {
+		li {
+			//@include mediaright();
+		}
+	}
+
+	/**
+	 * Forms
+	 */
+	form {
+		.form-row {
+			padding: 0;
+			margin-bottom: $form-gutter;
+
+			label {
+				display: block;
+
+				&.checkbox {
+					display: inline;
+				}
+			}
+
+			select,
+			.input-text {
+				width: 100%;
+			}
+
+			&:last-child { margin-bottom: 0; }
+		}
+
+		.form-row-first,
+		.form-row-last {
+			width: 50%;
+			overflow: visible;
+		}
+		.form-row-first {
+			float: left;
+			padding-right: $form-gutter / 2;
+		}
+		.form-row-last {
+			float: right;
+			padding-left: $form-gutter / 2;
+		}
+
+		.form-row-wide {
+			clear: both;
+		}
+	}
+
+	#payment {
+		.form-row {
+			select {
+				width: auto;
+			}
+		}
+
+		.terms {
+			text-align: right;
+			padding: 0 1em 0;
+		}
+
+		#place_order {
+			float: right;
+		}
+	}
+}
+
+
+// Sidebar pages
+.has-sidebar {
+	.product .summary:first-child,
+	.woocommerce-tabs {
+		width: 100% !important;
+		padding-right: 0 !important;
+	}
+}

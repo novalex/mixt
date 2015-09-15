@@ -109,6 +109,11 @@ jQuery(document).ready( function($) {
 				item.find('.item-type').text('Button');
 				item.find('.field-xfn, .field-mixt-megamenu').hide();
 
+			// Widget Area
+			} else if ( itemType == 'widget' ) {
+				item.find('.item-type').text('Widget Area');
+				item.find('.field-url, .field-link-target, .field-xfn, .field-mixt-megamenu, .field-mixt-icon, .field-mixt-no-label, .field-mixt-disabled').hide();
+
 			// Shopping Cart
 			} else if ( itemType == 'cart' ) {
 				item.find('.item-type').text('Shopping Cart');

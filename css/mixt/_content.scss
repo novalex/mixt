@@ -2,6 +2,7 @@
 // Wrappers
 
 #main-wrap {
+	width: 100%;
 	min-height: 100%;
 	height: auto !important;
 	margin: 0 auto;
@@ -27,20 +28,36 @@
 #content-wrap > .row { border-color: inherit; }
 
 
-// Fullwidth Layout
+// Boxed Layout
+
+.boxed {
+	#main-wrap,
+	#main-nav {
+		padding-left: 0;
+		padding-right: 0;
+
+		@media (min-width: $screen-sm-min) { width: $container-sm; }
+		@media (min-width: $screen-md-min) { width: $container-md; }
+		@media (min-width: $screen-lg-min) { width: $container-lg; }
+		@media (min-width: $screen-md-min + $gutter-lg) and (max-width: $screen-lg-min) { width: $container-md + $gutter-lg; }
+		@media (min-width: $screen-lg-min + $gutter-lg) { width: $container-lg + $gutter-lg; }
+	}
+	#main-wrap { overflow: hidden; }
+
+	&.fixed-nav #main-nav {
+		left: auto;
+		right: auto;
+	}
+}
+
+
+// Fullwidth Content Layout
 
 .fullwidth {
 	#content-wrap,
 	#content-wrap .container { width: 100%; }
 
 	.blog-grid { padding: 0 !important; }
-}
-
-
-// Boxed Layout
-
-.boxed {
-	
 }
 
 
@@ -171,6 +188,16 @@ img[class*="wp-image-"] {
 		}
 	}
 }
+
+@include media('screen', 'venus') {
+	#content-wrap {
+		&.has-sidebar {
+			#content { width: 75%; }
+			.sidebar { width: 25%; }
+		}
+	}
+}
+
 
 // Mobile
 @include media('screen', '<mars') {

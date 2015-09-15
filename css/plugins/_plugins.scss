@@ -1,15 +1,15 @@
 
 // lightSlider
-@import 'lightSlider';
-
-// lightGallery
-@import 'lightGallery';
+@if $lightslider { @import 'lightSlider'; }
 
 // Visual Composer
-@import 'js_composer';
+@if $vcomposer { @import 'js_composer/js_composer'; }
+
+// WooCommerce
+@if $woocommerce { @import 'woocommerce/woocommerce'; }
 
 // Contact Form 7
-@import 'wpcf7';
+@if $wpcf { @import 'wpcf7'; }
 
 
 // MediaElement Responsive Fix

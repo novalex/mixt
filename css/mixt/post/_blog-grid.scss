@@ -7,25 +7,19 @@
 		flex-wrap: wrap;
 		padding-left: 0;
 		padding-right: 0;
-	}
 
-	.blog-post {
-		width: 100%;
-		padding: 0;
-		margin: -1px 0 0 -1px;
-		border-width: 1px;
-		border-style: solid;
-		border-color: inherit;
+		.article {
+			width: 100%;
+			padding: 0;
+			margin: -1px 0 0 -1px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: inherit;
+		}
 	}
 
 	.post-feat {
 		position: relative;
-		
-		&,
-		> a,
-		> img,
-		> a > img,
-		blockquote { min-height: 140px; }
 
 		&.post-link a,
 		&.post-quote blockquote {
@@ -42,5 +36,5 @@
 	&.blog-3-col .posts-container { margin-right: -4px; }
 	&.blog-4-col .posts-container { margin-right: -5px; }
 	&.blog-5-col .posts-container { margin-right: -6px; }
+	&.blog-6-col .posts-container { margin-right: -7px; }
 }
-.fullwidth .blog-grid .posts-container { padding-top: 0; }

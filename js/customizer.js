@@ -1,5 +1,7 @@
 
-// MIXT Live Customizer Integration
+/* ------------------------------------------------ /
+CUSTOMIZER INTEGRATION
+/ ------------------------------------------------ */
 
 ( function( $ ) {
 

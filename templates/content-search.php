@@ -15,13 +15,17 @@ $is_masonry = Mixt_Options::get('layout', 'type') == 'masonry';
 
 	<?php if ( $is_masonry ) { echo '<div class="post-wrapper">'; } ?>
 
-	<header class="page-header">
-		<?php $post_ob->header(); ?>
-	</header>
+	<header class="page-header"><?php
 
-	<div class="entry-body entry-summary">
-		<?php $post_ob->content('excerpt'); ?>
-	</div>
+		$post_ob->header();
+
+	?></header>
+
+	<div class="entry-body entry-summary"><?php
+
+		$post_ob->content('excerpt');
+
+	?></div>
 
 	<?php if ( $is_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
 

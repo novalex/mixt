@@ -9,7 +9,7 @@
 ?>
 
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="mixt">
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
@@ -33,28 +33,32 @@
 	?>
 </head>
 
-<body <?php body_class('mixt no-js'); ?>>
+<?php
 
-	<script type="text/javascript" id="mixt-test-js">
-		document.body.className = document.body.className.replace('no-js','js');
-	</script>
+// Get Options
+$nav_options    = Mixt_Options::get('nav');
+$page_options   = Mixt_Options::get('page');
+$header_options = Mixt_Options::get('header');
+$theme_options  = Mixt_Options::get('themes');
+$layout_options = Mixt_Options::get('layout');
 
+$body_classes = 'theme-' . $theme_options['site'];
+if ( $page_options['layout'] == 'boxed' ) $body_classes .= ' boxed';
+if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
+
+?>
+
+<body <?php body_class($body_classes); ?>>
 	<?php
 
 	do_action( 'before' );
-
-	$nav_options    = Mixt_Options::get('nav');
-	$page_options   = Mixt_Options::get('page');
-	$header_options = Mixt_Options::get('header');
-	$theme_options  = Mixt_Options::get('themes');
-	$layout_options = Mixt_Options::get('layout');
 
 	// Show Page Loader
 	if ( $page_options['page-loader'] ) { mixt_page_loader(); }
 
 	// Main Wrapper Classes
-	$wrapper_classes = 'theme-' . $theme_options['site'];
-	if ( $page_options['fullwidth'] ) $wrapper_classes .= ' fullwidth';
+	$wrapper_classes = '';
+	if ( $page_options['fullwidth'] ) $wrapper_classes .= 'fullwidth';
 
 	// Header Media Wrapper Classes
 	if ( $header_options['enabled'] ) {
@@ -68,6 +72,10 @@
 <div id="main-wrap" class="<?php echo $wrapper_classes; ?>">
 
 	<?php
+
+	// Do not output header if a blank page is being shown
+	if ( $page_options['page-type'] == 'blank' ) return;
+
 	// Show Secondary Navbar
 	if ( $nav_options['second-nav'] ) {
 		mixt_second_nav();

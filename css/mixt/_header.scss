@@ -57,17 +57,7 @@
 		}
 	}
 
-	&.media-slider {
-		> div { z-index: 1; }
-	}
-
-	.media-not-found {
-		position: absolute;
-		top: 50%; left: 0;
-		width: 100%;
-		text-align: center;
-		font-size: $font-size-l;
-	}
+	&.media-slider > div { z-index: 1; }
 
 	.container {
 		height: 100%;
@@ -147,6 +137,13 @@
 
 	&.bg-dark:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
 
+	// No Slider Plugin Message
+	&.no-slider p {
+		width: 100%;
+		text-align: center;
+		font-size: $font-size-l;
+	}
+
 	@include media('screen', '<mars') {
 		.container { padding-bottom: $spacing-sm; }
 		.media-inner {
@@ -170,12 +167,15 @@
 
 	.container { height: auto; }
 
+	$padding: 15px;
+	$spacing: 10px;
+
 	.inner {
 		display: table;
 		width: 100%;
 		height: auto;
 		min-height: 100%;
-		padding: 15px 0;
+		padding: $padding - $spacing 0 $padding;
 		position: relative;
 	}
 
@@ -190,21 +190,32 @@
 			margin: 5px 0 0;
 		}
 	}
-	#breadcrumbs + .page-title { text-align: right; }
-
-	#breadcrumbs {
-		margin: 0;
-		padding: 0 20px 0 0;
-	}
-	.page-title + #breadcrumbs {
-		text-align: right;
-		padding: 0 0 0 20px;
-	}
 
 	.page-title,
 	#breadcrumbs {
-		display: table-cell;
-		vertical-align: middle;
+		margin: 0;
+		padding: 0;
+	}
+
+	.left-content,
+	.right-content {
+		padding-top: $spacing;
+		text-align: center;
+
+		&:empty { display: none; }
+	}
+
+	@include media('screen', '(min-width: 480px)') {
+		.left-content,
+		.right-content {
+			text-align: left;
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.right-content {
+			padding-left: $spacing;
+			text-align: right;
+		}
 	}
 }
 

@@ -1,0 +1,87 @@
+
+// WooCommerce Custom Styling
+
+$wc-spacing: 15px;
+$wc-spacing-s: 10px;
+$wc-spacing-l: 20px;
+
+@import 'layout';
+
+.woocommerce {
+
+	// Common Styling
+	@import 'common';
+
+	// Widgets
+	@import 'widgets';
+
+	// Single Product
+	@import 'single';
+}
+
+.entry-content .woocommerce { border-color: inherit; }
+
+// Cart
+@import 'cart';
+
+// Checkout
+@import 'checkout';
+
+// Shop Page
+#shop-wrapper {
+	border-color: inherit;
+
+	.page-title { display: none; }
+
+	.woocommerce-result-count { float: right; }
+
+	.shop-filters {
+		$spacing: $gutter-lg;
+
+		float: left;
+		padding-bottom: $spacing - 15px;
+
+		@extend %clearfix;
+
+		form {
+			float: left;
+			margin: 0 15px 15px 0;
+		}
+	}
+}
+
+.mixt {
+	// Catalog Styling
+	@import 'catalog';
+
+	// Demo Notice
+	p.demo_store {
+		position: static;
+		font-size: $font-size;
+		padding: 10px;
+		box-shadow: none;
+		z-index: 1;
+	}
+
+	// Buttons
+	a.button,
+	input.button,
+	button.button,
+	#respond input#submit {
+		@extend %button-base;
+		@extend .btn-default;
+	}
+
+	.alert .button,
+	.price_slider_amount .button { @extend .btn-black; }
+
+	// Smallscreen
+	@import 'smallscreen';
+}
+
+a.button.alt,
+button.button.alt,
+input.button.alt,
+input[type="submit"].button,
+#respond input#submit,
+#respond input#submit.alt { @extend .btn-accent; }

@@ -2,26 +2,29 @@
 /** @var $this WPBakeryShortCode_VC_Row */
 $output = $el_class = $bg_image = $bg_color = $bg_image_repeat = $font_color = $padding = $margin_bottom = $css = $full_width = $el_id = $parallax_image = $parallax = '';
 extract( shortcode_atts( array(
-	'el_class' => '',
-	'bg_image' => '',
-	'bg_color' => '',
+	'el_class'        => '',
+	'bg_image'        => '',
+	'bg_color'        => '',
 	'bg_image_repeat' => '',
-	'font_color' => '',
-	'padding' => '',
-	'margin_bottom' => '',
-	'full_width' => false,
-	'parallax' => false,
-	'parallax_image' => false,
-	'css' => '',
-	'el_id' => '',
+	'font_color'      => '',
+	'padding'         => '',
+	'margin_bottom'   => '',
+	'full_width'      => false,
+	'parallax'        => false,
+	'parallax_image'  => false,
+	'css'             => '',
+	'el_id'           => '',
 
 	// MIXT Custom
-	'separator' => '',
-	'separator_color' => '',
-	'separator_icon' => '',
-	'first_row' => false,
+	'theme_color'      => 'auto',
+	'row_padding'      => '',
+	'separator'        => '',
+	'separator_color'  => '',
+	'separator_icon'   => '',
+	'first_row'        => false,
 	'cols_matchheight' => false,
 ), $atts ) );
+
 $parallax_image_id = '';
 $parallax_image_src = '';
 
@@ -33,9 +36,15 @@ $el_class = $this->getExtraClass( $el_class );
 
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'vc_row wpb_row ' . ( $this->settings( 'base' ) === 'vc_row_inner' ? 'vc_inner ' : '' ) . get_row_css_class() . $el_class . vc_shortcode_custom_css_class( $css, ' ' ), $this->settings['base'], $atts );
 
-if ( $separator != '' ) { $css_class .= ' mixt-row-has-separator'; }
-if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) { $css_class .= ' first-row'; }
-if ( filter_var($cols_matchheight, FILTER_VALIDATE_BOOLEAN) === true ) { $css_class .= ' cols-match-height'; }
+if ( $theme_color != 'auto' ) $css_class .= ' theme-color-' . $theme_color;
+if ( $row_padding != '' ) {
+	$row_padding = explode(',', $row_padding);
+	if ( in_array('horizontal', $row_padding) ) $css_class .= ' padding-horizontal';
+	if ( in_array('vertical', $row_padding) ) $css_class .= ' padding-vertical';
+}
+if ( $separator != '' ) $css_class .= ' mixt-row-has-separator';
+if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' first-row';
+if ( filter_var($cols_matchheight, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' cols-match-height';
 
 $style = $this->buildStyle( $bg_image, $bg_color, $bg_image_repeat, $font_color, $padding, $margin_bottom );
 ?>
@@ -54,7 +63,7 @@ $bgSpeed = 2.5;
 <?php
 if ( $parallax ) {
 	wp_deregister_script('vc_jquery_skrollr_js');
-	wp_enqueue_script('mixt-skrollr');
+	mixt_enqueue_plugin('skrollr');
 
 	echo '
             data-vc-parallax="' . $bgSpeed . '"

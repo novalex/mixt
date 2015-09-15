@@ -1,15 +1,29 @@
 
-html,
-body { margin: 0 !important; }
+html {
+	height: 100%;
+}
 
 body {
 	min-width: 320px;
-	line-height: 1.618;
+	min-height: 100%;
+	line-height: $line-height-base;
 	overflow-x: hidden;
 	word-wrap: break-word;
 	font-size: $font-size;
 	font-family: $font-family-base;
+
+	// Media query breakpoint values, for use in JS
+	&:before {
+		display: none;
+		content: 'pluto';
+	}
+	@each $bp-name, $bp-value in $breakpoints {
+		@include media('screen', $bp-name) { &:before { content: '#{$bp-name}'; } }
+	}
 }
+
+html,
+body { margin: 0 !important; }
 
 
 // Lists
@@ -18,6 +32,8 @@ ol, ul {
 	padding-left: 30px;
 
 	li:not(:last-child) { margin-bottom: 10px; }
+
+	&.no-style { @extend %reset-list; }
 }
 
 

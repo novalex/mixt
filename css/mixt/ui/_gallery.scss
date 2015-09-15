@@ -20,7 +20,7 @@
 	.inner {
 		position: absolute;
 		top: 5px; left: 5px;
-		width: 48px; height: 48px;
+		width: 42px; height: 42px;
 		color: #fff;
 		border-radius: $bd-radius;
 		background-color: rgba(0,0,0,0.4);
@@ -28,8 +28,8 @@
 		z-index: 9;
 	}
 	.icon {
-		height: 32px; line-height: 48px;
-		text-align: center; font-size: 24px;
+		height: 32px; line-height: 42px;
+		text-align: center; font-size: 16px;
 	}
 
 	.count {

@@ -1,6 +1,6 @@
 
 /* ------------------------------------------------ /
-MIXT POST FUNCTIONS
+POST FUNCTIONS
 / ------------------------------------------------ */
 
 +function ($) {
@@ -10,6 +10,9 @@ MIXT POST FUNCTIONS
 	/* global mixt_opt, iframeAspect */
 
 	var viewport = $(window);
+
+	// Resize Embedded Videos Proportionally
+	iframeAspect( $('.post iframe') );
 
 	// Post Layout
 	function postsPage() {
@@ -39,16 +42,14 @@ MIXT POST FUNCTIONS
 
 		// Equalize featured media height for related posts and grid blog
 		if ( typeof $.fn.matchHeight === 'function' ) {
-			var matchHeightEl = $('.blog-grid .blog-post .post-feat, .post-related .post-feat');
+			var matchHeightEl = $('.blog-grid .posts-container .post-feat, .post-related .post-feat');
 			matchHeightEl.imagesLoaded( function() {
-				matchHeightEl.addClass('fix-height').matchHeight();
+				matchHeightEl.addClass('fix-height').matchHeight({
+					target: $('.wp-post-image'),
+				});
 			});
 		}
 	}
-
-	
-	// Resize Embedded Videos Proportionally
-	iframeAspect( $('.post iframe') );
 
 
 	// Load Posts & Comments via Ajax

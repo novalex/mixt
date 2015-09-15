@@ -35,7 +35,7 @@ get_header();
 			$icons = mixt_social_profiles(false, array(
 				'type'  => 'sharing',
 				'style' => 'group',
-				'class' => 'post-share btn-group-lg btn-group-justified',
+				'class' => 'post-share btn-group-justified',
 			));
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';

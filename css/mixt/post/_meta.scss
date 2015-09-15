@@ -1,6 +1,4 @@
 
-// Post Meta Styling
-
 .post-meta {
 	padding: 0;
 	font-size: 12px;
@@ -62,18 +60,27 @@
 			line-height: 20px;
 		}
 	}
+
+	.cat a {
+		margin-right: 5px;
+
+		&:after {
+			content: ',';
+			margin-left: 1px;
+		}
+
+		&:last-child {
+			margin-right: 0;
+			&:after { content: ''; }
+		}
+	}
 }
 
-.post-meta .cat a {
-	margin-right: 5px;
+.article {
+	.post-meta { margin-top: $margin-m; }
 
-	&:after {
-		content: ',';
-		margin-left: 1px;
-	}
+	.page-title + .post-meta,
+	&.no-title .page-header .post-meta { margin-top: $margin-s; }
 
-	&:last-child {
-		margin-right: 0;
-		&:after { content: ''; }
-	}
+	&.no-content .post-meta:last-child { margin-bottom: $margin-s; }
 }

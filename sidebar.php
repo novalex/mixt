@@ -14,7 +14,7 @@ if ( Mixt_Options::get('page', 'sidebar') ) {
 
 	</div><?php // Close .main-content-inner ?>
 
-	<div class="sidebar">
+	<div class="sidebar widget-area">
 
 		<div class="sidebar-padder">
 			<?php

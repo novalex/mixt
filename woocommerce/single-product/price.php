@@ -13,6 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
+if ( ! mixt_wc_option('single-thumb') ) mixt_wc_badges();
+
 ?>
 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 

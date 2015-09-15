@@ -20,8 +20,15 @@
 		background-color: $btm-bg;
 	}
 
-	.widget-area div { border-color: #222; }
+	.widget-area {
+		div,
+		.nav { border-color: #222; }
+
+		ul { border-color: inherit; }
+	}
+
 	.widget { margin-bottom: $spacing; }
+
 	.widget-title {
 		margin-top: 0;
 		color: set-color-for-bg($top-bg);
@@ -33,5 +40,16 @@
 		.widget:last-child,
 		.wpb_content_element,
 		.mixt-element { margin-bottom: 0; }
+	}
+}
+
+// Back To Top Button
+#back-to-top {
+	position: fixed;
+	bottom: 15px; right: 15px;
+	opacity: 0.85;
+
+	@include media('screen', '<mercury') {
+		display: none !important;
 	}
 }

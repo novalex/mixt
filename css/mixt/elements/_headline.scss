@@ -13,7 +13,11 @@
 		vertical-align: middle;
 	}
 
-	.heading { white-space: pre; }
+	.heading {
+		white-space: pre;
+
+		p { margin: 0; }
+	}
 
 	.heading,
 	.subheading,

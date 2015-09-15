@@ -45,15 +45,14 @@ $row-grid-sm-gutter: 20px;
 	padding-right: $gutter-lg / 2;
 }
 
+.page-padding,
 .sidebar-padder,
 .blog-grid .posts-container:first-child { padding-top: $gutter-lg; }
 
-#content > .article:last-child { padding-bottom: 0 !important; }
 
 // Page Header Spacing
 
-.article,
-.author .about-the-author {
+.article {
 	margin: $gutter-lg 0 0;
 	padding: 0 0 $row-spacing-lg;
 }
@@ -62,6 +61,10 @@ $row-grid-sm-gutter: 20px;
 
 // Pre-Footer Spacing
 
+#content > .article {
+	&:last-child { padding-bottom: 0 !important; }
+	&:not(:last-child) .entry-body > :last-child { margin-bottom: 0; }
+}
 .posts-container:last-child { padding-bottom: $gutter-lg; }
 
 
@@ -83,6 +86,23 @@ ul.wpb_thumbnails-fluid > li,
 .last_toggle_el_margin,
 .wpb_button,
 .wpb_wrapper .mixt-element { margin-bottom: $row-spacing-lg; }
+
+
+// Spacing Classes
+
+.margin-sep-sm {
+	$margin: 10px;
+	margin-top: -$margin;
+	> * { margin-top: $margin; margin-right: $margin; }
+}
+.padding-horizontal {
+	padding-left: $gutter-lg;
+	padding-right: $gutter-lg;
+}
+.padding-vertical {
+	padding-top: $row-spacing-lg;
+	padding-bottom: $row-spacing-lg;
+}
 
 
 @include media('screen', 'mars') {
@@ -115,13 +135,13 @@ ul.wpb_thumbnails-fluid > li,
 		padding-right: $gutter-sm / 2;
 	}
 
-	.article,
-	.author .about-the-author {
+	.article {
 		margin: $gutter-sm 0 0;
 		padding: 0 0 $row-spacing-sm;
 	}
 	.article .first-row { margin-top: -$gutter-sm; }
 
+	.page-padding,
 	.sidebar-padder,
 	.blog-grid .posts-container:first-child { padding-top: $gutter-sm; }
 
@@ -167,13 +187,13 @@ ul.wpb_thumbnails-fluid > li,
 		.wpb_wrapper .mixt-element,
 		.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child { margin-bottom: $row-grid-sm-gutter; }
 	}
-}
 
-
-// Spacing Classes
-
-.margin-sep-sm {
-	$margin: 10px;
-	margin-top: -$margin;
-	> * { margin-top: $margin; margin-right: $margin; }
+	.padding-horizontal {
+		padding-left: $gutter-sm;
+		padding-right: $gutter-sm;
+	}
+	.padding-vertical {
+		padding-top: $row-spacing-sm;
+		padding-bottom: $row-spacing-sm;
+	}
 }

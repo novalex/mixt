@@ -13,11 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product, $woocommerce_loop;
 
-if ( empty( $product ) || ! $product->exists() ) {
+if ( empty( $product ) || ! mixt_wc_option('single-related') || ! $product->exists() ) {
 	return;
 }
 
-$related = $product->get_related( $posts_per_page );
+$related_nr = mixt_wc_option('single-related-nr', $posts_per_page);
+$related_cols = mixt_wc_option('single-related-cols', $columns);
+
+$related = $product->get_related( $related_nr );
 
 if ( sizeof( $related ) == 0 ) return;
 
@@ -25,7 +28,7 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 	'post_type'            => 'product',
 	'ignore_sticky_posts'  => 1,
 	'no_found_rows'        => 1,
-	'posts_per_page'       => $posts_per_page,
+	'posts_per_page'       => $related_nr,
 	'orderby'              => $orderby,
 	'post__in'             => $related,
 	'post__not_in'         => array( $product->id )
@@ -33,13 +36,13 @@ $args = apply_filters( 'woocommerce_related_products_args', array(
 
 $products = new WP_Query( $args );
 
-$woocommerce_loop['columns'] = $columns;
+$woocommerce_loop['columns'] = $related_cols;
 
 if ( $products->have_posts() ) : ?>
 
-	<div class="related products">
+	<div class="related products columns-<?php echo $related_cols; ?>">
 
-		<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
+		<?php echo do_shortcode('[mixt_headline tag="h2"]' . __( 'Related Products', 'woocommerce' ) . '[/mixt_headline]'); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 

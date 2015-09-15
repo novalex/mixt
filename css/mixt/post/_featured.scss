@@ -24,7 +24,7 @@
 		object-fit: cover;
 	}
 
-	&.post-video {
+	&.post-video:not(.post-image) {
 		background: #000;
 		border: 1px solid transparent;
 	}

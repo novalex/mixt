@@ -8,9 +8,14 @@
 
 get_header();
 
-mixt_about_the_author(false);
+echo '<div class="author-wrap page-padding">';
+	mixt_about_the_author(false);
+echo '</div>';
 
 if ( have_posts() ) {
+
+	// Set display options
+	Mixt_Options::set('post-display', null, array('meta-author' => false));
 
 	echo '<div class="posts-container">';
 

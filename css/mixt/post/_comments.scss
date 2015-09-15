@@ -5,9 +5,8 @@
 	&:focus,
 	li:focus { outline: 0; }
 
-	.comment-list {
-		padding: 0; margin: 0;
-		list-style: none;
+	ol, ul {
+		@extend %reset-list;
 	}
 
 	&,

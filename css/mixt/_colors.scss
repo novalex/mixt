@@ -34,11 +34,10 @@ $red: #D81616;
 
 // =====================================================
 // When adding or removing colors from the maps below,
-// also update the assets array in mixt-core/assets.php
+// also update the assets array in core/assets.php
 // =====================================================
 
 $basic-colors: (
-	'accent': $theme-accent,
 	'white': $white,
 	'grey': $grey,
 	'black': $black,
@@ -49,9 +48,6 @@ $basic-colors: (
 );
 
 $button-colors: (
-	'default': $off-white,
-	'minimal': $theme-bg,
-	'accent': $theme-accent,
 	'white': $white,
 	'grey': $grey,
 	'black': $black,
@@ -130,7 +126,7 @@ $vc-colors: (
 // lumin and contrast-color functions based on https://lnikki.la/articles/sass-better-colour-based-on-brightness/
 
 
-@function set-color-for-bg( $bg, $light: $theme-bg-dark-color, $dark: $theme-color ) {
+@function set-color-for-bg( $bg, $light: #fff, $dark: #333 ) {
 	@if ( lumin($bg) <= 0.5 ) { @return $light; }
 	@else { @return $dark; }
 }
@@ -174,6 +170,52 @@ $vc-colors: (
 // Border
 
 @mixin bd-color-alpha($color, $opacity: 0.9) {
-    border-color: $color;
-    border-color: rgba($color, $opacity);
+	border-color: $color;
+	border-color: rgba($color, $opacity);
+}
+
+
+// COLOR VARIANTS
+
+%basic-color-text-variants {
+	@each $sel, $color in $basic-colors {
+		&.#{$sel} {
+			color: $color;
+		}
+	}
+	@each $theme, $colors in $themes {
+		.theme-#{$theme} &.accent {
+			color: map-get($colors, 'accent');
+		}
+	}
+}
+
+%basic-color-bg-variants {
+	@mixin bg-variants($color) {
+		color: set-color-for-bg($color);
+		border-color: darken($color, 10);
+		background-color: $color;
+		@include text-shadow-for-bg($color);
+	}
+	@each $sel, $color in $basic-colors {
+		&.#{$sel} {
+			@include bg-variants($color);
+		}
+	}
+	@each $theme, $colors in $themes {
+		.theme-#{$theme} &.accent {
+			@include bg-variants(map-get($colors, 'accent'));
+		}
+	}
+}
+
+%basic-color-border-variants {
+	@each $sel, $color in $basic-colors {
+		&.#{$sel} { border-color: $color; }
+	}
+	@each $theme, $colors in $themes {
+		.theme-#{$theme} &.accent {
+			border-color: map-get($colors, 'accent');
+		}
+	}
 }

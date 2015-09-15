@@ -22,6 +22,31 @@ function mixt_vc_extend() {
 
 	// Custom Row Params
 	$row_custom = array(
+		// Row Theme Color
+		array(
+			'type'        => 'dropdown',
+			'heading'     => __( 'Row Color', 'mixt' ),
+			'description' => __( 'Set a theme color for this row', 'mixt' ),
+			'param_name'  => 'theme_color',
+			'std'         => 'auto',
+			'value'       => array(
+				__( 'Auto', 'mixt' )        => 'auto',
+				__( 'Main', 'mixt' )        => 'main',
+				__( 'Alternative', 'mixt' ) => 'alt',
+				__( 'Accent', 'mixt' )      => 'accent',
+			),
+		),
+		// Row Padding
+		array(
+			'type'        => 'checkbox',
+			'heading'     => __( 'Row Padding', 'mixt' ),
+			'description' => __( 'Apply padding to this row', 'mixt' ),
+			'param_name'  => 'row_padding',
+			'value'       => array(
+				__( 'Horizontal', 'mixt' ) => 'horizontal',
+				__( 'Vertical', 'mixt' )   => 'vertical',
+			),
+		),
 		// Separators
 		array(
 			'type'        => 'dropdown',
@@ -72,7 +97,12 @@ function mixt_vc_extend() {
 	vc_remove_element( 'vc_images_carousel' );
 
 	// Set Editor Post Types
-	vc_set_default_editor_post_types( array('page', 'post', 'portfolio') );
+	vc_set_default_editor_post_types( array(
+		'page',
+		'post',
+		'portfolio',
+		'product',
+	) );
 }
 add_action( 'vc_before_init', 'mixt_vc_extend' );
 

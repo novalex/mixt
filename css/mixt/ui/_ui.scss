@@ -14,6 +14,9 @@
 // Hover Effects
 @import 'effects';
 
+// Widgets
+@import 'widgets';
+
 
 // Search Widget
 
@@ -35,20 +38,12 @@
 	li {
 		display: inline-block;
 		text-align: center;
-		@extend .nav-border;
-		border-right-width: 1px;
+
 		a {
 			display: block;
 			padding: 5px 10px;
 			transition: color 0.25s;
-
-			&:hover,
-			&:active {
-				text-decoration: none;
-			}
 		}
-
-		&:first-child { border-left-width: 1px; }
 	}
 }
 
@@ -57,6 +52,7 @@
 
 .social-links {
 	@extend %reset-list;
+	margin-bottom: 0;
 
 	li {
 		display: inline-block;
@@ -100,6 +96,7 @@
 		color: #fff !important;
 		border-color: transparent;
 		text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+		box-shadow: none !important;
 	}
 }
 
@@ -131,7 +128,7 @@
 
 		// Color Variants
 		@each $key, $color in $basic-colors {
-			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.5), true, true);
+			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.25), true, true);
 		}
 	}
 

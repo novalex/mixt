@@ -2,7 +2,9 @@
 // Grid Item Styling
 
 .mixt-grid-item {
-	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	.vc_grid-item-mini {
+		box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	}
 
 	.gitem-title-cont {
 		background-color: $white;
@@ -22,7 +24,8 @@
 
 	.mixt-gitem-hover {
 		position: absolute;
-		top: 0; left: 0; right: 0; bottom: 0;
+		top: 0; left: 0;
+		right: 0; bottom: 0;
 	}
 
 	.gitem-icon {
@@ -39,13 +42,18 @@
 
 		i { font-size: $icon-size; }
 
-		&.btn { opacity: 0.75; }
 		&.plain { color: inherit; }
 	}
 }
 
 .bg-dark .mixt-grid-item {
 	.gitem-title-cont {
-		background-color: $black;
+		color: $black;
+
+		.vc_gitem-col {
+			padding: $post-inner-pad;
+
+			h4 { margin: 5px 0; }
+		}
 	}
 }

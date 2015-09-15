@@ -1,0 +1,24 @@
+
+.woocommerce-cart {
+	table.cart {
+		input { line-height: $line-height-base; }
+
+		.coupon {
+			max-width: 50%;
+
+			.btn { border-left-width: 0; }
+		}
+	}
+
+	.cart-collaterals {
+		.cart_totals {
+			table td,
+			table th {
+				padding: $wc-spacing-s 0;
+				line-height: $line-height-base;
+			}
+		}
+	}
+
+	.checkout-button { width: 100%; }
+}

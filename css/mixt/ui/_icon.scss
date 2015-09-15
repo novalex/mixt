@@ -1,4 +1,6 @@
 
+// Icon Styles
+
 $icon-sizes: (
 	'icon-sm': 16px,
 	'icon-lg': 32px,
@@ -111,10 +113,10 @@ $icon-el-padding: 8px;
 	.icon-cont:hover &.anim-spin i { animation: spin 1.8s linear infinite; }
 
 	// Color Variants
-	@each $sel, $color in $basic-colors {
+	@mixin icon-variant($sel, $color) {
 		$text: set-color-for-bg($color);
 		$border: darken($color, 10);
-		&.#{$sel}.icon-solid {
+		#{$sel} {
 			color: $text;
 			border-color: $border;
 			background-color: $color;
@@ -129,7 +131,15 @@ $icon-el-padding: 8px;
 			}
 		}
 	}
-
+	// Basic Colors
+	@each $sel, $color in $basic-colors {
+		@include icon-variant('&.#{$sel}.icon-solid', $color);
+	}
+	// Accent Colors
+	@each $theme, $colors in $themes {
+		@include icon-variant('.theme-#{$theme} &.accent', map-get($colors, 'accent'));
+	}
+	// Outline Colors
 	&.icon-outline {
 		@extend %basic-color-border-variants;
 	}

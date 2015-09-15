@@ -12,22 +12,16 @@ $post_ob = new Mixt_Post('single');
 
 <article id="post-<?php the_ID() ?>" <?php post_class( $post_ob->classes() ); ?>>
 
-	<header class="page-header">
+	<header class="page-header"><?php
 
-		<?php $post_ob->header(); ?>
+		$post_ob->header();
 
-	</header>
+	?></header>
 
-	<div class="entry-body entry-content">
+	<div class="entry-body entry-content"><?php
 
-		<?php $post_ob->content(); ?>
+		$post_ob->content();
 
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'mixt' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div>
+	?></div>
 
 </article>

@@ -23,7 +23,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 		
 		public function nav_menu_link() {
 
-			global $mixt_opt; // todo: change to asset global ($mixt_assets?)
+			global $mixt_opt;
 
 			// Define Custom Menu Item Icons
 			$cart_icon   = 'fa fa-shopping-cart';
@@ -46,24 +46,10 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 
 				<div id="tabs-panel-mixt-elems" class="tabs-panel tabs-panel-active">
 					<ul id="mixt-elems-checklist" class="categorychecklist form-no-clear">
-						<?php // AJAX WooCommerce Cart
-							if ( class_exists( 'WooCommerce' ) ) { ?>
-							<li>
-								<label class="menu-item-title">
-									<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php printf( __('Cart', 'mixt') ); ?>
-								</label>
-								<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
-								<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Cart">
-								<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
-								<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="cart woo-cart">
-								<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="cart">
-								<input type="hidden" class="menu-item-mixt-icon" name="menu-item[-1][menu-item-mixt-icon]" value="<?php echo $cart_icon ?>">
-							</li>
-						<?php } ?>
 						<?php // Divider ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php printf( __('Divider', 'mixt') ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Divider', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Divider">
@@ -74,7 +60,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Search Form Element ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php printf( __('Search Form', 'mixt') ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Search Form', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Search">
@@ -86,7 +72,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Button ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php printf( __('Button', 'mixt') ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Button', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Button">
@@ -94,6 +80,31 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="btn">
 							<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="button">
 						</li>
+						<?php // Widget Area ?>
+						<li>
+							<label class="menu-item-title">
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Widget Area', 'mixt' ); ?>
+							</label>
+							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
+							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Widget Area">
+							<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
+							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="widget-area">
+							<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="widget">
+						</li>
+						<?php // WooCommerce Cart
+							if ( class_exists( 'WooCommerce' ) ) { ?>
+							<li>
+								<label class="menu-item-title">
+									<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Cart', 'mixt' ); ?>
+								</label>
+								<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
+								<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Cart">
+								<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
+								<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="cart woo-cart">
+								<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="cart">
+								<input type="hidden" class="menu-item-mixt-icon" name="menu-item[-1][menu-item-mixt-icon]" value="<?php echo $cart_icon ?>">
+							</li>
+						<?php } ?>
 					</ul>
 				</div>
 

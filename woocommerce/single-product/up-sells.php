@@ -15,7 +15,7 @@ global $product, $woocommerce_loop;
 
 $upsells = $product->get_upsells();
 
-if ( sizeof( $upsells ) == 0 ) {
+if ( sizeof( $upsells ) == 0 || ! mixt_wc_option('upsells', true) ) {
 	return;
 }
 
@@ -34,13 +34,15 @@ $args = array(
 
 $products = new WP_Query( $args );
 
-$woocommerce_loop['columns'] = $columns;
+$upsell_cols = mixt_wc_option('upsell-cols', 3);
+
+$woocommerce_loop['columns'] = $upsell_cols;
 
 if ( $products->have_posts() ) : ?>
 
-	<div class="upsells products">
+	<div class="upsells products columns-<?php echo $upsell_cols; ?>">
 
-		<h2><?php _e( 'You may also like&hellip;', 'woocommerce' ) ?></h2>
+		<?php echo do_shortcode('[mixt_headline tag="h2"]' . __( 'You may also like', 'mixt' ) . '[/mixt_headline]'); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 
