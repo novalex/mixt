@@ -120,6 +120,11 @@
 		margin-top: $margin-l;
 	}
 
+	#breadcrumbs {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
 	.header-scroll {
 		$size: 32px;
 		position: absolute;

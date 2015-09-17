@@ -2562,12 +2562,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'type'  => 'color',
 									'label' => __( 'Accent', 'mixt' ),
 								),
-
-								// Link Color
-								'link' => array(
-									'type'  => 'color',
-									'label' => __( 'Link Color', 'mixt' ),
-								),
 							),
 							'default' => $site_default_themes,
 						),
@@ -2658,7 +2652,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								// RGBA Check
 								'rgba' => array(
 									'type'       => 'checkbox',
-									'label'      => __( 'Enable RGBA', 'mixt' ),
+									'label'      => __( 'Enable Opacity', 'mixt' ),
 									'wrap_class' => 'rgba-field',
 								),
 							),

@@ -7,9 +7,16 @@
 	}
 
 	.gitem-title-cont {
+		color: $black;
 		background-color: $white;
 
 		.vc_custom_heading { margin: 0; }
+
+		.vc_gitem-col {
+			padding: $post-inner-pad;
+
+			h4 { margin: 5px 0; }
+		}
 	}
 
 	.vc_gitem-zone-b .vc_gitem_row {
@@ -43,17 +50,5 @@
 		i { font-size: $icon-size; }
 
 		&.plain { color: inherit; }
-	}
-}
-
-.bg-dark .mixt-grid-item {
-	.gitem-title-cont {
-		color: $black;
-
-		.vc_gitem-col {
-			padding: $post-inner-pad;
-
-			h4 { margin: 5px 0; }
-		}
 	}
 }

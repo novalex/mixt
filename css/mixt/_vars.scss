@@ -1,24 +1,25 @@
 
 // GLOBAL VARIABLES
 
-$img-path: '../assets/img';
+$img-path:  '../assets/img';
 $font-path: '../assets/fonts';
 
 
 // PLUGIN CONFIG
 
-$portfolio: true;
+$portfolio:    true;
 $lightgallery: true;
-$lightslider: true;
-$vcomposer: true;
-$woocommerce: true;
-$wpcf: false;
+$lightslider:  true;
+$vcomposer:    true;
+$woocommerce:  true;
+$select2:      $woocommerce;
+$wpcf:         false;
 
 
 // MISCELLANEOUS
 
 $bd-radius-s: 1px;
-$bd-radius: 2px;
+$bd-radius:   2px;
 $bd-radius-l: 3px;
 
 $rounded-radius: $bd-radius-l;
@@ -30,12 +31,12 @@ $font-family-base: 'Roboto', 'Verdana', sans-serif;
 
 $line-height-base: 1.618;
 
-$font-size-xs: 11px;
-$font-size-s: 12px;
-$font-size: 13px;
-$font-size-m: 14px;
-$font-size-l: 16px;
-$font-size-xl: 20px;
+$font-size-xs:  11px;
+$font-size-s:   12px;
+$font-size:     13px;
+$font-size-m:   14px;
+$font-size-l:   16px;
+$font-size-xl:  20px;
 $font-size-xxl: 26px;
 
 $font-size-base: $font-size;
@@ -50,19 +51,19 @@ $font-size-h6: 10px;
 
 // SPACING, MARGINS & PADDINGS
 
-$main-gutter: 40px;
+$main-gutter:    40px;
 $main-gutter-sm: 30px;
 
 $form-gutter: 15px;
 
 $margin-xs: 5px;
-$margin-s: 10px;
-$margin-m: 20px;
-$margin-l: 30px;
+$margin-s:  10px;
+$margin-m:  20px;
+$margin-l:  30px;
 
 $padding-xs: 5px;
-$padding-s: 10px;
-$padding-m: 20px;
-$padding-l: 30px;
+$padding-s:  10px;
+$padding-m:  20px;
+$padding-l:  30px;
 
 $post-inner-pad: 15px;

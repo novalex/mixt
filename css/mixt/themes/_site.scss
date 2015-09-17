@@ -3,7 +3,6 @@
 
 @mixin site-theme($name, $theme) {
 	$accent: map-get($theme, 'accent');
-	$bg-dark-accent: map-get($theme, 'bg-dark-accent');
 
 	$bg: map-get($theme, 'bg');
 	$bg-hover: map-get($theme, 'bg-hover');
@@ -15,8 +14,8 @@
 
 	$border: map-get($theme, 'border');
 	$border-alpha: map-get($theme, 'border-alpha');
-	$bg-dark-border: map-get($theme, 'bg-dark-border');
-	$bg-dark-border-alpha: map-get($theme, 'bg-dark-border-alpha');
+	$border-inv: map-get($theme, 'border-inv');
+	$border-inv-alpha: map-get($theme, 'border-inv-alpha');
 
 	@if ( lightness(map-get($theme, 'color')) > lightness(map-get($theme, 'color-inv')) ) {
 		$bg-light-color: map-get($theme, 'color-inv');
@@ -30,22 +29,10 @@
 		$bg-dark-color-fade: map-get($theme, 'color-inv-fade');
 	}
 
-	@if ( map-has-key($theme, 'bg-alt') ) {
-		$bg-alt: map-get($theme, 'bg-alt');
-		$color-alt: contrast-color($bg-alt, $color, $color-inv);
-	} @else {
-		$bg-alt: darken($bg, 3);
-		$color-alt: $color;
-	}
-	@if ( map-has-key($theme, 'color-alt') ) {
-		$color-alt: map-get($theme, 'color-alt');
-	}
 	@if ( lumin($bg) > 0.5 ) {
-		$site-border: $border;
-		$site-border-alpha: $border-alpha;
+		$theme-dark: false;
 	} @else {
-		$site-border: $bg-dark-border;
-		$site-border-alpha: $bg-dark-border-alpha;
+		$theme-dark: true;
 	}
 
 	.theme-#{$name} {
@@ -55,6 +42,8 @@
 		}
 
 		// COLOR HELPER CLASSES
+		
+		.theme-bg { background-color: $bg; }
 
 		.theme-color { color: $color; }
 		.theme-color-fade { color: $color-fade; }
@@ -72,27 +61,47 @@
 			background-color: $accent;
 		}
 
-		.theme-bd { border-color: $site-border; }
+		.theme-bd { border-color: $border; }
 		.theme-accent-bd { border-color: $accent; }
 
 		.color-fade { opacity: 0.8; }
 
 
-		// THEME PRESET COLORS
+		// THEME SECTION COLORS
 		
-		.theme-color-main {
+		.theme-section-main {
 			color: $color;
 			background-color: $bg;
 			border-color: $border;
 		}
-		.theme-color-alt {
+
+		.theme-section-alt {
+			@if ( map-has-key($theme, 'bg-alt') ) {
+				$bg-alt: map-get($theme, 'bg-alt');
+				$color-alt: contrast-color($bg-alt, $color, $color-inv);
+			} @else {
+				$bg-alt: darken($bg, 3);
+				$color-alt: $color;
+			}
+			$color-alt: theme-color($theme, 'color-alt', $color-alt);
+			$border-alt: theme-color($theme, 'border-alt', darken($bg-alt, 5));
+
 			color: $color-alt;
+			border-color: $border-alt;
 			background-color: $bg-alt;
-			border-color: darken($bg-alt, 10);
 		}
-		.theme-color-accent {
+
+		.theme-section-accent {
 			@extend .accent-bg;
 			border-color: darken($accent, 10);
+		}
+
+		.theme-section-inv {
+			$bg-inv: theme-color($theme, 'bg-inv', lighten(invert($bg), 10));
+
+			color: $color-inv;
+			border-color: $border-inv;
+			background-color: $bg-inv;
 		}
 
 
@@ -106,12 +115,16 @@
 		.hover-accent-color:hover { color: $accent; }
 
 		&,
+		body,
 		#content-wrap { color: $color; }
 
 		.head-media {
-			.container,
-			#breadcrumbs > li + li:before { color: $color; }
-
+			&.bg-light {
+				.container,
+				.media-inner a,
+				.header-scroll,
+				#breadcrumbs > li + li:before { color: $bg-light-color; }
+			}
 			&.bg-dark {
 				.container,
 				.media-inner a,
@@ -141,8 +154,10 @@
 		&,
 		#content-wrap,
 		.sidebar ul {
-			border-color: $site-border;
+			border-color: $border;
 		}
+
+		.comment-list li.bypostauthor { border-left-color: $accent; }
 
 
 		// BACKGROUND COLORS
@@ -154,6 +169,33 @@
 			background-color: $accent;
 		}
 
+		.article .post-info .post-date { background-color: darken($bg, 5); }
+
+
+		// INPUTS
+		
+		$input-bg: darken($bg, 3);
+
+		%theme-input-color {
+			color: $color;
+			border-color: $border;
+			background-color: $input-bg;
+
+			@include placeholder($color-fade);
+
+			&:focus {
+				border-color: lighten($border, 2);
+				background-color: lighten($bg, 2);
+			}
+		}
+
+		@if $theme-dark { select { @extend %select-arrow-light; } }
+
+		@if $select2 {
+			.mixt & { @include select2-theme-color($input-bg, $color, $border); }
+			@if $theme-dark { .mixt & .select2-container .select2-arrow b:after { @extend %select-arrow-light; } }
+		}
+
 
 		// OTHER COLORS
 		
@@ -162,11 +204,6 @@
 			background: fade-out($accent, 0.2);
 			color: set-color-for-bg($accent, #fff, #000);
 			text-shadow: none;
-		}
-
-		#location-bar {
-			border-color: $site-border;
-			background-color: darken($bg, 5);
 		}
 
 		.sidebar .child-page-nav {
@@ -188,15 +225,29 @@
 			cite { color: $color-fade; }
 		}
 
+
+		// BOOTSTRAP ELEMENTS
+
 		.alert-default {
 			@include alert-variant(darken($bg, 3), $border, $color);
-
 			a { color: $accent; }
 		}
 
-		.well {
-			background-color: darken($bg, 3);
+		.panel {
 			border-color: $border;
+			background-color: lighten($bg, 3);
+		}
+
+		.well {
+			border-color: $border;
+			background-color: darken($bg, 3);
+		}
+
+		.table {
+			caption { color: $color-fade; }
+			&.table-bordered,
+			th, td { border-color: $border !important; }
+			&.table-striped > tbody > tr:nth-of-type(odd) { background-color: darken($bg, 3); }
 		}
 
 
@@ -216,7 +267,7 @@
 		
 		.mixt-stat.type-box,
 		.mixt-headline span.color-auto:after,
-		.mixt-timeline .timeline-block:before { border-color: $site-border; }
+		.mixt-timeline .timeline-block:before { border-color: $border; }
 
 		.mixt-row-separator.no-fill svg { fill: $bg; }
 
@@ -257,6 +308,16 @@
 				}
 			}
 			.vc_separator.theme-bd .vc_sep_holder .vc_sep_line { border-color: $border; }
+			.mixt-grid-item .gitem-title-cont {
+				color: $color;
+				background-color: lighten($bg, 5);
+			}
+			.vc_tta:not(.vc_tta-o-no-fill) {
+				&.vc_tta-style-classic,
+				&.vc_tta-style-modern {
+					.vc_tta-panel-body { color: $bg-light-color; }
+				}
+			}
 		}
 
 		// WooCommerce
@@ -275,7 +336,13 @@
 				.badge-cont .badge.sale-badge { background-color: $accent; }
 
 				.woocommerce-tabs {
-					ul.tabs li.active { border-bottom-color: $bg !important; }
+					ul.tabs li {
+						a { color: $color-fade !important; }
+						&.active {
+							border-bottom-color: $bg !important;
+							a { color: $color !important; }
+						}
+					}
 					ul.tabs li.active,
 					.wc-tab {
 						color: $color !important;
@@ -283,9 +350,26 @@
 					}
 				}
 
+				#reviews #comments ol.commentlist li .meta { color: $color-fade; }
+
+				.cart-collaterals .cart_totals tr {
+					td, th { border-color: $border; }
+				}
+
 				p.demo_store {
 					color: set-color-for-bg($accent);
 					background-color: $accent;
+				}
+			}
+
+			form .form-row {
+				&.woocommerce-validated,
+				&.woocommerce-invalid {
+					.select2-choice,
+					input.input-text,
+					select {
+						border-color: $border;
+					}
 				}
 			}
 		}

@@ -22,6 +22,8 @@
 
 	.entry-body {
 		&:first-child { margin-top: 0; }
+
+		p:last-child { margin-bottom: 0; }
 	}
 
 	embed, iframe, object { width: 100%; }
@@ -55,13 +57,7 @@
 			i { font-size: 16px; line-height: 1.6; }
 		}
 
-		.post-date {
-			background-color: $off-white;
-
-			strong {
-				margin-right: 6px;
-			}
-		}
+		.post-date strong { margin-right: 6px; }
 	}
 
 	&.no-title {
@@ -170,16 +166,6 @@
 	.gallery-caption {}
 }
 
-// POST SLIDER GALLERY
-
-.gallery-slider { margin: 0; }
-
-
-// TODO
-
-.sticky {}
-.bypostauthor {}
-
 
 // POST EXTRA ELEMENTS
 
@@ -216,7 +202,8 @@
 
 // MISCELLANEOUS
 
-// Password Form
+.gallery-slider { margin: 0; }
+
 .post-password-form {
 	input[type="password"] {
 		@extend %input-base;

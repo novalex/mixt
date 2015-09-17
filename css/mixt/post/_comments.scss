@@ -16,6 +16,13 @@
 	.comment-cont,
 	.comment-nav { border-color: inherit; }
 
+	.comment-list .bypostauthor {
+		border-left-width: 2px;
+		border-left-style: solid;
+		
+		article { padding-left: $padding-m; }
+	}
+
 	.no-comments { font-size: 15px; }
 }
 
@@ -33,6 +40,8 @@
 			}
 
 			#respond { overflow: auto; }
+
+			&.bypostauthor { margin-left: -1px; }
 		}
 	}
 

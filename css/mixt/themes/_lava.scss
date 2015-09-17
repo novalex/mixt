@@ -4,7 +4,6 @@
 $theme-lava: (
 	'lava': (
 		'accent': #dd3e3e,
-		'bg-dark-accent': #dd3e3e,
 
 		'bg': #fff,
 		'bg-hover': darken(#fff, 5),
@@ -16,8 +15,8 @@ $theme-lava: (
 
 		'border': #ddd,
 		'border-alpha': rgba(0,0,0,0.15),
-		'bg-dark-border': #333,
-		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+		'border-inv': #333,
+		'border-inv-alpha': rgba(0,0,0,0.4),
 
 		'menu-bg': #fbfbfb,
 		'menu-expand': rgba(0,0,0,0.05),
@@ -31,7 +30,6 @@ $theme-lava: (
 
 	'dark-lava': (
 		'accent': #dd3e3e,
-		'bg-dark-accent': #dd3e3e,
 
 		'bg': #444,
 		'bg-hover': #555,
@@ -41,10 +39,10 @@ $theme-lava: (
 		'color-inv': #333,
 		'color-inv-fade': #777,
 
-		'border': #ddd,
-		'border-alpha': rgba(0,0,0,0.15),
-		'bg-dark-border': #333,
-		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+		'border': #333,
+		'border-alpha': rgba(0,0,0,0.4),
+		'border-inv': #ddd,
+		'border-inv-alpha': rgba(0,0,0,0.15),
 
 		'menu-bg': #555,
 		'menu-expand': rgba(0,0,0,0.05),

@@ -134,6 +134,10 @@ class Mixt_Themes extends Mixt_DCSS {
 		$theme_id = $this->active_themes['site'];
 		$theme = $this->site_themes[$theme_id];
 		$this->site_theme = $theme;
+
+		// Do not output theme if it's one of the defaults or if themes are disabled
+		if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes['site']) ) return;
+
 		$defaults = $this->default_themes['site'][MIXT_THEME];
 
 		$site_bg = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
@@ -152,43 +156,40 @@ class Mixt_Themes extends Mixt_DCSS {
 		$site_accent_ob = new Color($site_accent);
 
 		$site_link_color = ! empty($theme['link']) ? $theme['link'] : $site_accent;
-
-		if ( $this->themes_enabled && $theme_id != MIXT_THEME ) {
 			
-			// Background Color
-			echo "body, #main-wrap { background-color: $site_bg; }";
+		// Background Color
+		echo "body, #main-wrap { background-color: $site_bg; }\n";
 
-			// Text Color
-			echo "body, #content-wrap { color: $site_text; }";
+		// Text Color
+		echo "body, #content-wrap { color: $site_text; }\n";
 
-			// Text Color Fade
-			echo '.post-meta a,' .
-				 ".post-meta > span { color: $site_text_fade; }\n";
+		// Text Color Fade
+		echo '.post-meta a,' .
+			 ".post-meta > span { color: $site_text_fade; }\n";
 
-			// Border Color
-			echo "#content-wrap { border-color: $site_border; }\n";
+		// Border Color
+		echo "#content-wrap { border-color: $site_border; }\n";
 
-			// Accent Text Color
-			echo ".accent-color," .
-				 "#breadcrumbs a:hover { color: $site_accent; }\n";
+		// Accent Text Color
+		echo ".accent-color," .
+			 "#breadcrumbs a:hover { color: $site_accent; }\n";
 
-			// Accent Background Color
-			echo '.accent-bg,' .
-				 '.accent-bg:hover,' .
-				 '.tag-list a:hover,' .
-				 '.tagcloud a:hover,' .
-				 ".hover-accent-bg:hover { background-color: $site_accent; color: " . $this->set_color_for_bg($site_accent, array($site_text, $site_inv_text)) . "; }\n";
+		// Accent Background Color
+		echo '.accent-bg,' .
+			 '.accent-bg:hover,' .
+			 '.tag-list a:hover,' .
+			 '.tagcloud a:hover,' .
+			 ".hover-accent-bg:hover { background-color: $site_accent; color: " . $this->set_color_for_bg($site_accent, array($site_text, $site_inv_text)) . "; }\n";
 
-			// Accent Border Color
-			echo "blockquote { border-left-color: $site_accent !important; }\n";
+		// Accent Border Color
+		echo "blockquote { border-left-color: $site_accent !important; }\n";
 
-			// Link Color
-			echo "a," .
-				 ".post-meta a:hover { color: $site_link_color; }\n";
+		// Link Color
+		echo "a," .
+			 ".post-meta a:hover { color: $site_link_color; }\n";
 
-			// Buttons
-			echo $this->button_color(array('primary', 'accent'), $site_accent);
-		}
+		// Buttons
+		echo $this->button_color(array('primary', 'accent'), $site_accent);
 	}
 
 	/**
@@ -207,197 +208,197 @@ class Mixt_Themes extends Mixt_DCSS {
 		$defaults = $this->default_themes['nav'][MIXT_THEME];
 
 		foreach ( $nav_themes as $theme_id ) {
-
 			if ( isset($this->nav_themes[$theme_id]) ) {
 				$theme = $this->nav_themes[$theme_id];
 			} else {
 				$theme = $this->nav_themes[key($this->nav_themes)];
 			}
 
-			$nav_bg      = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
-			$nav_bg_ob   = new Color($nav_bg);
-			$nav_bg_rgb  = implode(',', $nav_bg_ob->getRgb());
+			$nav_bg     = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
+			$nav_bg_ob  = new Color($nav_bg);
+			$nav_bg_rgb = implode(',', $nav_bg_ob->getRgb());
 			echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$options['nav-top-opacity']}); }\n";
 			echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$options['nav-opacity']}); }\n";
 
-			if ( $this->themes_enabled && $theme_id != MIXT_THEME ) { // && ! in_array($theme_id, $this->default_themes['names']) ) {
-				$navbar       = '.navbar.theme-' . $theme_id;
-				$navbar_dark  = $navbar . '.bg-dark';
-				$main_navbar  = $navbar . '.navbar-mixt';
+			// Do not output theme if it's one of the defaults or if themes are disabled
+			if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes['nav']) ) return;
 
-				// Get Theme Colors
+			$navbar       = '.navbar.theme-' . $theme_id;
+			$navbar_dark  = $navbar . '.bg-dark';
+			$main_navbar  = $navbar . '.navbar-mixt';
 
-				$nav_border    = ! empty($theme['border']) ? $theme['border'] : '#'.$nav_bg_ob->darken(10);
-				$nav_border_ob = new Color($nav_border);
+			// Get Theme Colors
 
-				$nav_text     = ! empty($theme['text']) ? $theme['text'] : $site_text;
-				$nav_inv_text = ! empty($theme['inv-text']) ? $theme['inv-text'] : $site_inv_text;
+			$nav_border    = ! empty($theme['border']) ? $theme['border'] : '#'.$nav_bg_ob->darken(10);
+			$nav_border_ob = new Color($nav_border);
 
-				$nav_accent     = ! empty($theme['accent']) ? $theme['accent'] : $site_accent;
-				$nav_inv_accent = ! empty($theme['inv-accent']) ? $theme['inv-accent'] : $nav_accent;
+			$nav_text     = ! empty($theme['text']) ? $theme['text'] : $site_text;
+			$nav_inv_text = ! empty($theme['inv-text']) ? $theme['inv-text'] : $site_inv_text;
 
-				$nav_menu_bg    = ! empty($theme['menu-bg']) ? $theme['menu-bg'] : $nav_bg;
-				$nav_menu_bg_ob = new Color($nav_menu_bg);
+			$nav_accent     = ! empty($theme['accent']) ? $theme['accent'] : $site_accent;
+			$nav_inv_accent = ! empty($theme['inv-accent']) ? $theme['inv-accent'] : $nav_accent;
 
-				$nav_menu_border    = ! empty($theme['menu-border']) ? $theme['menu-border'] : '#'.$nav_menu_bg_ob->darken(20);
-				$nav_menu_border_ob = new Color($nav_menu_border);
+			$nav_menu_bg    = ! empty($theme['menu-bg']) ? $theme['menu-bg'] : $nav_bg;
+			$nav_menu_bg_ob = new Color($nav_menu_bg);
 
-				// Set Effects & Text Colors According To The Background Color
+			$nav_menu_border    = ! empty($theme['menu-border']) ? $theme['menu-border'] : '#'.$nav_menu_bg_ob->darken(20);
+			$nav_menu_border_ob = new Color($nav_menu_border);
 
-				if ( $nav_bg_ob->isLight() ) {
-					$nav_bg_light_text = $nav_text;
-					$nav_bg_dark_text  = $nav_inv_text;
+			// Set Effects & Text Colors According To The Background Color
 
-					$nav_bg_light_accent = $nav_accent;
-					$nav_bg_dark_accent  = $nav_inv_accent;
-				} else {
-					$nav_bg_light_text = $nav_inv_text;
-					$nav_bg_dark_text  = $nav_text;
+			if ( $nav_bg_ob->isLight() ) {
+				$nav_bg_light_text = $nav_text;
+				$nav_bg_dark_text  = $nav_inv_text;
 
-					$nav_bg_light_accent = $nav_inv_accent;
-					$nav_bg_dark_accent  = $nav_accent;
-				}
+				$nav_bg_light_accent = $nav_accent;
+				$nav_bg_dark_accent  = $nav_inv_accent;
+			} else {
+				$nav_bg_light_text = $nav_inv_text;
+				$nav_bg_dark_text  = $nav_text;
 
-				// Make RGBA Colors If Enabled
-
-				$nav_border_rgba = $nav_menu_bg_rgba = $nav_menu_border_rgba = '';
-
-				$theme_rgba = isset($theme['rgba']) ? $theme['rgba'] : 0;
-
-				if ( $theme_rgba ) {
-					$nav_border_rgb  = implode(',', $nav_border_ob->getRgb());
-					$nav_border_rgba = "border-color: rgba($nav_border_rgb, 0.8)";
-
-					$nav_menu_bg_rgb  = implode(',', $nav_menu_bg_ob->getRgb());
-					$nav_menu_bg_rgba = "background-color: rgba($nav_menu_bg_rgb, 0.95);";
-
-					$nav_menu_border_rgb  = implode(',', $nav_menu_border_ob->getRgb());
-					$nav_menu_border_rgba = "border-color: rgba($nav_menu_border_rgb, 0.8)";
-				}
-
-
-				// BG Color
-
-				echo "$navbar { background-color: $nav_bg; }\n";
-
-				// Text Color
-
-				echo "$navbar .text-cont," .
-					 "$navbar .text-cont a:hover," .
-					 "$navbar .text-cont a.no-color," .
-					 "$navbar .nav > li > a { color: $nav_bg_light_text; }\n";
-
-				echo "$navbar_dark .text-cont," .
-					 "$navbar_dark .text-cont a:hover," .
-					 "$navbar_dark .text-cont a.no-color," .
-					 "$navbar_dark .nav > li > a { color: $nav_bg_dark_text; }\n";
-
-				// Hover & Active Text Color
-
-				echo "$navbar .text-cont a," .
-					 "$navbar .nav > li:hover > a," .
-					 "$navbar .nav > li.hover > a," .
-					 "$navbar .nav > li > a:hover," .
-					 "$navbar .nav > li.active > a { color: $nav_bg_light_accent; } \n";
-
-				echo "$navbar .nav > .active > a:before { background-color: $nav_bg_light_accent; }\n";
-
-				if ( $nav_bg_dark_accent !== $nav_bg_light_accent ) {
-					echo "$navbar_dark .text-cont a," .
-						 "$navbar_dark .nav > li:hover > a," .
-						 "$navbar_dark .nav > li.hover > a," .
-						 "$navbar_dark .nav > li > a:hover," .
-						 "$navbar_dark .nav > li.active > a { color: $nav_bg_dark_accent; } \n";
-
-					echo "$navbar_dark .nav > .active > a:before { background-color: $nav_bg_dark_accent; }\n";
-				}
-
-				// Border Color
-
-				echo "$navbar," .
-					 "$navbar .nav > li," .
-					 "$navbar .nav > li > a," .
-					 "$navbar .navbar-toggle { border-color: $nav_border; $nav_border_rgba }\n";
-
-				// Menus
-
-				if ( $nav_menu_bg_ob->isLight() ) {
-					$nav_menu_text   = $nav_bg_light_text;
-					$nav_menu_accent = $nav_bg_light_accent;
-					$nav_menu_hover  = '#'.$nav_menu_bg_ob->darken(3);
-					$nav_menu_expand = 'rgba(0,0,0,0.03)';
-				} else {
-					$nav_menu_text   = $nav_bg_dark_text;
-					$nav_menu_accent = $nav_bg_dark_accent;
-					$nav_menu_hover  = '#'.$nav_menu_bg_ob->lighten(5);
-					$nav_menu_expand = 'rgba(255,255,255,0.05)';
-				}
-
-				echo "$navbar .sub-menu { background-color: $nav_menu_bg; $nav_menu_bg_rgba }\n";
-
-				echo "$navbar .sub-menu li > a," .
-					 "$navbar .sub-menu input," .
-					 "$navbar .search-form button { color: $nav_menu_text; }\n";
-
-				echo "$navbar .sub-menu ::-webkit-input-placeholder { color: $nav_menu_text; }\n";
-				echo "$navbar .sub-menu ::-moz-placeholder { color: $nav_menu_text; }\n";
-
-				echo "$navbar .sub-menu li.hover > a," .
-					 "$navbar .sub-menu li > a:hover," .
-					 "$navbar .nav-search .btn { background-color: $nav_menu_hover; }\n";
-
-				echo "$navbar .sub-menu li.hover > a," .
-					 "$navbar .sub-menu li > a:hover," .
-					 "$navbar .sub-menu .active > a," .
-					 "$navbar .sub-menu .active > a:hover { color: $nav_menu_accent; }\n";
-
-				echo "$navbar .sub-menu," .
-					 "$navbar .sub-menu > li," .
-					 "$navbar .sub-menu > li > a," .
-					 "$navbar .nav-search button { border-color: $nav_menu_border; $nav_menu_border_rgba }\n";
-
-				echo "$navbar .mega-menu-column > a { background-color: $nav_menu_hover; }\n";
-
-				// Divider
-
-				echo "$navbar li.divider { background-color: $nav_bg_light_text; }\n";
-				echo "$navbar_dark li.divider { background-color: $nav_bg_dark_text; }\n";
-
-				// Navbar Toggle
-
-				echo "$navbar .navbar-toggle .icon-bar { background-color: $nav_bg_light_text; }\n";
-				echo "$navbar_dark .navbar-toggle .icon-bar { background-color: $nav_bg_dark_text; }\n";
-
-				// Mobile Styling
-
-				echo "@media ( max-width: {$this->media_bp('mars')} ) {\n";
-
-					echo "$main_navbar .navbar-inner { background-color: $nav_menu_bg; $nav_menu_bg_rgba }\n";
-
-					echo "$main_navbar .navbar-inner .text-cont," .
-						 "$main_navbar .navbar-inner .text-cont a:hover," .
-						 "$main_navbar .navbar-inner .text-cont a.no-color," .
-						 "$main_navbar .nav > li > a { color: $nav_menu_text; }\n";
-
-					echo "$main_navbar .nav > li:hover > a," .
-						 "$main_navbar .nav > li.hover > a," .
-						 "$main_navbar .nav > li > a:hover { background-color: $nav_menu_hover; }\n";
-
-					echo "$main_navbar .navbar-inner .text-cont a," .
-						 "$main_navbar .nav > li:hover > a," .
-						 "$main_navbar .nav > li.hover > a," .
-						 "$main_navbar .nav > li > a:hover," .
-						 "$main_navbar .nav > li.active > a { color: $nav_menu_accent; } \n";
-
-					echo "$main_navbar .navbar-inner," .
-						 "$main_navbar .nav > li," .
-						 "$main_navbar .nav > li > a { border-color: $nav_menu_border; $nav_menu_border_rgba }\n";
-
-					echo "$main_navbar .nav li.expand," .
-						 "$main_navbar .nav li.expand .sub-menu a:hover { background-color: $nav_menu_expand; }\n";
-
-				echo "}\n";
+				$nav_bg_light_accent = $nav_inv_accent;
+				$nav_bg_dark_accent  = $nav_accent;
 			}
+
+			// Make RGBA Colors If Enabled
+
+			$nav_border_rgba = $nav_menu_bg_rgba = $nav_menu_border_rgba = '';
+
+			$theme_rgba = isset($theme['rgba']) ? $theme['rgba'] : 0;
+
+			if ( $theme_rgba ) {
+				$nav_border_rgb  = implode(',', $nav_border_ob->getRgb());
+				$nav_border_rgba = "border-color: rgba($nav_border_rgb, 0.8)";
+
+				$nav_menu_bg_rgb  = implode(',', $nav_menu_bg_ob->getRgb());
+				$nav_menu_bg_rgba = "background-color: rgba($nav_menu_bg_rgb, 0.95);";
+
+				$nav_menu_border_rgb  = implode(',', $nav_menu_border_ob->getRgb());
+				$nav_menu_border_rgba = "border-color: rgba($nav_menu_border_rgb, 0.8)";
+			}
+
+
+			// BG Color
+
+			echo "$navbar { background-color: $nav_bg; }\n";
+
+			// Text Color
+
+			echo "$navbar .text-cont," .
+				 "$navbar .text-cont a:hover," .
+				 "$navbar .text-cont a.no-color," .
+				 "$navbar .nav > li > a { color: $nav_bg_light_text; }\n";
+
+			echo "$navbar_dark .text-cont," .
+				 "$navbar_dark .text-cont a:hover," .
+				 "$navbar_dark .text-cont a.no-color," .
+				 "$navbar_dark .nav > li > a { color: $nav_bg_dark_text; }\n";
+
+			// Hover & Active Text Color
+
+			echo "$navbar .text-cont a," .
+				 "$navbar .nav > li:hover > a," .
+				 "$navbar .nav > li.hover > a," .
+				 "$navbar .nav > li > a:hover," .
+				 "$navbar .nav > li.active > a { color: $nav_bg_light_accent; } \n";
+
+			echo "$navbar .nav > .active > a:before { background-color: $nav_bg_light_accent; }\n";
+
+			if ( $nav_bg_dark_accent !== $nav_bg_light_accent ) {
+				echo "$navbar_dark .text-cont a," .
+					 "$navbar_dark .nav > li:hover > a," .
+					 "$navbar_dark .nav > li.hover > a," .
+					 "$navbar_dark .nav > li > a:hover," .
+					 "$navbar_dark .nav > li.active > a { color: $nav_bg_dark_accent; } \n";
+
+				echo "$navbar_dark .nav > .active > a:before { background-color: $nav_bg_dark_accent; }\n";
+			}
+
+			// Border Color
+
+			echo "$navbar," .
+				 "$navbar .nav > li," .
+				 "$navbar .nav > li > a," .
+				 "$navbar .navbar-toggle { border-color: $nav_border; $nav_border_rgba }\n";
+
+			// Menus
+
+			if ( $nav_menu_bg_ob->isLight() ) {
+				$nav_menu_text   = $nav_bg_light_text;
+				$nav_menu_accent = $nav_bg_light_accent;
+				$nav_menu_hover  = '#'.$nav_menu_bg_ob->darken(3);
+				$nav_menu_expand = 'rgba(0,0,0,0.03)';
+			} else {
+				$nav_menu_text   = $nav_bg_dark_text;
+				$nav_menu_accent = $nav_bg_dark_accent;
+				$nav_menu_hover  = '#'.$nav_menu_bg_ob->lighten(5);
+				$nav_menu_expand = 'rgba(255,255,255,0.05)';
+			}
+
+			echo "$navbar .sub-menu { background-color: $nav_menu_bg; $nav_menu_bg_rgba }\n";
+
+			echo "$navbar .sub-menu li > a," .
+				 "$navbar .sub-menu input," .
+				 "$navbar .search-form button { color: $nav_menu_text; }\n";
+
+			echo "$navbar .sub-menu ::-webkit-input-placeholder { color: $nav_menu_text; }\n";
+			echo "$navbar .sub-menu ::-moz-placeholder { color: $nav_menu_text; }\n";
+
+			echo "$navbar .sub-menu li.hover > a," .
+				 "$navbar .sub-menu li > a:hover," .
+				 "$navbar .nav-search .btn { background-color: $nav_menu_hover; }\n";
+
+			echo "$navbar .sub-menu li.hover > a," .
+				 "$navbar .sub-menu li > a:hover," .
+				 "$navbar .sub-menu .active > a," .
+				 "$navbar .sub-menu .active > a:hover { color: $nav_menu_accent; }\n";
+
+			echo "$navbar .sub-menu," .
+				 "$navbar .sub-menu > li," .
+				 "$navbar .sub-menu > li > a," .
+				 "$navbar .nav-search button { border-color: $nav_menu_border; $nav_menu_border_rgba }\n";
+
+			echo "$navbar .mega-menu-column > a { background-color: $nav_menu_hover; }\n";
+
+			// Divider
+
+			echo "$navbar li.divider { background-color: $nav_bg_light_text; }\n";
+			echo "$navbar_dark li.divider { background-color: $nav_bg_dark_text; }\n";
+
+			// Navbar Toggle
+
+			echo "$navbar .navbar-toggle .icon-bar { background-color: $nav_bg_light_text; }\n";
+			echo "$navbar_dark .navbar-toggle .icon-bar { background-color: $nav_bg_dark_text; }\n";
+
+			// Mobile Styling
+
+			echo "@media ( max-width: {$this->media_bp('mars')} ) {\n";
+
+				echo "$main_navbar .navbar-inner { background-color: $nav_menu_bg; $nav_menu_bg_rgba }\n";
+
+				echo "$main_navbar .navbar-inner .text-cont," .
+					 "$main_navbar .navbar-inner .text-cont a:hover," .
+					 "$main_navbar .navbar-inner .text-cont a.no-color," .
+					 "$main_navbar .nav > li > a { color: $nav_menu_text; }\n";
+
+				echo "$main_navbar .nav > li:hover > a," .
+					 "$main_navbar .nav > li.hover > a," .
+					 "$main_navbar .nav > li > a:hover { background-color: $nav_menu_hover; }\n";
+
+				echo "$main_navbar .navbar-inner .text-cont a," .
+					 "$main_navbar .nav > li:hover > a," .
+					 "$main_navbar .nav > li.hover > a," .
+					 "$main_navbar .nav > li > a:hover," .
+					 "$main_navbar .nav > li.active > a { color: $nav_menu_accent; } \n";
+
+				echo "$main_navbar .navbar-inner," .
+					 "$main_navbar .nav > li," .
+					 "$main_navbar .nav > li > a { border-color: $nav_menu_border; $nav_menu_border_rgba }\n";
+
+				echo "$main_navbar .nav li.expand," .
+					 "$main_navbar .nav li.expand .sub-menu a:hover { background-color: $nav_menu_expand; }\n";
+
+			echo "}\n";
 		}
 	}
 }

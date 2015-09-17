@@ -64,6 +64,17 @@
 	}
 	.has-info .post-feat { margin-top: $margin-m; }
 
+	.sticky {
+		padding: $post-inner-pad;
+		@extend .well;
+
+		.post-info {
+			top: -1px; left: -1px;
+			border-top-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
 	.ajax-page {
 		border-bottom-width: 1px;
 		border-bottom-style: solid;

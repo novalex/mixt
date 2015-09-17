@@ -9,12 +9,13 @@
 		margin: 0 0 15px;
 	}
 
-	ul { @extend %reset-list; }
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
 
 	// Nav Menus
 	.nav li {
-		margin-bottom: 0;
-
 		> ul,
 		.menu-item-has-children > ul {
 			border-top-width: 1px;
@@ -50,6 +51,7 @@
 
 	.nav li,
 	#recentcomments li {
+		margin-bottom: 0;
 		border-width: 0;
 		border-style: solid;
 		border-color: inherit;
@@ -67,7 +69,9 @@
 			width: 100%;
 		}
 
-		h3 + ul {
+		select { max-width: 100%; }
+
+		h3 + .nav {
 			margin-top: -$margin-s;
 		}
 	}
@@ -77,15 +81,33 @@
 	}
 }
 
-// Bootstrap Integration
+.widget_nav_menu ul.sub-menu li,
+.widget_pages ul.children li { padding-left: 15px; }
 
-.widget_rss ul { @extend .media-list; }
+// Text Widget
+.widget_text {
+	p {
+		br { line-height: 30px; }
+	}
+}
 
+// RSS Widget
+.widget_rss {
+	ul { @extend .media-list; }
+
+	.rss-date,
+	.rssSummary,
+	cite {
+		display: block;
+		margin-bottom: $margin-s;
+	}
+
+	.rss-date,
+	cite { opacity: 0.8; }
+}
+
+// Calendar Widget
 table#wp-calendar {
-	@extend .table;
-	@extend .table-striped;
-	@extend .table-bordered;
-
 	th,
 	td { text-align: center; }
 }

@@ -205,3 +205,35 @@ $breakpoints: (
 		}
 	}
 }
+
+
+// PLUGINS
+
+@if $select2 {
+	@mixin select2-theme-color($bg, $color, $border) {
+		.select2-container a.select2-choice {
+			color: $color;
+			border-color: $border;
+			background-color: $bg;
+		}
+
+		.select2-drop {
+			color: $color;
+			background-color: $bg;
+
+			&,
+			&.select2-drop-active {
+				border-color: $border;
+			}
+		}
+
+		.select2-results {
+			background-color: $bg;
+			
+			.select2-highlighted {
+				color: $color;
+				background-color: darken($bg, 5);
+			}
+		}
+	}
+}

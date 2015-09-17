@@ -1,6 +1,5 @@
 
 @import 'navbar-base';
-@import 'navbar-themes';
 @import 'navbar-vertical';
 
 
@@ -545,6 +544,13 @@ $sec-nav-item-height: 32px;
 			a .drop-arrow:before { content: '\f078'; }
 
 			&.expand {
+				// Indent level 2+ items
+				$indent: $padding-l;
+				.menu-item {
+					> a { padding-left: $indent; }
+					&.expand .menu-item > a { padding-left: $indent * 2 - $padding-s; }
+				}
+
 				// Replace chevron down with chevron up
 				> a .drop-arrow:before { content: '\f077'; }
 				> .sub-menu { display: block !important; }

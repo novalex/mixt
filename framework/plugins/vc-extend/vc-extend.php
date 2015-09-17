@@ -33,6 +33,7 @@ function mixt_vc_extend() {
 				__( 'Auto', 'mixt' )        => 'auto',
 				__( 'Main', 'mixt' )        => 'main',
 				__( 'Alternative', 'mixt' ) => 'alt',
+				__( 'Inverse', 'mixt' )     => 'inv',
 				__( 'Accent', 'mixt' )      => 'accent',
 			),
 		),

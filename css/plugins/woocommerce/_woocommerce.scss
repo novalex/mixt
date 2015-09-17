@@ -50,9 +50,10 @@ $wc-spacing-l: 20px;
 	}
 }
 
+// Catalog Styling
+@import 'catalog';
+
 .mixt {
-	// Catalog Styling
-	@import 'catalog';
 
 	// Demo Notice
 	p.demo_store {

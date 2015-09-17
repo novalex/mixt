@@ -18,6 +18,22 @@
 	justify-content: center;
 }
 
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: $margin-m;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: $margin-m;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
 
 // BORDERS
 

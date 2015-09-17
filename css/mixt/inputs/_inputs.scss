@@ -11,10 +11,13 @@ $input-focus-bg: lighten($input-bg, 5);
 $input-focus-border: $input-border; 
 
 %input-base {
+	color: $input-color;
 	border: 1px solid $input-border;
 	background-color: $input-bg;
 	box-shadow: none;
 	transition: color 0.2s, border 0.2s, background 0.2s, box-shadow 0.2s;
+
+	@extend %theme-input-color;
 
 	&:focus {
 		border-color: $input-focus-border;
@@ -44,12 +47,14 @@ textarea { -webkit-appearance: none; }
 // SELECTS
 
 %select-arrow {
-	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAMdJREFUeNrslE0OhCAMhR+omBijLrwI8R5eCbyS9yBcxo3xh6ELE8eVjDGzocvXpu+DFphzDv8MFgEiQAhA13WOc451XbW1drjmpZQqTVO97zuMMexOTx5C2zQN2rZFVVXaw6gLnCKd8lR3N4IAhBBDURSo6/oL4jAnnfJU99oO9H2vsyxTy7JgmibM84w8z1GWJbwOrw/jOOpXl/CAoFlv24YkSUC7EWr+6BUQhD+5YoyBevibCDZ//AxP4/jJPH5EEYDiI8AAUTR0hYHR9dYAAAAASUVORK5CYII=');
+	background-image: url('#{$img-path}/icons/select-arrow-dark.png');
 	background-repeat: no-repeat;
 	background-position: center right;
 }
+%select-arrow-light { background-image: url('#{$img-path}/icons/select-arrow-light.png'); }
 
 select {
+	color: $input-color;
 	padding: $padding-base-vertical $padding-base-horizontal;
 	font-size: $font-size-s;
 	border-radius: $bd-radius;
@@ -63,10 +68,9 @@ select {
 	-moz-appearance: none;
     text-indent: 0.01px;
     text-overflow: '';
-}
 
-// Select2
-@import 'select2';
+    @extend %theme-input-color;
+}
 
 
 // INPUT STATES

@@ -129,8 +129,7 @@
 	}
 }
 
-.pricing-row[max-width="580px"],
-.pricing-row.pricing-5-col[max-width="800px"] {
+@include media('screen', '(max-width: 800px)') {
 	&,
 	> .wpb_wrapper,
 	.mixt-pricing { display: block !important; }

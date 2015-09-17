@@ -3,13 +3,12 @@
 	.select2-container {
 		a.select2-choice {
 			height: $input-height-base;
-			color: $input-color;
 			padding: $padding-base-vertical $padding-base-horizontal;
 			padding-right: 0;
 			line-height: $line-height-base;
-			border: 1px solid $input-border;
+			border-style: solid;
+			border-width: 1px;
 			border-radius: $input-border-radius;
-			background-color: $input-bg;
 		}
 
 		.select2-arrow {
@@ -30,21 +29,9 @@
 		}
 	}
 
-	.select2-drop {
-		color: $input-color;
-		background-color: $input-bg;
-
-		&,
-		&.select2-drop-active {
-			border-color: $input-border;
-		}
+	.select2-results .select2-highlighted {
+		border-color: $bd-radius;
 	}
 
-	.select2-results {
-		.select2-highlighted {
-			color: $input-color;
-			border-color: $bd-radius;
-			background-color: darken($input-bg, 5);
-		}
-	}
+	@include select2-theme-color($input-bg, $input-color, $input-color);
 }

@@ -19,7 +19,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 	extract( wp_parse_args($args, array(
 		'hover'    => '',
 		'class'    => '',
-		'color'    => 'default',
+		'color'    => 'minimal',
 		'size'     => '',
 		'type'     => 'networks',
 		'style'    => 'plain',

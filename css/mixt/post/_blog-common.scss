@@ -72,7 +72,14 @@
 
 .blog-grid .posts-container .article,
 .blog-masonry .post-wrapper {
-	> :last-child:not(:empty) { padding-bottom: $padding-s; }
+	background-color: rgba(0,0,0,0.02);
+
+	> :last-child:not(:empty) { padding-bottom: $post-inner-pad; }
+}
+
+.blog-grid .sticky,
+.blog-masonry .sticky .post-wrapper {
+	background-color: rgba(0,0,0,0.03);
 }
 
 .blog-2-col .posts-container .article { width: 50%; }

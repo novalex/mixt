@@ -36,7 +36,7 @@ $el_class = $this->getExtraClass( $el_class );
 
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'vc_row wpb_row ' . ( $this->settings( 'base' ) === 'vc_row_inner' ? 'vc_inner ' : '' ) . get_row_css_class() . $el_class . vc_shortcode_custom_css_class( $css, ' ' ), $this->settings['base'], $atts );
 
-if ( $theme_color != 'auto' ) $css_class .= ' theme-color-' . $theme_color;
+if ( $theme_color != 'auto' ) $css_class .= ' theme-section-' . $theme_color;
 if ( $row_padding != '' ) {
 	$row_padding = explode(',', $row_padding);
 	if ( in_array('horizontal', $row_padding) ) $css_class .= ' padding-horizontal';

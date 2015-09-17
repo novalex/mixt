@@ -8,6 +8,9 @@
 // WooCommerce
 @if $woocommerce { @import 'woocommerce/woocommerce'; }
 
+// Select2
+@if $select2 { @import 'select2'; }
+
 // Contact Form 7
 @if $wpcf { @import 'wpcf7'; }
 

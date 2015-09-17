@@ -74,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php // MIXT MODIFICATIONS ?>
 	<div class="buttons btn-group">
-		<a href="<?php echo WC()->cart->get_cart_url(); ?>" class="btn btn-default"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
+		<a href="<?php echo WC()->cart->get_cart_url(); ?>" class="btn btn-minimal"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
 		<a href="<?php echo WC()->cart->get_checkout_url(); ?>" class="btn btn-accent checkout"><?php _e( 'Checkout', 'woocommerce' ); ?></a>
 	</div>
 

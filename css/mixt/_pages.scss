@@ -26,18 +26,13 @@ body.one-page { position: relative; }
 
 // Blank Page
 .page-template-blank {
-
-	.entry-body > .row:last-child {
-		margin-bottom: 0;
-	}
+	.entry-body > .row:last-child { margin-bottom: 0; }
 
 	.flexbox & {
 		display: flex;
 		align-items: center;
 
-		#main-wrap {
-			padding-top: 0;
-		}
+		#main-wrap { padding-top: 0; }
 	}
 }
 

@@ -12,12 +12,35 @@ $main-nav-opacity: 0.95;
 	$border-alpha: map-get($theme, 'border-alpha');
 
 	$menu-bg: map-get($theme, 'menu-bg');
-	$menu-bg-hover: rgba(0,0,0,0.02);
-	$menu-bg-expand: map-get($theme, 'menu-expand');
+	$menu-bg-hover: theme-color($theme, 'menu-bg-hover', rgba(0,0,0,0.02));
+	$menu-bg-expand: theme-color($theme, 'menu-expand', rgba(0,0,0,0.04));
 	$menu-color: map-get($theme, 'menu-color');
 	$menu-color-fade: map-get($theme, 'menu-color-fade');
 	$menu-border: map-get($theme, 'menu-border');
 	$menu-border-alpha: map-get($theme, 'menu-border-alpha');
+
+	@if ( lumin($bg) > 0.5 ) {
+		$bg-light-accent: $accent;
+		$bg-light-color: $color;
+		$bg-light-border: $border;
+		$bg-light-border-alpha: $border-alpha;
+
+
+		$bg-dark-accent: theme-color($theme, 'accent-inv', $accent);
+		$bg-dark-color: $color-inv;
+		$bg-dark-border: theme-color($theme, 'border-inv');
+		$bg-dark-border-alpha: theme-color($theme, 'border-inv-alpha');
+	} @else {
+		$bg-light-accent: theme-color($theme, 'accent-inv', $accent);
+		$bg-light-color: $color-inv;
+		$bg-light-border: theme-color($theme, 'border-inv');
+		$bg-light-border-alpha: theme-color($theme, 'border-inv-alpha');
+
+		$bg-dark-accent: $accent;
+		$bg-dark-color: $color;
+		$bg-dark-border: $border;
+		$bg-dark-border-alpha: $border-alpha;
+	}
 
 	.navbar.theme-#{$name} {
 		border-color: $border;
@@ -29,24 +52,6 @@ $main-nav-opacity: 0.95;
 			&.active-top {
 				> .active > a:before { background-color: $accent; }
 			}
-		}
-
-		// Text Color
-		.nav > li > a,
-		.text-cont,
-		.text-cont a:hover,
-		.text-cont a.no-color { color: $color; }
-
-		.nav > li > a:hover,
-		.nav > .active > a,
-		.text-cont a { color: $accent; }
-
-		// Border Colors
-		.nav > li,
-		.nav > li > a,
-		.navbar-toggle {
-			border-color: $border;
-			border-color: $border-alpha;
 		}
 
 		// SUBMENUS
@@ -78,16 +83,6 @@ $main-nav-opacity: 0.95;
 
 		// OTHER ELEMENTS
 
-		.navbar-toggle .icon-bar {
-			background-color: $color;
-		}
-
-		// Divider
-		.divider {
-			background-color: $border;
-			background-color: $border-alpha;
-		}
-
 		// Nav Search Form
 		.nav-search .search-form {
 			button {
@@ -99,16 +94,54 @@ $main-nav-opacity: 0.95;
 			::placeholder { color: $menu-color-fade; }
 		}
 
+		// LIGHT BACKGROUND
+		
+		&.bg-light {
+			.nav > li > a,
+			.text-cont,
+			.text-cont a:hover,
+			.text-cont a.no-color {
+				color: $bg-light-color;
+			}
+
+			.nav > li:hover > a,
+			.nav > li.hover > a,
+			.nav > li > a:hover,
+			.nav > .active > a,
+			.text-cont a {
+				color: $bg-light-accent;
+			}
+
+			.navbar-toggle .icon-bar {
+				background-color: $bg-light-color;
+			}
+
+			.nav > li,
+			.nav > li > a,
+			.navbar-toggle {
+				border-color: $bg-light-border;
+				border-color: $bg-light-border-alpha;
+			}
+
+			.divider {
+				background-color: $bg-light-border;
+				background-color: $bg-light-border-alpha;
+			}
+		}
+
 		// DARK BACKGROUND
 
 		&.bg-dark {
-			$bg-dark-accent: map-get($theme, 'bg-dark-accent');
-			$bg-dark-border: map-get($theme, 'bg-dark-border');
-			$bg-dark-border-alpha: map-get($theme, 'bg-dark-border-alpha');
-			@if ( lightness($color) > lightness($color-inv) ) {
-				$bg-dark-color: $color;
-			} @else {
+			@if ( lumin($bg) > 0.5 ) {
+				$bg-dark-accent: theme-color($theme, 'accent-inv', $accent);
 				$bg-dark-color: $color-inv;
+				$bg-dark-border: theme-color($theme, 'border-inv');
+				$bg-dark-border-alpha: theme-color($theme, 'border-inv-alpha');
+			} @else {
+				$bg-dark-accent: $accent;
+				$bg-dark-color: $color;
+				$bg-dark-border: $border;
+				$bg-dark-border-alpha: $border-alpha;
 			}
 
 			.nav > li > a,
@@ -118,16 +151,16 @@ $main-nav-opacity: 0.95;
 				color: $bg-dark-color;
 			}
 
-			.navbar-toggle .icon-bar {
-				background-color: $bg-dark-color;
-			}
-
 			.nav > li:hover > a,
 			.nav > li.hover > a,
 			.nav > li > a:hover,
 			.nav > .active > a,
 			.text-cont a {
 				color: $bg-dark-accent;
+			}
+
+			.navbar-toggle .icon-bar {
+				background-color: $bg-dark-color;
 			}
 
 			.nav > li,

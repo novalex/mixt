@@ -4,7 +4,6 @@
 $theme-eco: (
 	'eco': (
 		'accent': #7cad24,
-		'bg-dark-accent': #7cad24,
 
 		'bg': #fff,
 		'bg-hover': darken(#fff, 5),
@@ -16,8 +15,8 @@ $theme-eco: (
 
 		'border': #ddd,
 		'border-alpha': rgba(0,0,0,0.15),
-		'bg-dark-border': #333,
-		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+		'border-inv': #333,
+		'border-inv-alpha': rgba(0,0,0,0.4),
 
 		'menu-bg': #fbfbfb,
 		'menu-expand': rgba(0,0,0,0.05),
@@ -31,7 +30,6 @@ $theme-eco: (
 
 	'dark-eco': (
 		'accent': #7cad24,
-		'bg-dark-accent': #7cad24,
 
 		'bg': #222,
 		'bg-hover': #333,
@@ -41,10 +39,10 @@ $theme-eco: (
 		'color-inv': #333,
 		'color-inv-fade': #777,
 
-		'border': #ddd,
-		'border-alpha': rgba(0,0,0,0.15),
-		'bg-dark-border': #333,
-		'bg-dark-border-alpha': rgba(0,0,0,0.4),
+		'border': #333,
+		'border-alpha': rgba(0,0,0,0.4),
+		'border-inv': #ddd,
+		'border-inv-alpha': rgba(0,0,0,0.15),
 
 		'menu-bg': #333,
 		'menu-expand': rgba(0,0,0,0.05),

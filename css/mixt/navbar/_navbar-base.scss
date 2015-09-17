@@ -169,8 +169,8 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		li .menu-item > a,
 		.mega-menu-column li > a {
 			clear: both;
-			padding: 10px;
-			font-size: 13px;
+			padding: $padding-s;
+			font-size: $font-size;
 			font-weight: bold;
 			line-height: 16px;
 			border-bottom-width: 1px;
@@ -232,7 +232,7 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 				> a {
 					height: 44px;
 					max-height: 44px;
-					padding-top: 13px;
+					padding-top: $font-size;
 				}
 
 				&:nth-child(4n),

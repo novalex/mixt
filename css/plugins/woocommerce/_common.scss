@@ -60,18 +60,12 @@ form .form-row {
 	&.woocommerce-validated {
 		.select2-choice,
 		input.input-text,
-		select {
-			border-color: $input-border;
-			@extend .input-success;
-		}
+		select { @extend .input-success; }
 	}
 	&.woocommerce-invalid {
 		.select2-choice,
 		input.input-text,
-		select {
-			border-color: $input-border;
-			@extend .input-error;
-		}
+		select { @extend .input-error; }
 	}
 }
 

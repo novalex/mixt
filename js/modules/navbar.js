@@ -36,9 +36,12 @@ NAVBAR FUNCTIONS
 
 			if ( colorLum == 'dark' ) { navbar.addClass('bg-dark'); }
 			if ( navbar.is(mainNavBar) ) {
-				navbarObj.navBg = ( colorLum == 'dark' ) ? 'bg-dark' : '';
+				navbarObj.navBg = ( colorLum == 'dark' ) ? 'bg-dark' : 'bg-light';
+				mainNavBar.attr('data-bg', colorLum);
 				if ( mixt_opt.nav.transparent && mixt_opt.header.enabled && mixt_opt.nav['top-opacity'] <= 0.4 ) {
-					navbarObj.navBgTop = mediaWrap.hasClass('bg-dark') ? 'bg-dark' : '';
+					if ( mediaWrap.hasClass('bg-dark') ) { navbarObj.navBgTop = 'bg-dark'; }
+					else if ( mediaWrap.hasClass('bg-light') ) { navbarObj.navBgTop = 'bg-light'; }
+					else { navbarObj.navBgTop = navbarObj.navBg; }
 				} else {
 					navbarObj.navBgTop = navbarObj.navBg;
 				}
@@ -83,7 +86,7 @@ NAVBAR FUNCTIONS
 				scrollVal = isMobile === true ? 0 : scrollVal += scrollCorrection;
 
 				if ( mainNavBar.hasClass('slide-bg-dark') ) { bgTopCls = 'bg-dark'; }
-				if ( mainNavBar.hasClass('slide-bg-light') ) { bgTopCls = ''; }
+				else if ( mainNavBar.hasClass('slide-bg-light') && ( navbarObj.navBg != 'bg-dark' || mixt_opt.nav['top-opacity'] <= 0.4 ) ) { bgTopCls = 'bg-light'; }
 
 				if ( scrollVal > navPos ) {  
 					bodyEl.addClass('fixed-nav');
@@ -318,8 +321,16 @@ NAVBAR FUNCTIONS
 			navScroll();
 		}
 	};
+	navbars.each( function() {
+		navbarObj.init($(this));
+	});
+	
+	navbarObj.megaMenuRows();
 
-	// RUN NAVBAR FUNCTIONS
+	mainNavBar.on('refresh', function() {
+		navbarObj.init(mainNavBar);
+	});
+
 
 	// Check which media queries are active
 	var mqCheck = function( elem ) {
@@ -330,6 +341,7 @@ NAVBAR FUNCTIONS
 		else if ( display == 'inline') { return 2; }
 		else { return 0; }
 	};
+
 
 	// Enable Menu Hover On Touch Screens
 	var menuParents = navbars.find('.menu-item-has-children, li.dropdown');
@@ -348,6 +360,7 @@ NAVBAR FUNCTIONS
 	function menuTouchRemoveHover(event) {
 		if ( ! $(event.delegateTarget).is(menuParents) ) { menuParents.removeClass('hover'); }
 	}
+
 
 	// Functions Run On Load & Window Resize
 	function navbarFn() {
@@ -397,6 +410,8 @@ NAVBAR FUNCTIONS
 
 		navbarOverlap();
 	}
+	viewport.resize( $.debounce( 500, navbarFn )).resize();
+
 
 	// Handle Navbar Items Overlap
 	var mainNavCont    = mainNavBar.children('.container'),
@@ -441,15 +456,5 @@ NAVBAR FUNCTIONS
 		}
 	}
 	navbarOverlap();
-
-	navbars.each( function() {
-		navbarObj.init($(this));
-	});
-
-	navbarFn();
-
-	navbarObj.megaMenuRows();
-
-	viewport.resize( $.debounce( 500, navbarFn ));
 
 }(jQuery);

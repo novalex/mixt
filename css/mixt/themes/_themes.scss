@@ -4,14 +4,10 @@ $themes: ();
 @import 'eco';
 @import 'aqua';
 
-// ACTIVE THEME
-$active-theme: 'lava';
-
-@function theme-color($color, $theme: $active-theme) {
-	$theme-map: map-get($themes, $theme);
-	@if not map-has-key($theme-map, $color) {
+@function theme-color($theme, $color, $default: '') {
+	@if not map-has-key($theme, $color) {
 		// @warn "Key #{$color} not found for the '#{$theme}' theme!";
-		@return '';
+		@return $default;
 	}
-	@return map-get($theme-map, $color);
+	@return map-get($theme, $color);
 }

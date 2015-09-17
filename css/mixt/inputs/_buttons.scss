@@ -93,7 +93,7 @@ $btn-height: 34px;
 }
 @each $name, $theme in $themes {
 	.theme-#{$name} {
-		@include button-color('minimal', map-get($theme, 'bg'));
+		@include button-color('minimal', darken(map-get($theme, 'bg'), 5));
 		@include button-color('accent', map-get($theme, 'accent'));
 		.btn-primary { @extend .btn-accent; }
 	}

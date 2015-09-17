@@ -1,7 +1,9 @@
 
 // NEW Tabs / Tour / Accordion
-.vc_tta.vc_tta-shape-rounded .vc_tta-panel-body,
-.vc_tta.vc_tta-shape-rounded .vc_tta-panel-heading { border-radius: $bd-radius; }
+.mixt {
+	.vc_tta.vc_tta-shape-rounded .vc_tta-panel-body,
+	.vc_tta.vc_tta-shape-rounded .vc_tta-panel-heading { border-radius: $bd-radius; }
+}
 
 
 // OLD Tabs / Tour / Accordion

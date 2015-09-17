@@ -323,7 +323,7 @@ function mixt_location_bar() {
 
 	if ( $options['left-content'] != '0' || $options['right-content'] != '0' ) {
 		?>
-		<div id="location-bar">
+		<div id="location-bar" class="theme-section-alt">
 			<div class="container">
 				<div class="inner">
 

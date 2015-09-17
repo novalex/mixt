@@ -61,101 +61,8 @@
 }
 
 
-// Tags
-
-.tag-list a,
-.tagcloud a {
-	float: left;
-	padding: 4px 8px;
-	margin: 0 5px 5px 0;
-	color: #fff !important;
-	font-size: $font-size-s !important;
-	border-radius: $bd-radius;
-	background-color: #555;
-	transition: color 0.2s, background 0.2s;
-}
-.tagcloud {
-	width: 100%;
-	overflow: auto;
-}
-.tag-list {
-	display: inline;
-	font-size: 0;
-
-	strong {
-		float: left;
-		line-height: 28px;
-		margin-right: 10px;
-		font-size: $font-size-s;
-	}
-}
-
-
-// Widgets
-
-.widget {
-	select { max-width: 100%; }
-}
-.widget_nav_menu ul.sub-menu li,
-.widget_pages ul.children li { padding-left: 15px; }
-
-
-// Alignment
-
-.alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1.5em;
-}
-.alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.5em;
-}
-.aligncenter {
-	clear: both;
-	display: block;
-	margin: 0 auto;
-}
-
-
-// Images and Captions
-
-img {
-	display: inline-block;
-	height: auto;
-	max-width: 100%;
-}
-img[class*="wp-image-"] {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-.wp-caption {
-	border: 1px solid #ccc;
-	margin-bottom: 10px;
-	max-width: 100%;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	padding: 0 10px;
-
-	&.aligncenter {
-		margin-bottom: 10px;
-	}
-
-	img[class*="wp-image-"] {
-		display: block;
-	}
-
-	.wp-caption-text {
-		text-align: center;
-		margin-top: 10px;
-	}
-}
-
-
-// Responsive
-
 // Tablet & Desktop
+
 @include media('screen', 'mars') {
 	#content-wrap {
 		&.has-sidebar {
@@ -200,6 +107,7 @@ img[class*="wp-image-"] {
 
 
 // Mobile
+
 @include media('screen', '<mars') {
 	.sidebar {
 		margin-top: -1px;

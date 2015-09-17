@@ -47,7 +47,8 @@ $row-grid-sm-gutter: 20px;
 
 .page-padding,
 .sidebar-padder,
-.blog-grid .posts-container:first-child { padding-top: $gutter-lg; }
+.blog-grid .posts-container:first-child,
+.blog-masonry .posts-container:first-child { padding-top: $gutter-lg; }
 
 
 // Page Header Spacing
@@ -143,7 +144,8 @@ ul.wpb_thumbnails-fluid > li,
 
 	.page-padding,
 	.sidebar-padder,
-	.blog-grid .posts-container:first-child { padding-top: $gutter-sm; }
+	.blog-grid .posts-container:first-child,
+	.blog-masonry .posts-container:first-child { padding-top: $gutter-sm; }
 
 	.posts-container:last-child { padding-bottom: $gutter-sm; }
 

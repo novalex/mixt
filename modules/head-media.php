@@ -138,11 +138,11 @@ function mixt_head_media() {
 							if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-dark").length ) {
 								header.addClass('bg-dark');
 								navbar.removeClass("slide-bg-light").addClass("slide-bg-dark");
-								if ( navbar.hasClass('position-top') ) { navbar.addClass('bg-dark'); }
-							} else {
+								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-light').addClass('bg-dark'); }
+							} else if ( jQuery(data["nextLayer"]["selector"]).children(".slide-bg-light").length ) {
 								header.removeClass('bg-dark');
 								navbar.addClass("slide-bg-light").removeClass("slide-bg-dark");
-								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-dark'); }
+								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-dark').addClass('bg-light'); }
 							}
 						}
 					}
@@ -202,7 +202,7 @@ function mixt_head_media() {
 				}
 			}
 
-			if ( $img_color == 'dark' ) { $wrap_classes .= ' bg-dark'; }
+			$wrap_classes .= ( $img_color == 'dark' ) ? ' bg-dark' : ' bg-light';
 
 			// Add pattern or image proportion class
 			if ( $img_repeat ) {
@@ -226,7 +226,7 @@ function mixt_head_media() {
 		else if ( $options['type'] == 'video') {
 			$wrap_classes .= ' media-video';
 
-			if ( $options['video-lum'] == 'false' ) { $wrap_classes .= ' bg-dark'; }
+			$wrap_classes .= ( $options['video-lum'] == 'false' ) ? ' bg-dark' : ' bg-light';
 
 			// Embedded Video
 			if ( $options['video-src'] == 'embed' && ! empty($options['video-embed']) ) {
@@ -268,7 +268,7 @@ function mixt_head_media() {
 
 		else if ( $options['type'] == 'color' ) {
 			$wrap_classes .= ' head-color';
-			if ( hex_is_light($options['bg']) == false ) { $wrap_classes .= ' bg-dark'; }
+			$wrap_classes .= ( hex_is_light($options['bg']) == false ) ? ' bg-dark' : ' bg-light';
 			$media_bg = "<div class='media-container $media_cont_classes' style='background-color: {$options['bg']};'></div>";
 		}
 	}

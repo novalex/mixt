@@ -181,3 +181,74 @@ blockquote {
 		font-size: $font-size-s;
 	}
 }
+
+
+// Images and Captions
+
+img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+}
+img[class*="wp-image-"] {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.wp-caption {
+	max-width: 100%;
+	padding: 5px;
+	margin-bottom: 10px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: inherit;
+	border-radius: $bd-radius;
+	@extend .theme-bd;
+
+	&.aligncenter { margin-bottom: 10px; }
+
+	img[class*="wp-image-"] { display: block; }
+
+	.wp-caption-text {
+		font-size: $font-size-xs;
+		text-align: center;
+		margin: $margin-s 0 0;
+	}
+}
+
+
+// Tags
+
+.tag-list a,
+.tagcloud a {
+	float: left;
+	padding: 4px 8px;
+	margin: 0 5px 5px 0;
+	color: #fff !important;
+	font-size: $font-size-s !important;
+	border-radius: $bd-radius;
+	background-color: #555;
+	transition: color 0.2s, background 0.2s;
+}
+.tagcloud {
+	width: 100%;
+	overflow: auto;
+}
+.tag-list {
+	display: inline;
+	font-size: 0;
+
+	strong {
+		float: left;
+		line-height: 28px;
+		margin-right: 10px;
+		font-size: $font-size-s;
+	}
+}
+
+
+// Miscellaneous
+
+hr { @extend .theme-bd; }
+
+.wp-smiley,
+.emoji { font-size: 16px; }

@@ -30,12 +30,13 @@ HELPER FUNCTIONS
 
 	// Apply Bootstrap Classes
 	
-	var widgetNavMenus = '.widget_meta, .widget_recent_entries, .widget_archive, .widget_categories, .widget_nav_menu, .widget_pages';
+	var widgetNavMenus = '.widget_meta, .widget_recent_entries, .widget_archive, .widget_categories, .widget_nav_menu, .widget_pages, .widget_rss';
 	// WooCommerce Widgets
-	widgetNavMenus += ', .widget_product_categories, .widget_products, .widget_top_rated_products, .widget_recent_reviews, .widget_recently_viewed_products';
-
+	widgetNavMenus += ', .widget_product_categories, .widget_products, .widget_top_rated_products, .widget_recent_reviews, .widget_recently_viewed_products, .widget_layered_nav';
 	$(widgetNavMenus).children('ul').addClass('nav');
 	$('.widget_nav_menu ul.menu').addClass('nav');
+
+	$('#wp-calendar').addClass('table table-striped table-bordered');
 
 	// Handle Post Count Tags
 
