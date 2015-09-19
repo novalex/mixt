@@ -5,24 +5,18 @@ $img-path:  '../assets/img';
 $font-path: '../assets/fonts';
 
 
-// PLUGIN CONFIG
+// NAVBAR
 
-$portfolio:    true;
-$lightgallery: true;
-$lightslider:  true;
-$vcomposer:    true;
-$woocommerce:  true;
-$select2:      $woocommerce;
-$wpcf:         false;
+$nav-primary-height: 91px;
+$nav-primary-pad: 20px;
+$nav-primary-item-height: 50px;
+$nav-primary-sub-item-height: 36px;
 
+$nav-vertical-width: 320px;
+$nav-vertical-width-sm: 20%;
+$nav-vertical-item-height: 42px;
 
-// MISCELLANEOUS
-
-$bd-radius-s: 1px;
-$bd-radius:   2px;
-$bd-radius-l: 3px;
-
-$rounded-radius: $bd-radius-l;
+$sec-nav-item-height: 32px;
 
 
 // TYPOGRAPHY
@@ -67,3 +61,23 @@ $padding-m:  20px;
 $padding-l:  30px;
 
 $post-inner-pad: 15px;
+
+
+// MISCELLANEOUS
+
+$bd-radius-s: 1px;
+$bd-radius:   2px;
+$bd-radius-l: 3px;
+
+$rounded-radius: $bd-radius-l;
+
+
+// PLUGIN CONFIG
+
+$portfolio:    true;
+$lightgallery: true;
+$lightslider:  true;
+$vcomposer:    true;
+$woocommerce:  true;
+$select2:      $woocommerce;
+$wpcf:         false;

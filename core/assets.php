@@ -37,6 +37,25 @@ function mixt_get_assets($group, $subgroup) {
 				'shine'   => __( 'Shine', 'mixt' ),
 				'shade'   => __( 'Shade', 'mixt' ),
 			),
+			'types' => array(
+				''       => __( 'Normal', 'mixt' ),
+				'round'  => __( 'Round', 'mixt' ),
+				'emboss' => __( 'Embossed', 'mixt' ),
+			),
+			'animations' => array(
+				''        => __( 'None', 'mixt' ),
+				'fill'    => 'Fill',
+				'fill-in' => 'Fill In',
+				'grow'    => 'Grow',
+				'shrink'  => 'Shrink',
+				'pop'     => 'Pop',
+				'push'    => 'Push',
+			),
+			'icon-animations' => array(
+				''                  => __( 'None', 'mixt' ),
+				'icon-goDown'       => __( 'Go Down', 'mixt' ),
+				'hover-icon-goDown' => __( 'Go Down on Hover', 'mixt' ),
+			),
 		),
 		
 		'colors' => array(
@@ -76,6 +95,13 @@ function mixt_get_assets($group, $subgroup) {
 	if ( empty($subgroup) ) {
 		return $assets[$group];
 	} else {
+		if ( $subgroup == 'icon-animations' ) {
+			$assets['button']['icon-animations'] = array_merge(
+				$assets['button']['icon-animations'],
+				mixt_icon_anims('sec', false)
+			);
+		}
+
 		return $assets[$group][$subgroup];
 	}
 }
@@ -222,6 +248,44 @@ function mixt_css_anims($type = 'all') {
 		return array_merge($anims['trans-in'], $anims['trans-out']);
 	} else {
 		return $anims[$type];
+	}
+}
+
+
+/**
+ * Return array of icon animations
+ *
+ * @param string $type The type of animations to return. Can be 'main', 'sec', 'all' and 'combined'
+ */
+function mixt_icon_anims($type = 'combined') {
+	$anims = array(
+		'main' => array(
+			'anim-pop'    => 'Pop',
+			'anim-focus'  => 'Focus',
+			'anim-invert' => 'Invert',
+		),
+		'sec' => array(
+			'anim-rise'     => 'Rise',
+			'anim-fall'     => 'Fall',
+			'anim-go-right' => 'Go Right',
+			'anim-go-left'  => 'Go Left',
+			'anim-spin'     => 'Spin',
+			'anim-rotate'   => 'Rotate',
+			'anim-grow'     => 'Grow',
+			'anim-shrink'   => 'Shrink',
+		),
+	);
+
+	if ( $type == 'combined' ) {
+		$icon_anims = array_merge($anims['main'], $anims['sec']);
+		foreach ( $anims['main'] as $main_key => $main_name ) {
+			foreach ( $anims['sec'] as $sec_key => $sec_name ) {
+				$icon_anims["$main_key $sec_key"] = $main_name . ' ' . __( 'and', 'mixt' ) . ' ' . $sec_name;
+			}
+		}
+		return $icon_anims;
+	} else {
+		return ( $type == 'all' ) ? array_merge($anims['main'], $anims['sec']) : $anims[$type];
 	}
 }
 

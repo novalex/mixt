@@ -108,6 +108,7 @@ class Mixt_Options {
 				'child-page-nav'   => array(),
 			),
 			'nav' => array(
+				'layout'         => array( 'key' => 'nav-layout', 'return' => 'value' ),
 				'mode'           => array( 'key' => 'nav-mode', 'return' => 'value' ),
 				'logo-align'     => array(
 					'return'     => array( '1' => 'logo-left', '2' => 'logo-center', '3' => 'logo-right', 'default' => 'logo-left' ),
@@ -165,6 +166,13 @@ class Mixt_Options {
 			} else {
 				self::set('page', 'sidebar-id', 'sidebar-1');
 			}
+		}
+
+		// Override options for vertical navbar
+		if ( self::get('nav', 'layout') == 'vertical' ) {
+			self::set('nav', 'mode', 'static');
+			self::set('nav', 'position', 'above');
+			self::set('nav', 'transparent', false);
 		}
 
 		// Perform "options set" action

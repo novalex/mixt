@@ -57,9 +57,11 @@ GLOBAL JS FUNCTIONS
 				}
 			});
 
+			var onePageOffset = ( mixt_opt.nav.mode == 'fixed' ) ? $('#main-nav').outerHeight() : 1;
+
 			bodyEl.scrollspy({
 				target: '#main-nav',
-				offset: $('#main-nav').outerHeight()
+				offset: onePageOffset
 			});
 		}
 

@@ -99,6 +99,13 @@ $breakpoints: (
 }
 
 
+// TRANSITIONS
+
+@mixin button-transition($color: 0.2s, $border: 0.3s, $background: 0.2s, $box-shadow: 0.3s, $text-shadow: 0.3s, $transform: 0.3s) {
+	transition: color $color, border $border, background $background, box-shadow $box-shadow, text-shadow $text-shadow, transform $transform;
+}
+
+
 // ARROWS
 
 // Border Arrow
@@ -209,31 +216,29 @@ $breakpoints: (
 
 // PLUGINS
 
-@if $select2 {
-	@mixin select2-theme-color($bg, $color, $border) {
-		.select2-container a.select2-choice {
-			color: $color;
+@mixin select2-theme-color($bg, $color, $border) {
+	.select2-container a.select2-choice {
+		color: $color;
+		border-color: $border;
+		background-color: $bg;
+	}
+
+	.select2-drop {
+		color: $color;
+		background-color: $bg;
+
+		&,
+		&.select2-drop-active {
 			border-color: $border;
-			background-color: $bg;
 		}
+	}
 
-		.select2-drop {
+	.select2-results {
+		background-color: $bg;
+		
+		.select2-highlighted {
 			color: $color;
-			background-color: $bg;
-
-			&,
-			&.select2-drop-active {
-				border-color: $border;
-			}
-		}
-
-		.select2-results {
-			background-color: $bg;
-			
-			.select2-highlighted {
-				color: $color;
-				background-color: darken($bg, 5);
-			}
+			background-color: lighten($bg, 5);
 		}
 	}
 }

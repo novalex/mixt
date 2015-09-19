@@ -1,10 +1,6 @@
 
 // Custom Animations
 
-.animated.pulsate {
-	opacity: 0;
-	animation: pulsate 0.8s ease 0 infinite;
-}
 @keyframes pulsate {
 	0% {
 		transform: scale(0.8);
@@ -17,14 +13,11 @@
 		opacity: 0;
 	}
 }
-
-%anim-goDown,
-.animated.goDown {
-	animation-name: goDown;
-	animation-duration: 2.5s;
-	animation-timing-function: ease;
-	animation-iteration-count: infinite;
+.animated.pulsate {
+	opacity: 0;
+	animation: pulsate 0.8s ease 0 infinite;
 }
+
 @keyframes goDown {
 	0% { transform: translate(0, 0); }
 	10% { transform: translate(0, 6px); }
@@ -32,6 +25,32 @@
 	40% { transform: translate(0, 6px); }
 	55%, 100% { transform: translate(0, 0); }
 }
+%anim-goDown,
+.animated.goDown {
+	animation-name: goDown;
+	animation-duration: 2.5s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+}
+
+@keyframes push {
+	50% { transform: scale(0.9); }
+	100% { transform: scale(1); }
+}
+@keyframes pop {
+	50% { transform: scale(1.1); }
+}
+%anim-push,
+.animated.push,
+%anim-pop,
+.animated.pop {
+	animation-name: push;
+	animation-duration: 0.3s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;
+}
+%anim-pop,
+.animated.pop { animation-name: pop; }
 
 @keyframes flipY {
 	0% {

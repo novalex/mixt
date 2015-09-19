@@ -2,13 +2,6 @@
 @import 'navbar-base';
 @import 'navbar-vertical';
 
-
-$nav-primary-height: 91px;
-$nav-primary-pad: 20px;
-$nav-primary-item-height: 50px;
-
-$sec-nav-item-height: 32px;
-
 // NAVBAR BORDERED MENU ITEMS
 
 .navbar.bordered {
@@ -367,7 +360,7 @@ $sec-nav-item-height: 32px;
 		}
 	}
 
-	.navbar-mixt.bordered.position-top .nav > li { border-color: transparent; }
+	.navbar-mixt.bordered.position-top:not(.vertical) .nav > li { border-color: transparent; }
 
 	// Transparent
 	.nav-transparent .navbar-mixt.position-top {
@@ -399,6 +392,8 @@ $sec-nav-item-height: 32px;
 		}
 		.navbar-inner {
 			text-align: center;
+
+			li { text-align: left; }
 		}
 		.navbar-nav {
 			float: none;
@@ -628,13 +623,13 @@ $sec-nav-item-height: 32px;
 	.logo-left .navbar-mixt {
 		.navbar-header { text-align: left; }
 
-		#nav-logo { margin-left: 15px; }
+		#nav-logo { margin-left: $nav-primary-pad; }
 	}
 
 	.logo-right .navbar-mixt {
 		.navbar-header { text-align: right; }
 
-		#nav-logo { margin-right: 15px; }
+		#nav-logo { margin-right: $nav-primary-pad; }
 	}
 
 	// Tell jQuery the mobile media query is active

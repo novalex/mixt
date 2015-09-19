@@ -84,7 +84,7 @@
 				$color-alt: $color;
 			}
 			$color-alt: theme-color($theme, 'color-alt', $color-alt);
-			$border-alt: theme-color($theme, 'border-alt', darken($bg-alt, 5));
+			$border-alt: theme-color($theme, 'border-alt', $border);
 
 			color: $color-alt;
 			border-color: $border-alt;
@@ -206,12 +206,11 @@
 			text-shadow: none;
 		}
 
-		.sidebar .child-page-nav {
-			li {
-				a:hover,
-				&.current_page_item a { color: $accent; }
-			}
-			.current_page_item {
+		.sidebar {
+			.child-page-nav li a:hover,
+			.nav li a:hover { color: $accent; }
+			
+			.child-page-nav .current_page_item {
 				&,
 				&:before { background-color: darken($bg, 3); }
 			}

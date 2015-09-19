@@ -20,26 +20,26 @@ $main-nav-opacity: 0.95;
 	$menu-border-alpha: map-get($theme, 'menu-border-alpha');
 
 	@if ( lumin($bg) > 0.5 ) {
+		$bg-light: true;
+
 		$bg-light-accent: $accent;
 		$bg-light-color: $color;
 		$bg-light-border: $border;
-		$bg-light-border-alpha: $border-alpha;
 
 
 		$bg-dark-accent: theme-color($theme, 'accent-inv', $accent);
 		$bg-dark-color: $color-inv;
 		$bg-dark-border: theme-color($theme, 'border-inv');
-		$bg-dark-border-alpha: theme-color($theme, 'border-inv-alpha');
 	} @else {
+		$bg-light: false;
+
 		$bg-light-accent: theme-color($theme, 'accent-inv', $accent);
 		$bg-light-color: $color-inv;
 		$bg-light-border: theme-color($theme, 'border-inv');
-		$bg-light-border-alpha: theme-color($theme, 'border-inv-alpha');
 
 		$bg-dark-accent: $accent;
 		$bg-dark-color: $color;
 		$bg-dark-border: $border;
-		$bg-dark-border-alpha: $border-alpha;
 	}
 
 	.navbar.theme-#{$name} {
@@ -96,7 +96,12 @@ $main-nav-opacity: 0.95;
 
 		// LIGHT BACKGROUND
 		
-		&.bg-light {
+		@if $bg-light {
+			$bg-light-sel: '&';
+		} @else {
+			$bg-light-sel: '&.bg-light';
+		}
+		#{$bg-light-sel} {
 			.nav > li > a,
 			.text-cont,
 			.text-cont a:hover,
@@ -118,32 +123,19 @@ $main-nav-opacity: 0.95;
 
 			.nav > li,
 			.nav > li > a,
-			.navbar-toggle {
-				border-color: $bg-light-border;
-				border-color: $bg-light-border-alpha;
-			}
+			.navbar-toggle { border-color: $bg-light-border; }
 
-			.divider {
-				background-color: $bg-light-border;
-				background-color: $bg-light-border-alpha;
-			}
+			.divider { background-color: $bg-light-border; }
 		}
 
 		// DARK BACKGROUND
 
-		&.bg-dark {
-			@if ( lumin($bg) > 0.5 ) {
-				$bg-dark-accent: theme-color($theme, 'accent-inv', $accent);
-				$bg-dark-color: $color-inv;
-				$bg-dark-border: theme-color($theme, 'border-inv');
-				$bg-dark-border-alpha: theme-color($theme, 'border-inv-alpha');
-			} @else {
-				$bg-dark-accent: $accent;
-				$bg-dark-color: $color;
-				$bg-dark-border: $border;
-				$bg-dark-border-alpha: $border-alpha;
-			}
-
+		@if $bg-light {
+			$bg-dark-sel: '&.bg-dark';
+		} @else {
+			$bg-dark-sel: '&';
+		}
+		#{$bg-dark-sel} {
 			.nav > li > a,
 			.text-cont,
 			.text-cont a:hover,
@@ -165,22 +157,18 @@ $main-nav-opacity: 0.95;
 
 			.nav > li,
 			.nav > li > a,
-			.navbar-toggle {
-				border-color: $bg-dark-border;
-				border-color: $bg-dark-border-alpha;
-			}
+			.navbar-toggle { border-color: $bg-dark-border; }
 
-			.divider {
-				background-color: $bg-dark-border;
-				background-color: $bg-dark-border-alpha;
-			}
+			.divider { background-color: $bg-dark-border; }
 		}
 
 		
 		// MAIN NAVBAR STYLES
 		
 		&.navbar-mixt {
-			background-color: rgba($bg, $main-nav-opacity);
+			&:not(.vertical) {
+				background-color: rgba($bg, $main-nav-opacity);
+			}
 
 			.sub-menu { background-color: rgba($menu-bg, $main-nav-opacity); }
 

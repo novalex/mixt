@@ -201,8 +201,13 @@ class Mixt_Themes extends Mixt_DCSS {
 			'nav-top-opacity' => array( 'type' => 'str', 'return' => 'value', 'default' => '0.25' ),
 		) );
 
-		$nav_themes = array( $this->active_themes['nav'] );
-		if ( $this->active_themes['sec-nav'] != $this->active_themes['nav'] && Mixt_Options::get('nav', 'second-nav') ) {
+		$nav_themes = array();
+		if ( $this->active_themes['nav'] != 'auto' ) {
+			$nav_themes[] = $this->active_themes['nav'];
+		} else {
+			$nav_themes[] = $this->active_themes['site'];
+		}
+		if ( $this->active_themes['sec-nav'] != $this->active_themes['nav'] && $this->active_themes['sec-nav'] != 'auto' && Mixt_Options::get('nav', 'second-nav') ) {
 			$nav_themes[] = $this->active_themes['sec-nav'];
 		}
 		$defaults = $this->default_themes['nav'][MIXT_THEME];
@@ -217,8 +222,10 @@ class Mixt_Themes extends Mixt_DCSS {
 			$nav_bg     = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
 			$nav_bg_ob  = new Color($nav_bg);
 			$nav_bg_rgb = implode(',', $nav_bg_ob->getRgb());
-			echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$options['nav-top-opacity']}); }\n";
-			echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$options['nav-opacity']}); }\n";
+			if ( Mixt_Options::get('nav', 'layout') == 'horizontal' ) {
+				echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$options['nav-top-opacity']}); }\n";
+				echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$options['nav-opacity']}); }\n";
+			}
 
 			// Do not output theme if it's one of the defaults or if themes are disabled
 			if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes['nav']) ) return;

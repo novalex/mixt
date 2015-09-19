@@ -212,6 +212,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				$site_default_themes = $themes_ob->default_themes['site'];
 
 				$nav_themes = ! empty(mixt_get_themes('nav')) ? mixt_get_themes('nav') : $preset_themes;
+				$nav_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $nav_themes );
 				$nav_default_themes = $themes_ob->default_themes['nav'];
 			}
 
@@ -1007,7 +1008,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'loc-bar-bg-color',
 							'type'     => 'color',
 							'title'    => __( 'Background Color', 'mixt' ),
-							'subtitle' => __( 'Select a background color for the location bar', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
 							'required' => array('location-bar', '=', true),
@@ -1018,7 +1018,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'loc-bar-bg-pat',
 							'type'     => 'image_select',
 							'title'    => __( 'Background Pattern', 'mixt' ),
-							'subtitle' => __( 'Select a background image for the bar', 'mixt' ),
 							'options'  => $img_patterns,
 							'empty'    => true,
 							'required' => array('location-bar', '=', true),
@@ -1029,7 +1028,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'loc-bar-text-color',
 							'type'     => 'color',
 							'title'    => __( 'Text Color', 'mixt' ),
-							'subtitle' => __( 'Select a text color for the location bar', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
 							'required' => array('location-bar', '=', true),
@@ -1040,7 +1038,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'loc-bar-border-color',
 							'type'     => 'color',
 							'title'    => __( 'Border Color', 'mixt' ),
-							'subtitle' => __( 'Select a border color for the location bar', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
 							'required' => array('location-bar', '=', true),
@@ -1336,6 +1333,20 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Settings for the primary navbar', 'mixt' ),
 						'indent'   => true,
 					),
+
+						// Layout
+						array(
+							'id'       => 'nav-layout',
+							'type'     => 'button_set',
+							'title'    => __( 'Layout', 'mixt' ),
+							'subtitle' => __( 'Set the navbar layout (orientation)', 'mixt' ),
+							'options'  => array(
+								'horizontal' => __( 'Horizontal', 'mixt' ),
+								'vertical'   => __( 'Vertical', 'mixt' ),
+							),
+							'default'  => 'horizontal',
+						),
+
 						// Logo Alignment
 						array(
 							'id'       => 'logo-align',
@@ -1361,6 +1372,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'static' => __( 'Static', 'mixt' ),
 							),
 							'default'  => 'fixed',
+							'required' => array('nav-layout', '=', 'horizontal'),
 						),
 
 						// Theme Select
@@ -1370,7 +1382,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Theme', 'mixt' ),
 							'subtitle' => __( 'Select the theme for the primary navbar', 'mixt' ),
 							'options'  => $nav_themes,
-							'default'  => MIXT_THEME,
+							'default'  => 'auto',
 						),
 
 						// Texture
@@ -1392,6 +1404,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => 20,
 							'min'      => 0,
 							'max'      => 50,
+							'required' => array('nav-layout', '=', 'horizontal'),
 						),
 
 						// Fixed Padding
@@ -1403,7 +1416,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => 0,
 							'min'      => 0,
 							'max'      => 50,
-							'required' => array('nav-mode', '=', 'fixed'),
+							'required' => array(
+								array('nav-layout', '=', 'horizontal'),
+								array('nav-mode', '=', 'fixed'),
+							),
 						),
 
 						// Opacity
@@ -1417,6 +1433,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'min'        => 0,
 							'max'        => 1,
 							'resolution' => 0.01,
+							'required'   => array('nav-layout', '=', 'horizontal'),
 						),
 
 						// See-Through When Possible
@@ -1430,6 +1447,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'false' => __( 'No', 'mixt' ),
 							),
 							'default'  => 'false',
+							'required' => array('nav-layout', '=', 'horizontal'),
 						),
 
 						// See-Through Opacity
@@ -1443,7 +1461,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'min'        => 0,
 							'max'        => 1,
 							'resolution' => 0.01,
-							'required'   => array('nav-transparent', '=', 'true'),
+							'required'   => array(
+								array('nav-layout', '=', 'horizontal'),
+								array('nav-transparent', '=', 'true'),
+							),
 						),
 
 						// Position
@@ -1457,6 +1478,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'below' => __( 'Below', 'mixt' ),
 							),
 							'default' => 'above',
+							'required' => array('nav-layout', '=', 'horizontal'),
 						),
 
 						// Hover Item Background
@@ -1547,7 +1569,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Theme', 'mixt' ),
 							'subtitle' => __( 'Select the theme for the secondary navbar', 'mixt' ),
 							'options'  => $nav_themes,
-							'default'  => 'ice-white',
+							'default'  => 'auto',
 							'required' => array('second-nav', '=', true),
 						),
 
@@ -1772,6 +1794,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'icon'       => 'el-icon-download-alt',
 				'customizer' => false,
 				'fields'     => array(
+
+					// Footer Theme Select
+					array(
+						'id'       => 'footer-theme',
+						'type'     => 'select',
+						'title'    => __( 'Footer Theme', 'mixt' ),
+						'subtitle' => __( 'Select the theme to be used for the footer', 'mixt' ),
+						'options'  => array_merge( array( 'auto' => __( 'Auto', 'mixt') ), $site_themes ),
+						'default'  => 'auto',
+					),
 					
 					// Back To Top Button
 					array(
@@ -1791,6 +1823,106 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'fa fa-chevron-up',
 						'required' => array('back-to-top', '=', true),
 					),
+					
+					// Divider
+					array(
+						'id'   => 'footer-divider',
+						'type' => 'divide',
+					),
+
+					// WIDGET AREA SECTION
+					array(
+						'id'       => 'footer-widgets-section',
+						'type'     => 'section',
+						'title'    => __( 'Widget Area', 'mixt' ),
+						'indent'   => true,
+					),
+					
+						// Background Color
+						array(
+							'id'       => 'footer-widgets-bg-color',
+							'type'     => 'color',
+							'title'    => __( 'Background Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
+
+						// Background Pattern
+						array(
+							'id'       => 'footer-widgets-bg-pat',
+							'type'     => 'image_select',
+							'title'    => __( 'Background Pattern', 'mixt' ),
+							'options'  => $img_patterns,
+							'empty'    => true,
+						),
+
+						// Text Color
+						array(
+							'id'       => 'footer-widgets-text-color',
+							'type'     => 'color',
+							'title'    => __( 'Text Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
+
+						// Text Color
+						array(
+							'id'       => 'footer-widgets-border-color',
+							'type'     => 'color',
+							'title'    => __( 'Border Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
+
+					// Divider
+					array(
+						'id'   => 'footer-divider-2',
+						'type' => 'divide',
+					),
+
+					// COPYRIGHT AREA SECTION
+					array(
+						'id'       => 'footer-copy-section',
+						'type'     => 'section',
+						'title'    => __( 'Copyright Area', 'mixt' ),
+						'indent'   => true,
+					),
+					
+						// Background Color
+						array(
+							'id'       => 'footer-copy-bg-color',
+							'type'     => 'color',
+							'title'    => __( 'Background Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
+
+						// Background Pattern
+						array(
+							'id'       => 'footer-copy-bg-pat',
+							'type'     => 'image_select',
+							'title'    => __( 'Background Pattern', 'mixt' ),
+							'options'  => $img_patterns,
+							'empty'    => true,
+						),
+
+						// Text Color
+						array(
+							'id'       => 'footer-copy-text-color',
+							'type'     => 'color',
+							'title'    => __( 'Text Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
+
+						// Text Color
+						array(
+							'id'       => 'footer-copy-border-color',
+							'type'     => 'color',
+							'title'    => __( 'Border Color', 'mixt' ),
+							'transparent' => false,
+							'validate' => 'color',
+						),
 				),
 			);
 

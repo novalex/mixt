@@ -156,7 +156,7 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		transition-delay: 0.15s;
 
 		li > a {
-			max-height: 37px;
+			max-height: $nav-primary-sub-item-height + 1px;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			transition: background 0.3s, color 0.3s;
@@ -169,10 +169,10 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		li .menu-item > a,
 		.mega-menu-column li > a {
 			clear: both;
-			padding: $padding-s;
+			padding: ($nav-primary-sub-item-height - $font-size) / 2;
 			font-size: $font-size;
 			font-weight: bold;
-			line-height: 16px;
+			line-height: 1;
 			border-bottom-width: 1px;
 			border-bottom-style: solid;
 		}
@@ -361,17 +361,20 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 	.nav-search {
 		.sub-menu { width: 300px; }
 
-		.search-form {
-			input, button {
-				border-width: 0;
-				border-radius: 0;
-				margin-left: 0;
-				background: transparent;
-				box-shadow: none !important;
-				text-shadow: none !important;
-			}
-
-			button { border-left-width: 1px; }
+		input {
+			margin-left: 0;
+			border-radius: 0;
+			border-width: 0 !important;
+			background: transparent !important;
+			box-shadow: none !important;
+			text-shadow: none !important;
+		}
+		button {
+			height: $input-height-base;
+			margin-left: 0;
+			border-radius: 0;
+			border-width: 0;
+			border-left-width: 1px;
 		}
 	}
 

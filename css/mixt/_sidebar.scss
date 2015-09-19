@@ -9,8 +9,6 @@
 		li {
 			border-top-width: 1px;
 			margin-top: -1px !important;
-
-			a { color: inherit; }
 		}
 
 		.current_page_item {
@@ -18,9 +16,15 @@
 			padding-left: 15px;
 			padding-right: 15px;
 
-			a { cursor: default; }
+			a {
+				cursor: default;
+				color: inherit !important;
+			}
 		}
 	}
+
+	.nav li a,
+	.child-page-nav li a { color: inherit; }
 
 	@include media('screen', 'mars') {
 		.child-page-nav {
@@ -44,6 +48,8 @@
 					border-right-width: 0;
 
 					@include square-arrow('right', 12px, $border: inherit);
+
+					&:before { left: auto; }
 				}
 			}
 		}

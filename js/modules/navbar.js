@@ -432,7 +432,7 @@ NAVBAR FUNCTIONS
 		var mqNav = mqCheck('navbar-check');
 
 		// Primary Navbar
-		if ( mainNavLogoCls != 'logo-center' ) {
+		if ( mainNavLogoCls != 'logo-center' && mixt_opt.nav.layout == 'horizontal' ) {
 			if ( mqNav === 0 ) {
 				var mainNavContWidth = mainNavCont.width();
 				if ( mainNavItemsWidth > mainNavContWidth ) {

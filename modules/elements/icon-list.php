@@ -310,7 +310,7 @@ class Mixt_Iconlist extends Mixt_Element {
 					'heading'    => __( 'Icon Animation', 'mixt' ),
 					'param_name' => 'icon_anim',
 					'value'      => array_flip($this->icon_anims),
-					'group'       => __( 'Icon', 'mixt' ),
+					'group'      => __( 'Icon', 'mixt' ),
 				),
 
 				// Design Tab

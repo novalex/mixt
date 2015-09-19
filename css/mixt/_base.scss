@@ -26,6 +26,21 @@ html,
 body { margin: 0 !important; }
 
 
+// Main Content
+
+#content,
+.sidebar {
+	border-width: 0;
+	border-style: solid;
+}
+
+#content,
+.sidebar,
+.posts-container,
+.page-nav,
+#content-wrap > .row { border-color: inherit; }
+
+
 // Lists
 
 ol, ul {

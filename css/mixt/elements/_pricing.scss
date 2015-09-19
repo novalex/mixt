@@ -129,12 +129,14 @@
 	}
 }
 
-@include media('screen', '(max-width: 800px)') {
-	&,
-	> .wpb_wrapper,
-	.mixt-pricing { display: block !important; }
+@include media('screen', '<mars') {
+	.pricing-row {
+		&,
+		> .wpb_wrapper,
+		.mixt-pricing { display: block !important; }
 
-	.mixt-pricing.highlight { padding: 5px 0; }
+		.mixt-pricing.highlight { padding: 5px 0; }
+	}
 }
 
 .mixt-pricing.no-border {

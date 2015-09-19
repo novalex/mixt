@@ -22,7 +22,9 @@ $icon-el-padding: 8px;
 	}
 
 	// Icon Colors
-	i { @extend %basic-color-text-variants; }
+	i {
+		@extend %basic-color-text-variants;
+	}
 
 	// Icon Styles
 	&.icon-solid,

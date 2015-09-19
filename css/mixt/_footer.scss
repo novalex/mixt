@@ -1,40 +1,31 @@
 
 #colophon {
-	$top-bg: #3a3a3a;
-	$btm-bg: #444;
-	$border: #333;
 	$spacing: 20px;
 
 	.footer-row {
 		padding: $spacing 0;
-		border-top: 1px solid $border;
-		color: set-color-for-bg($top-bg, $light: lighten($top-bg, 50), $dark: darken($top-bg, 50));
-		@include text-shadow-for-bg($top-bg);
+		border-top-width: 1px;
+		border-top-style: solid;
 	}
 
 	.widget-row {
-		background-color: $top-bg;
-	}
-
-	.copyright-row {
-		background-color: $btm-bg;
-	}
-
-	.widget-area {
+		ul,
 		div,
-		.nav { border-color: #222; }
-
-		ul { border-color: inherit; }
+		.nav,
+		.widget { border-color: inherit; }
 	}
 
 	.widget { margin-bottom: $spacing; }
 
-	.widget-title {
-		margin-top: 0;
-		color: set-color-for-bg($top-bg);
-	}
+	.widget-title { margin-top: 0; }
 
 	.widget-area:last-of-type .widget:last-child { margin-bottom: 0; }
+
+	.widget-row,
+	.copyright-row {
+		background-size: auto;
+		background-repeat: repeat;
+	}
 
 	@include media('screen', 'mars') {
 		.widget:last-child,
@@ -44,10 +35,12 @@
 }
 
 // Back To Top Button
+
 #back-to-top {
 	position: fixed;
 	bottom: 15px; right: 15px;
 	opacity: 0.85;
+	display: none;
 
 	@include media('screen', '<mercury') {
 		display: none !important;

@@ -366,7 +366,7 @@ class Mixt_Iconbox extends Mixt_Element {
 					'param_name' => 'icon_pos',
 					'value'      => array_flip($this->icon_positions),
 					'std'        => 'top',
-					'group'       => __( 'Icon', 'mixt' ),
+					'group'      => __( 'Icon', 'mixt' ),
 				),
 				array(
 					'type'       => 'dropdown',
@@ -377,12 +377,12 @@ class Mixt_Iconbox extends Mixt_Element {
 						__( 'Middle', 'mixt' ) => 'middle',
 						__( 'Bottom', 'mixt' ) => 'bottom',
 					),
-					'dependency'  => array(
+					'dependency' => array(
 						'element' => 'icon_pos',
 						'value'   => array('left', 'right'),
 					),
-					'std' => 'middle',
-					'group'       => __( 'Icon', 'mixt' ),
+					'std'        => 'middle',
+					'group'      => __( 'Icon', 'mixt' ),
 				),
 				array(
 					'type'       => 'dropdown',
@@ -393,19 +393,19 @@ class Mixt_Iconbox extends Mixt_Element {
 						__( 'Center', 'mixt' ) => 'center',
 						__( 'Right', 'mixt' )  => 'right',
 					),
-					'dependency'  => array(
+					'dependency' => array(
 						'element' => 'icon_pos',
 						'value'   => array('top', 'bottom'),
 					),
-					'std' => 'center',
-					'group'       => __( 'Icon', 'mixt' ),
+					'std'        => 'center',
+					'group'      => __( 'Icon', 'mixt' ),
 				),
 				array(
 					'type'       => 'dropdown',
 					'heading'    => __( 'Icon Animation', 'mixt' ),
 					'param_name' => 'icon_anim',
 					'value'      => array_flip($this->icon_anims),
-					'group'       => __( 'Icon', 'mixt' ),
+					'group'      => __( 'Icon', 'mixt' ),
 				),
 				array(
 					'type'        => 'checkbox',

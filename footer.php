@@ -7,6 +7,7 @@
  */
 
 $options = mixt_get_options( array(
+	'footer-theme'     => array( 'return' => 'value' ),
 	'back-to-top'      => array(),
 	'back-to-top-icon' => array( 'return' => 'value' ),
 ) );
@@ -19,7 +20,12 @@ $options = mixt_get_options( array(
 
 	</div><?php // close .main-content ?>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<?php
+		$footer_classes = 'site-footer';
+		if ( $options['footer-theme'] != 'auto' ) $footer_classes .= " theme-{$options['footer-theme']}";
+	?>
+
+	<footer id="colophon" class="<?php echo $footer_classes; ?>" role="contentinfo">
 		<?php
 
 		// Footer Widget Row
@@ -34,7 +40,7 @@ $options = mixt_get_options( array(
 		if ( $sidebars > 0 ) {
 			$column_class = 'col-sm-' . 12 / $sidebars;
 			?>
-			<div class="footer-row widget-row">
+			<div class="footer-row widget-row theme-section-alt">
 				<div class="container">
 					<div id="footer-widgets" class="row">
 						<?php foreach ( $active_sidebars as $sidebar ) { ?>
@@ -48,7 +54,7 @@ $options = mixt_get_options( array(
 		<?php } ?>
 
 		<?php // Footer Copyright Row ?>
-		<div class="footer-row copyright-row">
+		<div class="footer-row copyright-row theme-section-main">
 			<div class="container">
 				<div class="row">
 					<div class="site-footer-inner col-sm-12">

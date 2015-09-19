@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="quantity input-group mixt-spinner">
 	<span class="input-group-btn">
-		<button class="btn btn-default minus" type="button" title="<?php echo esc_attr__( 'Decrease Quantity', 'mixt' ); ?>">-</button>
+		<button class="btn btn-minimal minus" type="button" title="<?php echo esc_attr__( 'Decrease Quantity', 'mixt' ); ?>">-</button>
 	</span>
 	<input 
 		type="text" step="<?php echo esc_attr( $step ); ?>"
@@ -25,6 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		class="form-control spinner-val qty" 
 	/>
 	<span class="input-group-btn">
-		<button class="btn btn-default plus" type="button" title="<?php echo esc_attr__( 'Increase Quantity', 'mixt' ); ?>">+</button>
+		<button class="btn btn-minimal plus" type="button" title="<?php echo esc_attr__( 'Increase Quantity', 'mixt' ); ?>">+</button>
 	</span>
 </div>

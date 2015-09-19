@@ -226,7 +226,12 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 				}
 
 				if ( $depth === 0 ) {
-					$item_output .= '<i class="fa fa-chevron-down' . $arrow_classes . '"></i>';
+					if ( Mixt_Options::get('nav', 'layout') == 'vertical' ) {
+						$arrow = 'fa fa-chevron-right';
+					} else {
+						$arrow = 'fa fa-chevron-down';
+					}
+					$item_output .= "<i class='$arrow $arrow_classes'></i>";
 				} else if ( $depth > 0 ) {
 					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
 						if ( ! strpos($arrow_classes, 'visible-xs-inline-block') ) {

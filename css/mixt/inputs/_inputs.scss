@@ -34,7 +34,7 @@ $input-focus-border: $input-border;
 
 // INPUTS
 
-input,
+input:not([type=submit]):not([type=button]):not(.btn),
 textarea,
 .form-control {
 	@extend %input-base;

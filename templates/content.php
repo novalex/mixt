@@ -21,7 +21,7 @@ $is_masonry = Mixt_Options::get('layout', 'type') == 'masonry';
 
 	?></header>
 
-	<?php if ( is_archive() || Mixt_Options::get('page', 'posts-page') ) : // Display Excerpts for Archive Pages ?>
+	<?php if ( is_archive() || ( Mixt_Options::get('page', 'page-type') != 'blog' && Mixt_Options::get('page', 'posts-page') ) ) : // Display Excerpts for Archive Pages ?>
 		<div class="entry-body entry-summary"><?php
 
 			$post_ob->content('excerpt');

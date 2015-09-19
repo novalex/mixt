@@ -42,7 +42,7 @@ $header_options = Mixt_Options::get('header');
 $theme_options  = Mixt_Options::get('themes');
 $layout_options = Mixt_Options::get('layout');
 
-$body_classes = 'theme-' . $theme_options['site'];
+$body_classes = "theme-{$theme_options['site']}";
 if ( $page_options['layout'] == 'boxed' ) $body_classes .= ' boxed';
 if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 
@@ -58,7 +58,8 @@ if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 
 	// Main Wrapper Classes
 	$wrapper_classes = '';
-	if ( $page_options['fullwidth'] ) $wrapper_classes .= 'fullwidth';
+	if ( $page_options['fullwidth'] ) $wrapper_classes .= 'fullwidth ';
+	if ( $nav_options['layout'] == 'vertical' ) $wrapper_classes .= 'nav-vertical nav-left ';
 
 	// Header Media Wrapper Classes
 	if ( $header_options['enabled'] ) {
@@ -88,8 +89,14 @@ if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 
 	$nav_wrap_classes = $nav_options['logo-align'];
 
-	$nav_classes = ' theme-' . $theme_options['nav'];
-	if ( $nav_options['mode'] == 'fixed' ) $nav_classes .= ' sticky';
+	$nav_classes = ( $theme_options['nav'] != 'auto' ) ? " theme-{$theme_options['nav']}" : " theme-{$theme_options['site']}";
+
+	if ( $nav_options['layout'] == 'vertical' ) {
+		$nav_wrap_classes .= ' nav-vertical';
+		$nav_classes .= ' vertical';
+	} else {
+		if ( $nav_options['mode'] == 'fixed' ) $nav_classes .= ' sticky';
+	}
 	if ( $nav_options['bordered'] ) $nav_classes .= ' bordered';
 	if ( ! $nav_options['hover-bg'] ) $nav_classes .= ' no-hover-bg';
 	?>
