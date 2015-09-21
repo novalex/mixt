@@ -6,7 +6,6 @@ $theme-aqua: (
 		'accent': #5991CE,
 
 		'bg': #fff,
-		'bg-hover': darken(#fff, 5),
 
 		'color': #333,
 		'color-fade': #777,
@@ -14,9 +13,7 @@ $theme-aqua: (
 		'color-inv-fade': #ddd,
 
 		'border': #ddd,
-		'border-alpha': rgba(0,0,0,0.15),
 		'border-inv': #333,
-		'border-inv-alpha': rgba(0,0,0,0.4),
 
 		'menu-bg': #fbfbfb,
 		'menu-expand': rgba(0,0,0,0.05),
@@ -32,7 +29,6 @@ $theme-aqua: (
 		'accent': #5991CE,
 
 		'bg': #444,
-		'bg-hover': lighten(#444, 5),
 
 		'color': #fff,
 		'color-fade': #ddd,
@@ -40,15 +36,12 @@ $theme-aqua: (
 		'color-inv-fade': #777,
 
 		'border': #333,
-		'border-alpha': rgba(0,0,0,0.4),
 		'border-inv': #ddd,
-		'border-inv-alpha': rgba(0,0,0,0.15),
 
 		'menu-bg': #4a4a4a,
 		'menu-expand': rgba(0,0,0,0.05),
 
 		'menu-border': #333,
-		'menu-border-alpha': rgba(0,0,0,0.4),
 
 		'menu-color': #eee,
 		'menu-color-fade': #bbb,

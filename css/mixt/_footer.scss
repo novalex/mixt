@@ -1,11 +1,9 @@
 
 #colophon {
-	$spacing: 20px;
-
 	.footer-row {
-		padding: $spacing 0;
-		border-top-width: 1px;
-		border-top-style: solid;
+		padding: $gutter-lg 0 0;
+		border-style: solid;
+		border-width: 1px 0 0 0;
 	}
 
 	.widget-row {
@@ -15,22 +13,20 @@
 		.widget { border-color: inherit; }
 	}
 
-	.widget { margin-bottom: $spacing; }
-
 	.widget-title { margin-top: 0; }
 
-	.widget-area:last-of-type .widget:last-child { margin-bottom: 0; }
+	.widget-row {
+		border-bottom-width: 1px;
+
+		+ .copyright-row { border-top-width: 0; }
+	}
+
+	.copyright-row { padding: $padding-m 0; }
 
 	.widget-row,
 	.copyright-row {
 		background-size: auto;
 		background-repeat: repeat;
-	}
-
-	@include media('screen', 'mars') {
-		.widget:last-child,
-		.wpb_content_element,
-		.mixt-element { margin-bottom: 0; }
 	}
 }
 

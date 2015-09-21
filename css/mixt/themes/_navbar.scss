@@ -9,7 +9,6 @@ $main-nav-opacity: 0.95;
 	$color: map-get($theme, 'color');
 	$color-inv: map-get($theme, 'color-inv');
 	$border: map-get($theme, 'border');
-	$border-alpha: map-get($theme, 'border-alpha');
 
 	$menu-bg: map-get($theme, 'menu-bg');
 	$menu-bg-hover: theme-color($theme, 'menu-bg-hover', rgba(0,0,0,0.02));
@@ -17,7 +16,7 @@ $main-nav-opacity: 0.95;
 	$menu-color: map-get($theme, 'menu-color');
 	$menu-color-fade: map-get($theme, 'menu-color-fade');
 	$menu-border: map-get($theme, 'menu-border');
-	$menu-border-alpha: map-get($theme, 'menu-border-alpha');
+	$menu-border-alpha: theme-color($theme, 'menu-border-alpha', false);
 
 	@if ( lumin($bg) > 0.5 ) {
 		$bg-light: true;
@@ -44,7 +43,6 @@ $main-nav-opacity: 0.95;
 
 	.navbar.theme-#{$name} {
 		border-color: $border;
-		border-color: $border-alpha;
 		background-color: $bg;
 
 		.nav {
@@ -71,7 +69,7 @@ $main-nav-opacity: 0.95;
 			> li,
 			> li > a {
 				border-color: $menu-border;
-				border-color: $menu-border-alpha;
+				@if $menu-border-alpha { border-color: $menu-border-alpha; }
 			}
 
 			li > a:hover,
@@ -88,7 +86,7 @@ $main-nav-opacity: 0.95;
 			button {
 				color: $menu-color;
 				border-color: $menu-border;
-				border-color: $menu-border-alpha;
+				@if $menu-border-alpha { border-color: $menu-border-alpha; }
 			}
 
 			::placeholder { color: $menu-color-fade; }
@@ -202,7 +200,7 @@ $main-nav-opacity: 0.95;
 				.nav > li,
 				.nav > li > a {
 					border-color: $menu-border;
-					border-color: $menu-border-alpha;
+					@if $menu-border-alpha { border-color: $menu-border-alpha; }
 				}
 
 				// Menu Expanded State

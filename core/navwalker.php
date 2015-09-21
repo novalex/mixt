@@ -227,7 +227,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 
 				if ( $depth === 0 ) {
 					if ( Mixt_Options::get('nav', 'layout') == 'vertical' ) {
-						$arrow = 'fa fa-chevron-right';
+						$arrow = ( Mixt_Options::get('nav', 'vertical-pos') == 'left' ) ? 'fa fa-chevron-right' : 'fa fa-chevron-left';
 					} else {
 						$arrow = 'fa fa-chevron-down';
 					}

@@ -127,33 +127,39 @@ UI FUNCTIONS
 	});
 
 
-	// Tooltips Init
-	$('[data-toggle="tooltip"], .related-title-tip').tooltip({
-		placement: 'auto',
-		container: 'body'
-	});
+	// Functions run on page load and "refresh" event
+	function runOnRefresh() {
+		// Tooltips Init
+		$('[data-toggle="tooltip"], .related-title-tip').tooltip({
+			placement: 'auto',
+			container: 'body'
+		});
 
 
-	// On Hover Animations Init
-	var animHoverEl = $('.anim-on-hover');
-	animHoverEl.hoverIntent( function() {
-		$(this).addClass('hovered');
-		var inner   = $(this).children('.on-hover'),
-			animIn  = inner.data('anim-in') || 'fadeIn',
-			animOut = inner.data('anim-out') || 'fadeOut';
-		inner.removeClass(animOut).addClass('animated ' + animIn);
-	}, function() {
-		$(this).removeClass('hovered');
-		var inner   = $(this).children('.on-hover'),
-			animIn  = inner.data('anim-in') || 'fadeIn',
-			animOut = inner.data('anim-out') || 'fadeOut';
-		inner.removeClass(animIn).addClass(animOut);
-	}, 300);
-	animHoverEl.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
-		if ( ! $(this).hasClass('hovered') ) {
-			$(this).children('.on-hover').removeClass('animated');
-		}
-	});
+		// On Hover Animations Init
+		var animHoverEl = $('.anim-on-hover');
+		animHoverEl.hoverIntent( function() {
+			$(this).addClass('hovered');
+			var inner   = $(this).children('.on-hover'),
+				animIn  = inner.data('anim-in') || 'fadeIn',
+				animOut = inner.data('anim-out') || 'fadeOut';
+			inner.removeClass(animOut).addClass('animated ' + animIn);
+		}, function() {
+			$(this).removeClass('hovered');
+			var inner   = $(this).children('.on-hover'),
+				animIn  = inner.data('anim-in') || 'fadeIn',
+				animOut = inner.data('anim-out') || 'fadeOut';
+			inner.removeClass(animIn).addClass(animOut);
+		}, 300);
+		animHoverEl.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
+			if ( ! $(this).hasClass('hovered') ) {
+				$(this).children('.on-hover').removeClass('animated');
+			}
+		});
+	}
+	viewport.on('refresh', function() {
+		runOnRefresh();
+	}).trigger('refresh');
 
 
 	// Back To Top Button

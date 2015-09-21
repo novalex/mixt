@@ -48,14 +48,21 @@ function blendColors(c0, c1, p) {
 }
 
 
-// Convert HEX color to RGBa
-function hexToRgba(hex, opacity) {
-    hex = hex.replace('#','');
-    var r = parseInt(hex.substring(0,2), 16),
-	    g = parseInt(hex.substring(2,4), 16),
-	    b = parseInt(hex.substring(4,6), 16);
-    result = 'rgba('+r+','+g+','+b+','+opacity+')';
-    return result;
+// Convert color to RGBa
+function colorToRgba(color, opacity) {
+	if ( color.substring(0,4) == 'rgba' ) {
+		var alpha = color.match(/([^\,]*)\)$/);
+		return color.replace(alpha[1], opacity);
+	} else if ( color.substring(0,3) == 'rgb' ) {
+		return color.replace('rgb(', 'rgba(').replace(')', ', '+opacity+')');
+	} else {
+		hex = color.replace('#','');
+		var r = parseInt(hex.substring(0,2), 16),
+			g = parseInt(hex.substring(2,4), 16),
+			b = parseInt(hex.substring(4,6), 16);
+		result = 'rgba('+r+','+g+','+b+','+opacity+')';
+		return result;
+	}
 }
 
 
@@ -73,16 +80,8 @@ function colorLoD(color) {
 		b = a >> 8 & 255;
 		g = a & 255;
 	}
-	hsp = Math.sqrt(
-		0.299 * (r * r) +
-		0.587 * (g * g) +
-		0.114 * (b * b)
-	);
-	if (hsp>127.5) {
-		return 'light';
-	} else {
-		return 'dark';
-	}
+	hsp = Math.sqrt( 0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b) );
+	return ( hsp > 127.5 ) ? 'light' : 'dark';
 } 
 
 

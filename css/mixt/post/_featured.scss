@@ -40,16 +40,18 @@
 
 	&.post-aside,
 	&.post-link a,
-	&.post-quote blockquote {
-		min-height: 40px;
+	&.post-status {
 		padding: $padding-m;
 		border: 1px solid rgba(0,0,0,0.1);
 	}
-	&.post-quote blockquote { border-left-width: 2px; }
 
 	&.post-aside,
 	&.post-quote,
-	&.post-link { text-align: initial; }
+	&.post-link,
+	&.post-status {
+		min-height: 40px;
+		text-align: initial;
+	}
 
 	&.post-quote blockquote {
 		width: 100%;
@@ -58,8 +60,7 @@
 	}
 
 	&.post-link a {
-		padding: $padding-m;
-		text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+		min-height: 40px;
 
 		.title {
 			margin-top: 0;
@@ -67,6 +68,11 @@
 		}
 
 		small { opacity: 0.8; }
+	}
+
+	&.post-gallery {
+		.gallery-item { margin: 0 !important; }
+		.gallery-caption { display: none; }
 	}
 
 	&.feat-format {
@@ -81,25 +87,33 @@
 		i {
 			position: absolute;
 			top: 50%; left: 50%;
-			line-height: 1;
-			font-size: 32px;
+			width: 32px; height: 32px;
 			margin-top: -16px;
 			margin-left: -16px;
+			font-size: 32px;
+			line-height: 1;
+			text-align: center;
 		}
 	}
 
 	// Background Images
-	&.post-aside {
-		background-repeat: repeat;
-		background-image: url('#{$img-path}/textures/subtle-grunge.png');
+	@if $post-aside-img {
+		&.post-aside {
+			background-repeat: repeat;
+			background-image: url($post-aside-img);
+		}
 	}
-	&.post-quote blockquote {
-		background-repeat: repeat;
-		background-image: url('#{$img-path}/patterns/linedpaper.png');
+	@if $post-quote-img {
+		&.post-quote blockquote {
+			background-repeat: repeat;
+			background-image: url($post-quote-img);
+		}
 	}
-	&.post-link a {
-		background-repeat: repeat;
-		background-image: url('#{$img-path}/textures/gplay.png');
+	@if $post-link-img {
+		&.post-link a {
+			background-repeat: repeat;
+			background-image: url($post-link-img);
+		}
 	}
 
 
@@ -110,6 +124,7 @@
 	&.post-audio,
 	&.post-gallery,
 	&.post-quote blockquote,
+	&.post-status,
 	&.post-link a,
 	&.feat-format {
 		border-radius: $bd-radius;

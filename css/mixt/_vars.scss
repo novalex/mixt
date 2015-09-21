@@ -63,6 +63,13 @@ $padding-l:  30px;
 $post-inner-pad: 15px;
 
 
+// POST FEATURED IMAGES
+
+$post-aside-img: false; // '#{$img-path}/textures/subtle-grunge.png';
+$post-quote-img: false; // '#{$img-path}/patterns/linedpaper.png';
+$post-link-img: '#{$img-path}/textures/transparent-square-tiles.png';
+
+
 // MISCELLANEOUS
 
 $bd-radius-s: 1px;
@@ -70,6 +77,8 @@ $bd-radius:   2px;
 $bd-radius-l: 3px;
 
 $rounded-radius: $bd-radius-l;
+
+$ie-hacks: true;
 
 
 // PLUGIN CONFIG

@@ -190,21 +190,33 @@ if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
 					// Print Groups
 					foreach ( $this->value as $k => $value ) {
 
-						if ( $value == '' || !is_array($value) ) {
-							return;
-						}
+						if ( $value == '' || ! is_array($value) ) return;
 
 						$group_fields = '';
 
-						foreach ( $value as $field => $val ) {
-							$saved_field = $inputs_arr[$field];
+						foreach ( $this->fields as $id => $atts ) {
+							$saved_field = $inputs_arr[$id];
 
-							$saved_field['id']    = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
-							$saved_field['name']  = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
-							$saved_field['value'] = $val;
+							$saved_field['id']    = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $id . ']';
+							$saved_field['name']  = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $id . ']';
+
+							if ( array_key_exists($id, $value) ) {
+								$saved_field['value'] = $value[$id];
+							}
 							
 							$group_fields .= build_field($saved_field);
 						}
+
+						// foreach ( $value as $field => $val ) {
+						// 	if ( ! array_key_exists($field, $inputs_arr) ) continue;
+						// 	$saved_field = $inputs_arr[$field];
+
+						// 	$saved_field['id']    = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
+						// 	$saved_field['name']  = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
+						// 	$saved_field['value'] = $val;
+							
+						// 	$group_fields .= build_field($saved_field);
+						// }
 
 						echo '<li>';
 							echo $group_fields;

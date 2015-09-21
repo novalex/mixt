@@ -141,8 +141,6 @@ td.product-name dl.variation {
 // Table
 table.shop_table {
 	border-collapse: collapse;
-	@extend .table;
-	@extend .table-bordered;
 
 	td { padding: $wc-spacing-s; }
 }

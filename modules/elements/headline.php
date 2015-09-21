@@ -353,10 +353,13 @@ class Mixt_Headline {
 		if ( $desc != '' ) $classes .= ' has-desc';
 
 		$line_class = '';
-		if ( $color == '' ) $line_class .= 'theme-bd';
-		else if ( $color == 'accent' ) $line_class .= 'theme-accent-bd';
+
+		if ( $color == '' ) { $line_class .= 'theme-bd'; }
+		else if ( $color == 'accent' ) { $line_class .= 'theme-accent-bd'; }
 		else { $line_class .= ' ' . $color; }
+
 		if ( $line_style != '' ) $line_class .= ' ' . $line_style;
+		
 		$line = '<span class="sideline ' . $line_class . '"></span>';
 
 		$left_content = $right_content = $separator = '';

@@ -82,7 +82,16 @@ $options = mixt_get_options( array(
 
 </div><?php // close #main-wrap ?>
 
-<?php wp_footer(); ?>
+<?php
+
+// Enqueue the lightSlider plugin on blog and portfolio pages when AJAX pagination is enabled
+if ( in_array(Mixt_Options::get('layout', 'pagination-type'), array('ajax-click', 'ajax-scroll')) && in_array(Mixt_Options::get('page', 'page-type'), array('blog', 'portfolio')) ) {
+	mixt_enqueue_plugin('lightslider');
+}
+
+wp_footer();
+
+?>
 
 <?php mixt_browsersync(); ?>
 

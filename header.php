@@ -59,14 +59,14 @@ if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 	// Main Wrapper Classes
 	$wrapper_classes = '';
 	if ( $page_options['fullwidth'] ) $wrapper_classes .= 'fullwidth ';
-	if ( $nav_options['layout'] == 'vertical' ) $wrapper_classes .= 'nav-vertical nav-left ';
+	if ( $nav_options['layout'] == 'vertical' ) $wrapper_classes .= ( $nav_options['vertical-pos'] == 'left' ) ? 'nav-vertical nav-left ' : 'nav-vertical nav-right ';
 
 	// Header Media Wrapper Classes
 	if ( $header_options['enabled'] ) {
-		$wrapper_classes .= ' has-head-media';
-		if ( $header_options['fullscreen'] ) $wrapper_classes .= ' fullscreen';
-		if ( $nav_options['transparent'] ) $wrapper_classes .= ' nav-transparent';
-		if ( $nav_options['position'] == 'below' ) $wrapper_classes .= ' nav-below';
+		$wrapper_classes .= 'has-head-media ';
+		if ( $header_options['fullscreen'] ) $wrapper_classes .= 'fullscreen ';
+		if ( $nav_options['transparent'] ) $wrapper_classes .= 'nav-transparent ';
+		if ( $nav_options['position'] == 'below' ) $wrapper_classes .= 'nav-below ';
 	}
 	?>
 
@@ -92,7 +92,7 @@ if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 	$nav_classes = ( $theme_options['nav'] != 'auto' ) ? " theme-{$theme_options['nav']}" : " theme-{$theme_options['site']}";
 
 	if ( $nav_options['layout'] == 'vertical' ) {
-		$nav_wrap_classes .= ' nav-vertical';
+		$nav_wrap_classes .= ( $nav_options['vertical-mode'] == 'fixed' ) ? ' nav-vertical vertical-fixed' : ' nav-vertical vertical-static';
 		$nav_classes .= ' vertical';
 	} else {
 		if ( $nav_options['mode'] == 'fixed' ) $nav_classes .= ' sticky';

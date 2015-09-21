@@ -24,6 +24,7 @@
 		transform-style: preserve-3d;
 
 		> div {
+			width: 100%;
 			height: auto;
 			padding: $spacing;
 			text-align: center;
@@ -59,6 +60,7 @@
 		position: absolute;
 		top: 0; left: 0;
 		transform: rotateX(180deg);
+		z-index: 1;
 	}
 
 	&.flipY {
@@ -91,5 +93,44 @@
 	// Accent Colors
 	@each $theme, $colors in $themes {
 		@include flipcard-color('.theme-#{$theme} & > .inner > .accent', map-get($colors, 'accent'));
+	}
+}
+
+// Fix IE10-11 not supporting preserve-3d & text not wrapping bug
+@if $ie-hacks {
+	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+		.mixt-flipcard {
+			&:hover,
+			&:focus,
+			&.hover {
+				> .inner { transform: none; }
+				.front { transform: rotateX(180deg); }
+				.back { transform: rotateX(0deg); }
+			}
+
+			> .inner {
+				transform: none !important;
+
+				> div { align-items: inherit; }
+			}
+
+			.front,
+			.back { transition: transform 0.4s ease-out 0.1s; }
+
+			.front { transform: rotateX(0deg); }
+			.back { transform: rotateX(180deg); }
+
+			&.flipY {
+				&:hover,
+				&:focus,
+				&.hover {
+					> .inner { transform: none; }
+					.front { transform: rotateY(180deg); }
+					.back { transform: rotateY(0deg); }
+				}
+				.front { transform: rotateY(0deg); }
+				.back { transform: rotateY(180deg); }
+			}
+		}
 	}
 }

@@ -332,17 +332,16 @@
 
 @include media('screen', 'mars') {
 
-	.navbar-mixt {
-		&.position-top {
-			.nav > li > a {
-				&, &:hover, &:focus {
-					background-color: transparent !important;
-				}
+	.navbar-mixt .sub-menu a { max-width: 300px; }
+
+	.navbar-mixt.position-top:not(.vertical) {
+		.nav > li > a {
+			&, &:hover, &:focus {
+				background-color: transparent !important;
 			}
 		}
-		.sub-menu a {
-			max-width: 300px;
-		}
+
+		&.bordered .nav > li { border-color: transparent; }
 	}
 
 	// Primary Navbar Fixed State
@@ -359,8 +358,6 @@
 			}
 		}
 	}
-
-	.navbar-mixt.bordered.position-top:not(.vertical) .nav > li { border-color: transparent; }
 
 	// Transparent
 	.nav-transparent .navbar-mixt.position-top {
@@ -603,7 +600,7 @@
 			button { padding-left: 30px; padding-right: 30px; }
 
 			input, button {
-				height: $nav-primary-item-height - 1px;
+				height: $nav-primary-item-height;
 			}
 		}
 

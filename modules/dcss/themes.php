@@ -5,100 +5,17 @@ use Mexitek\PHPColors\Color;
 
 
 /**
- * Return default themes by set
+ * Return default theme IDs and names
  */
-function mixt_default_themes($set = 'all') {
-	$themes = array(
-		'names' => array(
-			'lava' => 'Lava', 'dark-lava' => 'Dark Lava',
-			'eco' => 'Eco', 'dark-eco' => 'Dark Eco',
-			'aqua' => 'Aqua', 'nightly' => 'Nightly',
-		),
-
-		'site' => array(
-			'lava' => array(
-				'name' => 'Lava', 'id' => 'lava',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'text-fade' => '#777',
-				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
-				'accent' => '#dd3e3e', 'link' => '#dd3e3e',
-			),
-			'dark-lava' => array(
-				'name' => 'Dark Lava', 'id' => 'dark-lava',
-				'bg' => '#444', 'border' => '#333',
-				'text' => '#eee', 'text-fade' => '#ddd',
-				'inv-text' => '#333', 'inv-text-fade' => '#777',
-				'accent' => '#dd3e3e', 'link' => '#dd3e3e',
-			),
-			'eco' => array(
-				'name' => 'Eco', 'id' => 'eco',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'text-fade' => '#777',
-				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
-				'accent' => '#7cad24', 'link' => '#7cad24',
-			),
-			'aqua' => array(
-				'name' => 'Aqua', 'id' => 'aqua',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'text-fade' => '#777',
-				'inv-text' => '#fff', 'inv-text-fade' => '#ddd',
-				'accent' => '#5991CE', 'link' => '#5991CE',
-			),
-		),
-
-		'nav' => array(
-			'lava' => array(
-				'name' => 'Lava', 'id' => 'lava',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'inv-text' => '#fff',
-				'accent' => '#dd3e3e', 'inv-accent' => '#dd3e3e',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'dark-lava' => array(
-				'name' => 'Dark Lava', 'id' => 'dark-lava',
-				'bg' => '#444', 'border' => '#333',
-				'text' => '#fff', 'inv-text' => '#333',
-				'accent' => '#dd3e3e', 'inv-accent' => '#dd3e3e',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'eco' => array(
-				'name' => 'Eco', 'id' => 'eco',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'inv-text' => '#fff',
-				'accent' => '#7cad24', 'inv-accent' => '#7cad24',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'dark-eco' => array(
-				'name' => 'Dark Eco', 'id' => 'dark-eco',
-				'bg' => '#222', 'border' => '#111',
-				'text' => '#fff', 'inv-text' => '#333',
-				'accent' => '#7cad24', 'inv-accent' => '#7cad24',
-				'menu-bg' => '#333', 'menu-border' => '#222',
-				'rgba' => '1',
-			),
-			'aqua' => array(
-				'name' => 'Aqua', 'id' => 'aqua',
-				'bg' => '#fff', 'border' => '#ddd',
-				'text' => '#333', 'inv-text' => '#fff',
-				'accent' => '#5991CE', 'inv-accent' => '#5991CE',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-			'nightly' => array(
-				'name' => 'Nightly', 'id' => 'nightly',
-				'bg' => '#444', 'border' => '#333',
-				'text' => '#fff', 'inv-text' => '#333',
-				'accent' => '#5991CE', 'inv-accent' => '#5991CE',
-				'menu-bg' => '#fbfbfb', 'menu-border' => '#ddd',
-				'rgba' => '1',
-			),
-		),
+function mixt_default_themes() {
+	return array(
+		'lava' => 'Lava',
+		'dark-lava' => 'Dark Lava',
+		'eco' => 'Eco',
+		'dark-eco' => 'Dark Eco',
+		'aqua' => 'Aqua',
+		'nightly' => 'Nightly',
 	);
-	if ( $set == 'all' ) { return $themes; }
-	else { return $themes[$set]; }
 }
 
 
@@ -118,89 +35,208 @@ class Mixt_Themes extends Mixt_DCSS {
 		$this->themes_enabled = get_option('mixt-themes-enabled', true);
 		$this->active_themes = Mixt_Options::get('themes');
 		$this->default_themes = mixt_default_themes();
-		$this->site_themes = array_merge( $this->default_themes['site'], get_option('mixt-site-themes', array()) );
-		$this->nav_themes = array_merge( $this->default_themes['nav'], get_option('mixt-nav-themes', array()) );
-		$this->site_theme = $this->site_themes[MIXT_THEME];
+		$this->site_themes = array_merge( $this->default_themes, get_option('mixt-site-themes', array()) );
+		$this->nav_themes = array_merge( $this->default_themes, get_option('mixt-nav-themes', array()) );
 	}
 
 	/**
 	 * Output site-wide theme
 	 */
 	public function output_site() {
-		$options = mixt_get_options( array(
-			'site-theme' => array( 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
-		) );
-
 		$theme_id = $this->active_themes['site'];
 		$theme = $this->site_themes[$theme_id];
-		$this->site_theme = $theme;
 
 		// Do not output theme if it's one of the defaults or if themes are disabled
-		if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes['site']) ) return;
+		if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes) || ! is_array($theme) ) return;
 
-		$defaults = $this->default_themes['site'][MIXT_THEME];
+		$defaults = array(
+			'accent' => '#dd3e3e', 'bg' => '#fff',
+			'color' => '#333', 'color-fade' => '#777',
+			'color-inv' => '#fff', 'color-inv-fade' => '#ddd',
+			'border' => '#ddd', 'border-inv' => '#333',
+		);
 
-		$site_bg = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
+		$bg         = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
+		$bg_ob      = new Color($bg);
+		$bg_darker  = '#'.$bg_ob->darken(3);
+		$bg_lighter = '#'.$bg_ob->lighten(3);
 
-		$site_text      = ! empty($theme['text']) ? $theme['text'] : $defaults['text'];
-		$site_text_ob   = new Color($site_text);
-		$site_text_fade = ! empty($theme['text-fade']) ? $theme['text-fade'] : '#'.$site_text_ob->lighten(20);
+		$color      = ! empty($theme['color']) ? $theme['color'] : $defaults['color'];
+		$color_ob   = new Color($color);
+		$color_fade = ! empty($theme['color-fade']) ? $theme['color-fade'] : '#'.$color_ob->lighten(20);
 
-		$site_inv_text      = ! empty($theme['inv-text']) ? $theme['inv-text'] : $defaults['inv-text'];
-		$site_inv_text_ob   = new Color($site_inv_text);
-		$site_inv_text_fade = ! empty($theme['inv-text-fade']) ? $theme['inv-text-fade'] : $site_inv_text_ob->darken(40);
+		$color_inv      = ! empty($theme['color-inv']) ? $theme['color-inv'] : $defaults['color-inv'];
+		$color_inv_ob   = new Color($color_inv);
+		$color_inv_fade = ! empty($theme['color-inv-fade']) ? $theme['color-inv-fade'] : '#'.$color_inv_ob->darken(40);
 
-		$site_border = ! empty($theme['border']) ? $theme['border'] : $defaults['border'];
+		$border    = ! empty($theme['border']) ? $theme['border'] : $defaults['border'];
+		$border_ob = new Color($border);
 
-		$site_accent    = ! empty($theme['accent']) ? $theme['accent'] : $defaults['accent'];
-		$site_accent_ob = new Color($site_accent);
+		$accent    = ! empty($theme['accent']) ? $theme['accent'] : $defaults['accent'];
+		$accent_ob = new Color($accent);
 
-		$site_link_color = ! empty($theme['link']) ? $theme['link'] : $site_accent;
+		if ( $bg_ob->isLight() ) {
+			$bg_light_color = $color;
+			$bg_light_color_fade = $color_fade;
+
+			$bg_dark_color = $color_inv;
+			$bg_dark_color_fade = $color_inv_fade;
+		} else {
+			$bg_light_color = $color_inv;
+			$bg_light_color_fade = $color_inv_fade;
+
+			$bg_dark_color = $color;
+			$bg_dark_color_fade = $color_fade;
+		}
+
+		$bg_alt     = ! empty($theme['bg-alt']) ? $theme['bg-alt'] : '#'.$bg_ob->darken(3);
+		$color_alt  = ! empty($theme['color-alt']) ? $theme['color-alt'] : $this->set_color_for_bg($bg_alt, array($bg_light_color, $bg_dark_color));
+		$border_alt = ! empty($theme['border-alt']) ? $theme['border-alt'] : $border;
+
+		$bg_inv     = ! empty($theme['bg-inv']) ? $theme['bg-inv'] : '#'.$bg_ob->complementary();
+		$bg_inv_ob  = new Color($bg_inv);
+		$border_inv = ! empty($theme['border-inv']) ? $theme['border-inv'] : '#'.$bg_inv_ob->darken(10);
+
+		// RULES START
 			
-		// Background Color
-		echo "body, #main-wrap { background-color: $site_bg; }\n";
+		// Main Background Color
+		
+		echo "body, #main-wrap { background-color: $bg; }\n";
 
-		// Text Color
-		echo "body, #content-wrap { color: $site_text; }\n";
+		// Helper Classes
+		
+		echo ".theme-bg { background-color: $bg; }\n";
 
-		// Text Color Fade
-		echo '.post-meta a,' .
-			 ".post-meta > span { color: $site_text_fade; }\n";
+		echo ".theme-color { color: $color; }\n";
+		echo ".theme-color-fade { color: $color_fade; }\n";
+		echo ".theme-color-inv { color: $color_inv; }\n";
+		echo ".theme-color-inv-fade { color: $color_inv_fade; }\n";
 
-		// Border Color
-		echo "#content-wrap { border-color: $site_border; }\n";
+		echo ".theme-bg-light-color { color: $bg_light_color; }\n";
+		echo ".theme-bg-light-color-fade { color: $bg_light_color_fade; }\n";
+		echo ".theme-bg-dark-color { color: $bg_dark_color; }\n";
+		echo ".theme-bg-dark-color-fade { color: $bg_dark_color_fade; }\n";
 
-		// Accent Text Color
-		echo ".accent-color," .
-			 "#breadcrumbs a:hover { color: $site_accent; }\n";
+		echo ".accent-color { color: $accent; }\n";
+		echo ".accent-bg, .theme-section-accent { color: ".$this->set_color_for_bg($accent, array($color, $color_inv))."; background-color: $accent; }\n";
 
-		// Accent Background Color
-		echo '.accent-bg,' .
-			 '.accent-bg:hover,' .
-			 '.tag-list a:hover,' .
-			 '.tagcloud a:hover,' .
-			 ".hover-accent-bg:hover { background-color: $site_accent; color: " . $this->set_color_for_bg($site_accent, array($site_text, $site_inv_text)) . "; }\n";
+		echo ".theme-bd { border-color: $border; }\n";
+		echo ".theme-accent-bd { border-color: $accent; }\n";
 
-		// Accent Border Color
-		echo "blockquote { border-left-color: $site_accent !important; }\n";
+		// Theme Section Colors
+		
+		echo ".theme-section-main { color: $color; background-color: $bg; border-color: $border; }\n";
+		echo ".theme-section-alt { color: $color_alt; border-color: $border_alt; background-color: $bg_alt; }\n";
+		echo ".theme-section-accent { border-color: #".$accent_ob->darken(10)."; }\n";
+		echo ".theme-section-inv { color: $color_inv; border-color: $border_inv; background-color: $bg_inv; }\n";
 
-		// Link Color
-		echo "a," .
-			 ".post-meta a:hover { color: $site_link_color; }\n";
+		// Text Colors
+		
+		echo "body, #content-wrap { color: $color; }\n";
+		echo "a, .post-meta a:hover, #breadcrumbs a:hover, .pager a:hover, .pager li > span, .hover-accent-color:hover { color: $accent; }\n";
+		echo ".head-media.bg-light .container, .head-media.bg-light .media-inner > a, .head-media.bg-light .header-scroll, .head-media.bg-light #breadcrumbs > li + li:before { color: $bg_light_color; }\n";
+		echo ".head-media.bg-dark .container, .head-media.bg-dark .media-inner > a, .head-media.bg-dark .header-scroll, .head-media.bg-dark #breadcrumbs > li + li:before { color: $bg_dark_color; }\n";
+		echo ".post-related .related-title { color: $bg_dark_color; }\n";
+		echo ".post-meta a, .post-meta > span { color: $color_fade; }\n";
+		echo ".link-list li a { color: $color_fade; }\n";
+		echo ".link-list li a:hover, .link-list li a:active, .link-list li.active > a { color: $accent; }\n";
+
+		// Border Colors
+		
+		echo "body, #content-wrap, .mixt .sidebar ul { border-color: $border; }\n";
+		echo ".comment-list li.bypostauthor { border-left-color: $accent; }\n";
+
+
+		// Background Colors
+		
+		echo ".accent-bg:hover, .hover-accent-bg:hover, .tag-list a:hover, .tagcloud a:hover { background-color: $accent; }\n";
+		echo ".article .post-info .post-date { background-color: $bg_darker; }\n";
+
+		// Other Colors
+		
+		echo "::selection { background: $accent; background: rgba($accent, 0.8); color: ".$this->set_color_for_bg($accent, array('#fff', '#000'))."; }\n";
+
+		echo ".sidebar .child-page-nav li a:hover, .sidebar .nav li a:hover { color: $accent; }\n";
+		echo ".sidebar .child-page-nav .current_page_item, .sidebar .child-page-nav .current_page_item:before { background-color: $bg_darker; }\n";
+
+		echo "blockquote { border-color: $border; border-left-color: $accent; background-color: $bg_darker; }\n";
+		echo "blockquote cite { color: $color_fade; }\n";
+
+		// Bootstrap Elements
+
+		echo ".alert-default { color: $color; border-color: $border; background-color: $bg_darker; }\n";
+		echo ".alert-default a { color: $accent; }\n";
+		echo ".panel { border-color: $border; background-color: $bg_lighter; }\n";
+		echo ".well { border-color: $border; background-color: $bg_darker; }\n";
+		echo ".table caption { color: $color_fade; }\n";
+		echo ".table.table-bordered, .table.table-bordered th, .table.table-bordered td { border-color: $border !important; }\n";
+		echo ".table.table-striped > tbody > tr:nth-of-type(odd) { background-color: $bg_darker; }\n";
+
+		// Background Variants
+		
+		echo ".bg-light { color: $bg_light_color; } .bg-light .text-fade { color: $bg_dark_color_fade; }";
+		echo ".bg-dark { color: $bg_dark_color; } .bg-dark .text-fade { color: $bg_dark_color_fade; }";
+
+		// Inputs
+		
+		echo "input:not([type=submit]):not([type=button]):not(.btn), select, textarea, .form-control, ".
+			 ".post-password-form input[type='password'], .woocommerce .input-text { color: $color; border-color: $border; background-color: $bg_darker; }\n";
+		echo "input:not([type=submit]):not([type=button]):not(.btn):focus, select:focus, textarea:focus, .form-control:focus, ".
+			 ".post-password-form input[type='password']:focus, .woocommerce .input-text:focus { border-color: #".$border_ob->lighten(3)."; background-color: $bg_lighter; }\n";
+		echo "::-webkit-input-placeholder, ::-moz-placeholder, :-ms-input-placeholder { color: $color_fade !important; }\n";
 
 		// Buttons
-		echo $this->button_color(array('primary', 'accent'), $site_accent);
+		
+		echo $this->button_color(array('primary', 'accent'), $accent);
+		echo $this->button_color('minimal', $bg_darker);
+
+		// Element Colors
+		
+		echo ".mixt-stat.type-box, .mixt-headline span.color-auto:after, .mixt-timeline .timeline-block:before { border-color: $border; }\n";
+		echo ".mixt-row-separator.no-fill svg { fill: $bg; }\n";
+		echo ".mixt-map { color: $bg_light_color; }\n";
+		echo ".mixt-flipcard > .inner > .accent { color: ".$this->set_color_for_bg($accent, array($bg_light_color, $bg_dark_color))."; background-color: $accent; border-color: #".$accent_ob->lighten(10)."; }\n";
+
+		// Plugin Colors
+
+		// LightSlider
+		echo ".lSSlideOuter .lSPager.lSpg > li:hover a, .lSSlideOuter .lSPager.lSpg > li.active a { background-color: $accent; }\n";
+
+		// LightGallery
+		echo ".lg-outer .lg-thumb-item.active, .lg-outer .lg-thumb-item:hover { border-color: $accent; }\n";
+		echo ".lg-progress-bar .lg-progress { background-color: $accent; }\n";
+
+		// Visual Composer
+		if ( defined( 'WPB_VC_VERSION') ) {
+			echo ".wpb_content_element .wpb_tour_tabs_wrapper .wpb_tabs_nav a:hover, .wpb_content_element .wpb_accordion_header a:hover { color: $accent; }\n";
+			echo ".vc_separator.theme-bd .vc_sep_holder .vc_sep_line { border-color: $border; }\n";
+			echo ".mixt-grid-item .gitem-title-cont { color: $color; background-color: $bg_lighter; }\n";
+			echo ".vc_tta.vc_tta-style-classic:not(.vc_tta-o-no-fill) .vc_tta-panel-body, .vc_tta.vc_tta-style-modern:not(.vc_tta-o-no-fill) .vc_tta-panel-body { color: $bg_light_color; }\n";
+		}
+
+		// WooCommerce
+		if ( class_exists('WooCommerce') ) {
+			echo ".woocommerce .price .amount, .woocommerce .total .amount, .woocommerce .woo-cart .amount, .woocommerce .nav li .amount { color: $accent; }\n";
+			echo ".woocommerce .nav li del .amount, .woocommerce #reviews #comments ol.commentlist li .meta { color: $color_fade; }\n";
+			echo ".woocommerce .widget_price_filter .ui-slider .ui-slider-range, .woocommerce p.demo_store { background-color: $accent; }\n";
+			echo ".woocommerce .badge-cont .badge.sale-badge { background-color: $accent; }\n";
+			echo ".woocommerce .woocommerce-tabs ul.tabs li a { color: $color_fade !important; }\n";
+			echo ".woocommerce .woocommerce-tabs ul.tabs li.active { border-bottom-color: $bg !important; }\n";
+			echo ".woocommerce .woocommerce-tabs ul.tabs li.active a { color: $color !important; }\n";
+			echo ".woocommerce .woocommerce-tabs ul.tabs li.active, .woocommerce .woocommerce-tabs .wc-tab { color: $color !important; background-color: $bg !important; }\n";
+			echo ".woocommerce .woocommerce-tabs .cart-collaterals .cart_totals tr td, .woocommerce .woocommerce-tabs .cart-collaterals .cart_totals tr th { border-color: $border; }\n";
+			echo ".woocommerce p.demo_store { color: ".$this->set_color_for_bg($accent, array($bg_light_color, $bg_dark_color))."; }\n";
+
+			echo ".woocommerce form .form-row.woocommerce-validated .select2-choice, .woocommerce form .form-row.woocommerce-validated input.input-text, .woocommerce form .form-row.woocommerce-validated select, ".
+				 ".woocommerce form .form-row.woocommerce-validated .select2-choice, .woocommerce form .form-row.woocommerce-validated input.input-text, .woocommerce form .form-row.woocommerce-validated select ".
+				 "{ border-color: $border; }\n";
+		}
 	}
 
 	/**
 	 * Output navbar theme
 	 */
 	public function output_navbar() {
-		$options = mixt_get_options( array(
-			'nav-opacity' => array( 'type' => 'str', 'return' => 'value', 'default' => '0.95' ),
-			'nav-top-opacity' => array( 'type' => 'str', 'return' => 'value', 'default' => '0.25' ),
-		) );
-
 		$nav_themes = array();
 		if ( $this->active_themes['nav'] != 'auto' ) {
 			$nav_themes[] = $this->active_themes['nav'];
@@ -210,7 +246,16 @@ class Mixt_Themes extends Mixt_DCSS {
 		if ( $this->active_themes['sec-nav'] != $this->active_themes['nav'] && $this->active_themes['sec-nav'] != 'auto' && Mixt_Options::get('nav', 'second-nav') ) {
 			$nav_themes[] = $this->active_themes['sec-nav'];
 		}
-		$defaults = $this->default_themes['nav'][MIXT_THEME];
+
+		$defaults = array(
+			'accent' => '#dd3e3e', 'bg' => '#fff',
+			'color' => '#333', 'color-fade' => '#777',
+			'color-inv' => '#fff', 'color-inv-fade' => '#ddd',
+			'border' => '#ddd', 'border-inv' => '#333',
+			'menu-bg' => '#fbfbfb', 'menu-expand' => 'rgba(0,0,0,0.05)',
+			'menu-border' => '#e2e2e2', 'menu-border-alpha' => 'rgba(0,0,0,0.15)',
+			'menu-color' => '#333', 'menu-color-fade' => '#777',
+		);
 
 		foreach ( $nav_themes as $theme_id ) {
 			if ( isset($this->nav_themes[$theme_id]) ) {
@@ -219,33 +264,28 @@ class Mixt_Themes extends Mixt_DCSS {
 				$theme = $this->nav_themes[key($this->nav_themes)];
 			}
 
-			$nav_bg     = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
-			$nav_bg_ob  = new Color($nav_bg);
-			$nav_bg_rgb = implode(',', $nav_bg_ob->getRgb());
-			if ( Mixt_Options::get('nav', 'layout') == 'horizontal' ) {
-				echo ".nav-transparent .navbar-mixt.theme-$theme_id.position-top { background-color: rgba($nav_bg_rgb, {$options['nav-top-opacity']}); }\n";
-				echo ".fixed-nav .navbar-mixt.theme-$theme_id { background-color: rgba($nav_bg_rgb,{$options['nav-opacity']}); }\n";
-			}
-
 			// Do not output theme if it's one of the defaults or if themes are disabled
-			if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes['nav']) ) return;
+			if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes) || ! is_array($theme) ) return;
 
 			$navbar       = '.navbar.theme-' . $theme_id;
 			$navbar_dark  = $navbar . '.bg-dark';
 			$main_navbar  = $navbar . '.navbar-mixt';
 
 			// Get Theme Colors
+			
+			$nav_bg     = ! empty($theme['bg']) ? $theme['bg'] : $defaults['bg'];
+			$nav_bg_ob  = new Color($nav_bg);
 
 			$nav_border    = ! empty($theme['border']) ? $theme['border'] : '#'.$nav_bg_ob->darken(10);
 			$nav_border_ob = new Color($nav_border);
 
-			$nav_text     = ! empty($theme['text']) ? $theme['text'] : $site_text;
-			$nav_inv_text = ! empty($theme['inv-text']) ? $theme['inv-text'] : $site_inv_text;
+			$nav_color     = ! empty($theme['color']) ? $theme['color'] : $defaults['color'];
+			$nav_color_inv = ! empty($theme['color-inv']) ? $theme['color-inv'] : $defaults['color-inv'];
 
-			$nav_accent     = ! empty($theme['accent']) ? $theme['accent'] : $site_accent;
-			$nav_inv_accent = ! empty($theme['inv-accent']) ? $theme['inv-accent'] : $nav_accent;
+			$nav_accent     = ! empty($theme['accent']) ? $theme['accent'] : $defaults['accent'];
+			$nav_inv_accent = ! empty($theme['inv-accent']) ? $theme['inv-accent'] : $defaults['inv-accent'];
 
-			$nav_menu_bg    = ! empty($theme['menu-bg']) ? $theme['menu-bg'] : $nav_bg;
+			$nav_menu_bg    = ! empty($theme['menu-bg']) ? $theme['menu-bg'] : $defaults['menu-bg'];
 			$nav_menu_bg_ob = new Color($nav_menu_bg);
 
 			$nav_menu_border    = ! empty($theme['menu-border']) ? $theme['menu-border'] : '#'.$nav_menu_bg_ob->darken(20);
@@ -254,14 +294,14 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Set Effects & Text Colors According To The Background Color
 
 			if ( $nav_bg_ob->isLight() ) {
-				$nav_bg_light_text = $nav_text;
-				$nav_bg_dark_text  = $nav_inv_text;
+				$nav_bg_light_text = $nav_color;
+				$nav_bg_dark_text  = $nav_color_inv;
 
 				$nav_bg_light_accent = $nav_accent;
 				$nav_bg_dark_accent  = $nav_inv_accent;
 			} else {
-				$nav_bg_light_text = $nav_inv_text;
-				$nav_bg_dark_text  = $nav_text;
+				$nav_bg_light_text = $nav_color_inv;
+				$nav_bg_dark_text  = $nav_color;
 
 				$nav_bg_light_accent = $nav_inv_accent;
 				$nav_bg_dark_accent  = $nav_accent;

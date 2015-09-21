@@ -70,6 +70,8 @@ select {
     text-overflow: '';
 
     @extend %theme-input-color;
+
+    &::-ms-expand { display: none; }
 }
 
 

@@ -9,7 +9,8 @@ POST FUNCTIONS
 
 	/* global mixt_opt, iframeAspect */
 
-	var viewport = $(window);
+	var viewport = $(window),
+		content  = $('#content');
 
 	// Resize Embedded Videos Proportionally
 	iframeAspect( $('.post iframe') );
@@ -17,10 +18,11 @@ POST FUNCTIONS
 	// Post Layout
 	function postsPage() {
 
-		// Featured Gallery Slider
-		if ( typeof $.fn.lightSlider === 'function' ) {
-			var gallerySlider = $('.gallery-slider').not('.lightSlider');
-			gallerySlider.imagesLoaded( function() {
+		content.imagesLoaded( function() {
+
+			// Featured Gallery Slider
+			if ( typeof $.fn.lightSlider === 'function' ) {
+				var gallerySlider = $('.gallery-slider').not('.lightSlider');
 				gallerySlider.lightSlider({
 					item: 1,
 					auto: true,
@@ -30,25 +32,21 @@ POST FUNCTIONS
 					keyPress: true,
 					slideMargin: 0,
 				});
-			});
-		}
+			}
 
-		if ( typeof $.fn.lightGallery === 'function' ) {
-			var lightGallery = $('.lightbox-gallery');
-			lightGallery.imagesLoaded( function() {
-				lightGallery.lightGallery();
-			});
-		}
+			if ( typeof $.fn.lightGallery === 'function' ) {
+				$('.lightbox-gallery').lightGallery();
+			}
 
-		// Equalize featured media height for related posts and grid blog
-		if ( typeof $.fn.matchHeight === 'function' ) {
-			var matchHeightEl = $('.blog-grid .posts-container .post-feat, .post-related .post-feat');
-			matchHeightEl.imagesLoaded( function() {
+			// Equalize featured media height for related posts and grid blog
+			if ( typeof $.fn.matchHeight === 'function' ) {
+				var matchHeightEl = $('.blog-grid .posts-container .post-feat, .post-related .post-feat');
 				matchHeightEl.addClass('fix-height').matchHeight({
 					target: $('.wp-post-image'),
 				});
-			});
-		}
+			}
+			
+		});
 	}
 
 
@@ -56,25 +54,31 @@ POST FUNCTIONS
 	function mixtAjaxLoad(type) {
 		type = type || 'posts';
 		var pagCont = $('.paging-navigation'),
-			ajaxBtn = $('.ajax-more', pagCont),
-			pageNow = pagCont.data('page-now'),
+			ajaxBtn = $('.ajax-more', pagCont);
+
+		if ( ! pagCont.length || ! ajaxBtn.length ) return;
+		
+		var pageNow = pagCont.data('page-now'),
 			pageMax = pagCont.data('page-max'),
+			nextUrl = ajaxBtn.attr('href'),
 			pageNum,
 			pageType,
-			nextUrl,
 			container,
 			element,
 			loadSel;
 
 		if ( type == 'posts' ) {
 			pageType  = mixt_opt.layout['pagination-type'];
-			nextUrl   = mixt_opt.layout['next-url'];
 			container = $('.posts-container');
 			element   = '.article';
 			loadSel   = ' .posts-container .article';
+		} else if ( type == 'shop' ) {
+			pageType  = mixt_opt.layout['pagination-type'];
+			container = $('ul.products');
+			element   = '.product';
+			loadSel   = ' ul.products > li';
 		} else if ( type == 'comments' ) {
 			pageType  = mixt_opt.layout['comment-pagination-type'];
-			nextUrl   = mixt_opt.layout['comment-next-url'];
 			container = $('.comment-list');
 			element   = '.comment';
 			loadSel   = ' .comment-list > li';
@@ -110,7 +114,7 @@ POST FUNCTIONS
 					ajaxBtn.blur();
 
 					newPosts.children(element).addClass('ajax-new');
-					if ( type == 'posts' && mixt_opt.layout.type != 'masonry' && mixt_opt.page['show-page-nr'] ) {
+					if ( ( type == 'posts' || type == 'shop' ) && mixt_opt.layout.type != 'masonry' && mixt_opt.layout['show-page-nr'] ) {
 						newPosts.prepend('<div class="ajax-page page-'+ pageNum +'"><a href="'+ nextUrl +'">Page '+ pageNum +'</a></div>');
 					}
 					container.append(newPosts.html());
@@ -118,16 +122,16 @@ POST FUNCTIONS
 					newPosts = container.children('.ajax-new');
 
 					// Update page number and nextUrl
-					if ( type == 'posts' ) {
-						pageNum++;
-						nextUrl = nextUrl.replace(/\/page\/[0-9]?/, '/page/' + pageNum);
-					} else {
+					if ( type == 'comments' ) {
 						if ( mixt_opt.layout['comment-default-page'] == 'newest' ) {
 							pageNum--;
 						} else {
 							pageNum++;
 						}
 						nextUrl = nextUrl.replace(/\/comment-page-[0-9]?/, '/comment-page-' + pageNum);
+					} else {
+						pageNum++;
+						nextUrl = nextUrl.replace(/\/page\/[0-9]?/, '/page/' + pageNum);
 					}
 					
 					// Update the button state
@@ -146,6 +150,7 @@ POST FUNCTIONS
 									$container.isotope('appended', newPosts);
 								});
 							}
+							viewport.trigger('refresh');
 						}
 					}, 100);
 
@@ -165,20 +170,24 @@ POST FUNCTIONS
 			return false;
 		});
 
-		// Trigger AJAX load upon reaching bottom of page
+		// Trigger AJAX load when reaching bottom of page
 		var ajaxScrollHandle = $.debounce( 500, function() {
 				/* global elemVisible */
 				if ( elemVisible(ajaxBtn, viewport) === true ) {
 					ajaxBtn.trigger('cont:bottom');
 				}
 			});
-		if ( pageType == 'ajax-scroll' && ajaxBtn.length ) {
+		if ( pageType == 'ajax-scroll' ) {
 			viewport.on('scroll', ajaxScrollHandle);
 		}
 	}
 	// Execute Function Where Applicable
 	if ( mixt_opt.page['posts-page'] && mixt_opt.layout['pagination-type'] == 'ajax-click' || mixt_opt.layout['pagination-type'] == 'ajax-scroll' ) {
-		mixtAjaxLoad('posts');
+		if ( mixt_opt.page['page-type'] == 'shop' ) {
+			mixtAjaxLoad('shop');
+		} else {
+			mixtAjaxLoad('posts');
+		}
 	}
 	if ( mixt_opt.page['page-type'] == 'single' && mixt_opt.layout['comment-pagination-type'] == 'ajax-click' || mixt_opt.layout['comment-pagination-type'] == 'ajax-scroll' ) {
 		mixtAjaxLoad('comments');

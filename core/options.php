@@ -110,16 +110,18 @@ class Mixt_Options {
 			'nav' => array(
 				'layout'         => array( 'key' => 'nav-layout', 'return' => 'value' ),
 				'mode'           => array( 'key' => 'nav-mode', 'return' => 'value' ),
-				'logo-align'     => array(
-					'return'     => array( '1' => 'logo-left', '2' => 'logo-center', '3' => 'logo-right', 'default' => 'logo-left' ),
-				),
+				'vertical-mode'  => array( 'key' => 'nav-vertical-mode', 'return' => 'value' ),
+				'logo-align'     => array( 'return' => array( '1' => 'logo-left', '2' => 'logo-center', '3' => 'logo-right', 'default' => 'logo-left' ) ),
 				'bordered'       => array( 'key' => 'nav-bordered' ),
 				'padding'        => array( 'key' => 'nav-padding', 'return' => 'value' ),
 				'position'       => array( 'key' => 'nav-position', 'return' => 'value' ),
+				'vertical-pos'   => array( 'key' => 'nav-vertical-position', 'return' => 'value' ),
 				'transparent'    => array( 'key' => 'nav-transparent' ),
 				'hover-bg'       => array( 'key' => 'nav-hover-bg' ),
 				'active-bar'     => array( 'key' => 'nav-active-bar' ),
 				'active-bar-pos' => array( 'key' => 'nav-active-bar-pos', 'return' => 'value' ),
+				'opacity'        => array( 'key' => 'nav-opacity', 'type' => 'str', 'return' => 'value', 'default' => '0.95' ),
+				'top-opacity'    => array( 'key' => 'nav-top-opacity', 'type' => 'str', 'return' => 'value', 'default' => '0.25' ),
 
 				'second-nav'     => array(),
 			),
@@ -170,6 +172,7 @@ class Mixt_Options {
 
 		// Override options for vertical navbar
 		if ( self::get('nav', 'layout') == 'vertical' ) {
+			self::set('page', 'layout', 'wide');
 			self::set('nav', 'mode', 'static');
 			self::set('nav', 'position', 'above');
 			self::set('nav', 'transparent', false);
@@ -185,15 +188,16 @@ class Mixt_Options {
 	 */
 	public static function page_type() {
 		if ( is_author() ) { return 'author'; }
+		else if ( self::is_blog() ) { return 'blog'; }
+		else if ( self::is_portfolio() ) { return 'portfolio'; }
+		else if ( self::is_shop('catalog') ) { return 'shop'; }
+		else if ( get_page_template_slug() == 'templates/one-page.php' ) { return 'onepage'; }
+		else if ( get_page_template_slug() == 'templates/blank.php' ) { return 'blank'; }
 		else if ( is_category() ) { return 'category'; }
 		else if ( is_date() ) { return 'date'; }
 		else if ( is_search() ) { return 'search'; }
 		else if ( is_tag() ) { return 'tag'; }
 		else if ( is_tax() ) { return 'taxonomy'; }
-		else if ( self::is_blog() ) { return 'blog'; }
-		else if ( self::is_portfolio() ) { return 'portfolio'; }
-		else if ( get_page_template_slug() == 'templates/one-page.php' ) { return 'onepage'; }
-		else if ( get_page_template_slug() == 'templates/blank.php' ) { return 'blank'; }
 		else { return 'single'; }
 	}
 	// Check if page is a blog page
@@ -205,8 +209,18 @@ class Mixt_Options {
 		return ( is_post_type_archive('portfolio') || get_page_template_slug() == 'templates/portfolio.php' );
 	}
 	// Check if page is a shop page
-	public static function is_shop() {
-		return class_exists('WooCommerce') && ( is_woocommerce() || is_cart() || is_checkout() );
+	public static function is_shop($type = 'any') {
+		if ( class_exists('WooCommerce') ) {
+			if ( $type == 'any' ) {
+				return ( is_woocommerce() || is_cart() || is_checkout() );
+			} else if ( $type == 'catalog' ) {
+				return ( is_shop() || is_product_category() || is_product_tag() );
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	// Check if page is a posts page
 	public static function is_posts_page() {

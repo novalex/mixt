@@ -144,9 +144,9 @@ function mixt_head_media() {
 								navbar.addClass('slide-bg-light').removeClass('slide-bg-dark');
 								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-dark').addClass('bg-light'); }
 							} else {
-								header.add(navbar).removeClass('bg-light bg-dark');
+								header.removeClass('bg-light bg-dark');
 								navbar.removeClass('slide-bg-light slide-bg-dark');
-								if ( navbar.hasClass('position-top') ) { navbar.addClass('bg-' + navbar.data('bg')); }
+								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-light bg-dark').addClass('bg-' + navbar.data('bg')); }
 							}
 						}
 					}

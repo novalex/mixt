@@ -37,6 +37,7 @@ HELPER FUNCTIONS
 	$('.widget_nav_menu ul.menu').addClass('nav');
 
 	$('#wp-calendar').addClass('table table-striped table-bordered');
+	$('.woocommerce .shop_table').addClass('table table-bordered');
 
 	// Handle Post Count Tags
 

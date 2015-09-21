@@ -10,7 +10,6 @@ GLOBAL JS FUNCTIONS
 	/* global mixt_opt */
 
 	var viewport = $(window),
-		htmlEl   = $('html'),
 		bodyEl   = $('body');
 
 

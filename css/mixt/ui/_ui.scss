@@ -206,7 +206,10 @@ img[class*="wp-image-"] {
 
 	&.aligncenter { margin-bottom: 10px; }
 
-	img[class*="wp-image-"] { display: block; }
+	img {
+		display: block;
+		margin: 0 !important;
+	}
 
 	.wp-caption-text {
 		font-size: $font-size-xs;

@@ -202,8 +202,7 @@ class Mixt_Post {
 				case 'title':
 					$head_opt = Mixt_Options::get('header');
 					return (
-						$this->context != 'single' || ! $head_opt['location-bar'] ||
-						( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) &&
+						( $this->context != 'single' || ! $head_opt['location-bar'] || ( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) ) &&
 						( $this->format != 'link' || $this->layout['feat-show'] == false )
 					);
 					break;
@@ -274,7 +273,8 @@ class Mixt_Post {
 			$placeholder_img = '<div class="' . $feat_classes . ' post-image image-placeholder">' . $permalink_start . wp_get_attachment_image($placeholder, $feat_size) . $permalink_end . '</div>';
 		}
 
-		$format_icon = '<a href="' . $this->permalink . '" class="' . $feat_classes . ' feat-format"><i class="format-icon ' . $this->options['format-icon'] . '"></i></a>';
+		if ( empty($this->options['format-icon']) ) { $this->options['format-icon'] = 'fa fa-ellipsis-h'; }
+		$format_icon = "<a href='{$this->permalink}' class='$feat_classes feat-format'><i class='format-icon {$this->options['format-icon']}'></i></a>";
 
 		$output = '';
 
@@ -282,16 +282,22 @@ class Mixt_Post {
 			case 'link':	
 			case 'aside':
 			case 'quote':
+			case 'status':
 				$feat_classes .= ' post-' . $this->format;
 
 				if ( $this->format == 'link' ) {
 					$link_query = '<a ';
 
-					if ( substr($this->content, 0, strlen($link_query)) === $link_query && preg_match('/<a href="(.*)".*?<\/a>/i', $this->content, $matches) ) {
+					// Anchor tag among other content
+					if ( substr($this->content, 0, strlen($link_query)) === $link_query && preg_match('/<a href="(.*?)".*?>(.*?)<\/a>/i', $this->content, $matches) ) {
 						$post_link = $matches[1];
+						$link_title = ( empty($matches[2]) ) ? get_the_title() : $matches[2];
 						$this->content = str_replace($matches[0], '', $this->content);
+
+					// Simple link
 					} else {
 						$post_link = $this->content;
+						$link_title = get_the_title();
 						$this->show_content = false;
 					}
 
@@ -303,7 +309,7 @@ class Mixt_Post {
 						}
 					} else {
 						$output = '<div class="' . $feat_classes . '"><a href="' . $post_link . '" class="accent-bg" target="_blank">' .
-									  '<h2 class="title">' . get_the_title() . '</h2><small>' . $post_link . '</small>' .
+									  '<h2 class="title">' . $link_title . '</h2><small>' . $post_link . '</small>' .
 								  '</a></div>';
 					}
 				} else {
@@ -374,7 +380,7 @@ class Mixt_Post {
 						preg_match('/size=.([\w]*)./i', $shortcode, $matches);
 						$new_attr = 'size="' . $feat_size . '" feat="true"';
 						if ( empty($matches[0]) ) {
-							$shortcode = str_replace(']', $new_attr . ']', $shortcode);
+							$shortcode = str_replace(']', " $new_attr]", $shortcode);
 						} else {
 							$shortcode = str_replace($matches[0], $new_attr, $shortcode);
 						}
@@ -388,6 +394,12 @@ class Mixt_Post {
 						} else {
 							$output = '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
 						}
+					}
+				} else if ( $this->context == 'related' ) {
+					if ( ! empty($placeholder_img) ) {
+						$output = $placeholder_img;
+					} else {
+						$output = $format_icon;
 					}
 				}
 				break;
@@ -428,6 +440,12 @@ class Mixt_Post {
 					} else {
 						$output = '<div class="' . $feat_classes . '">' . $audio_iframe . '</div>';
 					}
+				} else if ( $this->context == 'related' ) {
+					if ( ! empty($placeholder_img) ) {
+						$output = $placeholder_img;
+					} else {
+						$output = $format_icon;
+					}
 				}
 				break;
 
@@ -436,7 +454,10 @@ class Mixt_Post {
 				if ( ! empty($feat_img) ) {
 					$feat_classes .= ' post-image';
 					$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
-				} else if ( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) && ! $this->layout['post-info'] ) {
+				} else if (
+					$this->context == 'related' ||
+					( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) && ! $this->layout['post-info'] )
+				) {
 					if ( ! empty($placeholder_img) ) {
 						$output = $placeholder_img;
 					} else if ( $this->type != 'page' ) {
@@ -698,7 +719,7 @@ function mixt_related_posts( $args = array() ) {
 		$post_related = wp_get_post_tags($post->ID);
 		if ( ! $post_related ) return;
 		foreach ( $post_related as $tag ) { $related_args[] = $tag->term_id; }
-	} else if ( $args['related'] == 'cat' ) {
+	} else if ( $args['related'] == 'cats' ) {
 		$related_in = 'category__in';
 		$post_related = wp_get_post_categories($post->ID);
 		if ( ! $post_related ) return;

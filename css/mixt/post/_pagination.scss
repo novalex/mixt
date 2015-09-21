@@ -83,6 +83,8 @@
 
 	a {
 		display: inline-block;
-		padding: $padding-s 0;
+		padding: $padding-m 0;
+		font-size: $font-size-m;
+		font-weight: bold;
 	}
 }

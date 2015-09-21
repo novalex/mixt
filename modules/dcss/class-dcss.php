@@ -77,7 +77,7 @@ class Mixt_DCSS {
 			}
 			$selector = rtrim($selector, ',');
 		} else {
-			$selector = str_replace('{{sel}}', $single_sel, $pattern);
+			$selector = str_replace('{{sel}}', $sel, $pattern);
 		}
 		return $selector;
 	}

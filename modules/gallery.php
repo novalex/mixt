@@ -175,7 +175,7 @@ function mixt_gallery_shortcode($attr) {
 	} else {
 		$output .= "<$cont_tag id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class} $gallery_classes'>";
 		foreach ( $attachments as $id => $attachment ) {
-			if ( $attr['link'] == 'none' ) {
+			if ( empty($attr['link']) || $attr['link'] == 'none' ) {
 				$link = wp_get_attachment_image($id, $size);
 			} else {
 				$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);

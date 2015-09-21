@@ -7,16 +7,18 @@ NAVBAR FUNCTIONS
 
 	'use strict';
 
-	/* global mixt_opt, colorLoD */
+	/* global mixt_opt, colorLoD, colorToRgba */
 
 	var viewport     = $(window),
 		bodyEl       = $('body'),
 		mainWrap     = $('#main-wrap'),
-		mainNavBar   = $('#main-nav'),
 		mainNavWrap  = $('#main-nav-wrap'),
+		mainNavBar   = $('#main-nav'),
+		mainNavCont  = mainNavBar.children('.container'),
 		mainNavHead  = $('.navbar-header', mainNavBar),
 		mainNavInner = $('.navbar-inner', mainNavBar),
 		secNavBar    = $('#second-nav'),
+		secNavCont   = secNavBar.children('.container'),
 		navbars      = $('.navbar'),
 		mediaWrap    = $('.head-media');
 
@@ -38,10 +40,20 @@ NAVBAR FUNCTIONS
 			if ( navbar.is(mainNavBar) ) {
 				navbarObj.navBg = ( colorLum == 'dark' ) ? 'bg-dark' : 'bg-light';
 				mainNavBar.attr('data-bg', colorLum);
-				if ( mixt_opt.nav.transparent && mixt_opt.header.enabled && mixt_opt.nav['top-opacity'] <= 0.4 ) {
-					if ( mediaWrap.hasClass('bg-dark') ) { navbarObj.navBgTop = 'bg-dark'; }
-					else if ( mediaWrap.hasClass('bg-light') ) { navbarObj.navBgTop = 'bg-light'; }
-					else { navbarObj.navBgTop = navbarObj.navBg; }
+				if ( mixt_opt.nav.transparent && mixt_opt.header.enabled ) {
+					var headCssSheet = $('style[data-id="mixt-head-css"]');
+					// Add opacity rules
+					if ( mixt_opt.nav.opacity < 1 ) {
+						headCssSheet.append('.fixed-nav .navbar.navbar-mixt { background-color: '+colorToRgba(bgColor, mixt_opt.nav.opacity)+'; }');
+					}
+					if ( mixt_opt.nav['top-opacity'] < 1 ) {
+						headCssSheet.append('.nav-transparent .navbar.navbar-mixt.position-top { background-color: '+colorToRgba(bgColor, mixt_opt.nav['top-opacity'])+'; }');
+					}
+					if ( mixt_opt.nav['top-opacity'] <= 0.4 ) {
+						if ( mediaWrap.hasClass('bg-dark') ) { navbarObj.navBgTop = 'bg-dark'; }
+						else if ( mediaWrap.hasClass('bg-light') ) { navbarObj.navBgTop = 'bg-light'; }
+						else { navbarObj.navBgTop = navbarObj.navBg; }
+					}
 				} else {
 					navbarObj.navBgTop = navbarObj.navBg;
 				}
@@ -362,6 +374,16 @@ NAVBAR FUNCTIONS
 	}
 
 
+	// Ensure vertical navbar items fit in viewport
+	function verticalNavFitView() {
+		if ( viewport.height() < mainNavCont.innerHeight() ) {
+			mainNavWrap.removeClass('vertical-fixed').addClass('vertical-static');
+		} else {
+			mainNavWrap.removeClass('vertical-static').addClass('vertical-fixed');
+		}
+	}
+
+
 	// Functions Run On Load & Window Resize
 	function navbarFn() {
 
@@ -408,17 +430,20 @@ NAVBAR FUNCTIONS
 			mainNavBar.addClass('position-top');
 		}
 
+		// Vertical navbar handling
+		if ( mixt_opt.nav.layout == 'vertical' && mixt_opt.nav['vertical-mode'] == 'fixed' && mqNav === 0 ) {
+			// Make navbar static if items don't fit in viewport
+			verticalNavFitView();
+		}
+
 		navbarOverlap();
 	}
 	viewport.resize( $.debounce( 500, navbarFn )).resize();
 
 
 	// Handle Navbar Items Overlap
-	var mainNavCont    = mainNavBar.children('.container'),
-		mainNavLogoCls = mainNavWrap.attr('data-logo-align'),
+	var mainNavLogoCls = mainNavWrap.attr('data-logo-align'),
 		mainNavItemsWidth = 0,
-
-		secNavCont = secNavBar.children('.container'),
 		secNavItemsWidth = 0;
 
 	if ( mainNavLogoCls != 'logo-center' ) {

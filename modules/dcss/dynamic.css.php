@@ -25,7 +25,6 @@ function mixt_print_head_css() {
 		'nav-fixed-padding' => 0,
 		'font-family'       => 'Roboto',
 	);
-	$site_theme = $theme_ob->site_theme;
 
 
 	// START CSS OUTPUT
@@ -242,12 +241,10 @@ function mixt_print_head_css() {
 		'text' => array(
 			'return'  => 'value',
 			'key'     => 'head-text-color',
-			'default' => $site_theme['text'],
 		),
 		'inv-text' => array(
 			'return'  => 'value',
 			'key'     => 'head-inv-text-color',
-			'default' => $site_theme['inv-text'],
 		),
 	) );
 
@@ -256,12 +253,12 @@ function mixt_print_head_css() {
 		$hm_bg = $hm_options['bg'];
 		echo "$hm_el { background-color: $hm_bg; }\n";
 	}
-	if ( $hm_options['text'] != $site_theme['text'] ) {
+	if ( ! empty($hm_options['text']) ) {
 		$hm_text = $hm_options['text'];
 		echo "$hm_el .container," .
 			 "$hm_el #breadcrumbs li + li:before { color: $hm_text; }\n";
 	}
-	if ( $hm_options['inv-text'] != $site_theme['inv-text'] ) {
+	if ( ! empty($hm_options['inv-text']) ) {
 		$hm_inv_text = $hm_options['inv-text'];
 		echo "$hm_el.bg-dark .container," .
 			 "$hm_el.bg-dark .media-inner a," .

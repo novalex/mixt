@@ -206,14 +206,12 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$themes_enabled = get_option('mixt-themes-enabled', true);
 			if ( $themes_enabled ) {
 				$themes_ob = new Mixt_Themes;
-				$preset_themes = $themes_ob->default_themes['names'];
+				$preset_themes = $themes_ob->default_themes;
 
-				$site_themes = ! empty(mixt_get_themes('site')) ? mixt_get_themes('site') : $preset_themes;
-				$site_default_themes = $themes_ob->default_themes['site'];
+				$site_themes = ! empty(mixt_get_themes('site')) ? array_merge(mixt_get_themes('site'), $preset_themes) : $preset_themes;
 
-				$nav_themes = ! empty(mixt_get_themes('nav')) ? mixt_get_themes('nav') : $preset_themes;
+				$nav_themes = ! empty(mixt_get_themes('nav')) ? array_merge(mixt_get_themes('nav'), $preset_themes) : $preset_themes;
 				$nav_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $nav_themes );
-				$nav_default_themes = $themes_ob->default_themes['nav'];
 			}
 
 			// Image Patterns
@@ -1347,6 +1345,34 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => 'horizontal',
 						),
 
+						// Vertical Position
+						array(
+							'id'       => 'nav-vertical-position',
+							'type'     => 'button_set',
+							'title'    => __( 'Position', 'mixt' ),
+							'subtitle' => __( 'Position the navbar to the left or right of the page', 'mixt' ),
+							'options'  => array(
+								'left'  => __( 'Left', 'mixt' ),
+								'right' => __( 'Right', 'mixt' ),
+							),
+							'default'  => 'left',
+							'required' => array('nav-layout', '=', 'vertical'),
+						),
+
+						// Vertical Mode
+						array(
+							'id'       => 'nav-vertical-mode',
+							'type'     => 'button_set',
+							'title'    => __( 'Mode', 'mixt' ),
+							'subtitle' => __( 'Navbar fixed (scrolls with page) or static (stays at the top)', 'mixt' ),
+							'options'  => array(
+								'fixed'  => __( 'Fixed', 'mixt' ),
+								'static' => __( 'Static', 'mixt' ),
+							),
+							'default'  => 'fixed',
+							'required' => array('nav-layout', '=', 'vertical'),
+						),
+
 						// Logo Alignment
 						array(
 							'id'       => 'logo-align',
@@ -2405,6 +2431,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'fa fa-link',
 					),
 
+					// Status Format Icon
+					array(
+						'id'       => 'format-status-icon',
+						'type'     => 'text',
+						'title'    => __( 'Status Format Icon', 'mixt' ),
+						'default'  => 'fa fa-sticky-note',
+					),
+
 					// Page Format Icon
 					array(
 						'id'       => 'format-page-icon',
@@ -2624,7 +2658,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				// SITE-WIDE THEMES SECTION
 				$this->sections[] = array(
 					'title'      => __( 'Themes', 'mixt' ),
-					'desc'       => __( 'Create and manage site-wide themes', 'mixt' ),
+					'desc'       => __( 'Create and manage site-wide themes.', 'mixt' ) . ' ' .
+									__( 'Fields marked * can be left empty and their respective colors will be automatically generated.', 'mixt' ),
 					'icon'       => 'el-icon-leaf',
 					'customizer' => false,
 					'fields'     => array(
@@ -2653,10 +2688,58 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'wrap_class' => 'theme-id',
 								),
 
+								// Accent
+								'accent' => array(
+									'type'  => 'color',
+									'label' => __( 'Accent', 'mixt' ),
+								),
+
 								// Background Color
 								'bg' => array(
 									'type'  => 'color',
 									'label' => __( 'Background Color', 'mixt' ),
+								),
+
+								// Inverse Background Color
+								'bg-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Background', 'mixt' ) . ' *',
+								),
+
+								// Alt Background Color
+								'bg-alt' => array(
+									'type'  => 'color',
+									'label' => __( 'Alt Background', 'mixt' ) . ' *',
+								),
+
+								// Text Color
+								'color' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color' ),
+								),
+
+								// Text Color Fade
+								'color-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color Fade' ),
+								),
+
+								// Inverse Text Color
+								'color-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color' ),
+								),
+
+								// Inverse Text Color Fade
+								'color-inv-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Fade' ),
+								),
+
+								// Alt Text Color
+								'color-alt' => array(
+									'type'  => 'color',
+									'label' => __( 'Alt Text Color' ) . ' *',
 								),
 
 								// Border Color
@@ -2665,37 +2748,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Border Color', 'mixt' ),
 								),
 
-								// Text Color
-								'text' => array(
+								// Inverse Border Color
+								'border-inv' => array(
 									'type'  => 'color',
-									'label' => __( 'Text Color' ),
+									'label' => __( 'Inverse Border', 'mixt' ) . ' *',
 								),
 
-								// Text Color Fade
-								'text-fade' => array(
+								// Alt Border Color
+								'border-alt' => array(
 									'type'  => 'color',
-									'label' => __( 'Text Color Fade' ),
-								),
-
-								// Text Inverse Color
-								'inv-text' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Color' ),
-								),
-
-								// Text Inverse Color Fade
-								'inv-text-fade' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Fade' ),
-								),
-
-								// Accent
-								'accent' => array(
-									'type'  => 'color',
-									'label' => __( 'Accent', 'mixt' ),
+									'label' => __( 'Alt Border', 'mixt' ) . ' *',
 								),
 							),
-							'default' => $site_default_themes,
 						),
 					),
 				);
@@ -2703,7 +2767,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				// NAVBAR THEMES SECTION
 				$this->sections[] = array(
 					'title'      => __( 'Navbar Themes', 'mixt' ),
-					'desc'       => __( 'Create and manage themes for the navbar', 'mixt' ),
+					'desc'       => __( 'Create and manage themes for the navbar.', 'mixt' ) . ' ' .
+									__( 'Fields marked * can be left empty and their respective colors will be automatically generated.', 'mixt' ),
 					'icon'       => 'el-icon-minus',
 					'customizer' => false,
 					'subsection' => true,
@@ -2733,30 +2798,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'wrap_class' => 'theme-id',
 								),
 
-								// Background Color
-								'bg' => array(
-									'type'  => 'color',
-									'label' => __( 'Background Color', 'mixt' ),
-								),
-
-								// Border Color
-								'border' => array(
-									'type'  => 'color',
-									'label' => __( 'Border Color', 'mixt' ),
-								),
-
-								// Text Color
-								'text' => array(
-									'type'  => 'color',
-									'label' => __( 'Text Color' ),
-								),
-
-								// Inverse Text Color
-								'inv-text' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Color' ),
-								),
-
 								// Accent
 								'accent' => array(
 									'type'  => 'color',
@@ -2764,9 +2805,33 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								),
 
 								// Inverse Accent
-								'inv-accent' => array(
+								'accent-inv' => array(
 									'type'  => 'color',
-									'label' => __( 'Inverse Accent', 'mixt' ),
+									'label' => __( 'Inverse Accent', 'mixt' ) . ' *',
+								),
+
+								// Background Color
+								'bg' => array(
+									'type'  => 'color',
+									'label' => __( 'Background Color', 'mixt' ),
+								),
+
+								// Text Color
+								'color' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color' ),
+								),
+
+								// Inverse Text Color
+								'color-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color' ),
+								),
+
+								// Border Color
+								'border' => array(
+									'type'  => 'color',
+									'label' => __( 'Border Color', 'mixt' ),
 								),
 
 								// Menu Background Color
@@ -2788,7 +2853,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'wrap_class' => 'rgba-field',
 								),
 							),
-							'default' => $nav_default_themes,
 						),
 					),
 				);

@@ -71,6 +71,14 @@
 
 			&.first { clear: both; }
 		}
+
+		.ajax-page {
+			padding: 0 $gutter / 2;
+			border-width: 0;
+			margin-bottom: $gutter;
+
+			a { padding: 0; }
+		}
 	}
 	.columns-2 ul.products li.product { width: 50%; }
 	.columns-3 ul.products li.product { width: 33.333%; }

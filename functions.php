@@ -25,7 +25,7 @@ define( 'MIXT_FRAME_URI', MIXT_URI . '/framework' );       // Framework URI
 define( 'MIXT_MODULES_URI', MIXT_URI . '/modules' );       // Modules URI
 define( 'MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins' ); // Plugins URI
 
-define( 'MIXT_THEME', 'lava' );
+define( 'MIXT_THEME', 'lava' ); // Default Theme
 
 
 // LOAD CORE FILES & FRAMEWORK
@@ -85,7 +85,7 @@ function mixt_setup() {
 		add_theme_support('post-thumbnails');
 
 		// Enable support for Post Formats
-		add_theme_support('post-formats', array( 'aside', 'image', 'video', 'audio', 'gallery', 'quote', 'link', ));
+		add_theme_support('post-formats', array( 'aside', 'image', 'video', 'audio', 'gallery', 'link', 'quote', 'status' ));
 	}
 
 	// Add Translation Support

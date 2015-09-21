@@ -106,7 +106,7 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 			 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
 			<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
 			<ul class="pager">
-				<li><a href="#" class="ajax-more" 
+				<li><a href="<?php echo next_posts($page_max, false); ?>" class="ajax-more" 
 					data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 					data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
 					data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
@@ -301,7 +301,7 @@ function mixt_comment_nav($id, $ajax = false) {
 				 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
 				<h3 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h3>
 				<ul class="pager">
-					<li><a href="#" class="ajax-more" 
+					<li><a href="<?php echo get_comments_pagenum_link($page_now + 1); ?>" class="ajax-more" 
 						data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 						data-complete-text="<?php _e( 'No more comments to load', 'mixt' ); ?>" 
 						data-error-text="<?php _e( 'An error occured while trying to load the comments!', 'mixt' ); ?>"

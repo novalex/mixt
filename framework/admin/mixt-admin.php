@@ -77,7 +77,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Button">
 							<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
-							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="btn">
+							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="btn btn-minimal">
 							<input type="hidden" class="menu-item-mixt-type" name="menu-item[-1][menu-item-mixt-type]" value="button">
 						</li>
 						<?php // Widget Area ?>

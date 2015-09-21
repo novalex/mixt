@@ -232,7 +232,7 @@ add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
 
 
 // Initialize and Extend Visual Composer
-if ( defined( 'WPB_VC_VERSION' ) ) {
+if ( defined('WPB_VC_VERSION') ) {
 	add_action('vc_before_init', 'vc_set_as_theme');
 	vc_set_shortcodes_templates_dir( MIXT_PLUGINS_DIR . '/vc-extend/templates' );
 
@@ -362,25 +362,11 @@ function mixt_local_options() {
 
 	if ( $opt['header']['enabled'] == false ) $opt['header'] = array( 'enabled' => false );
 
-	// Additional nav options
-	$nav_options = mixt_get_options( array(
-		'top-opacity' => array( 'key' => 'nav-top-opacity', 'type' => 'str', 'return' => 'value' ),
-	));
-	$opt['nav'] = array_merge($opt['nav'], $nav_options);
-
 	// Pagination Options
 	global $wp_query;
-	if ( ! empty($opt['page']['posts-page']) && $opt['page']['posts-page'] ) {
-		if ( $opt['layout']['pagination-type'] == 'ajax-click' || $opt['layout']['pagination-type'] == 'ajax-scroll' ) {
-			$opt['layout']['next-url'] = next_posts($wp_query->max_num_pages, false);
-		}
-	}
 	if ( ! empty($opt['page']['page-type']) && $opt['page']['page-type'] == 'single' ) {
-		if ( get_option('page_comments') ) {
-			if ( $opt['layout']['comment-pagination-type'] == 'ajax-click' || $opt['layout']['comment-pagination-type'] == 'ajax-scroll' ) {
-				$opt['layout']['comment-default-page'] = get_option('default_comments_page', 'newest');
-				$opt['layout']['comment-next-url'] = get_comments_pagenum_link( get_query_var('cpage', 1) + 1 );
-			}
+		if ( get_option('page_comments') && in_array($opt['layout']['comment-pagination-type'], array('ajax-click', 'ajax-scroll')) ) {
+			$opt['layout']['comment-default-page'] = get_option('default_comments_page', 'newest');
 		}
 	}
 

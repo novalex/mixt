@@ -1,11 +1,12 @@
 
 // Site-Wide Theme Colors
 
+.color-fade { opacity: 0.8; }
+
 @mixin site-theme($name, $theme) {
 	$accent: map-get($theme, 'accent');
 
 	$bg: map-get($theme, 'bg');
-	$bg-hover: map-get($theme, 'bg-hover');
 
 	$color: map-get($theme, 'color');
 	$color-fade: map-get($theme, 'color-fade');
@@ -13,9 +14,7 @@
 	$color-inv-fade: map-get($theme, 'color-inv-fade');
 
 	$border: map-get($theme, 'border');
-	$border-alpha: map-get($theme, 'border-alpha');
 	$border-inv: map-get($theme, 'border-inv');
-	$border-inv-alpha: map-get($theme, 'border-inv-alpha');
 
 	@if ( lightness(map-get($theme, 'color')) > lightness(map-get($theme, 'color-inv')) ) {
 		$bg-light-color: map-get($theme, 'color-inv');
@@ -64,8 +63,6 @@
 		.theme-bd { border-color: $border; }
 		.theme-accent-bd { border-color: $accent; }
 
-		.color-fade { opacity: 0.8; }
-
 
 		// THEME SECTION COLORS
 		
@@ -106,6 +103,9 @@
 
 
 		// TEXT COLORS
+		
+		&,
+		#content-wrap { color: $color; }
 
 		a,
 		.post-meta a:hover,
@@ -114,20 +114,16 @@
 		.pager li > span,
 		.hover-accent-color:hover { color: $accent; }
 
-		&,
-		body,
-		#content-wrap { color: $color; }
-
 		.head-media {
 			&.bg-light {
 				.container,
-				.media-inner a,
+				.media-inner > a,
 				.header-scroll,
 				#breadcrumbs > li + li:before { color: $bg-light-color; }
 			}
 			&.bg-dark {
 				.container,
-				.media-inner a,
+				.media-inner > a,
 				.header-scroll,
 				#breadcrumbs > li + li:before { color: $bg-dark-color; }
 			}
@@ -203,7 +199,6 @@
 			background: $accent;
 			background: fade-out($accent, 0.2);
 			color: set-color-for-bg($accent, #fff, #000);
-			text-shadow: none;
 		}
 
 		.sidebar {
@@ -328,11 +323,12 @@
 				.woo-cart .amount,
 				.nav li .amount { color: $accent; }
 
-				.nav li del .amount { color: $color-fade; }
+				.nav li del .amount,
+				#reviews #comments ol.commentlist li .meta { color: $color-fade; }
 
-				.widget_price_filter .ui-slider .ui-slider-range { background-color: $accent; }
-
-				.badge-cont .badge.sale-badge { background-color: $accent; }
+				.widget_price_filter .ui-slider .ui-slider-range,
+				.badge-cont .badge.sale-badge,
+				p.demo_store { background-color: $accent; }
 
 				.woocommerce-tabs {
 					ul.tabs li {
@@ -349,16 +345,11 @@
 					}
 				}
 
-				#reviews #comments ol.commentlist li .meta { color: $color-fade; }
-
 				.cart-collaterals .cart_totals tr {
 					td, th { border-color: $border; }
 				}
 
-				p.demo_store {
-					color: set-color-for-bg($accent);
-					background-color: $accent;
-				}
+				p.demo_store { color: set-color-for-bg($accent); }
 			}
 
 			form .form-row {
