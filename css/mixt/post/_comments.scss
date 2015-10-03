@@ -2,14 +2,10 @@
 // Comments Styling
 
 .comments-area {
-	&:focus,
-	li:focus { outline: 0; }
-
 	ol, ul {
 		@extend %reset-list;
 	}
 
-	&,
 	.children,
 	.comment-list,
 	.comment-list li,
@@ -20,7 +16,8 @@
 		border-left-width: 2px;
 		border-left-style: solid;
 		
-		article { padding-left: $padding-m; }
+		article,
+		#respond { padding-left: $padding-m; }
 	}
 
 	.no-comments { font-size: 15px; }
@@ -39,8 +36,6 @@
 				padding-left: $padding-m;
 			}
 
-			#respond { overflow: auto; }
-
 			&.bypostauthor { margin-left: -1px; }
 		}
 	}
@@ -49,6 +44,8 @@
 
 	.edit-link { margin-left: 5px; }
 	.comment-reply-link { font-size: $font-size + 1px; }
+
+	#respond { margin-bottom: $margin-m; }
 }
 
 .comment-cont,
@@ -98,22 +95,6 @@
 
 	.required { color: $red; }
 
-	.author-field.last { margin-bottom: $margin-m; }
-
-	.form-submit {
-		margin-top: $margin-m;
-		margin-bottom: $margin-m;
-	}
-
-	@include media('screen', 'mercury') {
-		.author-field {
-			float: left;
-			width: 32%;
-			margin-right: 2%;
-			margin-bottom: $margin-m;
-
-			&.last { margin-right: 0; }
-		}
-	}
+	.form-submit { margin: 0; }
 }
 .headline + .comment-list > .comment:first-child > .comment-cont:first-child { border-top-width: 0; padding-top: 0; }

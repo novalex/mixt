@@ -148,11 +148,11 @@ table.shop_table {
 
 // Forms
 form.login,
-form.register,
-form.checkout_coupon {
+form.register {
 	padding: $wc-spacing;
 	border-radius: $bd-radius;
 	border-color: inherit;
+	background-color: rgba(0,0,0,0.01);
 }
 
 

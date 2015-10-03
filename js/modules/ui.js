@@ -110,9 +110,9 @@ UI FUNCTIONS
 				link = icon.children('a'),
 				dataColor = link.attr('data-color');
 
-			if ( cont.hasClass('hover-bg') ) {
+			if ( cont.hasClass('hover-bg') || cont.parents('.no-hover-bg').length ) {
 				link.hover( function() {
-					if ( cont.parents('.position-top').length === 0 && cont.parents('.no-hover-bg').length === 0 ) {
+					if ( cont.parents('.position-top').length === 0 ) {
 						link.css({ backgroundColor: dataColor, borderColor: dataColor, zIndex: 1 });
 					}
 				}, function() { link.css({ backgroundColor: '', borderColor: '', zIndex: '' }); });

@@ -1,0 +1,75 @@
+
+// MIXT CUSTOMIZER STYLING
+
+#redux_rAds { display: none !important; }
+
+#customize-theme-controls {
+
+	$border: #ddd;
+
+	#accordion-section-logo,
+	#accordion-panel-footer + .accordion-section {
+		margin-top: 10px;
+
+		> h3.accordion-section-title { border-top: 1px solid $border; }
+	}
+	#accordion-panel-footer > h3.accordion-section-title { border-bottom: 1px solid $border; }
+
+	.redux-main {
+		border-left: 0;
+
+		.customize-section-description-container .description {
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid $border;
+		}
+
+		.redux-multi-input {
+			.multi-input-field:nth-child(even) {
+				.wp-picker-container .wp-picker-holder { left: auto; right: -10px; }
+			}
+			.redux-multi-input-remove { display: none; }
+		}
+	}
+
+	.control-section-redux,
+	.control-panel-redux {
+		> h3.accordion-section-title {
+			&:hover,
+			&:focus {
+				color: #fff !important;
+				background-color: $blue !important;
+			}
+		}
+
+		.customize-panel-back,
+		.customize-section-back {
+			&:hover,
+			&:focus {
+				background-color: #f2f2f2 !important;
+
+				&, &:after { color: #555 !important; }
+			}
+		}
+	}
+
+	#mixt_opt-head-media-type,
+	#mixt_opt-nav-active-bar-pos,
+	#mixt_opt-sec-nav-active-bar-pos {
+		label {
+			padding-left: 6px;
+			padding-right: 6px;
+		}
+	}
+
+	#site-themes-ul,
+	#nav-themes-ul {
+		.multi-input-field {
+			width: 50%;
+			min-width: 120px;
+
+			&.theme-name,
+			&.theme-id { width: 49%; }
+		}
+	}
+}

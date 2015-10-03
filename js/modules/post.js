@@ -7,7 +7,7 @@ POST FUNCTIONS
 
 	'use strict';
 
-	/* global mixt_opt, iframeAspect */
+	/* global mixt_opt, iframeAspect, Modernizr */
 
 	var viewport = $(window),
 		content  = $('#content');
@@ -40,10 +40,18 @@ POST FUNCTIONS
 
 			// Equalize featured media height for related posts and grid blog
 			if ( typeof $.fn.matchHeight === 'function' ) {
-				var matchHeightEl = $('.blog-grid .posts-container .post-feat, .post-related .post-feat');
-				matchHeightEl.addClass('fix-height').matchHeight({
-					target: $('.wp-post-image'),
-				});
+				$('.blog-grid .posts-container .post-feat').addClass('fix-height').matchHeight();
+
+				if ( ! Modernizr.flexbox ) {
+					$('.blog-grid .posts-container article').addClass('fix-height').matchHeight();
+
+					var matchHeightEl = $('.post-related .post-feat'),
+						matchHeightTarget = matchHeightEl.find('.wp-post-image');
+					if ( matchHeightTarget.length === 0 ) matchHeightTarget = null;
+					matchHeightEl.addClass('fix-height').matchHeight({
+						target: matchHeightTarget,
+					});
+				}
 			}
 			
 		});

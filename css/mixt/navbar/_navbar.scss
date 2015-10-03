@@ -41,6 +41,11 @@
 	transition: min-height, 0.3s;
 }
 
+.navbar-data {
+	&:before,
+	&:after { display: none; }
+}
+
 .navbar-mixt {
 	opacity: 1;
 	padding: $nav-primary-pad 0;
@@ -48,6 +53,11 @@
 	background-image: none;
 	transform: translate3d(0,0,0);
 	transition: padding 0.3s, box-shadow 0.2s, background 0.4s;
+
+	&.init { transition: none; }
+
+	&:before,
+	&:after { width: 0; height: 0; }
 
 	// Navbar Header & Logo
 
@@ -93,22 +103,48 @@
 	.nav > li > a,
 	.no-menu-msg {
 		height: $nav-primary-item-height;
-		line-height: $nav-primary-item-height - 2px;
+		line-height: $nav-primary-item-height - 3px;
 	}
 
 	// Nav Menu
 
 	.nav {
-		> li > a {
-			padding: 0 15px;
-		}
+		> li > a { padding: 0 15px; }
+
+		$nav-spacing: 14px;
+
 		.divider,
 		.btn-cont {
-			height: $nav-primary-item-height - 14px;
-			margin-top: 7px;
-			margin-bottom: 7px;
+			height: $nav-primary-item-height - $nav-spacing;
+			margin-top: $nav-spacing / 2;
+			margin-bottom: $nav-spacing / 2;
 		}
-		.btn-cont { margin-left: 7px; margin-right: 7px; }
+		.btn-cont {
+			margin-left: $nav-spacing / 2;
+			margin-right: $nav-spacing / 2;
+		}
+
+		.amount { color: inherit !important; }
+	}
+
+	// Submenus
+	
+	.sub-menu {
+		li > a {
+			max-height: $nav-primary-sub-item-height + 1px;
+		}
+
+		li > a,
+		li .menu-item > a,
+		.mega-menu-column li > a {
+			padding: ($nav-primary-sub-item-height - $font-size) / 2;
+		}
+	}
+
+	.mega-menu > .sub-menu > li > a {
+		height: $nav-primary-item-height;
+		max-height: $nav-primary-item-height;
+		padding-top: ($nav-primary-item-height - $font-size) / 2;
 	}
 
 	// Mobile Expand/Collapse Handle
@@ -187,7 +223,7 @@
 		box-shadow: none;
 
 		.navbar-toggle {
-			border-color: transparent;
+			border-color: transparent !important;
 
 			&:hover,
 			&:focus { background-color: transparent; }
@@ -233,12 +269,17 @@
 
 	// Navigation
 	.nav {
-		> li {
-			float: left;
+		&,
+		&.social-links {
+			> li {
+				float: left;
 
-			> a {
-				padding: 0 10px;
-				line-height: $sec-nav-item-height - 1px;
+				> a {
+					padding: 0 10px;
+					line-height: $sec-nav-item-height - 1px;
+
+					i { padding: 0; }
+				}
 			}
 		}
 
@@ -264,9 +305,10 @@
 		}
 
 		.mega-menu > .sub-menu > li > a {
-			height: 38px;
+			height: auto;
 			max-height: 38px;
-			padding-top: 10px !important;
+			padding-top: 12px !important;
+			padding-bottom: 12px !important;
 		}
 	}
 
@@ -332,19 +374,29 @@
 
 @include media('screen', 'mars') {
 
-	.navbar-mixt .sub-menu a { max-width: 300px; }
+	.navbar-data:after { content: 'desktop'; } // Tell jQuery the desktop media query is active
 
-	.navbar-mixt.position-top:not(.vertical) {
-		.nav > li > a {
-			&, &:hover, &:focus {
-				background-color: transparent !important;
+	.navbar-mixt {
+
+		.sub-menu a { max-width: 300px; }
+
+		&.position-top:not(.vertical) {
+			.nav > li > a {
+				&, &:hover, &:focus {
+					background-color: transparent !important;
+				}
+			}
+
+			&.bordered .nav > li { border-color: transparent; }
+
+			.nav-transparent & {
+				.nav > li > a { text-shadow: 0 1px 1px rgba(255,255,255,0.1); }
+				&.bg-dark { .nav > li > a { text-shadow: 0 1px 1px rgba(0,0,0,0.15); } }
 			}
 		}
-
-		&.bordered .nav > li { border-color: transparent; }
 	}
 
-	// Primary Navbar Fixed State
+	// Fixed State
 	.fixed-nav {
 		#main-nav-wrap.logo-center {
 			min-height: 101px;
@@ -359,13 +411,8 @@
 		}
 	}
 
-	// Transparent
-	.nav-transparent .navbar-mixt.position-top {
-		.nav > li > a { text-shadow: 0 1px 1px rgba(255,255,255,0.1); }
-		&.bg-dark { .nav > li > a { text-shadow: 0 1px 1px rgba(0,0,0,0.15); } }
-	}
-
 	// Logo Positions
+	
 	.logo-left .navbar-mixt {
 		.navbar-header {
 			float: left;
@@ -373,6 +420,7 @@
 		}
 		.nav { float: right; }
 	}
+
 	.logo-right .navbar-mixt {
 		.navbar-header {
 			float: right;
@@ -380,6 +428,7 @@
 		}
 		.no-menu-msg { float: left; }
 	}
+
 	.logo-center .navbar-mixt {
 		.navbar-header {
 			float: none;
@@ -403,13 +452,15 @@
 		.no-menu-msg { float: none; }
 	}
 	#main-nav-wrap.logo-center {
-		min-height: 121px;
+		min-height: 142px;
 	}
 }
 
 // MOBILE NAV BREAKPOINT
 
 @include media('screen', '<mars') {
+
+	.navbar-data:after { content: 'tablet'; } // Tell jQuery the tablet mobile media query is active
 
 	#main-nav-wrap { min-height: 51px; }
 
@@ -467,6 +518,9 @@
 		}
 
 		.nav .divider { display: none !important; }
+
+		// Menu Expanded State
+		.nav li.expand { background-color: rgba(0,0,0,0.03); }
 
 		// Dropdown Menus
 
@@ -628,9 +682,6 @@
 
 		#nav-logo { margin-right: $nav-primary-pad; }
 	}
-
-	// Tell jQuery the mobile media query is active
-	#navbar-check { display: inline; }
 }
 
 @media (min-width: 601px) {
@@ -664,8 +715,7 @@
 }
 
 @media (max-width: 601px) {
-	// Tell jQuery the smallest mobile media query is active
-	#navbar-check { display: block; }
+	.navbar-data:after { content: 'mobile'; } // Tell jQuery the mobile media query is active
 }
 
 

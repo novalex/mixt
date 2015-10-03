@@ -96,11 +96,21 @@
 		}
 	}
 
+	// Format Styling
+	&.post-aside { @extend .panel; }
+	&.post-status { background-color: rgba(0,0,0,0.02); }
+
 	// Background Images
 	@if $post-aside-img {
 		&.post-aside {
 			background-repeat: repeat;
 			background-image: url($post-aside-img);
+		}
+	}
+	@if $post-link-img {
+		&.post-link a {
+			background-repeat: repeat;
+			background-image: url($post-link-img);
 		}
 	}
 	@if $post-quote-img {
@@ -109,10 +119,10 @@
 			background-image: url($post-quote-img);
 		}
 	}
-	@if $post-link-img {
-		&.post-link a {
+	@if $post-status-img {
+		&.post-status {
 			background-repeat: repeat;
-			background-image: url($post-link-img);
+			background-image: url($post-status-img);
 		}
 	}
 

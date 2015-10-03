@@ -261,6 +261,35 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				),
 				'default' => 'auto',
 			),
+
+			// Meta Position / Display
+			array(
+				'id'       => $prefix . 'blog-meta-show',
+				'type'     => 'radio_inline',
+				'name'     => __( 'Post Meta', 'mixt' ),
+				'desc'     => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+				'options'  => array(
+					'auto'    => __( 'Auto', 'mixt' ),
+					'header'  => __( 'In Header', 'mixt' ),
+					'footer'  => __( 'In Footer', 'mixt' ),
+					'false'   => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+			),
+
+			// Post Info Display
+			array(
+				'id'       => $prefix . 'blog-post-info',
+				'type'     => 'radio_inline',
+				'name'     => __( 'Post Info', 'mixt' ),
+				'desc'     => __( 'Display the post format and date', 'mixt' ),
+				'options'  => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+			),
 		),
 	);
 
@@ -351,11 +380,11 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 			// Height
 			array(
-				'id'      => $prefix . 'head-height',
-				'name'    => __( 'Custom Height', 'mixt' ),
-				'desc'    => __( 'Set a custom height (in px) for the header', 'mixt' ),
-				'type'    => 'text',
-				'default'    => '',
+				'id'         => $prefix . 'head-height',
+				'name'       => __( 'Custom Height', 'mixt' ),
+				'desc'       => __( 'Set a custom height (in px) for the header', 'mixt' ),
+				'type'       => 'text',
+				'default'    => 'none',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'head-media',

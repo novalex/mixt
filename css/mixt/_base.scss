@@ -112,4 +112,4 @@ embed, iframe, object { max-width: 100%; }
 // Miscellaneous
 p:empty { display: none; }
 
-::selection { text-shadow: none !important; }
+#main-wrap-inner ::selection { text-shadow: none !important; }

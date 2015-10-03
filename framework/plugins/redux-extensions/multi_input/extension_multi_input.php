@@ -60,8 +60,7 @@ if( ! class_exists( 'ReduxFramework_Extension_multi_input' ) ) {
 
 			self::$theInstance = $this;
 
-			add_filter( 'redux/mixt_opt/field/class/'.$this->field_name, array( &$this, 'overload_field_path' ) ); // Adds the local field
-
+			add_filter('redux/mixt_opt/field/class/'.$this->field_name, array( &$this, 'overload_field_path' )); // Adds the local field
 		}
 
 		public function getInstance() {
@@ -75,3 +74,11 @@ if( ! class_exists( 'ReduxFramework_Extension_multi_input' ) ) {
 
 	}
 }
+
+// Register field as customizer control
+function multi_input_customizer_control() {
+	class Redux_Customizer_Control_multi_input extends Redux_Customizer_Control {
+		public $type = 'redux-multi_input';
+	}
+}
+add_action('redux/extension/customizer/control/includes', 'multi_input_customizer_control');

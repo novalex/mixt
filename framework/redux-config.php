@@ -73,25 +73,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// echo "</pre>";
 			//print_r($options); //Option values
 			//print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
-
-			// CUSTOM CSS FILE
-
-			global $wp_filesystem;
-
-			$filename = MIXT_UPLOAD_PATH . '/custom-style.css';
-
-			if ( empty( $wp_filesystem ) ) {
-				require_once( ABSPATH . '/wp-admin/includes/file.php' );
-				WP_Filesystem();
-			}
-
-			if ( $wp_filesystem ) {
-				$wp_filesystem->put_contents(
-					$filename,
-					$css,
-					FS_CHMOD_FILE // predefined mode settings for WP files
-				);
-			}
 		}
 
 		/**
@@ -148,51 +129,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 		public function setSections() {
 
-			ob_start();
-
-			$ct          = wp_get_theme();
-			$this->theme = $ct;
-			$item_name   = $this->theme->get( 'Name' );
-			$tags        = $this->theme->Tags;
-			$class       = '';
-
-			?>
-
-			<div id="current-theme" class="<?php echo esc_attr( $class ); ?>">
-
-				<h4><?php echo $this->theme->display( 'Name' ); ?></h4>
-
-				<div>
-					<ul class="theme-info">
-						<li><?php printf( __( 'By %s', 'mixt' ), $this->theme->display( 'Author' ) ); ?></li>
-						<li><?php printf( __( 'Version %s', 'mixt' ), $this->theme->display( 'Version' ) ); ?></li>
-						<li><?php echo '<strong>' . __( 'Tags', 'mixt' ) . ':</strong> '; ?><?php printf( $this->theme->display( 'Tags' ) ); ?></li>
-					</ul>
-					<p class="theme-description"><?php echo $this->theme->display( 'Description' ); ?></p>
-					<?php
-						if ( $this->theme->parent() ) {
-							printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'mixt' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'mixt' ), $this->theme->parent()->display( 'Name' ) );
-						}
-					?>
-
-				</div>
-			</div>
-
-			<?php
-			$item_info = ob_get_contents();
-
-			ob_end_clean();
-
-			$sampleHTML = '';
-			if ( file_exists( dirname( __FILE__ ) . '/info-html.html' ) ) {
-				Redux_Functions::initWpFilesystem();
-
-				global $wp_filesystem;
-
-				$sampleHTML = $wp_filesystem->get_contents( dirname( __FILE__ ) . '/info-html.html' );
-			}
-
-
 			// GET ASSETS
 
 			$page_loader_anims = array(
@@ -202,17 +138,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
 
 			// Themes
-			$site_themes = $nav_themes = '';
+			$site_themes = $nav_themes = mixt_default_themes();
 			$themes_enabled = get_option('mixt-themes-enabled', true);
 			if ( $themes_enabled ) {
-				$themes_ob = new Mixt_Themes;
-				$preset_themes = $themes_ob->default_themes;
-
-				$site_themes = ! empty(mixt_get_themes('site')) ? array_merge(mixt_get_themes('site'), $preset_themes) : $preset_themes;
-
-				$nav_themes = ! empty(mixt_get_themes('nav')) ? array_merge(mixt_get_themes('nav'), $preset_themes) : $preset_themes;
-				$nav_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $nav_themes );
+				if ( ! empty(mixt_get_themes('site')) ) $site_themes = array_merge(mixt_get_themes('site'), $site_themes);
+				if ( ! empty(mixt_get_themes('nav')) ) $nav_themes = array_merge(mixt_get_themes('nav'), $nav_themes);
 			}
+			$nav_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $nav_themes );
+			$footer_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $site_themes );
 
 			// Image Patterns
 			$img_patterns = mixt_get_images('patterns');
@@ -226,8 +159,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$social_sharing_profile_names = array();
 			foreach( $social_sharing_profiles as $key => $profile ) { $social_sharing_profile_names[$key] = $profile['name']; }
 
-			// HTML Allowed in the secondary nav custom code field
-			$sec_nav_allowed_html = array(
+			// HTML Allowed in textareas
+			$text_allowed_html = array(
 				'a'   => array(
 					'href'  => array(),
 					'title' => array(),
@@ -238,8 +171,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'strong' => array( 'class' => array() ),
 				'em'     => array( 'class' => array() ),
 			);
-			// Secondary Nav custom code field placeholder
-			$sec_nav_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
+			// Textarea code field placeholder
+			$text_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
 
 			// Sidebars
 			$available_sidebars = array(
@@ -437,12 +370,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'wide',
 					),
 
+					// Site Background Color
+					array(
+						'id'          => 'site-bg-color',
+						'type'        => 'color',
+						'title'       => __( 'Background Color', 'mixt' ),
+						'subtitle'    => __( 'Select the site background color', 'mixt' ),
+						'transparent' => false,
+						'default'     => '#fff',
+						'validate'    => 'color',
+						'required'    => array('site-layout', '=', 'boxed'),
+					),
+
 					// Site Background
 					array(
 						'id'       => 'site-bg',
 						'type'     => 'background',
 						'title'    => __( 'Site Background', 'mixt' ),
-						'subtitle' => __( 'Choose a color, image and other options for the site background', 'mixt' ),
+						'subtitle' => __( 'Choose an image and other options for the site background', 'mixt' ),
 						'default'  => array(
 							'background-attachment' => 'fixed',
 							'background-size'       => 'cover',
@@ -450,16 +395,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'background-position'   => 'center top',
 						),
 						'required' => array('site-layout', '=', 'boxed'),
+						'background-color' => false,
 					),
 
 					// Site Background Pattern
 					array(
 						'id'       => 'site-bg-pat',
-						'type'     => 'image_select',
+						'type'     => 'mixt_image_select',
 						'title'    => __( 'Background Pattern', 'mixt' ),
-						'subtitle' => __( 'The site\'s background pattern', 'mixt' ),
+						'subtitle' => __( 'Choose a pattern for the site background', 'mixt' ),
 						'options'  => $img_patterns,
 						'empty'    => true,
+						'default'  => '',
 						'required' => array('site-layout', '=', 'boxed'),
 					),
 
@@ -615,17 +562,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => true,
 						),
 
-						// Dynamic Stylesheet Mode
-						array(
-							'id'       => 'dynamic-sass',
-							'type'     => 'switch',
-							'title'    => __( 'Dynamic Sass Stylesheet', 'mixt' ),
-							'subtitle' => __( 'Use Sass for dynamic styles, or regular CSS output in the head<br> Using Sass allows caching, but requires server write permissions', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => false,
-						),
-
 						// Page Metaboxes
 						array(
 							'id'       => 'page-metaboxes',
@@ -677,6 +613,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => false,
+						),
+
+						// Height
+						array(
+							'id'       => 'head-height',
+							'type'     => 'text',
+							'title'    => __( 'Custom Height', 'mixt' ),
+							'subtitle' => __( 'Set a custom height (in px) for the header', 'mixt' ),
 						),
 
 						// Background Color
@@ -1014,10 +958,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Background Pattern
 						array(
 							'id'       => 'loc-bar-bg-pat',
-							'type'     => 'image_select',
+							'type'     => 'mixt_image_select',
 							'title'    => __( 'Background Pattern', 'mixt' ),
 							'options'  => $img_patterns,
 							'empty'    => true,
+							'default'  => '',
 							'required' => array('location-bar', '=', true),
 						),
 
@@ -1031,7 +976,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array('location-bar', '=', true),
 						),
 
-						// Text Color
+						// Border Color
 						array(
 							'id'       => 'loc-bar-border-color',
 							'type'     => 'color',
@@ -1083,206 +1028,181 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 
-			// LOGO & FAVICON SECTION
+			// LOGO SECTION
 			$this->sections[] = array(
-				'title'      => __( 'Logo & Favicon', 'mixt' ),
-				'desc'       => __( 'Configure the site\'s logo and favicon', 'mixt' ),
+				'title'      => __( 'Logo', 'mixt' ),
 				'icon'       => 'el-icon-globe',
-				'customizer' => false,
 				'fields'     => array(
 
-					// LOGO SECTION
+					// Type
 					array(
-						'id'       => 'logo-section',
-						'type'     => 'section',
-						'title'    => __( 'Logo', 'mixt' ),
-						'indent'   => true,
+						'id'       => 'logo-type',
+						'type'     => 'button_set',
+						'title'    => __( 'Type', 'mixt' ),
+						'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
+						'options'  => array(
+							'img'  => __( 'Image', 'mixt' ),
+							'text' => __( 'Text', 'mixt' ),
+						),
+						'default'  => 'text',
 					),
 
-						// Type
-						array(
-							'id'       => 'logo-type',
-							'type'     => 'button_set',
-							'title'    => __( 'Type', 'mixt' ),
-							'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
-							'options'  => array(
-								'img'  => __( 'Image', 'mixt' ),
-								'text' => __( 'Text', 'mixt' ),
-							),
-							'default'  => 'text',
-						),
-
-						// Image Select
-						array(
-							'id'       => 'logo-img',
-							'type'     => 'media',
-							'url'      => false,
-							'title'    => __( 'Image', 'mixt' ),
-							'subtitle' => __( 'Select the image you want to use as the site\'s logo', 'mixt' ),
-							'required' => array('logo-type', '=', 'img'),
-						),
-
-						// Inverse Image Select
-						array(
-							'id'       => 'logo-img-inv',
-							'type'     => 'media',
-							'url'      => false,
-							'title'    => __( 'Inverse Image', 'mixt' ),
-							'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
-							'required' => array('logo-type', '=', 'img'),
-						),
-
-						// Hi-Res
-						array(
-							'id'       => 'logo-img-hr',
-							'type'     => 'switch',
-							'title'    => __( 'Hi-Res', 'mixt' ),
-							'subtitle' => __( 'Scale down logo to half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
-							'required' => array('logo-type', '=', 'img'),
-						),
-
-						// Text Field
-						array(
-							'id'       => 'logo-text',
-							'type'     => 'text',
-							'title'    => __( 'Text', 'mixt' ),
-							'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
-							'required' => array('logo-type', '=', 'text'),
-						),
-
-						// Text Style
-						array(
-							'id'             => 'logo-text-typo',
-							'type'           => 'typography',
-							'title'          => __( 'Text Style', 'mixt' ),
-							'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
-							'google'         => true,
-							'font-backup'    => true,
-							'line-height'    => false,
-							'text-align'     => false,
-							'text-transform' => true,
-							'units'          => 'px',
-							'default'        => array(
-								'color'  => '#333333',
-								'google' => false,
-							),
-							'required'       => array('logo-type', '=', 'text'),
-						),
-
-						// Text Inverse Color
-						array(
-							'id'       => 'logo-text-inv',
-							'type'     => 'color',
-							'title'    => __( 'Text Inverse Color', 'mixt' ),
-							'subtitle' => __( 'Select an inverse logo text color for dark backgrounds', 'mixt' ),
-							'transparent' => false,
-							'validate' => 'color',
-							'default'  => '#ffffff',
-							'required' => array('logo-type', '=', 'text'),
-						),
-
-						// Shrink
-						array(
-							'id'       => 'logo-shrink',
-							'type'     => 'spinner',
-							'title'    => __( 'Shrink', 'mixt' ),
-							'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 means no shrink)', 'mixt' ),
-							'max'      => '20',
-							'step'     => '1',
-							'default'  => '6',
-						),
-
-						// Tagline
-						array(
-							'id'       => 'logo-show-tagline',
-							'type'     => 'switch',
-							'title'    => __( 'Tagline', 'mixt' ),
-							'subtitle' => __( 'Show the site\'s tagline (or a custom one) next to the logo', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => false,
-						),
-
-						// Tagline Text
-						array(
-							'id'       => 'logo-tagline',
-							'type'     => 'text',
-							'title'    => __( 'Tagline Text', 'mixt' ),
-							'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
-							'required' => array('logo-show-tagline', '=', true),
-						),
-
-						// Tagline Style
-						array(
-							'id'             => 'logo-tagline-typo',
-							'type'           => 'typography',
-							'title'          => __( 'Tagline Style', 'mixt' ),
-							'google'         => true,
-							'font-backup'    => true,
-							'line-height'    => false,
-							'text-align'     => false,
-							'text-transform' => true,
-							'units'          => 'px',
-							'default'        => array(
-								'color'  => '#333333',
-								'google' => false,
-							),
-							'required'       => array('logo-show-tagline', '=', true),
-						),
-
-					// Divider
+					// Image Select
 					array(
-						'id'   => 'favicon-divider',
-						'type' => 'divide',
+						'id'       => 'logo-img',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Image', 'mixt' ),
+						'subtitle' => __( 'Select the image you want to use as the site\'s logo', 'mixt' ),
+						'required' => array('logo-type', '=', 'img'),
 					),
 
-					// FAVICON SECTION
+					// Inverse Image Select
 					array(
-						'id'       => 'favicon-section',
-						'type'     => 'section',
-						'title'    => __( 'Favicon', 'mixt' ),
-						'subtitle' => __( 'Set up the favicon (the icon that appears next to the site name in the browser)<br>MIXT will automatically generate icons in different sizes for most devices', 'mixt' ),
-						'indent'   => true,
+						'id'       => 'logo-img-inv',
+						'type'     => 'media',
+						'url'      => false,
+						'title'    => __( 'Inverse Image', 'mixt' ),
+						'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
+						'required' => array('logo-type', '=', 'img'),
 					),
 
-						// Image Select
-						array(
-							'id'       => 'favicon-img',
-							'type'     => 'media',
-							'url'      => false,
-							'title'    => __( 'Select Image', 'mixt' ),
-							'subtitle' => __( 'Select the image you want to use as the site\'s favicon.<br><strong>For optimal results, select an image at least 200x200 pixels big</strong>', 'mixt' ),
-						),
+					// Hi-Res
+					array(
+						'id'       => 'logo-img-hr',
+						'type'     => 'switch',
+						'title'    => __( 'Hi-Res', 'mixt' ),
+						'subtitle' => __( 'Scale down logo to half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+						'required' => array('logo-type', '=', 'img'),
+					),
 
-						// Rebuild Favicons
-						array(
-							'id'       => 'favicon-rebuild',
-							'type'     => 'switch',
-							'title'    => __( 'Rebuild Favicons', 'mixt' ),
-							'subtitle' => __( 'Delete the old favicons and rebuild from new source', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => false,
-						),
+					// Text Field
+					array(
+						'id'       => 'logo-text',
+						'type'     => 'text',
+						'title'    => __( 'Text', 'mixt' ),
+						'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
+						'required' => array('logo-type', '=', 'text'),
+					),
 
-						// Saved Favicon HTML Code
-						array(
-							'id'       => 'favicon-html',
-							'type'     => 'textarea',
-							'title'    => __( 'Current Favicon Code', 'mixt' ),
-							'subtitle' => __( 'This is the current favicon HTML, it <strong>will be replaced</strong> on each rebuild', 'mixt' ),
-							'allowed_html' => array(
-								'link' => array(
-									'rel'   => array(),
-									'type'  => array(),
-									'sizes' => array(),
-									'href'  => array(),
-								),
-							),
+					// Text Style
+					array(
+						'id'             => 'logo-text-typo',
+						'type'           => 'typography',
+						'title'          => __( 'Text Style', 'mixt' ),
+						'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
+						'color'          => false,
+						'google'         => true,
+						'font-backup'    => true,
+						'line-height'    => false,
+						'text-align'     => false,
+						'text-transform' => true,
+						'units'          => 'px',
+						'default'        => array(
+							'google' => false,
 						),
+						'required'       => array('logo-type', '=', 'text'),
+					),
+
+					// Text Color
+					array(
+						'id'       => 'logo-text-color',
+						'type'     => 'color',
+						'title'    => __( 'Text Color', 'mixt' ),
+						'subtitle' => __( 'Select a logo text color', 'mixt' ),
+						'transparent' => false,
+						'validate' => 'color',
+						'default'  => '#333',
+						'required' => array('logo-type', '=', 'text'),
+					),
+
+					// Text Inverse Color
+					array(
+						'id'       => 'logo-text-inv',
+						'type'     => 'color',
+						'title'    => __( 'Text Inverse Color', 'mixt' ),
+						'subtitle' => __( 'Select a logo text color for dark backgrounds', 'mixt' ),
+						'transparent' => false,
+						'validate' => 'color',
+						'default'  => '#fff',
+						'required' => array('logo-type', '=', 'text'),
+					),
+
+					// Shrink
+					array(
+						'id'       => 'logo-shrink',
+						'type'     => 'spinner',
+						'title'    => __( 'Shrink', 'mixt' ),
+						'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 means no shrink)', 'mixt' ),
+						'max'      => '20',
+						'step'     => '1',
+						'default'  => '6',
+					),
+
+					// Tagline
+					array(
+						'id'       => 'logo-show-tagline',
+						'type'     => 'switch',
+						'title'    => __( 'Tagline', 'mixt' ),
+						'subtitle' => __( 'Show the site\'s tagline (or a custom one) next to the logo', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
+					// Tagline Text
+					array(
+						'id'       => 'logo-tagline',
+						'type'     => 'text',
+						'title'    => __( 'Tagline Text', 'mixt' ),
+						'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
+						'required' => array('logo-show-tagline', '=', true),
+					),
+
+					// Tagline Style
+					array(
+						'id'             => 'logo-tagline-typo',
+						'type'           => 'typography',
+						'title'          => __( 'Tagline Style', 'mixt' ),
+						'color'          => false,
+						'google'         => true,
+						'font-backup'    => true,
+						'line-height'    => false,
+						'text-align'     => false,
+						'text-transform' => true,
+						'units'          => 'px',
+						'default'        => array(
+							'google' => false,
+						),
+						'required'       => array('logo-show-tagline', '=', true),
+					),
+
+					// Tagline Color
+					array(
+						'id'       => 'logo-tagline-color',
+						'type'     => 'color',
+						'title'    => __( 'Tagline Color', 'mixt' ),
+						'subtitle' => __( 'Select a tagline text color', 'mixt' ),
+						'transparent' => false,
+						'validate' => 'color',
+						'default'  => '#333',
+						'required' => array('logo-show-tagline', '=', true),
+					),
+
+					// Tagline Inverse Color
+					array(
+						'id'       => 'logo-tagline-inv',
+						'type'     => 'color',
+						'title'    => __( 'Tagline Inverse Color', 'mixt' ),
+						'subtitle' => __( 'Select a tagline text color for dark backgrounds', 'mixt' ),
+						'transparent' => false,
+						'validate' => 'color',
+						'default'  => '#fff',
+						'required' => array('logo-show-tagline', '=', true),
+					),
 				),
 			);
 
@@ -1414,10 +1334,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Texture
 						array(
 							'id'       => 'nav-texture',
-							'type'     => 'image_select',
+							'type'     => 'mixt_image_select',
 							'title'    => __( 'Texture', 'mixt' ),
 							'subtitle' => __( 'Texture the navbar', 'mixt' ),
 							'options'  => $img_textures,
+							'default'  => '',
 							'empty'    => true,
 						),
 
@@ -1465,14 +1386,12 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// See-Through When Possible
 						array(
 							'id'       => 'nav-transparent',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'See-Through', 'mixt' ),
 							'subtitle' => __( 'Make navbar transparent (when possible)', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default'  => 'false',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 							'required' => array('nav-layout', '=', 'horizontal'),
 						),
 
@@ -1489,7 +1408,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'resolution' => 0.01,
 							'required'   => array(
 								array('nav-layout', '=', 'horizontal'),
-								array('nav-transparent', '=', 'true'),
+								array('nav-transparent', '=', true),
 							),
 						),
 
@@ -1510,27 +1429,23 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Hover Item Background
 						array(
 							'id'       => 'nav-hover-bg',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Hover Item Background', 'mixt' ),
 							'subtitle' => __( 'Item background color on hover', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default' => 'true',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default' => true,
 						),
 
 						// Active Item Bar
 						array(
 							'id'       => 'nav-active-bar',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Active Item Bar', 'mixt' ),
 							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default' => 'true',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default' => true,
 						),
 
 						// Active Item Bar Position
@@ -1546,20 +1461,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'bottom' => __( 'Bottom', 'mixt' ),
 							),
 							'default'  => 'bottom',
-							'required' => array('nav-active-bar', '=', 'true'),
+							'required' => array('nav-active-bar', '=', true),
 						),
 
 						// Border Items
 						array(
 							'id'       => 'nav-bordered',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Border Items', 'mixt' ),
 							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default'  => 'false',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 						),
 
 					// Divider
@@ -1602,39 +1515,36 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Texture
 						array(
 							'id'       => 'sec-nav-texture',
-							'type'     => 'image_select',
+							'type'     => 'mixt_image_select',
 							'title'    => __( 'Texture', 'mixt' ),
 							'subtitle' => __( 'Texture the navbar', 'mixt' ),
 							'options'  => $img_textures,
 							'empty'    => true,
+							'default'  => '',
 							'required' => array('second-nav', '=', true),
 						),
 
 						// Hover Item Background
 						array(
 							'id'       => 'sec-nav-hover-bg',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Hover Item Background', 'mixt' ),
 							'subtitle' => __( 'Item background color on hover', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default' => 'true',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
 							'required' => array('second-nav', '=', true),
 						),
 
 						// Active Item Bar
 						array(
 							'id'       => 'sec-nav-active-bar',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Active Item Bar', 'mixt' ),
 							'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default' => 'false',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 							'required' => array('second-nav', '=', true),
 						),
 
@@ -1651,20 +1561,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'bottom' => __( 'Bottom', 'mixt' ),
 							),
 							'default'  => 'bottom',
-							'required' => array('sec-nav-active-bar', '=', 'true'),
+							'required' => array('sec-nav-active-bar', '=', true),
 						),
 
 						// Border Items
 						array(
 							'id'       => 'sec-nav-bordered',
-							'type'     => 'button_set',
+							'type'     => 'switch',
 							'title'    => __( 'Border Items', 'mixt' ),
 							'subtitle' => __( 'Add borders to the navbar items', 'mixt' ),
-							'options'  => array(
-								'true'  => __( 'Yes', 'mixt' ),
-								'false' => __( 'No', 'mixt' ),
-							),
-							'default'  => 'true',
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
 							'required' => array('second-nav', '=', true),
 						),
 
@@ -1690,8 +1598,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'         => 'textarea',
 							'title'        => __( 'Left Side Code', 'mixt' ),
 							'subtitle'     => __( 'Text or code to display on the left side', 'mixt' ),
-							'allowed_html' => $sec_nav_allowed_html,
-							'placeholder'  => $sec_nav_code_placeholder,
+							'allowed_html' => $text_allowed_html,
+							'placeholder'  => $text_code_placeholder,
 							'required'     => array('sec-nav-left-content', '=', '3'),
 						),
 
@@ -1699,7 +1607,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						array(
 							'id'       => 'sec-nav-left-hide',
 							'type'     => 'switch',
-							'title'    => __( 'Left Hide On Mobile', 'mixt' ),
+							'title'    => __( 'Hide Left Side On Mobile', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => false,
@@ -1728,8 +1636,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'         => 'textarea',
 							'title'        => __( 'Right Side Code', 'mixt' ),
 							'subtitle'     => __( 'Text or code to display on the right side', 'mixt' ),
-							'allowed_html' => $sec_nav_allowed_html,
-							'placeholder'  => $sec_nav_code_placeholder,
+							'allowed_html' => $text_allowed_html,
+							'placeholder'  => $text_code_placeholder,
 							'required'     => array('sec-nav-right-content', '=', '3'),
 						),
 
@@ -1737,7 +1645,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						array(
 							'id'       => 'sec-nav-right-hide',
 							'type'     => 'switch',
-							'title'    => __( 'Right Hide On Mobile', 'mixt' ),
+							'title'    => __( 'Hide Right Side On Mobile', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => false,
@@ -1827,7 +1735,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type'     => 'select',
 						'title'    => __( 'Footer Theme', 'mixt' ),
 						'subtitle' => __( 'Select the theme to be used for the footer', 'mixt' ),
-						'options'  => array_merge( array( 'auto' => __( 'Auto', 'mixt') ), $site_themes ),
+						'options'  => $footer_themes,
 						'default'  => 'auto',
 					),
 					
@@ -1876,9 +1784,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Background Pattern
 						array(
 							'id'       => 'footer-widgets-bg-pat',
-							'type'     => 'image_select',
+							'type'     => 'mixt_image_select',
 							'title'    => __( 'Background Pattern', 'mixt' ),
 							'options'  => $img_patterns,
+							'default'  => '',
 							'empty'    => true,
 						),
 
@@ -1926,9 +1835,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Background Pattern
 						array(
 							'id'       => 'footer-copy-bg-pat',
-							'type'     => 'image_select',
+							'type'     => 'mixt_image_select',
 							'title'    => __( 'Background Pattern', 'mixt' ),
 							'options'  => $img_patterns,
+							'default'  => '',
 							'empty'    => true,
 						),
 
@@ -1948,6 +1858,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Border Color', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
+						),
+
+						// Footer Code
+						array(
+							'id'           => 'footer-code',
+							'type'         => 'textarea',
+							'title'        => __( 'Footer Code', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display in the footer', 'mixt' ),
+							'default'      => __( 'Copyright', 'mixt' ) . ' © {{year}} Your Company',
+							'allowed_html' => $text_allowed_html,
+							'placeholder'  => $text_code_placeholder,
 						),
 				),
 			);
@@ -2089,8 +2010,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'title'    => __( 'Post Content', 'mixt' ),
 						'subtitle' => __( 'Show the post\'s excerpt or full content', 'mixt' ),
 						'options'  => array(
-							'full'      => __( 'Full', 'mixt' ),
-							'excerpt'   => __( 'Excerpt', 'mixt' ),
+							'full'    => __( 'Full', 'mixt' ),
+							'excerpt' => __( 'Excerpt', 'mixt' ),
 						),
 						'default'  => 'full',
 					),
@@ -2700,6 +2621,36 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Background Color', 'mixt' ),
 								),
 
+								// Text Color
+								'color' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color', 'mixt' ),
+								),
+
+								// Text Color Fade
+								'color-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Text Color Fade', 'mixt' ) . ' *',
+								),
+
+								// Inverse Text Color
+								'color-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color', 'mixt' ),
+								),
+
+								// Inverse Text Color Fade
+								'color-inv-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Fade', 'mixt' ) . ' *',
+								),
+
+								// Border Color
+								'border' => array(
+									'type'  => 'color',
+									'label' => __( 'Border Color', 'mixt' ),
+								),
+
 								// Inverse Background Color
 								'bg-inv' => array(
 									'type'  => 'color',
@@ -2712,40 +2663,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Alt Background', 'mixt' ) . ' *',
 								),
 
-								// Text Color
-								'color' => array(
-									'type'  => 'color',
-									'label' => __( 'Text Color' ),
-								),
-
-								// Text Color Fade
-								'color-fade' => array(
-									'type'  => 'color',
-									'label' => __( 'Text Color Fade' ),
-								),
-
-								// Inverse Text Color
-								'color-inv' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Color' ),
-								),
-
-								// Inverse Text Color Fade
-								'color-inv-fade' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Fade' ),
-								),
-
 								// Alt Text Color
 								'color-alt' => array(
 									'type'  => 'color',
-									'label' => __( 'Alt Text Color' ) . ' *',
-								),
-
-								// Border Color
-								'border' => array(
-									'type'  => 'color',
-									'label' => __( 'Border Color', 'mixt' ),
+									'label' => __( 'Alt Text Color', 'mixt' ) . ' *',
 								),
 
 								// Inverse Border Color
@@ -2759,7 +2680,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'type'  => 'color',
 									'label' => __( 'Alt Border', 'mixt' ) . ' *',
 								),
+
+								// Dark Background Check
+								'bg-dark' => array(
+									'type'       => 'checkbox',
+									'label'      => __( 'Dark Background', 'mixt' ),
+								),
 							),
+							'default' => get_option('mixt-site-themes', array()),
 						),
 					),
 				);
@@ -2770,8 +2698,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					'desc'       => __( 'Create and manage themes for the navbar.', 'mixt' ) . ' ' .
 									__( 'Fields marked * can be left empty and their respective colors will be automatically generated.', 'mixt' ),
 					'icon'       => 'el-icon-minus',
-					'customizer' => false,
 					'subsection' => true,
+					'customizer' => false,
 					'fields'     => array(
 
 						array(
@@ -2834,16 +2762,52 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Border Color', 'mixt' ),
 								),
 
+								// Inverse Border Color
+								'border-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Border', 'mixt' ),
+								),
+
 								// Menu Background Color
 								'menu-bg' => array(
 									'type'  => 'color',
-									'label' => __( 'Menu Background', 'mixt' ),
+									'label' => __( 'Menu Background', 'mixt' ) . ' *',
+								),
+
+								// Menu Text Color
+								'menu-color' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Text Color', 'mixt' ) . ' *',
+								),
+
+								// Menu Text Fade Color
+								'menu-color-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Text Fade', 'mixt' ) . ' *',
+								),
+
+								// Menu Hover Background Color
+								'menu-bg-hover' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Hover Bg', 'mixt' ) . ' *',
+								),
+
+								// Menu Hover Text Color
+								'menu-hover-color' => array(
+									'type'  => 'color',
+									'label' => __( 'Menu Hover Text', 'mixt' ) . ' *',
 								),
 
 								// Menu Border Color
 								'menu-border' => array(
 									'type'  => 'color',
-									'label' => __( 'Menu Border', 'mixt' ),
+									'label' => __( 'Menu Border', 'mixt' ) . ' *',
+								),
+
+								// Dark Background Check
+								'bg-dark' => array(
+									'type'       => 'checkbox',
+									'label'      => __( 'Dark Background', 'mixt' ),
 								),
 
 								// RGBA Check
@@ -2853,6 +2817,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'wrap_class' => 'rgba-field',
 								),
 							),
+							'default' => get_option('mixt-nav-themes', array())
 						),
 					),
 				);
@@ -2994,36 +2959,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'google'      => false,
 						),
 					),
-
-					// Web Fonts
-					// array(
-					// 	'id'       => 'opt-web-fonts',
-					// 	'type'     => 'media',
-					// 	'title'    => __( 'Web Fonts', 'mixt' ),
-					// 	'compiler' => 'true',
-					// 	'mode'     => false,
-					// 	// Can be set to false to allow any media type, or can also be set to any mime type.
-					// 	'desc'     => __( 'Basic media uploader with disabled URL input field.', 'mixt' ),
-					// 	'subtitle' => __( 'Upload any media using the WordPress native uploader', 'mixt' ),
-					// 	'hint'     => array(
-					// 		//'title'     => '',
-					// 		'content' => 'This is a <b>hint</b> tool-tip for the webFonts field.<br/><br/>Add any HTML based text you like here.',
-					// 	)
-					// ),
 				),
 			);
 
-			$theme_info = '<div class="redux-framework-section-desc">';
-			$theme_info .= '<p class="redux-framework-theme-data description theme-uri">' . __( '<strong>Theme URL:</strong> ', 'mixt' ) . '<a href="' . $this->theme->get( 'ThemeURI' ) . '" target="_blank">' . $this->theme->get( 'ThemeURI' ) . '</a></p>';
-			$theme_info .= '<p class="redux-framework-theme-data description theme-author">' . __( '<strong>Author:</strong> ', 'mixt' ) . $this->theme->get( 'Author' ) . '</p>';
-			$theme_info .= '<p class="redux-framework-theme-data description theme-version">' . __( '<strong>Version:</strong> ', 'mixt' ) . $this->theme->get( 'Version' ) . '</p>';
-			$theme_info .= '<p class="redux-framework-theme-data description theme-description">' . $this->theme->get( 'Description' ) . '</p>';
-			$tabs = $this->theme->get( 'Tags' );
-			if ( ! empty( $tabs ) ) {
-				$theme_info .= '<p class="redux-framework-theme-data description theme-tags">' . __( '<strong>Tags:</strong> ', 'mixt' ) . implode( ', ', $tabs ) . '</p>';
-			}
-			$theme_info .= '</div>';
 
+			// DOCUMENTATION
 			if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
 				$this->sections['theme_docs'] = array(
 					'icon'   => 'el-icon-list-alt',
@@ -3039,55 +2979,41 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				);
 			}
 
+
 			$this->sections[] = array(
 				'type' => 'divide',
 			);
 
-			$this->sections[] = array(
-				'icon'            => 'el-icon-list-alt',
-				'title'           => __( 'Customizer Only', 'mixt' ),
-				'desc'            => __( '<p class="description">This Section should be visible only in Customizer</p>', 'mixt' ),
-				'customizer_only' => true,
-				'fields'          => array(
-					array(
-						'id'              => 'opt-customizer-only',
-						'type'            => 'select',
-						'title'           => __( 'Customizer Only Option', 'mixt' ),
-						'subtitle'        => __( 'The subtitle is NOT visible in customizer', 'mixt' ),
-						'desc'            => __( 'The field desc is NOT visible in customizer.', 'mixt' ),
-						'customizer_only' => true,
-						'options'         => array(
-							'1' => 'Opt 1',
-							'2' => 'Opt 2',
-							'3' => 'Opt 3'
-						),
-						'default'         => '2'
-					),
-				)
-			);
+
+			// ABOUT SECTION
+			ob_start();
+
+			$this->theme = wp_get_theme();
+
+			?>
+			<div id="current-theme">
+				<ul class="theme-info">
+					<li><?php printf( __( 'By %s', 'mixt' ), $this->theme->display( 'Author' ) ); ?></li>
+					<li><?php printf( __( 'Version %s', 'mixt' ), $this->theme->display( 'Version' ) ); ?></li>
+				</ul>
+				<?php
+					if ( $this->theme->parent() ) {
+						printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'mixt' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'mixt' ), $this->theme->parent()->display( 'Name' ) );
+					}
+				?>
+			</div>
+			<?php
+
+			$item_info = ob_get_clean();
 
 			$this->sections[] = array(
-				'title'  => __( 'Import / Export', 'mixt' ),
-				'desc'   => __( 'Import and Export theme settings from file, text or URL.', 'mixt' ),
-				'icon'   => 'el-icon-refresh',
-				'fields' => array(
+				'icon'       => 'el-icon-list-alt',
+				'title'      => __( 'About MIXT', 'mixt' ),
+				'desc'       => __( 'Information about the theme', 'mixt' ),
+				'customizer' => false,
+				'fields'     => array(
 					array(
-						'id'         => 'opt-import-export',
-						'type'       => 'import_export',
-						'title'      => 'Import Export',
-						'subtitle'   => 'Save and restore your theme options',
-						'full_width' => false,
-					),
-				),
-			);
-
-			$this->sections[] = array(
-				'icon'   => 'el-icon-list-alt',
-				'title'  => __( 'About MIXT', 'mixt' ),
-				'desc'   => __( '<p class="description">Something about this wonderful theme here.</p>', 'mixt' ),
-				'fields' => array(
-					array(
-						'id'      => 'opt-raw-info',
+						'id'      => 'theme-info',
 						'type'    => 'raw',
 						'content' => $item_info,
 					),
@@ -3096,23 +3022,48 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					array(
 						'id'          => 'tf-update-login',
 						'type'        => 'password',
-						'title'       => __( 'Auto Update - ThemeForest login', 'mixt' ),
-						'subtitle'    => __( 'Your TF user and API key to enable auto-updates for MIXT', 'mixt' ),
+						'title'       => __( 'Auto Update', 'mixt' ),
+						'subtitle'    => __( 'Your ThemeForest username and API key to enable auto-updates', 'mixt' ),
 						'username'    => true,
 						'placeholder' => array(
-							'username' => __( 'Enter your Username', 'mixt' ),
-							'password' => __( 'Enter your API Key', 'mixt' ),
+							'username' => __( 'Username', 'mixt' ),
+							'password' => __( 'API Key', 'mixt' ),
 						),
 					),
 				),
 			);
 
-			if ( file_exists( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) ) {
-				$tabs['docs'] = array(
-					'icon'    => 'el-icon-book',
-					'title'   => __( 'Documentation', 'mixt' ),
-					'content' => nl2br( file_get_contents( trailingslashit( dirname( __FILE__ ) ) . 'README.html' ) )
-				);
+
+			// IMPORT & DEMOS SECTION
+			include_once( MIXT_MODULES_DIR . '/demos.php' );
+			$this->sections[] = array(
+				'id'         => 'wbc_importer_section',
+				'title'      => __( 'Settings & Demos', 'mixt' ),
+				'desc'       => __( 'Manage your settings, and import demo content.', 'mixt' ) .
+								'<br><strong>' . __( 'Demos work best on clean, fresh sites!', 'mixt' ) . '</strong>',
+				'icon'       => 'el-icon-refresh',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Demo Import
+					array(
+						'id'   => 'wbc_demo_importer',
+						'type' => 'wbc_importer',
+					),
+
+					// Settings
+					array(
+						'id'         => 'opt-import-export',
+						'type'       => 'import_export',
+						'full_width' => true,
+					),
+				)
+			);
+
+
+			// CUSTOMIZER SECTIONS
+			if ( is_customize_preview() ) {
+				include_once( MIXT_FRAME_DIR . '/admin/redux-customizer.php' );
 			}
 		}
 
@@ -3142,8 +3093,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 			// Set the help sidebar
-			$this->args['help_sidebar'] = '<p>The latest documentation is available at the <br>' .
-										  '<a class="button button-primary" href="https://bitbucket.org/nova-inc/mixt-docs/" target="_blank">MIXT Wiki</a></p>';
+			$this->args['help_sidebar'] = '<p>The latest documentation is available at the <br><a class="button button-primary" href="https://bitbucket.org/nova-inc/mixt-docs/" target="_blank">MIXT Wiki</a></p>';
 		}
 
 		/**

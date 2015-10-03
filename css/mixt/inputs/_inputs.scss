@@ -137,7 +137,6 @@ textarea,
 
 // Small Gutter Width for Forms
 
-form.form-cols,
-.form.form-cols {
+.form-cols {
 	@include make-custom-grid-columns($gutter: $form-gutter);
 }

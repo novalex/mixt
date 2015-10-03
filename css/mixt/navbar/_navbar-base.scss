@@ -1,6 +1,4 @@
 
-$menu-hover-bg: rgba(0,0,0,0.05);
-
 .nav > li > a { transition: background 0.2s, color 0.2s; }
 
 .navbar {
@@ -40,15 +38,13 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 			background-color: transparent;
 		}
 
-		&,
-		&.active-top {
-			> .active > a:before {
-				position: absolute;
-				left: 0; bottom: -1px;
-				width: 100%;
-				height: 3px;
-				content: '';
-			}
+		> .active > a:before {
+			position: absolute;
+			left: 0; bottom: -1px;
+			width: 100%;
+			height: 3px;
+			content: '';
+			z-index: 1001; // Above dropdown menu
 		}
 		&.active-top > .active > a:before {
 			top: -1px; bottom: auto;
@@ -92,6 +88,8 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		.nav > li:hover > a,
 		.nav > li.hover > a,
 		.navbar-toggle:hover { background-color: transparent !important; }
+
+		.social-links.hover-bg li a:hover { color: inherit !important; text-shadow: none; }
 	}
 
 	// Menu Icons
@@ -156,7 +154,7 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		transition-delay: 0.15s;
 
 		li > a {
-			max-height: $nav-primary-sub-item-height + 1px;
+			max-height: $nav-sub-item-height + 1px;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			transition: background 0.3s, color 0.3s;
@@ -169,7 +167,7 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 		li .menu-item > a,
 		.mega-menu-column li > a {
 			clear: both;
-			padding: ($nav-primary-sub-item-height - $font-size) / 2;
+			padding: ($nav-sub-item-height - $font-size) / 2;
 			font-size: $font-size;
 			font-weight: bold;
 			line-height: 1;
@@ -230,9 +228,9 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 				border-right-width: 1px;
 
 				> a {
-					height: 44px;
-					max-height: 44px;
-					padding-top: $font-size;
+					height: $nav-item-height;
+					max-height: $nav-item-height;
+					padding-top: ($nav-item-height - $font-size) / 2;
 				}
 
 				&:nth-child(4n),
@@ -360,14 +358,13 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 	// Nav Search Form
 	.nav-search {
 		.sub-menu { width: 300px; }
+		.input-group-btn { line-height: 1; }
 
 		input {
 			margin-left: 0;
 			border-radius: 0;
 			border-width: 0 !important;
 			background: transparent !important;
-			box-shadow: none !important;
-			text-shadow: none !important;
 		}
 		button {
 			height: $input-height-base;
@@ -375,6 +372,10 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 			border-radius: 0;
 			border-width: 0;
 			border-left-width: 1px;
+		}
+		input, button {
+			box-shadow: none !important;
+			text-shadow: none !important;
 		}
 	}
 
@@ -402,9 +403,7 @@ $menu-hover-bg: rgba(0,0,0,0.05);
 	}
 }
 
-.navbar:not(.navbar-mixt) {
-	.mega-menu-column > a .drop-arrow { display: none !important; }
-}
+.navbar:not(.navbar-mixt) .mega-menu-column > a .drop-arrow { display: none !important; }
 
 // Used by jquery to check which media queries are active
 #navbar-check {

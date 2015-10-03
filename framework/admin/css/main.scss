@@ -1,7 +1,11 @@
 
 // MIXT Admin Styles
 
+@import 'css/mixt/colors';
+@import 'css/mixt/functions';
+
 @import 'page-styles';
 @import 'redux-mixt';
 @import 'vc-mixt';
 @import 'elements';
+@import 'customizer';

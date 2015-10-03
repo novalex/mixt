@@ -12,7 +12,7 @@ if ( Mixt_Options::get('page', 'sidebar') ) {
 
 	?>
 
-	</div><?php // Close .main-content-inner ?>
+	</div><?php // close #content ?>
 
 	<div class="sidebar widget-area">
 

@@ -1,15 +1,19 @@
 
 // MIXT Redux Functions
 
-// jQuery('#redux-sticky').insertAfter(jQuery('#redux-header'));
-
 jQuery(document).ready( function($) {
 
 	'use strict';
 
 	// Lighten / Darken Color
-	function shadeColor(color, percent) {   
-		var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+	function shadeColor(color, percent) {
+		if ( color.length === 0 ) return;
+		var f = parseInt(color.slice(1),16),
+			t = percent < 0 ? 0 : 255,
+			p = percent < 0 ? percent * -1 : percent,
+			R = f >> 16,
+			G = f >> 8&0x00FF,
+			B = f&0x0000FF;
 		return '#'+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
 	}
 
@@ -31,17 +35,6 @@ jQuery(document).ready( function($) {
 	pageLoadPreview();
 
 	$('#mixt_opt-page-loader-bg').on('mouseup', function() { setTimeout(pageLoadPreview, 100); });
-
-
-	// Favicons Function
-
-	function faviconInit() {
-		$('#mixt_opt-favicon-img').on('click', '.button', function() {
-			$('#mixt_opt-favicon-rebuild').find('.cb-enable').get(0).click();
-		});
-	}
-
-	faviconInit();
 
 	// Multi Input Fields
 

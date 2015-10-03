@@ -107,6 +107,35 @@ if ( function_exists('cmb2_post_search_render_field') ) {
 				'default' => 'auto',
 			),
 
+			// Meta Position / Display
+			array(
+				'id'       => $prefix . 'portfolio-page-meta-show',
+				'type'     => 'radio_inline',
+				'name'     => __( 'Post Meta', 'mixt' ),
+				'desc'     => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+				'options'  => array(
+					'auto'    => __( 'Auto', 'mixt' ),
+					'header'  => __( 'In Header', 'mixt' ),
+					'footer'  => __( 'In Footer', 'mixt' ),
+					'false'   => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+			),
+
+			// Post Info Display
+			array(
+				'id'       => $prefix . 'portfolio-page-post-info',
+				'type'     => 'radio_inline',
+				'name'     => __( 'Post Info', 'mixt' ),
+				'desc'     => __( 'Display the post format and date', 'mixt' ),
+				'options'  => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+			),
+
 			// Posts
 			array(
 				'id'      => $prefix . 'portfolio-attached-posts',

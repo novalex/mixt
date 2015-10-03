@@ -7,25 +7,43 @@
  */
 
 $options = mixt_get_options( array(
-	'footer-theme'     => array( 'return' => 'value' ),
 	'back-to-top'      => array(),
 	'back-to-top-icon' => array( 'return' => 'value' ),
+	'footer-code'      => array( 'return' => 'value' ),
 ) );
 
 ?>
-			</div><?php // close main-content-inner or sidebar, if sidebar is used ?>
-		</div><?php // close .row ?>
+				</div><?php // close #content or .sidebar, if sidebar is active ?>
 
-		<?php do_action('mixt_body_css'); ?>
+			</div><?php // close .row ?>
 
-	</div><?php // close .main-content ?>
+			<?php do_action('mixt_body_css'); ?>
+
+		</div><?php // close #content-wrap ?>
+
+		<?php
+
+		// Back To Top Button
+		if ( $options['back-to-top'] ) {
+			echo '<a href="#" id="back-to-top" class="btn btn-accent btn-lg">';
+				echo '<i class="' . $options['back-to-top-icon'] . '"></i>';
+			echo '</a>';
+		}
+
+		?>
+
+	</div><?php // close #main-wrap-inner ?>
 
 	<?php
-		$footer_classes = 'site-footer';
-		if ( $options['footer-theme'] != 'auto' ) $footer_classes .= " theme-{$options['footer-theme']}";
+
+		$theme = Mixt_Options::get('themes', 'footer');
+
+		$class = "theme-$theme";
+
 	?>
 
-	<footer id="colophon" class="<?php echo $footer_classes; ?>" role="contentinfo">
+	<footer id="colophon" class="<?php echo $class; ?>" role="contentinfo">
+
 		<?php
 
 		// Footer Widget Row
@@ -51,49 +69,39 @@ $options = mixt_get_options( array(
 					</div>
 				</div>
 			</div>
-		<?php } ?>
+			<?php
+		}
 
-		<?php // Footer Copyright Row ?>
+		// Footer Copyright Row ?>
 		<div class="footer-row copyright-row theme-section-main">
 			<div class="container">
 				<div class="row">
-					<div class="site-footer-inner col-sm-12">
+					<div class="site-copyright col-sm-12">
+						<?php
 
-						<div class="site-info">
-							<?php do_action( 'mixt_credits' ); ?>
-							<?php printf( __( 'Theme: %1$s by %2$s.', 'mixt' ), 'MIXT', '<a href="http://novalx.com/" rel="designer">novalex</a>' ); ?>
-						</div>
+						do_action( 'mixt_credits' );
 
+						$footer_code = str_replace('{{year}}', date('Y'), $options['footer-code']);
+
+						echo "<div class='site-info'>$footer_code</div>";
+
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-	</footer>
-
-	<?php
-		// Back To Top Button
-		if ( $options['back-to-top'] ) {
-			echo '<a href="#" id="back-to-top" class="btn btn-accent btn-lg">';
-				echo '<i class="' . $options['back-to-top-icon'] . '"></i>';
-			echo '</a>';
-		}
-	?>
+	</footer><?php // close #colophon ?>
 
 </div><?php // close #main-wrap ?>
 
 <?php
 
-// Enqueue the lightSlider plugin on blog and portfolio pages when AJAX pagination is enabled
-if ( in_array(Mixt_Options::get('layout', 'pagination-type'), array('ajax-click', 'ajax-scroll')) && in_array(Mixt_Options::get('page', 'page-type'), array('blog', 'portfolio')) ) {
-	mixt_enqueue_plugin('lightslider');
-}
-
 wp_footer();
 
-?>
+mixt_browsersync();
 
-<?php mixt_browsersync(); ?>
+?>
 
 </body>
 </html>

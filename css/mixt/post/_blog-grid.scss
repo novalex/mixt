@@ -21,6 +21,10 @@
 	.post-feat {
 		position: relative;
 
+		> a,
+		img,
+		.lSSlideOuter { height: 100%; }
+
 		&.post-link a,
 		&.post-quote blockquote {
 			height: 100%;

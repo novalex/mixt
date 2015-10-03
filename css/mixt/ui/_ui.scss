@@ -202,7 +202,6 @@ img[class*="wp-image-"] {
 	border-style: solid;
 	border-color: inherit;
 	border-radius: $bd-radius;
-	@extend .theme-bd;
 
 	&.aligncenter { margin-bottom: 10px; }
 
@@ -250,8 +249,6 @@ img[class*="wp-image-"] {
 
 
 // Miscellaneous
-
-hr { @extend .theme-bd; }
 
 .wp-smiley,
 .emoji { font-size: 16px; }

@@ -15,10 +15,8 @@ $modules = array(
 	'head-media.php',
 	'breadcrumbs.php',
 	'social.php',
-	'favicons.php',
 	'gallery.php',
 	'extras.php',
-	'customizer.php',
 	'dcss/class-dcss.php',
 );
 mixt_requires( $modules, MIXT_MODULES_DIR );
@@ -189,10 +187,9 @@ class Mixt_Plugins {
 new Mixt_Plugins;
 
 
-// Set options that need to be accessed before Redux is initialized (themes, sidebars)
-function mixt_options_changed( $mixt_opt ) {
-	// Dynamic Sass Option
-	if ( array_key_exists('dynamic-sass', $mixt_opt) ) { update_option('mixt-dynamic-sass', $mixt_opt['dynamic-sass']); }
+// Update options after they are changed
+function mixt_options_changed($mixt_opt = null) {
+	if ( is_null($mixt_opt) ) global $mixt_opt;
 
 	// Custom Sidebars
 	if ( ! empty($mixt_opt['reg-sidebars']) ) { update_option('mixt-sidebars', $mixt_opt['reg-sidebars']); }
@@ -200,20 +197,18 @@ function mixt_options_changed( $mixt_opt ) {
 	// Post Excerpt Length
 	if ( ! empty($mixt_opt['post-excerpt-length']) ) { update_option('mixt-post-excerpt-length', $mixt_opt['post-excerpt-length']); }
 
-	// Themes Enabled
+	// Themes
 	if ( array_key_exists('themes-master', $mixt_opt) ) {
-		update_option('mixt-themes-enabled', $mixt_opt['themes-master']);
-
-		if ( $mixt_opt['themes-master'] == false ) {
-			global $mixtConfig;
-			$mixtConfig->ReduxFramework->set('site-theme', '');
-			$mixtConfig->ReduxFramework->set('nav-theme', '');
+		if ( $mixt_opt['themes-master'] == true ) {
+			update_option('mixt-themes-enabled', true);
+			if ( ! empty($mixt_opt['site-themes']) ) { update_option('mixt-site-themes', $mixt_opt['site-themes']); }
+			if ( ! empty($mixt_opt['nav-themes']) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
+			$theme_ob = new Mixt_Themes;
+			$theme_ob->theme_stylesheet();
+		} else {
+			update_option('mixt-themes-enabled', false);
 		}
 	}
-
-	// Themes
-	if ( ! empty($mixt_opt['site-themes']) ) { update_option('mixt-site-themes', $mixt_opt['site-themes']); }
-	if ( ! empty($mixt_opt['nav-themes']) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
 
 	// Social Profiles
 	if ( ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }
@@ -222,10 +217,17 @@ function mixt_options_changed( $mixt_opt ) {
 	else { update_option('mixt-sharing-profiles', mixt_preset_social_profiles('sharing')); }
 }
 add_action('redux/options/mixt_opt/settings/change', 'mixt_options_changed', 2);
+add_action('customize_save_after', 'mixt_options_changed');
+
+// Customizer Preview
+if ( is_customize_preview() ) {
+	mixt_options_changed();
+	require_once MIXT_FRAME_DIR . '/admin/customizer.php';
+}
 
 
 // Set Custom Excerpt Length
-function mixt_excerpt_length( $length ) {
+function mixt_excerpt_length($length) {
 	return get_option('mixt-post-excerpt-length', 55);
 }
 add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
@@ -266,7 +268,9 @@ function mixt_wp_old_classes($classes) {
 
 
 // Admin Integration
-require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
+if ( is_admin() ) {
+	require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
+}
 
 
 // BrowserSync Script
@@ -298,11 +302,6 @@ function mixt_scripts() {
 	// Main CSS
 	wp_enqueue_style( 'mixt-main-style', $resources['main-css'], array(), MIXT_VERSION );
 
-	// Dynamic Sass
-	if ( get_option('mixt-dynamic-sass', 0) ) {
-		wp_enqueue_style( 'mixt-dynamic-style', MIXT_MODULES_URI . '/dcss/dynamic.scss.php' );
-	}
-
 	// Bootstrap JS
 	wp_enqueue_script( 'mixt-bootstrap-js', $resources['bootstrap-js'], array( 'jquery' ), MIXT_VERSION, true );
 
@@ -322,6 +321,16 @@ function mixt_scripts() {
 	$icon_fonts = Mixt_Options::get('assets', 'icon-fonts');
 	foreach ( $icon_fonts as $font => $val ) {
 		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
+	}
+
+	// Custom Dynami Stylesheet
+	if ( get_option('mixt-themes-enabled', false) && file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
+		wp_enqueue_style( 'mixt-dynamic-css', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
+	}
+
+	// Enqueue the lightSlider plugin on blog and portfolio pages when AJAX pagination is enabled
+	if ( in_array(Mixt_Options::get('layout', 'pagination-type'), array('ajax-click', 'ajax-scroll')) && in_array(Mixt_Options::get('page', 'page-type'), array('blog', 'portfolio')) ) {
+		mixt_enqueue_plugin('lightslider');
 	}
 
 	// Isotope Masonry
@@ -347,6 +356,7 @@ function mixt_admin_scripts($hook) {
 add_action('admin_enqueue_scripts', 'mixt_admin_scripts');
 // Add BrowserSync script to admin pages
 add_action('admin_footer', 'mixt_browsersync');
+// add_action('customize_controls_enqueue_scripts', 'mixt_browsersync');
 
 
 /**

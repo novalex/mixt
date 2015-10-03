@@ -62,10 +62,7 @@ $row-grid-sm-gutter: 20px;
 
 // Pre-Footer Spacing
 
-#content > .article {
-	&:last-child { padding-bottom: 0 !important; }
-	&:not(:last-child) .entry-body > :last-child { margin-bottom: 0; }
-}
+#content > .article .entry-body > :last-child { margin-bottom: 0; }
 .posts-container:last-child { padding-bottom: $gutter-lg; }
 
 
@@ -164,7 +161,7 @@ ul.wpb_thumbnails-fluid > li,
 		padding-left: ($gutter-sm / 2) - ($row-grid-sm-gutter / 2);
 		padding-right: ($gutter-sm / 2) - ($row-grid-sm-gutter / 2);
 	}
-	form.form-cols.row {
+	.form-cols.row {
 		padding-left: ($gutter-sm / 2) - ($form-gutter / 2);
 		padding-right: ($gutter-sm / 2) - ($form-gutter / 2);
 	}

@@ -5,18 +5,25 @@ $img-path:  '../assets/img';
 $font-path: '../assets/fonts';
 
 
-// NAVBAR
+// NAVBARS
+
+$nav-item-height: 42px;
+$nav-sub-item-height: 36px;
+$menu-hover-bg: rgba(0,0,0,0.03);
 
 $nav-primary-height: 91px;
 $nav-primary-pad: 20px;
 $nav-primary-item-height: 50px;
 $nav-primary-sub-item-height: 36px;
+$nav-primary-opacity: 0.95;
+$nav-primary-menu-opacity: 0.95;
 
 $nav-vertical-width: 320px;
 $nav-vertical-width-sm: 20%;
 $nav-vertical-item-height: 42px;
 
 $sec-nav-item-height: 32px;
+$sec-nav-sub-item-height: 32px;
 
 
 // TYPOGRAPHY
@@ -65,9 +72,10 @@ $post-inner-pad: 15px;
 
 // POST FEATURED IMAGES
 
-$post-aside-img: false; // '#{$img-path}/textures/subtle-grunge.png';
-$post-quote-img: false; // '#{$img-path}/patterns/linedpaper.png';
+$post-aside-img: '#{$img-path}/textures/ag-square.png';
 $post-link-img: '#{$img-path}/textures/transparent-square-tiles.png';
+$post-quote-img: false;
+$post-status-img: false;
 
 
 // MISCELLANEOUS

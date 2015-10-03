@@ -38,6 +38,7 @@
 		.header {
 			$bd-radius: $bd-radius-l - 1px;
 			border-radius: $bd-radius $bd-radius 0 0;
+			border-color: transparent;
 		}
 		.plan-name {
 			margin: 5px 0;
@@ -95,9 +96,8 @@
 
 	// Color Variants
 	@mixin pricing-table-variant($sel, $color) {
-		#{$sel} {
+		#{$sel} .mixt-pricing-inner .header {
 			color: set-color-for-bg($color);
-			border-color: transparent;
 			background-color: $color;
 			box-shadow: 0 0 0 1px darken($color, 10);
 			@include text-shadow-for-bg($color);
@@ -105,11 +105,11 @@
 	}
 	// Basic Colors
 	@each $sel, $color in $basic-colors {
-		@include pricing-table-variant('&.#{$sel} .mixt-pricing-inner .header', $color);
+		@include pricing-table-variant('&.#{$sel}', $color);
 	}
 	// Accent Colors
 	@each $theme, $colors in $themes {
-		@include pricing-table-variant('.theme-#{$theme} &.accent .mixt-pricing-inner .header', map-get($colors, 'accent'));
+		@include pricing-table-variant('.theme-#{$theme} &.accent', map-get($colors, 'accent'));
 	}
 }
 

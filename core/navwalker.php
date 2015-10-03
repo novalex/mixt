@@ -64,7 +64,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 
 		// SOCIAL ICON LIST
 		} else if ( $item_type == 'social-icons' ) {
-			$output .= $indent . '<li class="menu-social-icons">' . mixt_social_profiles(false);
+			$output .= $indent . '<li class="menu-social-icons">' . mixt_social_profiles(false, array('style' => 'nav'));
 
 		// WIDGET AREA
 		} else if ( $item_type == 'widget' ) {

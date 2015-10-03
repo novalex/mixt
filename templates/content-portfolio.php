@@ -25,7 +25,7 @@ if ( is_single() ) {
 		),
 	) );
 
-	if ( $options['project-layout'] != 'full' ) {
+	if ( $options['project-layout'] != 'full' && $post_ob->display_component('featured') ) {
 		$has_columns = true;
 
 		$post_classes[] = 'has-columns';

@@ -75,6 +75,8 @@
 		}
 	}
 
+	.entry-body:empty { margin-top: 0; }
+
 	.ajax-page {
 		border-bottom-width: 1px;
 		border-bottom-style: solid;

@@ -1,0 +1,25 @@
+
+// Edge Theme (Cyan)
+
+$theme-edge: (
+	'edge': (
+		'accent': #ffc28d,
+
+		'bg': #54C4CE,
+		'bg-dark': true,
+
+		'color': #fff,
+		'color-inv': #333,
+
+		'border': #49AEB7,
+
+		'menu-bg': #555,
+		'menu-bg-hover': #ffc28d,
+
+		'menu-color': #fff,
+		'menu-hover-color': #843a02,
+
+		'menu-border': #444,
+	)
+);
+$nav-themes: map-merge($nav-themes, $theme-edge);

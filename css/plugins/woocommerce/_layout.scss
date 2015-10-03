@@ -2,6 +2,7 @@
 .mixt {
 
 	// GENERAL
+	
 	.col2-set {
 		margin-left: $gutter-lg / -2;
 		margin-right: $gutter-lg / -2;
@@ -34,11 +35,10 @@
 	}
 
 	.woocommerce-checkout {
-		.woocommerce {
+		#content .woocommerce {
 			> div,
 			form.login,
 			.coupon-cont,
-			form.checkout,
 			#customer_details,
 			.shop_table {
 				margin-bottom: $row-spacing-lg;
@@ -48,10 +48,6 @@
 
 			form.login { margin-top: $row-spacing-lg / -2; }
 		}
-	}
-
-	.woocommerce-edit-address {
-		.woocommerce > form { margin-bottom: $row-spacing-lg; }
 	}
 
 
@@ -88,6 +84,7 @@
 
 
 	// PRODUCT PAGE
+	
 	div.product {
 		float: left;
 		width: 100%;
@@ -151,6 +148,7 @@
 
 
 	// CART PAGE
+	
 	table.cart,
 	#content table.cart {
 		img {
@@ -216,19 +214,9 @@
 		}
 	}
 
-	/**
-	 * Cart sidebar
-	 */
-	ul.cart_list,
-	ul.product_list_widget {
-		li {
-			//@include mediaright();
-		}
-	}
 
-	/**
-	 * Forms
-	 */
+	// FORMS
+	
 	form {
 		.form-row {
 			padding: 0;
@@ -285,10 +273,24 @@
 			float: right;
 		}
 	}
+
+
+	// ACCOUNT PAGE
+	
+	.woocommerce-account {
+		input[type=submit] { margin-top: $margin-m; }
+
+		fieldset { margin: $margin-m 0; }
+
+		.login, .register {
+			input[type=submit] { margin-top: 0; }
+		}
+	}
 }
 
 
-// Sidebar pages
+// Pages with sidebar
+
 .has-sidebar {
 	.product .summary:first-child,
 	.woocommerce-tabs {

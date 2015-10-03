@@ -22,16 +22,17 @@
 	}
 }
 
+.blog-grid .post-rollover {
+	.hover-content,
+	.post-feat-rollover > a { display: block; }
+}
+
 .blog-grid,
 .blog-masonry {
 	.portfolio .page-title a {
 		color: inherit;
 		font-size: $font-size;
 	}
-}
-
-// Project Styling
-.single-portfolio .article {
 }
 
 // Media

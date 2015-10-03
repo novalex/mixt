@@ -17,7 +17,7 @@ $options = mixt_get_options( array(
 
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area post-extra">
 
 <?php
 
@@ -54,6 +54,8 @@ if ( comments_open() ) {
 
 	// Comment Form
 
+	$form_classes = 'comment-form row form-cols form-no-labels';
+
 	$commenter = wp_get_current_commenter();
 	$req       = get_option( 'require_name_email' );
 	$aria_req  = $req ? ' required aria-required="true"' : '';
@@ -80,27 +82,27 @@ if ( comments_open() ) {
 	$site_label = __( 'Website', 'mixt' );
 	$author_fields = array(
 		'author' =>
-			'<p class="author-field comment-form-author">' .
-				'<label for="author" class="sr-only">' . $name_label . '</label>' .
+			'<p class="author-field comment-form-author form-group col-sm-4">' .
+				'<label for="author">' . $name_label . '</label>' .
 				'<input id="author" name="author" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author'] ) . '" ' .
 				'placeholder="' . $name_label . '" size="30"' . $aria_req . ' />' .
 			'</p>',
 		'email' =>
-			'<p class="author-field comment-form-email">' .
-				'<label for="email" class="sr-only">' . $mail_label . '</label>' .
+			'<p class="author-field comment-form-email form-group col-sm-4">' .
+				'<label for="email">' . $mail_label . '</label>' .
 				'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' .
 				'placeholder="' . $mail_label . '" size="30"' . $aria_req . ' />' .
 			'</p>',
 		'url' =>
-			'<p class="author-field comment-form-url last">' .
-				'<label for="url" class="sr-only">' . $site_label . '</label>' .
+			'<p class="author-field comment-form-url form-group col-sm-4">' .
+				'<label for="url">' . $site_label . '</label>' .
 				'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" ' .
 				'placeholder="' . $site_label . '" size="30" />' .
 			'</p>',
 	);
 
 	// Comment Textarea
-	$comment_field = '<p class="comment-field clearfix">' .
+	$comment_field = '<p class="comment-field form-group col-sm-12 clearfix">' .
 		'<textarea placeholder="' . __( 'Type in your reply...', 'mixt' ) . '" id="comment" class="form-control" name="comment" cols="45" rows="4" required aria-required="true"></textarea>' .
 	'</p>';
 
@@ -124,11 +126,23 @@ if ( comments_open() ) {
 		'comment_field'        => $comment_field,
 		'comment_notes_after'  => $comment_notes_after,
 
-		// Submit Button Classes
 		'class_submit' => 'submit btn btn-black btn-hover-accent',
 	);
 
+	// Add bootstrap classes to comment form
+	ob_start();
 	comment_form($args);
+	echo str_replace(
+		array(
+			'class="comment-form"',
+			'class="form-submit"',
+		),
+		array(
+			"class='$form_classes'",
+			"class='form-submit col-sm-4'",
+		),
+		ob_get_clean()
+	);
 
 // If comments are closed and there are comments, let's leave a little note, shall we?
 } else if ( $comments_num != '0' && post_type_supports( get_post_type(), 'comments' ) ) : ?>

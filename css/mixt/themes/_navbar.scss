@@ -1,55 +1,82 @@
 
 // Navbar Theme Colors
 
-$main-nav-opacity: 0.95;
-
 @mixin navbar-theme($name, $theme) {
-	$bg: map-get($theme, 'bg');
 	$accent: map-get($theme, 'accent');
+
+	$bg: map-get($theme, 'bg');
+
 	$color: map-get($theme, 'color');
 	$color-inv: map-get($theme, 'color-inv');
-	$border: map-get($theme, 'border');
 
-	$menu-bg: map-get($theme, 'menu-bg');
+	$border: map-get($theme, 'border');
+	$border-inv: theme-color($theme, 'border-inv', darken($bg, 10));
+
+	$menu-bg: theme-color($theme, 'menu-bg', $bg);
 	$menu-bg-hover: theme-color($theme, 'menu-bg-hover', rgba(0,0,0,0.02));
-	$menu-bg-expand: theme-color($theme, 'menu-expand', rgba(0,0,0,0.04));
-	$menu-color: map-get($theme, 'menu-color');
-	$menu-color-fade: map-get($theme, 'menu-color-fade');
-	$menu-border: map-get($theme, 'menu-border');
+
+	$menu-color: theme-color($theme, 'menu-color', $color);
+	$menu-hover-color: theme-color($theme, 'menu-hover-color', $accent);
+
+	$menu-border: theme-color($theme, 'menu-border', $border);
 	$menu-border-alpha: theme-color($theme, 'menu-border-alpha', false);
 
-	@if ( lumin($bg) > 0.5 ) {
-		$bg-light: true;
-
-		$bg-light-accent: $accent;
-		$bg-light-color: $color;
-		$bg-light-border: $border;
-
-
-		$bg-dark-accent: theme-color($theme, 'accent-inv', $accent);
-		$bg-dark-color: $color-inv;
-		$bg-dark-border: theme-color($theme, 'border-inv');
+	@if ( map-has-key($theme, 'accent-inv') ) {
+		$has-inv-accent: true;
+		$accent-inv: map-get($theme, 'accent-inv');
 	} @else {
-		$bg-light: false;
+		$has-inv-accent: false;
+		$accent-inv: $accent;
+	}
 
-		$bg-light-accent: theme-color($theme, 'accent-inv', $accent);
+	$bg-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
+
+	@if ( $bg-dark ) {
+		$bg-light-accent: $accent-inv;
 		$bg-light-color: $color-inv;
-		$bg-light-border: theme-color($theme, 'border-inv');
+		$bg-light-border: $border-inv;
 
 		$bg-dark-accent: $accent;
 		$bg-dark-color: $color;
 		$bg-dark-border: $border;
+
+		$bg-dark-sel: '&';
+		$bg-light-sel: '&.bg-light';
+
+		$menu-color-fade: theme-color($theme, 'menu-color-fade', darken($menu-color, 10));
+	} @else {
+		$bg-light-accent: $accent;
+		$bg-light-color: $color;
+		$bg-light-border: $border;
+
+		$bg-dark-accent: $accent-inv;
+		$bg-dark-color: $color-inv;
+		$bg-dark-border: $border-inv;
+
+		$bg-dark-sel: '&.bg-dark';
+		$bg-light-sel: '&';
+
+		$menu-color-fade: theme-color($theme, 'menu-color-fade', lighten($menu-color, 10));
 	}
 
 	.navbar.theme-#{$name} {
 		border-color: $border;
 		background-color: $bg;
 
-		.nav {
-			&,
-			&.active-top {
-				> .active > a:before { background-color: $accent; }
+		&.init { background-color: $bg !important; }
+
+		@if ( $bg-dark ) {
+			.navbar-data:before { content: 'dark'; }
+
+			#nav-logo .logo-dark { position: static; opacity: 1; visibility: visible; }
+			#nav-logo .logo-light { position: absolute; opacity: 0; visibility: hidden; }
+
+			#{$bg-light-sel} {
+				#nav-logo .logo-dark { position: absolute; opacity: 0; visibility: hidden; }
+				#nav-logo .logo-light { position: static; opacity: 1; visibility: visible; }
 			}
+		} @else {
+			.navbar-data:before { content: 'light'; }
 		}
 
 		// SUBMENUS
@@ -57,13 +84,20 @@ $main-nav-opacity: 0.95;
 		.sub-menu {
 			background-color: $menu-bg;
 
-			li > a {
-				&:hover,
-				&:focus { background-color: $menu-bg-hover; }
+			li > a,
+			li > a:focus,
+			li:hover > a,
+			li.hover > a {
+				&:hover {
+					color: $menu-hover-color;
+					background-color: $menu-bg-hover;
+				}
 			}
 
 			li > a,
 			input { color: $menu-color; }
+
+			input { @include placeholder($menu-color-fade); }
 
 			&,
 			> li,
@@ -81,24 +115,21 @@ $main-nav-opacity: 0.95;
 
 		// OTHER ELEMENTS
 
-		// Nav Search Form
 		.nav-search .search-form {
 			button {
-				color: $menu-color;
 				border-color: $menu-border;
 				@if $menu-border-alpha { border-color: $menu-border-alpha; }
+				background-color: darken($menu-bg, 3);
 			}
-
-			::placeholder { color: $menu-color-fade; }
+			input, button { color: $menu-color; }
+		}
+		.accent-bg {
+			color: set-color-for-bg($accent);
+			background-color: $accent;
 		}
 
 		// LIGHT BACKGROUND
 		
-		@if $bg-light {
-			$bg-light-sel: '&';
-		} @else {
-			$bg-light-sel: '&.bg-light';
-		}
 		#{$bg-light-sel} {
 			.nav > li > a,
 			.text-cont,
@@ -107,12 +138,15 @@ $main-nav-opacity: 0.95;
 				color: $bg-light-color;
 			}
 
-			.nav > li:hover > a,
-			.nav > li.hover > a,
-			.nav > li > a:hover,
-			.nav > .active > a,
-			.text-cont a {
-				color: $bg-light-accent;
+			@if ( $has-inv-accent ) {
+				.nav > li:hover > a,
+				.nav > li.hover > a,
+				.nav > li > a:hover,
+				.nav > .active > a,
+				.text-cont a {
+					color: $bg-light-accent;
+				}
+				.nav > .active > a:before { background-color: $bg-light-accent; }
 			}
 
 			.navbar-toggle .icon-bar {
@@ -128,11 +162,6 @@ $main-nav-opacity: 0.95;
 
 		// DARK BACKGROUND
 
-		@if $bg-light {
-			$bg-dark-sel: '&.bg-dark';
-		} @else {
-			$bg-dark-sel: '&';
-		}
 		#{$bg-dark-sel} {
 			.nav > li > a,
 			.text-cont,
@@ -141,12 +170,15 @@ $main-nav-opacity: 0.95;
 				color: $bg-dark-color;
 			}
 
-			.nav > li:hover > a,
-			.nav > li.hover > a,
-			.nav > li > a:hover,
-			.nav > .active > a,
-			.text-cont a {
-				color: $bg-dark-accent;
+			@if ( $has-inv-accent ) {
+				.nav > li:hover > a,
+				.nav > li.hover > a,
+				.nav > li > a:hover,
+				.nav > .active > a,
+				.text-cont a {
+					color: $bg-dark-accent;
+				}
+				.nav > li.active > a:before { background-color: $bg-dark-accent; }
 			}
 
 			.navbar-toggle .icon-bar {
@@ -160,60 +192,88 @@ $main-nav-opacity: 0.95;
 			.divider { background-color: $bg-dark-border; }
 		}
 
-		
-		// MAIN NAVBAR STYLES
-		
-		&.navbar-mixt {
-			&:not(.vertical) {
-				background-color: rgba($bg, $main-nav-opacity);
+		@if ( $has-inv-accent = false ) {
+			.nav > li:hover > a,
+			.nav > li.hover > a,
+			.nav > li > a:hover,
+			.nav > li.active > a,
+			.text-cont a {
+				color: $accent;
+			}
+			.nav > li.active > a:before { background-color: $accent; }
+		}
+	}
+
+	// MAIN NAVBAR STYLES
+	
+	.navbar-mixt.theme-#{$name} {
+		&:not(.position-top):not(.vertical) {
+			background-color: rgba($bg, $nav-primary-opacity);
+		}
+
+		.sub-menu {
+			background-color: rgba($menu-bg, $nav-primary-menu-opacity);
+		}
+
+		@include media('screen', '<mars') {
+			.navbar-inner {
+				background-color: $menu-bg;
 			}
 
-			.sub-menu { background-color: rgba($menu-bg, $main-nav-opacity); }
+			.navbar-inner .text-cont,
+			.navbar-inner .text-cont a:hover,
+			.navbar-inner .text-cont a.no-color,
+			.nav > li > a {
+				color: $menu-color;
+			}
 
-			@include media('screen', '<mars') {
-				.navbar-inner {
-					background-color: $menu-bg;
+			// Hover State
+			.nav {
+				> li > a,
+				> li > a:focus,
+				> li:hover > a,
+				> li.hover > a,
+				> li.active > a {
+					&:hover {
+						color: $menu-hover-color;
+						background-color: $menu-bg-hover;
+					}
 				}
 
-				.navbar-inner .text-cont,
-				.navbar-inner .text-cont a:hover,
-				.navbar-inner .text-cont a.no-color,
-				.nav > li > a {
-					color: $menu-color;
-				}
+				> li:hover > a,
+				> li.hover > a { color: $menu-color; }
 
-				// Hover State
-				.nav > li > a:hover,
-				.nav > li:hover > a,
-				.nav > li.hover > a {
-					background-color: $menu-bg-hover;
+				li.nav-search {
+					&:hover > a,
+					&.hover > a {
+						color: $menu-color !important;
+						background-color: transparent !important;
+					}
 				}
+			}
 
-				.nav > li:hover > a,
-				.nav > li.hover > a,
-				.nav > li > a:hover,
-				.nav > li.active > a,
-				.navbar-inner .text-cont a { color: $accent; }
+			.nav > li.active > a,
+			.navbar-inner .text-cont a { color: $accent; }
 
-				// Border Colors
-				.navbar-inner,
-				.nav > li,
-				.nav > li > a {
-					border-color: $menu-border;
-					@if $menu-border-alpha { border-color: $menu-border-alpha; }
-				}
+			@if ( $has-inv-accent ) {
+				.nav > li.active > a:before { background-color: $accent; }
+			}
 
-				// Menu Expanded State
-				.nav li.expand,
-				.nav li.expand .sub-menu a:hover {
-					background-color: $menu-bg-expand;
-				}
-			};
-		}
+			// Border Colors
+			.navbar-inner,
+			.nav > li,
+			.nav > li > a {
+				border-color: $menu-border;
+				@if $menu-border-alpha { border-color: $menu-border-alpha; }
+			}
+		};
 	}
 }
 
 // Generate navbar themes
 @each $name, $theme in $themes {
+	@include navbar-theme($name, $theme);
+}
+@each $name, $theme in $nav-themes {
 	@include navbar-theme($name, $theme);
 }

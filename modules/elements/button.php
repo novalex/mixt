@@ -82,6 +82,7 @@ class Mixt_Button {
 				'text' => array(
 					'type'  => 'text',
 					'label' => __( 'Text', 'mixt' ),
+					'std'   => 'Button Text',
 				),
 				'link' => array(
 					'type'  => 'text',
@@ -91,12 +92,10 @@ class Mixt_Button {
 					'type'    => 'select',
 					'label'   => __( 'Animation', 'mixt' ),
 					'options' => $this->animations,
-					'std'     => '',
 				),
 				'icon' => array(
 					'type'     => 'text',
 					'label'    => __( 'Icon', 'mixt' ),
-					'std'      => 'Button Text',
 				),
 				'icon_align' => array(
 					'type'    => 'select',
@@ -111,7 +110,6 @@ class Mixt_Button {
 					'type'    => 'select',
 					'label'   => __( 'Icon Animation', 'mixt' ),
 					'options' => $this->icon_animations,
-					'std'     => '',
 				),
 				'class' => array(
 					'type'  => 'text',

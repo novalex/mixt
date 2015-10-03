@@ -11,6 +11,18 @@ add_theme_support('woocommerce');
 
 
 /**
+ * Add "woocommerce" class to content
+ */
+function mixt_wc_wrap_class($classes) {
+	if ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) {
+		$classes .= ' woocommerce';
+	}
+	return $classes;
+}
+add_filter('mixt_content_class', 'mixt_wc_wrap_class');
+
+
+/**
  * Display custom WC title on shop page
  */
 function mixt_wc_title($title) {

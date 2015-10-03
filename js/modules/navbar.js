@@ -34,21 +34,25 @@ NAVBAR FUNCTIONS
 		init: function(navbar) {
 
 			var bgColor  = navbar.css('background-color'),
-				colorLum = colorLoD(bgColor);
+				dataCont = navbar.find('.navbar-data'),
+				colorLum = dataCont.length ? window.getComputedStyle(dataCont[0], ':before').getPropertyValue('content').replace(/"/g, '') : '';
 
-			if ( colorLum == 'dark' ) { navbar.addClass('bg-dark'); }
+			if ( colorLum != 'dark' && colorLum != 'light' ) colorLum = colorLoD(bgColor);
+
 			if ( navbar.is(mainNavBar) ) {
+
 				navbarObj.navBg = ( colorLum == 'dark' ) ? 'bg-dark' : 'bg-light';
+				navbar.addClass(navbarObj.navBg);
+
 				mainNavBar.attr('data-bg', colorLum);
+
+				var headCssSheet = $('<style data-id="mixt-nav-css">').appendTo($('head'));
+
+				headCssSheet.append('.navbar.navbar-mixt:not(.position-top):not(.vertical) { background-color: '+colorToRgba(bgColor, mixt_opt.nav.opacity)+'; }');
+
 				if ( mixt_opt.nav.transparent && mixt_opt.header.enabled ) {
-					var headCssSheet = $('style[data-id="mixt-head-css"]');
-					// Add opacity rules
-					if ( mixt_opt.nav.opacity < 1 ) {
-						headCssSheet.append('.fixed-nav .navbar.navbar-mixt { background-color: '+colorToRgba(bgColor, mixt_opt.nav.opacity)+'; }');
-					}
-					if ( mixt_opt.nav['top-opacity'] < 1 ) {
-						headCssSheet.append('.nav-transparent .navbar.navbar-mixt.position-top { background-color: '+colorToRgba(bgColor, mixt_opt.nav['top-opacity'])+'; }');
-					}
+					headCssSheet.append('.nav-transparent .navbar.navbar-mixt.position-top { background-color: '+colorToRgba(bgColor, mixt_opt.nav['top-opacity'])+'; }');
+					
 					if ( mixt_opt.nav['top-opacity'] <= 0.4 ) {
 						if ( mediaWrap.hasClass('bg-dark') ) { navbarObj.navBgTop = 'bg-dark'; }
 						else if ( mediaWrap.hasClass('bg-light') ) { navbarObj.navBgTop = 'bg-light'; }
@@ -60,7 +64,14 @@ NAVBAR FUNCTIONS
 				if ( mixt_opt.nav.mode == 'static' ) {
 					mainNavBar.removeClass(navbarObj.navBg).addClass('position-top ' + navbarObj.navBgTop);
 				}
+			} else {
+				if ( colorLum == 'dark' ) {
+					navbar.addClass('bg-dark');
+				} else {
+					navbar.addClass('bg-light');
+				}
 			}
+			navbar.removeClass('init');
 		},
 
 		// Sticky (fixed) Navbar Function
@@ -340,18 +351,20 @@ NAVBAR FUNCTIONS
 	navbarObj.megaMenuRows();
 
 	mainNavBar.on('refresh', function() {
+		$('style[data-id="mixt-nav-css"]').remove();
+		mainNavBar.removeClass('bg-light bg-dark').addClass('init');
 		navbarObj.init(mainNavBar);
+	});
+
+	secNavBar.on('refresh', function() {
+		secNavBar.removeClass('bg-light bg-dark');
+		navbarObj.init(secNavBar);
 	});
 
 
 	// Check which media queries are active
-	var mqCheck = function( elem ) {
-		elem = $('#' + elem);
-		var display = elem.css('display');
-
-		if ( display == 'block' ) { return 1; }
-		else if ( display == 'inline') { return 2; }
-		else { return 0; }
+	var mqCheck = function() {
+		return window.getComputedStyle(document.querySelector('.navbar-data'), ':after').getPropertyValue('content').replace(/"/g, '');
 	};
 
 
@@ -384,10 +397,38 @@ NAVBAR FUNCTIONS
 	}
 
 
+	// Handle Navbar Items Overlap
+	function navbarOverlap() {
+		var mqNav = mqCheck(),
+			mainNavLogoCls = 'logo-' + mainNavWrap.attr('data-logo-align');
+
+		// Primary Navbar
+		if ( mainNavLogoCls != 'logo-center' && mixt_opt.nav.layout == 'horizontal' ) {
+			mainNavWrap.removeClass('logo-center').addClass(mainNavLogoCls);
+			if ( mqNav == 'desktop' ) {
+				var mainNavContWidth = mainNavCont.width(),
+					mainNavItemsWidth = mainNavHead.outerWidth(true) + $('#main-menu').outerWidth(true);
+				if ( mainNavItemsWidth > mainNavContWidth ) {
+					mainNavWrap.removeClass(mainNavLogoCls).addClass('logo-center');
+				}
+			}
+		}
+
+		// Secondary Navbar
+		if ( secNavBar.length ) {
+			secNavBar.removeClass('items-overlap');
+			var secNavContWidth = secNavCont.innerWidth(),
+				secNavItemsWidth = $('.left', secNavBar).outerWidth(true) + $('.right', secNavBar).outerWidth(true);
+			if ( secNavItemsWidth > secNavContWidth ) {
+				secNavBar.addClass('items-overlap');
+			}
+		}
+	}
+
+
 	// Functions Run On Load & Window Resize
 	function navbarFn() {
-
-		var mqNav = mqCheck('navbar-check'); // Equals "0" for desktop, "1" for mobile and "2" for tablets
+		var mqNav = mqCheck();
 
 		// Run function to prevent submenus going outside viewport
 		navbars.not(mainNavBar).each( function() {
@@ -395,7 +436,7 @@ NAVBAR FUNCTIONS
 		});
 
 		// Run functions based on currently active media query
-		if ( mqNav === 0 ) {
+		if ( mqNav == 'desktop' ) {
 			navbarObj.menuOverflow(mainNavInner);
 			mainNavBar.css('height', '');
 
@@ -405,7 +446,7 @@ NAVBAR FUNCTIONS
 
 			menuParents.on('touchstart', menuTouchHover);
 			bodyEl.on('touchstart', menuTouchRemoveHover);
-		} else if ( mqNav > 0 ) {
+		} else if ( mqNav == 'mobile' || mqNav == 'tablet' ) {
 			navbarObj.navMobile(mqNav);
 
 			var navHeight = mainNavHead.outerHeight() + 1;
@@ -439,47 +480,5 @@ NAVBAR FUNCTIONS
 		navbarOverlap();
 	}
 	viewport.resize( $.debounce( 500, navbarFn )).resize();
-
-
-	// Handle Navbar Items Overlap
-	var mainNavLogoCls = mainNavWrap.attr('data-logo-align'),
-		mainNavItemsWidth = 0,
-		secNavItemsWidth = 0;
-
-	if ( mainNavLogoCls != 'logo-center' ) {
-		mainNavItemsWidth = mainNavHead.outerWidth(true) + $('#main-menu').outerWidth(true);
-	}
-	if ( secNavBar.length ) {
-		secNavItemsWidth = $('.left', secNavBar).outerWidth(true) + $('.right', secNavBar).outerWidth(true);
-	}
-	function navbarOverlap() {
-
-		var mqNav = mqCheck('navbar-check');
-
-		// Primary Navbar
-		if ( mainNavLogoCls != 'logo-center' && mixt_opt.nav.layout == 'horizontal' ) {
-			if ( mqNav === 0 ) {
-				var mainNavContWidth = mainNavCont.width();
-				if ( mainNavItemsWidth > mainNavContWidth ) {
-					mainNavWrap.removeClass(mainNavLogoCls).addClass('logo-center');
-				} else {
-					mainNavWrap.removeClass('logo-center').addClass(mainNavLogoCls);
-				}
-			} else {
-				mainNavWrap.removeClass('logo-center').addClass(mainNavLogoCls);
-			}
-		}
-
-		// Secondary Navbar
-		if ( secNavBar.length ) {
-			var secNavContWidth = secNavCont.innerWidth();
-			if ( secNavItemsWidth > secNavContWidth ) {
-				secNavBar.addClass('items-overlap');
-			} else {
-				secNavBar.removeClass('items-overlap');
-			}
-		}
-	}
-	navbarOverlap();
 
 }(jQuery);

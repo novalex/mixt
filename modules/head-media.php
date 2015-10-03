@@ -11,7 +11,6 @@ function mixt_head_media() {
 	$options = mixt_get_options( array(
 		// Media Type
 		'type' => array(
-			'type'    => 'str',
 			'key'     => 'head-media-type',
 			'return'  => 'value',
 			'default' => 'color',
@@ -23,7 +22,6 @@ function mixt_head_media() {
 		),
 		// Header Colors
 		'bg' => array(
-			'type'    => 'str',
 			'key'     => 'head-bg-color',
 			'return'  => 'value',
 			'default' => '#ebf0f4',
@@ -36,17 +34,14 @@ function mixt_head_media() {
 		),
 		// Image
 		'img-src' => array(
-			'type'   => 'str',
 			'key'    => 'head-img-src',
 			'return' => 'value',
 		),
 		'img' => array(
-			'type'   => 'str',
 			'key'    => 'head-img',
 			'return' => 'value',
 		),
 		'img-ph' => array(
-			'type'   => 'str',
 			'key'    => 'head-img-ph',
 			'return' => 'value',
 		),
@@ -54,27 +49,22 @@ function mixt_head_media() {
 		'parallax' => array( 'key' => 'head-img-parallax' ),
 		// Video
 		'video-src' => array(
-			'type'   => 'str',
 			'key'    => 'head-video-src',
 			'return' => 'value',
 		),
 		'video-embed' => array(
-			'type'   => 'str',
 			'key'    => 'head-video-embed',
 			'return' => 'value',
 		),
 		'video' => array(
-			'type'   => 'str',
 			'key'    => 'head-video',
 			'return' => 'value',
 		),
 		'video-2' => array(
-			'type'   => 'str',
 			'key'    => 'head-video-2',
 			'return' => 'value',
 		),
 		'video-poster' => array(
-			'type'   => 'str',
 			'key'    => 'head-video-poster',
 			'return' => 'value',
 		),
@@ -85,19 +75,16 @@ function mixt_head_media() {
 		'video-loop' => array( 'key' => 'head-video-loop' ),
 		// Content
 		'content-size' => array(
-			'type'    => 'str',
 			'key'     => 'head-content-size',
 			'return'  => 'value',
 		),
 		'content-fade' => array( 'key' => 'head-content-fade' ),
 		'align' => array(
-			'type'    => 'str',
 			'key'     => 'head-content-align',
 			'return'  => 'value',
 			'default' => 'left',
 		),
 		'scroll-icon' => array(
-			'type'    => 'str',
 			'key'     => 'head-content-scroll-icon',
 			'return'  => 'value',
 			'default' => 'fa fa-chevron-down',
@@ -105,7 +92,6 @@ function mixt_head_media() {
 		'info' => array( 'key' => 'head-content-info' ),
 		'code' => array( 'key' => 'head-content-code' ),
 		'code-content' => array(
-			'type'   => 'str',
 			'key'    => 'head-code',
 			'return' => 'value',
 		),
@@ -272,7 +258,7 @@ function mixt_head_media() {
 
 		else if ( $options['type'] == 'color' ) {
 			$wrap_classes .= ' head-color';
-			$wrap_classes .= ( hex_is_light($options['bg']) == false ) ? ' bg-dark' : ' bg-light';
+			$wrap_classes .= ( hex_is_light($options['bg']) ) ? ' bg-light' : ' bg-dark';
 			$media_bg = "<div class='media-container $media_cont_classes' style='background-color: {$options['bg']};'></div>";
 		}
 	}
@@ -298,7 +284,7 @@ function mixt_head_media() {
 			if ( $options['content-fade'] ) $cont_classes .= ' has-parallax';
 
 			echo "<div class='$cont_classes'";
-				if ( $options['height'] != '' ) echo " style='height: {$options['height']}px;'";
+				if ( $options['height'] != '' && $options['height'] != 'none' ) echo " style='height: {$options['height']}px;'";
 				if ( $options['content-fade'] ) echo " data-top='opacity: 1; transform: translate3d(0, 0%, 0);' data--200-top-bottom='opacity: 0; transform: translate3d(0, 80%, 0);'";
 			echo '>';
 
@@ -325,6 +311,8 @@ function mixt_head_media() {
 						}
 					}
 			echo '</div></div>';
+		} else if ( $options['height'] != '' && $options['height'] != 'none' ) {
+			echo "<div class='container' style='height: {$options['height']}px;'></div>";
 		}
 
 		// Scroll To Content Icon

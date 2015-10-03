@@ -3,42 +3,41 @@
 
 .color-fade { opacity: 0.8; }
 
+
 @mixin site-theme($name, $theme) {
 	$accent: map-get($theme, 'accent');
 
 	$bg: map-get($theme, 'bg');
 
 	$color: map-get($theme, 'color');
-	$color-fade: map-get($theme, 'color-fade');
 	$color-inv: map-get($theme, 'color-inv');
-	$color-inv-fade: map-get($theme, 'color-inv-fade');
 
 	$border: map-get($theme, 'border');
-	$border-inv: map-get($theme, 'border-inv');
 
-	@if ( lightness(map-get($theme, 'color')) > lightness(map-get($theme, 'color-inv')) ) {
-		$bg-light-color: map-get($theme, 'color-inv');
-		$bg-light-color-fade: map-get($theme, 'color-inv-fade');
-		$bg-dark-color: map-get($theme, 'color');
-		$bg-dark-color-fade: map-get($theme, 'color-fade');
-	} @else {
-		$bg-light-color: map-get($theme, 'color');
-		$bg-light-color-fade: map-get($theme, 'color-fade');
-		$bg-dark-color: map-get($theme, 'color-inv');
-		$bg-dark-color-fade: map-get($theme, 'color-inv-fade');
-	}
+	$theme-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
 
-	@if ( lumin($bg) > 0.5 ) {
-		$theme-dark: false;
+	@if ( $theme-dark ) {
+		$color-fade: theme-color($theme, 'color-fade', darken($color, 10));
+		$color-inv-fade: theme-color($theme, 'color-inv-fade', lighten($color-inv, 10));
+
+		$bg-light-color: $color-inv;
+		$bg-light-color-fade: $color-inv-fade;
+
+		$bg-dark-color: $color;
+		$bg-dark-color-fade: $color-fade;
 	} @else {
-		$theme-dark: true;
+		$color-fade: theme-color($theme, 'color-fade', lighten($color, 10));
+		$color-inv-fade: theme-color($theme, 'color-inv-fade', darken($color-inv, 10));
+
+		$bg-light-color: $color;
+		$bg-light-color-fade: $color-fade;
+
+		$bg-dark-color: $color-inv;
+		$bg-dark-color-fade: $color-inv-fade;
 	}
 
 	.theme-#{$name} {
-		&,
-		#main-wrap {
-			background-color: $bg;
-		}
+		background-color: $bg;
 
 		// COLOR HELPER CLASSES
 		
@@ -89,12 +88,14 @@
 		}
 
 		.theme-section-accent {
-			@extend .accent-bg;
+			color: set-color-for-bg($accent);
 			border-color: darken($accent, 10);
+			background-color: $accent;
 		}
 
 		.theme-section-inv {
 			$bg-inv: theme-color($theme, 'bg-inv', lighten(invert($bg), 10));
+			$border-inv: theme-color($theme, 'border-inv', darken($bg-inv, 10));
 
 			color: $color-inv;
 			border-color: $border-inv;
@@ -114,6 +115,10 @@
 		.pager li > span,
 		.hover-accent-color:hover { color: $accent; }
 
+		.post-meta a,
+		.post-meta > span,
+		.link-list li a { color: $color-fade; }
+
 		.head-media {
 			&.bg-light {
 				.container,
@@ -131,13 +136,6 @@
 
 		.post-related .related-title { color: $bg-dark-color; }
 
-		.post-meta {
-			a,
-			> span { color: $color-fade; }
-		}
-
-		.link-list li a { color: $color-fade; }
-
 		.link-list li {
 			a:hover,
 			a:active,
@@ -148,6 +146,9 @@
 		// BORDER COLORS
 		
 		&,
+		.wp-caption,
+		hr { border-color: $border; }
+
 		#content-wrap,
 		.sidebar ul {
 			border-color: $border;
@@ -162,6 +163,7 @@
 		.hover-accent-bg:hover,
 		.tag-list a:hover,
 		.tagcloud a:hover {
+			color: set-color-for-bg($accent) !important;
 			background-color: $accent;
 		}
 
@@ -177,13 +179,14 @@
 			border-color: $border;
 			background-color: $input-bg;
 
-			@include placeholder($color-fade);
-
 			&:focus {
 				border-color: lighten($border, 2);
 				background-color: lighten($bg, 2);
 			}
 		}
+
+		input,
+		.form-control { @include placeholder($color-fade); }
 
 		@if $theme-dark { select { @extend %select-arrow-light; } }
 
@@ -194,12 +197,6 @@
 
 
 		// OTHER COLORS
-		
-		::selection {
-			background: $accent;
-			background: fade-out($accent, 0.2);
-			color: set-color-for-bg($accent, #fff, #000);
-		}
 
 		.sidebar {
 			.child-page-nav li a:hover,
@@ -209,6 +206,12 @@
 				&,
 				&:before { background-color: darken($bg, 3); }
 			}
+		}
+		
+		::selection {
+			background: $accent;
+			background: fade-out($accent, 0.2);
+			color: set-color-for-bg($accent, #fff, #000);
 		}
 
 		blockquote {
@@ -235,13 +238,6 @@
 		.well {
 			border-color: $border;
 			background-color: darken($bg, 3);
-		}
-
-		.table {
-			caption { color: $color-fade; }
-			&.table-bordered,
-			th, td { border-color: $border !important; }
-			&.table-striped > tbody > tr:nth-of-type(odd) { background-color: darken($bg, 3); }
 		}
 
 
@@ -316,8 +312,7 @@
 
 		// WooCommerce
 		@if $woocommerce {
-			.woocommerce,
-			&.woocommerce {
+			.woocommerce {
 				.price .amount,
 				.total .amount,
 				.woo-cart .amount,
@@ -327,8 +322,7 @@
 				#reviews #comments ol.commentlist li .meta { color: $color-fade; }
 
 				.widget_price_filter .ui-slider .ui-slider-range,
-				.badge-cont .badge.sale-badge,
-				p.demo_store { background-color: $accent; }
+				.badge-cont .badge.sale-badge { background-color: $accent; }
 
 				.woocommerce-tabs {
 					ul.tabs li {
@@ -345,11 +339,12 @@
 					}
 				}
 
+				table.shop_table {
+					&, th, td { border-color: $border !important; }
+				}
 				.cart-collaterals .cart_totals tr {
 					td, th { border-color: $border; }
 				}
-
-				p.demo_store { color: set-color-for-bg($accent); }
 			}
 
 			form .form-row {
@@ -362,11 +357,16 @@
 					}
 				}
 			}
+
+			.woocommerce-checkout #payment { border-color: $border; }
 		}
 	}
 }
 
 // Generate navbar themes
 @each $name, $theme in $themes {
+	@include site-theme($name, $theme);
+}
+@each $name, $theme in $site-themes {
 	@include site-theme($name, $theme);
 }

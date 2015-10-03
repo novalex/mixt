@@ -36,18 +36,18 @@
 	.post-feat {
 		width: 100%;
 		max-width: 100%;
-		min-height: 140px;
-		max-height: $max-height;
 		float: none;
 		margin: 0;
-		align-items: flex-end;
+
+		&,
+		img {
+			min-height: 140px;
+			max-height: $max-height;
+		}
 
 		> a { height: 100%; }
 
-		img {
-			display: block;
-			height: 100%;
-		}
+		img { display: block; }
 	}
 	.post-video > div,
 	.post-video > iframe { min-width: 0; }
@@ -90,7 +90,10 @@
 
 	@include media('screen', '<mars') {
 		.post { max-height: 100px; }
-		.post-feat { min-height: 100px; max-height: 100px; }
+		.post-feat {
+			&,
+			img { min-height: 100px; max-height: 100px; }
+		}
 		.related-title { display: none; }
 		.related-title-tip { z-index: 1; }
 		.feat-format i { margin-top: -16px; }
@@ -99,7 +102,31 @@
 	@include media('screen', '<mercury') {
 		.related-inner {
 			.post { max-height: 70px; }
-			.post-feat { min-height: 70px; max-height: 70px; }
+			.post-feat {
+				&,
+				img { min-height: 70px; max-height: 70px; }
+			}
+		}
+	}
+
+	// Flexbox Equal Height
+	.flexbox & .related-inner {
+		display: flex;
+		flex-flow: row wrap;
+
+		.post,
+		.post-feat {
+			display: flex;
+		}
+
+		.post-feat {
+			align-items: stretch;
+
+			> a {
+				height: auto;
+
+				> img { height: 100%; }
+			}
 		}
 	}
 }

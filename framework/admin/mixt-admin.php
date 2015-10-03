@@ -18,7 +18,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 		}
 
 		public function add_nav_menu_meta_boxes() {
-			add_meta_box( 'mixt_nav_meta', __('MIXT Elements', 'mixt'), array( $this, 'nav_menu_link'), 'nav-menus', 'side', 'high' );
+			add_meta_box('mixt_nav_meta', __('MIXT Elements', 'mixt'), array( $this, 'nav_menu_link'), 'nav-menus', 'side', 'high');
 		}
 		
 		public function nav_menu_link() {
@@ -264,9 +264,7 @@ new Mixt_Media_Meta( $media_meta_options );
 
 // Calculate image predominant color after upload and set meta
 function mixt_media_upload($id) {
-	if ( wp_attachment_is_image($id) && file_exists( MIXT_FRAME_DIR . '/libs/color-helpers.php') ) {
-		require_once( MIXT_FRAME_DIR . '/libs/color-helpers.php' );
-
+	if ( wp_attachment_is_image($id) ) {
 		$src = wp_get_attachment_image_src( $id, 'full' );
 
 		$img_lum = get_img_luminance( $src[0] );

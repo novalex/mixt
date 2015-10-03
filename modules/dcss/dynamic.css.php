@@ -9,7 +9,7 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 /**
- * Output CSS in the header
+ * Output dynamic CSS in the header
  */
 function mixt_print_head_css() {
 	global $mixt_opt;
@@ -56,11 +56,12 @@ function mixt_print_head_css() {
 	// Background color and image for boxed layout
 	if ( Mixt_Options::get('page', 'layout') == 'boxed' ) {
 		$site_options = mixt_get_options( array(
-			'site-bg'     => array( 'return' => 'value' ),
-			'site-bg-pat' => array( 'type' => 'str', 'return' => 'value', 'default' => '' ),
+			'site-bg-color' => array( 'return' => 'value' ),
+			'site-bg'       => array( 'return' => 'value' ),
+			'site-bg-pat'   => array( 'type' => 'str', 'return' => 'value', 'default' => '' ),
 		) );
-		if ( ! empty($site_options['site-bg']['background-color']) ) {
-			$body_styles .= "background-color: {$site_options['site-bg']['background-color']} !important;";
+		if ( ! empty($site_options['site-bg-color']) ) {
+			$body_styles .= "background-color: {$site_options['site-bg-color']};";
 		}
 		if ( ! empty($site_options['site-bg']['background-image']) ) {
 			$body_styles .= "background-image: url('{$site_options['site-bg']['background-image']}');";
@@ -90,17 +91,56 @@ function mixt_print_head_css() {
 
 	// LOGO STYLING
 
-	if ( ! isset($mixt_opt['logo-type']) || $mixt_opt['logo-type'] == 'text' ) {
+	// Image Logo
+	if ( $mixt_opt['logo-type'] == 'img' && ! empty($mixt_opt['logo-img']['url']) ) {
+		$logo_img    = $mixt_opt['logo-img'];
+		$logo_width  = $logo_img['width'];
+		$logo_height = $logo_img['height'];
+
+		$logo_hires  = $mixt_opt['logo-img-hr'];
+
+		if ( $logo_hires ) {
+			$logo_width  = $logo_width / 2;
+			$logo_height = $logo_height / 2;
+		}
+
+		// Logo Wide or Tall
+		if ( $logo_width > $logo_height ) {
+			$logo_width_val = $logo_width . 'px';
+			$logo_height_val = 'auto';
+		} else {
+			$logo_width_val = 'auto';
+			$logo_height_val = $logo_height . 'px';
+		}
+
+		echo "#nav-logo img { width: $logo_width_val; height: $logo_height_val; }\n";
+
+		// Logo Shrink
+		if ( $mixt_opt['logo-shrink'] != '0' ) {
+			$shrink_amount = $mixt_opt['logo-shrink'];
+
+			if ( $logo_width > $logo_height ) {
+				$shrink_width  = $logo_width - $shrink_amount . 'px';
+				$shrink_height = 'auto';
+			} else {
+				$shrink_width  = 'auto';
+				$shrink_height = $logo_height - $shrink_amount . 'px';
+			}
+			echo ".fixed-nav #nav-logo img { width: $shrink_width; height: $shrink_height; }\n";
+		}
+
 	// Text Logo
+	} else {
+		$font_size = ! empty($mixt_opt['logo-text-typo']['font-size']) ? $mixt_opt['logo-text-typo']['font-size'] : '24px';
 
 		echo "#nav-logo strong {";
+			echo "font-size: $font_size;";
+			if ( ! empty($mixt_opt['logo-text-color']) ) { echo "color: {$mixt_opt['logo-text-color']};"; }
 			$logo_font_family = $mixt_opt['logo-text-typo']['font-family'];
 			if ( ! empty($mixt_opt['logo-text-typo']['font-backup']) ) {
 				$logo_font_family .= ', ' . $typo_opts['font-backup'];
 			}
 			echo "font-family: $logo_font_family !important;";
-			if ( ! empty($mixt_opt['logo-text-typo']['color']) ) { echo "color: {$mixt_opt['logo-text-typo']['color']};"; }
-			if ( ! empty($mixt_opt['logo-text-typo']['font-size']) ) { echo "font-size: {$mixt_opt['logo-text-typo']['font-size']};"; }
 			if ( ! empty($mixt_opt['logo-text-typo']['font-weight']) ) { echo "font-weight: {$mixt_opt['logo-text-typo']['font-weight']};"; }
 			if ( ! empty($mixt_opt['logo-text-typo']['text-transform']) ) { echo "text-transform: {$mixt_opt['logo-text-typo']['text-transform']};"; }
 		echo "}\n";
@@ -115,51 +155,11 @@ function mixt_print_head_css() {
 
 			echo ".fixed-nav #nav-logo strong { font-size: $shrink_size; }\n";
 		}
-
-	} else {
-	// Image Logo
-
-		$logo_img    = $mixt_opt['logo-img'];
-		$logo_width  = $logo_img['width'];
-		$logo_height = $logo_img['height'];
-
-		$logo_hires  = $mixt_opt['logo-img-hr'];
-
-		if ( $logo_hires ) {
-			$logo_width  = $logo_width / 2;
-			$logo_height = $logo_height / 2;
-		}
-
-		// Logo Wide or Tall
-		if ( $logo_width > $logo_height ) {
-			$logo_size_type = 'wide';
-			$logo_width_val = $logo_width . 'px';
-			$logo_height_val = 'auto';
-		} else {
-			$logo_size_type = 'tall';
-			$logo_width_val = 'auto';
-			$logo_height_val = $logo_height . 'px';
-		}
-
-		echo "#nav-logo img { width: $logo_width_val; height: $logo_height_val; }\n";
-
-		// Logo Shrink
-		if ( $mixt_opt['logo-shrink'] != '0' ) {
-			$shrink_amount = $mixt_opt['logo-shrink'];
-
-			if ( $logo_size_type == 'wide' ) {
-				$shrink_width  = $logo_width - $shrink_amount . 'px';
-				$shrink_height = 'auto';
-			} else {
-				$shrink_width  = 'auto';
-				$shrink_height = $logo_height - $shrink_amount . 'px';
-			}
-			echo ".fixed-nav #nav-logo img { width: $shrink_width; height: $shrink_height; }\n";
-		}
 	}
 
 	// Logo Tagline
 	echo "#nav-logo small {";
+		if ( ! empty($mixt_opt['logo-tagline-color']) ) { echo "color: {$mixt_opt['logo-tagline-color']};"; }
 		if ( ! empty($mixt_opt['logo-tagline-typo']['font-family']) ) {
 			$tagline_font_family = $mixt_opt['logo-tagline-typo']['font-family'];
 			if ( ! empty($mixt_opt['logo-tagline-typo']['font-backup']) ) {
@@ -167,16 +167,19 @@ function mixt_print_head_css() {
 			}
 			echo "font-family: $tagline_font_family !important;";
 		}
-		if ( ! empty($mixt_opt['logo-tagline-typo']['color']) ) { echo "color: {$mixt_opt['logo-tagline-typo']['color']};"; }
 		if ( ! empty($mixt_opt['logo-tagline-typo']['font-size']) ) { echo "font-size: {$mixt_opt['logo-tagline-typo']['font-size']};"; }
 		if ( ! empty($mixt_opt['logo-tagline-typo']['font-weight']) ) { echo "font-weight: {$mixt_opt['logo-tagline-typo']['font-weight']};"; }
 		if ( ! empty($mixt_opt['logo-tagline-typo']['text-transform']) ) { echo "text-transform: {$mixt_opt['logo-tagline-typo']['text-transform']};"; }
 	echo "}\n";
 
+	// Dark Bg Tagline Color
+	if ( ! empty($mixt_opt['logo-tagline-inv']) ) { echo ".bg-dark #nav-logo small { color: {$mixt_opt['logo-tagline-inv']}; }\n"; }
+
 
 	// NAVBAR STYLING
 
 	$navbar_properties = '';
+	$logo_center = $mixt_opt['logo-align'] == '2';
 
 	// Navbar Texture
 	if ( ! empty($mixt_opt['nav-texture']) ) {
@@ -192,24 +195,40 @@ function mixt_print_head_css() {
 	if ( isset($mixt_opt['nav-padding']) ) {
 		$nav_pad = $mixt_opt['nav-padding'];
 		if ( $nav_pad != $defaults['nav-padding'] ) {
-			$nav_pad_px = $nav_pad . 'px';
-			$nav_wrap_height = $defaults['nav-height'] + ($nav_pad * 2) . 'px';
+			$nav_wrap_height = $defaults['nav-height'] + $nav_pad * 2;
 
-			$bp_min_mars_properties .= "#main-nav-wrap { min-height: $nav_wrap_height; }";
-			$navbar_properties .= "padding-top: $nav_pad_px; padding-bottom: $nav_pad_px;";
+			if ( $logo_center ) {
+				$nav_wrap_height = $nav_wrap_height + $defaults['nav-height'];
+				$bp_min_mars_properties .= "#main-nav-wrap.logo-center { min-height: {$nav_wrap_height}px; }";
+			} else {
+				$bp_min_mars_properties .= "#main-nav-wrap { min-height: {$nav_wrap_height}px; }";
+			}
+			$navbar_properties .= "padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px;";
 		}
 	}
 	if ( isset($mixt_opt['nav-fixed-padding']) ) {
 		$nav_pad = $mixt_opt['nav-fixed-padding'];
 		if ( $nav_pad != $defaults['nav-fixed-padding'] ) {
-			$nav_pad_px = $nav_pad . 'px';
-			$nav_wrap_height = $defaults['nav-height'] + ($nav_pad * 2) . 'px';
+			$nav_wrap_height = $nav_item_height = $defaults['nav-height'] + $nav_pad * 2;
 
-			echo ".fixed-nav #main-nav-wrap { min-height: $nav_wrap_height; }\n";
-			echo ".fixed-nav .navbar-mixt { padding-top: $nav_pad_px; padding-bottom: $nav_pad_px; }\n";
+			if ( $logo_center ) {
+				$nav_wrap_height = $nav_wrap_height + $defaults['nav-height'];
+				$bp_min_mars_properties .= ".fixed-nav #main-nav-wrap.logo-center { min-height: {$nav_wrap_height}px; }\n";
+			} else {
+				$bp_min_mars_properties .= ".fixed-nav #main-nav-wrap { min-height: {$nav_wrap_height}px; }\n";
+			}
+			$bp_min_mars_properties .= ".fixed-nav .navbar-mixt { padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px; }\n";
 
 			if ( $nav_pad > 0 ) {
-				$bp_min_mars_properties .= ".fixed-nav .navbar-mixt .nav > li > a { height: $nav_wrap_height; margin-top: -$nav_pad_px; margin-bottom: -$nav_pad_px; line-height: $nav_wrap_height; }";
+				if ( $logo_center ) {
+					$half_padding = $nav_pad / 2;
+					$nav_item_height = $nav_item_height - $half_padding;
+					$bp_min_mars_properties .= ".fixed-nav .navbar-mixt .navbar-header { margin-top: -{$half_padding}px; }";
+					$bp_min_mars_properties .= ".fixed-nav .navbar-mixt .nav > li { margin-top: {$half_padding}px; margin-bottom: -{$nav_pad}px; }";
+				} else {
+					$bp_min_mars_properties .= ".fixed-nav .navbar-mixt .nav > li { margin-top: -{$nav_pad}px; margin-bottom: -{$nav_pad}px; }";
+				}
+				$bp_min_mars_properties .= ".fixed-nav .navbar-mixt .nav > li, .fixed-nav .navbar-mixt .nav > li > a { height: {$nav_item_height}px; line-height: {$nav_item_height}px; }";
 			}
 		}
 	}
@@ -234,54 +253,41 @@ function mixt_print_head_css() {
 	// HEAD MEDIA STYLING
 
 	$hm_options = mixt_get_options( array(
-		'bg' => array(
-			'return' => 'value',
-			'key'    => 'head-bg-color',
-		),
-		'text' => array(
-			'return'  => 'value',
-			'key'     => 'head-text-color',
-		),
-		'inv-text' => array(
-			'return'  => 'value',
-			'key'     => 'head-inv-text-color',
-		),
+		'bg' => array( 'return' => 'value', 'key' => 'head-bg-color' ),
+		'text' => array( 'return' => 'value', 'key' => 'head-text-color' ),
+		'inv-text' => array( 'return' => 'value', 'key' => 'head-inv-text-color' ),
 	) );
 
-	$hm_el = '.head-media';
+	$hm = '.head-media';
 	if ( ! empty($hm_options['bg']) ) {
-		$hm_bg = $hm_options['bg'];
-		echo "$hm_el { background-color: $hm_bg; }\n";
+		echo "$hm { background-color: {$hm_options['bg']}; }\n";
 	}
 	if ( ! empty($hm_options['text']) ) {
-		$hm_text = $hm_options['text'];
-		echo "$hm_el .container," .
-			 "$hm_el #breadcrumbs li + li:before { color: $hm_text; }\n";
+		$hm_light = $hm.'.bg-light';
+		echo "$hm_light .container, $hm_light .media-inner > a, $hm_light .header-scroll, $hm_light #breadcrumbs > li + li:before { color: {$hm_options['text']} !important; }\n";
 	}
 	if ( ! empty($hm_options['inv-text']) ) {
-		$hm_inv_text = $hm_options['inv-text'];
-		echo "$hm_el.bg-dark .container," .
-			 "$hm_el.bg-dark .media-inner a," .
-			 "$hm_el.bg-dark #breadcrumbs li + li:before { color: $hm_inv_text; }\n";
+		$hm_dark = $hm.'.bg-dark';
+		echo "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$hm_options['inv-text']} !important; }\n";
 	}
 
 
 	// LOCATION BAR STYLING
 
 	$loc_bar_options = mixt_get_options( array(
-		'loc-bar-text-color'   => array( 'return' => 'value' ),
-		'loc-bar-border-color' => array( 'return' => 'value' ),
-		'loc-bar-bg-color'     => array( 'return' => 'value' ),
-		'loc-bar-bg-pat'       => array( 'type' => 'str', 'return' => 'value' ),
+		'text-color'   => array( 'key' => 'loc-bar-text-color', 'return' => 'value' ),
+		'border-color' => array( 'key' => 'loc-bar-border-color', 'return' => 'value' ),
+		'bg-color'     => array( 'key' => 'loc-bar-bg-color', 'return' => 'value' ),
+		'bg-pat'       => array( 'key' => 'loc-bar-bg-pat', 'type' => 'str', 'return' => 'value' ),
 	) );
 
 	$loc_bar_styles = '';
-	if ( ! empty($loc_bar_options['loc-bar-border-color']) ) { $loc_bar_styles .= "border-color: {$loc_bar_options['loc-bar-border-color']};"; }
-	if ( ! empty($loc_bar_options['loc-bar-bg-color']) ) { $loc_bar_styles .= "background-color: {$loc_bar_options['loc-bar-bg-color']};"; }
-	if ( ! empty($loc_bar_options['loc-bar-bg-pat']) ) { $loc_bar_styles .= "background-image: url({$loc_bar_options['loc-bar-bg-pat']});"; }
+	if ( ! empty($loc_bar_options['border-color']) ) { $loc_bar_styles .= "border-color: {$loc_bar_options['border-color']};"; }
+	if ( ! empty($loc_bar_options['bg-color']) ) { $loc_bar_styles .= "background-color: {$loc_bar_options['bg-color']};"; }
+	if ( ! empty($loc_bar_options['bg-pat']) ) { $loc_bar_styles .= "background-image: url({$loc_bar_options['bg-pat']});"; }
 
 	if ( $loc_bar_styles != '' ) echo "#location-bar { $loc_bar_styles }\n";
-	if ( ! empty($loc_bar_options['loc-bar-text-color']) ) { echo "#location-bar, #location-bar a:hover, #location-bar li:before { color: {$loc_bar_options['loc-bar-text-color']}; }\n"; }
+	if ( ! empty($loc_bar_options['text-color']) ) { echo "#location-bar, #location-bar a:hover, #location-bar li:before { color: {$loc_bar_options['text-color']}; }\n"; }
 
 
 	// FOOTER STYLING

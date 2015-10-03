@@ -2,6 +2,14 @@
 // lightSlider
 @if $lightslider { @import 'lightSlider'; }
 
+// lightGallery
+@if $lightgallery {
+	.mixt {
+		.lg-outer { z-index: 100001; }
+		.lg-backdrop { z-index: 100000; }
+	}
+}
+
 // Visual Composer
 @if $vcomposer { @import 'js_composer/js_composer'; }
 

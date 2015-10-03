@@ -32,14 +32,13 @@ var gulp         = require('gulp'),
 // Paths
 var path = {
 	js: {
-		src:       'js/',
-		inc:       'js/*.js',
-		plugins:   'js/plugins/*.js',
-		modules:   'js/modules/*.js',
-		bootstrap: 'js/bootstrap/*.js',
+		plugins:    'js/plugins/*.js',
+		modules:    'js/modules/*.js',
+		bootstrap:  'js/bootstrap/*.js',
+		admin:      'framework/admin/js',
+		customizer: 'framework/admin/js/customizer/*.js',
 	},
 	styles: {
-		src:         'css',
 		main:        'css/main.scss',
 		files:       'css/**/*.scss',
 		plugins:     'framework/plugins/**/main.scss',
@@ -48,6 +47,9 @@ var path = {
 	},
 	dest: 'dist'
 };
+
+// BrowserSync IP - Change this to the IP of your local server
+var host_ip = '192.168.0.103';
 
 // Task arguments
 var options = {
@@ -85,19 +87,6 @@ gulp.task('sass', function() {
 		.pipe( bsync.stream() );
 });
 
-// Compile Admin Sass
-gulp.task('sass-admin', function() {
-	return gulp.src([path.styles.admin, path.styles.pluginAdmin])
-		.pipe( gulpif(isDev, sourcemaps.init()) )
-		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
-		.on( 'error', displayError )
-		.pipe( concat('admin.css') )
-		.pipe( gulpif(isDev, sourcemaps.write()) )
-		.pipe( gulpif(prefix, autoprefix) )
-		.pipe( gulp.dest(path.dest) )
-		.pipe( bsync.stream() );
-});
-
 // Compile Plugin Sass
 gulp.task('sass-plugin', function() {
 	return gulp.src(path.styles.plugins, {base: './'})
@@ -111,7 +100,7 @@ gulp.task('sass-plugin', function() {
 });
 
 // Concat & minify JS
-gulp.task('minify', function(){
+gulp.task('minify', function() {
 	return gulp.src([path.js.plugins, path.js.modules])
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( concat('main.js') )
@@ -122,7 +111,7 @@ gulp.task('minify', function(){
 });
 
 // Concat & minify Bootstrap JS
-gulp.task('minify-bs', function(){
+gulp.task('minify-bs', function() {
 	return gulp.src(path.js.bootstrap)
 		.pipe( gulpif(isDev, sourcemaps.init()) )
 		.pipe( concat('bootstrap.js') )
@@ -130,15 +119,39 @@ gulp.task('minify-bs', function(){
 		.pipe( gulp.dest(path.dest) );
 });
 
+// Compile Admin Sass
+gulp.task('sass-admin', function() {
+	return gulp.src([path.styles.admin, path.styles.pluginAdmin])
+		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
+		.on( 'error', displayError )
+		.pipe( concat('admin.css') )
+		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(prefix, autoprefix) )
+		.pipe( gulp.dest(path.dest) )
+		.pipe( bsync.stream() );
+});
+
+// Concat & minify Customizer JS
+gulp.task('minify-customizer', function() {
+	return gulp.src(path.js.customizer)
+		.pipe( sourcemaps.init() )
+		.pipe( concat('customizer.js') )
+		.on( 'error', displayError )
+		.pipe( sourcemaps.write() )
+		.pipe( gulp.dest(path.js.admin) );
+});
+
 // Watch Sass & JS files
 gulp.task('watch', function() {
 	bsync.init({
-		host: '192.168.0.103'
+		host: host_ip
 	});
 	gulp.watch([path.styles.files], ['sass']);
 	gulp.watch([path.styles.admin, path.styles.pluginAdmin], ['sass-admin']);
 	gulp.watch([path.js.plugins, path.js.modules], ['minify']);
 	gulp.watch([path.js.bootstrap], ['minify-bs']);
+	gulp.watch([path.js.customizer], ['minify-customizer']);
 });
 
 // Default

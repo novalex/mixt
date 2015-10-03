@@ -1,0 +1,63 @@
+
+// Theme Template
+
+$theme-name: (
+	'name': (
+
+		// GLOBAL COLORS
+
+		// Main accent color, usually the brand color
+		'accent': *,
+		// Accent for inverted backgrounds (optional)
+		'accent-inv': *,
+
+		// Background color
+		'bg': *,
+		// Inverted background (optional)
+		'bg-inv': *,
+		// Alternative background (optional)
+		'bg-alt': *,
+
+		// Dark background switch
+		// Set this to true if you want the theme background to be treated as dark (optional, will be auto detected if not set)
+		'bg-dark': false,
+
+		// Text color
+		'color': *,
+		// Faded (muted) text color (optional)
+		'color-fade': *,
+		// Text color for inverted backgrounds
+		'color-inv': *,
+		// Faded inverse text color (optional)
+		'color-inv-fade': *,
+		// Text color for alternative backgrounds (optional)
+		'color-alt': *,
+
+		// Border color
+		'border': *,
+		// Border color for inverted backgrounds (optional)
+		'border-inv': *,
+		// Border color for alternate backgrounds (optional)
+		'border-alt': *,
+
+		// NAVBAR COLORS
+
+		// Menu background color (optional)
+		'menu-bg': *,
+		// Menu hover background color (optional)
+		'menu-bg-hover': *,
+
+		// Menu text color (optional)
+		'menu-color': *,
+		// Faded menu text color (optional)
+		'menu-color-fade': *,
+		// Menu hover color (optional)
+		'menu-hover-color': *,
+
+		// Menu border color (optional)
+		'menu-border': *,
+		// RGBa menu border color (optional)
+		'menu-border-alpha': *,
+	)
+);
+$themes: map-merge($themes, $theme-name);

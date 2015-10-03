@@ -37,29 +37,27 @@ function mixt_page_loader() {
 	$load_classes  = 'loader ';
 
 	// Loader Animation
-	if ( $options['anim'] != 'none' ) {
-		$load_classes .= 'animated infinite ' . $options['anim'] . ' ';
-	}
-
-	// Default Loader
-	$load_elem = '<div class="ring ' . $load_classes . '"></div>';
+	if ( $options['anim'] != 'none' ) $load_classes .= 'animated infinite ' . $options['anim'] . ' ';
 
 	// Loader Shape
 	if ( $options['type'] == '1' ) {
 		$load_elem = '<div class="' . $load_classes . $options['shape'] . '"></div>';
-
 	// Loader Image
 	} else if ( is_array($options['img']) && ! empty($options['img']['url']) ) {
 		$load_elem = '<img src="' . $options['img']['url'] . '" alt="Loading..." class="' . $load_classes . '">';
+	// Default Loader
+	} else {
+		$load_elem = '<div class="ring ' . $load_classes . '"></div>';
 	}
 
-	// Output ?>
+	// Output
+	?>
 	<div id="load-overlay">
 		<div class="load-inner">
 			<?php echo $load_elem; ?>
 		</div>
 	</div>
-	<script type="text/javascript" id="mixt-loading-class">document.body.className += " loading";</script><?php
+	<?php
 }
 
 
@@ -127,7 +125,7 @@ function mixt_display_logo() {
 
 	// Output Tagline
 
-	if ( $options['show-tagline'] ) {
+	if ( $options['show-tagline'] && ! empty($options['tagline']) ) {
 		echo '<small>' . $options['tagline'] . '</small>';
 	}
 }
@@ -138,70 +136,30 @@ function mixt_display_logo() {
  */
 function mixt_second_nav() {
 	$options = mixt_get_options( array(
-		'theme' => array(
-			'type'    => 'str',
-			'key'     => 'sec-nav-theme',
-			'return'  => 'value',
-			'prefix'  => 'theme-',
-			'suffix'  => ' ',
-			'default' => 'aqua',
-		),
-		'hover-bg' => array(
-			'key'    => 'sec-nav-hover-bg',
-			'return' => array(
-				'false' => 'no-hover-bg ',
-			),
-		),
-		'active-bar' => array(
-			'key'    => 'sec-nav-active-bar',
-			'return' => array(
-				'false' => 'no-active ',
-			),
-		),
-		'active-bar-pos' => array(
-			'key'    => 'sec-nav-active-bar-pos',
-			'return' => 'value',
-			'prefix' => 'active-',
-			'suffix' => ' ',
-		),
-		'bordered' => array(
-			'key'    => 'sec-nav-bordered',
-			'return' => array(
-				'true' => 'bordered ',
-			),
-		),
-		'left-content' => array(
-			'type'   => 'str',
-			'key'    => 'sec-nav-left-content',
-			'return' => 'value',
-		),
+		'hover-bg' => array( 'key' => 'sec-nav-hover-bg' ),
+		'active-bar' => array( 'key' => 'sec-nav-active-bar' ),
+		'active-bar-pos' => array( 'key' => 'sec-nav-active-bar-pos', 'return' => 'value' ),
+		'bordered' => array( 'key' => 'sec-nav-bordered' ),
+		'left-content' => array( 'type' => 'str', 'key' => 'sec-nav-left-content', 'return' => 'value' ),
+		'left-code' => array( 'key' => 'sec-nav-left-code', 'return' => 'value' ),
 		'left-hide' => array( 'key' => 'sec-nav-left-hide' ),
-		'left-code' => array(
-			'key'    => 'sec-nav-left-code',
-			'return' => 'value',
-		),
-		'right-content' => array(
-			'type'   => 'str',
-			'key'    => 'sec-nav-right-content',
-			'return' => 'value',
-		),
+		'right-content' => array( 'type' => 'str', 'key' => 'sec-nav-right-content', 'return' => 'value' ),
+		'right-code' => array( 'key' => 'sec-nav-right-code', 'return' => 'value' ),
 		'right-hide' => array( 'key' => 'sec-nav-right-hide' ),
-		'right-code' => array(
-			'key'    => 'sec-nav-right-code',
-			'return' => 'value',
-		),
 	) );
 
 	$left_el = $left_el_classes = $right_el = $right_el_classes = '';
 
-	// Navbar Theme
-	$nav_classes = $options['theme'] . $options['bordered'] . $options['hover-bg'];
-	$nav_menu_classes = 'nav navbar-nav ' . $options['active-bar'] . $options['active-bar-pos'];
-	if ( $options['left-hide'] && $options['right-hide'] ) { $nav_classes .= ' hidden-xs'; }
+	$nav_classes = 'theme-' . Mixt_Options::get('themes', 'sec-nav');
+	if ( $options['bordered'] ) $nav_classes .= ' bordered';
+	if ( ! $options['hover-bg'] ) $nav_classes .= ' no-hover-bg';
+	if ( $options['left-hide'] && $options['right-hide'] ) $nav_classes .= ' hidden-xs';
 
-
-	function wrap_code($code) {
-		return '<div class="code-inner text-cont">' . $code . '</div>';
+	$nav_menu_classes = 'nav navbar-nav';
+	if ( $options['active-bar'] ) {
+		$nav_menu_classes .= ' active-' . $options['active-bar-pos'];
+	} else {
+		$nav_menu_classes .= ' no-active';
 	}
 
 
@@ -233,7 +191,7 @@ function mixt_second_nav() {
 	// Content: Text / Code
 	} else if ( $options['left-content'] == '3' ) {
 		$left_el_classes = 'content-code';
-		$left_el = wrap_code($options['left-code']);
+		$left_el = '<div class="code-inner text-cont">' . $options['left-code'] . '</div>';
 	}
 	if ( $options['left-hide'] ) { $left_el_classes .= ' hidden-xs'; }
 
@@ -266,29 +224,28 @@ function mixt_second_nav() {
 	// Content: Text / Code
 	} else if ( $options['right-content'] == '3' ) {
 		$right_el_classes = 'content-code';
-		$right_el = wrap_code($options['right-code']);
+		$right_el = '<div class="code-inner text-cont">' . $options['right-code'] . '</div>';
 	}
 	if ( $options['right-hide'] ) { $right_el_classes .= ' hidden-xs'; }
 
-// Output
 
-if ( ! empty($left_el) || ! empty($right_el) ) :
+	// OUTPUT
 
-echo <<<EOT
-<nav id="second-nav" class="second-nav navbar $nav_classes">
-	<div class="container">
-		<div class="left $left_el_classes">
-			$left_el
-		</div>
-		<div class="right $right_el_classes">
-			$right_el
-		</div>
-	</div>
-</nav>
-EOT;
-
-endif;
-
+	if ( ! empty($left_el) || ! empty($right_el) ) {
+		?>
+		<nav id="second-nav" class="second-nav navbar <?php echo $nav_classes; ?>">
+			<div class="container">
+				<div class="left <?php echo $left_el_classes; ?>">
+					<?php echo $left_el; ?>
+				</div>
+				<div class="right <?php echo $right_el_classes; ?>">
+					<?php echo $right_el; ?>
+				</div>
+			</div>
+			<div class="navbar-data"></div>
+		</nav>
+		<?php
+	}
 }
 
 

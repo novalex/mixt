@@ -19,7 +19,11 @@ $wc-spacing-l: 20px;
 	@import 'single';
 }
 
-.entry-content .woocommerce { border-color: inherit; }
+.entry-content .woocommerce {
+	&,
+	form,
+	fieldset { border-color: inherit; }
+}
 
 // Cart
 @import 'cart';
@@ -80,9 +84,34 @@ $wc-spacing-l: 20px;
 	@import 'smallscreen';
 }
 
-a.button.alt,
-button.button.alt,
-input.button.alt,
-input[type="submit"].button,
-#respond input#submit,
-#respond input#submit.alt { @extend .btn-accent; }
+// Accent button
+@each $name, $theme in $themes {
+	$color: map-get($theme, 'accent');
+
+	.theme-#{$name} .woocommerce {
+		.button.alt,
+		input[type=submit].button,
+		#respond input#submit {
+			color: set-color-for-bg($color) !important;
+			border-color: darken($color, 5) !important;
+			background-color: $color !important;
+			text-shadow: 0 1px 1px set-textsh-for-bg($color) !important;
+
+			&:hover,
+			&:focus {
+				@if ( lumin($color) >= 0.3 ) {
+					background-color: darken($color, 3) !important;
+				} @else {
+					background-color: lighten($color, 5) !important;
+				}
+			}
+
+			&:active,
+			&.active {
+				$color-darker: darken($color, 10);
+				border-color: $color-darker !important;
+				box-shadow: inset 0 1px 12px $color-darker !important;
+			}
+		}
+	}
+}

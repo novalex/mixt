@@ -139,7 +139,7 @@ $icon-el-padding: 8px;
 	}
 	// Accent Colors
 	@each $theme, $colors in $themes {
-		@include icon-variant('.theme-#{$theme} &.accent', map-get($colors, 'accent'));
+		@include icon-variant('.theme-#{$theme} &.icon-solid.accent', map-get($colors, 'accent'));
 	}
 	// Outline Colors
 	&.icon-outline {

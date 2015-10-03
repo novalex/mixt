@@ -88,6 +88,25 @@
 }
 
 
+// FORMAT STYLING
+
+.format-aside,
+.format-link {
+	.post-meta {
+		.byline, .cat { display: none; }
+	}
+}
+
+.format-quote,
+.format-status {
+	.post-meta { display: none; }
+}
+
+.format-link {
+	.page-title { display: none; }
+}
+
+
 // BLOG STYLING
 
 @import 'blog-grid';
@@ -205,12 +224,19 @@
 .gallery-slider { margin: 0; }
 
 .post-password-form {
+	label { margin: 0; }
+
 	input[type="password"] {
 		@extend %input-base;
 		@extend %form-control;
+
+		display: inline-block;
+		width: auto;
 	}
 	input[type="submit"] {
 		@extend %button-base;
 		@extend .btn-default;
 	}
+
+	input { vertical-align: middle; }
 }

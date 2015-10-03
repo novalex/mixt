@@ -175,9 +175,19 @@ class Mixt_Post {
 
 				// Featured media
 				case 'featured':
-					if ( $this->layout['feat-show'] || in_array($this->context, array('single', 'related')) ) {
-						$head_opt = Mixt_Options::get('header');
-						return ( ! ( $head_opt['enabled'] && $head_opt['media-type'] == 'image' && $head_opt['img-src'] == 'feat' ) );
+					if ( $this->layout['feat-show'] ) {
+						if ( in_array($this->context, array('blog', 'related')) ) {
+							return true;
+						} else if ( $this->context == 'single' ) {
+							if ( in_array($this->format, array('image', false)) ) {
+								$head_opt = Mixt_Options::get('header');
+								return ( ! ( $head_opt['enabled'] && $head_opt['media-type'] == 'image' && $head_opt['img-src'] == 'feat' ) );
+							} else {
+								return true;
+							}
+						} else {
+							return false;
+						}
 					} else {
 						return false;
 					}
@@ -201,10 +211,7 @@ class Mixt_Post {
 				// Title
 				case 'title':
 					$head_opt = Mixt_Options::get('header');
-					return (
-						( $this->context != 'single' || ! $head_opt['location-bar'] || ( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) ) &&
-						( $this->format != 'link' || $this->layout['feat-show'] == false )
-					);
+					return ( $this->context != 'single' || ! $head_opt['location-bar'] || ( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) );
 					break;
 
 				// Meta
@@ -836,8 +843,9 @@ function mixt_post_meta( $args = array() ) {
 		$author_name   = get_the_author();
 		$author_icon   = empty($mixt_opt['meta-author-icon']) ? '' : '<i class="' . $mixt_opt['meta-author-icon'] . '"></i>';
 		if ( empty($author_name) ) {
-			$author_id   = get_queried_object()->post_author;
-			$author_name = get_the_author_meta( 'display_name', $author_id );
+			$queried_ob  = get_queried_object();
+			$author_id   = $queried_ob->post_author;
+			$author_name = ( empty($queried_ob->post_author) ) ? '' : get_the_author_meta( 'display_name', $author_id );
 		} else {
 			$author_id = get_the_author_meta( 'ID' );
 		}

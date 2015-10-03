@@ -29,17 +29,11 @@
 				margin: -1px -1px 0 -1px;
 				overflow: hidden;
 
-				> img,
-				> a > img,
-				.gallery,
-				.lSSlideWrapper {
-					height: 100%;
-					min-height: 100px;
-				}
-
 				.lightbox-trigger { width: 100%; }
 
 				.gallery .gallery-item { margin: 0 !important; }
+
+				iframe { max-height: 320px; }
 			}
 
 			.page-title,

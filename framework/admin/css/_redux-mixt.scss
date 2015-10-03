@@ -33,6 +33,7 @@ $blue-accent: #5991CE;
 	text-decoration: none !important;
 	@extend %transition;
 }
+
 %button-default {
 	color: #555;
 	font-size: 13px;
@@ -45,6 +46,7 @@ $blue-accent: #5991CE;
 	box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 1px rgba(0,0,0,0.1);
 	@extend %transition;
 }
+
 %button-blue {
 	color: #FFF;
 	text-shadow: 0 1px 1px #006ED0;
@@ -55,6 +57,7 @@ $blue-accent: #5991CE;
 	box-shadow: inset 0 1px 6px #77B5ED, 0 1px 0 #497AC7;
 	@extend %transition;
 }
+
 %button-red {
 	color: #FF7171 !important;
 	border-color: #ffa1a1 !important;
@@ -187,56 +190,6 @@ $blue-accent: #5991CE;
 
 		.color-transparency-check { font-size: 12px; }
 
-		// Switches & Buttonsets
-
-		.redux-container-switch .cb-disable,
-		.redux-container-switch .cb-enable,
-		.ui-buttonset .ui-button {
-			@extend %button-default;
-
-			color: #777;
-			min-width: 70px;
-			padding-left: 15px;
-			padding-right: 15px;
-			text-align: center;
-			box-shadow: inset 0 1px 0 #FFF;
-
-			span {
-				width: 100%;
-			}
-		}
-
-		.redux-container-switch .cb-enable.selected,
-		.ui-buttonset .ui-state-active {
-			@extend %button-blue;
-
-			color: #FFF;
-			box-shadow: inset 0 1px 3px #6995BB !important;
-		}
-
-		.redux-container-switch .cb-disable.selected {
-			color: #FFF;
-			text-shadow: 0 1px 1px #777;
-
-			background-image: none !important;
-			background-color: #888 !important;
-			border-color: #555 !important;
-			box-shadow: inset 0 1px 3px #777 !important;
-		}
-
-		.ui-buttonset .ui-button {
-			min-height: 19px;
-			min-width: 40px;
-			padding-top: 5px;
-			padding-bottom: 6px;
-			margin-left: -1px !important;
-		}
-
-		.ui-buttonset .ui-state-active {
-			position: relative;
-			z-index: 1;
-		}
-
 		// Divider
 
 		.divide {
@@ -272,147 +225,6 @@ $blue-accent: #5991CE;
 		}
 	}
 
-	// Image Selects
-
-	.redux-option-image {
-		padding: 10px;
-		max-width: 90%;
-		background-color: #FFF;
-		box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
-	}
-
-	.button.remove-image {
-		@extend %button-red;
-	}
-
-	// Logo Inverse Thumb
-	#image_logo-img-inv,
-	#mixt_opt-logo-img-inv .redux-option-image {
-		border-color: #333;
-		background-color: $bg-dark;
-	}
-
-	// Buttons
-
-	.button {
-		@extend %button-default;
-
-		&:focus,
-		&:hover {
-			background-color: #F9F9F9 !important;
-			box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 0 $bd-light !important;
-		}
-
-		&:active {
-			box-shadow: none !important;
-		}
-	}
-
-	.button.button-primary {
-		@extend %button-blue;
-
-		&:focus,
-		&:hover {
-			background-color: #61ABEC !important;
-			box-shadow: inset 0 1px 8px #77B5ED, 0 1px 0 #497AC7 !important;
-		}
-
-		&:active {
-			box-shadow: inset 0 1px 8px #77B5ED !important;
-		}
-	}
-
-	.button.red {
-		@extend %button;
-		@extend %button-red;
-	}
-
-	a.deletion {
-		@extend %button;
-		@extend %button-red;
-		font-size: 12px;
-		margin-top: 10px;
-	}
-
-	// Select 2
-
-	.select2-container { min-width: 170px; }
-
-	.select2-container,
-	.select2-dropdown-open.select2-drop-above {
-		.select2-choice {
-			@extend %input;
-
-			border-radius: 3px !important;
-			background-image: none !important;
-
-			> .select2-chosen {
-				font-size: 13px;
-			}
-
-			.select2-arrow {
-				border-color: $bd-darker;
-				border-radius: 0 3px 3px 0 !important;
-				background-color: #EEE !important;
-				background-image: none !important;
-			}
-		}
-	}
-
-	.select2-dropdown-open {
-		.select2-choice {
-			border-radius: 3px 3px 0 0 !important;
-
-			.select2-arrow {
-				border-radius: 0 3px 0 0 !important;
-				background-color: transparent !important;
-			}
-		}
-
-		&.select2-drop-above .select2-choice {
-			border-radius: 0 0 3px 3px !important;
-
-			.select2-arrow {
-				border-radius: 0 0 3px 0 !important;
-				background-color: transparent !important;
-			}
-		}
-	}
-
-	// Inputs
-
-	input, textarea {
-		@extend %input;
-
-		border-radius: 3px;
-	}
-
-	.redux-container-password input {
-	    width: 25em;
-	}
-
-	.redux-container-spinner {
-		.spinner-wrpr {
-			height: 32px;
-
-			.spinner-input {
-				height: 32px !important;
-				background-color: #fafafa !important;
-			}
-		}
-
-		.ui-corner-br, .ui-spinner-button .ui-icon-triangle-1-s { border-radius: 3px 0 0 3px !important; }
-		.ui-corner-tr, .ui-spinner-button .ui-icon-triangle-1-n { border-radius: 0 3px 3px 0 !important; }
-
-		.ui-widget .ui-spinner-button {
-			padding: 0 0 32px;
-
-			.ui-icon {
-				height: 30px;
-			}
-		}
-	}
-
 	// Headings
 
 	.redux-group-tab > h3:first-child {
@@ -433,21 +245,40 @@ $blue-accent: #5991CE;
 	.hr {
 		padding: 0 0 0 20px !important;
 		margin: 20px 0 !important;
-		border: 1px solid $bd-light;
-		border-right-width: 0;
-		background-color: $bg-light;
+		border: 0;
+		border-top: 1px solid $bd-light;
 
 		.inner {
 			display: none;
 		}
 	}
 
-	// jQuery UI overrides
+	// Theme Info Styling
 
-	.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { border-top-left-radius: 3px !important; }
-	.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { border-top-right-radius: 3px !important; }
-	.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { border-bottom-left-radius: 3px !important; }
-	.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border-bottom-right-radius: 3px !important; }
+	#mixt_opt-theme-info {
+		padding-top: 0;
+
+		ul {
+			margin: 0;
+
+			li { margin-top: 10px !important; }
+		}
+	}
+
+	#mixt_opt-tf-update-login {
+		input {
+			width: 200px;
+			margin: 0 !important;
+
+			&:first-of-type { margin-right: 20px !important; }
+		}
+	}
+
+	// Demo Import Styling
+
+	.theme-browser {
+		.theme .theme-name { line-height: 18px; }
+	}
 }
 
 .select2-drop-active {
@@ -545,6 +376,208 @@ $blue-accent: #5991CE;
 }
 
 
+// COMMON ELEMENTS
+
+.redux-container,
+.redux-main {
+
+	// Buttons
+	
+	.button,
+	.button-secondary {
+		@extend %button-default;
+
+		&:focus,
+		&:hover {
+			background-color: #F9F9F9 !important;
+			box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 0 $bd-light !important;
+		}
+
+		&:active {
+			box-shadow: none !important;
+		}
+
+		i { line-height: inherit; }
+	}
+
+	.button-primary,
+	.button.button-primary {
+		@extend %button-blue;
+
+		&:focus,
+		&:hover {
+			background-color: #61ABEC !important;
+			box-shadow: inset 0 1px 8px #77B5ED, 0 1px 0 #497AC7 !important;
+		}
+
+		&:active {
+			box-shadow: inset 0 1px 8px #77B5ED !important;
+		}
+	}
+
+	.button.red {
+		@extend %button;
+		@extend %button-red;
+	}
+
+	a.deletion {
+		@extend %button;
+		@extend %button-red;
+		font-size: 12px;
+	}
+
+	// Inputs
+
+	input, textarea {
+		@extend %input;
+
+		border-radius: 3px;
+	}
+
+	.redux-container-spinner {
+		.spinner-wrpr {
+			height: 32px;
+
+			.spinner-input {
+				height: 32px !important;
+				background-color: #fafafa !important;
+			}
+		}
+
+		.ui-corner-br, .ui-spinner-button .ui-icon-triangle-1-s { border-radius: 3px 0 0 3px !important; }
+		.ui-corner-tr, .ui-spinner-button .ui-icon-triangle-1-n { border-radius: 0 3px 3px 0 !important; }
+
+		.ui-widget .ui-spinner-button {
+			padding: 0 0 32px;
+
+			.ui-icon {
+				height: 30px;
+			}
+		}
+	}
+
+	// Image Selects
+
+	.redux-option-image {
+		padding: 10px;
+		max-width: 90%;
+		background-color: #FFF;
+		box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+	}
+
+	.button.remove-image {
+		@extend %button-red;
+	}
+
+	// Logo Inverse Thumb
+	#image_logo-img-inv,
+	#mixt_opt-logo-img-inv .redux-option-image {
+		border-color: #333;
+		background-color: $bg-dark;
+	}
+}
+
+.redux-main .redux-group-tab {
+
+	// Buttons And Switches
+	
+	.redux-container-switch .cb-disable,
+	.redux-container-switch .cb-enable,
+	.redux-container-button_set .ui-buttonset .ui-button {
+		@extend %button-default;
+
+		color: #777;
+		min-width: 70px;
+		padding-left: 15px;
+		padding-right: 15px;
+		text-align: center;
+		box-shadow: inset 0 1px 0 #FFF;
+
+		span {
+			width: 100%;
+		}
+	}
+
+	.redux-container-switch .cb-enable.selected,
+	.redux-container-button_set .ui-buttonset .ui-state-active {
+		@extend %button-blue;
+
+		color: #FFF;
+		box-shadow: inset 0 1px 3px #6995BB !important;
+	}
+
+	.redux-container-switch .cb-disable.selected {
+		color: #FFF;
+		text-shadow: 0 1px 1px #777;
+
+		background-image: none !important;
+		background-color: #888 !important;
+		border-color: #555 !important;
+		box-shadow: inset 0 1px 3px #777 !important;
+	}
+
+	.redux-container-button_set .ui-buttonset {
+		.ui-button {
+			min-height: 19px;
+			min-width: 40px;
+			padding-top: 5px;
+			padding-bottom: 6px;
+			margin-left: -1px !important;
+		}
+
+		.ui-state-active {
+			position: relative;
+			z-index: 1;
+		}
+	}
+
+	// Select 2
+
+	.select2-container { min-width: 170px; }
+
+	.select2-container,
+	.select2-dropdown-open.select2-drop-above {
+		.select2-choice {
+			@extend %input;
+
+			border-radius: 3px !important;
+			background-image: none !important;
+
+			> .select2-chosen {
+				font-size: 13px;
+			}
+
+			.select2-arrow {
+				border-color: $bd-darker;
+				border-radius: 0 3px 3px 0 !important;
+				background-color: #EEE !important;
+				background-image: none !important;
+			}
+		}
+	}
+
+	.select2-dropdown-open {
+		.select2-choice {
+			border-radius: 3px 3px 0 0 !important;
+
+			.select2-arrow {
+				border-radius: 0 3px 0 0 !important;
+				background-color: transparent !important;
+			}
+		}
+
+		&.select2-drop-above .select2-choice {
+			border-radius: 0 0 3px 3px !important;
+
+			.select2-arrow {
+				border-radius: 0 0 3px 0 !important;
+				background-color: transparent !important;
+			}
+		}
+	}
+}
+
+
 // CUSTOM FIELD STYLING
 
 
@@ -553,12 +586,12 @@ $blue-accent: #5991CE;
 .redux-container-multi_input {
 
 	.redux-multi-input-add {
-		margin: 10px 0;
+		margin: 0;
 		display: inline-block;
 	}
 }
 
-.redux-multi-input {
+.redux-main .redux-multi-input {
 	float: left;
 	width: 100%;
 	margin: 0;
@@ -624,7 +657,10 @@ $blue-accent: #5991CE;
 			min-width: 120px;
 			z-index: 1;
 
-			input.wp-colorpicker { width: 65px !important; }
+			input.wp-colorpicker {
+				width: 65px !important;
+				margin-left: 0 !important;
+			}
 		}
 
 		.wp-picker-clear { float: right; }
@@ -885,7 +921,7 @@ $blue-accent: #5991CE;
 
 // IMAGE SELECT EXTENSION STYLING
 
-.redux-container-image_select {
+.redux-container-mixt_image_select {
 	padding-top: 10px !important;
 
 	.redux-table-container {
@@ -894,21 +930,20 @@ $blue-accent: #5991CE;
 		width: 100%;
 	}
 
-	.redux-image-select input[type='radio'] { display: none; }
+	.redux-mixt-image-select input[type='radio'] { display: none; }
 
-	.redux-image-select-presets img { width: 100%; }
+	.redux-mixt-image-select-presets img { width: 100%; }
 
-	ul.redux-image-select li {
+	ul.redux-mixt-image-select li {
 		padding: 10px 10px 0;
 		display: inline-block;
 		padding-left: 0;
 	}
 
-	.redux-image-select li:last-child { margin-bottom: 0; }
-	.redux-image-select-selected { background-color: #f9f9f9; }
+	.redux-mixt-image-select li:last-child { margin-bottom: 0; }
 
-	.redux-image-select,
-	.redux-image-select-selected {
+	.redux-mixt-image-select,
+	.redux-mixt-image-select-selected {
 		img, .tiles {
 			width: 50px;
 			height: 50px;
@@ -916,14 +951,19 @@ $blue-accent: #5991CE;
 			border-style: solid;
 		}
 	}
-	.redux-image-select {
+	.redux-mixt-image-select {
 		img, .tiles { border-color: #d9d9d9; }
 	}
-	.redux-image-selected {
-		img, .tiles { border-color: #7a7a7a; }
+	.redux-mixt-image-select-selected {
+		background-color: #f9f9f9;
+
+		img, .tiles {
+			border-color: #fff;
+			box-shadow: 0 0 3px 1px $blue;
+		}
 	}
 
-	.redux-image-select .tiles {
+	.redux-mixt-image-select .tiles {
 		width: 40px;
 		height: 40px;
 		display: block;
@@ -932,4 +972,11 @@ $blue-accent: #5991CE;
 	}
 }
 
-.redux-image-select, td fieldset .redux-image-select label { margin: 0 !important; }
+.redux-mixt-image-select, td fieldset .redux-mixt-image-select label { margin: 0 !important; }
+
+// jQuery UI overrides
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { border-top-left-radius: 3px !important; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { border-top-right-radius: 3px !important; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { border-bottom-left-radius: 3px !important; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border-bottom-right-radius: 3px !important; }

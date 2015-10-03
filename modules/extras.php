@@ -9,7 +9,7 @@
  */
 
 /**
- * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
+ * Get the wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  */
 function mixt_page_menu_args( $args ) {
 	$args['show_home'] = true;
@@ -19,7 +19,7 @@ add_filter( 'wp_page_menu_args', 'mixt_page_menu_args' );
 
 
 /**
- * Adds custom classes to the array of body classes.
+ * Add custom classes to the array of body classes.
  */
 function mixt_body_classes( $classes ) {
 	// Adds a class of group-blog to blogs with more than 1 published author

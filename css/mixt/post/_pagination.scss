@@ -29,7 +29,7 @@
 		> a {
 			transition: color 0.2s, background 0.2s;
 
-			&:hover { background-color: rgba(0,0,0,0.05); }
+			&:hover { background-color: rgba(0,0,0,0.03); }
 		}
 
 		> span {
@@ -37,7 +37,7 @@
 		}
 	}
 
-	a { color: inherit; }
+	a:not(:hover) { color: inherit !important; }
 }
 
 .numbered-paging {

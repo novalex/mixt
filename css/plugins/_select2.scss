@@ -30,7 +30,7 @@
 	}
 
 	.select2-results .select2-highlighted {
-		border-color: $bd-radius;
+		border-radius: $bd-radius;
 	}
 
 	@include select2-theme-color($input-bg, $input-color, $input-color);

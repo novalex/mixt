@@ -29,7 +29,7 @@ function iframeAspect(selector) {
 				attrH = this.height;
 			iframe.data('ratio', attrH / attrW ).removeAttr('width').removeAttr('height');
 		}
-		iframe.height( width * iframe.data('ratio') );
+		iframe.height( width * iframe.data('ratio') ).css('max-height', '');
 	});
 }
 

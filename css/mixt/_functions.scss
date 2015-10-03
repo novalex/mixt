@@ -1,0 +1,84 @@
+// FUNCTIONS
+
+
+// Get a color from a theme list, and return a default value if key is not found
+@function theme-color($theme, $color, $default: '') {
+	@if not map-has-key($theme, $color) {
+		// @warn "Key #{$color} not found for the '#{$theme}' theme!";
+		@return $default;
+	}
+	@return map-get($theme, $color);
+}
+
+
+// Calculate a color's luminance (more accurate than lightness)
+@function lumin( $color ) {
+	// Colors for which to override luminance
+	$override-colors: (
+		$blue: 0.4,
+		$green: 0.4,
+		$orange: 0.4,
+	);
+	@if map-has-key($override-colors, $color) {
+		$lumin: map-get($override-colors, $color);
+	} @else {
+		$local-red: red($color);
+		$local-green: green($color);
+		$local-blue: blue($color);
+		$lumin: (0.2126 * $local-red  + 0.7152 * $local-green + 0.0722 * $local-blue) / 255;
+		@if ( $lumin > 1 ) { $lumin: 1; }
+		@if ( $lumin < 0 ) { $lumin: 0; }
+	}
+	@return $lumin;
+}
+
+
+// Return one of 2 colors which contrasts most with the background color
+@function contrast-color( $bg, $c1, $c2 ) {
+	$bg-lumin: lumin($bg);
+	$c1-diff: abs($bg-lumin - lumin($c1));
+	$c2-diff: abs($bg-lumin - lumin($c2));
+	@if ( $c1-diff > $c2-diff ) {
+		@return $c1;
+	} @else {
+		@return $c2;
+	}
+}
+
+// lumin and contrast-color functions based on https://lnikki.la/articles/sass-better-colour-based-on-brightness/
+
+
+// Return the appropriate color for the given background
+@function set-color-for-bg( $bg, $light: #fff, $dark: #333 ) {
+	@if ( lumin($bg) <= 0.5 ) {
+		@return $light;
+	} @else {
+		@return $dark;
+	}
+}
+
+
+@function set-textsh-for-bg( $bg, $light: rgba(255,255,255,0.1), $dark: rgba(0,0,0,0.1) ) {
+	@if ( lumin($bg) <= 0.5 ) {
+		@return $dark;
+	} @else {
+		@return $light;
+	}
+}
+
+
+@function color-fade-for-bg( $bg, $light: lighten($bg, 40), $dark: darken($bg, 50) ) {
+	@if ( lumin($bg) <= 0.5 ) {
+		@return $light;
+	} @else {
+		@return $dark;
+	}
+}
+
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+	@return $string;
+}

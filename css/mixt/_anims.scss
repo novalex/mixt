@@ -15,7 +15,10 @@
 }
 .animated.pulsate {
 	opacity: 0;
-	animation: pulsate 0.8s ease 0 infinite;
+	animation-name: pulsate;
+	animation-duration: 0.8s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
 }
 
 @keyframes goDown {
@@ -45,7 +48,7 @@
 %anim-pop,
 .animated.pop {
 	animation-name: push;
-	animation-duration: 0.3s;
+	animation-duration: 0.25s;
 	animation-timing-function: linear;
 	animation-iteration-count: 1;
 }

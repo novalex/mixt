@@ -110,9 +110,11 @@
 		}
 	}
 
-	.post-meta > span {
-		color: inherit;
-		margin-right: $margin-s;
+	.post-meta {
+		a,
+		> span { color: inherit; opacity: 0.8; }
+
+		 > span { margin-right: $margin-s; }
 	}
 
 	.page-title {
@@ -150,7 +152,11 @@
 	}
 
 	@include media('screen', '<mars') {
-		.container { padding-bottom: $spacing-sm; }
+		.container {
+			width: 100%;
+			padding-bottom: $spacing-sm;
+		}
+
 		.media-inner {
 			padding: $spacing-sm 0;
 		}

@@ -19,14 +19,7 @@ get_header(); ?>
 		</header>
 
 		<div class="page-content row">
-			<?php // Search Form ?>
-			<div class="col-sm-6">
-				<?php echo do_shortcode('[mixt_headline]' . __( 'Do a search', 'mixt' ) . '[/mixt_headline]'); ?>
-				<p><?php _e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
-				<?php get_search_form(); ?>
-			</div>
-
-			<?php // Useful Links
+			<?php
 				$nav = wp_nav_menu(
 					array(
 						'theme_location'  => '404_page',
@@ -38,11 +31,30 @@ get_header(); ?>
 					)
 				);
 				if ( ! empty($nav) ) {
-					echo '<div class="col-sm-6">';
-						echo do_shortcode('[mixt_headline]' . __( 'Useful links', 'mixt' ) . '[/mixt_headline]');
-						echo $nav;
-					echo '</div>';
+					$search_classes = 'col-sm-6';
+					$search_headline_args = '';
+
+					$nav_html = '<div class="col-sm-6">';
+						$nav_html .= do_shortcode('[mixt_headline]' . __( 'Useful links', 'mixt' ) . '[/mixt_headline]');
+						$nav_html .= $nav;
+					$nav_html .= '</div>';
+				} else {
+					$search_classes = 'col-sm-6 col-sm-offset-3 text-center';
+					$search_headline_args = 'align="center"';
+
+					$nav_html = '';
 				}
+			?>
+
+			<?php // Search Form ?>
+			<div class="<?php echo $search_classes; ?>">
+				<?php echo do_shortcode('[mixt_headline '.$search_headline_args.']' . __( 'Do a search', 'mixt' ) . '[/mixt_headline]'); ?>
+				<p><?php _e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
+				<?php get_search_form(); ?>
+			</div>
+
+			<?php // Useful Links
+				echo $nav_html;
 			?>
 		</div>
 

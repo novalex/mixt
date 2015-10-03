@@ -90,9 +90,10 @@ class Mixt_Options {
 
 		$options = array(
 			'themes' => array(
-				'site' => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
-				'nav'  => array( 'key' => 'nav-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
-				'sec-nav'  => array( 'key' => 'sec-nav-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
+				'site'    => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
+				'nav'     => array( 'key' => 'nav-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
+				'sec-nav' => array( 'key' => 'sec-nav-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
+				'footer'  => array( 'key' => 'footer-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 			),
 			'assets' => array(
 				'icon-fonts' => array( 'return' => 'value' ),
@@ -111,7 +112,7 @@ class Mixt_Options {
 				'layout'         => array( 'key' => 'nav-layout', 'return' => 'value' ),
 				'mode'           => array( 'key' => 'nav-mode', 'return' => 'value' ),
 				'vertical-mode'  => array( 'key' => 'nav-vertical-mode', 'return' => 'value' ),
-				'logo-align'     => array( 'return' => array( '1' => 'logo-left', '2' => 'logo-center', '3' => 'logo-right', 'default' => 'logo-left' ) ),
+				'logo-align'     => array( 'return' => array( '1' => 'left', '2' => 'center', '3' => 'right', 'default' => 'left' ) ),
 				'bordered'       => array( 'key' => 'nav-bordered' ),
 				'padding'        => array( 'key' => 'nav-padding', 'return' => 'value' ),
 				'position'       => array( 'key' => 'nav-position', 'return' => 'value' ),
@@ -177,6 +178,17 @@ class Mixt_Options {
 			self::set('nav', 'position', 'above');
 			self::set('nav', 'transparent', false);
 		}
+
+		// Set the theme for elements when they are set to auto
+		$site_theme = self::get('themes', 'site');
+		if ( ! array_key_exists($site_theme, mixt_default_themes()) && ! array_key_exists($site_theme, get_option('mixt-nav-themes', array())) ) {
+			if ( self::get('themes', 'nav') == 'auto' ) self::set('themes', 'nav', MIXT_THEME);
+			if ( self::get('themes', 'sec-nav') == 'auto' ) self::set('themes', 'sec-nav', MIXT_THEME);
+		} else {
+			if ( self::get('themes', 'nav') == 'auto' ) self::set('themes', 'nav', $site_theme);
+			if ( self::get('themes', 'sec-nav') == 'auto' ) self::set('themes', 'sec-nav', $site_theme);
+		}
+		if ( self::get('themes', 'footer') == 'auto' ) self::set('themes', 'footer', $site_theme);
 
 		// Perform "options set" action
 		do_action('mixt_options_set');
