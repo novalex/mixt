@@ -6,17 +6,13 @@
 		border-width: 1px 0 0 0;
 	}
 
-	.widget-row {
-		ul,
-		div,
-		.nav,
-		.widget { border-color: inherit; }
-	}
-
 	.widget-title { margin-top: 0; }
 
 	.widget-row {
 		border-bottom-width: 1px;
+
+		.container,
+		#footer-widgets { border-color: inherit; }
 
 		+ .copyright-row { border-top-width: 0; }
 	}

@@ -41,75 +41,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// If Redux is running as a plugin, this will remove the demo notice and links
 			add_action( 'redux/loaded', array( $this, 'remove_demo' ) );
 
-			// Function to test the compiler hook and demo CSS output.
-			// Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-			add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 3);
-
-			// Change the arguments after they've been declared, but before the panel is created
-			//add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
-
-			// Change the default value of a field after it's been set, but before it's been useds
-			//add_filter('redux/options/'.$this->args['opt_name'].'/defaults', array( $this,'change_defaults' ) );
-
-			// Dynamically add a section. Can be also used to modify sections/fields
-			//add_filter('redux/options/' . $this->args['opt_name'] . '/sections', array($this, 'dynamic_section'));
-
 			$this->ReduxFramework = new ReduxFramework( $this->sections, $this->args );
-		}
-
-		/**
-		 * This is a test function that will let you see when the compiler hook occurs.
-		 * It only runs if a field    set with compiler=>true is changed.
-		 * */
-		function compiler_action( $options, $css, $changed_values ) {
-			add_action('admin_notices', 'compiler_notification');
-			function compiler_notification() {
-				echo '<div id="info-notice_success" class="redux-success redux-notice-field redux-field-info" style="margin: 15px 0 0;">
-					  <p class="redux-info-desc"><b>Compiler Run</b><br>Custom CSS sucessfully compiled!</p>
-					  </div>';
-			}
-			// echo "<pre>";
-			// print_r( $changed_values ); // Values that have changed since the last save
-			// echo "</pre>";
-			//print_r($options); //Option values
-			//print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
-		}
-
-		/**
-		 * Custom function for filtering the sections array. Good for child themes to override or add to the sections.
-		 * Simply include this function in the child themes functions.php file.
-		 * NOTE: the defined constants for URLs, and directories will NOT be available at this point in a child theme,
-		 * so you must use get_template_directory_uri() if you want to use any of the built in icons
-		 * */
-		function dynamic_section( $sections ) {
-			//$sections = array();
-			$sections[] = array(
-				'title'  => __( 'Section via hook', 'mixt' ),
-				'desc'   => __( '<p class="description">This is a section created by adding a filter to the sections array. Can be used by child themes to add/remove sections from the options.</p>', 'mixt' ),
-				'icon'   => 'el-icon-paper-clip',
-				// Leave this as a blank section, no options just some intro text set above.
-				'fields' => array()
-			);
-
-			return $sections;
-		}
-
-		/**
-		 * Filter hook for filtering the args. Good for child themes to override or add to the args array. Can also be used in other functions.
-		 * */
-		function change_arguments( $args ) {
-			//$args['dev_mode'] = true;
-
-			return $args;
-		}
-
-		/**
-		 * Filter hook for filtering the default value of any given field. Very useful in development mode.
-		 * */
-		function change_defaults( $defaults ) {
-			$defaults['str_replace'] = 'Testing filter hook!';
-
-			return $defaults;
 		}
 
 		// Remove the demo link and the notice of integrated demo from the redux-framework plugin
@@ -443,7 +375,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle' => __( 'Enable page loader to show animations when loading site', 'mixt' ),
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
-							'default'  => true,
+							'default'  => false,
 						),
 
 						// Page Loader Type
@@ -472,7 +404,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'square'  => __( 'Square', 'mixt' ),
 								'square2' => __( 'Empty Square', 'mixt' ),
 							),
-							'default'  => 'ring',
+							'default'  => 'square',
 							'required' => array('page-loader-type', '=', '1'),
 						),
 
@@ -631,7 +563,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle' => __( 'Select a background color for the header', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
-							'default'  => '#fafafa',
+							'default'  => '',
 						),
 
 						// Text Color
@@ -809,12 +741,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						// Video Luminance
 						array(
 							'id'       => 'head-video-lum',
-							'type'     => 'switch',
+							'type'     => 'button_set',
 							'title'    => __( 'Video Luminance', 'mixt' ),
 							'subtitle' => __( 'Header text color will be adjusted based on this', 'mixt' ),
-							'on'       => __( 'Light', 'mixt' ),
-							'off'      => __( 'Dark', 'mixt' ),
-							'default'  => true,
+							'options'  => array(
+								'light' => __( 'Light', 'mixt' ),
+								'dark'  => __( 'Dark', 'mixt' ),
+							),
+							'default'  => 'light',
 							'required' => array('head-media-type', '=', 'video'),
 						),
 
@@ -860,7 +794,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'   => __( 'Content Fade Effect', 'mixt' ),
 							'on'      => __( 'Yes', 'mixt' ),
 							'off'     => __( 'No', 'mixt' ),
-							'default' => true,
+							'default' => false,
 						),
 
 						// Scroll To Content
@@ -1866,7 +1800,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'         => 'textarea',
 							'title'        => __( 'Footer Code', 'mixt' ),
 							'subtitle'     => __( 'Text or code to display in the footer', 'mixt' ),
-							'default'      => __( 'Copyright', 'mixt' ) . ' © {{year}} Your Company',
+							'default'      => __( 'Copyright', 'mixt' ) . ' &copy; {{year}} Your Company',
 							'allowed_html' => $text_allowed_html,
 							'placeholder'  => $text_code_placeholder,
 						),
@@ -2556,13 +2490,13 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// ADD PORTFOLIO FIELDS IF ENABLED
 			if ( class_exists('Mixt_Portfolio') ) {
-				include_once( MIXT_PLUGINS_DIR . '/mixt-portfolio/redux-fields.php' );
+				include_once( MIXT_PLUGINS_DIR . '/redux-extend/portfolio-fields.php' );
 			}
 
 
 			// ADD SHOP FIELDS IF WOOCOMMERCE ENABLED
 			if ( class_exists('WooCommerce') ) {
-				include_once( MIXT_PLUGINS_DIR . '/woocommerce/redux-fields.php' );
+				include_once( MIXT_PLUGINS_DIR . '/redux-extend/woocommerce-fields.php' );
 			}
 
 
@@ -2747,13 +2681,13 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								// Text Color
 								'color' => array(
 									'type'  => 'color',
-									'label' => __( 'Text Color' ),
+									'label' => __( 'Text Color', 'mixt' ),
 								),
 
 								// Inverse Text Color
 								'color-inv' => array(
 									'type'  => 'color',
-									'label' => __( 'Inverse Text Color' ),
+									'label' => __( 'Inverse Text Color', 'mixt' ),
 								),
 
 								// Border Color
@@ -2910,7 +2844,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'color'       => false,
 						'line-height' => false,
 						'text-align'  => false,
-						'font-size'   => false,
 						'font-style'  => false,
 						'font-weight' => false,
 						'units'       => 'px',
@@ -2930,7 +2863,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'color'       => false,
 						'line-height' => false,
 						'text-align'  => false,
-						'font-size'   => true,
 						'font-style'  => false,
 						'font-weight' => true,
 						'text-transform' => true,
@@ -3035,7 +2967,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 
 			// IMPORT & DEMOS SECTION
-			include_once( MIXT_MODULES_DIR . '/demos.php' );
+			include_once( MIXT_PLUGINS_DIR . '/redux-extend/demos.php' );
 			$this->sections[] = array(
 				'id'         => 'wbc_importer_section',
 				'title'      => __( 'Settings & Demos', 'mixt' ),
@@ -3063,7 +2995,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// CUSTOMIZER SECTIONS
 			if ( is_customize_preview() ) {
-				include_once( MIXT_FRAME_DIR . '/admin/redux-customizer.php' );
+				include_once( MIXT_PLUGINS_DIR . '/redux-extend/customizer-fields.php' );
 			}
 		}
 
@@ -3102,22 +3034,41 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 		 * */
 		public function setArguments() {
 
-			$theme = wp_get_theme(); // For use with some settings. Not necessary.
+			$theme = wp_get_theme();
 
 			$this->args = array(
-				// TYPICAL -> Change these values as you need/desire
-				'opt_name'             => 'mixt_opt',
-				// This is where your data is stored in the database and also becomes your global variable name.
-				'display_name'         => $theme->get( 'Name' ),
-				// Name that appears at the top of your panel
-				'display_version'      => $theme->get( 'Version' ),
-				// Version that appears at the top of your panel
-				'menu_type'            => 'menu',
-				//Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
-				'allow_sub_menu'       => true,
-				// Show the sections below the admin menu item or not
-				'menu_title'           => __( 'MIXT', 'mixt' ),
-				'page_title'           => __( 'MIXT Options', 'mixt' ),
+				'opt_name'           => 'mixt_opt',
+				'display_name'       => 'MIXT',
+				'display_version'    => $theme->get('Version'),
+				'menu_type'          => 'menu',
+				'allow_sub_menu'     => true,
+				'menu_title'         => __( 'MIXT', 'mixt' ),
+				'page_title'         => __( 'MIXT Options', 'mixt' ),
+				'admin_bar'          => true,
+				'admin_bar_icon'     => 'dashicons-admin-generic',
+				'admin_bar_priority' => '31.6498',
+
+				'ajax_save'          => true,
+				'dev_mode'           => true,
+				'update_notice'      => true,
+				'disable_tracking'   => true,
+				
+				'customizer'         => true,
+				'sass'               => array( 'enabled' => false ),
+				
+				'page_priority'      => '59.6498',
+				'page_parent'        => 'themes.php',
+				'page_permissions'   => 'manage_options',
+				'menu_icon'          => 'dashicons-screenoptions',
+				'page_icon'          => 'icon-themes',
+				'page_slug'          => 'mixt_options',
+				'save_defaults'      => true,
+				'default_show'       => false,
+				'default_mark'       => '',
+				'show_import_export' => false,
+
+				'templates_path'     => MIXT_DIR . '/templates/redux-templates',
+
 				// You will need to generate a Google API key to use this feature.
 				// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
 				'google_api_key'       => 'AIzaSyANZToOjYpoewv8b-GpX4LOOVZXC_08tD0',
@@ -3125,74 +3076,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'google_update_weekly' => false,
 				// Must be defined to add google fonts to the typography module
 				'async_typography'     => true,
-				// Use a asynchronous font on the front end or font string
-				//'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
-				'admin_bar'            => true,
-				// Show the panel pages on the admin bar
-				'admin_bar_icon'     => 'dashicons-admin-generic',
-				// Choose an icon for the admin bar menu
-				'admin_bar_priority' => '31.6497',
-				// Choose an priority for the admin bar menu
-				'global_variable'      => '',
-				// Set a different name for your global variable other than the opt_name
-				'dev_mode'             => true,
-				// Show the time the page took to load, etc
-				'update_notice'        => true,
-				// If dev_mode is enabled, will notify developer of updated versions available in the GitHub Repo
-				'customizer'           => true,
-				// Enable basic customizer support
-				//'open_expanded'     => true,                    // Allow you to start the panel in an expanded way initially.
-				//'disable_save_warn' => true,                    // Disable the save warning when a user changes a field
-
-				// OPTIONAL -> Give you extra features
-				'page_priority'        => '59.6497',
-				// Order where the menu appears in the admin area. If there is any conflict, something will not show. Warning.
-				'page_parent'          => 'themes.php',
-				// For a full list of options, visit: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-				'page_permissions'     => 'manage_options',
-				// Permissions needed to access the options panel.
-				'menu_icon'            => 'dashicons-screenoptions',
-				// Specify a custom URL to an icon
-				'last_tab'             => '',
-				// Force your panel to always open to a specific tab (by id)
-				'page_icon'            => 'icon-themes',
-				// Icon displayed in the admin panel next to your menu_title
-				'page_slug'            => 'mixt_options',
-				// Page slug used to denote the panel
-				'save_defaults'        => true,
-				// On load save the defaults to DB before user clicks save or not
-				'default_show'         => false,
-				// If true, shows the default value next to each field that is not the default value.
-				'default_mark'         => '',
-				// What to print by the field's title if the value shown is default. Suggested: *
-				'show_import_export'   => true,
-				// Shows the Import/Export panel when not used as a field.
-
-				'sass' => array (
-					'enabled'     => true,
-					'page_output' => false
-				),
-
-				'ajax_save' => true,
-
-				'templates_path' => MIXT_DIR . '/templates/redux-templates',
 
 				// CAREFUL -> These options are for advanced use only
-				'transient_time'       => 60 * MINUTE_IN_SECONDS,
-				'output'               => true,
-				// Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
-				'output_tag'           => true,
-				// Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
-				// 'footer_credit'     => '',                   // Disable the footer credit of Redux. Please leave if you can help it.
-
-				// FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
-				'database'             => '',
-				// possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!
-				'system_info'          => false,
-				// REMOVE
+				'transient_time' => 60 * MINUTE_IN_SECONDS,
+				'output'         => true,
+				'output_tag'     => true,
 
 				// HINTS
-				'hints'                => array(
+				'hints' => array(
 					'icon'          => 'icon-question-sign',
 					'icon_position' => 'right',
 					'icon_color'    => 'lightgray',
@@ -3242,38 +3133,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// Add content after the form.
 			$this->args['footer_text'] = __( '<p>MiXT by <a href="http://novalx.com/">novalex</a></p>', 'mixt' );
 		}
-
-		public function validate_callback_function( $field, $value, $existing_value ) {
-			$error = true;
-			$value = 'just testing';
-
-			/*
-		  do your validation
-
-		  if(something) {
-			$value = $value;
-		  } elseif(something else) {
-			$error = true;
-			$value = $existing_value;
-
-		  }
-		 */
-
-			$return['value'] = $value;
-			$field['msg']    = 'your custom error message';
-			if ( $error == true ) {
-				$return['error'] = $field;
-			}
-
-			return $return;
-		}
-
-		public function class_field_callback( $field, $value ) {
-			print_r( $field );
-			echo '<br/>CLASS CALLBACK';
-			print_r( $value );
-		}
-
 	}
 
 	global $mixtConfig;
@@ -3281,45 +3140,3 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 } else {
 	echo "The class named Redux_MIXT_config has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
 }
-
-/**
- * Custom function for the callback referenced above
- */
-if ( ! function_exists( 'redux_my_custom_field' ) ):
-	function redux_my_custom_field( $field, $value ) {
-		print_r( $field );
-		echo '<br/>';
-		print_r( $value );
-	}
-endif;
-
-/**
- * Custom function for the callback validation referenced above
- * */
-if ( ! function_exists( 'redux_validate_callback_function' ) ):
-	function redux_validate_callback_function( $field, $value, $existing_value ) {
-		$error = true;
-		$value = 'just testing';
-
-		/*
-	  do your validation
-
-	  if(something) {
-		$value = $value;
-	  } elseif(something else) {
-		$error = true;
-		$value = $existing_value;
-
-	  }
-	 */
-
-		$return['value'] = $value;
-		$field['msg']    = 'your custom error message';
-		if ( $error == true ) {
-			$return['error'] = $field;
-		}
-
-		return $return;
-	}
-
-endif;

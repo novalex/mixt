@@ -3,6 +3,12 @@
 
 .widget-area {
 
+	&,
+	ul,
+	div,
+	.nav,
+	.widget { border-color: inherit; }
+
 	// Widget Titles
 	h3 {
 		font-size: 15px;
@@ -24,6 +30,7 @@
 
 		a {
 			display: block;
+			color: inherit;
 			padding: $padding-s 0;
 
 			&:hover { background: none !important; }
@@ -46,7 +53,7 @@
 			float: right;
 		}
 
-		li:last-child { border-bottom: 0; }
+		li:last-child { border-bottom-width: 0; }
 	}
 
 	.nav li,

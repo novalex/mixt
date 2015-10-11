@@ -8,6 +8,8 @@ CUSTOMIZER INTEGRATION - NAV THEMES
 	'use strict';
 
 	/* global _, wp, MIXT, mixt_customize, tinycolor */
+
+	if ( _.isEmpty(wp.customize('mixt_opt[nav-themes]')) ) return;
 	
 	var defaults = {
 		'accent':     '#dd3e3e',
@@ -180,6 +182,8 @@ CUSTOMIZER INTEGRATION - NAV THEMES
 				}
 
 				// Main Navbar Mobile Styling
+
+				main_navbar += '.navbar';
 
 				css += '@media ( max-width: '+mixt_customize.breakpoints.mars+'px ) {';
 					css += main_navbar+' .navbar-inner { background-color: '+menu_bg+'; '+menu_bg_rgba+' }';

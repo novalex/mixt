@@ -42,7 +42,7 @@ if ( $products->have_posts() ) : ?>
 
 	<div class="related products columns-<?php echo $related_cols; ?>">
 
-		<?php echo do_shortcode('[mixt_headline tag="h2"]' . __( 'Related Products', 'woocommerce' ) . '[/mixt_headline]'); ?>
+		<?php echo mixt_heading( __( 'Related Products', 'woocommerce' ), 'tag="h2"'); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 

@@ -32,15 +32,15 @@ get_header(); ?>
 				);
 				if ( ! empty($nav) ) {
 					$search_classes = 'col-sm-6';
-					$search_headline_args = '';
+					$search_heading_args = '';
 
 					$nav_html = '<div class="col-sm-6">';
-						$nav_html .= do_shortcode('[mixt_headline]' . __( 'Useful links', 'mixt' ) . '[/mixt_headline]');
+						$nav_html .= mixt_heading( __( 'Useful links', 'mixt' ) );
 						$nav_html .= $nav;
 					$nav_html .= '</div>';
 				} else {
 					$search_classes = 'col-sm-6 col-sm-offset-3 text-center';
-					$search_headline_args = 'align="center"';
+					$search_heading_args = 'align="center"';
 
 					$nav_html = '';
 				}
@@ -48,7 +48,7 @@ get_header(); ?>
 
 			<?php // Search Form ?>
 			<div class="<?php echo $search_classes; ?>">
-				<?php echo do_shortcode('[mixt_headline '.$search_headline_args.']' . __( 'Do a search', 'mixt' ) . '[/mixt_headline]'); ?>
+				<?php echo mixt_heading( __( 'Do a search', 'mixt' ), $search_heading_args ); ?>
 				<p><?php _e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
 				<?php get_search_form(); ?>
 			</div>

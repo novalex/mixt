@@ -12,15 +12,19 @@ get_header();
 
 		the_post();
 
-		get_template_part( 'templates/content', 'single' );
-
 		$options = mixt_get_options( array(
+			'blog-meta-show'    => array( 'return' => 'value' ),
 			'post-tags'         => array(),
 			'post-sharing'      => array(),
 			'post-about-author' => array(),
 			'post-navigation'   => array(),
 			'post-related'      => array(),
 		) );
+
+		// Set post display options
+		Mixt_Options::set('layout', 'meta-show', $options['blog-meta-show']);
+
+		get_template_part( 'templates/content', 'single' );
 
 		// Post Tags
 		if ( $options['post-tags'] ) {
@@ -39,7 +43,7 @@ get_header();
 			));
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';
-					echo do_shortcode('[mixt_headline text="' . __( 'Share this', 'mixt' ) . '"]');
+					echo mixt_heading( __( 'Share this', 'mixt' ) );
 					echo $icons;
 				echo '</div>';
 			}

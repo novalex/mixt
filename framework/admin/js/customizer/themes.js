@@ -5,7 +5,7 @@ CUSTOMIZER INTEGRATION - THEMES
 
 'use strict';
 
-/* global _, wp, MIXT */
+/* global wp, MIXT */
 
 MIXT.themes = {
 	regex: /theme-([^\s]*)/,
@@ -20,6 +20,7 @@ MIXT.themes = {
 			this.nav = jQuery('#main-nav')[0].className.match(this.regex)[1];
 			if ( jQuery('#second-nav').length ) this.secNav = jQuery('#second-nav')[0].className.match(this.regex)[1];
 			this.footer = jQuery('#colophon')[0].className.match(this.regex)[1];
+			
 			this.setup = true;
 		}
 	},
@@ -45,7 +46,7 @@ MIXT.themes = {
 	wp.customize('mixt_opt[site-theme]', function(value) {
 		value.bind( function(to) {
 			themes.site = to;
-			var elems = $('#main-wrap-inner, [data-theme="auto"]');
+			var elems = $('body, #main-wrap-inner, [data-theme="auto"]');
 			elems.each( function() {
 				$(this)[0].className = $(this)[0].className.replace(themes.regex, 'theme-' + to);
 				$(this).trigger('refresh').trigger('theme-change', to);

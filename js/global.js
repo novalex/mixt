@@ -3,7 +3,7 @@
 GLOBAL JS FUNCTIONS
 / ------------------------------------------------ */
 
-(function ($) {
+( function($) {
 
 	'use strict';
 

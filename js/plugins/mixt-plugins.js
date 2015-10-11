@@ -3,7 +3,9 @@
 JS PLUGINS
 / ------------------------------------------------ */
 
-'use strict'; /* jshint unused: false */
+'use strict';
+
+/* jshint unused: false */
 
 
 // Get Current Breakpoint (Global)
@@ -56,11 +58,11 @@ function colorToRgba(color, opacity) {
 	} else if ( color.substring(0,3) == 'rgb' ) {
 		return color.replace('rgb(', 'rgba(').replace(')', ', '+opacity+')');
 	} else {
-		hex = color.replace('#','');
-		var r = parseInt(hex.substring(0,2), 16),
+		var hex = color.replace('#',''),
+			r = parseInt(hex.substring(0,2), 16),
 			g = parseInt(hex.substring(2,4), 16),
-			b = parseInt(hex.substring(4,6), 16);
-		result = 'rgba('+r+','+g+','+b+','+opacity+')';
+			b = parseInt(hex.substring(4,6), 16),
+			result = 'rgba('+r+','+g+','+b+','+opacity+')';
 		return result;
 	}
 }
@@ -176,18 +178,18 @@ function elemVisible(elem, cont) {
 }
 
 
-// Fix WPML Dropdown
-jQuery('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
+( function($) {
+	// Fix WPML Dropdown
+	$('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
 
-// Fix PolyLang Menu Items And Make Them Dropdown
-jQuery('.menu-item.lang-item').removeClass('disabled');
+	// Fix PolyLang Menu Items And Make Them Dropdown
+	$('.menu-item.lang-item').removeClass('disabled');
 
-jQuery( function() {
-	var item = jQuery('.lang-item.current-lang');
+	var item = $('.lang-item.current-lang');
 	if (item.length === 0) {
-		item = jQuery('.lang-item').first();
+		item = $('.lang-item').first();
 	}
 	var langs = item.siblings('.lang-item');
 	item.addClass('dropdown drop-menu');
 	langs.wrapAll('<ul class="sub-menu dropdown-menu"></ul>').parent().appendTo(item);
-});
+})(jQuery);

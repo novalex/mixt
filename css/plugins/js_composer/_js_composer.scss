@@ -1,35 +1,40 @@
 
 // Visual Composer Custom Styling
 
-@import 'frontend';
-
+@import 'gitem';
 @import 'toggle';
 @import 'progress-bars';
 @import 'tabs-tour-accordion';
 
-.wpb_row,
-.wpb_column,
-.wpb_wrapper,
-.wpb_text_column,
-.compose-mode .vc_element,
-.view-mode .vc_element { border-color: inherit; }
+@if $vcomposer {
 
-.wpb_wrapper .mixt-element.mixt-headline { margin-bottom: 20px; }
+	.vc_element div[class*=' col-'] { width: 100%; }
 
-.first-row .vc_controls-out-tl,
-.first-row .vc_controls-out-tr {
-    z-index: 9999 !important;
-}
+	.wpb_row,
+	.wpb_column,
+	.wpb_wrapper,
+	.wpb_text_column,
+	.compose-mode .vc_element,
+	.view-mode .vc_element { border-color: inherit; }
 
-// Buttons
+	.wpb_wrapper .mixt-element.mixt-headline { margin-bottom: 20px; }
 
-.vc_btn3 {
-	&.vc_btn3-shape-rounded { border-radius: $bd-radius; }
-}
-
-@media (max-width: 768px) {
-	.vc_general.vc_cta3 .vc_btn3-container {
-		margin-bottom: 0;
-		margin-top: 20px;
+	.first-row .vc_controls-out-tl,
+	.first-row .vc_controls-out-tr {
+	    z-index: 9999 !important;
 	}
+
+	// Buttons
+
+	.vc_btn3 {
+		&.vc_btn3-shape-rounded { border-radius: $bd-radius; }
+	}
+
+	@media (max-width: 768px) {
+		.vc_general.vc_cta3 .vc_btn3-container {
+			margin-bottom: 0;
+			margin-top: 20px;
+		}
+	}
+
 }

@@ -12,12 +12,14 @@ echo '<div class="author-wrap page-padding">';
 	mixt_about_the_author(false);
 echo '</div>';
 
+echo '<div class="posts-container page-padding">';
+
 if ( have_posts() ) {
 
 	// Set display options
 	Mixt_Options::set('post-display', null, array('meta-author' => false));
 
-	echo '<div class="posts-container">';
+	echo mixt_heading( __( 'Entries by this author', 'mixt' ) );
 
 	while ( have_posts() ) : // Start The Loop
 
@@ -27,15 +29,15 @@ if ( have_posts() ) {
 
 	endwhile; // End The Loop
 
-	echo '</div>'; // Close .posts-container
-
 	mixt_content_nav( 'nav-below', true );
 
 } else {
-	
-	get_template_part( 'templates/no-results', 'index' ); // Load "Nothing Found / No Results" template
+
+	echo mixt_heading( __( 'No entries by this author', 'mixt' ) );
 
 }
+
+echo '</div>'; // Close .posts-container
 
 get_sidebar();
 

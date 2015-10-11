@@ -3,7 +3,7 @@
 NAVBAR FUNCTIONS
 / ------------------------------------------------ */
 
-+function ($) {
+( function($) {
 
 	'use strict';
 
@@ -62,7 +62,7 @@ NAVBAR FUNCTIONS
 					navbarObj.navBgTop = navbarObj.navBg;
 				}
 				if ( mixt_opt.nav.mode == 'static' ) {
-					mainNavBar.removeClass(navbarObj.navBg).addClass('position-top ' + navbarObj.navBgTop);
+					mainNavBar.removeClass(navbarObj.navBg).addClass(navbarObj.navBgTop);
 				}
 			} else {
 				if ( colorLum == 'dark' ) {
@@ -268,7 +268,7 @@ NAVBAR FUNCTIONS
 			// Enable Nav Scrolling If Navbar Height > Viewport
 
 			function navScroll() {
-				if ( mixt_opt.nav.mode == 'fixed' && mqNav == 2 ) {
+				if ( mixt_opt.nav.mode == 'fixed' && mqNav == 'tablet' ) {
 					var viewportH     = viewport.height(),
 						viewportS     = viewport.scrollTop(),
 						navbarHeaderH = mainNavHead.height() + 1,
@@ -462,7 +462,7 @@ NAVBAR FUNCTIONS
 
 		// Make primary navbar sticky if option enabled
 		if ( mixt_opt.nav.mode == 'fixed' ) {
-			if ( mqNav === 1 ) {
+			if ( mqNav == 'mobile' ) {
 				navbarObj.stickyNav(true);
 			} else {
 				navbarObj.stickyNav(false);
@@ -472,7 +472,7 @@ NAVBAR FUNCTIONS
 		}
 
 		// Vertical navbar handling
-		if ( mixt_opt.nav.layout == 'vertical' && mixt_opt.nav['vertical-mode'] == 'fixed' && mqNav === 0 ) {
+		if ( mixt_opt.nav.layout == 'vertical' && mixt_opt.nav['vertical-mode'] == 'fixed' && mqNav == 'desktop' ) {
 			// Make navbar static if items don't fit in viewport
 			verticalNavFitView();
 		}
@@ -481,4 +481,4 @@ NAVBAR FUNCTIONS
 	}
 	viewport.resize( $.debounce( 500, navbarFn )).resize();
 
-}(jQuery);
+})(jQuery);

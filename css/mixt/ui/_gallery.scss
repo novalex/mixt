@@ -5,6 +5,7 @@
 	position: relative;
 	cursor: pointer;
 
+	&,
 	img { width: 100%; }
 
 	&:after {
@@ -33,7 +34,8 @@
 	}
 
 	.count {
-		opacity: 0; visibility: none;
+		opacity: 0;
+		visibility: hidden;
 		margin-left: 10px;
 		font-size: 15px; white-space: nowrap;
 		text-align: left; font-weight: bold;

@@ -21,13 +21,9 @@ CUSTOMIZER INTEGRATION - LOGO
 		// Image Logo
 		if ( type == 'img' && ! _.isEmpty(img.url) ) {
 			var width = img.width,
-				height = img.height,
 				img_inv = wp.customize('mixt_opt[logo-img-inv]').get(),
 				hires = wp.customize('mixt_opt[logo-img-hr]').get() == '1',
-				width_val,
-				height_val,
-				shrink_width,
-				shrink_height;
+				shrink_width;
 
 			if ( ! _.isEmpty(img_inv.url) ) {
 				html += '<img class="logo-img logo-light" src="'+img.url+'" alt="'+text+'">';
@@ -37,31 +33,15 @@ CUSTOMIZER INTEGRATION - LOGO
 			}
 
 			if ( hires ) {
-				width  = width / 2;
-				height = height / 2;
+				width = width / 2;
 			}
 
-			// Logo Wide or Tall
-			if ( width > height ) {
-				width_val = width + 'px';
-				height_val = 'auto';
-			} else {
-				width_val = 'auto';
-				height_val = height + 'px';
-			}
-
-			css += '#nav-logo img { width: '+width_val+'; height: '+height_val+'; }';
+			css += '.navbar-mixt #nav-logo img { max-width: '+width+'px; }';
 
 			// Logo Shrink
 			if ( shrink != '0' ) {
-				if ( width > height ) {
-					shrink_width  = ( width - shrink ) + 'px';
-					shrink_height = 'auto';
-				} else {
-					shrink_width  = 'auto';
-					shrink_height = ( height - shrink ) + 'px';
-				}
-				css += '.fixed-nav #nav-logo img { width: '+shrink_width+'; height: '+shrink_height+'; }';
+				shrink_width  = width - shrink;
+				css += '.fixed-nav .navbar-mixt #nav-logo img { max-width: '+shrink_width+'px; }';
 			}
 
 		// Text Logo

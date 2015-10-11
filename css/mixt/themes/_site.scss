@@ -16,25 +16,16 @@
 
 	$theme-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
 
-	@if ( $theme-dark ) {
-		$color-fade: theme-color($theme, 'color-fade', darken($color, 10));
-		$color-inv-fade: theme-color($theme, 'color-inv-fade', lighten($color-inv, 10));
+	$color-fade: if( $theme-dark, theme-color($theme, 'color-fade', darken($color, 10)), theme-color($theme, 'color-fade', lighten($color, 10)) );
+	$color-inv-fade: if( $theme-dark, theme-color($theme, 'color-inv-fade', lighten($color-inv, 10)), theme-color($theme, 'color-inv-fade', darken($color-inv, 10)) );
 
-		$bg-light-color: $color-inv;
-		$bg-light-color-fade: $color-inv-fade;
+	$bg-light-color: if( $theme-dark, $color-inv, $color );
+	$bg-light-color-fade: if( $theme-dark, $color-inv-fade, $color-fade );
 
-		$bg-dark-color: $color;
-		$bg-dark-color-fade: $color-fade;
-	} @else {
-		$color-fade: theme-color($theme, 'color-fade', lighten($color, 10));
-		$color-inv-fade: theme-color($theme, 'color-inv-fade', darken($color-inv, 10));
-
-		$bg-light-color: $color;
-		$bg-light-color-fade: $color-fade;
-
-		$bg-dark-color: $color-inv;
-		$bg-dark-color-fade: $color-inv-fade;
-	}
+	$bg-dark-color: if( $theme-dark, $color, $color-inv );
+	$bg-dark-color-fade: if( $theme-dark, $color-fade, $color-inv-fade );
+		
+	$input-bg: darken($bg, 3);
 
 	.theme-#{$name} {
 		background-color: $bg;
@@ -72,12 +63,11 @@
 		}
 
 		.theme-section-alt {
+			$bg-alt: darken($bg, 3);
+			$color-alt: $color;
 			@if ( map-has-key($theme, 'bg-alt') ) {
 				$bg-alt: map-get($theme, 'bg-alt');
 				$color-alt: contrast-color($bg-alt, $color, $color-inv);
-			} @else {
-				$bg-alt: darken($bg, 3);
-				$color-alt: $color;
 			}
 			$color-alt: theme-color($theme, 'color-alt', $color-alt);
 			$border-alt: theme-color($theme, 'border-alt', $border);
@@ -146,11 +136,11 @@
 		// BORDER COLORS
 		
 		&,
-		.wp-caption,
-		hr { border-color: $border; }
-
 		#content-wrap,
-		.sidebar ul {
+		.sidebar ul,
+		.post-feat.feat-format,
+		.wp-caption,
+		hr {
 			border-color: $border;
 		}
 
@@ -171,8 +161,6 @@
 
 
 		// INPUTS
-		
-		$input-bg: darken($bg, 3);
 
 		%theme-input-color {
 			color: $color;
@@ -188,25 +176,24 @@
 		input,
 		.form-control { @include placeholder($color-fade); }
 
-		@if $theme-dark { select { @extend %select-arrow-light; } }
-
-		@if $select2 {
-			.mixt & { @include select2-theme-color($input-bg, $color, $border); }
-			@if $theme-dark { .mixt & .select2-container .select2-arrow b:after { @extend %select-arrow-light; } }
+		@if $theme-dark {
+			select { @extend %select-arrow-light; }
+			@if $select2 { .mixt & .select2-container .select2-arrow b:after { @extend %select-arrow-light; } }
 		}
 
 
 		// OTHER COLORS
 
 		.sidebar {
-			.child-page-nav li a:hover,
-			.nav li a:hover { color: $accent; }
+			.child-page-nav li a:hover { color: $accent; }
 			
 			.child-page-nav .current_page_item {
 				&,
 				&:before { background-color: darken($bg, 3); }
 			}
 		}
+
+		.widget-area .nav li a:hover { color: $accent; }
 		
 		::selection {
 			background: $accent;
@@ -273,19 +260,6 @@
 				&.active a {
 					background-color: $accent;
 				}
-			}
-		}
-
-		// LightGallery
-		@if $lightgallery {
-			.lg-outer .lg-thumb-item {
-				&.active,
-				&:hover {
-					border-color: $accent;
-				}
-			}
-			.lg-progress-bar .lg-progress {
-				background-color: $accent;
 			}
 		}
 
@@ -361,9 +335,29 @@
 			.woocommerce-checkout #payment { border-color: $border; }
 		}
 	}
+
+	// Styling for elements outside #main-wrap-inner
+	.body-theme-#{$name} {
+
+		@if $select2 {
+			.mixt & { @include select2-theme-color($input-bg, $color, $border); }
+		}
+
+		@if $lightgallery {
+			.lg-outer .lg-thumb-item {
+				&.active,
+				&:hover {
+					border-color: $accent;
+				}
+			}
+			.lg-progress-bar .lg-progress {
+				background-color: $accent;
+			}
+		}
+	}
 }
 
-// Generate navbar themes
+// Generate site themes
 @each $name, $theme in $themes {
 	@include site-theme($name, $theme);
 }

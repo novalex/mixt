@@ -3,7 +3,7 @@
 ELEMENT FUNCTIONS
 / ------------------------------------------------ */
 
-+function ($) {
+( function($) {
 
 	'use strict';
 
@@ -97,4 +97,4 @@ ELEMENT FUNCTIONS
 		$(this).toggleClass('hover');
 	});
 
-}(jQuery);
+})(jQuery);

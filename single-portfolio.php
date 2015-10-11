@@ -62,7 +62,7 @@ get_header();
 			));
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';
-					echo do_shortcode('[mixt_headline text="' . __( 'Share this', 'mixt' ) . '"]');
+					echo mixt_heading( __( 'Share this', 'mixt' ) );
 					echo $icons;
 				echo '</div>';
 			}

@@ -42,7 +42,7 @@ if ( $products->have_posts() ) : ?>
 
 	<div class="upsells products columns-<?php echo $upsell_cols; ?>">
 
-		<?php echo do_shortcode('[mixt_headline tag="h2"]' . __( 'You may also like', 'mixt' ) . '[/mixt_headline]'); ?>
+		<?php echo mixt_heading( __( 'You may also like', 'mixt' ), 'tag="h2"'); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 

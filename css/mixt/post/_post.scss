@@ -93,17 +93,23 @@
 .format-aside,
 .format-link {
 	.post-meta {
-		.byline, .cat { display: none; }
+		.byline, .cat {
+			&, + .meta-sep { display: none; }
+		}
 	}
 }
 
 .format-quote,
 .format-status {
-	.post-meta { display: none; }
+	.post-meta {
+		&, + .meta-sep { display: none; }
+	}
 }
 
 .format-link {
-	.page-title { display: none; }
+	.page-title {
+		&, + .meta-sep { display: none; }
+	}
 }
 
 
@@ -114,11 +120,10 @@
 @import 'blog-standard';
 @import 'blog-common';
 
+
 // PORTFOLIO STYLING
 
-@if $portfolio {
-	@import 'portfolio';
-}
+@import 'portfolio';
 
 
 // FEATURED HOVER EFFECT
@@ -165,6 +170,8 @@
 	.excerpt {
 		font-size: $font-size-s;
 	}
+
+	.lightbox-trigger:hover:after { display: none; }
 }
 
 

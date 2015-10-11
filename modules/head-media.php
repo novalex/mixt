@@ -24,7 +24,6 @@ function mixt_head_media() {
 		'bg' => array(
 			'key'     => 'head-bg-color',
 			'return'  => 'value',
-			'default' => '#ebf0f4',
 		),
 		// Slider
 		'slider' => array(
@@ -70,7 +69,8 @@ function mixt_head_media() {
 		),
 		'video-lum' => array(
 			'key'     => 'head-video-lum',
-			'default' => 'true',
+			'default' => 'light',
+			'return'  => 'value',
 		),
 		'video-loop' => array( 'key' => 'head-video-loop' ),
 		// Content
@@ -188,7 +188,7 @@ function mixt_head_media() {
 					$img_color = mixt_meta( '_image_color', $options['img-ph']['id'] );
 				} else {
 					$img_color  = 'dark';
-					$img_url    = MIXT_URI . '/assets/img/patterns/placeholder.jpg';
+					$img_url    = MIXT_IMG_PLACEHOLDER;
 				}
 			}
 
@@ -216,7 +216,7 @@ function mixt_head_media() {
 		else if ( $options['type'] == 'video') {
 			$wrap_classes .= ' media-video';
 
-			$wrap_classes .= ( $options['video-lum'] == 'false' ) ? ' bg-dark' : ' bg-light';
+			$wrap_classes .= ( $options['video-lum'] == 'dark' ) ? ' bg-dark' : ' bg-light';
 
 			// Embedded Video
 			if ( $options['video-src'] == 'embed' && ! empty($options['video-embed']) ) {
@@ -292,7 +292,7 @@ function mixt_head_media() {
 				if ( $options['align'] != 'left' ) { $inner_classes .= ' align-' . $options['align']; }
 
 				echo "<div class='$inner_classes'>";
-					echo do_shortcode($options['code-content']);
+					echo do_shortcode(mixt_shortcode_unwrap($options['code-content']));
 
 					// Post Info
 					if ( $options['info'] ) {

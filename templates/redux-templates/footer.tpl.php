@@ -5,7 +5,7 @@
 	 *
 	 * @author 		Redux Framework
 	 * @package 	ReduxFramework/Templates
-	 * @version     3.5.4.18
+	 * @version     3.5.6.7
 	 */
 ?>
 <div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
@@ -45,11 +45,13 @@
 
 		<div class="redux-action_bar">
 			<span class="spinner"></span>
-			<?php submit_button( __( 'Save', 'mixt' ), 'primary', 'redux_save', false  ); ?>
+			<?php if ( false === $this->parent->args['hide_save'] ) : ?>
+				<?php submit_button( __( 'Save', 'mixt' ), 'primary', 'redux_save', false  ); ?>
+			<?php endif; ?>
 			
 			<?php if ( false === $this->parent->args['hide_reset'] ) : ?>
 				<?php submit_button( __( 'Reset Section', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults-section]', false, array( 'id' => 'redux-defaults-section' ) ); ?>
-				<?php // submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults' ) ); ?>
+				<?php submit_button( __( 'Reset All', 'redux-framework' ), 'secondary', $this->parent->args['opt_name'] . '[defaults]', false, array( 'id' => 'redux-defaults' ) ); ?>
 			<?php endif; ?>
 
 		</div>

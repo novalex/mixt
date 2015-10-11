@@ -7,17 +7,13 @@
  */
 
 ?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="mixt">
-
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-
 	<?php
 
 	wp_head();
@@ -27,7 +23,6 @@
 
 	?>
 </head>
-
 <?php
 
 // Get Options
@@ -37,13 +32,12 @@ $header_options = Mixt_Options::get('header');
 $theme_options  = Mixt_Options::get('themes');
 $layout_options = Mixt_Options::get('layout');
 
-$body_classes = "no-js";
+$body_classes = "no-js body-theme-{$theme_options['site']}";
 if ( $page_options['layout'] == 'boxed' ) $body_classes .= ' boxed';
 if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 ?>
-
 <body <?php body_class($body_classes); ?>>
 	<script type="text/javascript" id="mixt-test-js">document.body.className = document.body.className.replace('no-js','js');</script>
 
@@ -92,9 +86,10 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 			$nav_classes = 'theme-' . $theme_options['nav'];
 			if ( $nav_options['layout'] == 'vertical' ) {
-				$nav_wrap_classes .= ( $nav_options['vertical-mode'] == 'fixed' ) ? ' nav-vertical vertical-fixed' : ' nav-vertical vertical-static';
+				$nav_wrap_classes .= ( $nav_options['vertical-mode'] == 'fixed' ) ? ' vertical-fixed' : ' vertical-static';
 				$nav_classes .= ' vertical';
 			} else {
+				$nav_classes .= ' horizontal';
 				if ( $nav_options['mode'] == 'fixed' ) $nav_classes .= ' sticky';
 			}
 			if ( $nav_options['bordered'] ) $nav_classes .= ' bordered';
@@ -102,9 +97,9 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 			?>
 
-			<div id="main-nav-wrap" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
+			<div id="main-nav-wrap" role="banner" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
 
-				<nav id="main-nav" class="navbar navbar-mixt site-navigation <?php echo $nav_classes; ?>" role="banner">
+				<nav id="main-nav" class="navbar navbar-mixt site-navigation position-top <?php echo $nav_classes; ?>">
 					<div class="container">
 
 						<?php // Main Navbar Header ?>

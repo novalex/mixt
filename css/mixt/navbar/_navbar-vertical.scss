@@ -2,120 +2,158 @@
 // Vertical Navbar
 
 @include media('screen', 'mars') {
-	#main-wrap {
-		&.nav-vertical {
-			position: relative;
+	#main-wrap.nav-vertical {
+		position: relative;
 
-			.container {
-				width: 100%;
-			}
-			.head-media .container,
-			#location-bar .container,
-			#content,
-			.sidebar-padder,
-			#colophon .container {
-				padding-left: $gutter-lg / 2;
-				padding-right: $gutter-lg / 2;
-			}
+		.container {
+			width: 100%;
+			max-width: $nav-vertical-content-max-width;
 		}
+		#second-nav .container,
+		.head-media .container,
+		#location-bar .container,
+		#content,
+		.sidebar-padder,
+		#colophon .container {
+			padding-left: $gutter-lg / 2;
+			padding-right: $gutter-lg / 2;
+		}
+
 		&.nav-left {
 			padding-left: $nav-vertical-width-sm;
+
+			#main-nav-wrap { left: 0; }
 
 			.navbar-mixt { border-right-width: 1px; }
 		}
 		&.nav-right {
 			padding-right: $nav-vertical-width-sm;
 
+			#main-nav-wrap { right: 0; }
+
 			.navbar-mixt { border-left-width: 1px; }
 		}
-	}
 
-	#main-nav-wrap.nav-vertical {
-		position: fixed;
-		top: 0; bottom: 0;
-		width: $nav-vertical-width-sm;
+		#main-nav-wrap {
+			position: fixed;
+			top: 0; bottom: 0;
+			width: $nav-vertical-width-sm;
 
-		.nav-left & { left: 0; }
-		.nav-right & { right: 0; }
+			&.vertical-static { position: absolute; }
 
-		&.vertical-static { position: absolute; }
+			.navbar-mixt {
+				height: 100%;
+				padding: 0;
+				border-bottom-width: 0;
 
-		.navbar-mixt {
-			height: 100%;
-			padding: 0;
-			border-bottom-width: 0;
+				.container { padding: $nav-primary-pad 0; }
 
-			.container { padding: $nav-primary-pad 0; }
+				.navbar-header {
+					margin: 0 0 $nav-primary-pad;
+					padding: 0 $nav-primary-pad;
 
-			.navbar-header {
-				margin: 0 0 $nav-primary-pad;
-				padding: 0 $nav-primary-pad;
+					&,
+					#nav-logo { height: auto; }
 
-				#nav-logo { margin: 0; }
-			}
+					#nav-logo {
+						width: 100%;
+						margin: 0;
+						padding: $padding-m 0 !important;
 
-			.nav {
-				> li {
+						img, strong, small { max-width: 100%; }
+
+						small { margin: 5px; }
+					}
+				}
+
+				.nav {
 					width: 100%;
+					display: block;
 
-					> a {
+					> li {
+						width: 100%;
+
+						> a {
+							height: auto;
+							min-height: $nav-vertical-item-height;
+							padding: 0 $nav-primary-pad;
+
+							&,
+							.drop-arrow { line-height: $nav-vertical-item-height - 1px; }
+
+							.nav-left & .drop-arrow {
+								float: right;
+								margin-left: $margin-s;
+							}
+							.nav-right & .drop-arrow {
+								float: left;
+								margin-left: 0;
+								margin-right: $margin-s;
+							}
+						}
+
+						> .sub-menu {
+							top: 0; left: 100%;
+							margin-top: 0; margin-left: 10px !important;
+
+							.nav-right & {
+								left: auto; right: 100%;
+								margin-left: 0; margin-right: 10px !important;
+							}
+						}
+
+						&:hover,
+						&.hover {
+							> .sub-menu { margin: 0 !important; }
+						}
+
+						&.divider {
+							height: 6px;
+							margin: 0 !important;
+						}
+					}
+
+					&.active-left > .active > a:before { left: -1px; }
+					&.active-right > .active > a:before { right: -1px; }
+
+					.sub-menu li > a {
+						max-height: $nav-vertical-item-height + 1px;
+						padding: ($nav-vertical-item-height - $font-size) / 2;
+					}
+				}
+
+				&.bordered .nav > li {
+					border-width: 1px 0 1px 0;
+					margin-top: -1px;
+					margin-left: 0;
+
+					> .sub-menu { top: -1px; }
+				}
+
+				.nav-search {
+					input, button {
 						height: $nav-vertical-item-height;
-						padding: 0 $nav-primary-pad;
-
-						&,
-						.drop-arrow { line-height: $nav-vertical-item-height - 1px; }
-
-						.nav-left & .drop-arrow {
-							float: right;
-							margin-left: $margin-s;
-						}
-						.nav-right & .drop-arrow {
-							float: left;
-							margin-left: 0;
-							margin-right: $margin-s;
-						}
-					}
-
-					> .sub-menu {
-						top: 0; left: 100%;
-						margin-top: 0; margin-left: 10px !important;
-
-						.nav-right & {
-							left: auto; right: 100%;
-							margin-left: 0; margin-right: 10px !important;
-						}
-					}
-
-					&:hover,
-					&.hover {
-						> .sub-menu { margin: 0 !important; }
-					}
-
-					&.divider {
-						height: 6px;
-						margin: 0 !important;
+						padding-top: 0; padding-bottom: 0;
+						line-height: $nav-vertical-item-height - 1px;
 					}
 				}
 
-				.sub-menu li > a {
-					max-height: $nav-vertical-item-height + 1px;
-					padding: ($nav-vertical-item-height - $font-size) / 2;
+				.nav.social-links {
+					> li > a, i { padding: 0; }
+
+					@include justify-items;
+
+					&:before,
+					&:after { display: none; }
 				}
-			}
+				&.bordered .nav.social-links > li {
+					border-width: 0;
 
-			&.bordered .nav > li {
-				border-width: 1px 0 1px 0;
-				margin-top: -1px;
-				margin-left: 0;
-
-				> .sub-menu { top: -1px; }
-			}
-
-			.nav-search {
-				input, button {
-					height: $nav-vertical-item-height;
-					padding-top: 0; padding-bottom: 0;
-					line-height: $nav-vertical-item-height - 1px;
+					+ li > a {
+						border-style: solid;
+						border-color: inherit;
+						border-width: 0 0 0 1px;
+					}
 				}
 			}
 		}
@@ -142,24 +180,24 @@
 }
 
 @include media('screen', 'venus') {
-	#main-wrap {
-		&.nav-vertical {
-			.head-media .container,
-			#location-bar .container,
-			#content,
-			.sidebar-padder,
-			#colophon .container {
-				padding-left: $gutter-lg;
-				padding-right: $gutter-lg;
-			}
+	#main-wrap.nav-vertical {
+		#second-nav .container,
+		.head-media .container,
+		#location-bar .container,
+		#content,
+		.sidebar-padder,
+		#colophon .container {
+			padding-left: $gutter-lg;
+			padding-right: $gutter-lg;
 		}
 	}
 }
 
 @include media('screen', 'earth') {
-	#main-wrap {
+	#main-wrap.nav-vertical {
 		&.nav-left { padding-left: $nav-vertical-width; }
 		&.nav-right { padding-right: $nav-vertical-width; }
+
+		#main-nav-wrap { width: $nav-vertical-width; }
 	}
-	#main-nav-wrap.nav-vertical { width: $nav-vertical-width; }
 }

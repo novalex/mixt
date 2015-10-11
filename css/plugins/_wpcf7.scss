@@ -1,40 +1,44 @@
 
-// Contact Form 7
+// Contact Form 7 Custom Styling
 
-.wpcf7-form-control.wpcf7-text,
-select.wpcf7-form-control,
-textarea.wpcf7-form-control {
-	@extend .form-control;
-}
-.wpcf7-checkbox .wpcf7-list-item {
-	@extend .checkbox;
-}
-.wpcf7-checkbox.checkbox-inline .wpcf7-list-item {
-	@extend .checkbox-inline;
-}
-.wpcf7-radio .wpcf7-list-item {
-	@extend .radio;
-}
-.wpcf7-radio.radio-inline .wpcf7-list-item {
-	@extend .radio-inline;
-}
-.wpcf7-form-control.wpcf7-not-valid {
-	@extend .input-error;
-}
-div.wpcf7-response-output {
-	margin: $margin-s 0 $margin-l 0;
-	@extend .alert;
+@if $wpcf {
 
-	&.wpcf7-mail-sent-ok { @extend .alert-success; }
-	&.wpcf7-validation-errors,
-	&.wpcf7-spam-blocked { @extend .alert-warning; }
-	&.wpcf7-mail-sent-ng { @extend .alert-danger; }
-}
-.wpcf7-not-valid-tip {
-	font-size: 12px;
-	color: $red;
-}
-.wpcf7-submit {
-	@extend .btn;
-	@extend .btn-primary;
+	.wpcf7-form-control.wpcf7-text,
+	select.wpcf7-form-control,
+	textarea.wpcf7-form-control {
+		@extend .form-control;
+	}
+	.wpcf7-checkbox .wpcf7-list-item {
+		@extend .checkbox;
+	}
+	.wpcf7-checkbox.checkbox-inline .wpcf7-list-item {
+		@extend .checkbox-inline;
+	}
+	.wpcf7-radio .wpcf7-list-item {
+		@extend .radio;
+	}
+	.wpcf7-radio.radio-inline .wpcf7-list-item {
+		@extend .radio-inline;
+	}
+	.wpcf7-form-control.wpcf7-not-valid {
+		@extend .input-error;
+	}
+	div.wpcf7-response-output {
+		margin: $margin-s 0 $margin-l 0;
+		@extend .alert;
+
+		&.wpcf7-mail-sent-ok { @extend .alert-success; }
+		&.wpcf7-validation-errors,
+		&.wpcf7-spam-blocked { @extend .alert-warning; }
+		&.wpcf7-mail-sent-ng { @extend .alert-danger; }
+	}
+	.wpcf7-not-valid-tip {
+		font-size: 12px;
+		color: $red;
+	}
+	.wpcf7-submit {
+		@extend .btn;
+		@extend .btn-primary;
+	}
+
 }

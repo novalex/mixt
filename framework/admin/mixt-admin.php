@@ -18,7 +18,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 		}
 
 		public function add_nav_menu_meta_boxes() {
-			add_meta_box('mixt_nav_meta', __('MIXT Elements', 'mixt'), array( $this, 'nav_menu_link'), 'nav-menus', 'side', 'high');
+			add_meta_box('mixt_nav_meta', __( 'MIXT Elements', 'mixt' ), array( $this, 'nav_menu_link'), 'nav-menus', 'side', 'high');
 		}
 		
 		public function nav_menu_link() {
@@ -229,7 +229,7 @@ if ( ! class_exists('Mixt_Media_Meta')) {
 				foreach ( $this->media_fields as $field => $values ) {
 					if ( isset( $attachment[$field] ) ) {
 						if ( strlen( trim( $attachment[$field] ) ) == 0 ) {
-							$post['errors'][$field]['errors'][] = __( $values['error_text'] );
+							$post['errors'][$field]['errors'][] = $values['error_text'];
 						} else {
 							update_post_meta( $post['ID'], '_' . $field, $attachment[$field] );
 						}
@@ -247,12 +247,12 @@ if ( ! class_exists('Mixt_Media_Meta')) {
 
 	$media_meta_options = array(
 		'image_color' => array(
-			'label'   => __('Image Color', 'mixt'),
+			'label'   => __( 'Image Color', 'mixt' ),
 			'input'   => 'select',
 			'options' => array(
 				'none'  => '-',
-				'light' => __('Light', 'mixt'),
-				'dark'  => __('Dark', 'mixt'),
+				'light' => __( 'Light', 'mixt' ),
+				'dark'  => __( 'Dark', 'mixt' ),
 			),
 			'application' => 'image',
 			'exclusions'  => array('audio', 'video'),
@@ -292,3 +292,53 @@ function mixt_editor_styles() {
 	}
 }
 add_action('admin_init', 'mixt_editor_styles');
+
+
+/**
+ * Plugin Name: Custom Post Type Archives in Nav Menus
+ * Plugin URI: http://xavisys.com/
+ * Description: Adds an archive checkbox to the nav menu meta box for Custom Post Types that support archives
+ * Author: Aaron D. Campbell
+ * Author URI: http://xavisys.com/
+ * Version: 0.0.1
+ *
+ * This plugin was modified for use with the MIXT Theme
+ */
+class cptArchiveNavMenu {
+	public function __construct() {
+		add_action( 'admin_head-nav-menus.php', array( $this, 'add_filters' ) );
+	}
+
+	public function add_filters() {
+		$post_type_args = array(
+			'has_archive'       => true,
+			'show_in_nav_menus' => true,
+		);
+		$post_types = get_post_types($post_type_args, 'object');
+		foreach ( $post_types as $post_type ) {
+			add_filter( 'nav_menu_items_' . $post_type->name, array( $this, 'add_archive_checkbox' ), null, 3 );
+		}
+	}
+
+	public function add_archive_checkbox( $posts, $args, $post_type ) {
+		global $_nav_menu_placeholder, $wp_rewrite;
+		$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? intval($_nav_menu_placeholder) - 1 : -1;
+
+		$archive_url = get_post_type_archive_link($post_type['args']->name);
+
+		array_unshift( $posts, (object) array(
+			'ID' => 0,
+			'object_id' => $_nav_menu_placeholder,
+			'post_content' => '',
+			'post_excerpt' => '',
+			'post_title' => $post_type['args']->labels->all_items,
+			'post_type' => 'nav_menu_item',
+			'object' => 'archive-page',
+			'type' => 'custom',
+			'url' => $archive_url,
+		) );
+
+		return $posts;
+	}
+}
+new cptArchiveNavMenu();

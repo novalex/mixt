@@ -54,6 +54,33 @@ function mixt_get_title( $echo = false ) {
 }
 
 
+
+/**
+ * Return a heading. Will use the headline element if it is available.
+ * 
+ * @param  string $text
+ * @param  string $atts
+ * @return string
+ */
+function mixt_heading($text, $atts = '') {
+	if ( shortcode_exists('mixt_headline') ) {
+		return do_shortcode("[mixt_headline $atts]$text".'[/mixt_headline]');
+	} else {
+		extract(shortcode_atts( array(
+			'desc'             => '',
+			'align'            => 'left',
+			'tag'              => 'h3',
+			'class'            => '',
+		), $atts ));
+		$h_class = 'title headline mixt-heading mixt-element';
+		if ( $class != '' ) { $h_class .= " $class"; }
+		$h_atts = '';
+		if ( $align != 'left' ) { $h_atts .= "style='text-align='$align' "; }
+		return "<$tag class='$h_class' $h_atts>$text</$tag>";
+	}
+}
+
+
 /**
  * Display page navigation links
  *
@@ -81,13 +108,13 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 			'current'   => $page_now,
 			'total'     => $page_max,
 			'type'      => 'array',
-			'prev_text' => '<i class="fa fa-chevron-left"></i>' . __('Previous'),
-			'next_text' => __('Next') . '<i class="fa fa-chevron-right"></i>',
+			'prev_text' => '<i class="fa fa-chevron-left"></i>' . __( 'Previous', 'mixt' ),
+			'next_text' => __( 'Next', 'mixt' ) . '<i class="fa fa-chevron-right"></i>',
 		) );
 
 		if ( ! empty($page_links) ) {
 			?>
-			<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+			<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
 				<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
 				<ul class="pager">
 					<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
@@ -102,7 +129,7 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 		$nav_class .= 'paging-navigation ajax-paging';
 
 		?>
-		<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
+		<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
 			 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
 			<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
 			<ul class="pager">
@@ -133,7 +160,7 @@ function mixt_content_nav( $nav_id, $archive = false, $page_max = null ) {
 		}
 
 		?>
-		<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+		<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
 			<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
 			<ul class="pager">
 
@@ -170,18 +197,20 @@ function mixt_comment( $comment, $args, $depth ) {
 
 	// Pingbacks & Trackbacks
 
-	if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) { ?>
+	if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) {
+		?>
 		<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<div class="comment-body">
 				<?php _e( 'Pingback:', 'mixt' ); ?> 
 				<?php comment_author_link(); ?> 
 				<?php edit_comment_link( __( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
 			</div>
-	<?php
+		<?php
 
 	// Standard Comments
-
-	} else { ?>
+		
+	} else {
+		?>
 		<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
 			<article id="div-comment-<?php comment_ID(); ?>" class="comment-cont">
 
@@ -238,7 +267,7 @@ function mixt_comment( $comment, $args, $depth ) {
 				</div>
 
 			</article>
-	<?php
+		<?php
 	}
 }
 
@@ -274,13 +303,13 @@ function mixt_comment_nav($id, $ajax = false) {
 				'type'         => 'array',
 				'total'        => $page_max,
 				'echo'         => false,
-				'prev_text'    => '<i class="fa fa-chevron-left"></i>' . __('Previous'),
-				'next_text'    => __('Next') . '<i class="fa fa-chevron-right"></i>',
+				'prev_text'    => '<i class="fa fa-chevron-left"></i>' . __( 'Previous', 'mixt' ),
+				'next_text'    => __( 'Next', 'mixt' ) . '<i class="fa fa-chevron-right"></i>',
 			) );
 
 			if ( ! empty($page_links) ) {
 				?>
-				<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+				<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
 					<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
 					<ul class="pager">
 						<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
@@ -297,7 +326,7 @@ function mixt_comment_nav($id, $ajax = false) {
 			$page_now   = ( get_query_var('cpage') > 1 ) ? get_query_var('cpage') : 1;
 
 			?>
-			<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
+			<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
 				 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
 				<h3 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h3>
 				<ul class="pager">
@@ -316,7 +345,7 @@ function mixt_comment_nav($id, $ajax = false) {
 			$nav_class .= 'classic-paging';
 			?>
 
-			<nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
+			<nav id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
 				<h5 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h5>
 				<ul class="pager">
 					<li class="nav-previous prev"><?php previous_comments_link( __( '<i class="fa fa-chevron-left"></i> Older comments', 'mixt' ) ); ?></li>
@@ -331,33 +360,7 @@ function mixt_comment_nav($id, $ajax = false) {
 
 
 /**
- * Returns true if a blog has more than 1 category
- */
-function mixt_categorized_blog() {
-	if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
-		// Create an array of all the categories that are attached to posts
-		$all_the_cool_cats = get_categories( array(
-			'hide_empty' => 1,
-		) );
-
-		// Count the number of categories that are attached to the posts
-		$all_the_cool_cats = count( $all_the_cool_cats );
-
-		set_transient( 'all_the_cool_cats', $all_the_cool_cats );
-	}
-
-	if ( '1' != $all_the_cool_cats ) {
-		// This blog has more than 1 category so mixt_categorized_blog should return true
-		return true;
-	} else {
-		// This blog has only 1 category so mixt_categorized_blog should return false
-		return false;
-	}
-}
-
-
-/**
- * Return navigation menu for child pages
+ * Output navigation menu for child pages
  */
 function mixt_child_page_nav() {
 	if ( ! is_page() ) return;
@@ -374,13 +377,3 @@ function mixt_child_page_nav() {
 	$children = wp_list_pages($args);
 	if ( $children ) echo "<div class='child-page-nav widget'><ul class='nav'>$children</ul></div>";
 }
-
-
-/**
- * Flush out the transients used in mixt_categorized_blog
- */
-function mixt_category_transient_flusher() {
-	delete_transient( 'all_the_cool_cats' );
-}
-add_action( 'edit_category', 'mixt_category_transient_flusher' );
-add_action( 'save_post',     'mixt_category_transient_flusher' );

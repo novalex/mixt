@@ -3,7 +3,7 @@
 UI FUNCTIONS
 / ------------------------------------------------ */
 
-+function ($) {
+( function($) {
 
 	'use strict';
 
@@ -112,15 +112,11 @@ UI FUNCTIONS
 
 			if ( cont.hasClass('hover-bg') || cont.parents('.no-hover-bg').length ) {
 				link.hover( function() {
-					if ( cont.parents('.position-top').length === 0 ) {
-						link.css({ backgroundColor: dataColor, borderColor: dataColor, zIndex: 1 });
-					}
+					link.css({ backgroundColor: dataColor, borderColor: dataColor, zIndex: 1 });
 				}, function() { link.css({ backgroundColor: '', borderColor: '', zIndex: '' }); });
 			} else {
 				link.hover( function() {
-					if ( cont.parents('.navbar.position-top').length === 0 ) {
-						link.css({ color: dataColor, zIndex: 1 });
-					}
+					link.css({ color: dataColor, zIndex: 1 });
 				}, function() { link.css({ color: '', zIndex: '' }); });
 			}
 		});
@@ -182,4 +178,4 @@ UI FUNCTIONS
 		});
 	}
 
-}(jQuery);
+})(jQuery);

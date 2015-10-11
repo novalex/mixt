@@ -1,43 +1,47 @@
 
-// Archive / Catalog
-.portfolio-wrap {
-	border-color: inherit;
+@if $portfolio {
 
-	// Portfolio sorting
-	.portfolio-sorter {
-		width: 100%;
-		font-size: $font-size-m;
+	// Archive / Catalog
+	.portfolio-wrap {
+		border-color: inherit;
 
-		li:not(:last-child) {
-			&:after { content: '/'; }
+		// Portfolio sorting
+		.portfolio-sorter {
+			width: 100%;
+			font-size: $font-size-m;
 
-			a { display: inline-block; }
+			li:not(:last-child) {
+				&:after { content: '/'; }
+
+				a { display: inline-block; }
+			}
+
+			li.active > a {
+				border-bottom-width: 2px;
+				border-bottom-style: solid;
+				border-bottom-color: inherit;
+			}
 		}
+	}
 
-		li.active > a {
-			border-bottom-width: 2px;
-			border-bottom-style: solid;
-			border-bottom-color: inherit;
+	.blog-grid .post-rollover {
+		.hover-content,
+		.post-feat-rollover > a { display: block; }
+	}
+
+	.blog-grid,
+	.blog-masonry {
+		.portfolio .page-title a {
+			color: inherit;
+			font-size: $font-size;
 		}
 	}
-}
 
-.blog-grid .post-rollover {
-	.hover-content,
-	.post-feat-rollover > a { display: block; }
-}
-
-.blog-grid,
-.blog-masonry {
-	.portfolio .page-title a {
-		color: inherit;
-		font-size: $font-size;
+	// Media
+	@include media('screen', 'mars') {
+		.portfolio.has-columns {
+			.entry-body { margin-top: 0; }
+		}
 	}
-}
-
-// Media
-@include media('screen', 'mars') {
-	.portfolio.has-columns {
-		.entry-body { margin-top: 0; }
-	}
+	
 }

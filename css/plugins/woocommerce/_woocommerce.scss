@@ -6,112 +6,100 @@ $wc-spacing-s: 10px;
 $wc-spacing-l: 20px;
 
 @import 'layout';
-
-.woocommerce {
-
-	// Common Styling
-	@import 'common';
-
-	// Widgets
-	@import 'widgets';
-
-	// Single Product
-	@import 'single';
-}
-
-.entry-content .woocommerce {
-	&,
-	form,
-	fieldset { border-color: inherit; }
-}
-
-// Cart
+@import 'common';
+@import 'widgets';
+@import 'single';
 @import 'cart';
-
-// Checkout
 @import 'checkout';
+@import 'catalog';
+@import 'smallscreen';
 
-// Shop Page
-#shop-wrapper {
-	border-color: inherit;
+@if $woocommerce {
 
-	.page-title { display: none; }
+	.entry-content .woocommerce {
+		&,
+		form,
+		fieldset { border-color: inherit; }
+	}
 
-	.woocommerce-result-count { float: right; }
 
-	.shop-filters {
-		$spacing: $gutter-lg;
+	// Shop Page
+	#shop-wrapper {
+		border-color: inherit;
 
-		float: left;
-		padding-bottom: $spacing - 15px;
+		.page-title { display: none; }
 
-		@extend %clearfix;
+		.woocommerce-result-count { float: right; }
 
-		form {
+		.shop-filters {
+			$spacing: $gutter-lg;
+
 			float: left;
-			margin: 0 15px 15px 0;
+			padding-bottom: $spacing - 15px;
+
+			@extend %clearfix;
+
+			form {
+				float: left;
+				margin: 0 15px 15px 0;
+			}
 		}
 	}
-}
 
-// Catalog Styling
-@import 'catalog';
+	.mixt {
 
-.mixt {
+		// Demo Notice
+		p.demo_store {
+			position: static;
+			font-size: $font-size;
+			padding: 10px;
+			box-shadow: none;
+			z-index: 1;
+		}
 
-	// Demo Notice
-	p.demo_store {
-		position: static;
-		font-size: $font-size;
-		padding: 10px;
-		box-shadow: none;
-		z-index: 1;
-	}
-
-	// Buttons
-	a.button,
-	input.button,
-	button.button,
-	#respond input#submit {
-		@extend %button-base;
-		@extend .btn-default;
-	}
-
-	.alert .button,
-	.price_slider_amount .button { @extend .btn-black; }
-
-	// Smallscreen
-	@import 'smallscreen';
-}
-
-// Accent button
-@each $name, $theme in $themes {
-	$color: map-get($theme, 'accent');
-
-	.theme-#{$name} .woocommerce {
-		.button.alt,
-		input[type=submit].button,
+		// Buttons
+		a.button,
+		input.button,
+		button.button,
 		#respond input#submit {
-			color: set-color-for-bg($color) !important;
-			border-color: darken($color, 5) !important;
-			background-color: $color !important;
-			text-shadow: 0 1px 1px set-textsh-for-bg($color) !important;
+			@extend %button-base;
+			@extend .btn-default;
+		}
 
-			&:hover,
-			&:focus {
-				@if ( lumin($color) >= 0.3 ) {
-					background-color: darken($color, 3) !important;
-				} @else {
-					background-color: lighten($color, 5) !important;
+		.alert .button,
+		.price_slider_amount .button { @extend .btn-black; }
+	}
+
+	// Accent button
+	@each $name, $theme in $themes {
+		$color: map-get($theme, 'accent');
+
+		.theme-#{$name} .woocommerce {
+			.button.alt,
+			input[type=submit].button,
+			#respond input#submit {
+				color: set-color-for-bg($color) !important;
+				border-color: darken($color, 5) !important;
+				background-color: $color !important;
+				text-shadow: 0 1px 1px set-textsh-for-bg($color) !important;
+
+				&:hover,
+				&:focus {
+					@if ( lumin($color) >= 0.3 ) {
+						background-color: darken($color, 3) !important;
+					} @else {
+						background-color: lighten($color, 5) !important;
+					}
+				}
+
+				&:active,
+				&.active {
+					$color-darker: darken($color, 10);
+					border-color: $color-darker !important;
+					box-shadow: inset 0 1px 12px $color-darker !important;
 				}
 			}
-
-			&:active,
-			&.active {
-				$color-darker: darken($color, 10);
-				border-color: $color-darker !important;
-				box-shadow: inset 0 1px 12px $color-darker !important;
-			}
 		}
 	}
+
 }

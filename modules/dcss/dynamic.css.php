@@ -23,15 +23,15 @@ function mixt_print_head_css() {
 		'nav-height'        => 50,
 		'nav-padding'       => 20,
 		'nav-fixed-padding' => 0,
-		'font-family'       => 'Roboto',
 	);
+
+	// Rules for the "Mars" media breakpoint
+	$bp_min_mars_properties = '';
 
 
 	// START CSS OUTPUT
 
-	echo "\n<style type='text/css' data-id='mixt-head-css'>\n";
-
-	$bp_min_mars_properties = '';
+	ob_start();
 
 
 	// PAGE LOADER STYLING
@@ -64,23 +64,27 @@ function mixt_print_head_css() {
 			$body_styles .= "background-color: {$site_options['site-bg-color']};";
 		}
 		if ( ! empty($site_options['site-bg']['background-image']) ) {
-			$body_styles .= "background-image: url('{$site_options['site-bg']['background-image']}');";
+			$body_styles .= "background-image: url({$site_options['site-bg']['background-image']});";
 			$body_styles .= "background-attachment: {$site_options['site-bg']['background-attachment']};";
 			$body_styles .= "background-size: {$site_options['site-bg']['background-size']};";
 			$body_styles .= "background-position: {$site_options['site-bg']['background-position']};";
 			$body_styles .= "background-repeat: {$site_options['site-bg']['background-repeat']};";
 		} else if ( ! empty($site_options['site-bg-pat']) ) {
-			$body_styles .= "background-image: url('{$site_options['site-bg-pat']}');";
+			$body_styles .= "background-image: url({$site_options['site-bg-pat']});";
 		}
 	}
 
+	// Typography
 	$site_font = $mixt_opt['font-sitewide'];
 	$font_family = $site_font['font-family'];
-	if ( $font_family != $defaults['font-family'] && ! empty($font_family) ) {
+	if ( ! empty($font_family) ) {
 		if ( ! empty($site_font['font-backup']) ) {
 			$font_family .= ', ' . $site_font['font-backup'];
 		}
 		$body_styles .= "font-family: $font_family;";
+	}
+	if ( ! empty($site_font['font-size']) ) {
+		$body_styles .= "font-size: {$site_font['font-size']};";
 	}
 
 	if ( $body_styles != '' ) { echo "body { $body_styles }\n"; }
@@ -95,38 +99,18 @@ function mixt_print_head_css() {
 	if ( $mixt_opt['logo-type'] == 'img' && ! empty($mixt_opt['logo-img']['url']) ) {
 		$logo_img    = $mixt_opt['logo-img'];
 		$logo_width  = $logo_img['width'];
-		$logo_height = $logo_img['height'];
 
-		$logo_hires  = $mixt_opt['logo-img-hr'];
-
-		if ( $logo_hires ) {
+		if ( $mixt_opt['logo-img-hr'] ) {
 			$logo_width  = $logo_width / 2;
-			$logo_height = $logo_height / 2;
 		}
 
-		// Logo Wide or Tall
-		if ( $logo_width > $logo_height ) {
-			$logo_width_val = $logo_width . 'px';
-			$logo_height_val = 'auto';
-		} else {
-			$logo_width_val = 'auto';
-			$logo_height_val = $logo_height . 'px';
-		}
-
-		echo "#nav-logo img { width: $logo_width_val; height: $logo_height_val; }\n";
+		echo ".navbar-mixt #nav-logo img { max-width: {$logo_width}px; }\n";
+		$bp_min_mars_properties .= "#main-wrap.nav-vertical .navbar-mixt #nav-logo img { width: {$logo_width}px; }\n";
 
 		// Logo Shrink
 		if ( $mixt_opt['logo-shrink'] != '0' ) {
-			$shrink_amount = $mixt_opt['logo-shrink'];
-
-			if ( $logo_width > $logo_height ) {
-				$shrink_width  = $logo_width - $shrink_amount . 'px';
-				$shrink_height = 'auto';
-			} else {
-				$shrink_width  = 'auto';
-				$shrink_height = $logo_height - $shrink_amount . 'px';
-			}
-			echo ".fixed-nav #nav-logo img { width: $shrink_width; height: $shrink_height; }\n";
+			$shrink_width  = $logo_width - $mixt_opt['logo-shrink'];
+			echo ".fixed-nav .navbar-mixt #nav-logo img { max-width: {$shrink_width}px; }\n";
 		}
 
 	// Text Logo
@@ -138,7 +122,7 @@ function mixt_print_head_css() {
 			if ( ! empty($mixt_opt['logo-text-color']) ) { echo "color: {$mixt_opt['logo-text-color']};"; }
 			$logo_font_family = $mixt_opt['logo-text-typo']['font-family'];
 			if ( ! empty($mixt_opt['logo-text-typo']['font-backup']) ) {
-				$logo_font_family .= ', ' . $typo_opts['font-backup'];
+				$logo_font_family .= ', ' . $mixt_opt['logo-text-typo']['font-backup'];
 			}
 			echo "font-family: $logo_font_family !important;";
 			if ( ! empty($mixt_opt['logo-text-typo']['font-weight']) ) { echo "font-weight: {$mixt_opt['logo-text-typo']['font-weight']};"; }
@@ -163,7 +147,7 @@ function mixt_print_head_css() {
 		if ( ! empty($mixt_opt['logo-tagline-typo']['font-family']) ) {
 			$tagline_font_family = $mixt_opt['logo-tagline-typo']['font-family'];
 			if ( ! empty($mixt_opt['logo-tagline-typo']['font-backup']) ) {
-				$tagline_font_family .= ', ' . $typo_opts['font-backup'];
+				$tagline_font_family .= ', ' . $mixt_opt['logo-tagline-typo']['font-backup'];
 			}
 			echo "font-family: $tagline_font_family !important;";
 		}
@@ -184,11 +168,11 @@ function mixt_print_head_css() {
 	// Navbar Texture
 	if ( ! empty($mixt_opt['nav-texture']) ) {
 		$img_url = $mixt_opt['nav-texture'];
-		$navbar_properties .= "background-image: url('$img_url');";
+		$navbar_properties .= "background-image: url($img_url);";
 	}
 	if ( ! empty($mixt_opt['sec-nav-texture']) ) {
 		$img_url = $mixt_opt['sec-nav-texture'];
-		echo ".second-nav { background-image: url('$img_url'); }\n";
+		echo ".second-nav { background-image: url($img_url); }\n";
 	}
 
 	// Navbar Padding
@@ -236,7 +220,7 @@ function mixt_print_head_css() {
 	// Navbar Typography
 	$nav_font = $mixt_opt['font-nav'];
 	$font_family = $nav_font['font-family'];
-	if ( $font_family != $defaults['font-family'] && ! empty($font_family) ) {
+	if ( ! empty($font_family) ) {
 		if ( ! empty($nav_font['font-backup']) ) { $font_family .= ', ' . $nav_font['font-backup']; }
 		$navbar_properties .= "font-family: $font_family;";
 	}
@@ -324,7 +308,10 @@ function mixt_print_head_css() {
 	
 	if ( $bp_min_mars_properties != '' ) { echo "@media ( min-width: {$theme_ob->media_bp('mars', 'min')} ) { $bp_min_mars_properties }\n"; }
 
-	echo "</style>";
+
+	// SANITIZE AND OUTPUT RULES
+
+	echo "\n<style type='text/css' data-id='mixt-head-css'>\n" . esc_html(ob_get_clean()) . "</style>";
 }
 
 

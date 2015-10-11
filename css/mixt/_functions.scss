@@ -19,6 +19,7 @@
 		$green: 0.4,
 		$orange: 0.4,
 	);
+	$lumin: 0;
 	@if map-has-key($override-colors, $color) {
 		$lumin: map-get($override-colors, $color);
 	} @else {

@@ -3,7 +3,7 @@
 POST FUNCTIONS
 / ------------------------------------------------ */
 
-+function ($) {
+( function($) {
 
 	'use strict';
 
@@ -40,6 +40,8 @@ POST FUNCTIONS
 
 			// Equalize featured media height for related posts and grid blog
 			if ( typeof $.fn.matchHeight === 'function' ) {
+				$.fn.matchHeight._maintainScroll = true;
+				
 				$('.blog-grid .posts-container .post-feat').addClass('fix-height').matchHeight();
 
 				if ( ! Modernizr.flexbox ) {
@@ -251,7 +253,7 @@ POST FUNCTIONS
 						breakpoint: 540,
 						settings: { item: 2 }
 					}],
-					onSliderLoad: function(el) {
+					onSliderLoad: function() {
 						if ( typeof $.fn.matchHeight === 'function' ) {
 							$('.post-feat', relPostsSlider).matchHeight();
 							relPostsSlider.css('height', '');
@@ -262,4 +264,4 @@ POST FUNCTIONS
 		}
 	});
 
-}(jQuery);
+})(jQuery);

@@ -48,15 +48,6 @@ function mixt_vc_extend() {
 				__( 'Vertical', 'mixt' )   => 'vertical',
 			),
 		),
-		// Separators
-		array(
-			'type'        => 'dropdown',
-			'heading'     => __( 'Row Separator', 'mixt' ),
-			'description' => __( 'Apply a separator to this row. Use inverted separators when using a background image for this row.', 'mixt' ),
-			'param_name'  => 'separator',
-			'std'         => '',
-			'value'       => array_flip(mixt_element_assets('row-separators')),
-		),
 		array(
 			'type'        => 'colorpicker',
 			'heading'     => __( 'Separator Color', 'mixt' ),
@@ -81,6 +72,17 @@ function mixt_vc_extend() {
 			'std' => false,
 		),
 	);
+	if ( class_exists('Mixt_Elements') ) {
+		// Separators
+		$row_custom[] = array(
+			'type'        => 'dropdown',
+			'heading'     => __( 'Row Separator', 'mixt' ),
+			'description' => __( 'Apply a separator to this row. Use inverted separators when using a background image for this row.', 'mixt' ),
+			'param_name'  => 'separator',
+			'std'         => '',
+			'value'       => array_flip(mixt_element_assets('row-separators')),
+		);
+	}
 	vc_add_params( 'vc_row', $row_custom );
 
 	// Row Columns Equal Height
@@ -105,7 +107,7 @@ function mixt_vc_extend() {
 		'product',
 	) );
 }
-add_action( 'vc_before_init', 'mixt_vc_extend' );
+add_action('vc_before_init', 'mixt_vc_extend');
 
 
 /**
@@ -130,7 +132,7 @@ function mixt_vc_custom_classes( $classes, $tag ) {
 			return $classes;
 	}
 }
-add_filter( 'vc_shortcodes_css_class', 'mixt_vc_custom_classes', 10, 2 );
+add_filter('vc_shortcodes_css_class', 'mixt_vc_custom_classes', 10, 2);
 
 
 /**
@@ -142,4 +144,4 @@ function mixt_vc_colors() {
 	$param['value'][__( 'Theme Accent', 'mixt' )] = 'bar_accent';
 	vc_update_shortcode_param('vc_progress_bar', $param);
 }
-add_action( 'vc_after_init', 'mixt_vc_colors' );
+add_action('vc_after_init', 'mixt_vc_colors');

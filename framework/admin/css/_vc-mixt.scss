@@ -3,58 +3,42 @@
 
 $bd-radius: 3px;
 
-$modal-bg: #e4e4e4;
-$modal-bd-color: #333;
 $item-bd-color: #eee;
 
-.vc_modal.vc_modal-content,
-.vc_panel {
-	border-radius: $bd-radius;
-	border-color: $modal-bd-color;
-}
-.vc_modal.vc_modal-content { background-color: $modal-bg; }
+.vc_add-element-container .wpb-content-layouts li {
+	width: 14.28%;
+	height: 120px;
+	margin: -1px 0 0 -1px;
+	border: 1px solid $item-bd-color;
+	background: none repeat scroll 0 0 #FFF;
+	transition: background 0.2s;
 
-.vc_filter-content-elements a {
-	font-size: 14px;
-}
+	&:hover {
+		border-color: $item-bd-color;
+		background-color: #f5f5f5;
+	}
 
+	a {
+	    padding: 5px;
+		text-align: center;
+	}
 
-.vc_modal.wpb-elements-list-modal {
+	.vc_el-container { height: 100%; }
+
 	.vc_element-icon {
 		position: static;
 	    margin: 0 auto 10px auto;
 	}
 
-	.wpb-content-layouts li {
-		width: 14.28%;
-		height: 120px;
-		margin: -1px 0 0 -1px;
-		border: 1px solid $item-bd-color;
-		background: none repeat scroll 0 0 #FFF;
-		transition: background 0.2s;
-
-		&:hover {
-			border-color: $item-bd-color;
-			background-color: #f5f5f5;
-		}
-
-		.vc_el-container { height: 100%; }
-
-		a {
-		    padding: 5px;
-			text-align: center;
-		}
+	@media (max-width: 1156px) {
+		width: 20%;
 	}
-}
-
-@media (max-width: 1156px) {
-	.wpb-elements-list-modal .wpb-content-layouts li { width: 20%; }
-}
-@media (max-width: 808px) {
-	.wpb-elements-list-modal .wpb-content-layouts li { width: 33.333%; }
-}
-@media (max-width: 460px) {
-	.wpb-elements-list-modal .wpb-content-layouts li { width: 50%; }
+	@media (max-width: 808px) {
+		width: 33.333%;
+	}
+	@media (max-width: 460px) {
+		width: 50%;
+	}
 }
 
 // Checkbox Param Type

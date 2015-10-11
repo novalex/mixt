@@ -247,7 +247,7 @@ class Mixt_DCSS {
 	 * @return string CSS code
 	 */
 	public static function output_css() {
-		echo self::$css;
+		echo esc_html(self::$css);
 	}
 }
 new Mixt_DCSS;

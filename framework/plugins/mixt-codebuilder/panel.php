@@ -27,7 +27,7 @@ class Mixt_CB_Admin {
 		// Add editor button and render panel HTML only if user can edit posts and pages, is on an editor page, and has rich editing enabled
 		if ( ! $this->editor_page || ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) || get_user_option('rich_editing') == 'false' ) { return; }
 
-		add_action('admin_head',  array($this, 'mixt_cb_add_button') );
+		add_action( 'admin_head',  array($this, 'mixt_cb_add_button') );
 		add_action( 'admin_footer', array($this, 'mixt_cb_panel') );
 	}
 
@@ -179,8 +179,8 @@ class Mixt_CB_Admin {
 	 */
 	public static function render_field($key, $param, $preset = '') {
 		$defaults = array(
-			'std'    => '',
-			'desc'   => '',
+			'std'  => '',
+			'desc' => '',
 		);
 		$param = wp_parse_args($param, $defaults);
 

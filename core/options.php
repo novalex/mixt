@@ -145,7 +145,7 @@ class Mixt_Options {
 				'columns'         => array( 'key' => $page_type . '-columns', 'return' => 'value', 'default' => '2' ),
 				'feat-show'       => array( 'key' => $page_type . '-feat-show', 'default' => true ),
 				'feat-size'       => array( 'key' => $page_type . '-feat-size', 'return' => 'value', 'default' => 'blog-large' ),
-				'post-info'       => array( 'key' => $page_type . '-post-info', 'default' => 'false' ),
+				'post-info'       => array( 'key' => $page_type . '-post-info', 'default' => false ),
 				'post-content'    => array( 'return' => 'value' ),
 				'meta-show'       => array( 'key' => $page_type . '-meta-show', 'return' => 'value', 'default' => 'header' ),
 				'pagination-type' => array( 'return' => 'value' ),

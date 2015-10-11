@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-	<?php echo do_shortcode('[mixt_headline]' . __( 'Cart Totals', 'woocommerce' ) . '[/mixt_headline]'); ?>
+	<?php echo mixt_heading( __( 'Cart Totals', 'woocommerce' ) ); ?>
 
 	<table cellspacing="0">
 

@@ -6,7 +6,7 @@
 	 *
 	 * @author 		Redux Framework
 	 * @package 	ReduxFramework/Templates
-	 * @version     3.5.5
+	 * @version     3.5.7.8
 	 */
 ?>
 <div id="redux-sticky">

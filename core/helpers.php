@@ -19,6 +19,30 @@ if ( ! is_dir( MIXT_UPLOAD_PATH ) ) {
 	wp_mkdir_p( MIXT_UPLOAD_PATH );
 }
 
+// Placeholder Image
+define( 'MIXT_IMG_PLACEHOLDER', MIXT_URI . '/assets/img/patterns/placeholder.jpg' );
+
+
+/**
+ * Remove misplaced p tags added by the wpautop function
+ */
+function mixt_unautop($string) {
+	$string = force_balance_tags($string);
+	$string = str_replace(array('<p></p>', '<br />'), '', $string);
+	return trim($string);
+}
+add_filter('mixt_unautop', 'mixt_unautop');
+
+
+/**
+ * Remove unwanted p tags wrapping shortcodes
+ */
+function mixt_shortcode_unwrap($string) {
+	$string = str_replace(array('<p>[', ']</p>'), array('[', ']'), $string);
+	return trim($string);
+}
+add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
+
 
 /**
  * Display a message when no menu is assigned to a location

@@ -10,18 +10,27 @@
 
 // Admin Bar Offset
 .admin-bar {
-	#main-wrap { padding-top: 32px; }
-	#main-nav-wrap.nav-vertical { top: 32px; }
+	#main-wrap {
+		padding-top: 32px;
+
+		&.nav-vertical #main-nav-wrap { top: 32px; }
+	}
 
 	&.admin-bar-slim {
-		#main-wrap { padding-top: 28px !important; }
-		#main-nav-wrap.nav-vertical { top: 28px; }
+		#main-wrap {
+			padding-top: 28px !important;
+
+			&.nav-vertical #main-nav-wrap { top: 28px; }
+		}
 	}
 }
 @media screen and (max-width: 782px) {
 	.admin-bar {
-		#main-wrap { padding-top: 46px; }
-		#main-nav-wrap.nav-vertical { top: 46px; }
+		#main-wrap {
+			padding-top: 46px;
+
+			&.nav-vertical #main-nav-wrap { top: 46px; }
+		}
 	}
 }
 
@@ -52,6 +61,8 @@
 // Fullwidth Content Layout
 
 .fullwidth {
+	.container { max-width: none !important; }
+
 	#content-wrap,
 	#content-wrap .container { width: 100%; }
 

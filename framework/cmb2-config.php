@@ -633,10 +633,10 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'desc'       => __( 'Header text color will be adjusted based on this', 'mixt' ),
 				'type'       => 'radio_inline',
 				'options'    => array(
-					'true'  => __( 'Light', 'mixt' ),
-					'false' => __( 'Dark', 'mixt' ),
+					'light' => __( 'Light', 'mixt' ),
+					'dark'  => __( 'Dark', 'mixt' ),
 				),
-				'default'    => 'true',
+				'default'    => 'light',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'head-media-type',
@@ -795,7 +795,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 	// PORTFOLIO OPTIONS
 	
 	if ( class_exists('Mixt_Portfolio') ) {
-		include_once( MIXT_PLUGINS_DIR . '/mixt-portfolio/cmb2-fields.php' );
+		include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/portfolio-fields.php' );
 	}
 
 

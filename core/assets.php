@@ -12,7 +12,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 /**
  * Return various assets by groups
  */
-function mixt_get_assets($group, $subgroup) {
+function mixt_get_assets($group, $subgroup = false) {
 	$assets = array(
 		'button' => array(
 			'sizes' => array(
@@ -90,9 +90,32 @@ function mixt_get_assets($group, $subgroup) {
 				'white'       => __( 'White', 'mixt' ),
 			),
 		),
+
+		'image-styles' => array(
+			'' => __( 'Default', 'mixt' ),
+
+			'image-border'  => __( 'Bordered', 'mixt' ),
+			'image-outline' => __( 'Outlined', 'mixt' ),
+			'image-eclipse' => __( 'Eclipse', 'mixt' ),
+			'image-shadow'  => __( 'Shadow', 'mixt' ),
+
+			'image-rounded' => __( 'Rounded', 'mixt' ),
+			'image-rounded image-border'  => __( 'Rounded with border', 'mixt' ),
+			'image-rounded image-outline' => __( 'Rounded with outline', 'mixt' ),
+			'image-rounded image-eclipse' => __( 'Rounded with eclipse', 'mixt' ),
+			'image-rounded image-shadow'  => __( 'Rounded with shadow', 'mixt' ),
+
+			'image-circle' => __( 'Circle', 'mixt' ),
+			'image-circle image-border'  => __( 'Circle with border', 'mixt' ),
+			'image-circle image-outline' => __( 'Circle with outline', 'mixt' ),
+			'image-circle image-eclipse' => __( 'Circle with eclipse', 'mixt' ),
+			'image-circle image-shadow'  => __( 'Circle with shadow', 'mixt' ),
+
+			'image-shadow-3d' => __( '3D Shadow', 'mixt' ),
+		),
 	);
 
-	if ( empty($subgroup) ) {
+	if ( ! $subgroup ) {
 		return $assets[$group];
 	} else {
 		if ( $subgroup == 'icon-animations' ) {

@@ -21,17 +21,17 @@ $modules = array(
 );
 mixt_requires( $modules, MIXT_MODULES_DIR );
 
-// Elements & Shortcodes
-foreach ( glob( MIXT_MODULES_DIR . '/elements/*.php' ) as $filename ) {
-	include $filename;
-}
-
 
 /**
  * Initialize and load framework plugins
  */
 class Mixt_Plugins {
-	public $required = array();
+
+	/**
+	 * Plugins to be activated
+	 * @var array
+	 */
+	public $plugins = array();
 
 	public function __construct() {
 		$this->load_plugins();
@@ -44,26 +44,31 @@ class Mixt_Plugins {
 		global $mixt_opt;
 
 		// MIXT Portfolio
-			if ( ! class_exists('Mixt_Portfolio') ) {
-				include_once( MIXT_PLUGINS_DIR . '/mixt-portfolio/mixt-portfolio.php' );
-			}
+			$this->plugins[] = array(
+				'name'     => 'MIXT Portfolio',
+				'slug'     => 'mixt-portfolio',
+				'source'   => 'portfolio.zip',
+			);
+
+		// MIXT Elements
+			$this->plugins[] = array(
+				'name'     => 'MIXT Elements',
+				'slug'     => 'mixt-elements',
+				'source'   => 'elements.zip',
+			);
 
 		// MIXT CodeBuilder
-			if ( ! class_exists('Mixt_CodeBuilder') ) {
-				include_once( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' );
-			}
+			include_once( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' );
 
 		// Redux Framework and Extensions
 			// Extension Loader
-			if ( file_exists( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' ) ) {
-				require_once( MIXT_PLUGINS_DIR . '/redux-extensions/loader.php' );
-			}
+			include_once( MIXT_PLUGINS_DIR . '/redux-extend/extensions/loader.php' );
 			// Framework
 			if ( ! class_exists( 'ReduxFramework' ) ) {
 				if ( file_exists( MIXT_PLUGINS_DIR . '/redux/framework.php' ) ) {
 					require_once( MIXT_PLUGINS_DIR . '/redux/framework.php' );
 				} else {
-					$this->required[] = array(
+					$this->plugins[] = array(
 						'name'     => 'Redux Framework',
 						'slug'     => 'redux-framework',
 						'required' => true
@@ -72,57 +77,52 @@ class Mixt_Plugins {
 			}
 			add_action( 'redux/page/mixt_opt/enqueue', array($this, 'redux_scripts'), 2 );
 			// Config
-			if ( ! isset( $mixt_opt ) && file_exists( MIXT_FRAME_DIR . '/redux-config.php' ) ) {
-				require_once( MIXT_FRAME_DIR . '/redux-config.php' );
+			if ( ! isset( $mixt_opt ) ) {
+				include_once( MIXT_FRAME_DIR . '/redux-config.php' );
 			}
 
 		// CMB2 Framework
-			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) && file_exists( MIXT_FRAME_DIR . '/cmb2-config.php' ) ) {
-				require_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
+			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
+				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
 
 				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php') ) {
-					$this->required[] = array(
+					$this->plugins[] = array(
 						'name'     => 'CMB2',
 						'slug'     => 'cmb2',
 						'required' => true
 					);
 				}
 				// CMB2 Extensions
-				if ( file_exists( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' ) ) {
-					require_once( MIXT_PLUGINS_DIR . '/cmb2-extensions/post-search-field.php' );
-				}
+				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/post-search-field.php' );
 			}
 
 		// MICF library & Config
 			if ( file_exists( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' ) ) {
 				require_once( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' );
 			} else {
-				$this->required[] = array(
+				$this->plugins[] = array(
 					'name'     => 'Menu Item Custom Fields',
 					'slug'     => 'menu-item-custom-fields',
 					'required' => true
 				);
 			}
-			if ( file_exists( MIXT_FRAME_DIR . '/micf-config.php' ) ) {
-				require_once( MIXT_FRAME_DIR . '/micf-config.php' );
-			}
+			include_once( MIXT_FRAME_DIR . '/micf-config.php' );
 
 		// WPBakery Visual Composer
-			$this->required[] = array(
+			$this->plugins[] = array(
 				'name'     => 'WPBakery Visual Composer',
 				'slug'     => 'js_composer',
-				'source'   => MIXT_PLUGINS_DIR . '/js_composer.zip',
-				'required' => false,
+				'source'   => 'js_composer.zip',
+				'version'  => '4.7.4',
 				'force_deactivation' => true
 			);
 
 		// LayerSlider
-			$this->required[] = array(
-				'name' => 'LayerSlider WP',
-				'slug' => 'LayerSlider',
-				'source' => MIXT_PLUGINS_DIR . '/layerslider.zip',
-				'required' => false,
-				'version' => '5.0.2',
+			$this->plugins[] = array(
+				'name'     => 'LayerSlider WP',
+				'slug'     => 'LayerSlider',
+				'source'   => 'layerslider.zip',
+				'version'  => '5.6.2',
 				'force_deactivation' => true
 			);
 
@@ -153,35 +153,18 @@ class Mixt_Plugins {
 	 */
 	public function tgmpa_init() {
 		$config = array(
-			'default_path' => '',                      // Default absolute path to pre-packaged plugins.
+			'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+			'default_path' => MIXT_PLUGINS_DIR,        // Default absolute path to bundled plugins.
 			'menu'         => 'tgmpa-install-plugins', // Menu slug.
+			'parent_slug'  => 'themes.php',            // Parent menu slug.
+			'capability'   => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
 			'has_notices'  => true,                    // Show admin notices or not.
 			'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
 			'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
 			'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 			'message'      => '',                      // Message to output right before the plugins table.
-			'strings'      => array(
-				'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
-				'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
-				'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ), // %s = plugin name.
-				'oops'                            => __( 'Something went wrong with the plugin API.', 'tgmpa' ),
-				'notice_can_install_required'     => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s).
-				'notice_can_install_recommended'  => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_install'           => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s).
-				'notice_can_activate_required'    => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
-				'notice_can_activate_recommended' => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_activate'          => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s).
-				'notice_ask_to_update'            => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s).
-				'notice_cannot_update'            => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s).
-				'install_link'                    => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-				'activate_link'                   => _n_noop( 'Begin activating plugin', 'Begin activating plugins' ),
-				'return'                          => __( 'Return to Required Plugins Installer', 'tgmpa' ),
-				'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
-				'complete'                        => __( 'All plugins installed and activated successfully. %s', 'tgmpa' ), // %s = dashboard link.
-				'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
-			)
 		);
-		tgmpa( $this->required, $config );
+		tgmpa($this->plugins, $config);
 	}
 }
 new Mixt_Plugins;
@@ -226,13 +209,6 @@ if ( is_customize_preview() ) {
 }
 
 
-// Set Custom Excerpt Length
-function mixt_excerpt_length($length) {
-	return get_option('mixt-post-excerpt-length', 55);
-}
-add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );
-
-
 // Initialize and Extend Visual Composer
 if ( defined('WPB_VC_VERSION') ) {
 	add_action('vc_before_init', 'vc_set_as_theme');
@@ -256,60 +232,26 @@ if ( class_exists('WooCommerce') ) {
 }
 
 
-// Old WP Version Handling
-add_filter('body_class', 'mixt_wp_old_classes');
-function mixt_wp_old_classes($classes) {
-	$version = empty($wp_version) ? get_bloginfo('version') : $wp_version;
-	// Slim Admin Bar in WP < 3.8
-	if ( version_compare($version, '3.8', '<') ) { $classes[] = 'admin-bar-slim'; }
-	
-	return $classes;
-}
-
-
 // Admin Integration
 if ( is_admin() ) {
 	require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
 }
 
 
-// BrowserSync Script
-function mixt_browsersync() {
-echo <<<EOT
-<script type="text/javascript" id="__bs_script__">
-if ( ! (/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent) ) {
-	//<![CDATA[
-	document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js'><\/script>".replace("HOST", location.hostname));
-	//]]>
-}
-</script>
-EOT;
-}
-
-
 // ENQUEUE SCRIPTS AND STYLESHEETS
 
 function mixt_scripts() {
-	// Define resource paths as filtered array so they can be overridden from child themes
-	$resources = array(
-		'main-css'     => MIXT_URI . '/dist/main.css',
-		'main-js'      => MIXT_URI . '/dist/main.js',
-		'global-js'    => MIXT_URI . '/js/global.js',
-		'bootstrap-js' => MIXT_URI . '/dist/bootstrap.js',
-	);
-	$resources = apply_filters('mixt_resources', $resources, $resources);
-
 	// Main CSS
-	wp_enqueue_style( 'mixt-main-style', $resources['main-css'], array(), MIXT_VERSION );
+	wp_enqueue_style( 'mixt-main-style', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
 
 	// Bootstrap JS
-	wp_enqueue_script( 'mixt-bootstrap-js', $resources['bootstrap-js'], array( 'jquery' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ), MIXT_VERSION, true );
 
 	// Main JS
-	wp_enqueue_script( 'mixt-main-js', $resources['main-js'], array( 'jquery' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-main-js', MIXT_URI . '/dist/main.js', array( 'jquery' ), MIXT_VERSION, true );
 
 	// Global Functions JS
-	wp_enqueue_script( 'mixt-global-js', $resources['global-js'], array( 'jquery', 'mixt-main-js' ), MIXT_VERSION, true );
+	wp_enqueue_script( 'mixt-global-js', MIXT_URI . '/js/global.js', array( 'jquery', 'mixt-main-js' ), MIXT_VERSION, true );
 
 	// Localize Options
 	wp_localize_script( 'mixt-main-js', 'mixt_opt', mixt_local_options() );
@@ -323,7 +265,7 @@ function mixt_scripts() {
 		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
 	}
 
-	// Custom Dynami Stylesheet
+	// Custom Dynamic Stylesheet
 	if ( get_option('mixt-themes-enabled', false) && file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
 		wp_enqueue_style( 'mixt-dynamic-css', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
 	}
@@ -354,9 +296,6 @@ function mixt_admin_scripts($hook) {
 	}
 }
 add_action('admin_enqueue_scripts', 'mixt_admin_scripts');
-// Add BrowserSync script to admin pages
-add_action('admin_footer', 'mixt_browsersync');
-// add_action('customize_controls_enqueue_scripts', 'mixt_browsersync');
 
 
 /**

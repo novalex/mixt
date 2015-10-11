@@ -20,18 +20,7 @@ class Mixt_CodeBuilder {
 		define( 'MIXTCB_DIR', MIXT_PLUGINS_DIR . '/mixt-codebuilder' );
 		define( 'MIXTCB_URL', MIXT_PLUGINS_URI . '/mixt-codebuilder' );
 
-		add_action( 'init', array($this, 'init') );
 		add_action( 'admin_init', array($this, 'admin_init') );
-	}
-
-	/**
-	 * Enqueue frontend CSS & JS
-	 */
-	function init() {
-		return; // No use for this yet
-		if ( ! is_admin() ) {
-			wp_enqueue_script( 'mixt-cb-script', MIXTCB_URL . '/js/mixt-cb.js', 'jquery', '1.0', true );
-		}
 	}
 
 	/**

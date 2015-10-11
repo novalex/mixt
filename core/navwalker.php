@@ -68,14 +68,16 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 
 		// WIDGET AREA
 		} else if ( $item_type == 'widget' ) {
-			$sidebar_id = $item->attr_title;
-			$sidebar_name = empty($item->title) ? 'Nav Widget Area' : $item->title;
+			$area_name = empty($item->title) ? 'Nav Widget Area' : $item->title;
+			$area_id   = empty($item->attr_title) ? 'nav-widgets-' . $item->ID : $item->attr_title;
 
-			if ( ! empty($sidebar_id) && is_active_sidebar($sidebar_id) ) {
+			if ( is_active_sidebar($area_id) ) {
 				ob_start();
-				dynamic_sidebar($sidebar_id);
+				dynamic_sidebar($area_id);
 				$widgets_html = ob_get_clean();
-				$output .= $indent . '<li class="menu-item widget-area">' . $widgets_html;
+				$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
+				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter($classes), $item, $args ) );
+				$output .= $indent . "<li class='menu-item $class_names'>$widgets_html";
 			}
 
 		// REGULAR MENU ITEM
@@ -84,7 +86,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[]   = ($item->current) ? 'active' : '';
 			$classes[]   = 'menu-item-' . $item->ID;
-			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter($classes), $item, $args ) );
 
 			// Remove unused classes
 			$unused_classes = array(
@@ -355,7 +357,7 @@ if ( class_exists('WooCommerce') ) {
 	function mixt_wc_menu_cart() {
 		$cart_items = WC()->cart->get_cart_contents_count();
 		$output = '<a class="cart-contents" href="' . esc_url( WC()->cart->get_cart_url() ) . '">';
-			$output .= '<span class="count">' . wp_kses_data( sprintf( _n('%d item', '%d items', $cart_items ), $cart_items ) ) . '</span>';
+			$output .= '<span class="count">' . wp_kses_data( sprintf( _n( '%d item', '%d items', $cart_items, 'mixt' ), $cart_items ) ) . '</span>';
 			if ( $cart_items > 0 ) {
 				$output .= ' - <span class="amount">' . wp_kses_data( WC()->cart->get_cart_total() ) . '</span>';
 			}

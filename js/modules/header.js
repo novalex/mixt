@@ -3,7 +3,7 @@
 HEADER FUNCTIONS
 / ------------------------------------------------ */
 
-+function ($) {
+( function($) {
 
 	'use strict';
 
@@ -61,4 +61,4 @@ HEADER FUNCTIONS
 		$(window).resize( $.debounce( 500, headerFn ));
 	}
 
-}(jQuery);
+})(jQuery);

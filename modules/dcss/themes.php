@@ -70,7 +70,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			ob_start();
 			$this->output_site(true);
 			$this->output_navbar(true);
-			$css = ob_get_clean();
+			$css = esc_html(ob_get_clean());
 
 			$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
 			if ( ! empty($css) ) {
@@ -100,6 +100,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			if ( ! is_array($theme) ) continue;
 
 			$th = ".theme-$theme_id";
+			$body_th = ".body-theme-$theme_id";
 
 			$defaults = array(
 				'accent'    => '#dd3e3e',
@@ -204,7 +205,7 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// Border Colors
 			
-			echo "$th, $th #content-wrap, $th .sidebar ul, $th .wp-caption, $th hr { border-color: $border; }\n";
+			echo "$th, $th #content-wrap, $th .sidebar ul, $th .post-feat.feat-format, $th .wp-caption, $th hr { border-color: $border; }\n";
 			echo "$th .comment-list li.bypostauthor { border-left-color: $accent; }\n";
 
 
@@ -220,7 +221,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th blockquote { border-color: $border; border-left-color: $accent; background-color: $bg_darker; }\n";
 			echo "$th blockquote cite { color: $color_fade; }\n";
 
-			echo "$th .sidebar .child-page-nav li a:hover, $th .sidebar .nav li a:hover { color: $accent; }\n";
+			echo "$th .sidebar .child-page-nav li a:hover, $th .widget-area .nav li a:hover { color: $accent; }\n";
 			echo "$th .sidebar .child-page-nav .current_page_item, $th .sidebar .child-page-nav .current_page_item:before { background-color: $bg_darker; }\n";
 
 			// Bootstrap Elements
@@ -245,7 +246,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th input::-moz-placeholder, $th .form-control::-moz-placeholder { color: $color_fade; }\n";
 			echo "$th input:-ms-input-placeholder, $th .form-control:-ms-input-placeholder { color: $color_fade; }\n";
 			if ( $bg_dark ) {
-				echo "$th select, .mixt $th .select2-container .select2-arrow b:after { background-image: url('" . MIXT_URI . "/assets/img/icons/select-arrow-light.png'); }\n";
+				echo "$th select, .mixt $th .select2-container .select2-arrow b:after { background-image: url(" . MIXT_URI . "/assets/img/icons/select-arrow-light.png); }\n";
 			}
 
 			// Buttons
@@ -288,13 +289,13 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th .lSSlideOuter .lSPager.lSpg > li:hover a, $th .lSSlideOuter .lSPager.lSpg > li.active a { background-color: $accent; }\n";
 
 			// LightGallery
-			echo "$th .lg-outer .lg-thumb-item.active, $th .lg-outer .lg-thumb-item:hover { border-color: $accent; }\n";
-			echo "$th .lg-progress-bar .lg-progress { background-color: $accent; }\n";
+			echo "$body_th .lg-outer .lg-thumb-item.active, $body_th .lg-outer .lg-thumb-item:hover { border-color: $accent; }\n";
+			echo "$body_th .lg-progress-bar .lg-progress { background-color: $accent; }\n";
 
 			// Select2
-			echo "$th .select2-container a.select2-choice, $th .select2-drop, $th .select2-drop.select2-drop-active { color: $color; border-color: $border; background-color: $bg_darker; }\n";
-			echo "$th .select2-results { background-color: $bg_darker; }\n";
-			echo "$th .select2-results .select2-highlighted { color: $color; background-color: $bg_lighter; }\n";
+			echo "$body_th .select2-container a.select2-choice, $body_th .select2-drop, $body_th .select2-drop.select2-drop-active { color: $color; border-color: $border; background-color: $bg_darker; }\n";
+			echo "$body_th .select2-results { background-color: $bg_darker; }\n";
+			echo "$body_th .select2-results .select2-highlighted { color: $color; background-color: $bg_lighter; }\n";
 
 			// Visual Composer
 			if ( defined( 'WPB_VC_VERSION') ) {
@@ -514,6 +515,8 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// Main Navbar Mobile Styling
 
+			$main_navbar .= '.navbar';
+			
 			echo "@media ( max-width: {$this->media_bp('mars')} ) {\n";
 				echo "$main_navbar .navbar-inner { background-color: $menu_bg; $menu_bg_rgba }\n";
 				echo "$main_navbar .navbar-inner .text-cont, $main_navbar .navbar-inner .text-cont a:hover, $main_navbar .navbar-inner .text-cont a.no-color, $main_navbar .nav > li > a { color: $menu_color; }\n";

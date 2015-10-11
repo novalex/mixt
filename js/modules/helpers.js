@@ -3,12 +3,9 @@
 HELPER FUNCTIONS
 / ------------------------------------------------ */
 
-'use strict';
-
 ( function($) {
 
-	var viewport = $(window),
-		bodyEl   = $('body');
+	'use strict';
 
 	// Skip Link Focus Fix
 	
@@ -88,17 +85,6 @@ HELPER FUNCTIONS
 		}
 		if ( url && ( !$('textarea, input').is(':focus') ) ) {
 			window.location = url;
-		}
-	});
-
-	// Plugins
-
-	viewport.load( function() {
-		if ( typeof $.fn.lightGallery === 'function' ) {
-			var theme = $('#main-wrap-inner')[0].className.match(/(theme-[^\s]*)/)[1];
-			bodyEl.on('onAfterOpen.lg onBeforeClose.lg', function() {
-				bodyEl.toggleClass(theme);
-			});
 		}
 	});
 

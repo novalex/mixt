@@ -21,43 +21,23 @@
 	$menu-border: theme-color($theme, 'menu-border', $border);
 	$menu-border-alpha: theme-color($theme, 'menu-border-alpha', false);
 
-	@if ( map-has-key($theme, 'accent-inv') ) {
-		$has-inv-accent: true;
-		$accent-inv: map-get($theme, 'accent-inv');
-	} @else {
-		$has-inv-accent: false;
-		$accent-inv: $accent;
-	}
+	$has-inv-accent: if( map-has-key($theme, 'accent-inv'), true, false );
+	$accent-inv: if( $has-inv-accent, map-get($theme, 'accent-inv'), $accent );
 
 	$bg-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
 
-	@if ( $bg-dark ) {
-		$bg-light-accent: $accent-inv;
-		$bg-light-color: $color-inv;
-		$bg-light-border: $border-inv;
+	$bg-light-accent: if( $bg-dark, $accent-inv, $accent );
+	$bg-light-color: if( $bg-dark, $color-inv, $color );
+	$bg-light-border: if( $bg-dark, $border-inv, $border );
 
-		$bg-dark-accent: $accent;
-		$bg-dark-color: $color;
-		$bg-dark-border: $border;
+	$bg-dark-accent: if( $bg-dark, $accent, $accent-inv );
+	$bg-dark-color: if( $bg-dark, $color, $color-inv );
+	$bg-dark-border: if( $bg-dark, $border, $border-inv );
 
-		$bg-dark-sel: '&';
-		$bg-light-sel: '&.bg-light';
+	$bg-dark-sel: if( $bg-dark, '&', '&.bg-dark' );
+	$bg-light-sel: if( $bg-dark, '&.bg-light', '&' );
 
-		$menu-color-fade: theme-color($theme, 'menu-color-fade', darken($menu-color, 10));
-	} @else {
-		$bg-light-accent: $accent;
-		$bg-light-color: $color;
-		$bg-light-border: $border;
-
-		$bg-dark-accent: $accent-inv;
-		$bg-dark-color: $color-inv;
-		$bg-dark-border: $border-inv;
-
-		$bg-dark-sel: '&.bg-dark';
-		$bg-light-sel: '&';
-
-		$menu-color-fade: theme-color($theme, 'menu-color-fade', lighten($menu-color, 10));
-	}
+	$menu-color-fade: if( $bg-dark, theme-color($theme, 'menu-color-fade', darken($menu-color, 10)), theme-color($theme, 'menu-color-fade', lighten($menu-color, 10)) );
 
 	.navbar.theme-#{$name} {
 		border-color: $border;
@@ -192,7 +172,7 @@
 			.divider { background-color: $bg-dark-border; }
 		}
 
-		@if ( $has-inv-accent = false ) {
+		@if ( $has-inv-accent == false ) {
 			.nav > li:hover > a,
 			.nav > li.hover > a,
 			.nav > li > a:hover,
@@ -216,55 +196,57 @@
 		}
 
 		@include media('screen', '<mars') {
-			.navbar-inner {
-				background-color: $menu-bg;
-			}
+			&.navbar {
+				.navbar-inner {
+					background-color: $menu-bg;
+				}
 
-			.navbar-inner .text-cont,
-			.navbar-inner .text-cont a:hover,
-			.navbar-inner .text-cont a.no-color,
-			.nav > li > a {
-				color: $menu-color;
-			}
+				.navbar-inner .text-cont,
+				.navbar-inner .text-cont a:hover,
+				.navbar-inner .text-cont a.no-color,
+				.nav > li > a {
+					color: $menu-color;
+				}
 
-			// Hover State
-			.nav {
-				> li > a,
-				> li > a:focus,
-				> li:hover > a,
-				> li.hover > a,
-				> li.active > a {
-					&:hover {
-						color: $menu-hover-color;
-						background-color: $menu-bg-hover;
+				// Hover State
+				.nav {
+					> li > a,
+					> li > a:focus,
+					> li:hover > a,
+					> li.hover > a,
+					> li.active > a {
+						&:hover {
+							color: $menu-hover-color;
+							background-color: $menu-bg-hover;
+						}
+					}
+
+					> li:hover > a,
+					> li.hover > a { color: $menu-color; }
+
+					li.nav-search {
+						&:hover > a,
+						&.hover > a {
+							color: $menu-color !important;
+							background-color: transparent !important;
+						}
 					}
 				}
 
-				> li:hover > a,
-				> li.hover > a { color: $menu-color; }
+				.nav > li.active > a,
+				.navbar-inner .text-cont a { color: $accent; }
 
-				li.nav-search {
-					&:hover > a,
-					&.hover > a {
-						color: $menu-color !important;
-						background-color: transparent !important;
-					}
+				@if ( $has-inv-accent ) {
+					.nav > li.active > a:before { background-color: $accent; }
 				}
-			}
 
-			.nav > li.active > a,
-			.navbar-inner .text-cont a { color: $accent; }
-
-			@if ( $has-inv-accent ) {
-				.nav > li.active > a:before { background-color: $accent; }
-			}
-
-			// Border Colors
-			.navbar-inner,
-			.nav > li,
-			.nav > li > a {
-				border-color: $menu-border;
-				@if $menu-border-alpha { border-color: $menu-border-alpha; }
+				// Border Colors
+				.navbar-inner,
+				.nav > li,
+				.nav > li > a {
+					border-color: $menu-border;
+					@if $menu-border-alpha { border-color: $menu-border-alpha; }
+				}
 			}
 		};
 	}

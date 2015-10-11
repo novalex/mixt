@@ -99,7 +99,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 
 				$profile_icon = $profile['icon'];
 
-				if ( isset($profile['color']) ) { $link_atts_now .= "data-color='{$profile['color']}'"; }
+				if ( isset($profile['color']) ) { $link_atts_now .= " data-color='{$profile['color']}'"; }
 				
 				$profile_title = isset($profile['title']) ? $profile['title'] : '';
 

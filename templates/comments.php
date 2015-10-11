@@ -27,7 +27,7 @@ if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }
 else if ( $comments_num > 1 ) { $comments_text = $comments_num . __( ' comments', 'mixt' ); }
 else { $comments_text = __( '1 comment', 'mixt' ); }
 
-echo do_shortcode('[mixt_headline text="' . $comments_text . '" class="comments-title"]');
+echo mixt_heading( $comments_text, 'class="comments-title"' );
 
 if ( have_comments() ) {
 
@@ -64,7 +64,7 @@ if ( comments_open() ) {
 
 	if ( $options['logged-in-as'] ) {
 		$logged_in_as = '<p class="logged-in-as">' .
-			sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ),
+			sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'mixt' ),
 				admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) )
 			) .
 		'</p>';

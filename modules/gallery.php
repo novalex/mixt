@@ -128,6 +128,8 @@ function mixt_gallery_shortcode($attr) {
 		$output = $br_tag = $gallery_style = '';
 		$cont_tag = 'ul';
 		$itemtag = 'li';
+		$icontag = 'div';
+		$captiontag = 'p';
 	}
 	if ( $type == 'slider' ) {
 		$gallery_classes = 'gallery-slider';
@@ -165,7 +167,7 @@ function mixt_gallery_shortcode($attr) {
 			$itemattr = "data-src='$image'";
 			// Captions
 			if ( $captiontag && trim($attachment->post_excerpt) ) {
-				$itemattr .= ' data-sub-html="<div>' . wptexturize($attachment->post_excerpt) . '</div>"';
+				$itemattr .= ' data-sub-html="&lt;div&gt;' . wptexturize($attachment->post_excerpt) . '&lt;/div&gt;"';
 			}
 			// Output item
 			$output .= "<$itemtag class='$itemclass' $itemattr>$thumb</$itemtag>";

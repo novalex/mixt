@@ -42,8 +42,7 @@ $options = mixt_get_options( array(
 
 	?>
 
-	<footer id="colophon" class="<?php echo $class; ?>" role="contentinfo">
-
+	<footer id="colophon" class="<?php echo $class; ?>">
 		<?php
 
 		// Footer Widget Row
@@ -93,15 +92,10 @@ $options = mixt_get_options( array(
 		
 	</footer><?php // close #colophon ?>
 
-</div><?php // close #main-wrap ?>
-
-<?php
+</div><?php // close #main-wrap
 
 wp_footer();
 
-mixt_browsersync();
-
 ?>
-
 </body>
 </html>

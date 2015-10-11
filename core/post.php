@@ -94,7 +94,7 @@ class Mixt_Post {
 			$this->content   = get_the_content($this->ID);
 		} else {
 			$this->permalink = get_permalink($this->ID);
-			$this->content   = get_the_content('<button class="btn btn-black btn-hover-accent read-more">' . __('Read More', 'mixt') . '</span>');
+			$this->content   = get_the_content();
 		}
 
 		$this->type = get_post_type($id);
@@ -111,7 +111,6 @@ class Mixt_Post {
 		// Page type post
 		if ( $context == 'page' || $this->type == 'page' ) {
 			$this->format = 'page';
-			// $this->layout['post-info'] = 'false'; // Do not display post info for page type posts
 		}
 		// Product type post
 		if ( $this->type == 'product' ) { $this->format = 'product'; }
@@ -591,7 +590,8 @@ class Mixt_Post {
 
 			// Title
 			if ( $this->display_component('title') ) {
-				echo '<h1 class="page-title">' . $permalink_start . get_the_title() . $permalink_end . '</h1>';
+				$tag = ( $this->context == 'single' ) ? 'h1' : 'h2';
+				echo "<$tag class='page-title'>$permalink_start" . get_the_title() . "$permalink_end</$tag>";
 			}
 
 			// Header Post Meta
@@ -627,7 +627,7 @@ class Mixt_Post {
 			// Split post navigation
 			if ( $this->context == 'single' ) {
 				wp_link_pages( array(
-					'before'    => '<nav role="navigation" id="post-split-nav" class="page-nav paging-navigation numbered-paging">' .
+					'before'    => '<nav id="post-split-nav" class="page-nav paging-navigation numbered-paging">' .
 									   '<h3 class="screen-reader-text">' . __( 'Post pages', 'mixt' ) . '</h3>' .
 									   '<ul class="pager"><li>',
 					'after'     => '</li></ul></nav>',
@@ -683,22 +683,25 @@ function mixt_get_post_image($content = null, $type = 'full') {
 function mixt_about_the_author($title = true) {
 	$bio = get_the_author_meta('description');
 
-	if ( ! empty($bio) ) {
-		$id     = get_the_author_meta('ID');
-		$name   = '<a href="' . get_author_posts_url($id) . '" class="author-url" rel="author">' .
-					  get_the_author_meta('display_name') .
-				  '</a>';
-		$avatar = get_avatar($id, 64);
-		?>
-		<aside class="post-extra about-the-author"><?php
-			if ( $title ) echo do_shortcode('[mixt_headline]' . _x('About ', 'author', 'mixt' ) . $name . '[/mixt_headline]');
+	if ( empty($bio) ) {
+		$bio = __( 'This author has not yet written their bio.', 'mixt' );
+	}
 
-			if ( ! empty($avatar) ) {
-				echo '<div class="author-avatar">' . $avatar . '</div>';
-			} ?>
-			<div class="author-bio"><?php echo wpautop($bio); ?></div>
-		</aside>
-	<?php }
+	$id     = get_the_author_meta('ID');
+	$name   = '<a href="' . get_author_posts_url($id) . '" class="author-url" rel="author">' .
+				  get_the_author_meta('display_name') .
+			  '</a>';
+	$avatar = get_avatar($id, 64);
+	?>
+	<aside class="post-extra about-the-author"><?php
+		if ( $title ) echo mixt_heading( _x('About ', 'author', 'mixt' ) . $name );
+
+		if ( ! empty($avatar) ) {
+			echo '<div class="author-avatar">' . $avatar . '</div>';
+		} ?>
+		<div class="author-bio"><?php echo wpautop($bio); ?></div>
+	</aside>
+	<?php
 }
 
 
@@ -752,7 +755,7 @@ function mixt_related_posts( $args = array() ) {
 			<?php
 
 			if ( $args['title'] !== false && ! empty($args['title']) ) {
-				echo do_shortcode('[mixt_headline text="' . $args['title'] . '"]');
+				echo mixt_heading( $args['title'] );
 			}
 
 			if ( $args['slider'] && $args['number'] > 3 ) {

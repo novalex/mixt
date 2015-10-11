@@ -24,6 +24,4 @@ if ( empty($post_content) ) return;
 
 	?></div>
 
-	<?php // edit_post_link( __( 'Edit', 'mixt' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
-
 </article>
