@@ -1,4 +1,6 @@
 
+// Post Meta Styling
+
 .post-meta {
 	padding: 0;
 	font-size: 12px;
@@ -33,6 +35,8 @@
 	}
 
 	.posted-on {
+		white-space: nowrap;
+		
 		time > span {
 			margin-left: 5px;
 
@@ -72,6 +76,22 @@
 		&:last-child {
 			margin-right: 0;
 			&:after { content: ''; }
+		}
+	}
+
+	@if $rtl {
+		.rtl & {
+			> span {
+				margin-right: 0;
+				margin-left: $meta-spacing;
+
+				&:last-child { margin-left: 0; }
+			}
+
+			.meta-sep {
+				margin-left: $meta-spacing / 2;
+				margin-right: -$meta-spacing / 2;
+			}
 		}
 	}
 }

@@ -39,10 +39,8 @@ CUSTOMIZER INTEGRATION - LOGO
 			css += '.navbar-mixt #nav-logo img { max-width: '+width+'px; }';
 
 			// Logo Shrink
-			if ( shrink != '0' ) {
-				shrink_width  = width - shrink;
-				css += '.fixed-nav .navbar-mixt #nav-logo img { max-width: '+shrink_width+'px; }';
-			}
+			shrink_width = ( shrink != '0' ) ? width - shrink : width;
+			css += '.fixed-nav .navbar-mixt #nav-logo img { max-width: '+shrink_width+'px; }';
 
 		// Text Logo
 		} else {

@@ -64,7 +64,7 @@
 	.container { max-width: none !important; }
 
 	#content-wrap,
-	#content-wrap .container { width: 100%; }
+	#content-wrap .container { width: 100% !important; }
 
 	.blog-grid { padding: 0 !important; }
 }
@@ -73,19 +73,24 @@
 // Tablet & Desktop
 
 @include media('screen', 'mars') {
-	#content-wrap {
-		&.has-sidebar {
-			#content {
-				float: left;
-				width: 70%;
-				border-right-width: 1px;
-			}
-			.sidebar {
-				float: left;
-				width: 30%;
-				margin-left: -1px;
-				border-left-width: 1px;
-			}
+	$content-width: 100%;
+	@if ( unit($sidebar-width-sm) == '%' ) {
+		$content-width: 100% - $sidebar-width-sm;
+	} @else {
+		$content-width: calc(100% - #{$sidebar-width-sm});
+	}
+
+	#content-wrap.has-sidebar {
+		#content {
+			float: left;
+			width: $content-width;
+			border-right-width: 1px;
+		}
+		.sidebar {
+			float: left;
+			width: $sidebar-width-sm;
+			margin-left: -1px;
+			border-left-width: 1px;
 		}
 
 		&.sidebar-left {
@@ -106,11 +111,16 @@
 }
 
 @include media('screen', 'venus') {
-	#content-wrap {
-		&.has-sidebar {
-			#content { width: 75%; }
-			.sidebar { width: 25%; }
-		}
+	$content-width: 100%;
+	@if ( unit($sidebar-width) == '%' ) {
+		$content-width: 100% - $sidebar-width;
+	} @else {
+		$content-width: calc(100% - #{$sidebar-width});
+	}
+
+	#content-wrap.has-sidebar {
+		#content { width: $content-width; }
+		.sidebar { width: $sidebar-width; }
 	}
 }
 
@@ -118,8 +128,6 @@
 // Mobile
 
 @include media('screen', '<mars') {
-	#main-nav-wrap { top: 0 !important; }
-
 	.sidebar {
 		margin-top: -1px;
 		border-top-width: 1px;

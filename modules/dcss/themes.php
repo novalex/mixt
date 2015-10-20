@@ -5,23 +5,6 @@ use Mexitek\PHPColors\Color;
 
 
 /**
- * Return default theme IDs and names
- * @return array
- */
-function mixt_default_themes() {
-	return array(
-		'lava'      => 'Lava',
-		'dark-lava' => 'Dark Lava',
-		'eco'       => 'Eco',
-		'dark-eco'  => 'Dark Eco',
-		'aqua'      => 'Aqua',
-		'nightly'   => 'Nightly',
-		'edge'      => 'Edge',
-	);
-}
-
-
-/**
  * Main theme class. Generates CSS for user created themes.
  */
 class Mixt_Themes extends Mixt_DCSS {
@@ -34,11 +17,6 @@ class Mixt_Themes extends Mixt_DCSS {
 	 * @var array $themes
 	 */
 	public $themes_enabled, $active_themes, $default_themes, $site_themes, $themes;
-	/**
-	 * Flag for stylesheet support
-	 * @var boolean
-	 */
-	private $stylesheet = false;
 
 	public function __construct() {
 		$this->themes_enabled = get_option('mixt-themes-enabled', false);
@@ -49,44 +27,18 @@ class Mixt_Themes extends Mixt_DCSS {
 				'sec-nav' => array( 'key' => 'sec-nav-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 				'footer'  => array( 'key' => 'footer-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 			) );
-			$this->default_themes = mixt_default_themes();
-			$this->site_themes = array_merge( $this->default_themes, get_option('mixt-site-themes', array()) );
-			$this->nav_themes = array_merge( $this->default_themes, get_option('mixt-nav-themes', array()) );
-
-			// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
-			if ( ! is_customize_preview() && function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) $this->stylesheet = true;
-		}
-	}
-
-	/**
-	 * Create dynamic theme stylesheet
-	 */
-	public function theme_stylesheet() {
-		if ( $this->stylesheet ) {
-			WP_Filesystem();
-			global $wp_filesystem;
-
-			// Begin stylesheet
-			ob_start();
-			$this->output_site(true);
-			$this->output_navbar(true);
-			$css = esc_html(ob_get_clean());
-
-			$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
-			if ( ! empty($css) ) {
-				$wp_filesystem->put_contents($stylesheet, $css, FS_CHMOD_FILE);
-			} else if ( file_exists($stylesheet) ) {
-				unlink($stylesheet);
-			}
+			$this->default_themes = mixt_get_themes('default');
+			$this->site_themes = array_merge( $this->default_themes, mixt_get_themes('site', 'custom') );
+			$this->nav_themes = array_merge( $this->default_themes, mixt_get_themes('nav', 'custom') );
 		}
 	}
 
 	/**
 	 * Output site-wide theme
 	 */
-	public function output_site($override = false) {
-		// Do nothing if themes are disabled or stylesheets are supported
-		if ( ! $override && ( ! $this->themes_enabled || $this->stylesheet ) ) return;
+	public function output_site() {
+		// Do nothing if themes are disabled
+		if ( ! $this->themes_enabled ) return;
 
 		$themes = array( $this->active_themes['site']);
 		if ( $this->active_themes['footer'] != $this->active_themes['site'] ) $themes[] = $this->active_themes['footer'];
@@ -199,7 +151,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th .post-meta a, $th .post-meta > span { color: $color_fade; }\n";
 			echo "$th .head-media.bg-light .container, $th .head-media.bg-light .media-inner > a, $th .head-media.bg-light .header-scroll, $th .head-media.bg-light #breadcrumbs > li + li:before { color: $bg_light_color; }\n";
 			echo "$th .head-media.bg-dark .container, $th .head-media.bg-dark .media-inner > a, $th .head-media.bg-dark .header-scroll, $th .head-media.bg-dark #breadcrumbs > li + li:before { color: $bg_dark_color; }\n";
-			echo "$th .post-related .related-title { color: $bg_dark_color; }\n";
+			echo "$th .post-related.related-media .related-content { color: $bg_dark_color; }\n";
 			echo "$th .link-list li a { color: $color_fade; }\n";
 			echo "$th .link-list li a:hover, $th .link-list li a:active, $th .link-list li.active > a { color: $accent; }\n";
 
@@ -286,6 +238,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Plugin Colors
 
 			// LightSlider
+			echo "$th .lSSlideOuter .lSPager.lSpg > li a { background-color: $color_fade; }\n";
 			echo "$th .lSSlideOuter .lSPager.lSpg > li:hover a, $th .lSSlideOuter .lSPager.lSpg > li.active a { background-color: $accent; }\n";
 
 			// LightGallery
@@ -327,9 +280,9 @@ class Mixt_Themes extends Mixt_DCSS {
 	/**
 	 * Output navbar theme
 	 */
-	public function output_navbar($override = false) {
-		// Do nothing if themes are disabled or stylesheets are supported
-		if ( ! $override && ( ! $this->themes_enabled || $this->stylesheet ) ) return;
+	public function output_navbar() {
+		// Do nothing if themes are disabled
+		if ( ! $this->themes_enabled ) return;
 
 		$options = mixt_get_options( array(
 			'nav-opacity' => array( 'type' => 'str', 'return' => 'value', 'default' => '0.95' ),
@@ -350,12 +303,10 @@ class Mixt_Themes extends Mixt_DCSS {
 		);
 
 		foreach ( $themes as $theme_id ) {
-			if ( ! array_key_exists($theme_id, $this->nav_themes) ) return;
+			// Do not output theme if it's one of the defaults or undefined
+			if ( ! array_key_exists($theme_id, $this->nav_themes) || array_key_exists($theme_id, $this->default_themes) ) continue;
 
 			$theme = $this->nav_themes[$theme_id];
-
-			// Do not output theme if it's one of the defaults or if themes are disabled
-			if ( ! $this->themes_enabled || array_key_exists($theme_id, $this->default_themes) || ! is_array($theme) ) return;
 
 			$navbar       = ".navbar.theme-$theme_id";
 			$main_navbar  = ".navbar-mixt.theme-$theme_id";
@@ -513,23 +464,21 @@ class Mixt_Themes extends Mixt_DCSS {
 				echo "$navbar .nav > .active > a:before { background-color: $accent; }\n";
 			}
 
-			// Main Navbar Mobile Styling
+			// Main Navbar Mobile (mini) Styling
 
-			$main_navbar .= '.navbar';
+			$mini_navbar = ".nav-mini $main_navbar.navbar";
 			
-			echo "@media ( max-width: {$this->media_bp('mars')} ) {\n";
-				echo "$main_navbar .navbar-inner { background-color: $menu_bg; $menu_bg_rgba }\n";
-				echo "$main_navbar .navbar-inner .text-cont, $main_navbar .navbar-inner .text-cont a:hover, $main_navbar .navbar-inner .text-cont a.no-color, $main_navbar .nav > li > a { color: $menu_color; }\n";
-				echo "$main_navbar .nav > li > a:hover, $main_navbar .nav > li > a:hover:focus, $main_navbar .nav > li:hover > a:hover, " .
-					 "$main_navbar .nav > li.hover > a:hover, $main_navbar .nav > li.active > a:hover { color: $menu_hover_color; background-color: $menu_bg_hover; }\n";
-				echo "$main_navbar .nav > li:hover > a, $main_navbar .nav > li.hover > a { color: $menu_color; }\n";
-				echo "$main_navbar .nav li.nav-search:hover > a, $main_navbar .nav li.nav-search.hover > a { color: $menu_color !important; background-color: transparent !important; }\n";
-				echo "$main_navbar .nav > li.active > a, $main_navbar .navbar-inner .text-cont a { color: $menu_accent; }\n";
-				if ( $has_inv_accent ) {
-					echo "$main_navbar .nav > .active > a:before { background-color: $menu_accent; }\n";
-				}
-				echo "$main_navbar .navbar-inner, $main_navbar .nav > li, $main_navbar .nav > li > a { border-color: $menu_border; $menu_border_rgba }\n";
-			echo "}\n";
+			echo "$mini_navbar .navbar-inner { background-color: $menu_bg; $menu_bg_rgba }\n";
+			echo "$mini_navbar .navbar-inner .text-cont, $mini_navbar .navbar-inner .text-cont a:hover, $mini_navbar .navbar-inner .text-cont a.no-color, $mini_navbar .nav > li > a { color: $menu_color; }\n";
+			echo "$mini_navbar .nav > li > a:hover, $mini_navbar .nav > li > a:hover:focus, $mini_navbar .nav > li:hover > a:hover, " .
+				 "$mini_navbar .nav > li.hover > a:hover, $mini_navbar .nav > li.active > a:hover { color: $menu_hover_color; background-color: $menu_bg_hover; }\n";
+			echo "$mini_navbar .nav > li:hover > a, $mini_navbar .nav > li.hover > a { color: $menu_color; }\n";
+			echo "$mini_navbar .nav li.nav-search:hover > a, $mini_navbar .nav li.nav-search.hover > a { color: $menu_color !important; background-color: transparent !important; }\n";
+			echo "$mini_navbar .nav > li.active > a, $mini_navbar .navbar-inner .text-cont a { color: $menu_accent; }\n";
+			if ( $has_inv_accent ) {
+				echo "$mini_navbar .nav > .active > a:before { background-color: $menu_accent; }\n";
+			}
+			echo "$mini_navbar .navbar-inner, $mini_navbar .nav > li, $mini_navbar .nav > li > a { border-color: $menu_border; $menu_border_rgba }\n";
 		}
 	}
 }

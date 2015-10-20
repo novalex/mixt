@@ -81,49 +81,35 @@
 
 // MEDIA BREAKPOINTS
 
-$breakpoints: (
-	'mercury': 480px,
-	'mars':    767px,
-	'venus':   992px,
-	'earth':   1200px,
+$media-conditions: (
+	// Media
+	'print':   'only print',
+	'screen':  'only screen',
+	'retina':  '(-webkit-min-device-pixel-ratio: 1.5),\a'
+			   '(min--moz-device-pixel-ratio: 1.5),\a'
+			   '(-o-min-device-pixel-ratio: 3/2),\a'
+			   '(min-device-pixel-ratio: 1.5),\a'
+			   '(min-resolution: 120dpi)'
 );
 
-// neptune, uranus, saturn, jupiter
-
-@function translate-media-condition($cond) {
-	$bp-mercury: map-get($breakpoints, 'mercury');
-	$bp-mars:    map-get($breakpoints, 'mars');
-	$bp-venus:   map-get($breakpoints, 'venus');
-	$bp-earth:   map-get($breakpoints, 'earth');
-
-	$media-cond: (
-		// Media
-		"print":   "only print",
-		"screen":  "only screen",
-		"retina":  "(-webkit-min-device-pixel-ratio: 1.5),\a"
-				   "(min--moz-device-pixel-ratio: 1.5),\a"
-				   "(-o-min-device-pixel-ratio: 3/2),\a"
-				   "(min-device-pixel-ratio: 1.5),\a"
-				   "(min-resolution: 120dpi)",
-		// Desktops
-		"earth":    "(min-width: #{$bp-earth + 1})",
-		"<earth":   "(max-width: #{$bp-earth})",
-		// Laptops
-		"venus":    "(min-width: #{$bp-venus + 1})",
-		"<venus":   "(max-width: #{$bp-venus})",
-		// Tablets
-		"mars":     "(min-width: #{$bp-mars + 1})",
-		"<mars":    "(max-width: #{$bp-mars})",
-		// Phones
-		"mercury":  "(min-width: #{$bp-mercury + 1})",
-		"<mercury": "(max-width: #{$bp-mercury})"
+$breakpoints: (
+	// Phones
+	'mercury': $screen-xs-min,
+	// Tablets
+	'mars':    $screen-sm-min,
+	// Laptops
+	'venus':   $screen-md-min,
+	// Desktops
+	'earth':   $screen-lg-min,
+	// Navbar mobile breakpoint
+	'navbar':  $grid-float-breakpoint,
+);
+@each $bp-name, $bp-width in $breakpoints {
+	$conditions: (
+		'#{$bp-name}': '(min-width: #{$bp-width})',
+		'<#{$bp-name}': '(max-width: #{$bp-width - 1})'
 	);
-
-	@if map-has-key($media-cond, $cond) {
-		@return map-get($media-cond, $cond);
-	} @else {
-		@return $cond;
-	}
+	$media-conditions: map-merge($media-conditions, $conditions);
 }
 
 @mixin media($args...) {
@@ -133,7 +119,11 @@ $breakpoints: (
 		@if ( $query != "" ) {
 			$op: " and ";
 		}
-		$query: $query + $op + translate-media-condition($arg);
+		$condition: $arg;
+		@if map-has-key($media-conditions, $arg) {
+			$condition: map-get($media-conditions, $arg);
+		}
+		$query: $query + $op + $condition;
 	}
 	@media #{$query}  { @content; }
 }

@@ -30,23 +30,28 @@ define('MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins'); // Plugins URI
 define('MIXT_THEME', 'lava');                            // Default Theme
 
 
-// LOAD CORE FILES & FRAMEWORK
-
 /**
- * Load files using require_once() and display an error message if a file is not found
+ * Load files and display an error message if a file is not found. Looks in child theme first.
  *
- * @param array $files the files to require
- * @param string $dir path in which to look for files (without trailing slash)
+ * @param array  $files The files to load
+ * @param string $dir   Relative path to directory in which to look for files
  */
 function mixt_requires($files, $dir) {
+	$child_dir = get_stylesheet_directory().'/'.$dir.'/';
+	$parent_dir = get_template_directory().'/'.$dir.'/';
 	foreach ( $files as $file ) {
-		$file = $dir . '/' . $file;
-		if ( ! file_exists( $file ) ) {
+		if ( file_exists( $child_dir . $file ) ) {
+			require_once( $child_dir . $file );
+		} else if ( file_exists( $parent_dir . $file ) ) {
+			require_once( $parent_dir . $file );
+		} else {
 			trigger_error( __( 'Error locating file for inclusion', 'mixt' ) . ': ' . $file, E_USER_ERROR );
 		}
-		require_once $file;
 	}
 }
+
+
+// LOAD CORE FILES
 
 $core_files = array(
 	'assets.php',
@@ -58,7 +63,7 @@ $core_files = array(
 	'tags.php',
 	'post.php',
 );
-mixt_requires( $core_files, MIXT_CORE_DIR );
+mixt_requires( $core_files, 'core' );
 
 
 // SET UP THEME AND REGISTER FEATURES
@@ -73,10 +78,7 @@ if ( ! isset( $content_width ) ) {
  */
 function mixt_setup() {
 
-	global $cap, $content_width;
-
 	if ( function_exists('add_theme_support') ) {
-
 		// WP 4.1+ Title Tag Support
 		add_theme_support('title-tag');
 

@@ -24,7 +24,7 @@
 	$has-inv-accent: if( map-has-key($theme, 'accent-inv'), true, false );
 	$accent-inv: if( $has-inv-accent, map-get($theme, 'accent-inv'), $accent );
 
-	$bg-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
+	$bg-dark: theme-color($theme, 'bg-dark', false);
 
 	$bg-light-accent: if( $bg-dark, $accent-inv, $accent );
 	$bg-light-color: if( $bg-dark, $color-inv, $color );
@@ -195,7 +195,7 @@
 			background-color: rgba($menu-bg, $nav-primary-menu-opacity);
 		}
 
-		@include media('screen', '<mars') {
+		@include media('screen', '<navbar') {
 			&.navbar {
 				.navbar-inner {
 					background-color: $menu-bg;

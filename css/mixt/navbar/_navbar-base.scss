@@ -388,17 +388,20 @@
 
 	// NAV DESKTOP STYLING
 
-	@include media('screen', 'mars') {
+	@include media('screen', 'navbar') {
 		.no-label > a {
 			> .menu-label { display: none; }
-			> .menu-icon { margin-right: 0; }
+			> .menu-icon {
+				margin-left: 0;
+				margin-right: 0;
+			}
 		}
 		.mega-menu-column.no-label > a { display: none; }
 	}
 
 	// MAIN NAV MOBILE STYLING
 
-	@include media('screen', '<mars') {
+	@include media('screen', '<navbar') {
 		&.navbar-mixt .nav-search .menu-label { display: none; }
 	}
 }

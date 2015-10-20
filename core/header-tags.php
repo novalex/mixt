@@ -3,13 +3,14 @@
 /**
  * Header Elements
  *
- * @package MIXT
+ * @package MIXT\Core
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
+
 /**
- * Display Page Loader
+ * Display the Page Loader
  */
 function mixt_page_loader() {
 	$options = mixt_get_options( array(
@@ -62,7 +63,7 @@ function mixt_page_loader() {
 
 
 /**
- * Display Logo
+ * Display the site logo
  */
 function mixt_display_logo() {
 	$options = mixt_get_options( array(
@@ -95,7 +96,7 @@ function mixt_display_logo() {
 		),
 		// Show Tagline
 		'show-tagline' => array(
-			'key'    => 'logo-show-tagline',
+			'key' => 'logo-show-tagline',
 		),
 		// Tagline Text
 		'tagline' => array(
@@ -132,23 +133,23 @@ function mixt_display_logo() {
 
 
 /**
- * Display Secondary Navbar
+ * Display the secondary navbar
  */
 function mixt_second_nav() {
 	$options = mixt_get_options( array(
-		'hover-bg' => array( 'key' => 'sec-nav-hover-bg' ),
-		'active-bar' => array( 'key' => 'sec-nav-active-bar' ),
+		'hover-bg'       => array( 'key' => 'sec-nav-hover-bg' ),
+		'active-bar'     => array( 'key' => 'sec-nav-active-bar' ),
 		'active-bar-pos' => array( 'key' => 'sec-nav-active-bar-pos', 'return' => 'value' ),
-		'bordered' => array( 'key' => 'sec-nav-bordered' ),
-		'left-content' => array( 'type' => 'str', 'key' => 'sec-nav-left-content', 'return' => 'value' ),
-		'left-code' => array( 'key' => 'sec-nav-left-code', 'return' => 'value' ),
-		'left-hide' => array( 'key' => 'sec-nav-left-hide' ),
-		'right-content' => array( 'type' => 'str', 'key' => 'sec-nav-right-content', 'return' => 'value' ),
-		'right-code' => array( 'key' => 'sec-nav-right-code', 'return' => 'value' ),
-		'right-hide' => array( 'key' => 'sec-nav-right-hide' ),
+		'bordered'       => array( 'key' => 'sec-nav-bordered' ),
+		'left-content'   => array( 'type' => 'str', 'key' => 'sec-nav-left-content', 'return' => 'value' ),
+		'left-code'      => array( 'key' => 'sec-nav-left-code', 'return' => 'value' ),
+		'left-hide'      => array( 'key' => 'sec-nav-left-hide' ),
+		'right-content'  => array( 'type' => 'str', 'key' => 'sec-nav-right-content', 'return' => 'value' ),
+		'right-code'     => array( 'key' => 'sec-nav-right-code', 'return' => 'value' ),
+		'right-hide'     => array( 'key' => 'sec-nav-right-hide' ),
 	) );
 
-	$left_el = $left_el_classes = $right_el = $right_el_classes = '';
+	$left_content = $left_content_class = $right_content = $right_content_class = '';
 
 	$nav_classes = 'theme-' . Mixt_Options::get('themes', 'sec-nav');
 	if ( $options['bordered'] ) $nav_classes .= ' bordered';
@@ -167,7 +168,7 @@ function mixt_second_nav() {
 	
 	// Content: Navigation
 	if ( $options['left-content'] == '1' ) {
-		$left_el_nav = wp_nav_menu(
+		$left_content_nav = wp_nav_menu(
 			array(
 				'theme_location'  => 'sec_navbar_left',
 				'container_class' => 'navbar-inner',
@@ -178,29 +179,29 @@ function mixt_second_nav() {
 				'walker'          => new Mixt_Navwalker()
 			)
 		);
-		if ( ! empty($left_el_nav) ) {
-			$left_el = $left_el_nav;
+		if ( ! empty($left_content_nav) ) {
+			$left_content = $left_content_nav;
 		} else {
-			$left_el = mixt_no_menu_msg(false);
+			$left_content = mixt_no_menu_msg(false);
 		}
 
 	// Content: Social Icons
 	} else if ( $options['left-content'] == '2' ) {
-		$left_el = mixt_social_profiles(false, array('style' => 'nav'));
+		$left_content = mixt_social_profiles(false, array('style' => 'nav'));
 
 	// Content: Text / Code
 	} else if ( $options['left-content'] == '3' ) {
-		$left_el_classes = 'content-code';
-		$left_el = '<div class="code-inner text-cont">' . $options['left-code'] . '</div>';
+		$left_content_class = 'content-code';
+		$left_content = '<div class="code-inner text-cont">' . $options['left-code'] . '</div>';
 	}
-	if ( $options['left-hide'] ) { $left_el_classes .= ' hidden-xs'; }
+	if ( $options['left-hide'] ) { $left_content_class .= ' hidden-xs'; }
 
 
 	// RIGHT SIDE CONTENT
 
 	// Content: Navigation
 	if ( $options['right-content'] == '1' ) {
-		$right_el_nav = wp_nav_menu(
+		$right_content_nav = wp_nav_menu(
 			array(
 				'theme_location'  => 'sec_navbar_right',
 				'container_class' => 'navbar-inner',
@@ -211,35 +212,35 @@ function mixt_second_nav() {
 				'walker'          => new Mixt_Navwalker()
 			)
 		);
-		if ( ! empty($right_el_nav) ) {
-			$right_el = $right_el_nav;
+		if ( ! empty($right_content_nav) ) {
+			$right_content = $right_content_nav;
 		} else {
-			$right_el = mixt_no_menu_msg(false);
+			$right_content = mixt_no_menu_msg(false);
 		}
 
 	// Content: Social Icons
 	} else if ( $options['right-content'] == '2' ) {
-		$right_el = mixt_social_profiles(false, array('style' => 'nav'));
+		$right_content = mixt_social_profiles(false, array('style' => 'nav'));
 
 	// Content: Text / Code
 	} else if ( $options['right-content'] == '3' ) {
-		$right_el_classes = 'content-code';
-		$right_el = '<div class="code-inner text-cont">' . $options['right-code'] . '</div>';
+		$right_content_class = 'content-code';
+		$right_content = '<div class="code-inner text-cont">' . $options['right-code'] . '</div>';
 	}
-	if ( $options['right-hide'] ) { $right_el_classes .= ' hidden-xs'; }
+	if ( $options['right-hide'] ) { $right_content_class .= ' hidden-xs'; }
 
 
 	// OUTPUT
 
-	if ( ! empty($left_el) || ! empty($right_el) ) {
+	if ( ! empty($left_content) || ! empty($right_content) ) {
 		?>
 		<nav id="second-nav" class="second-nav navbar <?php echo $nav_classes; ?>">
 			<div class="container">
-				<div class="left <?php echo $left_el_classes; ?>">
-					<?php echo $left_el; ?>
+				<div class="left-content <?php echo $left_content_class; ?>">
+					<?php echo $left_content; ?>
 				</div>
-				<div class="right <?php echo $right_el_classes; ?>">
-					<?php echo $right_el; ?>
+				<div class="right-content <?php echo $right_content_class; ?>">
+					<?php echo $right_content; ?>
 				</div>
 			</div>
 			<div class="navbar-data"></div>
@@ -250,7 +251,7 @@ function mixt_second_nav() {
 
 
 /**
- * Display Location Bar
+ * Display the Location Bar
  */
 function mixt_location_bar() {
 	if ( is_front_page() ) { return false; }

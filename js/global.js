@@ -35,7 +35,7 @@ GLOBAL JS FUNCTIONS
 		// Set Content Min Height
 		var content = $('#content-wrap');
 		if ( content.length ) {
-			content.css('min-height', viewport.height() - content.offset().top - $('#colophon').outerHeight(true));
+			content.css('min-height', viewport.height() - content.offset().top - $('#colophon').height());
 		}
 		
 		// One-Page Navigation

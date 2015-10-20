@@ -136,6 +136,7 @@
 				float: left;
 				width: 50%;
 				clear: none;
+				position: relative;
 			}
 
 			@include media('screen', 'venus') {
@@ -186,13 +187,7 @@
 				width: 48%;
 				float: left;
 
-				ul.products {
-					float: none;
-
-					li {
-						width: 48%;
-					}
-				}
+				ul.products { float: none; }
 			}
 
 			.shipping_calculator {
@@ -297,6 +292,7 @@
 		.product .summary:first-child,
 		.woocommerce-tabs {
 			width: 100% !important;
+			padding-left: 0 !important;
 			padding-right: 0 !important;
 		}
 	}

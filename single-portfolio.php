@@ -75,19 +75,7 @@ get_header();
 
 		// Related Posts
 		if ( $options['project-related'] ) {
-			$related_options = mixt_get_options( array(
-				'slider'  => array( 'key' => 'project-related-slider' ),
-				'feat-ph' => array( 'key' => 'project-related-feat-ph', 'return' => 'value' ),
-				'number'  => array( 'key' => 'project-related-number', 'type' => 'str', 'return' => 'value' ),
-			) );
-			$args = array(
-				'number'   => $related_options['number'],
-				'slider'   => $related_options['slider'],
-				'related'  => 'type',
-				'title'    => __( 'Other Projects', 'mixt' ),
-			);
-			if ( ! empty($related_options['feat-ph']['id']) ) { $args['feat-ph'] = $related_options['feat-ph']['id']; }
-			mixt_related_posts($args);
+			mixt_related_posts('project', __( 'Other Projects', 'mixt' ));
 		}
 
 		// Comments

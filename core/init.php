@@ -1,9 +1,9 @@
 <?php
 
 /**
- * MIXT Init
+ * Initialization
  *
- * @package MIXT
+ * @package MIXT\Core
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
@@ -17,9 +17,9 @@ $modules = array(
 	'social.php',
 	'gallery.php',
 	'extras.php',
-	'dcss/class-dcss.php',
+	'dcss/dynamic-css.php',
 );
-mixt_requires( $modules, MIXT_MODULES_DIR );
+mixt_requires( $modules, 'modules' );
 
 
 /**
@@ -170,28 +170,25 @@ class Mixt_Plugins {
 new Mixt_Plugins;
 
 
-// Update options after they are changed
+/**
+ * Update options after they are saved
+ */
 function mixt_options_changed($mixt_opt = null) {
-	if ( is_null($mixt_opt) ) global $mixt_opt;
+	if ( is_null($mixt_opt) ) { global $mixt_opt; }
 
 	// Custom Sidebars
-	if ( ! empty($mixt_opt['reg-sidebars']) ) { update_option('mixt-sidebars', $mixt_opt['reg-sidebars']); }
+	if ( array_key_exists('reg-sidebars', $mixt_opt) ) { update_option('mixt-sidebars', $mixt_opt['reg-sidebars']); }
 
 	// Post Excerpt Length
 	if ( ! empty($mixt_opt['post-excerpt-length']) ) { update_option('mixt-post-excerpt-length', $mixt_opt['post-excerpt-length']); }
 
 	// Themes
-	if ( array_key_exists('themes-master', $mixt_opt) ) {
-		if ( $mixt_opt['themes-master'] == true ) {
-			update_option('mixt-themes-enabled', true);
-			if ( ! empty($mixt_opt['site-themes']) ) { update_option('mixt-site-themes', $mixt_opt['site-themes']); }
-			if ( ! empty($mixt_opt['nav-themes']) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
-			$theme_ob = new Mixt_Themes;
-			$theme_ob->theme_stylesheet();
-		} else {
-			update_option('mixt-themes-enabled', false);
-		}
-	}
+	if ( array_key_exists('themes-master', $mixt_opt) ) { update_option('mixt-themes-enabled', $mixt_opt['themes-master']); }
+	if ( array_key_exists('site-themes', $mixt_opt) ) { update_option('mixt-site-themes', $mixt_opt['site-themes']); }
+	if ( array_key_exists('nav-themes', $mixt_opt) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
+
+	// Update Custom CSS
+	( new Mixt_DCSS() )->stylesheet();
 
 	// Social Profiles
 	if ( ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }
@@ -219,11 +216,11 @@ if ( defined('WPB_VC_VERSION') ) {
 
 
 // Initialize LayerSlider As Included With Theme
-add_action('layerslider_ready', 'mixt_layerslider_overrides');
 function mixt_layerslider_overrides() {
 	// Disable auto-updates
 	$GLOBALS['lsAutoUpdateBox'] = false;
 }
+add_action('layerslider_ready', 'mixt_layerslider_overrides');
 
 
 // Configure WooCommerce
@@ -238,11 +235,12 @@ if ( is_admin() ) {
 }
 
 
-// ENQUEUE SCRIPTS AND STYLESHEETS
-
+/**
+ * Enqueue theme scripts and stylesheets
+ */
 function mixt_scripts() {
 	// Main CSS
-	wp_enqueue_style( 'mixt-main-style', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
+	wp_enqueue_style( 'mixt-main', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
 
 	// Bootstrap JS
 	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ), MIXT_VERSION, true );
@@ -266,8 +264,8 @@ function mixt_scripts() {
 	}
 
 	// Custom Dynamic Stylesheet
-	if ( get_option('mixt-themes-enabled', false) && file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
-		wp_enqueue_style( 'mixt-dynamic-css', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
+	if ( file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
+		wp_enqueue_style( 'mixt-dynamic', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
 	}
 
 	// Enqueue the lightSlider plugin on blog and portfolio pages when AJAX pagination is enabled
@@ -281,8 +279,11 @@ function mixt_scripts() {
 add_action('wp_enqueue_scripts', 'mixt_scripts', 99);
 
 
-// ENQUEUE ADMIN SCRIPTS AND STYLESHEETS
-
+/**
+ * Enqueue admin scripts and stylesheets
+ * 
+ * @param string $hook Current admin page
+ */
 function mixt_admin_scripts($hook) {
 	// Admin Styles
 	wp_enqueue_style( 'mixt-admin-styles', MIXT_URI . '/dist/admin.css', false, MIXT_VERSION );

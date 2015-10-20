@@ -17,11 +17,11 @@
 			&.feat-format { display: inline-block; }
 
 			// Featured Sizes
-
-			$blog-large-w: 900px;
-			$blog-large-h: 600px;
+			// Make sure these are updated as well if image sizes are changed in functions.php
+			$blog-large-w: 960px;
+			$blog-large-h: 460px;
 			$blog-medium-w: 320px;
-			$blog-medium-h: 240px;
+			$blog-medium-h: 200px;
 			$blog-small-w: 120px;
 			$blog-small-h: 120px;
 
@@ -40,6 +40,11 @@
 				&.post-video > div,
 				&.post-video > iframe {
 					min-width: $blog-medium-w;
+				}
+
+				@include media('screen', '<mercury') {
+					max-width: none;
+					max-height: none;
 				}
 			}
 
@@ -61,8 +66,12 @@
 				margin-bottom: $margin-s;
 			}
 		}
+
+		.page-title,
+		.post-meta { min-width: 140px; }
+
+		.page-title a { display: inline-block; }
 	}
-	.has-info .post-feat { margin-top: $margin-m; }
 
 	.sticky {
 		padding: $post-inner-pad;
@@ -81,41 +90,5 @@
 		border-bottom-width: 1px;
 		border-bottom-style: solid;
 		border-color: inherit;
-	}
-
-	@include media('screen', 'mars') {
-		.has-info {
-			position: relative;
-			padding-left: 100px;
-			min-height: 155px;
-
-			.post-feat { margin-top: 0; }
-		}
-		.post-info {
-			position: absolute;
-			top: 0; left: 0;
-			width: 80px;
-			display: block;
-			overflow: hidden;
-
-			> a {
-				display: block;
-				border-left-width: 0;
-				border-top-width: 1px;
-				font-size: $font-size;
-
-				&:first-child { border-top-width: 0; }
-			}
-
-			.post-format i { font-size: 23px; }
-
-			.post-date strong {
-				display: block;
-				line-height: 1;
-				margin-right: 0;
-				margin-bottom: 5px;
-				font-size: 20px;
-			}
-		}
 	}
 }

@@ -1,7 +1,9 @@
 
 @import 'featured';
 
-@import 'meta';
+@import 'post-info';
+
+@import 'post-meta';
 
 @import 'post-related';
 
@@ -29,36 +31,6 @@
 	embed, iframe, object { width: 100%; }
 
 	blockquote { overflow: hidden; }
-
-	.post-info {
-		width: 100%;
-		display: table;
-		border-radius: $bd-radius;
-		border: 1px solid rgba(0, 0, 0, 0.15);
-		border-color: inherit;
-
-		> a {
-			display: table-cell;
-			text-align: center;
-			padding: 10px 0;
-			border-width: 0;
-			border-style: solid;
-			border-left-width: 1px;
-			border-color: inherit;
-			vertical-align: middle;
-			font-size: $font-size-l;
-
-			&:first-child { border-left-width: 0; }
-		}
-
-		.post-format {
-			padding: 5px;
-
-			i { font-size: 16px; line-height: 1.6; }
-		}
-
-		.post-date strong { margin-right: 6px; }
-	}
 
 	&.no-title {
 		.page-title { display: none; }

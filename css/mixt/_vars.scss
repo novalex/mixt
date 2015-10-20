@@ -1,11 +1,11 @@
 
-// GLOBAL VARIABLES
+// Global Variables
 
 $img-path:  '../assets/img';
 $font-path: '../assets/fonts';
 
 
-// NAVBARS
+// Navbars
 
 $nav-item-height: 42px;
 $nav-sub-item-height: 36px;
@@ -26,8 +26,18 @@ $nav-vertical-content-max-width: 1200px;
 $sec-nav-item-height: 32px;
 $sec-nav-sub-item-height: 32px;
 
+// Main navbar mobile (mini) breakpoint
+// This is the width below which the navbar switches to mobile mode
+// $grid-float-breakpoint: 768px;
 
-// TYPOGRAPHY
+
+// Sidebar
+
+$sidebar-width: 25%;
+$sidebar-width-sm: 30%;
+
+
+// Typography
 
 $font-family-base: 'Roboto', 'Verdana', sans-serif;
 
@@ -51,11 +61,17 @@ $font-size-h5: 12px;
 $font-size-h6: 10px;
 
 
-// SPACING, MARGINS & PADDINGS
+// Spacing, Margins & Paddings
 
-$main-gutter:    40px;
+$main-gutter: 40px;
 $main-gutter-sm: 30px;
+$gutter-lg: $main-gutter;
+$row-spacing-lg: 40px;
+$gutter-sm: $main-gutter-sm;
+$row-spacing-sm: 30px;
+$row-grid-sm-gutter: 20px;
 
+$post-inner-pad: 15px;
 $form-gutter: 15px;
 
 $margin-xs: 5px;
@@ -68,10 +84,8 @@ $padding-s:  10px;
 $padding-m:  20px;
 $padding-l:  30px;
 
-$post-inner-pad: 15px;
 
-
-// POST FEATURED IMAGES
+// Post Featured Images
 
 $post-aside-img: '#{$img-path}/textures/ag-square.png';
 $post-link-img: '#{$img-path}/textures/transparent-square-tiles.png';
@@ -79,7 +93,7 @@ $post-quote-img: false;
 $post-status-img: false;
 
 
-// MISCELLANEOUS
+// Miscellaneous
 
 $bd-radius-s: 1px;
 $bd-radius:   2px;
@@ -87,10 +101,12 @@ $bd-radius-l: 3px;
 
 $rounded-radius: $bd-radius-l;
 
+$rtl: false;
+
 $ie-hacks: true;
 
 
-// PLUGIN CONFIG
+// Plugin Config
 
 $portfolio:    true;
 $lightgallery: true;

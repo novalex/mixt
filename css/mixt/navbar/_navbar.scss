@@ -135,6 +135,8 @@
 		.amount { color: inherit !important; }
 	}
 
+	.drop-arrow.visible-mobile { display: inline-block; }
+
 	// Submenus
 	
 	.sub-menu {
@@ -252,12 +254,12 @@
 	min-height: $sec-nav-item-height;
 	z-index: 10000;
 
-	.left, .right {
+	.left-content, .right-content {
 		border-color: inherit;
 	}
 
 	// Left Side
-	.left {
+	.left-content {
 		float: left;
 
 		.dropdown:last-child > .sub-menu {
@@ -266,7 +268,7 @@
 	}
 
 	// Right Side
-	.right {
+	.right-content {
 		float: right;
 		text-align: right;
 
@@ -324,7 +326,7 @@
 		line-height: $sec-nav-item-height;
 	}
 
-	&.bordered .left .dropdown:last-child > .sub-menu {
+	&.bordered .left-content .dropdown:last-child > .sub-menu {
 		left: -1px; right: auto;
 	}
 
@@ -350,7 +352,7 @@
 
 		.container { padding: 0; }
 
-		.left, .right {
+		.left-content, .right-content {
 			width: 100%;
 			font-size: 0;
 			text-align: center;
@@ -371,7 +373,7 @@
 			.divider { display: none !important; }
 		}
 
-		.right { border-top: 1px solid #000; border-color: inherit; }
+		.right-content { border-top: 1px solid #000; border-color: inherit; }
 	}
 }
 
@@ -380,13 +382,15 @@
 
 // DESKTOP NAV BREAKPOINT
 
-@include media('screen', 'mars') {
+@include media('screen', 'navbar') {
 
 	.navbar-data:after { content: 'desktop'; } // Tell jQuery the desktop media query is active
 
 	.navbar-mixt {
 
 		.sub-menu a { max-width: 300px; }
+
+		.drop-arrow.visible-mobile { display: none; }
 
 		&.position-top:not(.vertical) {
 			.nav > li > a {
@@ -466,16 +470,19 @@
 
 // MOBILE NAV BREAKPOINT
 
-@include media('screen', '<mars') {
+@include media('screen', '<navbar') {
 
 	.navbar-data:after { content: 'tablet'; } // Tell jQuery the tablet mobile media query is active
 
-	#main-nav-wrap { min-height: 51px; }
+	#main-nav-wrap { top: 0 !important; min-height: 51px; }
 
 	.navbar-mixt {
 		padding: 0 !important;
 
-		.container { padding: 0; }
+		.container {
+			width: 100% !important;
+			padding: 0;
+		}
 
 		.navbar-header {
 			position: relative;
@@ -503,7 +510,13 @@
 			border-style: solid;
 			border-bottom-width: 1px;
 
-			&.dropdown-toggle { padding-right: $nav-primary-item-height; }
+			&.dropdown-toggle {
+				padding-right: $nav-primary-item-height;
+
+				@if $rtl {
+					.rtl & { padding-right: 15px; padding-left: $nav-primary-item-height; }
+				}
+			}
 		}
 
 		&.bordered {
@@ -541,7 +554,11 @@
 		.mega-menu-column {
 			> a {
 				font-size: 13px;
-				padding-right: 50px !important;
+				padding-right: $nav-primary-item-height !important;
+
+				@if $rtl {
+					.rtl & { padding-left: $nav-primary-item-height !important; }
+				}
 			}
 
 			.drop-arrow {
@@ -606,6 +623,13 @@
 				.menu-item {
 					> a { padding-left: $indent; }
 					&.expand .menu-item > a { padding-left: $indent * 2 - $padding-s; }
+
+					@if $rtl {
+						.rtl & {
+							> a { padding-left: 15px; padding-right: $indent !important; }
+							&.expand .menu-item > a { padding-left: 15px; padding-right: $indent * 2 - $padding-s !important; }
+						}
+					}
 				}
 
 				// Replace chevron down with chevron up
@@ -648,6 +672,10 @@
 			text-align: center;
 			line-height: $nav-primary-item-height - 2px;
 			margin-left: 0;
+
+			@if $rtl {
+				.rtl & { left: 0; right: auto; margin-right: 0; }
+			}
 		}
 
 		// Nav Search Form

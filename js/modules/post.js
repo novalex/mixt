@@ -239,21 +239,27 @@ POST FUNCTIONS
 
 		// Related Posts Slider
 		if ( typeof $.fn.lightSlider === 'function' ) {
-			var relPostsSlider = $('.post-related .slider-cont');
+			var relPostsSlider = $('.post-related .slider-cont'),
+				type = relPostsSlider.data('type'),
+				cols = relPostsSlider.data('cols'),
+				tabletCols = relPostsSlider.data('tablet-cols'),
+				mobileCols = relPostsSlider.data('mobile-cols');
 			relPostsSlider.imagesLoaded( function() {
 				relPostsSlider.lightSlider({
-					item: 3,
-					pager: false,
+					item: cols,
+					controls: (type == 'media'),
+					pager: (type == 'text'),
 					keyPress: true,
 					slideMargin: 20,
 					responsive: [{
-						breakpoint: 960,
-						settings: { item: 3 }
+						breakpoint: 1200,
+						settings: { item: tabletCols }
 					}, {
-						breakpoint: 540,
-						settings: { item: 2 }
+						breakpoint: 580,
+						settings: { item: mobileCols }
 					}],
 					onSliderLoad: function() {
+						relPostsSlider.removeClass('init');
 						if ( typeof $.fn.matchHeight === 'function' ) {
 							$('.post-feat', relPostsSlider).matchHeight();
 							relPostsSlider.css('height', '');

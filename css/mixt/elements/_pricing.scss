@@ -45,7 +45,8 @@
 				content: ' ';
 				width: 100%; height: 1px;
 				position: absolute; left: 0; bottom: -1px;
-				box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+				box-shadow: 0 -1px 3px rgba(0,0,0,0.06);
+				background-color: rgba(0,0,0,0.1);
 			}
 		}
 		.plan-name {

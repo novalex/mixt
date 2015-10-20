@@ -3,10 +3,11 @@
 /**
  * Helper Functions
  *
- * @package MIXT
+ * @package MIXT\Core
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
+
 
 // MIXT Upload Directory
 
@@ -23,23 +24,33 @@ if ( ! is_dir( MIXT_UPLOAD_PATH ) ) {
 define( 'MIXT_IMG_PLACEHOLDER', MIXT_URI . '/assets/img/patterns/placeholder.jpg' );
 
 
-/**
- * Remove misplaced p tags added by the wpautop function
- */
-function mixt_unautop($string) {
-	$string = force_balance_tags($string);
-	$string = str_replace(array('<p></p>', '<br />'), '', $string);
-	return trim($string);
+if ( ! function_exists('mixt_unautop') ) {
+	/**
+	 * Remove misplaced p tags added by the wpautop function
+	 *
+	 * @param  string $string
+	 * @return string
+	 */
+	function mixt_unautop($string) {
+		$string = force_balance_tags($string);
+		$string = str_replace(array('<p></p>', '<br />'), '', $string);
+		return trim($string);
+	}
 }
 add_filter('mixt_unautop', 'mixt_unautop');
 
 
-/**
- * Remove unwanted p tags wrapping shortcodes
- */
-function mixt_shortcode_unwrap($string) {
-	$string = str_replace(array('<p>[', ']</p>'), array('[', ']'), $string);
-	return trim($string);
+if ( ! function_exists('mixt_shortcode_unwrap') ) {
+	/**
+	 * Remove unwanted p tags wrapping shortcodes
+	 *
+	 * @param  string $string
+	 * @return string
+	 */
+	function mixt_shortcode_unwrap($string) {
+		$string = str_replace(array('<p>[', ']</p>'), array('[', ']'), $string);
+		return trim($string);
+	}
 }
 add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
 
@@ -47,7 +58,7 @@ add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
 /**
  * Display a message when no menu is assigned to a location
  *
- * @param bool $echo Whether to echo or return string
+ * @param bool $echo       Whether to echo or return string
  * @param bool $bs_wrapper Wrap string inside Bootstrap markup
  */
 function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
@@ -157,7 +168,8 @@ new Mixt_JS_Plugins;
 
 /**
  * Wrapper for enqueueing JS plugins
- * @param  string $plugin Name of the plugin
+ * 
+ * @param string $plugin Name of the plugin
  */
 function mixt_enqueue_plugin($plugin) {
 	return Mixt_JS_Plugins::enqueue($plugin);
@@ -166,6 +178,7 @@ function mixt_enqueue_plugin($plugin) {
 
 /**
  * Determine if hex color is light
+ * 
  * @param  string $hex HEX code of color to analyze
  * @return bool
  */
@@ -190,9 +203,10 @@ function hex_is_light($hex) {
 
 /**
  * Determine an image's average luminance
+ * 
  * @param  string  $file Path or URL to image
  * @param  integer $num_samples
- * @return integer luminance value
+ * @return integer Luminance value
  */
 function get_img_luminance($file, $num_samples = 10) {
 	$extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));

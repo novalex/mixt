@@ -192,7 +192,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				css += th+' .post-meta a, '+th+' .post-meta > span { color: '+color_fade+'; }';
 				css += th+' .head-media.bg-light .container, '+th+' .head-media.bg-light .media-inner > a, '+th+' .head-media.bg-light .header-scroll, '+th+' .head-media.bg-light #breadcrumbs > li + li:before { color: '+bg_light_color+'; }';
 				css += th+' .head-media.bg-dark .container, '+th+' .head-media.bg-dark .media-inner > a, '+th+' .head-media.bg-dark .header-scroll, '+th+' .head-media.bg-dark #breadcrumbs > li + li:before { color: '+bg_dark_color+'; }';
-				css += th+' .post-related .related-title { color: '+bg_dark_color+'; }';
+				css += th+' .post-related.related-media .related-content { color: '+bg_dark_color+'; }';
 				css += th+' .link-list li a { color: '+color_fade+'; }';
 				css += th+' .link-list li a:hover, '+th+' .link-list li a:active, '+th+' .link-list li.active > a { color: '+accent+'; }';
 
@@ -278,6 +278,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				// Plugin Colors
 
 				// LightSlider
+				css += th+' .lSSlideOuter .lSPager.lSpg > li a { background-color: '+color_fade+'; }';
 				css += th+' .lSSlideOuter .lSPager.lSpg > li:hover a, '+th+' .lSSlideOuter .lSPager.lSpg > li.active a { background-color: '+accent+'; }';
 
 				// LightGallery

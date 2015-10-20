@@ -10,54 +10,105 @@ use Mexitek\PHPColors\Color;
  */
 class Mixt_DCSS {
 
-	/** @var string CSS code that will be output */
-	public static $css = '';
+	/**
+	 * CSS code that will be output in the header
+	 * @var string
+	 */
+	public static $head_css = '';
+
+	/**
+	 * CSS code that will be output in the body
+	 * @var string
+	 */
+	public static $body_css = '';
+
+	/**
+	 * CSS code that will be written to the custom stylesheet
+	 * @var string
+	 */
+	public static $stylesheet_css = '';
+	
+	/**
+	 * Flag for stylesheet support
+	 * @var bool
+	 */
+	private $stylesheet = false;
+
+	/**
+	 * Media breakpoints defined in the CSS
+	 * @var array
+	 */
+	public static $media_bps = array(
+		'mercury' => 480,
+		'mars'    => 767,
+		'venus'   => 992,
+		'earth'   => 1200,
+	);
 
 	public function __construct() {
-		// Output CSS in header
-		add_action('mixt_head_css', 'mixt_print_head_css');
-		// Output Styler CSS
-		add_action('mixt_body_css', 'mixt_print_body_css');
+		// Output CSS in the header
+		add_action('mixt_head_css', array($this, 'print_head_css'));
+		// Output CSS in the body
+		add_action('mixt_body_css', array($this, 'print_body_css'));
+
+		// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
+		if ( ! is_customize_preview() && function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) {
+			$this->stylesheet = true;
+			self::$stylesheet_css .= mixt_custom_css();
+		} else {
+			self::$head_css .= mixt_custom_css();
+		}
 	}
 
 	/**
-	 * Add CSS code to output
-	 * 
-	 * @param string $css
+	 * Output dynamic CSS in the header
+	 * Used to output page specific styles and custom CSS if stylesheets are unsupported
 	 */
-	public static function add($css) {
-		self::$css .= $css;
+	public function print_head_css() {
+		if ( self::$head_css == '' ) return;
+		echo "\n<style type='text/css' data-id='mixt-head-css'>\n" . esc_html(self::$head_css) . "</style>";
 	}
 
 	/**
-	 * Check the CSS code for duplicates of the given string
-	 * 
-	 * @param  string $string
-	 * @return boolean
+	 * Output dynamic CSS in the body
+	 * Used to output CSS from the element Styler and any other styles that cannot be loaded in the header
 	 */
-	public static function is_duplicate($string) {
-		return ( strpos(self::$css, $string) !== false );
+	public function print_body_css() {
+		if ( self::$body_css == '' ) return;
+		echo "<style type='text/css' data-id='mixt-body-css' scoped>\n" . esc_html(self::$body_css) . "</style>\n";
+	}
+
+	/**
+	 * Update custom CSS stylesheet
+	 */
+	public function stylesheet() {
+		if ( $this->stylesheet ) {
+			WP_Filesystem();
+			global $wp_filesystem;
+
+			$css = esc_html(self::$stylesheet_css);
+
+			$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
+			if ( ! empty($css) ) {
+				$wp_filesystem->put_contents($stylesheet, $css, FS_CHMOD_FILE);
+			} else if ( file_exists($stylesheet) ) {
+				unlink($stylesheet);
+			}
+		}
 	}
 
 	/**
 	 * Return pixel value for the site's media breakpoints
 	 * 
-	 * @param  string $bp    breakpoint name
-	 * @param  string $range breakpoint range (min for use with min-width or max)
+	 * @param  string $bp    Breakpoint name
+	 * @param  string $range Breakpoint range (min for use with min-width or max)
 	 * @return string
 	 */
 	public function media_bp($bp, $range = 'max') {
-		$bps = array(
-			'mercury' => 480,
-			'mars'    => 767,
-			'venus'   => 992,
-			'earth'   => 1200,
-		);
-
 		if ( $range == 'max' ) {
-			return $bps[$bp] . 'px';
+			return self::$media_bps[$bp] - 1 . 'px';
 		} else {
-			return $bps[$bp] + 1 . 'px';
+			return self::$media_bps[$bp] . 'px';
 		}
 	}
 
@@ -242,18 +293,5 @@ class Mixt_DCSS {
 
 		return ob_get_clean();
 	}
-
-	/**
-	 * @return string CSS code
-	 */
-	public static function output_css() {
-		echo esc_html(self::$css);
-	}
 }
-new Mixt_DCSS;
-
-// Load theme generator file
-require_once( MIXT_MODULES_DIR . '/dcss/themes.php' );
-
-// Load dynamic CSS generator
-require_once( MIXT_MODULES_DIR . '/dcss/dynamic.css.php' );
+new Mixt_DCSS();

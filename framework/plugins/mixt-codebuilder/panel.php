@@ -3,14 +3,15 @@
 /**
  * Add CodeBuilder button to editor and render the panel
  *
- * @package MIXT CodeBuilder
+ * @package MIXT\Plugins\CodeBuilder
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+
 class Mixt_CB_Admin {
 
-	/** @var boolean */
+	/** @var bool */
 	protected $editor_page = false;
 
 	/** @var array mapped elements */

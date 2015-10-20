@@ -19,19 +19,23 @@ HEADER FUNCTIONS
 			mediaCont    = mediaWrap.children('.media-container'),
 			topNavHeight = mainNavBar.outerHeight(),
 			wrapHeight   = mediaWrap.height(),
-			hmHeight     = 0;
+			viewHeight   = viewport.height() - mediaWrap.offset().top;
 
+		// Make header fullscreen
 		if ( mixt_opt.header.fullscreen ) {
+			var fullHeight = viewHeight;
+
 			mediaWrap.css('height', wrapHeight);
-			
-			hmHeight = viewport.height() - mediaWrap.offset().top;
 
-			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) { hmHeight -= topNavHeight; }
+			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) {
+				fullHeight -= topNavHeight;
+			}
 
-			mediaWrap.css('height', hmHeight);
-			mediaCont.css('height', hmHeight);
+			mediaWrap.css('height', fullHeight);
+			mediaCont.css('height', fullHeight);
 		}
 
+		// Add padding behind transparent navbar to prevent overlapping
 		if ( mixt_opt.nav.transparent && mediaCont.length == 1 ) {
 			var containerPad = topNavHeight;
 
@@ -39,6 +43,15 @@ HEADER FUNCTIONS
 				container.css('padding-bottom', containerPad);
 			} else {
 				container.css('padding-top', containerPad);
+			}
+		}
+
+		// Prevent content fade if header is taller than viewport
+		if ( mixt_opt.header['content-fade'] ) {
+			if ( wrapHeight > viewHeight ) {
+				mediaWrap.addClass('no-fade');
+			} else {
+				mediaWrap.removeClass('no-fade');
 			}
 		}
 	}

@@ -322,3 +322,31 @@ function mixt_head_media() {
 
 	echo '</header>';
 }
+
+/**
+ * Generate CSS for the header media element
+ */
+if ( Mixt_Options::get('header', 'enabled') ) {
+	$options = mixt_get_options( array(
+		'bg' => array( 'return' => 'value', 'key' => 'head-bg-color' ),
+		'text' => array( 'return' => 'value', 'key' => 'head-text-color' ),
+		'inv-text' => array( 'return' => 'value', 'key' => 'head-inv-text-color' ),
+	) );
+
+	$hm = '.head-media';
+	$css = '';
+
+	if ( ! empty($options['bg']) ) {
+		$css .= "$hm { background-color: {$options['bg']}; }\n";
+	}
+	if ( ! empty($options['text']) ) {
+		$hm_light = $hm.'.bg-light';
+		$css .= "$hm_light .container, $hm_light .media-inner > a, $hm_light .header-scroll, $hm_light #breadcrumbs > li + li:before { color: {$options['text']} !important; }\n";
+	}
+	if ( ! empty($options['inv-text']) ) {
+		$hm_dark = $hm.'.bg-dark';
+		$css .= "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$options['inv-text']} !important; }\n";
+	}
+
+	if ( $css != '' ) Mixt_DCSS::$head_css .= $css;
+}

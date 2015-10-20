@@ -159,6 +159,12 @@
 		font-size: $font-size-l;
 	}
 
+	// Prevent content fade
+	&.no-fade .container {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
 	@include media('screen', '<mars') {
 		.container {
 			width: 100%;
@@ -187,13 +193,11 @@
 	.container { height: auto; }
 
 	$padding: 15px;
-	$spacing: 10px;
+	$spacing: $margin-s;
 
 	.inner {
-		display: table;
 		width: 100%;
 		height: auto;
-		min-height: 100%;
 		padding: $padding - $spacing 0 $spacing;
 		position: relative;
 	}
@@ -225,6 +229,8 @@
 	}
 
 	@include media('screen', '(min-width: 480px)') {
+		.inner { display: table; }
+		
 		.left-content,
 		.right-content {
 			text-align: left;

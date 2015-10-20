@@ -12,19 +12,15 @@ get_header();
 
 		the_post();
 
+		get_template_part( 'templates/content', 'single' );
+
 		$options = mixt_get_options( array(
-			'blog-meta-show'    => array( 'return' => 'value' ),
 			'post-tags'         => array(),
 			'post-sharing'      => array(),
 			'post-about-author' => array(),
 			'post-navigation'   => array(),
 			'post-related'      => array(),
 		) );
-
-		// Set post display options
-		Mixt_Options::set('layout', 'meta-show', $options['blog-meta-show']);
-
-		get_template_part( 'templates/content', 'single' );
 
 		// Post Tags
 		if ( $options['post-tags'] ) {
@@ -61,19 +57,7 @@ get_header();
 
 		// Related Posts
 		if ( $options['post-related'] ) {
-			$related_options = mixt_get_options( array(
-				'rel-by'  => array( 'key' => 'post-related-by', 'return' => 'value' ),
-				'slider'  => array( 'key' => 'post-related-slider' ),
-				'feat-ph' => array( 'key' => 'post-related-feat-ph', 'return' => 'value' ),
-				'number'  => array( 'key' => 'post-related-number', 'type' => 'str', 'return' => 'value' ),
-			) );
-			$args = array(
-				'number'   => $related_options['number'],
-				'slider'   => $related_options['slider'],
-				'related'  => $related_options['rel-by'],
-			);
-			if ( ! empty($related_options['feat-ph']['id']) ) { $args['feat-ph'] = $related_options['feat-ph']['id']; }
-			mixt_related_posts($args);
+			mixt_related_posts('post', __( 'Related Posts', 'mixt' ));
 		}
 
 		// Comments

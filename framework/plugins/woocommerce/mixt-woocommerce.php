@@ -262,7 +262,7 @@ if ( mixt_wc_option('sharing') ) {
 		$sel_profiles = mixt_wc_option('sharing-profiles');
 		if ( ! empty($sel_profiles) ) {
 			global $mixt_opt;
-			$set_profiles = ( ! empty($mixt_opt['social-sharing-profiles']) ) ? $mixt_opt['social-sharing-profiles'] : mixt_preset_social_profiles('sharing');
+			$set_profiles = get_option('mixt-sharing-profiles', mixt_preset_social_profiles('sharing'));
 			foreach ( $set_profiles as $key => $profile ) {
 				if ( ! empty($sel_profiles[$key]) ) $profiles[$key] = $profile;
 			}
@@ -284,9 +284,9 @@ if ( mixt_wc_option('sharing') ) {
 
 // Override default stylesheets
 function mixt_wc_styles($styles) {
-	// unset($styles['woocommerce-general']);     // Remove the gloss
-	unset($styles['woocommerce-layout']);      // Remove the layout
-	unset($styles['woocommerce-smallscreen']); // Remove the smallscreen optimisation
+	// unset($styles['woocommerce-general']);
+	unset($styles['woocommerce-layout']);
+	unset($styles['woocommerce-smallscreen']);
 	return $styles;
 }
 add_filter('woocommerce_enqueue_styles', 'mixt_wc_styles');

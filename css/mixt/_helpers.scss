@@ -71,7 +71,7 @@ $spacing-margin-sizes: (
 // LISTS
 
 %reset-list {
-	padding-left: 0;
+	padding: 0;
 	list-style: none;
 
 	li:not(:last-child) { margin: 0; }

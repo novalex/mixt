@@ -1,19 +1,62 @@
 <?php
 
 /**
- * MIXT Assets
+ * Assets
  *
- * @package MIXT
+ * @package MIXT\Core
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 
 /**
+ * Return theme names and ids for specified element
+ *
+ * @param  string $elem Element for which to retreive themes, or default for default themes
+ * @param  string $type The type of themes to retreive ('custom' or 'all')
+ * @return array
+ */
+function mixt_get_themes($elem, $type = 'all') {
+	$default_themes = apply_filters( 'mixt_default_themes', array(
+		'lava'      => 'Lava',
+		'dark-lava' => 'Dark Lava',
+		'eco'       => 'Eco',
+		'dark-eco'  => 'Dark Eco',
+		'aqua'      => 'Aqua',
+		'nightly'   => 'Nightly',
+		'edge'      => 'Edge',
+	) );
+
+	if ( $elem == 'default' ) { return $default_themes; }
+
+	$theme_list = ( $type == 'all' ) ? $default_themes : array();
+
+	if ( $type == 'all' || $type == 'custom' ) {
+		$themes = get_option("mixt-$elem-themes", array());
+
+		if ( ! empty($themes) && is_array($themes) ) {
+			foreach ( $themes as $theme_id => $theme ) {
+				if ( empty($theme['name']) ) {
+					$theme_list[$theme_id] = $theme_id;
+				} else {
+					$theme_list[$theme_id] = $theme['name'];
+				}
+			}
+		}
+	}
+	return $theme_list;
+}
+
+
+/**
  * Return various assets by groups
+ *
+ * @param  string $group    Main group of assets to retreive
+ * @param  string $subgroup Subgroup of assets to retreive
+ * @return array
  */
 function mixt_get_assets($group, $subgroup = false) {
-	$assets = array(
+	$assets = apply_filters( 'mixt_assets_array', array(
 		'button' => array(
 			'sizes' => array(
 				''       => __( 'Normal', 'mixt' ),
@@ -113,7 +156,7 @@ function mixt_get_assets($group, $subgroup = false) {
 
 			'image-shadow-3d' => __( '3D Shadow', 'mixt' ),
 		),
-	);
+	) );
 
 	if ( ! $subgroup ) {
 		return $assets[$group];
@@ -131,38 +174,13 @@ function mixt_get_assets($group, $subgroup = false) {
 
 
 /**
- * Return array of theme names and ids for specified element
+ * Return available CSS animations
  *
- * @param str $elem
- */
-function mixt_get_themes($elem = '') {
-	if ( empty($elem) ) { return false; }
-
-	$theme_list = array();
-	$themes = get_option("mixt-$elem-themes");
-
-	if ( ! empty($themes) && is_array($themes) ) {
-		foreach ( $themes as $theme_id => $theme ) {
-			if ( $theme['name'] == '' ) {
-				$theme_list[$theme_id] = $theme_id;
-			} else {
-				$theme_list[$theme_id] = $theme['name'];
-			}
-		}
-		return $theme_list;
-	} else {
-		return null;
-	}
-}
-
-
-/**
- * Return array of available CSS animations
- *
- * @param str $type type of animations to return
+ * @param  string $type Type of animations to return
+ * @return array
  */
 function mixt_css_anims($type = 'all') {
-	$anims = array(
+	$anims = apply_filters( 'mixt_css_anims', array(
 		'loops' => array(
 			'bounce'     => 'Bounce',
 			'flash'      => 'Flash',
@@ -198,7 +216,7 @@ function mixt_css_anims($type = 'all') {
 			'flipInX'  => 'Flip In X',
 			'flipInY'  => 'Flip In Y',
 
-			'lightSpeedIn'  => 'Light Speed In',
+			'lightSpeedIn' => 'Light Speed In',
 
 			'rotateIn'          => 'Rotate In',
 			'rotateInDownLeft'  => 'Rotate In Down Left',
@@ -217,7 +235,7 @@ function mixt_css_anims($type = 'all') {
 			'slideInLeft'  => 'Slide In Left',
 			'slideInRight' => 'Slide In Right',
 
-			'rollIn'  => 'Roll In',
+			'rollIn' => 'Roll In',
 		),
 
 		'trans-out' => array(
@@ -261,9 +279,9 @@ function mixt_css_anims($type = 'all') {
 
 			'rollOut' => 'Roll Out',
 
-			'hinge'   => 'Hinge',
+			'hinge' => 'Hinge',
 		),
-	);
+	) );
 
 	if ( $type == 'all' ) {
 		return array_merge($anims['loops'], $anims['trans-in'], $anims['trans-out']);
@@ -276,12 +294,13 @@ function mixt_css_anims($type = 'all') {
 
 
 /**
- * Return array of icon animations
+ * Return icon animations
  *
- * @param string $type The type of animations to return. Can be 'main', 'sec', 'all' and 'combined'
+ * @param  string $type The type of animations to return. Can be 'main', 'sec', 'all' or 'combined'.
+ * @return array
  */
 function mixt_icon_anims($type = 'combined') {
-	$anims = array(
+	$anims = apply_filters( 'mixt_icon_anims', array(
 		'main' => array(
 			'anim-pop'    => 'Pop',
 			'anim-focus'  => 'Focus',
@@ -297,7 +316,7 @@ function mixt_icon_anims($type = 'combined') {
 			'anim-grow'     => 'Grow',
 			'anim-shrink'   => 'Shrink',
 		),
-	);
+	) );
 
 	if ( $type == 'combined' ) {
 		$icon_anims = array_merge($anims['main'], $anims['sec']);
@@ -314,9 +333,10 @@ function mixt_icon_anims($type = 'combined') {
 
 
 /**
- * Return array of images by type
+ * Return asset images by type
  *
- * @param str $type type of images to retrieve (must match directory name in /assets/)
+ * @param  string $type Type of images to retrieve (must match directory name in '/assets/')
+ * @return array
  */
 function mixt_get_images($type) {
 	$images_path = MIXT_DIR . '/assets/img/' . $type . '/';
@@ -342,7 +362,9 @@ function mixt_get_images($type) {
 
 
 /**
- * Test For Server Image Manipulation Capabilities
+ * Test for server image manipulation capabilities
+ *
+ * @return bool
  */
 function mixt_img_edit_support() {
 	$img_edit_support = array(

@@ -19,7 +19,6 @@ $this->sections[] = array(
 				'wide'  => __( 'Wide', 'mixt' ),
 				'boxed' => __( 'Boxed', 'mixt' ),
 			),
-			'default'  => 'wide',
 		),
 
 		// Site Background Color
@@ -29,7 +28,6 @@ $this->sections[] = array(
 			'title'       => __( 'Background Color (Boxed)', 'mixt' ),
 			'subtitle'    => __( 'Select the site background color', 'mixt' ),
 			'transparent' => false,
-			'default'     => '#fff',
 			'validate'    => 'color',
 		),
 
@@ -41,7 +39,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'The site\'s background pattern', 'mixt' ),
 			'options'  => $img_patterns,
 			'empty'    => true,
-			'default'  => '',
 		),
 
 		// Page Loader
@@ -52,7 +49,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Enable page loader to show animations when loading site', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => true,
 		),
 
 		// Page Loader Type
@@ -65,7 +61,6 @@ $this->sections[] = array(
 				'1' => __( 'Shape', 'mixt' ),
 				'2' => __( 'Image', 'mixt' ),
 			),
-			'default'  => '1',
 		),
 
 		// Page Loader Shape Select
@@ -80,7 +75,6 @@ $this->sections[] = array(
 				'square'  => __( 'Square', 'mixt' ),
 				'square2' => __( 'Empty Square', 'mixt' ),
 			),
-			'default'  => 'ring',
 		),
 
 		// Page Loader Shape Color Select
@@ -90,7 +84,6 @@ $this->sections[] = array(
 			'title'       => __( 'Loader Shape Color', 'mixt' ),
 			'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
 			'transparent' => false,
-			'default'     => '#333333',
 			'validate'    => 'color',
 		),
 
@@ -110,7 +103,6 @@ $this->sections[] = array(
 			'title'       => __( 'Loader Background Color', 'mixt' ),
 			'subtitle'    => __( 'The page loader background color', 'mixt' ),
 			'transparent' => false,
-			'default'     => '#ffffff',
 			'validate'    => 'color',
 		),
 
@@ -121,7 +113,6 @@ $this->sections[] = array(
 			'title'    => __( 'Loader Animation', 'mixt' ),
 			'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
 			'options'  => $page_loader_anims,
-			'default'  => 'pulsate',
 		),
 	),
 );
@@ -150,7 +141,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Display the header media element on all pages where possible', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Fullscreen
@@ -161,7 +151,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Header fills entire screen size', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Height
@@ -180,7 +169,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Select a background color for the header', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
-			'default'  => '',
 		),
 
 		// Text Color
@@ -191,7 +179,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'The color for text on light backgrounds', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
-			'default'  => '',
 		),
 
 		// Background Color
@@ -202,7 +189,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'The color for text on dark backgrounds', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
-			'default'  => '',
 		),
 
 		// Media Type
@@ -217,7 +203,6 @@ $this->sections[] = array(
 				'video'  => __( 'Video', 'mixt' ),
 				'slider' => __( 'Slider', 'mixt' ),
 			),
-			'default'  => 'color',
 		),
 	),
 );
@@ -249,7 +234,6 @@ $this->sections[] = array(
 				'gallery' => __( 'Gallery', 'mixt' ),
 				'feat'    => __( 'Featured', 'mixt' ),
 			),
-			'default'  => 'gallery',
 		),
 
 		// Image Select
@@ -267,7 +251,6 @@ $this->sections[] = array(
 			'title'   => __( 'Repeat / Pattern Image', 'mixt' ),
 			'on'      => __( 'Yes', 'mixt' ),
 			'off'     => __( 'No', 'mixt' ),
-			'default' => true,
 		),
 
 		// Parallax Effect
@@ -277,7 +260,6 @@ $this->sections[] = array(
 			'title'   => __( 'Parallax Effect', 'mixt' ),
 			'on'      => __( 'Yes', 'mixt' ),
 			'off'     => __( 'No', 'mixt' ),
-			'default' => false,
 		),
 	),
 );
@@ -299,7 +281,6 @@ $this->sections[] = array(
 				'embed' => __( 'Embedded', 'mixt' ),
 				'local' => __( 'Hosted', 'mixt' ),
 			),
-			'default'  => 'embed',
 		),
 
 		// Video Embed Code
@@ -359,7 +340,6 @@ $this->sections[] = array(
 			'title'   => __( 'Video Loop', 'mixt' ),
 			'on'      => __( 'Yes', 'mixt' ),
 			'off'     => __( 'No', 'mixt' ),
-			'default' => true,
 		),
 
 		// Video Luminance
@@ -372,7 +352,6 @@ $this->sections[] = array(
 				'light' => __( 'Light', 'mixt' ),
 				'dark'  => __( 'Dark', 'mixt' ),
 			),
-			'default'  => 'light',
 		),
 	),
 );
@@ -411,7 +390,6 @@ $this->sections[] = array(
 				'center' => __( 'Center', 'mixt' ),
 				'right'  => __( 'Right', 'mixt' ),
 			),
-			'default' => 'left',
 		),
 
 		// Content Size
@@ -424,7 +402,6 @@ $this->sections[] = array(
 				'fullwidth' => __( 'Full Width', 'mixt' ),
 				'cover'     => __( 'Cover', 'mixt' ),
 			),
-			'default' => 'normal',
 		),
 
 		// Content Fade Effect
@@ -434,7 +411,6 @@ $this->sections[] = array(
 			'title'   => __( 'Content Fade Effect', 'mixt' ),
 			'on'      => __( 'Yes', 'mixt' ),
 			'off'     => __( 'No', 'mixt' ),
-			'default' => false,
 		),
 
 		// Scroll To Content
@@ -445,7 +421,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Post Info
@@ -456,7 +431,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Show the post title and meta in the header', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 	),
 );
@@ -476,7 +450,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Display the location bar', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => true,
 		),
 
 		// Background Color
@@ -495,7 +468,6 @@ $this->sections[] = array(
 			'title'    => __( 'Background Pattern', 'mixt' ),
 			'options'  => $img_patterns,
 			'empty'    => true,
-			'default'  => '',
 		),
 
 		// Text Color
@@ -527,7 +499,6 @@ $this->sections[] = array(
 				'1' => __( 'Title', 'mixt' ),
 				'2' => __( 'Breadcrumbs', 'mixt' ),
 			),
-			'default'  => '1',
 		),
 
 		// Right Side Content
@@ -541,7 +512,6 @@ $this->sections[] = array(
 				'1' => __( 'Title', 'mixt' ),
 				'2' => __( 'Breadcrumbs', 'mixt' ),
 			),
-			'default'  => '2',
 		),
 
 		// Breadcrumbs Prefix
@@ -570,7 +540,6 @@ $this->sections[] = array(
 			'title'    => __( 'Site Theme', 'mixt' ),
 			'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
 			'options'  => $site_themes,
-			'default'  => MIXT_THEME,
 		),
 
 		// Navbar Theme Select
@@ -580,7 +549,6 @@ $this->sections[] = array(
 			'title'    => __( 'Navbar Theme', 'mixt' ),
 			'subtitle' => __( 'Select the theme for the primary navbar', 'mixt' ),
 			'options'  => $nav_themes,
-			'default'  => 'auto',
 		),
 
 		// Secondary Navbar Theme Select
@@ -590,7 +558,6 @@ $this->sections[] = array(
 			'title'    => __( 'Secondary Navbar Theme', 'mixt' ),
 			'subtitle' => __( 'Select the theme for the secondary navbar', 'mixt' ),
 			'options'  => $nav_themes,
-			'default'  => 'auto',
 		),
 
 		// Footer Theme Select
@@ -600,7 +567,6 @@ $this->sections[] = array(
 			'title'    => __( 'Footer Theme', 'mixt' ),
 			'subtitle' => __( 'Select the theme to be used for the footer', 'mixt' ),
 			'options'  => $footer_themes,
-			'default'  => 'auto',
 		),
 	),
 );
@@ -717,7 +683,6 @@ if ( $themes_enabled ) {
 						'label'      => __( 'Dark Background', 'mixt' ),
 					),
 				),
-				'default' => get_option('mixt-site-themes', array()),
 			),
 		),
 	);
@@ -844,7 +809,6 @@ if ( $themes_enabled ) {
 						'wrap_class' => 'rgba-field',
 					),
 				),
-				'default' => get_option('mixt-nav-themes', array())
 			),
 		),
 	);
@@ -877,7 +841,6 @@ $this->sections[] = array(
 				'horizontal' => __( 'Horizontal', 'mixt' ),
 				'vertical'   => __( 'Vertical', 'mixt' ),
 			),
-			'default'  => 'horizontal',
 		),
 
 		// Vertical Position
@@ -889,7 +852,6 @@ $this->sections[] = array(
 				'left'  => __( 'Left', 'mixt' ),
 				'right' => __( 'Right', 'mixt' ),
 			),
-			'default'  => 'left',
 		),
 
 		// Logo Alignment
@@ -902,7 +864,6 @@ $this->sections[] = array(
 				'2' => __( 'Center', 'mixt' ),
 				'3' => __( 'Right', 'mixt' ),
 			),
-			'default'  => '1',
 		),
 
 		// Texture
@@ -911,7 +872,6 @@ $this->sections[] = array(
 			'type'     => 'mixt_image_select',
 			'title'    => __( 'Texture', 'mixt' ),
 			'options'  => $img_textures,
-			'default'  => '',
 			'empty'    => true,
 		),
 
@@ -921,7 +881,6 @@ $this->sections[] = array(
 			'type'     => 'slider',
 			'title'    => __( 'Padding', 'mixt' ),
 			'subtitle' => __( 'Set the navbar\'s padding (in px) when at the top', 'mixt' ),
-			'default'  => 20,
 			'min'      => 0,
 			'max'      => 50,
 		),
@@ -932,7 +891,6 @@ $this->sections[] = array(
 			'type'     => 'slider',
 			'title'    => __( 'Padding When Fixed', 'mixt' ),
 			'subtitle' => __( 'Set the navbar\'s padding (in px) when fixed', 'mixt' ),
-			'default'  => 0,
 			'min'      => 0,
 			'max'      => 50,
 		),
@@ -943,7 +901,6 @@ $this->sections[] = array(
 			'type'       => 'slider',
 			'title'      => __( 'Opacity', 'mixt' ),
 			'subtitle'   => __( 'Set the navbar\'s opacity when fixed', 'mixt' ),
-			'default'    => 0.95,
 			'step'       => 0.05,
 			'min'        => 0,
 			'max'        => 1,
@@ -958,7 +915,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Make navbar transparent (when possible)', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// See-Through Opacity
@@ -967,7 +923,6 @@ $this->sections[] = array(
 			'type'       => 'slider',
 			'title'      => __( 'See-Through Opacity', 'mixt' ),
 			'subtitle'   => __( 'Set the navbar\'s see-through opacity', 'mixt' ),
-			'default'    => 0.25,
 			'step'       => 0.05,
 			'min'        => 0,
 			'max'        => 1,
@@ -984,7 +939,6 @@ $this->sections[] = array(
 				'above' => __( 'Above', 'mixt' ),
 				'below' => __( 'Below', 'mixt' ),
 			),
-			'default' => 'above',
 		),
 
 		// Hover Item Background
@@ -995,7 +949,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Item background color on hover', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default' => true,
 		),
 
 		// Active Item Bar
@@ -1006,7 +959,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default' => true,
 		),
 
 		// Active Item Bar Position
@@ -1020,7 +972,6 @@ $this->sections[] = array(
 				'right'  => __( 'Right', 'mixt' ),
 				'bottom' => __( 'Bottom', 'mixt' ),
 			),
-			'default'  => 'bottom',
 		),
 
 		// Border Items
@@ -1030,7 +981,6 @@ $this->sections[] = array(
 			'title'    => __( 'Border Items', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 	),
 );
@@ -1049,7 +999,6 @@ $this->sections[] = array(
 			'title'    => __( 'Enable Secondary Navbar', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Texture
@@ -1059,7 +1008,6 @@ $this->sections[] = array(
 			'title'    => __( 'Texture', 'mixt' ),
 			'options'  => $img_textures,
 			'empty'    => true,
-			'default'  => '',
 		),
 
 		// Hover Item Background
@@ -1070,7 +1018,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Item background color on hover', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => true,
 		),
 
 		// Active Item Bar
@@ -1081,7 +1028,6 @@ $this->sections[] = array(
 			'subtitle' => __( 'Show an accent bar for active menu items', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Active Item Bar Position
@@ -1095,7 +1041,6 @@ $this->sections[] = array(
 				'right'  => __( 'Right', 'mixt' ),
 				'bottom' => __( 'Bottom', 'mixt' ),
 			),
-			'default'  => 'bottom',
 		),
 
 		// Border Items
@@ -1105,7 +1050,6 @@ $this->sections[] = array(
 			'title'    => __( 'Border Items', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => true,
 		),
 
 		// Left Side Content
@@ -1120,7 +1064,6 @@ $this->sections[] = array(
 				'2' => __( 'Social Icons', 'mixt' ),
 				'3' => __( 'Custom Text / Code', 'mixt' ),
 			),
-			'default'  => '0',
 		),
 
 		// Left Side Code
@@ -1140,7 +1083,6 @@ $this->sections[] = array(
 			'title'    => __( 'Hide Left Side On Mobile', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 
 		// Right Side Content
@@ -1155,7 +1097,6 @@ $this->sections[] = array(
 				'2' => __( 'Social Icons', 'mixt' ),
 				'3' => __( 'Custom Text / Code', 'mixt' ),
 			),
-			'default'  => '0',
 		),
 
 		// Right Side Code
@@ -1175,7 +1116,6 @@ $this->sections[] = array(
 			'title'    => __( 'Hide Right Side On Mobile', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
 		),
 	),
 );
@@ -1211,7 +1151,6 @@ $this->sections[] = array(
 			'type'     => 'mixt_image_select',
 			'title'    => __( 'Background Pattern', 'mixt' ),
 			'options'  => $img_patterns,
-			'default'  => '',
 			'empty'    => true,
 		),
 
@@ -1257,7 +1196,6 @@ $this->sections[] = array(
 			'type'     => 'mixt_image_select',
 			'title'    => __( 'Background Pattern', 'mixt' ),
 			'options'  => $img_patterns,
-			'default'  => '',
 			'empty'    => true,
 		),
 
@@ -1279,15 +1217,52 @@ $this->sections[] = array(
 			'validate' => 'color',
 		),
 
-		// Footer Code
+		// Left Side Content
 		array(
-			'id'           => 'footer-code',
+			'id'       => 'footer-left-content',
+			'type'     => 'select',
+			'title'    => __( 'Left Side Content', 'mixt' ),
+			'subtitle' => __( 'Content to show on the left side of the footer', 'mixt' ),
+			'options'  => array(
+				'0' => __( 'No Content', 'mixt' ),
+				'1' => __( 'Social Icons', 'mixt' ),
+				'2' => __( 'Custom Text / Code', 'mixt' ),
+			),
+		),
+
+		// Left Side Code
+		array(
+			'id'           => 'footer-left-code',
 			'type'         => 'textarea',
-			'title'        => __( 'Footer Code', 'mixt' ),
-			'subtitle'     => __( 'Text or code to display in the footer', 'mixt' ),
-			'default'      => __( 'Copyright', 'mixt' ) . ' © {{year}} Your Company',
+			'title'        => __( 'Left Side Code', 'mixt' ),
+			'subtitle'     => __( 'Text or code to display on the left side', 'mixt' ),
 			'allowed_html' => $text_allowed_html,
 			'placeholder'  => $text_code_placeholder,
+			'required'     => array('footer-left-content', '=', '2'),
+		),
+
+		// Right Side Content
+		array(
+			'id'       => 'footer-right-content',
+			'type'     => 'select',
+			'title'    => __( 'Right Side Content', 'mixt' ),
+			'subtitle' => __( 'Content to show on the right side of the footer', 'mixt' ),
+			'options'  => array(
+				'0' => __( 'No Content', 'mixt' ),
+				'1' => __( 'Social Icons', 'mixt' ),
+				'2' => __( 'Custom Text / Code', 'mixt' ),
+			),
+		),
+
+		// Right Side Code
+		array(
+			'id'           => 'footer-right-code',
+			'type'         => 'textarea',
+			'title'        => __( 'Right Side Code', 'mixt' ),
+			'subtitle'     => __( 'Text or code to display on the right side', 'mixt' ),
+			'allowed_html' => $text_allowed_html,
+			'placeholder'  => $text_code_placeholder,
+			'required'     => array('footer-right-content', '=', '2'),
 		),
 	),
 );

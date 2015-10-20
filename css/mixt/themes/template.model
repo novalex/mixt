@@ -19,7 +19,7 @@ $theme-name: (
 		'bg-alt': *,
 
 		// Dark background switch
-		// Set this to true if you want the theme background to be treated as dark (optional, will be auto detected if not set)
+		// Set this to true if you want the theme background to be treated as dark (optional, will default to false if not set)
 		'bg-dark': false,
 
 		// Text color

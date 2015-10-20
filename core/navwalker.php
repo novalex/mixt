@@ -1,19 +1,23 @@
 <?php
 
 /**
- * Nav Walker
+ * Nav Walker class and navbar functions
  *
+ * @package MIXT\Core
+ */
+
+defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
+
+
+/**
  * Class Name: Mixt_Navwalker
  * Description: MIXT Custom Nav Walker Class
  * Version: 1.0
- *
- * @package MIXT
  *
  * Based on:
  * https://github.com/twittem/wp-bootstrap-navwalker by Edward McIntyre - @twittem
  * License: GPL-2.0+
  */
-
 class Mixt_Navwalker extends Walker_Nav_Menu {
 
 	/**
@@ -224,7 +228,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 				$arrow_classes = ' drop-arrow';
 
 				if ( $has_menu_arrows == 0 ) {
-					$arrow_classes .= ' visible-xs-inline-block';
+					$arrow_classes .= ' visible-mobile';
 				}
 
 				if ( $depth === 0 ) {
@@ -236,8 +240,8 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 					$item_output .= "<i class='$arrow $arrow_classes'></i>";
 				} else if ( $depth > 0 ) {
 					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
-						if ( ! strpos($arrow_classes, 'visible-xs-inline-block') ) {
-							$arrow_classes .= ' visible-xs-inline-block';
+						if ( ! strpos($arrow_classes, 'visible-mobile') ) {
+							$arrow_classes .= ' visible-mobile';
 						}
 						$item_output .= '<i class="fa fa-chevron-down' . $arrow_classes . '"></i>';
 					} else {
@@ -310,7 +314,9 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 }
 
 
-// Register Menu Widget Areas
+/**
+ * Register Menu Widget Areas
+ */
 function mixt_nav_menu_widgets() {
 	$locations = get_nav_menu_locations();
 	if ( array_key_exists('primary', $locations) ) {

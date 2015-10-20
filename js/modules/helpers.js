@@ -67,7 +67,7 @@ HELPER FUNCTIONS
 		}
 	});
 
-	$('.widget_layered_nav li').each( function() {
+	$('.widget.woocommerce li').each( function() {
 		var $this = $(this),
 			count = $this.children('.count'),
 			link  = $this.children('a');

@@ -31,8 +31,9 @@ echo mixt_heading( $comments_text, 'class="comments-title"' );
 
 if ( have_comments() ) {
 
-	mixt_comment_nav('top'); ?>
+	mixt_comment_nav('top');
 
+	?>
 	<ol class="comment-list">
 		<?php
 			/* Loop through and list the comments. Tell wp_list_comments()
@@ -44,10 +45,9 @@ if ( have_comments() ) {
 			wp_list_comments( array( 'callback' => 'mixt_comment', 'avatar_size' => 50 ) );
 		?>
 	</ol>
-
 	<?php
 
-	mixt_comment_nav('bottom', true);
+	mixt_comment_nav('bottom');
 }
 
 if ( comments_open() ) {

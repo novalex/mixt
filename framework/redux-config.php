@@ -70,14 +70,15 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
 
 			// Themes
-			$site_themes = $nav_themes = mixt_default_themes();
 			$themes_enabled = get_option('mixt-themes-enabled', true);
 			if ( $themes_enabled ) {
-				if ( ! empty(mixt_get_themes('site')) ) $site_themes = array_merge(mixt_get_themes('site'), $site_themes);
-				if ( ! empty(mixt_get_themes('nav')) ) $nav_themes = array_merge(mixt_get_themes('nav'), $nav_themes);
+				$site_themes = mixt_get_themes('site', 'all');
+				$nav_themes = mixt_get_themes('nav', 'all');
+			} else {
+				$site_themes = $nav_themes = mixt_get_themes('default');
 			}
-			$nav_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $nav_themes );
-			$footer_themes = array_merge( array( 'auto' => __( 'Auto', 'mixt' ) ), $site_themes );
+			$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
+			$footer_themes = array_merge( array('auto' => __( 'Auto', 'mixt' )), $site_themes );
 
 			// Image Patterns
 			$img_patterns = mixt_get_images('patterns');
@@ -88,8 +89,9 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// Social Networks
 			$social_profiles = get_option('mixt-social-profiles', array());
 			$social_sharing_profiles = get_option('mixt-sharing-profiles', array());
-			$social_sharing_profile_names = array();
-			foreach( $social_sharing_profiles as $key => $profile ) { $social_sharing_profile_names[$key] = $profile['name']; }
+			$social_profile_names = $social_sharing_profile_names = array();
+			foreach ( $social_profiles as $key => $profile ) { $social_profile_names[$key] = $profile['name']; }
+			foreach ( $social_sharing_profiles as $key => $profile ) { $social_sharing_profile_names[$key] = $profile['name']; }
 
 			// HTML Allowed in textareas
 			$text_allowed_html = array(
@@ -302,6 +304,18 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'wide',
 					),
 
+					// Boxed layout & vertical nav notification
+					array(
+						'id'       => 'site-layout-warn',
+						'type'     => 'info',
+						'style'    => 'warning',
+						'subtitle' => __( 'The site layout cannot be boxed while the navbar is vertical. Wide layout will be used instead.', 'mixt' ),
+						'required' => array(
+							array('site-layout', '=', 'boxed'),
+							array('nav-layout', '=', 'vertical'),
+						),
+					),
+
 					// Site Background Color
 					array(
 						'id'          => 'site-bg-color',
@@ -350,6 +364,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
 						'options'  => $site_themes,
 						'default'  => MIXT_THEME,
+					),
+
+					// Site Width
+					array(
+						'id'       => 'site-width',
+						'type'     => 'text',
+						'title'    => __( 'Site Width', 'mixt' ),
+						'subtitle' => __( 'Set a custom site width, e.g. \'1140px\' or \'100%\'', 'mixt' ),
 					),
 
 					// Divider
@@ -920,7 +942,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array('location-bar', '=', true),
 						),
 
-						// Right Side Content
+						// Left Side Content
 						array(
 							'id'       => 'loc-bar-left-content',
 							'type'     => 'select',
@@ -1210,6 +1232,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'right' => __( 'Right', 'mixt' ),
 							),
 							'default'  => 'left',
+							'required' => array('nav-layout', '=', 'vertical'),
+						),
+
+						// Vertical Width
+						array(
+							'id'       => 'nav-vertical-width',
+							'type'     => 'text',
+							'title'    => __( 'Width', 'mixt' ),
+							'subtitle' => __( 'Set a custom navbar width, e.g. \'150px\' or \'20%\'', 'mixt' ),
+							'required' => array('nav-layout', '=', 'vertical'),
+						),
+
+						// Small Vertical Width
+						array(
+							'id'       => 'nav-vertical-width-sm',
+							'type'     => 'text',
+							'title'    => __( 'Small Width', 'mixt' ),
+							'subtitle' => __( 'Set a custom navbar width for smaller screens, e.g. \'150px\' or \'20%\'', 'mixt' ),
 							'required' => array('nav-layout', '=', 'vertical'),
 						),
 
@@ -1621,6 +1661,22 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'right',
 					),
 
+					// Sidebar Width
+					array(
+						'id'       => 'sidebar-width',
+						'type'     => 'text',
+						'title'    => __( 'Width', 'mixt' ),
+						'subtitle' => __( 'Set a custom sidebar width, e.g. \'300px\' or \'25%\'', 'mixt' ),
+					),
+
+					// Small Sidebar Width
+					array(
+						'id'       => 'sidebar-width-sm',
+						'type'     => 'text',
+						'title'    => __( 'Small Width', 'mixt' ),
+						'subtitle' => __( 'Set a custom sidebar width for smaller screens, e.g. \'200px\' or \'30%\'', 'mixt' ),
+					),
+
 					// Child Page Navigation
 					array(
 						'id'       => 'child-page-nav',
@@ -1794,15 +1850,86 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'validate' => 'color',
 						),
 
-						// Footer Code
+						// Left Side Content
 						array(
-							'id'           => 'footer-code',
+							'id'       => 'footer-left-content',
+							'type'     => 'select',
+							'title'    => __( 'Left Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the left side of the footer', 'mixt' ),
+							'options'  => array(
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Social Icons', 'mixt' ),
+								'2' => __( 'Custom Text / Code', 'mixt' ),
+							),
+							'default'  => '2',
+						),
+
+						// Left Side Code
+						array(
+							'id'           => 'footer-left-code',
 							'type'         => 'textarea',
-							'title'        => __( 'Footer Code', 'mixt' ),
-							'subtitle'     => __( 'Text or code to display in the footer', 'mixt' ),
-							'default'      => __( 'Copyright', 'mixt' ) . ' &copy; {{year}} Your Company',
+							'title'        => __( 'Left Side Code', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display on the left side', 'mixt' ),
+							'default'      => 'Copyright &copy; {{year}} Your Company',
 							'allowed_html' => $text_allowed_html,
 							'placeholder'  => $text_code_placeholder,
+							'required'     => array('footer-left-content', '=', '2'),
+						),
+
+						// Left Side Hide On Mobile
+						array(
+							'id'       => 'footer-left-hide',
+							'type'     => 'switch',
+							'title'    => __( 'Hide Left Side On Mobile', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array('footer-left-content', '!=', '0'),
+						),
+
+						// Right Side Content
+						array(
+							'id'       => 'footer-right-content',
+							'type'     => 'select',
+							'title'    => __( 'Right Side Content', 'mixt' ),
+							'subtitle' => __( 'Content to show on the right side of the footer', 'mixt' ),
+							'options'  => array(
+								'0' => __( 'No Content', 'mixt' ),
+								'1' => __( 'Social Icons', 'mixt' ),
+								'2' => __( 'Custom Text / Code', 'mixt' ),
+							),
+							'default'  => '0',
+						),
+
+						// Right Side Code
+						array(
+							'id'           => 'footer-right-code',
+							'type'         => 'textarea',
+							'title'        => __( 'Right Side Code', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display on the right side', 'mixt' ),
+							'allowed_html' => $text_allowed_html,
+							'placeholder'  => $text_code_placeholder,
+							'required'     => array('footer-right-content', '=', '2'),
+						),
+
+						// Right Side Hide On Mobile
+						array(
+							'id'       => 'footer-right-hide',
+							'type'     => 'switch',
+							'title'    => __( 'Hide Right Side On Mobile', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array('footer-right-content', '!=', '0'),
+						),
+
+						// Social Icons To Display
+						array(
+							'id'       => 'footer-social-profiles',
+							'type'     => 'checkbox',
+							'title'    => __( 'Social Profiles', 'mixt' ),
+							'subtitle' => __( 'Select which social profiles to display', 'mixt' ),
+							'options'  => $social_profile_names,
 						),
 				),
 			);
@@ -2002,6 +2129,31 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'customizer' => false,
 				'fields'     => array(
 
+					// Post Info
+					array(
+						'id'       => 'single-post-info',
+						'type'     => 'switch',
+						'title'    => __( 'Post Info', 'mixt' ),
+						'subtitle' => __( 'Display the post format and date', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
+					// Meta Position / Display
+					array(
+						'id'       => 'single-meta-show',
+						'type'     => 'button_set',
+						'title'    => __( 'Post Meta', 'mixt' ),
+						'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+						'options'  => array(
+							'header'  => __( 'In Header', 'mixt' ),
+							'footer'  => __( 'In Footer', 'mixt' ),
+							'false'   => __( 'No', 'mixt' ),
+						),
+						'default'  => 'false',
+					),
+
 					// Post Tags
 					array(
 						'id'       => 'post-tags',
@@ -2060,6 +2212,20 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => true,
 						),
 
+						// Related By
+						array(
+							'id'       => 'post-related-by',
+							'type'     => 'button_set',
+							'title'    => __( 'Related By', 'mixt' ),
+							'subtitle' => __( 'Show posts related by tags or categories', 'mixt' ),
+							'options'  => array(
+								'tags' => __( 'Tags', 'mixt' ),
+								'cats' => __( 'Categories', 'mixt' ),
+							),
+							'default'  => 'tags',
+							'required' => array('post-related', '=', true),
+						),
+
 						// Related Posts Number
 						array(
 							'id'       => 'post-related-number',
@@ -2073,20 +2239,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array('post-related', '=', true),
 						),
 
-						// Related By
-						array(
-							'id'       => 'post-related-by',
-							'type'     => 'button_set',
-							'title'    => __( 'Related By', 'mixt' ),
-							'subtitle' => __( 'Show posts related by tags or categories', 'mixt' ),
-							'options'  => array(
-								'tags' => __( 'Tags', 'mixt' ),
-								'cats' => __( 'Categories', 'mixt' ),
-							),
-							'default'  => 'tags',
-						),
-
-						// Related Posts Slider
+						// Post Slider
 						array(
 							'id'       => 'post-related-slider',
 							'type'     => 'switch',
@@ -2101,7 +2254,93 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							),
 						),
 
-						// Related Posts Featured Media Placeholder
+						// Columns
+						array(
+							'id'       => 'post-related-cols',
+							'type'     => 'slider',
+							'title'    => __( 'Columns', 'mixt' ),
+							'subtitle' => __( 'How many columns (related posts per row) to display', 'mixt' ),
+							'default'  => 3,
+							'min'      => 1,
+							'max'      => 6,
+							'required' => array('post-related', '=', true),
+						),
+
+						// Tablet (medium screen) Columns
+						array(
+							'id'       => 'post-related-tablet-cols',
+							'type'     => 'slider',
+							'title'    => __( 'Tablet Columns', 'mixt' ),
+							'subtitle' => __( 'How many columns to display on tablets / medium screens', 'mixt' ),
+							'default'  => 3,
+							'min'      => 1,
+							'max'      => 6,
+							'required' => array('post-related', '=', true),
+						),
+
+						// Mobile (small screen) Columns
+						array(
+							'id'       => 'post-related-mobile-cols',
+							'type'     => 'slider',
+							'title'    => __( 'Mobile Columns', 'mixt' ),
+							'subtitle' => __( 'How many columns to display on mobiles / small screens', 'mixt' ),
+							'default'  => 2,
+							'min'      => 1,
+							'max'      => 3,
+							'required' => array('post-related', '=', true),
+						),
+
+						// Display Type
+						array(
+							'id'       => 'post-related-type',
+							'type'     => 'button_set',
+							'title'    => __( 'Type', 'mixt' ),
+							'subtitle' => __( 'Display posts with media or text only', 'mixt' ),
+							'options'  => array(
+								'media' => __( 'Media', 'mixt' ),
+								'text'  => __( 'Text', 'mixt' ),
+							),
+							'default'  => 'media',
+							'required' => array('post-related', '=', true),
+						),
+
+						// Text Elements
+						array(
+							'id'       => 'post-related-elements',
+							'type'     => 'checkbox',
+							'title'    => __( 'Post Elements', 'mixt' ),
+							'subtitle' => __( 'Select which elements to display', 'mixt' ),
+							'options'  => array(
+								'date'     => __( 'Date', 'mixt' ),
+								'comments' => __( 'Comments', 'mixt' ),
+								'excerpt'  => __( 'Excerpt', 'mixt' ),
+							),
+							'default'  => array(
+								'date'     => '1',
+								'comments' => '1',
+							),
+							'required' => array(
+								array('post-related', '=', true),
+								array('post-related-type', '=', 'text'),
+							),
+						),
+
+						// Minimal Style
+						array(
+							'id'       => 'post-related-mini',
+							'type'     => 'switch',
+							'title'    => __( 'Minimal Style', 'mixt' ),
+							'subtitle' => __( 'Hide the title and shrink items on small screens', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+							'required' => array(
+								array('post-related', '=', true),
+								array('post-related-type', '=', 'media'),
+							),
+						),
+
+						// Featured Media Placeholder
 						array(
 							'id'             => 'post-related-feat-ph',
 							'type'           => 'media',
@@ -2109,7 +2348,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'subtitle'       => __( 'Select a placeholder image to show if a post does not have any featured media', 'mixt' ),
 							'mode'           => 'jpg, jpeg, png',
 							'library_filter' => array('jpg', 'jpeg', 'png'),
-							'required' => array('post-related', '=', true),
+							'required' => array(
+								array('post-related', '=', true),
+								array('post-related-type', '=', 'media'),
+							),
 						),
 				),
 			);

@@ -25,6 +25,11 @@
 
 	.child-page-nav li a { color: inherit; }
 
+	#wp-calendar {
+		th,
+		td { padding-left: 0 !important; padding-right: 0 !important; }
+	}
+
 	@include media('screen', 'mars') {
 		.child-page-nav {
 			.current_page_item {

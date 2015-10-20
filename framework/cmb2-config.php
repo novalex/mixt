@@ -39,15 +39,9 @@ add_filter( 'cmb2_meta_boxes', 'cmb2_mixt_metaboxes' );
  */
 function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
-	$prefix = '_mixt-'; // Start with underscore ('_prefix_') to hide custom meta from 'Custom Fields' section
+	$prefix = '_mixt-'; // Start with underscore to hide custom meta from 'Custom Fields' section
 
-	$themes_auto = array('auto' => 'Auto');
-	$nav_themes = mixt_get_themes('nav');
-	if ( ! empty($nav_themes) && is_array($nav_themes) ) {
-		$nav_themes = $themes_auto + $nav_themes;
-	} else {
-		$nav_themes = $themes_auto;
-	}
+	$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), mixt_get_themes('nav') );
 
 	// PAGE OPTIONS
 
@@ -70,20 +64,6 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 					'auto'  => __( 'Auto', 'mixt' ),
 					'true'  => __( 'Yes', 'mixt' ),
 					'false' => __( 'No', 'mixt' ),
-				),
-				'default' => 'auto',
-			),
-
-			// Sticky Nav Switch
-			array(
-				'id'      => $prefix . 'nav-mode',
-				'name'    => __('Navbar Mode', 'mixt'),
-				'desc'    => __( 'Navbar fixed (scrolls with page) or static (stays at the top)', 'mixt' ),
-				'type'    => 'radio_inline',
-				'options' => array(
-					'auto'   => __( 'Auto', 'mixt' ),
-					'fixed'  => __( 'Fixed', 'mixt' ),
-					'static' => __( 'Static', 'mixt' ),
 				),
 				'default' => 'auto',
 			),

@@ -5,7 +5,6 @@
 @import 'mixt/colors';
 @import 'mixt/functions';
 
-// Bootstrap
 @import 'bootstrap';
 
 @import 'mixt/mixins';
@@ -40,5 +39,6 @@
 @import 'mixt/elements/elements';
 @import 'plugins/plugins';
 
-// Specific Page Styling
 @import 'mixt/pages';
+
+@import 'mixt/rtl';

@@ -1,7 +1,7 @@
 
 // Vertical Navbar
 
-@include media('screen', 'mars') {
+@include media('screen', 'navbar') {
 	#main-wrap.nav-vertical {
 		position: relative;
 
@@ -24,14 +24,37 @@
 
 			#main-nav-wrap { left: 0; }
 
-			.navbar-mixt { border-right-width: 1px; }
+			.navbar-mixt {
+				border-right-width: 1px;
+
+				.nav > li {
+					> a .drop-arrow {
+						float: right;
+						margin-left: $margin-s;
+					}
+
+					> .sub-menu {
+						left: auto; right: 100%;
+						margin-left: 0; margin-right: 10px !important;
+					}
+				}
+			}
 		}
+
 		&.nav-right {
 			padding-right: $nav-vertical-width-sm;
 
 			#main-nav-wrap { right: 0; }
 
-			.navbar-mixt { border-left-width: 1px; }
+			.navbar-mixt {
+				border-left-width: 1px;
+
+				.nav > li > a .drop-arrow {
+					float: left;
+					margin-left: 0;
+					margin-right: $margin-s;
+				}
+			}
 		}
 
 		#main-nav-wrap {
@@ -46,7 +69,10 @@
 				padding: 0;
 				border-bottom-width: 0;
 
-				.container { padding: $nav-primary-pad 0; }
+				.container {
+					width: 100% !important;
+					padding: $nav-primary-pad 0;
+				}
 
 				.navbar-header {
 					margin: 0 0 $nav-primary-pad;
@@ -80,26 +106,11 @@
 
 							&,
 							.drop-arrow { line-height: $nav-vertical-item-height - 1px; }
-
-							.nav-left & .drop-arrow {
-								float: right;
-								margin-left: $margin-s;
-							}
-							.nav-right & .drop-arrow {
-								float: left;
-								margin-left: 0;
-								margin-right: $margin-s;
-							}
 						}
 
 						> .sub-menu {
 							top: 0; left: 100%;
 							margin-top: 0; margin-left: 10px !important;
-
-							.nav-right & {
-								left: auto; right: 100%;
-								margin-left: 0; margin-right: 10px !important;
-							}
 						}
 
 						&:hover,
@@ -160,7 +171,7 @@
 	}
 }
 
-@include media('screen', 'mars', '<venus') {
+@include media('screen', 'navbar', '<venus') {
 	#main-wrap.nav-vertical {
 		.child-page-nav .current_page_item {
 			margin-left: $gutter-lg / -2;

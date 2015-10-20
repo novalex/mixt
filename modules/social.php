@@ -11,9 +11,9 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 /**
  * Get Social Profiles & Output Links or Return Data
  *
- * @param bool $echo true to echo links, false to return them as a string
+ * @param bool   $echo true to echo links, false to return them as a string
  * @param string $type output network profiles or sharing buttons
- * @param array $args additional arguments (hover type, container class, profiles array)
+ * @param array  $args additional arguments (hover type, container class, profiles array)
  */
 function mixt_social_profiles( $echo = true, $args = array() ) {
 	extract( wp_parse_args($args, array(

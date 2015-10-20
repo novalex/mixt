@@ -1,15 +1,4 @@
 
-// Spacing & Gutters
-
-$gutter-lg: $main-gutter;
-$row-spacing-lg: 40px;
-
-$gutter-sm: $main-gutter-sm;
-$row-spacing-sm: 30px;
-
-$row-grid-sm-gutter: 20px;
-
-
 // Custom Gutter Columns & Rows
 
 @mixin make-custom-grid-columns($i: 1, $list: '.col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}', $gutter: $grid-gutter-width) {

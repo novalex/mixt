@@ -352,7 +352,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-navigation',
 			'type'     => 'switch',
-			'title'    => __( 'Prev/Next Navigation', 'mixt' ),
+			'title'    => __( 'Project Navigation', 'mixt' ),
 			'subtitle' => __( 'Show links to next and previous projects', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
@@ -394,7 +394,7 @@ $this->sections[] = array(
 				'default' => true,
 			),
 
-			// Related Projects
+			// Related Projects Number
 			array(
 				'id'       => 'project-related-number',
 				'type'     => 'spinner',
@@ -407,7 +407,7 @@ $this->sections[] = array(
 				'required' => array('project-related', '=', true),
 			),
 
-			// Related Projects Slider
+			// Project Slider
 			array(
 				'id'       => 'project-related-slider',
 				'type'     => 'switch',
@@ -422,15 +422,104 @@ $this->sections[] = array(
 				),
 			),
 
-			// Related Projects Featured Media Placeholder
+			// Columns
 			array(
-				'id'             => 'project-related-feat-ph',
-				'type'           => 'media',
-				'title'          => __( 'Featured Media Placeholder', 'mixt' ),
-				'subtitle'       => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
-				'mode'           => 'jpg, jpeg, png',
-				'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+				'id'       => 'project-related-cols',
+				'type'     => 'slider',
+				'title'    => __( 'Columns', 'mixt' ),
+				'subtitle' => __( 'How many columns (related projects per row) to display', 'mixt' ),
+				'default'  => 3,
+				'min'      => 1,
+				'max'      => 6,
 				'required' => array('project-related', '=', true),
+			),
+
+			// Tablet (medium screen) Columns
+			array(
+				'id'       => 'project-related-tablet-cols',
+				'type'     => 'slider',
+				'title'    => __( 'Tablet Columns', 'mixt' ),
+				'subtitle' => __( 'How many columns to display on tablets / medium screens', 'mixt' ),
+				'default'  => 3,
+				'min'      => 1,
+				'max'      => 6,
+				'required' => array('project-related', '=', true),
+			),
+
+			// Mobile (small screen) Columns
+			array(
+				'id'       => 'project-related-mobile-cols',
+				'type'     => 'slider',
+				'title'    => __( 'Mobile Columns', 'mixt' ),
+				'subtitle' => __( 'How many columns to display on mobiles / small screens', 'mixt' ),
+				'default'  => 2,
+				'min'      => 1,
+				'max'      => 3,
+				'required' => array('project-related', '=', true),
+			),
+
+			// Display Type
+			array(
+				'id'       => 'project-related-type',
+				'type'     => 'button_set',
+				'title'    => __( 'Type', 'mixt' ),
+				'subtitle' => __( 'Display text-only projects or with featured media', 'mixt' ),
+				'options'  => array(
+					'text'  => __( 'Text', 'mixt' ),
+					'media' => __( 'Media', 'mixt' ),
+				),
+				'default'  => 'media',
+				'required' => array('project-related', '=', true),
+			),
+
+			// Text Elements
+			array(
+				'id'       => 'project-related-elements',
+				'type'     => 'checkbox',
+				'title'    => __( 'Text Elements', 'mixt' ),
+				'subtitle' => __( 'Select which elements to display', 'mixt' ),
+				'options'  => array(
+					'date'     => __( 'Date', 'mixt' ),
+					'comments' => __( 'Comments', 'mixt' ),
+					'excerpt'  => __( 'Excerpt', 'mixt' ),
+				),
+				'default'  => array(
+					'date'     => '1',
+					'comments' => '1',
+				),
+				'required' => array(
+					array('project-related', '=', true),
+					array('project-related-type', '=', 'text'),
+				),
+			),
+
+			// Minimal Style
+			array(
+				'id'       => 'project-related-mini',
+				'type'     => 'switch',
+				'title'    => __( 'Minimal Style', 'mixt' ),
+				'subtitle' => __( 'Hide the title and shrink items on small screens', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => true,
+				'required' => array(
+					array('project-related', '=', true),
+					array('project-related-type', '=', 'media'),
+				),
+			),
+
+			// Featured Media Placeholder
+			array(
+				'id'       => 'project-related-feat-ph',
+				'type'     => 'media',
+				'title'    => __( 'Featured Media Placeholder', 'mixt' ),
+				'subtitle' => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
+				'mode'     => 'jpg, jpeg, png',
+				'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+				'required' => array(
+					array('project-related', '=', true),
+					array('project-related-type', '=', 'media'),
+				),
 			),
 	),
 );

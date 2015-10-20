@@ -8,7 +8,7 @@
 		&.widget_shopping_cart {
 			.cart_list li {
 				padding-bottom: 0;
-				margin-bottom: 10px;
+				margin-bottom: $margin-s;
 				border-color: inherit;
 				border-bottom-width: 1px;
 				border-bottom-style: solid;
@@ -40,8 +40,8 @@
 		}
 
 		// Layered Nav
-		.widget_layered_nav {
-			ul li a {
+		.widget.woocommerce {
+			ul.nav li > a {
 				padding: 5px 0;
 				display: block;
 
@@ -115,7 +115,7 @@
 				}
 				ins {
 					float: left;
-					margin-right: 10px;
+					margin-right: $margin-s;
 					text-decoration: none;
 				}
 			}

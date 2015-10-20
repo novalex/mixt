@@ -14,7 +14,7 @@
 
 	$border: map-get($theme, 'border');
 
-	$theme-dark: theme-color($theme, 'bg-dark', lumin($bg) <= 0.6);
+	$theme-dark: theme-color($theme, 'bg-dark', false);
 
 	$color-fade: if( $theme-dark, theme-color($theme, 'color-fade', darken($color, 10)), theme-color($theme, 'color-fade', lighten($color, 10)) );
 	$color-inv-fade: if( $theme-dark, theme-color($theme, 'color-inv-fade', lighten($color-inv, 10)), theme-color($theme, 'color-inv-fade', darken($color-inv, 10)) );
@@ -124,7 +124,7 @@
 			}
 		}
 
-		.post-related .related-title { color: $bg-dark-color; }
+		.post-related.related-media .related-content { color: $bg-dark-color; }
 
 		.link-list li {
 			a:hover,
@@ -256,6 +256,8 @@
 		// LightSlider
 		@if $lightslider {
 			.lSSlideOuter .lSPager.lSpg > li {
+				a { background-color: $color-fade; }
+				
 				&:hover a,
 				&.active a {
 					background-color: $accent;

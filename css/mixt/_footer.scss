@@ -1,5 +1,6 @@
 
 #colophon {
+
 	.footer-row {
 		padding: $gutter-lg 0 0;
 		border-style: solid;
@@ -17,7 +18,57 @@
 		+ .copyright-row { border-top-width: 0; }
 	}
 
-	.copyright-row { padding: $padding-m 0; }
+	.copyright-row {
+		$spacing: $padding-m / 2;
+
+		position: relative;
+		z-index: 2; // Set footer above back to top button
+		padding: $spacing 0;
+
+		.container,
+		.inner,
+		.left-content,
+		.right-content { border-color: inherit; }
+
+		.inner {
+			width: 100%;
+			height: auto;
+		}
+
+		.left-content,
+		.right-content {
+			padding-top: $spacing;
+			padding-bottom: $spacing;
+		}
+
+		@include media('screen', '(min-width: 480px)') {
+			.inner { display: table; }
+			
+			.left-content,
+			.right-content {
+				text-align: left;
+				display: table-cell;
+				vertical-align: middle;
+			}
+
+			.left-content { padding-right: $padding-s; }
+
+			.right-content { text-align: right; }
+
+			.flexbox & {
+				.inner {
+					display: flex;
+					flex-flow: row wrap;
+					align-items: center;
+				}
+
+				.left-content { flex-grow: 1; }
+				
+				.left-content,
+				.right-content { display: inherit; }
+			}
+		}
+	}
 
 	.widget-row,
 	.copyright-row {
@@ -33,6 +84,7 @@
 	bottom: 15px; right: 15px;
 	opacity: 0.85;
 	display: none;
+	z-index: 1;
 
 	@include media('screen', '<mercury') {
 		display: none !important;

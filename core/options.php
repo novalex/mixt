@@ -3,7 +3,7 @@
 /**
  * Options Framework
  *
- * @package MIXT
+ * @package MIXT\Core
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
@@ -13,6 +13,11 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * Theme configuration class
  */
 class Mixt_Options {
+
+	/**
+	 * Stored configuration options
+	 * @var array
+	 */
 	protected static $config = array();
 
 	/**
@@ -45,8 +50,9 @@ class Mixt_Options {
 
 	/**
 	 * Return an option, group of options, or all options
+	 * 
 	 * @param  string $group
-	 * @param  string $key   key to retreive from group
+	 * @param  string $key   Key to retreive from group
 	 */
 	public static function get($group, $key = null) {
 		if ( $group == 'all' ) {
@@ -61,18 +67,20 @@ class Mixt_Options {
 	}
 
 	/**
-	 * Set an option or group
+	 * Set an option or group of options
+	 * 
 	 * @param string $group
 	 * @param string $key
 	 * @param mixed  $val
 	 */
-	public static function set($group, $key, $val) {
+	public static function set($group, $key = null, $val) {
 		if ( empty($key) ) { self::$config[$group] = $val; }
 		else { self::$config[$group][$key] = $val; }
 	}
 
 	/**
 	 * Add a group of options to the config array
+	 * 
 	 * @param string $group
 	 * @param mixed  $val
 	 */
@@ -80,6 +88,12 @@ class Mixt_Options {
 		self::$config[$group] = array_merge(self::$config[$group], $val);
 	}
 
+	/**
+	 * Retrieve a group of options
+	 * 
+	 * @param  string $group
+	 * @return array
+	 */
 	public static function options($group) {
 		$page_type = self::$config['page']['page-type'];
 		if ( $group == 'layout' && $page_type != 'blog' && self::$config['page']['posts-page'] ) {
@@ -158,7 +172,7 @@ class Mixt_Options {
 	}
 
 	/**
-	 * Post-init functions
+	 * Post-initialization functions
 	 */
 	protected function after_init() {
 		if ( in_array(self::get('page', 'sidebar-id'), array('none', 'auto')) ) {
@@ -181,7 +195,7 @@ class Mixt_Options {
 
 		// Set the theme for elements when they are set to auto
 		$site_theme = self::get('themes', 'site');
-		if ( ! array_key_exists($site_theme, mixt_default_themes()) && ! array_key_exists($site_theme, get_option('mixt-nav-themes', array())) ) {
+		if ( ! array_key_exists( $site_theme, mixt_get_themes('nav') ) ) {
 			if ( self::get('themes', 'nav') == 'auto' ) self::set('themes', 'nav', MIXT_THEME);
 			if ( self::get('themes', 'sec-nav') == 'auto' ) self::set('themes', 'sec-nav', MIXT_THEME);
 		} else {
@@ -196,6 +210,7 @@ class Mixt_Options {
 
 	/**
 	 * Get page type
+	 * 
 	 * @return string
 	 */
 	public static function page_type() {
@@ -210,16 +225,20 @@ class Mixt_Options {
 		else if ( is_search() ) { return 'search'; }
 		else if ( is_tag() ) { return 'tag'; }
 		else if ( is_tax() ) { return 'taxonomy'; }
+		else if ( is_singular('portfolio') ) { return 'single-portfolio'; }
 		else { return 'single'; }
 	}
+
 	// Check if page is a blog page
 	public static function is_blog() {
 		return ( ! is_front_page() && is_home() || get_page_template_slug() == 'templates/blog.php' );
 	}
+
 	// Check if page is a portfolio page
 	public static function is_portfolio() {
 		return ( is_post_type_archive('portfolio') || get_page_template_slug() == 'templates/portfolio.php' );
 	}
+
 	// Check if page is a shop page
 	public static function is_shop($type = 'any') {
 		if ( class_exists('WooCommerce') ) {
@@ -234,11 +253,13 @@ class Mixt_Options {
 			return false;
 		}
 	}
+
 	// Check if page is a posts page
 	public static function is_posts_page() {
 		$single_pages = array(
 			'single',
 			'onepage',
+			'single-portfolio',
 		);
 		return ( ! in_array(self::page_type(), $single_pages) );
 	}
@@ -253,8 +274,9 @@ class Mixt_Options {
 
 	/**
 	 * Get global and page specific options. Page options will override global ones.
-	 * @param mixed   $option_arr options to retrieve
-	 * @param integer $post_id id of the post or page for which to retreive meta options
+	 * 
+	 * @param array   $option_arr Options to retrieve
+	 * @param integer $post_id    ID of the post or page for which to retreive meta options
 	 */
 	public static function get_options($option_arr, $post_id = null) {
 		$options = array();
@@ -337,5 +359,9 @@ class Mixt_Options {
 new Mixt_Options;
 
 // Wrapper functions
-function mixt_get_options($option_arr) { return Mixt_Options::get_options($option_arr); }
-function mixt_meta($key, $post_id = null, $single = true) { return Mixt_Options::get_meta($key, $post_id, $single); }
+if ( ! function_exists('mixt_get_options') ) {
+	function mixt_get_options($option_arr) { return Mixt_Options::get_options($option_arr); }
+}
+if ( ! function_exists('mixt_meta') ) {
+	function mixt_meta($key, $post_id = null, $single = true) { return Mixt_Options::get_meta($key, $post_id, $single); }
+}

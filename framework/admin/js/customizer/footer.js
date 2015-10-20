@@ -58,12 +58,20 @@ CUSTOMIZER INTEGRATION - FOOTER
 			$('#colophon .copyright-row').css('border-color', to);
 		});
 	});
-	wp.customize('mixt_opt[footer-code]', function( value ) {
+	wp.customize('mixt_opt[footer-left-code]', function( value ) {
 		var date = new Date(),
 			year = date.getFullYear();
 		value.bind( function(to) {
 			to = to.replace(/\{\{year\}\}/g, year);
-			$('#colophon .site-info').html(to);
+			$('#colophon .left-content .content-code').html(to);
+		});
+	});
+	wp.customize('mixt_opt[footer-right-code]', function( value ) {
+		var date = new Date(),
+			year = date.getFullYear();
+		value.bind( function(to) {
+			to = to.replace(/\{\{year\}\}/g, year);
+			$('#colophon .right-content .content-code').html(to);
 		});
 	});
 

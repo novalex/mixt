@@ -9,7 +9,13 @@
 $options = mixt_get_options( array(
 	'back-to-top'      => array(),
 	'back-to-top-icon' => array( 'return' => 'value' ),
-	'footer-code'      => array( 'return' => 'value' ),
+	'left-content'     => array( 'type' => 'str', 'key' => 'footer-left-content', 'return' => 'value' ),
+	'left-code'        => array( 'key' => 'footer-left-code', 'return' => 'value' ),
+	'left-hide'        => array( 'key' => 'footer-left-hide' ),
+	'right-content'    => array( 'type' => 'str', 'key' => 'footer-right-content', 'return' => 'value' ),
+	'right-code'       => array( 'key' => 'footer-right-code', 'return' => 'value' ),
+	'right-hide'       => array( 'key' => 'footer-right-hide' ),
+	'social-profiles'  => array( 'key' => 'footer-social-profiles', 'return' => 'value' ),
 ) );
 
 ?>
@@ -71,24 +77,48 @@ $options = mixt_get_options( array(
 			<?php
 		}
 
-		// Footer Copyright Row ?>
-		<div class="footer-row copyright-row theme-section-main">
-			<div class="container">
-				<div class="row">
-					<div class="site-copyright col-sm-12">
-						<?php
+		// Footer Copyright Row
 
-						do_action( 'mixt_credits' );
+		$left_content = $left_content_class = $right_content = $right_content_class = '';
 
-						$footer_code = str_replace('{{year}}', date('Y'), $options['footer-code']);
+		if ( $options['left-content'] == '1' || $options['right-content'] == '1' ) {
+			$profiles = array();
+			global $mixt_opt;
+			$set_profiles = get_option('mixt-social-profiles', mixt_preset_social_profiles('networks'));
+			foreach ( $set_profiles as $key => $profile ) {
+				if ( ! empty($options['social-profiles'][$key]) ) $profiles[$key] = $profile;
+			}
+		}
 
-						echo "<div class='site-info'>$footer_code</div>";
+		if ( $options['left-content'] == '1' ) {
+			$left_content = mixt_social_profiles(false, array( 'style' => 'group', 'profiles' => $profiles, 'color' => 'minimal' ));
+		} else if ( $options['left-content'] == '2' ) {
+			$left_content = '<div class="content-code">' . str_replace('{{year}}', date('Y'), $options['left-code']) . '</div>';
+		}
+		if ( $options['left-hide'] ) { $left_content_class = 'hidden-xs'; }
 
-						?>
+		if ( $options['right-content'] == '1' ) {
+			$right_content = mixt_social_profiles(false, array( 'style' => 'group', 'profiles' => $profiles, 'color' => 'minimal' ));
+		} else if ( $options['right-content'] == '2' ) {
+			$right_content = '<div class="content-code">' . str_replace('{{year}}', date('Y'), $options['right-code']) . '</div>';
+		}
+		if ( $options['right-hide'] ) { $right_content_class = 'hidden-xs'; }
+
+		if ( ! empty($left_content) || ! empty($right_content) ) { ?>
+			<div class="footer-row copyright-row site-copyright theme-section-main">
+				<div class="container">
+					<div class="inner">
+						<div class="left-content <?php echo $left_content_class; ?>">
+							<?php echo $left_content; ?>
+						</div>
+						<div class="right-content <?php echo $right_content_class; ?>">
+							<?php echo $right_content; ?>
+						</div>
 					</div>
+					<?php do_action('mixt_credits'); ?>
 				</div>
 			</div>
-		</div>
+		<?php } else { do_action('mixt_credits'); } ?>
 		
 	</footer><?php // close #colophon ?>
 

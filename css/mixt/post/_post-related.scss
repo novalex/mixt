@@ -2,7 +2,6 @@
 // Related Posts Styling
 
 .post-related {
-	$max-height: 200px;
 	$gutter: $margin-m;
 
 	.title { margin-bottom: 0; }
@@ -12,7 +11,6 @@
 		overflow: hidden;
 		position: relative;
 		min-height: 30px;
-		max-height: $max-height;
 	}
 
 	.title + div:not(.related-inner),
@@ -31,7 +29,61 @@
 		}
 	}
 
+	.related-title {
+		color: inherit;
+		font-size: 12px;
+		font-weight: bold;
+	}
+
 	* { border-color: inherit; }
+
+	.related-title,
+	.post-meta {
+		display: block;
+		margin-bottom: 5px;
+
+		&:last-child { margin-bottom: 0; }
+	}
+
+	.post-meta {
+		@include clearfix;
+		> span { display: block; }
+	}
+
+	.post-excerpt { font-size: $font-size-s; }
+
+
+	// Media Type
+
+	&.related-media {
+		.post { max-height: 200px; }
+
+		.related-content,
+		.related-title-tip {
+			position: absolute;
+			left: 0; right: 0; bottom: 0;
+		}
+		.related-inner {
+			.related-content,
+			.related-title-tip { left: $gutter / 2; right: $gutter / 2; }
+		}
+
+		.related-content {
+			margin: 0;
+			border-radius: 0 0 $bd-radius $bd-radius;
+			background-color: rgba(0,0,0,0.3);
+			vertical-align: middle;
+			text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+			z-index: 1;
+		}
+
+		.related-title { padding: 6px 10px; }
+
+		.related-title-tip {
+			top: 0;
+			opacity: 0; z-index: -1;
+		}
+	}
 
 	.post-feat {
 		width: 100%;
@@ -42,7 +94,7 @@
 		&,
 		img {
 			min-height: 140px;
-			max-height: $max-height;
+			max-height: 200px;
 		}
 
 		> a { height: 100%; }
@@ -59,61 +111,85 @@
 		}
 	}
 
-	.related-title,
-	.related-title-tip {
-		position: absolute;
-		left: 0; right: 0; bottom: 0;
-	}
-	.related-inner {
-		.related-title,
-		.related-title-tip { left: $gutter / 2; right: $gutter / 2; }
+
+	// Text Type
+
+	&.related-text {
+		.post { flex-flow: column; }
 	}
 
-	.related-title {
-		margin: 0; padding: 6px 10px;
-		font-weight: bold;
-		font-size: 12px;
-		border-radius: 0 0 $bd-radius $bd-radius;
-		background-color: rgba(0,0,0,0.3);
-		vertical-align: middle;
-		text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-	}
 
-	.related-title-tip {
-		top: 0;
-		opacity: 0; z-index: -1;
+	// Slider Style
+
+	.slider-cont {
+		opacity: 1;
+		transition: opacity 0.3s;
+
+		.js &.init { opacity: 0; }
+
+		.post { @include clearfix; }
 	}
+	.lSSlideOuter .lSPager.lSpg { margin-top: 0 !important; }
+
 
 	// Columns
-	.related-2-col .post,
-	.related-4-col .post { width: 50%; }
+
+	.related-1-col .post { width: 100%; }
+	.related-2-col .post { width: 50%; }
+	.related-3-col .post { width: 33.333%; }
+	.related-4-col .post { width: 25%; }
+	.related-5-col .post { width: 20%; }
+	.related-6-col .post { width: 16.666%; }
+
+	// Tablet Columns
+	@include media('screen', '<earth') {
+		.related-tablet-1-col .post { width: 100%; }
+		.related-tablet-2-col .post { width: 50%; }
+		.related-tablet-3-col .post { width: 33.333%; }
+		.related-tablet-4-col .post { width: 25%; }
+		.related-tablet-5-col .post { width: 20%; }
+		.related-tablet-6-col .post { width: 16.666%; }
+	}
+
+	// Mobile Columns
+	@include media('screen', '(max-width: 580px)') {
+		.related-mobile-1-col .post { width: 100%; }
+		.related-mobile-2-col .post { width: 50%; }
+		.related-mobile-3-col .post { width: 33.333%; }
+	}
 
 	@include media('screen', '<mars') {
-		.post { max-height: 100px; }
-		.post-feat {
-			&,
-			img { min-height: 100px; max-height: 100px; }
+		&.related-media.mobile-mini {
+			.post { max-height: 100px; }
+			.post-feat {
+				&,
+				img { min-height: 100px; max-height: 100px; }
+			}
+			.related-content { display: none; }
+			.related-title-tip { z-index: 1; }
+			.feat-format i { margin-top: -16px; }
 		}
-		.related-title { display: none; }
-		.related-title-tip { z-index: 1; }
-		.feat-format i { margin-top: -16px; }
 	}
 
 	@include media('screen', '<mercury') {
-		.related-inner {
-			.post { max-height: 70px; }
-			.post-feat {
-				&,
-				img { min-height: 70px; max-height: 70px; }
+		&.related-media.mobile-mini {
+			.related-inner {
+				.post { max-height: 70px; }
+				.post-feat {
+					&,
+					img { min-height: 70px; max-height: 70px; }
+				}
 			}
 		}
 	}
 
+
 	// Flexbox Equal Height
+
 	.flexbox & .related-inner {
-		display: flex;
 		flex-flow: row wrap;
 
+		&,
 		.post,
 		.post-feat {
 			display: flex;

@@ -104,7 +104,8 @@ function mixt_customize_register($wp_customize) {
 	$wp_customize->get_setting('mixt_opt[footer-copy-bg-pat]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[footer-copy-text-color]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[footer-copy-border-color]')->transport = 'postMessage';
-	$wp_customize->get_setting('mixt_opt[footer-code]')->transport = 'postMessage';
+	$wp_customize->get_setting('mixt_opt[footer-left-code]')->transport = 'postMessage';
+	$wp_customize->get_setting('mixt_opt[footer-right-code]')->transport = 'postMessage';
 }
 add_action('customize_register', 'mixt_customize_register', 999);
 
@@ -135,13 +136,8 @@ function mixt_customize_options() {
 			'tagline-typo' => $mixt_opt['logo-tagline-typo'],
 		),
 		'nav' => $nav_options,
-		'themes' => mixt_default_themes(),
-		'breakpoints' => array(
-			'mercury' => 480,
-			'mars'    => 767,
-			'venus'   => 992,
-			'earth'   => 1200,
-		),
+		'themes' => mixt_get_themes('default'),
+		'breakpoints' => Mixt_DCSS::$media_bps,
 		'mixt-uri' => MIXT_URI,
 	);
 }
