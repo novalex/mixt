@@ -58,6 +58,8 @@ NAVBAR FUNCTIONS
 						else if ( mediaWrap.hasClass('bg-light') ) { this.navBgTop = 'bg-light'; }
 						else { this.navBgTop = this.navBg; }
 					}
+
+					Navbar.sticky.toggle();
 				} else {
 					this.navBgTop = this.navBg;
 				}
@@ -366,6 +368,7 @@ NAVBAR FUNCTIONS
 		$('style[data-id="mixt-nav-css"]').remove();
 		mainNavBar.removeClass('bg-light bg-dark').addClass('init');
 		Navbar.init(mainNavBar);
+
 	});
 
 	secNavBar.on('refresh', function() {
@@ -430,7 +433,7 @@ NAVBAR FUNCTIONS
 		if ( secNavBar.length ) {
 			secNavBar.removeClass('items-overlap');
 			var secNavContWidth = secNavCont.innerWidth(),
-				secNavItemsWidth = $('.left', secNavBar).outerWidth(true) + $('.right', secNavBar).outerWidth(true);
+				secNavItemsWidth = $('.left-content', secNavBar).outerWidth(true) + $('.right-content', secNavBar).outerWidth(true);
 			if ( secNavItemsWidth > secNavContWidth ) {
 				secNavBar.addClass('items-overlap');
 			}

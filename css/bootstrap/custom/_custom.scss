@@ -1,15 +1,23 @@
 
-// Component animations
-
-.fade { @include transition(opacity .2s ease); }
-
-
 // Alerts
 .alert {
 	a {
 		color: inherit;
 		font-weight: bold;
 	}
+}
+
+
+// Component animations
+
+.fade { @include transition(opacity .2s ease); }
+
+
+// Grid
+
+// Disable small container size
+@media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+	.container { width: 100%; }
 }
 
 

@@ -144,7 +144,7 @@
 			border-color: $border;
 		}
 
-		.comment-list li.bypostauthor { border-left-color: $accent; }
+		.comment-list .bypostauthor > .comment-cont { border-left-color: $accent; }
 
 
 		// BACKGROUND COLORS
@@ -242,7 +242,7 @@
 
 		// ELEMENT COLORS
 		
-		.mixt-stat.type-box,
+		.mixt-stat,
 		.mixt-headline span.color-auto:after,
 		.mixt-timeline .timeline-block:before { border-color: $border; }
 

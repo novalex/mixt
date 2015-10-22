@@ -70,7 +70,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$page_loader_anims = array_merge($page_loader_anims, $css_loop_anims);
 
 			// Themes
-			$themes_enabled = get_option('mixt-themes-enabled', true);
+			$themes_enabled = (bool) get_option('mixt-themes-enabled');
 			if ( $themes_enabled ) {
 				$site_themes = mixt_get_themes('site', 'all');
 				$nav_themes = mixt_get_themes('nav', 'all');
@@ -525,6 +525,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'on'       => __( 'Yes', 'mixt' ),
 							'off'      => __( 'No', 'mixt' ),
 							'default'  => true,
+						),
+
+						// BrowserSync Script
+						array(
+							'id'       => 'bsync-script',
+							'type'     => 'switch',
+							'title'    => __( 'BrowserSync Script', 'mixt' ),
+							'subtitle' => __( 'Add BrowserSync script in the footer (only for logged in admins)', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 						),
 				),
 			);

@@ -10,14 +10,14 @@ HEADER FUNCTIONS
 	/* global mixt_opt */
 
 	var viewport  = $(window),
-		mainNavBar = $('#main-nav'),
+		mainNav   = $('#main-nav'),
 		mediaWrap = $('.head-media');
 
 	// Head Media Functions
 	function headerFn() {
 		var container    = mediaWrap.children('.container'),
 			mediaCont    = mediaWrap.children('.media-container'),
-			topNavHeight = mainNavBar.outerHeight(),
+			topNavHeight = mainNav.outerHeight(),
 			wrapHeight   = mediaWrap.height(),
 			viewHeight   = viewport.height() - mediaWrap.offset().top;
 
@@ -60,7 +60,7 @@ HEADER FUNCTIONS
 	function headerScroll() {
 		var page   = $('html, body'),
 			offset = $('#content-wrap').offset().top;
-		if ( mixt_opt.nav.mode == 'fixed' ) { offset -= mainNavBar.children('.container').height(); }
+		if ( mixt_opt.nav.mode == 'fixed' ) { offset -= mainNav.children('.container').height(); }
 		$('.header-scroll').on('click', function() {
 			page.animate({ scrollTop: offset }, 800);
 		});

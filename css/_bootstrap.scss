@@ -1,3 +1,11 @@
+/*!
+ * Bootstrap v3.3.5 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ *
+ * Modified for use with the MIXT Theme
+ */
+
 // Core variables and mixins
 @import 'bootstrap/custom/variables';
 @import 'bootstrap/variables';
@@ -12,8 +20,7 @@
 @import 'bootstrap/scaffolding';
 @import 'bootstrap/type';
 @import 'bootstrap/code';
-// @import 'bootstrap/grid';
-@import 'bootstrap/custom/grid';
+@import 'bootstrap/grid';
 // @import 'bootstrap/tables';
 @import 'bootstrap/custom/tables';
 //@import 'bootstrap/forms';

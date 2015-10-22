@@ -32,7 +32,7 @@ class Mixt_DCSS {
 	 * Flag for stylesheet support
 	 * @var bool
 	 */
-	private $stylesheet = false;
+	protected $stylesheet = false;
 
 	/**
 	 * Media breakpoints defined in the CSS
@@ -46,18 +46,19 @@ class Mixt_DCSS {
 	);
 
 	public function __construct() {
+
 		// Output CSS in the header
 		add_action('mixt_head_css', array($this, 'print_head_css'));
 		// Output CSS in the body
 		add_action('mixt_body_css', array($this, 'print_body_css'));
 
 		// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
-		if ( ! is_customize_preview() && function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) {
+		if ( ! is_customize_preview() && ( ( function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) || file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) ) {
 			$this->stylesheet = true;
-			self::$stylesheet_css .= mixt_custom_css();
-		} else {
-			self::$head_css .= mixt_custom_css();
 		}
+
+		// Load theme generator file
+		require_once( MIXT_MODULES_DIR . '/dcss/themes.php' );
 	}
 
 	/**
@@ -65,8 +66,12 @@ class Mixt_DCSS {
 	 * Used to output page specific styles and custom CSS if stylesheets are unsupported
 	 */
 	public function print_head_css() {
+		// Generate custom CSS for the header
+		self::$head_css .= mixt_custom_css();
+		if ( ! $this->stylesheet ) { self::$head_css .= mixt_custom_theme_css(); }
+
 		if ( self::$head_css == '' ) return;
-		echo "\n<style type='text/css' data-id='mixt-head-css'>\n" . esc_html(self::$head_css) . "</style>";
+		echo "\n<style type='text/css' data-id='mixt-head-css'>\n" . self::$head_css . "</style>\n";
 	}
 
 	/**
@@ -75,18 +80,18 @@ class Mixt_DCSS {
 	 */
 	public function print_body_css() {
 		if ( self::$body_css == '' ) return;
-		echo "<style type='text/css' data-id='mixt-body-css' scoped>\n" . esc_html(self::$body_css) . "</style>\n";
+		echo "\n<style type='text/css' data-id='mixt-body-css' scoped>\n" . self::$body_css . "</style>\n";
 	}
 
 	/**
 	 * Update custom CSS stylesheet
 	 */
-	public function stylesheet() {
+	public function print_stylesheet() {
 		if ( $this->stylesheet ) {
 			WP_Filesystem();
 			global $wp_filesystem;
 
-			$css = esc_html(self::$stylesheet_css);
+			$css = self::$stylesheet_css . mixt_custom_theme_css();
 
 			$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
 			if ( ! empty($css) ) {
@@ -104,7 +109,7 @@ class Mixt_DCSS {
 	 * @param  string $range Breakpoint range (min for use with min-width or max)
 	 * @return string
 	 */
-	public function media_bp($bp, $range = 'max') {
+	public static function media_bp($bp, $range = 'max') {
 		if ( $range == 'max' ) {
 			return self::$media_bps[$bp] - 1 . 'px';
 		} else {

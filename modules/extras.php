@@ -72,14 +72,16 @@ add_filter('attachment_link', 'mixt_enhanced_image_navigation', 10, 2);
 
 // BrowserSync Script
 function mixt_browsersync() {
+	global $mixt_opt;
+
+	if ( empty($mixt_opt['bsync-script']) || (bool) $mixt_opt['bsync-script'] == false ) return;
+
 	ob_start();
 	?>
 	<script type="text/javascript" id="__bs_script__">
-		if ( ! (/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent) ) {
-			//<![CDATA[
-			document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js'><\/script>".replace("HOST", location.hostname));
-			//]]>
-		}
+		//<![CDATA[
+		document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js'><\/script>".replace("HOST", location.hostname));
+		//]]>
 	</script>
 	<?php
 	echo ob_get_clean();

@@ -23,8 +23,6 @@ $options = mixt_get_options( array(
 
 			</div><?php // close .row ?>
 
-			<?php do_action('mixt_body_css'); ?>
-
 		</div><?php // close #content-wrap ?>
 
 		<?php
@@ -108,12 +106,15 @@ $options = mixt_get_options( array(
 			<div class="footer-row copyright-row site-copyright theme-section-main">
 				<div class="container">
 					<div class="inner">
+						<?php if ( ! empty($left_content) ) { ?>
 						<div class="left-content <?php echo $left_content_class; ?>">
 							<?php echo $left_content; ?>
 						</div>
+						<?php } if ( ! empty($right_content) ) { ?>
 						<div class="right-content <?php echo $right_content_class; ?>">
 							<?php echo $right_content; ?>
 						</div>
+						<?php } ?>
 					</div>
 					<?php do_action('mixt_credits'); ?>
 				</div>
@@ -123,6 +124,8 @@ $options = mixt_get_options( array(
 	</footer><?php // close #colophon ?>
 
 </div><?php // close #main-wrap
+
+do_action('mixt_body_css');
 
 wp_footer();
 

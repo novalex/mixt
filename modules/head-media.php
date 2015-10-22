@@ -24,6 +24,7 @@ function mixt_head_media() {
 		'bg' => array(
 			'key'     => 'head-bg-color',
 			'return'  => 'value',
+			'default' => '#fff',
 		),
 		// Slider
 		'slider' => array(
@@ -132,7 +133,7 @@ function mixt_head_media() {
 							} else {
 								header.removeClass('bg-light bg-dark');
 								navbar.removeClass('slide-bg-light slide-bg-dark');
-								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-light bg-dark').addClass('bg-' + navbar.data('bg')); }
+								if ( navbar.hasClass('position-top') ) { navbar.removeClass('bg-light bg-dark').addClass('bg-' + navbar.attr('data-bg')); }
 							}
 						}
 					}
@@ -208,7 +209,7 @@ function mixt_head_media() {
 				$img_atts .= 'data-top="transform: translate3d(0, 0%, 0);" data-top-bottom="transform: translate3d(0, 25%, 0);" ';
 			}
 
-			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";
+			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-color: {$options['bg']}; background-image: url($img_url);'></div>";
 		}
 
 		// Video Background
@@ -326,27 +327,30 @@ function mixt_head_media() {
 /**
  * Generate CSS for the header media element
  */
-if ( Mixt_Options::get('header', 'enabled') ) {
-	$options = mixt_get_options( array(
-		'bg' => array( 'return' => 'value', 'key' => 'head-bg-color' ),
-		'text' => array( 'return' => 'value', 'key' => 'head-text-color' ),
-		'inv-text' => array( 'return' => 'value', 'key' => 'head-inv-text-color' ),
-	) );
+function mixt_head_media_css() {
+	if ( Mixt_Options::get('header', 'enabled') ) {
+		$options = mixt_get_options( array(
+			'bg' => array( 'return' => 'value', 'key' => 'head-bg-color' ),
+			'text' => array( 'return' => 'value', 'key' => 'head-text-color' ),
+			'inv-text' => array( 'return' => 'value', 'key' => 'head-inv-text-color' ),
+		) );
 
-	$hm = '.head-media';
-	$css = '';
+		$hm = '.head-media';
+		$css = '';
 
-	if ( ! empty($options['bg']) ) {
-		$css .= "$hm { background-color: {$options['bg']}; }\n";
-	}
-	if ( ! empty($options['text']) ) {
-		$hm_light = $hm.'.bg-light';
-		$css .= "$hm_light .container, $hm_light .media-inner > a, $hm_light .header-scroll, $hm_light #breadcrumbs > li + li:before { color: {$options['text']} !important; }\n";
-	}
-	if ( ! empty($options['inv-text']) ) {
-		$hm_dark = $hm.'.bg-dark';
-		$css .= "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$options['inv-text']} !important; }\n";
-	}
+		if ( ! empty($options['bg']) ) {
+			$css .= "$hm { background-color: {$options['bg']}; }\n";
+		}
+		if ( ! empty($options['text']) ) {
+			$hm_light = $hm.'.bg-light';
+			$css .= "$hm_light .container, $hm_light .media-inner > a, $hm_light .header-scroll, $hm_light #breadcrumbs > li + li:before { color: {$options['text']} !important; }\n";
+		}
+		if ( ! empty($options['inv-text']) ) {
+			$hm_dark = $hm.'.bg-dark';
+			$css .= "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$options['inv-text']} !important; }\n";
+		}
 
-	if ( $css != '' ) Mixt_DCSS::$head_css .= $css;
+		if ( $css != '' ) Mixt_DCSS::$head_css .= $css;
+	}
 }
+add_action('mixt_options_set', 'mixt_head_media_css');

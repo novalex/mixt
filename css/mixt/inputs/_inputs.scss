@@ -61,17 +61,45 @@ select {
 	background-color: $input-bg;
 	border: 1px solid $input-border;
 	box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+
 	// Remove default browser select styling and show custom arrow
-	padding-right: 24px;
+	padding-right: 24px !important;
 	@extend %select-arrow;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-    text-indent: 0.01px;
-    text-overflow: '';
+	text-indent: 0.01px;
+	text-overflow: '';
 
-    @extend %theme-input-color;
+	@extend %theme-input-color;
 
-    &::-ms-expand { display: none; }
+	&::-ms-expand { display: none; }
+
+	// Select Sizes
+	&.select-xl {
+		padding: $padding-xl-vertical $padding-xl-horizontal;
+		font-size: $font-size-large;
+    }
+	&.select-lg {
+		padding: $padding-large-vertical $padding-large-horizontal;
+		font-size: $font-size-base;
+	}
+	&.select-xl,
+	&.select-lg {
+		line-height: $line-height-large;
+		border-radius: $border-radius-large;
+	}
+	&.select-sm {
+		padding: $padding-small-vertical $padding-small-horizontal;
+	}
+	&.select-xs {
+		padding: $padding-xs-vertical $padding-xs-horizontal;
+	}
+	&.select-sm,
+	&.select-xs { 
+		font-size: $font-size-small;
+		line-height: $line-height-small;
+		border-radius: $border-radius-small;
+	}
 }
 
 

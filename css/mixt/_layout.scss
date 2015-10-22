@@ -49,7 +49,9 @@
 		@media (min-width: $screen-md-min + $gutter-lg) and (max-width: $screen-lg-min) { width: $container-md + $gutter-lg; }
 		@media (min-width: $screen-lg-min + $gutter-lg) { width: $container-lg + $gutter-lg; }
 	}
-	#main-wrap { overflow: hidden; }
+
+	#main-wrap { box-shadow: 0 0 3px 1px rgba(0,0,0,0.1); }
+	#main-wrap-inner { overflow: hidden; }
 
 	&.fixed-nav #main-nav {
 		left: auto;

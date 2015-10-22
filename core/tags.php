@@ -254,14 +254,15 @@ if ( ! function_exists('mixt_comment') ) {
 
 					<?php // Comment Body ?>
 					<div class="comment-body">
-						<?php if ( '0' == $comment->comment_approved ) : ?>
-							<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'mixt' ); ?></p>
-						<?php endif; ?>
-
 						<div class="comment-content">
-							<?php comment_text(); ?>
-						</div>
+							<?php
+								if ( '0' == $comment->comment_approved ) { ?>
+									<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'mixt' ); ?></p>
+								<?php }
 
+								comment_text();
+							?>
+						</div>
 						<?php comment_reply_link(
 							array_merge(
 								$args, array(

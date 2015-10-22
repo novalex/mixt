@@ -11,9 +11,6 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 // Load dynamic CSS class
 require_once( MIXT_MODULES_DIR . '/dcss/class-dcss.php' );
 
-// Load theme generator file
-require_once( MIXT_MODULES_DIR . '/dcss/themes.php' );
-
 
 /**
  * Generate custom CSS based on options
@@ -23,8 +20,6 @@ require_once( MIXT_MODULES_DIR . '/dcss/themes.php' );
 function mixt_custom_css() {
 	global $mixt_opt;
 	if ( ! is_array($mixt_opt) ) { return; }
-
-	$theme_ob = new Mixt_Themes;
 
 	$defaults = array(
 		'nav-height'        => 50,
@@ -100,7 +95,7 @@ function mixt_custom_css() {
 		} else {
 			$content_width = "calc(100% - {$mixt_opt['sidebar-width-sm']})";
 		}
-		echo "@media only screen and ( min-width: " . $theme_ob->media_bp('mars', 'min') . " ) {\n";
+		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('mars', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
 			echo "\t#content-wrap.has-sidebar .sidebar { width: {$mixt_opt['sidebar-width-sm']}; }\n";
 		echo "}\n";
@@ -111,7 +106,7 @@ function mixt_custom_css() {
 		} else {
 			$content_width = "calc(100% - {$mixt_opt['sidebar-width']})";
 		}
-		echo "@media only screen and ( min-width: " . $theme_ob->media_bp('venus', 'min') . " ) {\n";
+		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('venus', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
 			echo "\t#content-wrap.has-sidebar .sidebar { width: {$mixt_opt['sidebar-width']}; }\n";
 		echo "}\n";
@@ -131,9 +126,6 @@ function mixt_custom_css() {
 	}
 
 	if ( $body_styles != '' ) { echo "body { $body_styles }\n"; }
-
-	// Site Theme
-	$theme_ob->output_site();
 
 
 	// LOGO STYLING
@@ -268,7 +260,7 @@ function mixt_custom_css() {
 			echo "#main-wrap.nav-vertical.nav-full.nav-right { padding-right: {$mixt_opt['nav-vertical-width-sm']}; }\n";
 		}
 		if ( ! empty($mixt_opt['nav-vertical-width']) ) {
-			echo "@media only screen and ( min-width: " . $theme_ob->media_bp('earth', 'min') . " ) {\n";
+			echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('earth', 'min') . " ) {\n";
 				echo "\t#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: {$mixt_opt['nav-vertical-width']}; }\n";
 				echo "\t#main-wrap.nav-vertical.nav-full.nav-left { padding-left: {$mixt_opt['nav-vertical-width']}; }\n";
 				echo "\t#main-wrap.nav-vertical.nav-full.nav-right { padding-right: {$mixt_opt['nav-vertical-width']}; }\n";
@@ -288,9 +280,6 @@ function mixt_custom_css() {
 	if ( ! empty($nav_font['text-transform']) ) { $navbar_properties .= "text-transform: {$nav_font['text-transform']}; "; }
 
 	if ( $navbar_properties != '' ) echo ".navbar-mixt { $navbar_properties }\n";
-
-	// Navbar Themes
-	$theme_ob->output_navbar();
 
 
 	// LOCATION BAR STYLING
@@ -341,6 +330,24 @@ function mixt_custom_css() {
 	if ( ! empty($footer_options['footer-copy-bg-color']) ) { $footer_copy_styles .= "background-color: {$footer_options['footer-copy-bg-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-bg-pat']) ) { $footer_copy_styles .= "background-image: url({$footer_options['footer-copy-bg-pat']}); "; }
 	if ( $footer_copy_styles != '' ) echo "#colophon .copyright-row { $footer_copy_styles }\n";
+
+	return ob_get_clean();
+}
+
+
+/**
+ * Generate theme CSS
+ */
+function mixt_custom_theme_css() {
+	$themes_ob = new Mixt_Themes();
+
+	ob_start();
+
+	// Site Themes
+	$themes_ob->output_site();
+
+	// Navbar Themes
+	$themes_ob->output_navbar();
 
 	return ob_get_clean();
 }

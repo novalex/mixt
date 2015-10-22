@@ -188,7 +188,7 @@ function mixt_options_changed($mixt_opt = null) {
 	if ( array_key_exists('nav-themes', $mixt_opt) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
 
 	// Update Custom CSS
-	( new Mixt_DCSS() )->stylesheet();
+	( new Mixt_DCSS() )->print_stylesheet();
 
 	// Social Profiles
 	if ( ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }
@@ -242,6 +242,17 @@ function mixt_scripts() {
 	// Main CSS
 	wp_enqueue_style( 'mixt-main', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
 
+	// Custom Dynamic Stylesheet
+	if ( file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
+		wp_enqueue_style( 'mixt-dynamic', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
+	}
+
+	// Icon Fonts
+	$icon_fonts = Mixt_Options::get('assets', 'icon-fonts');
+	foreach ( $icon_fonts as $font => $val ) {
+		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
+	}
+
 	// Bootstrap JS
 	wp_enqueue_script( 'mixt-bootstrap-js', MIXT_URI . '/dist/bootstrap.js', array( 'jquery' ), MIXT_VERSION, true );
 
@@ -256,17 +267,6 @@ function mixt_scripts() {
 
 	// Comment Reply JS
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { wp_enqueue_script( 'comment-reply' ); }
-
-	// Icon Fonts
-	$icon_fonts = Mixt_Options::get('assets', 'icon-fonts');
-	foreach ( $icon_fonts as $font => $val ) {
-		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
-	}
-
-	// Custom Dynamic Stylesheet
-	if ( file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
-		wp_enqueue_style( 'mixt-dynamic', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
-	}
 
 	// Enqueue the lightSlider plugin on blog and portfolio pages when AJAX pagination is enabled
 	if ( in_array(Mixt_Options::get('layout', 'pagination-type'), array('ajax-click', 'ajax-scroll')) && in_array(Mixt_Options::get('page', 'page-type'), array('blog', 'portfolio')) ) {

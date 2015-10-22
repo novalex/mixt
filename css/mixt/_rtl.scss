@@ -24,7 +24,7 @@
 
 		.input-group .form-control { direction: rtl; }
 
-		select { padding-left: 24px; padding-right: $padding-base-horizontal; }
+		select { padding-left: 24px !important; padding-right: $padding-base-horizontal !important; }
 
 		select,
 		.mixt & .select2-container .select2-arrow b:after { background-position: center left; }

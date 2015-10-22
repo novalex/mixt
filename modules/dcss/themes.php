@@ -19,7 +19,7 @@ class Mixt_Themes extends Mixt_DCSS {
 	public $themes_enabled, $active_themes, $default_themes, $site_themes, $themes;
 
 	public function __construct() {
-		$this->themes_enabled = get_option('mixt-themes-enabled', false);
+		$this->themes_enabled = (bool) get_option('mixt-themes-enabled');
 		if ( $this->themes_enabled ) {
 			$this->active_themes = mixt_get_options( array(
 				'site'    => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
@@ -28,8 +28,8 @@ class Mixt_Themes extends Mixt_DCSS {
 				'footer'  => array( 'key' => 'footer-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 			) );
 			$this->default_themes = mixt_get_themes('default');
-			$this->site_themes = array_merge( $this->default_themes, mixt_get_themes('site', 'custom') );
-			$this->nav_themes = array_merge( $this->default_themes, mixt_get_themes('nav', 'custom') );
+			$this->site_themes = array_merge( $this->default_themes, get_option('mixt-site-themes', array()) );
+			$this->nav_themes = array_merge( $this->default_themes, get_option('mixt-nav-themes', array()) );
 		}
 	}
 
@@ -50,6 +50,8 @@ class Mixt_Themes extends Mixt_DCSS {
 			$theme = $this->site_themes[$theme_id];
 
 			if ( ! is_array($theme) ) continue;
+
+			$theme_name = ( ! empty($theme['name']) ) ? $theme['name'] : $theme_id;
 
 			$th = ".theme-$theme_id";
 			$body_th = ".body-theme-$theme_id";
@@ -111,7 +113,7 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// START CSS RULES
 			
-			echo "/* MIXT Dynamic Site Theme */\n";
+			echo "/* $theme_name Site Theme */\n";
 				
 			// Main Background Color
 			
@@ -158,7 +160,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Border Colors
 			
 			echo "$th, $th #content-wrap, $th .sidebar ul, $th .post-feat.feat-format, $th .wp-caption, $th hr { border-color: $border; }\n";
-			echo "$th .comment-list li.bypostauthor { border-left-color: $accent; }\n";
+			echo "$th .comment-list .bypostauthor > .comment-cont { border-left-color: $accent; }\n";
 
 
 			// Background Colors
@@ -308,6 +310,8 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			$theme = $this->nav_themes[$theme_id];
 
+			$theme_name = ( ! empty($theme['name']) ) ? $theme['name'] : $theme_id;
+
 			$navbar       = ".navbar.theme-$theme_id";
 			$main_navbar  = ".navbar-mixt.theme-$theme_id";
 
@@ -398,7 +402,7 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// START CSS RULES
 			
-			echo "/* MIXT Dynamic Navbar Theme */\n";
+			echo "/* $theme_name Navbar Theme */\n";
 
 			echo "$navbar { border-color: $border; background-color: $bg; }\n";
 			

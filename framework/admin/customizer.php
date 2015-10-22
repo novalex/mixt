@@ -63,7 +63,7 @@ function mixt_customize_register($wp_customize) {
 	$wp_customize->get_setting('mixt_opt[sec-nav-theme]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[footer-theme]')->transport = 'postMessage';
 
-	if ( get_option('mixt-themes-enabled', true) ) {
+	if ( (bool) get_option('mixt-themes-enabled') ) {
 		$wp_customize->get_setting('mixt_opt[site-themes]')->transport = 'postMessage';
 		$wp_customize->get_setting('mixt_opt[nav-themes]')->transport = 'postMessage';
 	}

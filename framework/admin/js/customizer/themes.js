@@ -9,10 +9,10 @@ CUSTOMIZER INTEGRATION - THEMES
 
 MIXT.themes = {
 	regex: /theme-([^\s]*)/,
-	site: false,
-	nav: false,
-	secNav: false,
-	footer: false,
+	site: null,
+	nav: null,
+	secNav: null,
+	footer: null,
 	setup: false,
 	init: function() {
 		if ( ! this.setup ) {

@@ -363,11 +363,13 @@ if ( class_exists('WooCommerce') ) {
 	function mixt_wc_menu_cart() {
 		$cart_items = WC()->cart->get_cart_contents_count();
 		$output = '<a class="cart-contents" href="' . esc_url( WC()->cart->get_cart_url() ) . '">';
-			$output .= '<span class="count">' . wp_kses_data( sprintf( _n( '%d item', '%d items', $cart_items, 'mixt' ), $cart_items ) ) . '</span>';
+			$output .= '<span class="count">';
 			if ( $cart_items > 0 ) {
-				$output .= ' - <span class="amount">' . wp_kses_data( WC()->cart->get_cart_total() ) . '</span>';
+				$output .= wp_kses_data( sprintf( _n( '%d item', '%d items', $cart_items, 'mixt' ), $cart_items ) ) . ' - <span class="amount">' . wp_kses_data( WC()->cart->get_cart_total() ) . '</span>';
+			} else {
+				$output .= __( 'No items in the cart', 'mixt' );
 			}
-		$output .= '</a>';
+		$output .= '</span></a>';
 		return $output;
 	}
 
