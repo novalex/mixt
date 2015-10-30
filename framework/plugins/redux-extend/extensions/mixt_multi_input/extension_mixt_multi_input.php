@@ -25,14 +25,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( ! class_exists( 'ReduxFramework_Extension_multi_input' ) ) {
+if( ! class_exists( 'ReduxFramework_Extension_mixt_multi_input' ) ) {
 
 	/**
 	 * Main ReduxFramework custom_field extension class
 	 *
 	 * @since       3.1.6
 	 */
-	class ReduxFramework_Extension_multi_input extends ReduxFramework {
+	class ReduxFramework_Extension_mixt_multi_input extends ReduxFramework {
 
 		// Protected vars
 		protected $parent;
@@ -56,7 +56,7 @@ if( ! class_exists( 'ReduxFramework_Extension_multi_input' ) ) {
 			if ( empty( $this->extension_dir ) ) {
 				$this->extension_dir = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
 			}
-			$this->field_name = 'multi_input';
+			$this->field_name = 'mixt_multi_input';
 
 			self::$theInstance = $this;
 
@@ -76,9 +76,9 @@ if( ! class_exists( 'ReduxFramework_Extension_multi_input' ) ) {
 }
 
 // Register field as customizer control
-function multi_input_customizer_control() {
-	class Redux_Customizer_Control_multi_input extends Redux_Customizer_Control {
-		public $type = 'redux-multi_input';
+function mixt_multi_input_customizer_control() {
+	class Redux_Customizer_Control_mixt_multi_input extends Redux_Customizer_Control {
+		public $type = 'redux-mixt_multi_input';
 	}
 }
-add_action('redux/extension/customizer/control/includes', 'multi_input_customizer_control');
+add_action('redux/extension/customizer/control/includes', 'mixt_multi_input_customizer_control');

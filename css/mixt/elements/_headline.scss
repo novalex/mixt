@@ -102,7 +102,7 @@
 	@mixin headline_variants($selector, $color) {
 		.sideline.#{$selector}:after { border-color: $color; }
 	}
-	@each $selector, $color in $vc-colors {
+	@each $selector, $color in $element-colors {
 		@include headline_variants($selector, $color);
 	}
 

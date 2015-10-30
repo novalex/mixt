@@ -21,7 +21,7 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 		protected $sizes = array();
 
 		function __construct() {
-			$this->colors = mixt_get_assets('button', 'colors');
+			$this->colors = mixt_get_assets('colors', 'buttons');
 			$this->sizes = mixt_get_assets('button', 'sizes');
 		}
 
@@ -83,12 +83,12 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 			$values = mixt_element_button($this->value(), 'value');
 
 			// Color Select
-			$output .= '<div class="vc_col-sm-4"><select class="button-field color-select button-colors" data-attr="color">' .
+			$output .= '<div class="vc_col-sm-6"><select class="button-field color-select button-colors" data-attr="color">' .
 						   $this->select_options($this->colors, $values['color']) .
 					   '</select></div>';
 
 			// Size Select
-			$output .= '<div class="vc_col-sm-4"><select class="button-field button-sizes" data-attr="size">' .
+			$output .= '<div class="vc_col-sm-6"><select class="button-field button-sizes" data-attr="size">' .
 						   $this->select_options($this->sizes, $values['size']) .
 					   '</select></div>';
 

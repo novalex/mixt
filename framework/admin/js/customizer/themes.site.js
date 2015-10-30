@@ -9,7 +9,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 
 	/* global _, wp, MIXT, mixt_customize, tinycolor */
 
-	if ( _.isEmpty(wp.customize('mixt_opt[site-themes]')) ) return;
+	if ( ! mixt_customize['themes-enabled'] ) return;
 	
 	var defaults = {
 		'accent':     '#dd3e3e',
@@ -35,7 +35,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 	}
 
 	function set_textsh_for_bg(bg, colors) {
-		colors = colors || ['rgba(0,0,0,0.1)', 'rgba(255,255,255,0.1)'];
+		colors = colors || ['rgba(255,255,255,0.1)', 'rgba(0,0,0,0.1)'];
 		if ( tinycolor(bg).isLight() ) {
 			return colors[0];
 		} else {
@@ -47,7 +47,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 		pre = pre || '.mixt';
 
 		var css = '',
-			color_for_bg = tinycolor.mostReadable(color, ['#fff', '#000']).toHexString(),
+			color_for_bg = tinycolor.mostReadable(color, ['#fff', '#333']).toHexString(),
 			border_color = tinycolor(color).darken(5).toString(),
 			text_shadow  = set_textsh_for_bg(color),
 			color_darker = tinycolor(color).darken(10).toString(),
@@ -130,6 +130,8 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 					color_alt = theme['color-alt'] || tinycolor.mostReadable(bg_alt, [color, color_inv]).toHexString(),
 					border_alt = theme['border-alt'] || border,
 
+					input_border = tinycolor(bg).darken(10).toString(),
+
 					bg_inv = theme['bg-inv'] || tinycolor(bg).spin(180).toString(),
 					border_inv = theme['border-inv'] || tinycolor(bg).darken(10).toString(),
 
@@ -156,11 +158,9 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 
 				// Main Background Color
 				
-				css = th+' { background-color: '+bg+'; }';
+				css = th+', '+th+' .theme-bg { background-color: '+bg+'; }';
 
 				// Helper Classes
-				
-				css += th+' .theme-bg { background-color: '+bg+'; }';
 
 				css += th+' .theme-color { color: '+color+'; }';
 				css += th+' .theme-color-fade { color: '+color_fade+'; }';
@@ -189,6 +189,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				
 				css += th+' #content-wrap { color: '+color+'; }';
 				css += th+' a, '+th+' .post-meta a:hover, '+th+' #breadcrumbs a:hover, '+th+' .pager a:hover, '+th+' .pager li > span, '+th+' .hover-accent-color:hover { color: '+accent+'; }';
+				css += th+' a.no-color { color: inherit; }';
 				css += th+' .post-meta a, '+th+' .post-meta > span { color: '+color_fade+'; }';
 				css += th+' .head-media.bg-light .container, '+th+' .head-media.bg-light .media-inner > a, '+th+' .head-media.bg-light .header-scroll, '+th+' .head-media.bg-light #breadcrumbs > li + li:before { color: '+bg_light_color+'; }';
 				css += th+' .head-media.bg-dark .container, '+th+' .head-media.bg-dark .media-inner > a, '+th+' .head-media.bg-dark .header-scroll, '+th+' .head-media.bg-dark #breadcrumbs > li + li:before { color: '+bg_dark_color+'; }';
@@ -232,9 +233,9 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				// Inputs
 				
 				css += th+' input:not([type=submit]):not([type=button]):not(.btn), '+th+' select, '+th+' textarea, '+th+' .form-control, ' +
-					   th+' .post-password-form input[type="password"], '+th+' .woocommerce .input-text { color: '+color+'; border-color: '+border+'; background-color: '+bg_darker+'; }';
+					   th+' .post-password-form input[type="password"], '+th+' .woocommerce .input-text { color: '+color+'; border-color: '+input_border+'; background-color: '+bg_darker+'; }';
 				css += th+' input:not([type=submit]):not([type=button]):not(.btn):focus, '+th+' select:focus, '+th+' textarea:focus, '+th+' .form-control:focus, ' +
-					   th+' .post-password-form input[type="password"]:focus, '+th+' .woocommerce .input-text:focus { border-color: '+tinycolor(border).lighten(2).toString()+'; background-color: '+tinycolor(bg).lighten(2).toString()+'; }';
+					   th+' .post-password-form input[type="password"]:focus, '+th+' .woocommerce .input-text:focus { border-color: '+input_border+'; background-color: '+tinycolor(bg).lighten(2).toString()+'; }';
 				css += th+' input::-webkit-input-placeholder, '+th+' .form-control::-webkit-input-placeholder { color: '+color_fade+'; }';
 				css += th+' input::-moz-placeholder, '+th+' .form-control::-moz-placeholder { color: '+color_fade+'; }';
 				css += th+' input:-ms-input-placeholder, '+th+' .form-control:-ms-input-placeholder { color: '+color_fade+'; }';
@@ -286,7 +287,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				css += body_th+' .lg-progress-bar .lg-progress { background-color: '+accent+'; }';
 
 				// Select2
-				css += body_th+' .select2-container a.select2-choice, '+body_th+' .select2-drop, '+body_th+' .select2-drop.select2-drop-active { color: '+color+'; border-color: '+border+'; background-color: '+bg_darker+'; }';
+				css += body_th+' .select2-container a.select2-choice, '+body_th+' .select2-drop, '+body_th+' .select2-drop.select2-drop-active { color: '+color+'; border-color: '+input_border+'; background-color: '+bg_darker+'; }';
 				css += body_th+' .select2-results { background-color: '+bg_darker+'; }';
 				css += body_th+' .select2-results .select2-highlighted { color: '+color+'; background-color: '+bg_lighter+'; }';
 
@@ -309,7 +310,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 					   th+' .woocommerce .cart-collaterals .cart_totals tr td, '+th+' .woocommerce .cart-collaterals .cart_totals tr th { border-color: '+border+' !important; }';
 				css += th+' .woocommerce-checkout #payment, ' +
 					   th+' .woocommerce form .form-row.woocommerce-validated .select2-choice, '+th+' .woocommerce form .form-row.woocommerce-validated input.input-text, '+th+' .woocommerce form .form-row.woocommerce-validated select, ' +
-					   th+' .woocommerce form .form-row.woocommerce-invalid .select2-choice, '+th+' .woocommerce form .form-row.woocommerce-invalid input.input-text, '+th+' .woocommerce form .form-row.woocommerce-invalid select { border-color: '+border+'; }';
+					   th+' .woocommerce form .form-row.woocommerce-invalid .select2-choice, '+th+' .woocommerce form .form-row.woocommerce-invalid input.input-text, '+th+' .woocommerce form .form-row.woocommerce-invalid select { border-color: '+input_border+'; }';
 
 				MIXT.stylesheet('site-theme-'+id, css);
 			}
@@ -322,18 +323,15 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 		});
 	});
 
-	// Generate custom themes if theme is changed from one of the defaults
+	// Generate custom theme if selected theme is not one of the defaults
 	function maybeUpdateSiteThemes(id) {
 		if ( id == 'auto' ) id = themes.site;
-		if ( ! _.has(mixt_customize.themes, id) ) {
+		if ( ! _.has(mixt_customize['default-site-themes'], id) ) {
 			var siteThemes = wp.customize('mixt_opt[site-themes]').get();
 			updateSiteThemes(siteThemes);
 		}
 	}
-	$('#main-wrap-inner').on('theme-change', function(event, theme) {
-		maybeUpdateSiteThemes(theme);
-	});
-	$('#colophon').on('theme-change', function(event, theme) {
+	$('#main-wrap-inner, #colophon').on('theme-change', function(event, theme) {
 		maybeUpdateSiteThemes(theme);
 	});
 

@@ -48,12 +48,12 @@ class Mixt_DCSS {
 	public function __construct() {
 
 		// Output CSS in the header
-		add_action('mixt_head_css', array($this, 'print_head_css'));
+		add_action('mixt_head_code', array($this, 'print_head_css'));
 		// Output CSS in the body
-		add_action('mixt_body_css', array($this, 'print_body_css'));
+		add_action('mixt_body_code', array($this, 'print_body_css'));
 
 		// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
-		if ( ! is_customize_preview() && ( ( function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) || file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) ) {
+		if ( ( function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) || file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
 			$this->stylesheet = true;
 		}
 

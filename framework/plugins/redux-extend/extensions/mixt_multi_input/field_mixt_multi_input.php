@@ -25,14 +25,14 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 
-if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
+if ( ! class_exists( 'ReduxFramework_mixt_multi_input' ) ) {
 
 	/**
-	 * Main ReduxFramework_multi_input class
+	 * Main ReduxFramework_mixt_multi_input class
 	 *
 	 * @since       1.0.0
 	 */
-	class ReduxFramework_multi_input {
+	class ReduxFramework_mixt_multi_input {
 
 		/**
 		 * Field Constructor.
@@ -80,9 +80,11 @@ if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
 			$this->add_text = ( isset( $this->field['add_text'] ) ) ? $this->field['add_text'] : __( 'Add More', 'redux-framework' );
 			$this->fields   = ( isset( $this->field['inputs'] ) ) ? $this->field['inputs'] : $this->presets;
 
-			$this->no_title = ( isset($this->field['no_title']) && $this->field['no_title'] === true ) ? true : false;
-			$this->sortable = ( isset($this->field['sortable']) && $this->field['sortable'] === true ) ? true : false;
+			$this->no_title = ( isset($this->field['no_title']) && $this->field['no_title'] === true );
+			$this->sortable = ( isset($this->field['sortable']) && $this->field['sortable'] === true );
 			$this->sort_icon = ( isset($this->field['sort_icon']) ) ? $this->field['sort_icon'] : 'el-icon-resize-vertical';
+
+			$this->no_ajax = ( isset($this->field['no_ajax']) && $this->field['no_ajax'] === true );
 
 			if ( ! function_exists('build_field') ) {
 
@@ -170,18 +172,15 @@ if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
 			if ( $this->sortable ) {
 				$field_controls .= '<a href="javascript:void(0);" class="button sort-handle" title="Move Group"><i class="el ' . $this->sort_icon . '"></i></a>';
 			}
-			$field_controls .= '<a href="javascript:void(0);" class="button red deletion redux-multi-input-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
+			$field_controls .= '<a href="javascript:void(0);" class="button red deletion mixt-multi-input-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
 
 			// PRINT SAVED FIELDS
 
-			$cont_classes = 'redux-multi-input ';
+			$cont_classes = 'mixt-multi-input ';
 
-			if ( $this->no_title ) {
-				$cont_classes .= 'no-title ';
-			}
-			if ( $this->sortable ) {
-				$cont_classes .= 'sortable ';
-			}
+			if ( $this->no_title ) { $cont_classes .= 'no-title '; }
+			if ( $this->sortable ) { $cont_classes .= 'sortable '; }
+			if ( $this->no_ajax ) { $cont_classes .= 'no-ajax '; }
 
 			echo '<ul id="' . $this->field['id'] . '-ul" class="' . $cont_classes . '">';
 
@@ -236,7 +235,7 @@ if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
 			$this->field['add_number'] = ( isset( $this->field['add_number'] ) && is_numeric( $this->field['add_number'] ) ) ? $this->field['add_number'] : 1;
 
 			// Add More Button
-			echo '<a href="javascript:void(0);" class="button button-primary redux-multi-input-add" data-add_number="' . $this->field['add_number'] . '" data-id="' . $this->field['id'] . '-ul" data-name="' . $this->field['name'] . $this->field['name_suffix'] . '[]">' . $this->add_text . '</a><br/>';
+			echo '<a href="javascript:void(0);" class="button button-primary mixt-multi-input-add" data-add_number="' . $this->field['add_number'] . '" data-id="' . $this->field['id'] . '-ul" data-name="' . $this->field['name'] . $this->field['name_suffix'] . '[]">' . $this->add_text . '</a><br/>';
 		}
 
 		// EMPTY FIELD <input type="text" id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '[]' . '" value="" class="regular-text ' . $this->field['class'] . '" />
@@ -251,8 +250,8 @@ if ( ! class_exists( 'ReduxFramework_multi_input' ) ) {
 		 */
 		public function enqueue() {
 			wp_enqueue_script(
-				'redux-field-multi-input-js',
-				MIXT_PLUGINS_URI . '/redux-extend/extensions/multi_input/field_multi_input.js',
+				'redux-field-mixt-multi-input-js',
+				MIXT_PLUGINS_URI . '/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.js',
 				array( 'jquery', 'redux-js' ),
 				time(),
 				true

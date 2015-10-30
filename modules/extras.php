@@ -8,6 +8,20 @@
 
 
 /**
+ * Hook into the header action and output relevant code
+ */
+function mixt_head_code_output() {
+	global $mixt_opt;
+
+	// User-defined code
+	if ( ! empty($mixt_opt['head-user-code']) ) {
+		echo $mixt_opt['head-user-code'];
+	}
+}
+add_action('mixt_head_code', 'mixt_head_code_output', 99);
+
+
+/**
  * Add custom classes to the array of body classes.
  */
 function mixt_body_classes( $classes ) {
@@ -37,7 +51,9 @@ function mixt_read_more_link($permalink) {
 add_filter('the_content_more_link', 'mixt_read_more_link');
 
 
-// Set Custom Excerpt Length
+/**
+ * Set Custom Excerpt Length
+ */
 function mixt_excerpt_length($length) {
 	return get_option('mixt-post-excerpt-length', 55);
 }
@@ -70,7 +86,9 @@ function mixt_enhanced_image_navigation( $url, $id ) {
 add_filter('attachment_link', 'mixt_enhanced_image_navigation', 10, 2);
 
 
-// BrowserSync Script
+/**
+ * BrowserSync Script
+ */
 function mixt_browsersync() {
 	global $mixt_opt;
 

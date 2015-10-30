@@ -41,7 +41,8 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 	$prefix = '_mixt-'; // Start with underscore to hide custom meta from 'Custom Fields' section
 
-	$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), mixt_get_themes('nav') );
+	$nav_themes = ( (bool) get_option('mixt-themes-enabled') ) ? mixt_get_themes('nav', 'all') : mixt_get_themes('nav', 'default');
+	$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
 
 	// PAGE OPTIONS
 

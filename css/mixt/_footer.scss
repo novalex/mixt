@@ -1,4 +1,20 @@
 
+// Back To Top Button
+
+#back-to-top {
+	position: fixed;
+	bottom: 15px; right: 15px;
+	opacity: 0.85;
+	display: none;
+	z-index: 1;
+
+	@include media('screen', '<mercury') {
+		display: none !important;
+	}
+}
+
+// Footer
+
 #colophon {
 
 	.footer-row {
@@ -21,9 +37,9 @@
 	.copyright-row {
 		$spacing: $padding-m / 2;
 
-		position: relative;
-		z-index: 2; // Set footer above back to top button
 		padding: $spacing 0;
+		position: relative;
+		z-index: 2; // Above back to top button
 
 		.container,
 		.inner,
@@ -77,16 +93,31 @@
 	}
 }
 
-// Back To Top Button
+// Info Bar
 
-#back-to-top {
-	position: fixed;
-	bottom: 15px; right: 15px;
-	opacity: 0.85;
-	display: none;
-	z-index: 1;
+#info-bar-wrap {
+	position: relative;
+	z-index: 2;
 
-	@include media('screen', '<mercury') {
-		display: none !important;
+	.info-bar {
+		padding: $padding-s 0;
+		border-top-width: 1px;
+		border-top-style: solid;
+
+		&.sticky {
+			position: fixed;
+			left: 0; right: 0;
+			bottom: 0;
+			z-index: 2;
+		}
 	}
+}
+
+// Media
+
+@include media('screen', '<mars') {
+	#colophon .widget-row.hidden-xs + .copyright-row { border-top-width: 1px; }
+
+	.info-bar.sticky { position: static; }
+	#back-to-top { margin-bottom: 0 !important; }
 }

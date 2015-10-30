@@ -118,7 +118,7 @@
 		@include pricing-table-variant('&.#{$sel}', $color);
 	}
 	// Accent Colors
-	@each $theme, $colors in $themes {
+	@each $theme, $colors in $site-themes {
 		@include pricing-table-variant('.theme-#{$theme} &.accent', map-get($colors, 'accent'));
 	}
 }

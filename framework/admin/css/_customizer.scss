@@ -24,11 +24,11 @@
 			border-bottom: 1px solid $border;
 		}
 
-		.redux-multi-input {
+		.mixt-multi-input {
 			.multi-input-field:nth-child(even) {
 				.wp-picker-container .wp-picker-holder { left: auto; right: -10px; }
 			}
-			.redux-multi-input-remove { display: none; }
+			.mixt-multi-input-remove { display: none; }
 		}
 	}
 

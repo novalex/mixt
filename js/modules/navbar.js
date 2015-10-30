@@ -91,9 +91,11 @@ NAVBAR FUNCTIONS
 				Navbar.sticky.isMobile = isMobile;
 				Navbar.sticky.scrollCorrection = 0;
 
-				if ( isMobile === false ) {
+				if ( isMobile === false && ( mixt_opt.nav.layout == 'vertical' || ( document.documentElement.scrollHeight - viewport.height() ) > 160 ) ) {
+					mainNavBar.data('fixed', true);
 					viewport.on('scroll', $.throttle(50, Navbar.sticky.toggle));
 				} else {
+					mainNavBar.data('fixed', false);
 					viewport.off('scroll', Navbar.sticky.toggle);
 				}
 
@@ -102,13 +104,7 @@ NAVBAR FUNCTIONS
 				}
 
 				if ( mixt_opt.nav.layout == 'horizontal' && mixt_opt.nav.transparent && mixt_opt.nav.position == 'below' ) {
-					var navHeight = mainNavBar.css('height', '').outerHeight(),
-						navPos    = parseInt(mainNavBar.css('top'), 10);
-					Navbar.sticky.offset = navHeight;
-
-					if ( navPos === 0 || isNaN(navPos) ) {
-						mainNavBar.css('margin-top', (navHeight * -1));
-					}
+					Navbar.sticky.offset = mainNavBar.outerHeight();
 				}
 
 				Navbar.sticky.toggle();
@@ -319,7 +315,6 @@ NAVBAR FUNCTIONS
 						navbarHeaderH = mainNavHead.height() + 1,
 						navbarInnerH  = mainNavInner.hasClass('in') ? mainNavInner.height() : 0,
 						navbarH       = navbarHeaderH + navbarInnerH,
-						navbarMg      = 0,
 						navbarTop     = mainNavBar.offset().top,
 						navwrapTop    = mainNavWrap.offset().top;
 
@@ -332,18 +327,14 @@ NAVBAR FUNCTIONS
 						navbarTop  -= adminBarH;
 					}
 
-					if ( mixt_opt.nav.transparent && mixt_opt.nav.position == 'below' ) {
-						navbarMg = navbarHeaderH * -1;
-					}
-
 					if ( navbarH > viewportH ) {
 						viewport.on('scroll', Navbar.mobile.stopScroll);
 						if ( mainNavBar.not('stopped') ) {
-							mainNavBar.addClass('stopped').css({ 'position': 'absolute', 'top': (navbarTop - navwrapTop), 'margin-top': '0' });
+							mainNavBar.addClass('stopped').css({ 'position': 'absolute', 'top': (navbarTop - navwrapTop) });
 						}
 					} else {
 						viewport.off('scroll', Navbar.mobile.stopScroll);
-						mainNavBar.css({ 'position': '', 'top': '', 'margin-top': navbarMg }).removeClass('stopped');
+						mainNavBar.css({ 'position': '', 'top': '' }).removeClass('stopped');
 					}
 				}
 			},
@@ -384,21 +375,21 @@ NAVBAR FUNCTIONS
 
 
 	// Enable menu hover on touch screens
-	var menuParents = navbars.find('.menu-item-has-children, li.dropdown');
+	var menuParents = navbars.find('.menu-item-has-children:not(.mega-menu-column), li.dropdown');
 	function menuTouchHover(event) {
-		var link = $(event.delegateTarget),
-			ancestors = link.parents('.hover');
-		if (link.hasClass('hover')) {
+		var item = $(event.delegateTarget),
+			ancestors = item.parents('.hover');
+		if ( item.hasClass('hover') ) {
 			return true;
 		} else {
-			link.addClass('hover');
-			menuParents.not(link).not(ancestors).removeClass('hover');
+			item.addClass('hover');
+			menuParents.not(item).not(ancestors).removeClass('hover');
 			event.preventDefault();
 			return false;
 		}
 	}
 	function menuTouchRemoveHover(event) {
-		if ( ! $(event.delegateTarget).is(menuParents) ) { menuParents.removeClass('hover'); }
+		if ( ! $(event.delegateTarget).is(menuParents) && ! $(event.target).is('input') ) { menuParents.removeClass('hover'); }
 	}
 
 
@@ -419,12 +410,12 @@ NAVBAR FUNCTIONS
 
 		// Primary Navbar
 		if ( mainNavLogoCls != 'logo-center' && mixt_opt.nav.layout == 'horizontal' ) {
-			mainNavWrap.removeClass('logo-center').addClass(mainNavLogoCls);
+			mainNavWrap.add(mediaWrap).removeClass('logo-center').addClass(mainNavLogoCls);
 			if ( mqNav == 'desktop' ) {
 				var mainNavContWidth = mainNavCont.width(),
 					mainNavItemsWidth = mainNavHead.outerWidth(true) + $('#main-menu').outerWidth(true);
 				if ( mainNavItemsWidth > mainNavContWidth ) {
-					mainNavWrap.removeClass(mainNavLogoCls).addClass('logo-center');
+					mainNavWrap.add(mediaWrap).removeClass(mainNavLogoCls).addClass('logo-center');
 				}
 			}
 		}
@@ -441,6 +432,45 @@ NAVBAR FUNCTIONS
 	}
 
 
+	// One-Page Navigation
+	function onePageNav() {
+		var offset = ( mixt_opt.nav.mode == 'fixed' && mainNavBar.data('fixed') ) ? mainNavBar.outerHeight() : 0,
+			spyData = bodyEl.data('bs.scrollspy');
+
+		$('.one-page-row').each( function() {
+			var row = $(this);
+
+			if ( row.is(':first-child') ) {
+				var pageContent = $('.page-content.one-page');
+				pageContent.css('margin-top', '');
+				row.css('padding-top', pageContent.css('margin-top'));
+				pageContent.css('margin-top', 0);
+			} else {
+				var prevRow = row.prev();
+				if ( ! prevRow.hasClass('row') ) prevRow = prevRow.prev('.row');
+
+				prevRow.css('margin-bottom', '');
+				row.css('padding-top', prevRow.css('margin-bottom'));
+				prevRow.css('margin-bottom', 0);
+			}
+		});
+
+		if ( spyData ) {
+			spyData.options.offset = offset;
+			bodyEl.scrollspy('refresh');
+		} else {
+			bodyEl.scrollspy({
+				target: '#main-nav',
+				offset: offset
+			});
+
+			mainNavBar.on('activate.bs.scrollspy', function () {
+				mainNavInner.collapse('hide');
+			});
+		}
+	}
+
+
 	// Functions Run On Load & Window Resize
 	function navbarFn() {
 		var mqNav = mqCheck();
@@ -453,7 +483,6 @@ NAVBAR FUNCTIONS
 		// Run functions based on currently active media query
 		if ( mqNav == 'desktop' ) {
 			Navbar.menu.overflow(mainNavInner);
-			mainNavBar.css('height', '');
 			mainWrap.addClass('nav-full').removeClass('nav-mini');
 
 			navbars.each( function() {
@@ -464,9 +493,6 @@ NAVBAR FUNCTIONS
 			bodyEl.on('touchstart', menuTouchRemoveHover);
 		} else if ( mqNav == 'mobile' || mqNav == 'tablet' ) {
 			Navbar.mobile.trigger(mqNav);
-
-			var navHeight = mainNavHead.outerHeight() + 1;
-			mainNavBar.css('height', navHeight);
 			mainWrap.addClass('nav-mini').removeClass('nav-full');
 
 			navbars.each( function() {
@@ -503,6 +529,10 @@ NAVBAR FUNCTIONS
 		}
 
 		navbarOverlap();
+
+		if ( mixt_opt.page['page-type'] == 'onepage' ) {
+			onePageNav();
+		}
 	}
 	viewport.resize( $.debounce( 500, navbarFn )).resize();
 

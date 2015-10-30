@@ -83,15 +83,14 @@ UI FUNCTIONS
 		var link = $(this),
 			hash = link.attr('href');
 
-		if ( link.data('no-hash-scroll') ) return;
+		if ( link.attr('data-no-hash-scroll') ) return;
 
 		if ( hash.length ) {
 			e.preventDefault();
 			var target = $(hash);
 			if ( target.length) {
-				/* global breakpoint */
-				var hashOffset = $(hash).offset().top;
-				if ( mixt_opt.nav.mode == 'fixed' && breakpoint.name != 'pluto' && breakpoint.name != 'mercury' ) { hashOffset -= $('#main-nav').outerHeight(); }
+				var hashOffset = $(hash).offset().top + 1;
+				if ( mixt_opt.nav.mode == 'fixed' && $('#main-nav').data('fixed') ) { hashOffset -= $('#main-nav').outerHeight(); }
 				htmlEl.add(bodyEl).animate({ scrollTop: hashOffset }, 600);
 			}
 			window.location.hash = hash;
@@ -159,6 +158,8 @@ UI FUNCTIONS
 
 
 	// Back To Top Button
+	var backToTop = $('#back-to-top');
+
 	function backToTopDisplay() {
 		var scrollTop = viewport.scrollTop();
 		if ( scrollTop > 200 ) {
@@ -168,14 +169,32 @@ UI FUNCTIONS
 		}
 	}
 
-	var backToTop = $('#back-to-top');
-
 	if ( backToTop.length ) {
 		viewport.on('scroll', $.throttle( 1000, backToTopDisplay )).scroll();
 
-		backToTop.click( function() {
+		backToTop.click( function(e) {
+			e.preventDefault();
 			htmlEl.add(bodyEl).animate({ scrollTop: 0 }, 600);
 		});
+	}
+
+	
+	// Info Bar
+	var infoBarWrap = $('#info-bar-wrap'),
+		infoBar = infoBarWrap.children('.info-bar');
+
+	function infoBarSticky() {
+		var barHeight = infoBar.outerHeight();
+		infoBarWrap.css('min-height', barHeight);
+		if ( backToTop.length ) { backToTop.css('margin-bottom', barHeight); }
+	}
+
+	if ( infoBar.length ) {
+		infoBar.find('.info-close').click( function() {
+			infoBarWrap.fadeOut(300);
+			if ( backToTop.length ) { backToTop.css('margin-bottom', ''); }
+		});
+		if ( infoBar.hasClass('sticky') ) { infoBarSticky(); }
 	}
 
 })(jQuery);

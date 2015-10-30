@@ -439,10 +439,15 @@ $blue-accent: #5991CE;
 
 	// Inputs
 
-	input, textarea {
+	input, textarea, pre.ace_editor {
 		@extend %input;
 
 		border-radius: 3px;
+	}
+
+	pre.ace_editor {
+		border-width: 1px;
+		border-style: solid;
 	}
 
 	.redux-container-spinner {
@@ -486,6 +491,10 @@ $blue-accent: #5991CE;
 		border-color: #333;
 		background-color: $bg-dark;
 	}
+
+	// Misc
+
+	.red-text { color: red !important; }
 }
 
 .redux-main .redux-group-tab {
@@ -594,15 +603,15 @@ $blue-accent: #5991CE;
 
 // MULTI INPUT STYLING
 
-.redux-container-multi_input {
+.redux-container-mixt_multi_input {
 
-	.redux-multi-input-add {
+	.mixt-multi-input-add {
 		margin: 0;
 		display: inline-block;
 	}
 }
 
-.redux-main .redux-multi-input {
+.redux-main .mixt-multi-input {
 	float: left;
 	width: 100%;
 	margin: 0;
@@ -903,10 +912,10 @@ $blue-accent: #5991CE;
 
 // MULTI INPUT EXTENSION STYLING
 
-.redux-container-multi-input {
-	ul.redux-multi-input { margin: 0; padding: 0; }
+.redux-container-mixt_multi_input {
+	ul.mixt-multi-input { margin: 0; padding: 0; }
 
-	.redux-multi-input-remove {
+	.mixt-multi-input-remove {
 		color: #F00;
 		padding: 2px 4px;
 		margin-left: 5px;
@@ -918,13 +927,13 @@ $blue-accent: #5991CE;
 		}
 	}
 
-	.redux-multi-input-add { margin: 5px 0; }
+	.mixt-multi-input-add { margin: 5px 0; }
 }
 
 @media screen and (max-width: 782px) {
-	.redux-container-multi-input input { clear: both; }
+	.redux-container-mixt_multi_input input { clear: both; }
 
-	.redux-container-multi-input .redux-multi-input-remove {
+	.redux-container-mixt_multi_input .mixt-multi-input-remove {
 		margin: 0;
 		float: right;
 	}

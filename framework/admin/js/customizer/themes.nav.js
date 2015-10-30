@@ -9,7 +9,7 @@ CUSTOMIZER INTEGRATION - NAV THEMES
 
 	/* global _, wp, MIXT, mixt_customize, tinycolor */
 
-	if ( _.isEmpty(wp.customize('mixt_opt[nav-themes]')) ) return;
+	if ( ! mixt_customize['themes-enabled'] ) return;
 	
 	var defaults = {
 		'accent':     '#dd3e3e',
@@ -210,10 +210,10 @@ CUSTOMIZER INTEGRATION - NAV THEMES
 		});
 	});
 
-	// Generate custom themes if theme is changed from one of the defaults
+	// Generate custom theme if selected theme is not one of the defaults
 	function maybeUpdateNavThemes(id) {
 		if ( id == 'auto' ) id = themes.site;
-		if ( ! _.has(mixt_customize.themes, id) ) {
+		if ( ! _.has(mixt_customize['default-nav-themes'], id) ) {
 			var navThemes = wp.customize('mixt_opt[nav-themes]').get();
 			updateNavThemes(navThemes);
 		}

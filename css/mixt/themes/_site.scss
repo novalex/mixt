@@ -26,6 +26,7 @@
 	$bg-dark-color-fade: if( $theme-dark, $color-fade, $color-inv-fade );
 		
 	$input-bg: darken($bg, 3);
+	$input-border: darken($bg, 10);
 
 	.theme-#{$name} {
 		background-color: $bg;
@@ -164,11 +165,11 @@
 
 		%theme-input-color {
 			color: $color;
-			border-color: $border;
+			border-color: $input-border;
 			background-color: $input-bg;
 
 			&:focus {
-				border-color: lighten($border, 2);
+				border-color: $input-border;
 				background-color: lighten($bg, 2);
 			}
 		}
@@ -329,7 +330,7 @@
 					.select2-choice,
 					input.input-text,
 					select {
-						border-color: $border;
+						border-color: $input-border;
 					}
 				}
 			}
@@ -342,7 +343,7 @@
 	.body-theme-#{$name} {
 
 		@if $select2 {
-			.mixt & { @include select2-theme-color($input-bg, $color, $border); }
+			.mixt & { @include select2-theme-color($input-bg, $color, $input-border); }
 		}
 
 		@if $lightgallery {
@@ -360,9 +361,6 @@
 }
 
 // Generate site themes
-@each $name, $theme in $themes {
-	@include site-theme($name, $theme);
-}
 @each $name, $theme in $site-themes {
 	@include site-theme($name, $theme);
 }

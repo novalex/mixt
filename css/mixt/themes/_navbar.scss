@@ -253,9 +253,6 @@
 }
 
 // Generate navbar themes
-@each $name, $theme in $themes {
-	@include navbar-theme($name, $theme);
-}
 @each $name, $theme in $nav-themes {
 	@include navbar-theme($name, $theme);
 }

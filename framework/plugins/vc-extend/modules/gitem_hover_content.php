@@ -8,7 +8,7 @@
 function mixt_gitem_hover($shortcodes) {
 	$colors = mixt_get_assets('colors', 'basic');
 	$anims  = array('in' => mixt_css_anims('trans-in'), 'out' => mixt_css_anims('trans-out'));
-	$btn_colors = mixt_get_assets('button', 'colors');
+	$btn_colors = mixt_get_assets('colors', 'buttons');
 
 	$shortcodes['mixt_gitem_hover'] = array(
 		'name'        => __( 'Hover Content', 'mixt' ),

@@ -9,6 +9,8 @@
  *
  * Based on ZillaShortcodes
  * http://www.themezilla.com/plugins/zillashortcodes
+ * 
+ * @package MIXT\Plugins\CodeBuilder
  */
 
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access

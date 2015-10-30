@@ -53,7 +53,8 @@
 	#main-wrap { box-shadow: 0 0 3px 1px rgba(0,0,0,0.1); }
 	#main-wrap-inner { overflow: hidden; }
 
-	&.fixed-nav #main-nav {
+	&.fixed-nav #main-nav,
+	.info-bar.fixed {
 		left: auto;
 		right: auto;
 	}

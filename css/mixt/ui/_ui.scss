@@ -133,7 +133,7 @@
 			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.25), true, true);
 		}
 		// Accent Colors
-		@each $theme, $colors in $themes {
+		@each $theme, $colors in $site-themes {
 			@include mixt-bg-variant('.theme-#{$theme} &.accent', fade-out(map-get($colors, 'accent'), 0.25), true, true);
 		}
 	}

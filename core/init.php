@@ -153,7 +153,7 @@ class Mixt_Plugins {
 	 */
 	public function tgmpa_init() {
 		$config = array(
-			'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+			'id'           => 'mixt_tgmpa',            // Unique ID for hashing notices for multiple instances of TGMPA.
 			'default_path' => MIXT_PLUGINS_DIR,        // Default absolute path to bundled plugins.
 			'menu'         => 'tgmpa-install-plugins', // Menu slug.
 			'parent_slug'  => 'themes.php',            // Parent menu slug.
@@ -174,13 +174,13 @@ new Mixt_Plugins;
  * Update options after they are saved
  */
 function mixt_options_changed($mixt_opt = null) {
-	if ( is_null($mixt_opt) ) { global $mixt_opt; }
+	if ( is_null($mixt_opt) || ! is_array($mixt_opt) ) { global $mixt_opt; }
 
 	// Custom Sidebars
 	if ( array_key_exists('reg-sidebars', $mixt_opt) ) { update_option('mixt-sidebars', $mixt_opt['reg-sidebars']); }
 
 	// Post Excerpt Length
-	if ( ! empty($mixt_opt['post-excerpt-length']) ) { update_option('mixt-post-excerpt-length', $mixt_opt['post-excerpt-length']); }
+	if ( array_key_exists('post-excerpt-length', $mixt_opt) && intval($mixt_opt['post-excerpt-length']) > 0 ) { update_option('mixt-post-excerpt-length', $mixt_opt['post-excerpt-length']); }
 
 	// Themes
 	if ( array_key_exists('themes-master', $mixt_opt) ) { update_option('mixt-themes-enabled', $mixt_opt['themes-master']); }
@@ -191,27 +191,33 @@ function mixt_options_changed($mixt_opt = null) {
 	( new Mixt_DCSS() )->print_stylesheet();
 
 	// Social Profiles
-	if ( ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }
+	if ( array_key_exists('social-profiles', $mixt_opt) && ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }
 	else { update_option('mixt-social-profiles', mixt_preset_social_profiles('networks')); }
-	if ( ! empty($mixt_opt['post-sharing-profiles']) ) { update_option('mixt-sharing-profiles', $mixt_opt['post-sharing-profiles']); }
+	if ( array_key_exists('post-sharing-profiles', $mixt_opt) && ! empty($mixt_opt['post-sharing-profiles']) ) { update_option('mixt-sharing-profiles', $mixt_opt['post-sharing-profiles']); }
 	else { update_option('mixt-sharing-profiles', mixt_preset_social_profiles('sharing')); }
 }
 add_action('redux/options/mixt_opt/settings/change', 'mixt_options_changed', 2);
-add_action('customize_save_after', 'mixt_options_changed');
+add_action('customize_save_after', 'mixt_options_changed', 99);
+
+/**
+ * Add user settings to theme_mods
+ */
+function mixt_options_to_mods($mixt_opt) {
+	set_theme_mod('mixt_opt', $mixt_opt);
+}
+add_action('redux/options/mixt_opt/settings/change', 'mixt_options_to_mods', 3);
 
 // Customizer Preview
 if ( is_customize_preview() ) {
-	mixt_options_changed();
 	require_once MIXT_FRAME_DIR . '/admin/customizer.php';
 }
 
 
 // Initialize and Extend Visual Composer
 if ( defined('WPB_VC_VERSION') ) {
-	add_action('vc_before_init', 'vc_set_as_theme');
 	vc_set_shortcodes_templates_dir( MIXT_PLUGINS_DIR . '/vc-extend/templates' );
 
-	require_once( MIXT_PLUGINS_DIR . '/vc-extend/vc-extend.php' );
+	include_once( MIXT_PLUGINS_DIR . '/vc-extend/vc-extend.php' );
 }
 
 

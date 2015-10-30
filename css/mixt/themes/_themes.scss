@@ -3,10 +3,21 @@ $themes: ();
 $site-themes: ();
 $nav-themes: ();
 
+// =====================================================
+// When adding or removing themes, also update the
+// respective array in the 'mixt_get_themes' function in 'core/assets.php',
+// or use the default theme filters in your child theme
+// =====================================================
+
 @import 'lava';
 @import 'eco';
 @import 'aqua';
 @import 'edge';
+@import 'reno';
+
+// Join universal theme maps with specific ones
+$site-themes: map-merge($themes, $site-themes);
+$nav-themes: map-merge($themes, $nav-themes);
 
 
 // COLOR VARIANTS
@@ -17,7 +28,7 @@ $nav-themes: ();
 			color: $color;
 		}
 	}
-	@each $theme, $colors in $themes {
+	@each $theme, $colors in $site-themes {
 		.theme-#{$theme} &.accent {
 			color: map-get($colors, 'accent');
 		}
@@ -36,7 +47,7 @@ $nav-themes: ();
 			@include bg-variant($color);
 		}
 	}
-	@each $theme, $colors in $themes {
+	@each $theme, $colors in $site-themes {
 		.theme-#{$theme} &.accent {
 			@include bg-variant(map-get($colors, 'accent'));
 		}
@@ -47,7 +58,7 @@ $nav-themes: ();
 	@each $sel, $color in $basic-colors {
 		&.#{$sel} { border-color: $color; }
 	}
-	@each $theme, $colors in $themes {
+	@each $theme, $colors in $site-themes {
 		.theme-#{$theme} &.accent {
 			border-color: map-get($colors, 'accent');
 		}

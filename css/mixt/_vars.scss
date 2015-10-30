@@ -1,43 +1,73 @@
+// =====================================================
+// Some of these variables are also defined in an array
+// inside 'modules/dcss/dynamic-css.php', make sure to
+// update them as well if you change anything. You may
+// filter them in a child theme with 'mixt_dcss_defaults'
+// =====================================================
 
-// Global Variables
+// GLOBAL VARIABLES
 
 $img-path:  '../assets/img';
 $font-path: '../assets/fonts';
 
 
-// Navbars
+// NAVBARS
 
 $nav-item-height: 42px;
 $nav-sub-item-height: 36px;
 $menu-hover-bg: rgba(0,0,0,0.03);
 
-$nav-primary-height: 91px;
+// Primary Navbar
+
+// Padding. Defined in PHP as 'nav-padding'
 $nav-primary-pad: 20px;
+// Padding when fixed. Defined in PHP as 'nav-fixed-padding'
+$nav-primary-fixed-pad: 0;
+// Item height. This will be the base height of the navbar. Defined in PHP as 'nav-item-height'
 $nav-primary-item-height: 50px;
-$nav-primary-sub-item-height: 36px;
+// Total height
+$nav-primary-height: $nav-primary-item-height + $nav-primary-pad * 2 + 1px;
+// Total height when fixed
+$nav-primary-fixed-height: $nav-primary-item-height + $nav-primary-fixed-pad * 2;
+// Opacity
 $nav-primary-opacity: 0.95;
+// Submenu opacity
 $nav-primary-menu-opacity: 0.95;
-
-$nav-vertical-width: 320px;
-$nav-vertical-width-sm: 20%;
-$nav-vertical-item-height: 42px;
-$nav-vertical-content-max-width: 1200px;
-
-$sec-nav-item-height: 32px;
-$sec-nav-sub-item-height: 32px;
-
-// Main navbar mobile (mini) breakpoint
-// This is the width below which the navbar switches to mobile mode
+// Submenu item height
+$nav-primary-sub-item-height: 36px;
+// Minimum width for the fixed (sticky) mode
+$nav-primary-fixed-breakpoint: 601px;
+// Main navbar mobile (mini) breakpoint - the width below which the navbar switches to mobile mode
 // $grid-float-breakpoint: 768px;
 
+// Primary Navbar (Vertical)
 
-// Sidebar
+// Width
+$nav-vertical-width: 320px;
+// Width on small screens
+$nav-vertical-width-sm: 20%;
+// Item height
+$nav-vertical-item-height: 42px;
+// Max content width. Set to '100%' to enable fullwidth
+$nav-vertical-content-max-width: 1200px;
 
+// Secondary Navbar
+
+// Item height
+$sec-nav-item-height: 32px;
+// Submenu item height
+$sec-nav-sub-item-height: 32px;
+
+
+// SIDEBAR
+
+// Width
 $sidebar-width: 25%;
+// Width on small screens
 $sidebar-width-sm: 30%;
 
 
-// Typography
+// TYPOGRAPHY
 
 $font-family-base: 'Roboto', 'Verdana', sans-serif;
 
@@ -61,18 +91,26 @@ $font-size-h5: 12px;
 $font-size-h6: 10px;
 
 
-// Spacing, Margins & Paddings
+// SPACING, MARGINS & PADDINGS
 
+// Column spacing
 $main-gutter: 40px;
-$main-gutter-sm: 30px;
 $gutter-lg: $main-gutter;
-$row-spacing-lg: 40px;
+// Column spacing on small screens
+$main-gutter-sm: 30px;
 $gutter-sm: $main-gutter-sm;
-$row-spacing-sm: 30px;
+// Column spacing for compact grids
 $row-grid-sm-gutter: 20px;
-
-$post-inner-pad: 15px;
+// Column spacing for forms
 $form-gutter: 15px;
+
+// Row spacing
+$row-spacing-lg: 40px;
+// Row spacing on small screens
+$row-spacing-sm: 30px;
+
+// Spacing for post elements
+$post-inner-pad: 15px;
 
 $margin-xs: 5px;
 $margin-s:  10px;
@@ -85,7 +123,7 @@ $padding-m:  20px;
 $padding-l:  30px;
 
 
-// Post Featured Images
+// POST FEATURED IMAGES
 
 $post-aside-img: '#{$img-path}/textures/ag-square.png';
 $post-link-img: '#{$img-path}/textures/transparent-square-tiles.png';
@@ -93,7 +131,7 @@ $post-quote-img: false;
 $post-status-img: false;
 
 
-// Miscellaneous
+// MISCELLANEOUS
 
 $bd-radius-s: 1px;
 $bd-radius:   2px;
@@ -101,12 +139,14 @@ $bd-radius-l: 3px;
 
 $rounded-radius: $bd-radius-l;
 
+// Right-To-Left language support
 $rtl: false;
 
+// Include various Internet Explorer tweaks and hacks
 $ie-hacks: true;
 
 
-// Plugin Config
+// PLUGIN CONFIG
 
 $portfolio:    true;
 $lightgallery: true;

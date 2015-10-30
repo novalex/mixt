@@ -13,10 +13,11 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * Return theme names and ids for specified element
  *
  * @param  string $elem Element for which to retreive themes, or default for default themes
- * @param  string $type The type of themes to retreive ('custom' or 'all')
+ * @param  string $type The type of themes to retreive ('default', 'custom' or 'all')
  * @return array
  */
 function mixt_get_themes($elem, $type = 'all') {
+	// Default universal themes
 	$default_themes = apply_filters( 'mixt_default_themes', array(
 		'lava'      => 'Lava',
 		'dark-lava' => 'Dark Lava',
@@ -25,11 +26,22 @@ function mixt_get_themes($elem, $type = 'all') {
 		'aqua'      => 'Aqua',
 		'nightly'   => 'Nightly',
 		'edge'      => 'Edge',
+		'reno'      => 'Reno',
 	) );
+	// Default site themes
+	$default_site_themes = apply_filters( 'mixt_default_site_themes', array() );
+	// Default nav themes
+	$default_nav_themes = apply_filters( 'mixt_default_nav_themes', array() );
 
-	if ( $elem == 'default' ) { return $default_themes; }
+	$theme_list = array();
 
-	$theme_list = ( $type == 'all' ) ? $default_themes : array();
+	if ( $elem == 'default' ) {
+		return $default_themes;
+	} else if ( $elem == 'site' && ( $type == 'default' || $type == 'all' ) ) {
+		$theme_list = array_merge($default_themes, $default_site_themes);
+	} else if ( $elem == 'nav' && ( $type == 'default' || $type == 'all' ) ) {
+		$theme_list = array_merge($default_themes, $default_nav_themes);
+	}
 
 	if ( $type == 'all' || $type == 'custom' ) {
 		$themes = get_option("mixt-$elem-themes", array());
@@ -65,21 +77,6 @@ function mixt_get_assets($group, $subgroup = false) {
 				'btn-sm' => __( 'Small', 'mixt' ),
 				'btn-xs' => __( 'Extra Small', 'mixt' ),
 			),
-			'colors' => array(
-				'default' => __( 'Default', 'mixt' ),
-				'minimal' => __( 'Minimal', 'mixt' ),
-				'primary' => __( 'Primary (accent)', 'mixt' ),
-				'white'   => __( 'White', 'mixt' ),
-				'grey'    => __( 'Grey', 'mixt' ),
-				'black'   => __( 'Black', 'mixt' ),
-				'red'     => __( 'Red', 'mixt' ),
-				'orange'  => __( 'Orange', 'mixt' ),
-				'green'   => __( 'Green', 'mixt' ),
-				'blue'    => __( 'Blue', 'mixt' ),
-				'violet'  => __( 'Violet', 'mixt' ),
-				'shine'   => __( 'Shine', 'mixt' ),
-				'shade'   => __( 'Shade', 'mixt' ),
-			),
 			'types' => array(
 				''       => __( 'Normal', 'mixt' ),
 				'round'  => __( 'Round', 'mixt' ),
@@ -111,6 +108,21 @@ function mixt_get_assets($group, $subgroup = false) {
 				'red'    => __( 'Red', 'mixt' ),
 				'green'  => __( 'Green', 'mixt' ),
 				'blue'   => __( 'Blue', 'mixt' ),
+			),
+			'buttons' => array(
+				'default' => __( 'Default', 'mixt' ),
+				'minimal' => __( 'Minimal', 'mixt' ),
+				'primary' => __( 'Primary (accent)', 'mixt' ),
+				'white'   => __( 'White', 'mixt' ),
+				'grey'    => __( 'Grey', 'mixt' ),
+				'black'   => __( 'Black', 'mixt' ),
+				'red'     => __( 'Red', 'mixt' ),
+				'orange'  => __( 'Orange', 'mixt' ),
+				'green'   => __( 'Green', 'mixt' ),
+				'blue'    => __( 'Blue', 'mixt' ),
+				'violet'  => __( 'Violet', 'mixt' ),
+				'shine'   => __( 'Shine', 'mixt' ),
+				'shade'   => __( 'Shade', 'mixt' ),
 			),
 			'elements' => array(
 				'color-auto'  => __( 'Auto', 'mixt' ),

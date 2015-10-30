@@ -1,7 +1,7 @@
 
 // ELEMENTS
 
-$icon-path: '../assets/img/element-icons';
+$icon-path: '#{$img-path}/element-icons';
 
 // Icons
 
@@ -54,7 +54,7 @@ $icon-path: '../assets/img/element-icons';
 	}
 
 	&.all-colors {
-		@each $selector, $color in $vc-colors {
+		@each $selector, $color in $element-colors {
 			@include option_color_variant($selector, $color);
 		}
 	}

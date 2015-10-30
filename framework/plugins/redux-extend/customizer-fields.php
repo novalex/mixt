@@ -584,7 +584,7 @@ if ( $themes_enabled ) {
 
 			array(
 				'id'       => 'site-themes',
-				'type'     => 'multi_input',
+				'type'     => 'mixt_multi_input',
 				'no_title' => true,
 				'add_text' => __( 'New Theme', 'mixt' ),
 				'inputs'   => array(
@@ -697,7 +697,7 @@ if ( $themes_enabled ) {
 		'fields'          => array(
 			array(
 				'id'       => 'nav-themes',
-				'type'     => 'multi_input',
+				'type'     => 'mixt_multi_input',
 				'no_title' => true,
 				'add_text' => __( 'New Theme', 'mixt' ),
 				'inputs'   => array(
@@ -820,7 +820,7 @@ if ( $themes_enabled ) {
 
 $this->sections[] = array(
 	'title'           => __( 'Navbars', 'mixt' ),
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'fields'          => array(),
 );
 
@@ -828,7 +828,7 @@ $this->sections[] = array(
 $this->sections[] = array(
 	'title'           => __( 'Primary Navbar', 'mixt' ),
 	'subsection'      => true,
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'fields'          => array(
 
 		// Layout
@@ -989,7 +989,7 @@ $this->sections[] = array(
 $this->sections[] = array(
 	'title'           => __( 'Secondary Navbar', 'mixt' ),
 	'subsection'      => true,
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'fields'          => array(
 
 		// On/Off Switch
@@ -1125,14 +1125,14 @@ $this->sections[] = array(
 
 $this->sections[] = array(
 	'title'           => __( 'Footer', 'mixt' ),
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'fields'          => array(),
 );
 
 // FOOTER WIDGET AREA SECTION
 $this->sections[] = array(
 	'title'           => __( 'Widget Area', 'mixt' ),
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'subsection'      => true,
 	'fields'          => array(
 		
@@ -1177,7 +1177,7 @@ $this->sections[] = array(
 // FOOTER COPYRIGHT AREA SECTION
 $this->sections[] = array(
 	'title'           => __( 'Copyright Area', 'mixt' ),
-	'customizer-only' => true,
+	'customizer_only' => true,
 	'subsection'      => true,
 	'fields'          => array(
 		

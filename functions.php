@@ -27,7 +27,7 @@ define('MIXT_MODULES_URI', MIXT_URI . '/modules');       // Modules URI
 define('MIXT_PLUGINS_DIR', MIXT_FRAME_DIR . '/plugins'); // Plugins Path
 define('MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins'); // Plugins URI
 
-define('MIXT_THEME', 'lava');                            // Default Theme
+define('MIXT_THEME', 'aqua');                            // Default Theme
 
 
 /**
@@ -130,6 +130,8 @@ function mixt_widgets_init() {
 	$custom_sidebars = get_option('mixt-sidebars');
 	if ( is_array($custom_sidebars) ) {
 		foreach ( $custom_sidebars as $sidebar ) {
+			if ( empty($sidebar['name']) || empty($sidebar['id']) ) continue;
+			
 			register_sidebar( array(
 				'name' => $sidebar['name'],
 				'id'   => $sidebar['id'],
@@ -181,8 +183,3 @@ function remove_adminbar_styles() {
 	remove_action('wp_head', '_admin_bar_bump_cb');
 }
 add_action('get_header', 'remove_adminbar_styles');
-
-// Redirect to Options Page After Activation
-if ( is_admin() && isset($_GET['activated']) && $pagenow == 'themes.php' ) {
-	wp_redirect(admin_url('admin.php?page=mixt_options&tab=0'));
-}

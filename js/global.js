@@ -37,32 +37,6 @@ GLOBAL JS FUNCTIONS
 		if ( content.length ) {
 			content.css('min-height', viewport.height() - content.offset().top - $('#colophon').height());
 		}
-		
-		// One-Page Navigation
-		if ( bodyEl.hasClass('one-page') ) {
-			$('.one-page-row').each( function() {
-				var row = $(this);
-
-				if ( row.is(':first-child') ) {
-					var pageContent = $('.page-content.one-page');
-					row.css('padding-top', pageContent.css('margin-top'));
-					pageContent.css('margin-top', 0);
-				} else {
-					var prevRow = row.prev();
-					if ( ! prevRow.hasClass('row') ) prevRow = prevRow.prev('.row');
-
-					row.css('padding-top', prevRow.css('margin-bottom'));
-					prevRow.css('margin-bottom', 0);
-				}
-			});
-
-			var onePageOffset = ( mixt_opt.nav.mode == 'fixed' ) ? $('#main-nav').outerHeight() : 1;
-
-			bodyEl.scrollspy({
-				target: '#main-nav',
-				offset: onePageOffset
-			});
-		}
 
 
 		// Skrollr Parallax
@@ -263,20 +237,29 @@ GLOBAL JS FUNCTIONS
 	// 	setTheme: function(newTheme, elem) {
 	// 		elem = elem || $('#styler-theme-elem').val();
 	// 		newTheme = newTheme || $('input[name="styler-theme"]:checked', styleSwitcher.el).val();
-	// 		var $elem    = $('#'+elem),
-	// 			themeNow = $elem[0].className.match(/theme-([^\s]*)/)[1];
 
-	// 		bodyEl.removeClass('body-theme-'+themeNow).addClass('body-theme-'+newTheme);
-	// 		$elem.removeClass('theme-'+themeNow).addClass('theme-'+newTheme);
-	// 		if ( elem == 'main-nav' || elem == 'second-nav' ) {
-	// 			$elem.trigger('refresh');
+	// 		if ( elem == 'all' ) {
+	// 			$.each(['main-wrap-inner', 'main-nav', 'second-nav', 'colophon'], function(index, elem) {
+	// 				styleSwitcher.setTheme(newTheme, elem);
+	// 			});
+	// 		} else {
+	// 			var $elem = $('#'+elem),
+	// 				themeNow = $elem[0].className.match(/theme-([^\s]*)/)[1];	
+
+	// 			if ( elem == 'main-wrap-inner' ) {
+	// 				bodyEl.removeClass('body-theme-'+themeNow).addClass('body-theme-'+newTheme);
+	// 			}
+	// 			$elem.removeClass('theme-'+themeNow).addClass('theme-'+newTheme);
+	// 			if ( elem == 'main-nav' || elem == 'second-nav' ) {
+	// 				$elem.trigger('refresh');
+	// 			}
+	// 			styleSwitcher.setCookie('styler-theme-' + elem, newTheme);
 	// 		}
-	// 		styleSwitcher.setCookie('styler-theme-' + elem, newTheme);
 	// 	},
 
 	// 	setElemTheme: function() {
 	// 		var elem  = $('#styler-theme-elem').val(),
-	// 			$elem = $('#'+elem),
+	// 			$elem = ( elem == 'all' ) ? $('#main-wrap-inner') : $('#'+elem),
 	// 			theme = $elem[0].className.match(/theme-([^\s]*)/)[1];
 
 	// 		styleSwitcher.setChecked($('#styler-theme'), theme);

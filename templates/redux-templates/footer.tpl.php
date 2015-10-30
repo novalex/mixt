@@ -5,43 +5,12 @@
 	 *
 	 * @author 		Redux Framework
 	 * @package 	ReduxFramework/Templates
-	 * @version     3.5.6.7
+	 * @version     3.5.8.3
 	 */
 ?>
 <div id="redux-sticky-padder" style="display: none;">&nbsp;</div>
 <div id="redux-footer-sticky">
 	<div id="redux-footer">
-
-		<?php if ( isset( $this->parent->args['share_icons'] ) ) : ?>
-			<div id="redux-share">
-				<?php foreach ( $this->parent->args['share_icons'] as $link ) : ?>
-					<?php
-					// SHIM, use URL now
-					if ( isset( $link['link'] ) && ! empty( $link['link'] ) ) {
-						$link['url'] = $link['link'];
-						unset( $link['link'] );
-					}
-					?>
-
-					<a href="<?php echo esc_url( $link['url'] ) ?>" title="<?php echo esc_attr( $link['title'] ); ?>"
-					   target="_blank">
-
-						<?php if ( isset( $link['icon'] ) && ! empty( $link['icon'] ) ) : ?>
-							<i class="<?php
-								if ( strpos( $link['icon'], 'el-icon' ) !== false && strpos( $link['icon'], 'el ' ) === false ) {
-									$link['icon'] = 'el ' . $link['icon'];
-								}
-								echo esc_attr( $link['icon'] );
-							?>"></i>
-						<?php else : ?>
-							<img src="<?php echo esc_url( $link['img'] ); ?>"/>
-						<?php endif; ?>
-
-					</a>
-				<?php endforeach; ?>
-
-			</div>
-		<?php endif; ?>
 
 		<div class="redux-action_bar">
 			<span class="spinner"></span>

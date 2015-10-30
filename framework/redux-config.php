@@ -75,7 +75,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				$site_themes = mixt_get_themes('site', 'all');
 				$nav_themes = mixt_get_themes('nav', 'all');
 			} else {
-				$site_themes = $nav_themes = mixt_get_themes('default');
+				$site_themes = mixt_get_themes('site', 'default');
+				$nav_themes = mixt_get_themes('nav', 'default');
 			}
 			$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
 			$footer_themes = array_merge( array('auto' => __( 'Auto', 'mixt' )), $site_themes );
@@ -374,6 +375,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Set a custom site width, e.g. \'1140px\' or \'100%\'', 'mixt' ),
 					),
 
+					// Header Code
+					array(
+						'id'       => 'head-user-code',
+						'type'     => 'ace_editor',
+						'title'    => __( 'Head Code', 'mixt' ),
+						'subtitle' => __( 'Add custom code before the closing &lt;head&gt; tag', 'mixt' ),
+						'mode'     => 'html',
+						'theme'    => 'chrome',
+					),
+
 					// Divider
 					array(
 						'id'   => 'global-divider-1',
@@ -426,7 +437,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'square'  => __( 'Square', 'mixt' ),
 								'square2' => __( 'Empty Square', 'mixt' ),
 							),
-							'default'  => 'square',
+							'default'  => 'ring',
 							'required' => array('page-loader-type', '=', '1'),
 						),
 
@@ -1688,6 +1699,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'subtitle' => __( 'Set a custom sidebar width for smaller screens, e.g. \'200px\' or \'30%\'', 'mixt' ),
 					),
 
+					// Hide On Mobile
+					array(
+						'id'       => 'sidebar-hide',
+						'type'     => 'switch',
+						'title'    => __( 'Hide On Mobile', 'mixt' ),
+						'subtitle' => __( 'Hide sidebar on mobile / small screens', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
 					// Child Page Navigation
 					array(
 						'id'       => 'child-page-nav',
@@ -1702,7 +1724,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					// Additional Sidebars
 					array(
 						'id'       => 'reg-sidebars',
-						'type'     => 'multi_input',
+						'type'     => 'mixt_multi_input',
 						'title'    => __( 'Custom Sidebars', 'mixt' ),
 						'subtitle' => __( 'Register custom sidebars to use on different pages or locations', 'mixt' ),
 						'add_text' => __( 'New Sidebar', 'mixt' ),
@@ -1808,6 +1830,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Border Color', 'mixt' ),
 							'transparent' => false,
 							'validate' => 'color',
+						),
+						
+						// Hide On Mobile
+						array(
+							'id'       => 'footer-widgets-hide',
+							'type'     => 'switch',
+							'title'    => __( 'Hide On Mobile', 'mixt' ),
+							'subtitle' => __( 'Hide the widget area on mobile / small screens', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
 						),
 
 					// Divider
@@ -1941,6 +1974,68 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Social Profiles', 'mixt' ),
 							'subtitle' => __( 'Select which social profiles to display', 'mixt' ),
 							'options'  => $social_profile_names,
+						),
+
+					// Divider
+					array(
+						'id'   => 'footer-divider-3',
+						'type' => 'divide',
+					),
+
+					// INFO BAR SECTION
+					array(
+						'id'       => 'footer-info-section',
+						'type'     => 'section',
+						'title'    => __( 'Info Bar', 'mixt' ),
+						'subtitle' => __( 'Settings for the info bar. Can be used to show the cookie law notice, a promotion or any other information.', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Enable
+						array(
+							'id'       => 'info-bar',
+							'type'     => 'switch',
+							'title'    => __( 'Show', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Content
+						array(
+							'id'           => 'info-bar-content',
+							'type'         => 'textarea',
+							'title'        => __( 'Content', 'mixt' ),
+							'subtitle'     => __( 'Text or code to display in the info bar', 'mixt' ),
+							'default'      => 'This site uses cookies to improve user experience. By continuing to use it, you are agreeing to our <a href="#">cookie policy</a>.' .
+											  '<a href="#" class="btn btn-red btn-xs pull-right info-close"><i class="fa fa-remove"></i></a>',
+							'allowed_html' => $text_allowed_html,
+							'placeholder'  => $text_code_placeholder,
+							'required'     => array('info-bar', '=', true),
+						),
+
+						// Fixed Position
+						array(
+							'id'       => 'info-bar-fixed',
+							'type'     => 'switch',
+							'title'    => __( 'Fixed Position', 'mixt' ),
+							'subtitle' => __( 'Make the info bar fixed (sticky)', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array('info-bar', '=', true),
+						),
+
+						// Hide On Mobile
+						array(
+							'id'       => 'info-bar-hide',
+							'type'     => 'switch',
+							'title'    => __( 'Hide On Mobile', 'mixt' ),
+							'subtitle' => __( 'Hide the info bar on mobile / small screens', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+							'required' => array('info-bar', '=', true),
 						),
 				),
 			);
@@ -2627,7 +2722,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					// Social Sharing Profiles
 					array(
 						'id'       => 'post-sharing-profiles',
-						'type'     => 'multi_input',
+						'type'     => 'mixt_multi_input',
 						'no_title' => true,
 						'add_text' => __( 'New Profile', 'mixt' ),
 						'sortable' => true,
@@ -2774,9 +2869,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						array(
 							'id'       => 'site-themes',
-							'type'     => 'multi_input',
+							'type'     => 'mixt_multi_input',
 							'no_title' => true,
 							'sortable' => true,
+							'no_ajax'  => true,
 							'add_text' => __( 'New Theme', 'mixt' ),
 							'inputs'   => array(
 
@@ -2891,9 +2987,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 						array(
 							'id'       => 'nav-themes',
-							'type'     => 'multi_input',
+							'type'     => 'mixt_multi_input',
 							'no_title' => true,
 							'sortable' => true,
+							'no_ajax'  => true,
 							'add_text' => __( 'New Theme', 'mixt' ),
 							'inputs'   => array(
 
@@ -3037,7 +3134,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 					// Social Profiles
 					array(
 						'id'       => 'social-profiles',
-						'type'     => 'multi_input',
+						'type'     => 'mixt_multi_input',
 						'no_title' => true,
 						'add_text' => __( 'New Profile', 'mixt' ),
 						'sortable' => true,
@@ -3084,7 +3181,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'desc'       => __( 'Manage the site\'s typography options and fonts.', 'mixt' ),
 				'icon'       => 'el-icon-font',
 				'customizer' => false,
-				'fields'  => array(
+				'fields'     => array(
 
 					// Site-Wide Font
 					array(
@@ -3225,7 +3322,9 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'id'         => 'wbc_importer_section',
 				'title'      => __( 'Settings & Demos', 'mixt' ),
 				'desc'       => __( 'Manage your settings, and import demo content.', 'mixt' ) .
-								'<br><strong>' . __( 'Demos work best on clean, fresh sites!', 'mixt' ) . '</strong>',
+								'<br><strong class="red-text">' .
+									__( 'Demos work best on clean, fresh sites. For complete content import, make sure all recommended plugins (Appearance > Install Plugins) are activated! The page will reload after importing.', 'mixt' ) .
+								'</strong>',
 				'icon'       => 'el-icon-refresh',
 				'customizer' => false,
 				'fields'     => array(
@@ -3291,6 +3390,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			$this->args = array(
 				'opt_name'           => 'mixt_opt',
+				'global_variable'    => '',
 				'display_name'       => 'MIXT',
 				'display_version'    => $theme->get('Version'),
 				'menu_type'          => 'menu',
@@ -3301,13 +3401,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'admin_bar_icon'     => 'dashicons-admin-generic',
 				'admin_bar_priority' => '31.6498',
 
-				'ajax_save'          => true,
-				'dev_mode'           => true,
+				'dev_mode'           => false,
 				'update_notice'      => true,
 				'disable_tracking'   => true,
 				
 				'customizer'         => true,
-				'sass'               => array( 'enabled' => false ),
 				
 				'page_priority'      => '59.6498',
 				'page_parent'        => 'themes.php',
@@ -3324,7 +3422,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 				// You will need to generate a Google API key to use this feature.
 				// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
-				'google_api_key'       => 'AIzaSyANZToOjYpoewv8b-GpX4LOOVZXC_08tD0',
+				'google_api_key'       => apply_filters('mixt_google_api_key', ''),
 				// Set it you want google fonts to update weekly. A google_api_key value is required.
 				'google_update_weekly' => false,
 				// Must be defined to add google fonts to the typography module
@@ -3367,11 +3465,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 			// ADMIN BAR LINKS -> Setup custom links in the admin bar menu as external items.
-			$this->args['admin_bar_links'][] = array(
-				'id'    => 'redux-docs',
-				'href'   => 'http://docs.reduxframework.com/',
-				'title' => __( 'Documentation', 'mixt' ),
-			);
+			// $this->args['admin_bar_links'][] = array(
+			// 	'id'    => 'redux-docs',
+			// 	'href'   => 'http://docs.reduxframework.com/',
+			// 	'title' => __( 'Documentation', 'mixt' ),
+			// );
 
 			// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
 			// $this->args['share_icons'][] = array(

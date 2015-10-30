@@ -9,7 +9,7 @@
  */
 
 // Hide Sidebar
-Mixt_Options::set('page', 'sidebar', false);
+Mixt_Options::set('sidebar', 'enabled', false);
 
 get_header();
 

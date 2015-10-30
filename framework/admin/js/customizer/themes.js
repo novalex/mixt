@@ -42,6 +42,21 @@ MIXT.themes = {
 	var themes = MIXT.themes;
 
 	themes.init();
+
+	$(document).ready( function() {
+		if ( wp.customize('mixt_opt[nav-theme]').get() == 'auto' ) {
+			themes.nav = themes.site;
+			$('#main-nav').attr('data-theme', 'auto');
+		}
+		if ( $('#second-nav').length && wp.customize('mixt_opt[sec-nav-theme]').get() == 'auto' ) {
+			themes.secNav = themes.site;
+			$('#second-nav').attr('data-theme', 'auto');
+		}
+		if ( wp.customize('mixt_opt[footer-theme]').get() == 'auto' ) {
+			themes.footer = themes.site;
+			$('#colophon').attr('data-theme', 'auto');
+		}
+	});
 	
 	wp.customize('mixt_opt[site-theme]', function(value) {
 		value.bind( function(to) {

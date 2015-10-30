@@ -35,17 +35,6 @@ HEADER FUNCTIONS
 			mediaCont.css('height', fullHeight);
 		}
 
-		// Add padding behind transparent navbar to prevent overlapping
-		if ( mixt_opt.nav.transparent && mediaCont.length == 1 ) {
-			var containerPad = topNavHeight;
-
-			if ( mixt_opt.nav.position == 'below' ) {
-				container.css('padding-bottom', containerPad);
-			} else {
-				container.css('padding-top', containerPad);
-			}
-		}
-
 		// Prevent content fade if header is taller than viewport
 		if ( mixt_opt.header['content-fade'] ) {
 			if ( wrapHeight > viewHeight ) {

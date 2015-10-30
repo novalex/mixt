@@ -38,7 +38,7 @@ jQuery(document).ready( function($) {
 
 	// Multi Input Fields
 
-	$('.redux-multi-input').each( function() {
+	$('.mixt-multi-input').each( function() {
 		var cont = $(this),
 			parent = cont.parents('tr'),
 			parClass = 'multi-input-cont';

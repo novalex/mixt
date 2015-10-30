@@ -71,7 +71,7 @@ $wc-spacing-l: 20px;
 	}
 
 	// Accent button
-	@each $name, $theme in $themes {
+	@each $name, $theme in $site-themes {
 		$color: map-get($theme, 'accent');
 
 		.theme-#{$name} .woocommerce {

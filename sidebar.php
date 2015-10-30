@@ -6,25 +6,28 @@
  * @package MIXT
  */
 
-if ( Mixt_Options::get('page', 'sidebar') ) {
+if ( Mixt_Options::get('sidebar', 'enabled') ) {
 
-	$active_sidebar = Mixt_Options::get('page', 'sidebar-id');
+	$classes = 'sidebar widget-area';
+	if ( Mixt_Options::get('sidebar', 'hide') ) {
+		$classes .= ' hidden-xs';
+	}
 
 	?>
 
 	</div><?php // close #content ?>
 
-	<div class="sidebar widget-area">
+	<div class="<?php echo $classes; ?>">
 
 		<div class="sidebar-padder">
 			<?php
 
 			// Child Page Navigation
-			if ( Mixt_Options::get('page', 'child-page-nav') ) { mixt_child_page_nav(); }
+			if ( Mixt_Options::get('sidebar', 'page-nav') ) { mixt_child_page_nav(); }
 
 			do_action( 'before_sidebar' );
 			
-			if ( ! dynamic_sidebar($active_sidebar) ) : ?>
+			if ( ! dynamic_sidebar(Mixt_Options::get('sidebar', 'id')) ) : ?>
 				<aside id="search" class="widget widget_search">
 					<?php get_search_form(); ?>
 				</aside>

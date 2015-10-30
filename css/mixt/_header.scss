@@ -77,22 +77,27 @@ body.loading {
 // HEADER MEDIA
 
 .head-media {
-	$spacing: 25px;
-	$spacing-sm: 15px;
+	$spacing: 50px;
+	$spacing-sm: 25px;
+	$spacing-content: 15px;
 
 	width: 100%;
 	height: auto;
-	min-height: 90px;
+	min-height: $nav-primary-height;
+	position: relative;
 	margin: 0;
 	overflow: hidden;
-	position: relative;
-	z-index: 0;
 	transition: height 0.3s;
+	z-index: 0;
 
+	// Inset shadow
 	&:after {
-		content: ' '; z-index: 2;
-		position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+		content: ' ';
+		position: absolute;
+		left: 0; bottom: -1px;
+		height: 1px; width: 100%;
 		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05), 0 -1px 8px rgba(0, 0, 0, 0.15);
+		z-index: 2;
 	}
 
 	.media-container {
@@ -141,7 +146,6 @@ body.loading {
 		display: table;
 		table-layout: fixed;
 		vertical-align: middle;
-		padding-bottom: $spacing;
 		transition: opacity 0.05s ease-out, transform 0.05s ease-out;
 		z-index: 2;
 
@@ -164,11 +168,11 @@ body.loading {
 		display: table-cell;
 		position: relative;
 		vertical-align: middle;
-		padding: ($spacing * 2 - $spacing-sm) 0 $spacing 0;
+		padding: ($spacing - $spacing-content) 0 $spacing 0;
 		z-index: 2;
 
 		> * {
-			margin-top: $spacing-sm;
+			margin-top: $spacing-content;
 			margin-bottom: 0;
 		}
 
@@ -240,21 +244,15 @@ body.loading {
 		transform: none !important;
 	}
 
-	@include media('screen', '<mars') {
-		.container {
-			width: 100%;
-			padding-bottom: $spacing-sm;
-		}
-
-		.media-inner {
-			padding: $spacing-sm 0;
-		}
+	// Transparent navbar padding
+	.nav-transparent.nav-below & {
+		.container { padding-top: 0 !important; }
 	}
-}
 
-.nav-transparent {
-	.head-media .container { padding-top: $nav-primary-height; }
-	&.nav-below .head-media .container { padding-top: 0; padding-bottom: $nav-primary-height; }
+	@include media('screen', '<mars') {
+		.container { width: 100%; }
+		.media-inner { padding: ( $spacing-sm - $spacing-content ) 0 $spacing-sm 0 !important; }
+	}
 }
 
 
@@ -342,6 +340,7 @@ body.loading {
 		opacity: 0.6;
 		padding: 0 5px;
 		font-size: 16px;
+		color: inherit;
 		display: inline-block;
 		vertical-align: -1px;
 	}

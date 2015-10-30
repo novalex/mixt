@@ -1,0 +1,42 @@
+
+// Reno Theme (Reno Sand)
+
+$theme-reno-site: (
+	'reno': (
+		'accent': #b57934,
+
+		'bg': #f9f8f7,
+		'bg-alt': #f4e5d7,
+
+		'color': #3a2303,
+		'color-fade': #777777,
+		'color-inv': #ffffff,
+		'color-inv-fade': #d1d1d1,
+		'color-alt': #994900,
+
+		'border': #d6c9b8,
+	)
+);
+$site-themes: map-merge($site-themes, $theme-reno-site);
+
+$theme-reno-nav: (
+	'reno': (
+		'accent': #b57934,
+
+		'bg': #f4bc84,
+
+		'color': #3a2303,
+		'color-inv': #fff,
+
+		'border': #cea167,
+
+		'menu-bg': #555,
+		'menu-bg-hover': #f4bc84,
+
+		'menu-color': #fff,
+		'menu-hover-color': #3a2303,
+
+		'menu-border': #444,
+	)
+);
+$nav-themes: map-merge($nav-themes, $theme-reno-nav);

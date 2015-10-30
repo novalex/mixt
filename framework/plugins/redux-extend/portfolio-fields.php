@@ -286,7 +286,7 @@ $this->sections[] = array(
 				'id'       => 'portfolio-rollover-btn-color',
 				'type'     => 'select',
 				'title'    => __( 'Button Color', 'mixt' ),
-				'options'  => mixt_get_assets('button', 'colors'),
+				'options'  => mixt_get_assets('colors', 'buttons'),
 				'default'  => 'primary',
 				'required' => array('portfolio-rollover', '=', true),
 			),

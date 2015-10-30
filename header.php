@@ -17,9 +17,9 @@
 	<?php
 
 	wp_head();
-
-	// Print Header CSS
-	do_action('mixt_head_css');
+	
+	// Output code before the closing 'head' tag
+	do_action('mixt_head_code');
 
 	?>
 </head>
@@ -161,9 +161,9 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 			// Content Wrap Classes
 			$content_classes = 'container';
-			if ( $page_options['sidebar'] && $page_options['page-type'] != 'onepage' ) {
+			if ( Mixt_Options::get('sidebar', 'enabled') && $page_options['page-type'] != 'onepage' ) {
 				$content_classes .= ' has-sidebar';
-				if ( $page_options['sidebar-position'] == 'left' ) { $content_classes .= ' sidebar-left'; }
+				if ( Mixt_Options::get('sidebar', 'position') == 'left' ) { $content_classes .= ' sidebar-left'; }
 			}
 			// Content Class Filter
 			$content_classes = apply_filters('mixt_content_class', $content_classes);

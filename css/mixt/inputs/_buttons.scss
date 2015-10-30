@@ -21,6 +21,12 @@
 		}
 	}
 
+	&.btn-sm,
+	&.btn-xs {
+		i { font-size: 14px !important; }
+		.mixt-icon { &, i { width: 14px; height: 14px; } }
+	}
+
 	&.icon-l {
 		> i, .mixt-icon { margin: 0 $padding-base-horizontal 0 0; }
 	}
@@ -133,7 +139,7 @@
 	.btn-default { @extend .btn-grey; }
 	.btn-success { @extend .btn-green; }
 }
-@each $name, $theme in $themes {
+@each $name, $theme in $site-themes {
 	.theme-#{$name} {
 		@include button-color('minimal', darken(map-get($theme, 'bg'), 5));
 		@include button-color('accent', map-get($theme, 'accent'));

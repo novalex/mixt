@@ -9,13 +9,20 @@
 $options = mixt_get_options( array(
 	'back-to-top'      => array(),
 	'back-to-top-icon' => array( 'return' => 'value' ),
-	'left-content'     => array( 'type' => 'str', 'key' => 'footer-left-content', 'return' => 'value' ),
+
+	'widgets-hide'     => array( 'key' => 'footer-widgets-hide' ),
+	'left-content'     => array( 'key' => 'footer-left-content', 'type' => 'str', 'return' => 'value' ),
 	'left-code'        => array( 'key' => 'footer-left-code', 'return' => 'value' ),
 	'left-hide'        => array( 'key' => 'footer-left-hide' ),
-	'right-content'    => array( 'type' => 'str', 'key' => 'footer-right-content', 'return' => 'value' ),
+	'right-content'    => array( 'key' => 'footer-right-content', 'type' => 'str', 'return' => 'value' ),
 	'right-code'       => array( 'key' => 'footer-right-code', 'return' => 'value' ),
 	'right-hide'       => array( 'key' => 'footer-right-hide' ),
 	'social-profiles'  => array( 'key' => 'footer-social-profiles', 'return' => 'value' ),
+
+	'info-bar'         => array(),
+	'info-bar-content' => array( 'type' => 'str', 'return' => 'value' ),
+	'info-bar-fixed'   => array(),
+	'info-bar-hide'    => array(),
 ) );
 
 ?>
@@ -29,7 +36,7 @@ $options = mixt_get_options( array(
 
 		// Back To Top Button
 		if ( $options['back-to-top'] ) {
-			echo '<a href="#" id="back-to-top" class="btn btn-accent btn-lg">';
+			echo '<a href="#" id="back-to-top" class="btn btn-accent btn-lg" data-no-hash-scroll="true">';
 				echo '<i class="' . $options['back-to-top-icon'] . '"></i>';
 			echo '</a>';
 		}
@@ -38,15 +45,7 @@ $options = mixt_get_options( array(
 
 	</div><?php // close #main-wrap-inner ?>
 
-	<?php
-
-		$theme = Mixt_Options::get('themes', 'footer');
-
-		$class = "theme-$theme";
-
-	?>
-
-	<footer id="colophon" class="<?php echo $class; ?>">
+	<footer id="colophon" class="theme-<?php echo Mixt_Options::get('themes', 'footer'); ?>">
 		<?php
 
 		// Footer Widget Row
@@ -59,13 +58,15 @@ $options = mixt_get_options( array(
 			}
 		}
 		if ( $sidebars > 0 ) {
-			$column_class = 'col-sm-' . 12 / $sidebars;
+			$widgets_class = 'footer-row widget-row theme-section-alt';
+			if ( $options['widgets-hide'] ) { $widgets_class .= ' hidden-xs'; }
+			
 			?>
-			<div class="footer-row widget-row theme-section-alt">
+			<div class="<?php echo $widgets_class; ?>">
 				<div class="container">
 					<div id="footer-widgets" class="row">
 						<?php foreach ( $active_sidebars as $sidebar ) { ?>
-							<div class="widget-area <?php echo $column_class; ?>" role="complementary">
+							<div class="widget-area <?php echo 'col-sm-' . ( 12 / intval($sidebars) ); ?>" role="complementary">
 								<?php dynamic_sidebar($sidebar); ?>
 							</div>
 						<?php } ?>
@@ -102,7 +103,8 @@ $options = mixt_get_options( array(
 		}
 		if ( $options['right-hide'] ) { $right_content_class = 'hidden-xs'; }
 
-		if ( ! empty($left_content) || ! empty($right_content) ) { ?>
+		if ( ! empty($left_content) || ! empty($right_content) ) {
+			?>
 			<div class="footer-row copyright-row site-copyright theme-section-main">
 				<div class="container">
 					<div class="inner">
@@ -119,13 +121,33 @@ $options = mixt_get_options( array(
 					<?php do_action('mixt_credits'); ?>
 				</div>
 			</div>
-		<?php } else { do_action('mixt_credits'); } ?>
-		
+			<?php
+		} else {
+			do_action('mixt_credits');
+		}
+
+		// Info Bar
+
+		if ( $options['info-bar'] && ! empty($options['info-bar-content']) ) {
+			$info_class = 'info-bar theme-section-alt';
+			if ( $options['info-bar-fixed'] ) { $info_class .= ' sticky'; }
+			if ( $options['info-bar-hide'] ) { $info_class .= ' hidden-xs'; }
+
+			?>
+			<div id="info-bar-wrap">
+				<div class="<?php echo $info_class; ?>">
+					<div class="container"><?php echo $options['info-bar-content']; ?></div>
+				</div>
+			</div>
+			<?php
+		}
+
+		?>
 	</footer><?php // close #colophon ?>
 
 </div><?php // close #main-wrap
 
-do_action('mixt_body_css');
+do_action('mixt_body_code');
 
 wp_footer();
 

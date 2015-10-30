@@ -12,11 +12,12 @@ class Mixt_Themes extends Mixt_DCSS {
 	/**
 	 * @var bool  $themes_enabled
 	 * @var array $active_themes
-	 * @var array $default_themes
+	 * @var array $default_site_themes
+	 * @var array $default_nav_themes
 	 * @var array $site_themes
-	 * @var array $themes
+	 * @var array $nav_themes
 	 */
-	public $themes_enabled, $active_themes, $default_themes, $site_themes, $themes;
+	public $themes_enabled, $active_themes, $default_site_themes, $default_nav_themes, $site_themes, $nav_themes;
 
 	public function __construct() {
 		$this->themes_enabled = (bool) get_option('mixt-themes-enabled');
@@ -27,9 +28,10 @@ class Mixt_Themes extends Mixt_DCSS {
 				'sec-nav' => array( 'key' => 'sec-nav-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 				'footer'  => array( 'key' => 'footer-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 			) );
-			$this->default_themes = mixt_get_themes('default');
-			$this->site_themes = array_merge( $this->default_themes, get_option('mixt-site-themes', array()) );
-			$this->nav_themes = array_merge( $this->default_themes, get_option('mixt-nav-themes', array()) );
+			$this->default_site_themes = mixt_get_themes('site', 'default');
+			$this->default_nav_themes = mixt_get_themes('nav', 'default');
+			$this->site_themes = array_merge( $this->default_site_themes, get_option('mixt-site-themes', array()) );
+			$this->nav_themes = array_merge( $this->default_nav_themes, get_option('mixt-nav-themes', array()) );
 		}
 	}
 
@@ -45,7 +47,7 @@ class Mixt_Themes extends Mixt_DCSS {
 
 		foreach ( $themes as $theme_id ) {
 			// Do not output theme if it's one of the defaults or undefined
-			if ( ! array_key_exists($theme_id, $this->site_themes) || array_key_exists($theme_id, $this->default_themes) ) continue;
+			if ( ! array_key_exists($theme_id, $this->site_themes) || array_key_exists($theme_id, $this->default_site_themes) ) continue;
 
 			$theme = $this->site_themes[$theme_id];
 
@@ -83,6 +85,8 @@ class Mixt_Themes extends Mixt_DCSS {
 			$border    = ! empty($theme['border']) ? $theme['border'] : $defaults['border'];
 			$border_ob = new Color($border);
 
+			$input_border = '#'.$bg_ob->darken(10);
+
 			$bg_dark = ! empty($theme['bg-dark']) ? true : false;
 
 			if ( $bg_dark ) {
@@ -114,14 +118,10 @@ class Mixt_Themes extends Mixt_DCSS {
 			// START CSS RULES
 			
 			echo "/* $theme_name Site Theme */\n";
-				
-			// Main Background Color
 			
-			echo "$th { background-color: $bg; }\n";
+			echo "$th, $th .theme-bg { background-color: $bg; }\n";
 
 			// Helper Classes
-			
-			echo "$th .theme-bg { background-color: $bg; }\n";
 
 			echo "$th .theme-color { color: $color; }\n";
 			echo "$th .theme-color-fade { color: $color_fade; }\n";
@@ -150,6 +150,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			
 			echo "$th, $th #content-wrap { color: $color; }\n";
 			echo "$th a, $th .post-meta a:hover, $th #breadcrumbs a:hover, $th .pager a:hover, $th .pager li > span, $th .hover-accent-color:hover { color: $accent; }\n";
+			echo "a.no-color { color: inherit; }\n";
 			echo "$th .post-meta a, $th .post-meta > span { color: $color_fade; }\n";
 			echo "$th .head-media.bg-light .container, $th .head-media.bg-light .media-inner > a, $th .head-media.bg-light .header-scroll, $th .head-media.bg-light #breadcrumbs > li + li:before { color: $bg_light_color; }\n";
 			echo "$th .head-media.bg-dark .container, $th .head-media.bg-dark .media-inner > a, $th .head-media.bg-dark .header-scroll, $th .head-media.bg-dark #breadcrumbs > li + li:before { color: $bg_dark_color; }\n";
@@ -193,9 +194,9 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Inputs
 			
 			echo "$th input:not([type=submit]):not([type=button]):not(.btn), $th select, $th textarea, $th .form-control, " .
-				 "$th .post-password-form input[type='password'], $th .woocommerce .input-text { color: $color; border-color: $border; background-color: $bg_darker; }\n";
+				 "$th .post-password-form input[type='password'], $th .woocommerce .input-text { color: $color; border-color: $input_border; background-color: $bg_darker; }\n";
 			echo "$th input:not([type=submit]):not([type=button]):not(.btn):focus, $th select:focus, $th textarea:focus, $th .form-control:focus, " .
-				 "$th .post-password-form input[type='password']:focus, $th .woocommerce .input-text:focus { border-color: #".$border_ob->lighten(2)."; background-color: #".$bg_ob->lighten(2)."; }\n";
+				 "$th .post-password-form input[type='password']:focus, $th .woocommerce .input-text:focus { border-color: $input_border; background-color: #".$bg_ob->lighten(2)."; }\n";
 			echo "$th input::-webkit-input-placeholder,$th .form-control::-webkit-input-placeholder { color: $color_fade; }\n";
 			echo "$th input::-moz-placeholder, $th .form-control::-moz-placeholder { color: $color_fade; }\n";
 			echo "$th input:-ms-input-placeholder, $th .form-control:-ms-input-placeholder { color: $color_fade; }\n";
@@ -248,7 +249,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$body_th .lg-progress-bar .lg-progress { background-color: $accent; }\n";
 
 			// Select2
-			echo "$body_th .select2-container a.select2-choice, $body_th .select2-drop, $body_th .select2-drop.select2-drop-active { color: $color; border-color: $border; background-color: $bg_darker; }\n";
+			echo "$body_th .select2-container a.select2-choice, $body_th .select2-drop, $body_th .select2-drop.select2-drop-active { color: $color; border-color: $input_border; background-color: $bg_darker; }\n";
 			echo "$body_th .select2-results { background-color: $bg_darker; }\n";
 			echo "$body_th .select2-results .select2-highlighted { color: $color; background-color: $bg_lighter; }\n";
 
@@ -274,7 +275,7 @@ class Mixt_Themes extends Mixt_DCSS {
 					 "$th .woocommerce .cart-collaterals .cart_totals tr td, $th .woocommerce .cart-collaterals .cart_totals tr th { border-color: $border !important; }\n";
 				echo "$th .woocommerce-checkout #payment, ".
 					 "$th .woocommerce form .form-row.woocommerce-validated .select2-choice, $th .woocommerce form .form-row.woocommerce-validated input.input-text, $th .woocommerce form .form-row.woocommerce-validated select, ".
-					 "$th .woocommerce form .form-row.woocommerce-invalid .select2-choice, $th .woocommerce form .form-row.woocommerce-invalid input.input-text, $th .woocommerce form .form-row.woocommerce-invalid select { border-color: $border; }\n";
+					 "$th .woocommerce form .form-row.woocommerce-invalid .select2-choice, $th .woocommerce form .form-row.woocommerce-invalid input.input-text, $th .woocommerce form .form-row.woocommerce-invalid select { border-color: $input_border; }\n";
 			}
 		}
 	}
@@ -306,7 +307,7 @@ class Mixt_Themes extends Mixt_DCSS {
 
 		foreach ( $themes as $theme_id ) {
 			// Do not output theme if it's one of the defaults or undefined
-			if ( ! array_key_exists($theme_id, $this->nav_themes) || array_key_exists($theme_id, $this->default_themes) ) continue;
+			if ( ! array_key_exists($theme_id, $this->nav_themes) || array_key_exists($theme_id, $this->default_nav_themes) ) continue;
 
 			$theme = $this->nav_themes[$theme_id];
 

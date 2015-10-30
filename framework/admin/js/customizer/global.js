@@ -22,6 +22,21 @@ window.MIXT = {
 
 	/* global _, wp */
 
+	wp.customize('mixt_opt[site-layout]', function(value) {
+		value.bind( function(to) {
+			if ( $('#main-wrap').hasClass('nav-vertical') ) {
+				wp.customize.previewer.refresh();
+				return;
+			}
+			if ( to == 'wide' ) {
+				$('body').removeClass('boxed');
+			} else {
+				$('body').addClass('boxed');
+			}
+			$(window).trigger('resize');
+		});
+	});
+
 	wp.customize('mixt_opt[site-bg-color]', function(value) {
 		value.bind( function(to) {
 			$('body').css('background-color', to);
@@ -57,6 +72,8 @@ window.MIXT = {
 			this.loader = $('#load-overlay');
 			this.loader.find('.loader').show();
 			this.loadInner = this.loader.children('.load-inner');
+			this.handle(this.color, 'color');
+			this.handle(this.bg, 'bg');
 			this.loadShape();
 			if ( $('#loader-close').length === 0 ) {
 				this.loader.append('<button id="loader-close" class="btn btn-red btn-lg" style="position: absolute; top: 20px; right: 20px;">&times;</button>');

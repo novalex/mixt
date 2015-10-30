@@ -1,7 +1,26 @@
 
-// Edge Theme (Cyan)
+// Edge Theme (Turquoise)
 
-$theme-edge: (
+$theme-edge-site: (
+	'edge': (
+		'accent': #ffa65e,
+
+		'bg': #fff,
+		'bg-alt': #dceef2,
+
+		'color': #1e3e4f,
+		'color-fade': #426b84,
+		'color-inv': #fff,
+		'color-inv-fade': #d1d1d1,
+		'color-alt': #3e6368,
+
+		'border': #c5dddd,
+		'border-alt': #abc8d8,
+	)
+);
+$site-themes: map-merge($site-themes, $theme-edge-site);
+
+$theme-edge-nav: (
 	'edge': (
 		'accent': #ffc28d,
 
@@ -22,4 +41,4 @@ $theme-edge: (
 		'menu-border': #444,
 	)
 );
-$nav-themes: map-merge($nav-themes, $theme-edge);
+$nav-themes: map-merge($nav-themes, $theme-edge-nav);

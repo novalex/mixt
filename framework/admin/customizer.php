@@ -33,6 +33,7 @@ function mixt_customize_register($wp_customize) {
 	
 	// GLOBAL OPTIONS
 	
+	$wp_customize->get_setting('mixt_opt[site-layout]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[site-bg-color]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[site-bg-pat]')->transport = 'postMessage';
 
@@ -64,8 +65,9 @@ function mixt_customize_register($wp_customize) {
 	$wp_customize->get_setting('mixt_opt[footer-theme]')->transport = 'postMessage';
 
 	if ( (bool) get_option('mixt-themes-enabled') ) {
-		$wp_customize->get_setting('mixt_opt[site-themes]')->transport = 'postMessage';
-		$wp_customize->get_setting('mixt_opt[nav-themes]')->transport = 'postMessage';
+		global $mixt_opt;
+		if ( ! empty($mixt_opt['site-themes']) ) $wp_customize->get_setting('mixt_opt[site-themes]')->transport = 'postMessage';
+		if ( ! empty($mixt_opt['nav-themes']) ) $wp_customize->get_setting('mixt_opt[nav-themes]')->transport = 'postMessage';
 	}
 
 	// NAVBARS
@@ -107,7 +109,7 @@ function mixt_customize_register($wp_customize) {
 	$wp_customize->get_setting('mixt_opt[footer-left-code]')->transport = 'postMessage';
 	$wp_customize->get_setting('mixt_opt[footer-right-code]')->transport = 'postMessage';
 }
-add_action('customize_register', 'mixt_customize_register', 999);
+add_action('customize_register', 'mixt_customize_register', 99);
 
 
 /**
@@ -136,7 +138,9 @@ function mixt_customize_options() {
 			'tagline-typo' => $mixt_opt['logo-tagline-typo'],
 		),
 		'nav' => $nav_options,
-		'themes' => mixt_get_themes('default'),
+		'themes-enabled' => (bool) get_option('mixt-themes-enabled'),
+		'default-site-themes' => mixt_get_themes('site', 'default'),
+		'default-nav-themes' => mixt_get_themes('nav', 'default'),
 		'breakpoints' => Mixt_DCSS::$media_bps,
 		'mixt-uri' => MIXT_URI,
 	);

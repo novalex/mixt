@@ -6,7 +6,7 @@
 	/* global _, redux_change, redux */
 
 	redux.field_objects = redux.field_objects || {};
-	redux.field_objects.multi_input = redux.field_objects.multi_input || {};
+	redux.field_objects.mixt_multi_input = redux.field_objects.mixt_multi_input || {};
 
 	function makeCheckbox(input) {
 		if ( input.hasClass('init') ) {
@@ -31,13 +31,16 @@
 
 	function groupInit(group, groupID) {
 		group.find('input').each( function() {
-			var input   = $(this);
+			var input = $(this);
 
 			if ( input.hasClass('wp-colorpicker') ) {
 				input.wpColorPicker({
-					change: _.throttle(function() {
+					change: _.throttle( function() {
 						$(this).trigger('change');
-					}, 100)
+					}, 25),
+					clear: _.throttle( function() {
+						input.trigger('change');
+					}, 10),
 				});
 			}
 
@@ -90,10 +93,10 @@
 	}
 
 	$( document ).ready( function() {
-		//redux.field_objects.multi_input.init();
+		//redux.field_objects.mixt_multi_input.init();
 
 
-		$('.redux-multi-input').find('li:not(.multi-input-model)').each( function() {
+		$('.mixt-multi-input').find('li:not(.multi-input-model)').each( function() {
 			var group = $(this),
 				idField = group.find('.group-id input');
 
@@ -106,58 +109,66 @@
 		});
 	});
 
-	redux.field_objects.multi_input.init = function( selector ) {
+	redux.field_objects.mixt_multi_input.init = function(selector) {
 
-		if ( !selector ) {
-			selector = $( document ).find( '.redux-container-multi_input:visible' );
+		if ( ! selector ) {
+			selector = $( document ).find( '.redux-container-mixt_multi_input:visible' );
 		}
 
-		$( selector ).each(
-			function() {
-				var el = $( this );
-				var parent = el;
-				if ( !el.hasClass( 'redux-field-container' ) ) {
-					parent = el.parents( '.redux-field-container:first' );
-				}
-				if ( parent.is(':hidden') ) { // Skip hidden fields
-					return;
-				}
-				if ( parent.hasClass( 'redux-field-init' ) ) {
-					parent.removeClass( 'redux-field-init' );
-				} else {
-					return;
-				}
+		$( selector ).each( function() {
+			var el = $(this),
+				parent = el;
 
-				el.find( '.redux-multi-input-remove' ).live('click', function() {
-					redux_change( $( this ) );
-					$( this ).prev( 'input[type="text"]' ).val( '' );
-					$( this ).parent().slideUp(
-						'medium', function() {
-							$( this ).remove();
-						}
-					);
-				});
-
-				el.find( '.redux-multi-input-add' ).click(
-					function() {
-						var number = parseInt( $( this ).attr( 'data-add_number' ) );
-						var id = $( this ).attr( 'data-id' );
-						var name = $( this ).attr( 'data-name' );
-						for ( var i = 0; i < number; i++ ) {
-							var container = $('#' + id),
-								new_input = container.find('.multi-input-model').clone();
-
-							container.append( new_input );
-
-							var groupNr   = container.find('li').length,
-								lastGroup = container.find('li:last-child');
-							lastGroup.removeAttr('style').removeClass('multi-input-model');
-
-							groupInit(lastGroup, groupNr);
-						}
-					}
-				);
+			if ( ! el.hasClass('redux-field-container') ) {
+				parent = el.parents('.redux-field-container:first');
 			}
-		);
+
+			if ( parent.is(':hidden') ) { // Skip hidden fields
+				return;
+			}
+
+			if ( parent.hasClass('redux-field-init') ) {
+				parent.removeClass('redux-field-init');
+			} else {
+				return;
+			}
+
+			el.find('.mixt-multi-input-add').click( function() {
+				var btn = $(this),
+					number = parseInt( btn.attr('data-add_number') ),
+					id = btn.attr('data-id');
+
+				for ( var i = 0; i < number; i++ ) {
+					var container = $('#' + id),
+						new_input = container.find('.multi-input-model').clone();
+
+					container.append( new_input );
+
+					var groupNr   = container.find('li').length,
+						lastGroup = container.find('li:last-child');
+					lastGroup.removeAttr('style').removeClass('multi-input-model');
+
+					groupInit(lastGroup, groupNr);
+				}
+				redux_change(btn);
+				maybeDisableAjax(el);
+			});
+		});
 	};
+
+	$(document).on('click', '.mixt-multi-input-remove', function() {
+		var btn = $(this);
+		redux_change(btn);
+		btn.prev('input[type="text"]').val('');
+		btn.parent().slideUp(300, function() { $(this).remove(); });
+		maybeDisableAjax(btn.parents('.redux-container-mixt_multi_input'));
+	});
+
+	function maybeDisableAjax(el) {
+		if ( el.find('.mixt-multi-input').hasClass('no-ajax') ) {
+			window.onbeforeunload = null;
+			redux.args.ajax_save = false;
+		}
+	}
+
 })( jQuery );

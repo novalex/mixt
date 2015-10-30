@@ -29,8 +29,9 @@ $red: #D81616;
 
 
 // =====================================================
-// When adding or removing colors from the maps below,
-// also update the assets array in core/assets.php
+// When adding or removing colors in the maps below,
+// also update the respective assets array in core/assets.php,
+// or use the 'mixt_assets_array' filter in your child theme
 // =====================================================
 
 $basic-colors: (
@@ -54,7 +55,7 @@ $button-colors: (
 	'violet': #9B27BF,
 );
 
-$vc-colors: (
+$element-colors: (
 	'white': #FFFFFF,
 	'off-white': #f0f0f0,
 	'grey': #EBEBEB,

@@ -31,18 +31,7 @@ class Mixt_Options {
 	 * Set options and perform init functions
 	 */
 	public function init() {
-		$queried = get_queried_object();
-		self::set('page', null, array(
-			'page-type'      => self::page_type(),
-			'posts-page'     => self::is_posts_page(),
-			'show-admin-bar' => is_admin_bar_showing(),
-		));
-		self::add('page', self::options('page'));
-		self::set('themes', null, self::options('themes'));
-		self::set('assets', null, self::options('assets'));
-		self::set('nav', null, self::options('nav'));
-		self::set('header', null, self::options('header'));
-		self::set('layout', null, self::options('layout'));
+		self::set_options();
 
 		// Run post-init functions
 		$this->after_init();
@@ -94,14 +83,7 @@ class Mixt_Options {
 	 * @param  string $group
 	 * @return array
 	 */
-	public static function options($group) {
-		$page_type = self::$config['page']['page-type'];
-		if ( $group == 'layout' && $page_type != 'blog' && self::$config['page']['posts-page'] ) {
-			global $mixt_opt;
-			$page_type .= '-page';
-			if ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] ) { $page_type = 'blog'; }
-		}
-
+	public static function set_options() {
 		$options = array(
 			'themes' => array(
 				'site'    => array( 'key' => 'site-theme', 'type' => 'str', 'return' => 'value', 'default' => MIXT_THEME ),
@@ -113,14 +95,10 @@ class Mixt_Options {
 				'icon-fonts' => array( 'return' => 'value' ),
 			),
 			'page' => array(
-				'layout'           => array( 'key' => 'site-layout', 'return' => 'value' ),
-				'page-loader'      => array(),
-				'fullwidth'        => array( 'key' => 'page-fullwidth' ),
-				'sidebar'          => array( 'key' => 'page-sidebar' ),
-				'sidebar-id'       => array( 'type' => 'str', 'return' => 'value', 'default' => 'none' ),
-				'sidebar-position' => array( 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
-				'location-bar'     => array(),
-				'child-page-nav'   => array(),
+				'layout'       => array( 'key' => 'site-layout', 'return' => 'value' ),
+				'page-loader'  => array(),
+				'fullwidth'    => array( 'key' => 'page-fullwidth' ),
+				'location-bar' => array(),
 			),
 			'nav' => array(
 				'layout'         => array( 'key' => 'nav-layout', 'return' => 'value' ),
@@ -155,33 +133,60 @@ class Mixt_Options {
 				'loc-bar-right-content' => array( 'type' => 'str', 'return' => 'value' ),
 			),
 			'layout' => array(
-				'type'            => array( 'key' => $page_type . '-type', 'return' => 'value', 'default' => 'standard' ),
-				'columns'         => array( 'key' => $page_type . '-columns', 'return' => 'value', 'default' => '2' ),
-				'feat-show'       => array( 'key' => $page_type . '-feat-show', 'default' => true ),
-				'feat-size'       => array( 'key' => $page_type . '-feat-size', 'return' => 'value', 'default' => 'blog-large' ),
-				'post-info'       => array( 'key' => $page_type . '-post-info', 'default' => false ),
+				'type'            => array( 'key' => '{page_type}-type', 'return' => 'value', 'default' => 'standard' ),
+				'columns'         => array( 'key' => '{page_type}-columns', 'return' => 'value', 'default' => '2' ),
+				'feat-show'       => array( 'key' => '{page_type}-feat-show', 'default' => true ),
+				'feat-size'       => array( 'key' => '{page_type}-feat-size', 'return' => 'value', 'default' => 'blog-large' ),
+				'post-info'       => array( 'key' => '{page_type}-post-info', 'default' => false ),
 				'post-content'    => array( 'return' => 'value' ),
-				'meta-show'       => array( 'key' => $page_type . '-meta-show', 'return' => 'value', 'default' => 'header' ),
+				'meta-show'       => array( 'key' => '{page_type}-meta-show', 'return' => 'value', 'default' => 'header' ),
 				'pagination-type' => array( 'return' => 'value' ),
 				'show-page-nr'    => array(),
 				'comment-pagination-type' => array( 'return' => 'value' ),
 			),
+			'sidebar' => array(
+				'enabled'  => array( 'key' => 'page-sidebar' ),
+				'id'       => array( 'key' => 'sidebar-id', 'type' => 'str', 'return' => 'value', 'default' => 'none' ),
+				'position' => array( 'key' => 'sidebar-position', 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
+				'hide'     => array( 'key' => 'sidebar-hide' ),
+				'page-nav' => array( 'key' => 'child-page-nav' ),
+			),
 		);
 
-		return self::get_options($options[$group]);
+		$page_options = array(
+			'page-type'      => self::page_type(true),
+			'posts-page'     => self::is_posts_page(),
+			'show-admin-bar' => is_admin_bar_showing(),
+		);
+
+		foreach ( $options as $group => $opts ) {
+			if ( $group == 'layout' ) {
+				$page_type = $page_options['page-type'];
+				if ( $page_type != 'blog' && $page_options['posts-page'] ) {
+					global $mixt_opt;
+					$page_type = ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] ) ? 'blog' : $page_type . '-page';
+				}
+				foreach ( $opts as $name => $data ) {
+					if ( isset($data['key']) ) { $opts[$name]['key'] = str_replace('{page_type}', $page_type, $data['key']); }
+				}
+			}
+			self::set($group, null, self::get_options($opts));
+		}
+
+		self::add('page', $page_options);
 	}
 
 	/**
 	 * Post-initialization functions
 	 */
 	protected function after_init() {
-		if ( in_array(self::get('page', 'sidebar-id'), array('none', 'auto')) ) {
+		if ( in_array(self::get('sidebar', 'id'), array('none', 'auto')) ) {
 			if ( self::is_shop() ) {
 				// Set sidebar for shop pages
 				global $mixt_opt;
-				if ( isset($mixt_opt['wc-sidebar']) ) self::set('page', 'sidebar-id', $mixt_opt['wc-sidebar']);
+				if ( isset($mixt_opt['wc-sidebar']) ) self::set('sidebar', 'id', $mixt_opt['wc-sidebar']);
 			} else {
-				self::set('page', 'sidebar-id', 'sidebar-1');
+				self::set('sidebar', 'id', 'sidebar-1');
 			}
 		}
 
@@ -210,23 +215,29 @@ class Mixt_Options {
 
 	/**
 	 * Get page type
-	 * 
+	 *
+	 * @param  bool $refresh Run the checks again
 	 * @return string
 	 */
-	public static function page_type() {
-		if ( is_author() ) { return 'author'; }
-		else if ( self::is_blog() ) { return 'blog'; }
-		else if ( self::is_portfolio() ) { return 'portfolio'; }
-		else if ( self::is_shop('catalog') ) { return 'shop'; }
-		else if ( get_page_template_slug() == 'templates/one-page.php' ) { return 'onepage'; }
-		else if ( get_page_template_slug() == 'templates/blank.php' ) { return 'blank'; }
-		else if ( is_category() ) { return 'category'; }
-		else if ( is_date() ) { return 'date'; }
-		else if ( is_search() ) { return 'search'; }
-		else if ( is_tag() ) { return 'tag'; }
-		else if ( is_tax() ) { return 'taxonomy'; }
-		else if ( is_singular('portfolio') ) { return 'single-portfolio'; }
-		else { return 'single'; }
+	public static function page_type($refresh = false) {
+		static $type = '';
+		if ( $type != '' && ! $refresh ) return $type;
+
+		if ( is_author() ) { $type = 'author'; }
+		else if ( self::is_blog() ) { $type = 'blog'; }
+		else if ( self::is_portfolio() ) { $type = 'portfolio'; }
+		else if ( self::is_shop('catalog') ) { $type = 'shop'; }
+		else if ( get_page_template_slug() == 'templates/one-page.php' ) { $type = 'onepage'; }
+		else if ( get_page_template_slug() == 'templates/blank.php' ) { $type = 'blank'; }
+		else if ( is_category() ) { $type = 'category'; }
+		else if ( is_date() ) { $type = 'date'; }
+		else if ( is_search() ) { $type = 'search'; }
+		else if ( is_tag() ) { $type = 'tag'; }
+		else if ( is_tax() ) { $type = 'taxonomy'; }
+		else if ( is_singular('portfolio') ) { $type = 'single-portfolio'; }
+		else { $type = 'single'; }
+
+		return $type;
 	}
 
 	// Check if page is a blog page
@@ -285,14 +296,9 @@ class Mixt_Options {
 
 		global $mixt_opt;
 
-		if ( empty(self::$config['page']) ) {
-			$is_posts_page = false;
-			$page_type = 'single';
-		} else {
-			$is_posts_page = self::$config['page']['posts-page'];
-			$page_type     = self::$config['page']['page-type'];
-			if ( $page_type != 'blog' ) { $page_type .= '-page'; }
-		}
+		$page_type     = self::page_type();
+		$is_posts_page = self::is_posts_page();
+		if ( $page_type != 'blog' && $is_posts_page ) { $page_type .= '-page'; }
 
 		foreach ( $option_arr as $k => $option ) {
 			$defaults = array(

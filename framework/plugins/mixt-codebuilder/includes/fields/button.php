@@ -3,23 +3,23 @@
 /**
  * CodeBuilder Button Field
  *
- * @package MIXT CodeBuilder
+ * @package MIXT\Plugins\CodeBuilder
  */
 
 if ( ! class_exists( 'Mixt_CB_Button' ) ) {
 	class Mixt_CB_Button {
 
-		/** @var array field params */
+		/** @var array Field params */
 		protected $param = array();
-		/** @var array button colors */
+		/** @var array Button colors */
 		protected $colors = array();
-		/** @var array button sizes */
+		/** @var array Button sizes */
 		protected $sizes = array();
-		/** @var array button styles */
+		/** @var array Button styles */
 		protected $styles = array();
 
 		public function __construct() {
-			$this->colors = mixt_get_assets('button', 'colors');
+			$this->colors = mixt_get_assets('colors', 'buttons');
 			$this->sizes = mixt_get_assets('button', 'sizes');
 
 			add_action('mixtcb_load', array($this, 'cb_add_field'));

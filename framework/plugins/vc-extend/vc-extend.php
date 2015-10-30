@@ -19,6 +19,7 @@ foreach ( glob( __DIR__ . '/fields/*.php' ) as $file ) { require_once $file; }
  * Add custom parameters to Visual Composer
  */
 function mixt_vc_extend() {
+	vc_set_as_theme();
 
 	// Custom Row Params
 	$row_custom = array(
@@ -106,6 +107,9 @@ function mixt_vc_extend() {
 		'portfolio',
 		'product',
 	) );
+
+	// Disable welcome page
+	remove_action('init', 'vc_page_welcome_redirect');
 }
 add_action('vc_before_init', 'mixt_vc_extend');
 

@@ -21,11 +21,11 @@ function mixt_custom_css() {
 	global $mixt_opt;
 	if ( ! is_array($mixt_opt) ) { return; }
 
-	$defaults = array(
-		'nav-height'        => 50,
+	$defaults = apply_filters( 'mixt_dcss_defaults', array(
 		'nav-padding'       => 20,
 		'nav-fixed-padding' => 0,
-	);
+		'nav-item-height'   => 50,
+	) );
 
 
 	// START CSS RULES
@@ -114,12 +114,11 @@ function mixt_custom_css() {
 
 	// Typography
 	$site_font = $mixt_opt['font-sitewide'];
-	$font_family = $site_font['font-family'];
-	if ( ! empty($font_family) ) {
+	if ( ! empty($site_font['font-family']) ) {
 		if ( ! empty($site_font['font-backup']) ) {
-			$font_family .= ', ' . $site_font['font-backup'];
+			$site_font['font-family'] .= ', ' . $site_font['font-backup'];
 		}
-		$body_styles .= "font-family: $font_family; ";
+		$body_styles .= "font-family: {$site_font['font-family']}; ";
 	}
 	if ( ! empty($site_font['font-size']) ) {
 		$body_styles .= "font-size: {$site_font['font-size']}; ";
@@ -150,18 +149,20 @@ function mixt_custom_css() {
 
 	// Text Logo
 	} else {
-		$font_size = ! empty($mixt_opt['logo-text-typo']['font-size']) ? $mixt_opt['logo-text-typo']['font-size'] : '24px';
+		$logo_font = $mixt_opt['logo-text-typo'];
+		$font_size = ! empty($logo_font['font-size']) ? $logo_font['font-size'] : '24px';
 
 		echo "#nav-logo strong { ";
 			echo "font-size: $font_size; ";
 			if ( ! empty($mixt_opt['logo-text-color']) ) { echo "color: {$mixt_opt['logo-text-color']}; "; }
-			$logo_font_family = $mixt_opt['logo-text-typo']['font-family'];
-			if ( ! empty($mixt_opt['logo-text-typo']['font-backup']) ) {
-				$logo_font_family .= ', ' . $mixt_opt['logo-text-typo']['font-backup'];
+			if ( ! empty($logo_font['font-family']) ) {
+				if ( ! empty($logo_font['font-backup']) ) {
+					$logo_font['font-family'] .= ', ' . $logo_font['font-backup'];
+				}
+				echo "font-family: {$logo_font['font-family']} !important; ";
 			}
-			echo "font-family: $logo_font_family !important; ";
-			if ( ! empty($mixt_opt['logo-text-typo']['font-weight']) ) { echo "font-weight: {$mixt_opt['logo-text-typo']['font-weight']}; "; }
-			if ( ! empty($mixt_opt['logo-text-typo']['text-transform']) ) { echo "text-transform: {$mixt_opt['logo-text-typo']['text-transform']}; "; }
+			if ( ! empty($logo_font['font-weight']) ) { echo "font-weight: {$logo_font['font-weight']}; "; }
+			if ( ! empty($logo_font['text-transform']) ) { echo "text-transform: {$logo_font['text-transform']}; "; }
 		echo "}\n";
 
 		// Dark Bg Logo Color
@@ -198,7 +199,6 @@ function mixt_custom_css() {
 	// NAVBAR STYLING
 
 	$navbar_properties = '';
-	$logo_center = $mixt_opt['logo-align'] == '2';
 
 	// Navbar Texture
 	if ( ! empty($mixt_opt['nav-texture']) ) {
@@ -214,40 +214,42 @@ function mixt_custom_css() {
 	if ( isset($mixt_opt['nav-padding']) ) {
 		$nav_pad = $mixt_opt['nav-padding'];
 		if ( $nav_pad != $defaults['nav-padding'] ) {
-			$nav_wrap_height = $defaults['nav-height'] + $nav_pad * 2;
+			$nav_height = $defaults['nav-item-height'] + $nav_pad * 2 + 1;
+			$nav_center_height = $nav_height + $defaults['nav-item-height'];
 
-			if ( $logo_center ) {
-				$nav_wrap_height = $nav_wrap_height + $defaults['nav-height'];
-				echo ".nav-full #main-nav-wrap.logo-center { min-height: {$nav_wrap_height}px; }";
-			} else {
-				echo ".nav-full #main-nav-wrap { min-height: {$nav_wrap_height}px; }";
-			}
 			$navbar_properties .= "padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px; ";
+
+			echo ".nav-full #main-nav-wrap { min-height: {$nav_height}px; }\n";
+			echo ".nav-full #main-nav-wrap.logo-center { min-height: {$nav_center_height}px; }\n";
+
+			echo "#main-wrap.nav-full.nav-transparent .head-media .container { padding-top: {$nav_height}px; }\n";
+			echo "#main-wrap.nav-full.nav-transparent .head-media.logo-center .container { padding-top: {$nav_center_height}px; }\n";
+			echo "#main-wrap.nav-full.nav-transparent.nav-below .head-media .container { padding-bottom: {$nav_height}px; }\n";
+			echo "#main-wrap.nav-full.nav-transparent.nav-below .head-media.logo-center .container { padding-bottom: {$nav_center_height}px; }\n";
+			echo "#main-wrap.nav-full.nav-transparent.nav-below .navbar-mixt.position-top { margin-top: -{$nav_height}px; }\n";
+			echo "#main-wrap.nav-full.nav-transparent.nav-below .logo-center .navbar-mixt.position-top { margin-top: -{$nav_center_height}px; }\n";
 		}
 	}
 	if ( isset($mixt_opt['nav-fixed-padding']) ) {
 		$nav_pad = $mixt_opt['nav-fixed-padding'];
 		if ( $nav_pad != $defaults['nav-fixed-padding'] ) {
-			$nav_wrap_height = $nav_item_height = $defaults['nav-height'] + $nav_pad * 2;
+			$nav_height = $defaults['nav-item-height'] + $nav_pad * 2;
+			$half_padding = $nav_pad / 2;
+			$nav_center_height = $nav_height + $defaults['nav-item-height'];
+			$nav_center_item_height = $nav_height - $nav_pad;
 
-			if ( $logo_center ) {
-				$nav_wrap_height = $nav_wrap_height + $defaults['nav-height'];
-				echo ".fixed-nav .nav-full #main-nav-wrap.logo-center { min-height: {$nav_wrap_height}px; }\n";
-			} else {
-				echo ".fixed-nav .nav-full #main-nav-wrap { min-height: {$nav_wrap_height}px; }\n";
-			}
+			echo ".fixed-nav .nav-full #main-nav-wrap { min-height: {$nav_height}px; }\n";
 			echo ".fixed-nav .nav-full .navbar-mixt { padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px; }\n";
 
+			echo ".fixed-nav .nav-full #main-nav-wrap.logo-center { min-height: {$nav_center_height}px; }\n";
+
 			if ( $nav_pad > 0 ) {
-				if ( $logo_center ) {
-					$half_padding = $nav_pad / 2;
-					$nav_item_height = $nav_item_height - $half_padding;
-					echo ".fixed-nav .nav-full .navbar-mixt .navbar-header { margin-top: -{$half_padding}px; }";
-					echo ".fixed-nav .nav-full .navbar-mixt .nav > li { margin-top: {$half_padding}px; margin-bottom: -{$nav_pad}px; }";
-				} else {
-					echo ".fixed-nav .nav-full .navbar-mixt .nav > li { margin-top: -{$nav_pad}px; margin-bottom: -{$nav_pad}px; }";
-				}
-				echo ".fixed-nav .nav-full .navbar-mixt .nav > li, .fixed-nav .navbar-mixt .nav > li > a { height: {$nav_item_height}px; line-height: {$nav_item_height}px; }";
+				echo ".fixed-nav .nav-full .navbar-mixt .nav > li { margin-top: -{$nav_pad}px; margin-bottom: -{$nav_pad}px; }\n";
+				echo ".fixed-nav .nav-full .navbar-mixt .nav > li, .fixed-nav .nav-full .navbar-mixt .nav > li > a { height: {$nav_height}px; line-height: " . ($nav_height - 3) . "px; }\n";
+
+				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .navbar-header { margin-top: -{$half_padding}px; }\n";
+				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li { margin-top: {$half_padding}px; margin-bottom: -{$nav_pad}px; }\n";
+				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li, .fixed-nav .nav-full .logo-center .navbar-mixt .nav > li > a { height: {$nav_center_item_height}px; line-height: " . ($nav_center_item_height - 3) . "px; }\n";
 			}
 		}
 	}
@@ -270,10 +272,9 @@ function mixt_custom_css() {
 
 	// Navbar Typography
 	$nav_font = $mixt_opt['font-nav'];
-	$font_family = $nav_font['font-family'];
-	if ( ! empty($font_family) ) {
-		if ( ! empty($nav_font['font-backup']) ) { $font_family .= ', ' . $nav_font['font-backup']; }
-		$navbar_properties .= "font-family: $font_family; ";
+	if ( ! empty($nav_font['font-family']) ) {
+		if ( ! empty($nav_font['font-backup']) ) { $nav_font['font-family'] .= ', ' . $nav_font['font-backup']; }
+		$navbar_properties .= "font-family: {$nav_font['font-family']}; ";
 	}
 	if ( ! empty($nav_font['font-size']) ) { $navbar_properties .= "font-size: {$nav_font['font-size']}; "; }
 	if ( ! empty($nav_font['font-weight']) ) { $navbar_properties .= "font-weight: {$nav_font['font-weight']}; "; }

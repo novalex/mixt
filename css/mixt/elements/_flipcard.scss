@@ -91,7 +91,7 @@
 		@include flipcard-color('> .inner > .#{$sel}', $color);
 	}
 	// Accent Colors
-	@each $theme, $colors in $themes {
+	@each $theme, $colors in $site-themes {
 		@include flipcard-color('.theme-#{$theme} & > .inner > .accent', map-get($colors, 'accent'));
 	}
 }

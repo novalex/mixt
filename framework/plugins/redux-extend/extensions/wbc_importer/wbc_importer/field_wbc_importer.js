@@ -65,6 +65,10 @@
                     parent.find('.importer-button:not(#wbc-importer-reimport)').removeClass('button-primary').addClass('button').text('Imported').show();
                     parent.find('.importer-button').attr('style', '');
                     parent.addClass('imported active').removeClass('not-imported');
+
+                    // MIXT MOD
+                    window.onbeforeunload = null;
+                    location.reload();
                 } else {
                     parent.find('.import-demo-data').show();
 
