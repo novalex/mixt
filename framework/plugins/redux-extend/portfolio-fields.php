@@ -1,13 +1,17 @@
 <?php
 
-// Portfolio Redux Fields
+// REDUX PORTFOLIO FIELDS
+
 
 // DIVIDER
+
 $this->sections[] = array(
 	'type' => 'divide',
 );
 
+
 // PORTFOLIO SECTION
+
 $this->sections[] = array(
 	'title'      => __( 'Portfolio', 'mixt' ),
 	'desc'       => __( 'Customize the portfolio\'s options and appearance', 'mixt' ),
@@ -293,7 +297,9 @@ $this->sections[] = array(
 	),
 );
 
+
 // SINGLE PROJECT PAGE SECTION
+
 $this->sections[] = array(
 	'title'      => __( 'Project Page', 'mixt' ),
 	'desc'       => __( 'Manage the single project pages', 'mixt' ),
@@ -315,6 +321,31 @@ $this->sections[] = array(
 				'one-third'  => '1/3',
 			),
 			'default'  => 'half',
+		),
+
+		// Post Info
+		array(
+			'id'       => 'project-post-info',
+			'type'     => 'switch',
+			'title'    => __( 'Post Info', 'mixt' ),
+			'subtitle' => __( 'Display the post format and date', 'mixt' ),
+			'on'       => __( 'Yes', 'mixt' ),
+			'off'      => __( 'No', 'mixt' ),
+			'default'  => false,
+		),
+
+		// Meta Position / Display
+		array(
+			'id'       => 'project-meta-show',
+			'type'     => 'button_set',
+			'title'    => __( 'Post Meta', 'mixt' ),
+			'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+			'options'  => array(
+				'header'  => __( 'In Header', 'mixt' ),
+				'footer'  => __( 'In Footer', 'mixt' ),
+				'false'   => __( 'No', 'mixt' ),
+			),
+			'default'  => 'header',
 		),
 
 		// Taxonomies

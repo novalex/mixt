@@ -88,4 +88,17 @@ HELPER FUNCTIONS
 		}
 	});
 
+	// Detect IE Version
+
+	var classes = [],
+		match = /msie (\d+)/i.exec( navigator.userAgent );
+	if ( match ) {
+		var version = +match[1],
+			min = 6,
+			max = 11;
+		classes.push( 'ie' );
+		classes.push( 'ie' + version );
+		document.documentElement.className += ' ' + classes.join(' ');
+	}
+
 })(jQuery);

@@ -100,6 +100,14 @@ select {
 		line-height: $line-height-small;
 		border-radius: $border-radius-small;
 	}
+
+	@if $ie-support {
+		// Hide custom arrow for IE9 as the native arrow can't be removed
+		.ie9 & {
+			background-image: none !important;
+			padding-right: $padding-base-horizontal !important;
+		}
+	}
 }
 
 

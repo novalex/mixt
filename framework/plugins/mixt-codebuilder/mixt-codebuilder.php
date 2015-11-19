@@ -3,9 +3,9 @@
 /**
  * Plugin Name: MIXT CodeBuilder
  * Description: Easily build and edit shortcodes
- * Version: 1.0
- * Author: Alex Nitu (novalex)
- * Author URI: http://www.novalx.com
+ * Version:     1.0
+ * Author:      novalex
+ * Author URI:  http://www.novalx.com
  *
  * Based on ZillaShortcodes
  * http://www.themezilla.com/plugins/zillashortcodes
@@ -46,7 +46,6 @@ class Mixt_CodeBuilder {
 		wp_localize_script( 'jquery', 'mixt_cb', $local );
 	}
 }
-
 new Mixt_CodeBuilder;
 
 ?>

@@ -1,9 +1,7 @@
 
 @import 'navbar-base';
-@import 'navbar-vertical';
-@import 'navbar-primary';
 
-// NAVBAR BORDERED MENU ITEMS
+// Navbar Bordered Menu Items
 
 .navbar.bordered {
 	.nav {
@@ -34,7 +32,17 @@
 }
 
 
-// SECONDARY NAVIGATION
+// Navbar Vetical Layout
+
+@import 'navbar-vertical';
+
+
+// Primary Navbar
+
+@import 'navbar-primary';
+
+
+// Secondary Navbar
 
 .second-nav {
 	min-height: $sec-nav-item-height;

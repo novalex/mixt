@@ -1,13 +1,16 @@
 <?php
 
-// WooCommerce Redux Fields
+// REDUX WOOCOMMERCE FIELDS
 
 // DIVIDER
+
 $this->sections[] = array(
 	'type' => 'divide',
 );
 
+
 // SHOP SECTION
+
 $this->sections[] = array(
 	'title'      => __( 'Shop', 'mixt' ),
 	'desc'       => __( 'Customize the shop\'s options and appearance', 'mixt' ),
@@ -211,7 +214,9 @@ $this->sections[] = array(
 	),
 );
 
+
 // SINGLE PRODUCT PAGE SECTION
+
 $this->sections[] = array(
 	'title'      => __( 'Product Page', 'mixt' ),
 	'desc'       => __( 'Manage the single product page', 'mixt' ),

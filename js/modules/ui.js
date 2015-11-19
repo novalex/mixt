@@ -83,7 +83,7 @@ UI FUNCTIONS
 		var link = $(this),
 			hash = link.attr('href');
 
-		if ( link.attr('data-no-hash-scroll') ) return;
+		if ( link.data('no-hash-scroll') || $(e.target).data('no-hash-scroll') || hash == '#' ) return true;
 
 		if ( hash.length ) {
 			e.preventDefault();
@@ -91,13 +91,15 @@ UI FUNCTIONS
 			if ( target.length) {
 				var hashOffset = $(hash).offset().top + 1;
 				if ( mixt_opt.nav.mode == 'fixed' && $('#main-nav').data('fixed') ) { hashOffset -= $('#main-nav').outerHeight(); }
-				htmlEl.add(bodyEl).animate({ scrollTop: hashOffset }, 600);
+				if ( mixt_opt.page['show-admin-bar'] && $('#wpadminbar').css('position') == 'fixed' ) { hashOffset -= $('#wpadminbar').height(); }
+				htmlEl.add(bodyEl).animate({ scrollTop: hashOffset }, 600 );
 			}
-			window.location.hash = hash;
+			history.replaceState({}, '', hash);
+			return false;
 		}
 	});
 	// Ignore specific anchors
-	$('.tabs a, .vc_tta a').attr('data-no-hash-scroll', true);
+	$('.tabs a, .vc_tta a, .ui-accordion a').data('no-hash-scroll', true);
 
 
 	// Social Icons

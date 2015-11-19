@@ -7,10 +7,6 @@
 	opacity: 0.85;
 	display: none;
 	z-index: 1;
-
-	@include media('screen', '<mercury') {
-		display: none !important;
-	}
 }
 
 // Footer
@@ -57,7 +53,7 @@
 			padding-bottom: $spacing;
 		}
 
-		@include media('screen', '(min-width: 480px)') {
+		@include media('screen', 'mercury') {
 			.inner { display: table; }
 			
 			.left-content,

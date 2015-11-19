@@ -1,6 +1,4 @@
 
-// Primary Navigation
-
 #main-nav-wrap {
 	position: relative;
 	transition: min-height 0.3s;
@@ -77,22 +75,21 @@
 	// Nav Menu
 
 	.nav {
-		&,
-		&.social-links {
-			> li > a { padding: 0 15px; }
+		& > li > a,
+		&.social-links > li > a,
+		.nav-search input {
+			padding: 0 $nav-primary-spacing;
 		}
-
-		$nav-spacing: 14px;
 
 		.divider,
 		.btn-cont {
-			height: $nav-primary-item-height - $nav-spacing;
-			margin-top: $nav-spacing / 2;
-			margin-bottom: $nav-spacing / 2;
+			height: $nav-primary-item-height - $nav-primary-spacing;
+			margin-top: $nav-primary-spacing / 2;
+			margin-bottom: $nav-primary-spacing / 2;
 		}
 		.btn-cont {
-			margin-left: $nav-spacing / 2;
-			margin-right: $nav-spacing / 2;
+			margin-left: $nav-primary-spacing / 2;
+			margin-right: $nav-primary-spacing / 2;
 		}
 
 		.amount { color: inherit !important; }
@@ -361,7 +358,11 @@
 	}
 
 	#main-wrap.nav-transparent {
-		.head-media .container { padding-top: $nav-height; }
+		.head-media {
+			min-height: $nav-height !important;
+
+			.container { padding-top: $nav-height; }
+		}
 
 		&.nav-below {
 			.head-media .container { padding-bottom: $nav-height; }
@@ -427,13 +428,9 @@
 			}
 		}
 
-		.nav > li:last-child {
-			> a,
-			> ul {
-				height: $nav-primary-item-height;
-				border-bottom-width: 0;
-			}
-		}
+		.nav > li:last-child:not(.expand) > a,
+		.nav > li:last-child .sub-menu:last-child > li:last-child > a,
+		.nav > li:last-child > ul:last-child { border-bottom-width: 0; }
 
 		.nav .divider { display: none !important; }
 
@@ -583,11 +580,12 @@
 				box-shadow: none !important;
 			}
 
-			input { padding-left: 40px; }
+			&.has-icon input { padding-left: $nav-primary-spacing + $nav-icon-size + $nav-icon-spacing; }
+
 			button { padding-left: 30px; padding-right: 30px; }
 
 			input, button {
-				height: $nav-primary-item-height;
+				height: $nav-primary-item-height - 1px;
 			}
 		}
 

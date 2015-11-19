@@ -58,7 +58,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 		global $wp_query, $mixt_opt;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-		$item_type = get_post_meta($item->ID, 'menu-item-mixt-type', true);
+		$item_type = get_post_meta($item->ID, '_mixt_menu_item_type', true);
 
 		// DIVIDER
 		if ( $item_type == 'divider' ) {
@@ -68,7 +68,9 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 
 		// SOCIAL ICON LIST
 		} else if ( $item_type == 'social-icons' ) {
-			$output .= $indent . '<li class="menu-social-icons">' . mixt_social_profiles(false, array('style' => 'nav'));
+			if ( $depth === 0 ) {
+				$output .= $indent . '<li class="menu-social-icons">' . mixt_social_profiles(false, array('style' => 'nav'));
+			}
 
 		// WIDGET AREA
 		} else if ( $item_type == 'widget' ) {
@@ -118,14 +120,20 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			// Button item type
 			else if ( $item_type == 'button' ) { $is_button = true; }
 
+			// Return if elements aren't supposed to be nested
+			if ( ( $is_search || $is_button ) && $depth !== 0 ) {
+				$output .= '';
+				return;
+			}
+
 			// Check If Item Label Is Disabled
-			$no_label = get_post_meta($item->ID, 'menu-item-mixt-no-label', true);
+			$no_label = get_post_meta($item->ID, '_mixt_menu_item_no_label', true);
 			if ( $no_label == 'true' ) {
 				$class_names .= ' no-label';
 			}
 
 			// Check If Item Is Disabled
-			$is_disabled = get_post_meta($item->ID, 'menu-item-mixt-disabled', true);
+			$is_disabled = get_post_meta($item->ID, '_mixt_menu_item_disabled', true);
 			if ( $is_disabled == 'true' ) {
 				$class_names .= ' disabled';
 			}
@@ -133,14 +141,18 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			// Check If Item Is Mega Menu
 			if ( ! function_exists('is_megamenu_check') ) {
 				function is_megamenu_check( $item_ID ) {
-					return get_post_meta($item_ID, 'menu-item-mixt-megamenu', true);
+					return get_post_meta($item_ID, '_mixt_menu_item_megamenu', true);
 				}
 			}
 			$is_megamenu = 'is_megamenu_check';
 
+			// Menu Icon
+			$menu_icon = ( isset($mixt_opt['nav-menu-icons']) && (bool) $mixt_opt['nav-menu-icons'] ) ? get_post_meta($item->ID, '_mixt_menu_item_icon', true) : '';
+			if ( is_array($menu_icon) ) { $menu_icon = implode(' ', (array) $menu_icon); }
+
 			// GET SETTINGS
-			$has_menu_icons = isset($mixt_opt['nav-menu-icons']) ? $mixt_opt['nav-menu-icons'] : 1;
-			$has_menu_arrows = isset($mixt_opt['nav-menu-arrows']) ? $mixt_opt['nav-menu-arrows'] : 1;
+			$has_menu_icons = ( ! empty($menu_icon) );
+			$has_menu_arrows = isset($mixt_opt['nav-menu-arrows']) ? (bool) $mixt_opt['nav-menu-arrows'] : 0;
 
 			
 			// APPLY CUSTOM CLASSES
@@ -162,6 +174,10 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 				}
 			} else if ( $is_search || $is_cart ) {
 				$class_names .= ' dropdown drop-menu';
+			}
+
+			if ( $has_menu_icons ) {
+				$class_names .= ' has-icon';
 			}
 
 			// Add Active Class To Menu Parents & Ancestors
@@ -211,9 +227,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			$item_output .= $args->link_before;
 
 			// ADD MENU ICONS
-			$menu_icon = get_post_meta($item->ID, 'menu-item-mixt-icon', true);
-
-			if ( $has_menu_icons != 0 && ! empty($menu_icon) ) {
+			if ( $has_menu_icons ) {
 				$item_output .= '<i class="menu-icon ' . esc_attr( $menu_icon ) . '"></i>';
 			}
 
@@ -226,28 +240,30 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			if ( $args->has_children ) {
 
 				$arrow_classes = ' drop-arrow';
+				if ( $has_menu_arrows == 0 ) { $arrow_classes .= ' visible-mobile'; }
 
-				if ( $has_menu_arrows == 0 ) {
-					$arrow_classes .= ' visible-mobile';
-				}
+				// Hardcode arrow icons for now
+				$arrow_left = 'fa fa-chevron-left';
+				$arrow_right = 'fa fa-chevron-right';
+				$arrow_down = 'fa fa-chevron-down';
 
 				if ( $depth === 0 ) {
 					if ( Mixt_Options::get('nav', 'layout') == 'vertical' ) {
-						$arrow = ( Mixt_Options::get('nav', 'vertical-pos') == 'left' ) ? 'fa fa-chevron-right' : 'fa fa-chevron-left';
+						$arrow = ( Mixt_Options::get('nav', 'vertical-pos') == 'left' ) ? $arrow_right : $arrow_left;
 					} else {
-						$arrow = 'fa fa-chevron-down';
+						$arrow = $arrow_down;
 					}
-					$item_output .= "<i class='$arrow $arrow_classes'></i>";
 				} else if ( $depth > 0 ) {
 					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
-						if ( ! strpos($arrow_classes, 'visible-mobile') ) {
+						if ( $has_menu_arrows != 0 ) {
 							$arrow_classes .= ' visible-mobile';
 						}
-						$item_output .= '<i class="fa fa-chevron-down' . $arrow_classes . '"></i>';
+						$arrow = $arrow_down;
 					} else {
-						$item_output .= '<i class="fa fa-chevron-right' . $arrow_classes . '"></i>';
+						$arrow = $arrow_right;
 					}
 				}
+				$item_output .= "<i class='$arrow $arrow_classes'></i>";
 			}
 
 			// CART ITEMS BADGE
@@ -331,8 +347,7 @@ function mixt_nav_menu_widgets() {
 		$items = wp_get_nav_menu_items($menu->term_id);
 		foreach ( $items as $item ) {
 			if ( $item->type != 'custom' ) continue;
-			$item_type = get_post_meta($item->ID, 'menu-item-mixt-type', true);
-			if ( $item_type == 'widget' ) {
+			if ( get_post_meta($item->ID, '_mixt_menu_item_type', true) == 'widget' ) {
 				$area_name = empty($item->title) ? 'Nav Widget Area' : $item->title;
 				$area_id = empty($item->attr_title) ? 'nav-widgets-' . $item->ID : $item->attr_title;
 				register_sidebar( array(

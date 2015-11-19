@@ -306,6 +306,24 @@ function mixt_css_anims($type = 'all') {
 
 
 /**
+ * Retreive an icon defined in the options
+ * 
+ * @param  string $icon   The icon to retreive
+ * @param  bool   $markup Whether to return the CSS class only or complete HTML markup
+ * @return string
+ */
+function mixt_get_icon($icon, $markup = true) {
+	global $mixt_opt;
+
+	if ( isset($mixt_opt[$icon . '-icon']) ) {
+		$icon_class = $mixt_opt[$icon . '-icon'];
+		return ( $markup ) ? "<i class='$icon_class'></i>" : $icon_class;
+	}
+	return '';
+}
+
+
+/**
  * Return icon animations
  *
  * @param  string $type The type of animations to return. Can be 'main', 'sec', 'all' or 'combined'.
@@ -347,12 +365,12 @@ function mixt_icon_anims($type = 'combined') {
 /**
  * Return asset images by type
  *
- * @param  string $type Type of images to retrieve (must match directory name in '/assets/')
+ * @param  string $type Type of images to retrieve (must match directory name in '/assets/img/')
  * @return array
  */
 function mixt_get_images($type) {
-	$images_path = MIXT_DIR . '/assets/img/' . $type . '/';
-	$images_url  = MIXT_URI . '/assets/img/' . $type . '/';
+	$images_path = apply_filters('mixt_images_path', MIXT_DIR . '/assets/img/') . $type . '/';
+	$images_url  = apply_filters('mixt_images_url', MIXT_URI . '/assets/img/') . $type . '/';
 	$images      = array();
 
 	if ( is_dir( $images_path ) ) {

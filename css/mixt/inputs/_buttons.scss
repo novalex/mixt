@@ -8,17 +8,25 @@
 }
 
 %button-icons {
-	i { font-size: 16px !important; }
+	i {
+		font-size: 16px !important;
+		line-height: inherit !important;
+	}
 
 	.mixt-icon {
 		padding: 0;
-		vertical-align: middle;
+		line-height: 1;
 		overflow: visible !important;
 
 		&, i {
 			width: 16px;
 			height: 16px;
 		}
+	}
+
+	i,
+	.mixt-icon {
+		vertical-align: middle;
 	}
 
 	&.btn-sm,
@@ -52,11 +60,12 @@
 	$color-lighter: lighten($color, 5);
 	$color-darker: darken($color, 5);
 	$color-darker-2: darken($color, 10);
+	$border-color: darken($color, 7);
 
 	// Solid Color
 	.btn-#{$selector} {
 		@include text-shadow-for-bg($color);
-		border-color: $color-darker;
+		border-color: $border-color;
 		background-color: $color;
 
 		&:hover,
@@ -73,7 +82,7 @@
 		&:hover,
 		&:focus {
 			@include text-shadow-for-bg($color);
-			border-color: $color-darker;
+			border-color: $border-color;
 			background-color: $color !important;
 		}
 	}

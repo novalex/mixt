@@ -13,7 +13,7 @@ get_header(); ?>
 
 	<section class="error-404 not-found">
 
-		<header class="page-header">
+		<header class="page-header text-center">
 			<h2 class="page-title accent-color">404</h2>
 			<h3 class="color-fade"><?php _e( 'The page could not be found!', 'mixt' ); ?></h3>
 		</header>

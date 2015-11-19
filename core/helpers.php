@@ -24,6 +24,34 @@ if ( ! is_dir( MIXT_UPLOAD_PATH ) ) {
 define( 'MIXT_IMG_PLACEHOLDER', MIXT_URI . '/assets/img/patterns/placeholder.jpg' );
 
 
+if ( ! function_exists('mixt_media_breakpoints') ) {
+	/**
+	 * Return an array of media query breakpoints or a single one
+	 * 
+	 * @param  string $bp Breakpoint to return, or 'all' for array
+	 * @return mixed
+	 */
+	function mixt_media_breakpoints($bp = 'all') {
+		if ( Mixt_Options::get('page', 'responsive') ) {
+			$bps = apply_filters( 'mixt_media_breakpoints', array(
+				'mercury' => 480,
+				'mars'    => 767,
+				'venus'   => 992,
+				'earth'   => 1200,
+			) );
+		} else {
+			$bps = array( 'mercury' => 1, 'mars' => 2, 'venus' => 3, 'earth' => 4 );
+		}
+
+		if ( $bp == 'all' ) {
+			return $bps;
+		} else {
+			return $bps[$bp];
+		}
+	}
+}
+
+
 if ( ! function_exists('mixt_unautop') ) {
 	/**
 	 * Remove misplaced p tags added by the wpautop function
@@ -62,16 +90,12 @@ add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
  * @param bool $bs_wrapper Wrap string inside Bootstrap markup
  */
 function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
-	$menu_page_url  = get_admin_url( null, 'nav-menus.php' );
-	$no_menu_asg    = __('No menu assigned', 'mixt');
-	$menu_mng_title = __('Manage menus', 'mixt');
-	$menu_page_msg  = __('Click here to assign one', 'mixt');
-
+	if ( ! current_user_can('edit_theme_options') ) return;
 	$no_menu_msg = sprintf('<p class="no-menu-msg text-cont">%1$s! <a href="%2$s" title="%3$s">%4$s</a>.</p>',
-		$no_menu_asg,
-		$menu_page_url,
-		$menu_mng_title,
-		$menu_page_msg
+		__('No menu assigned', 'mixt'),
+		get_admin_url( null, 'nav-menus.php' ),
+		__('Manage menus', 'mixt'),
+		__('Click here to assign one', 'mixt')
 	);
 
 	if ( $bs_wrapper ) {

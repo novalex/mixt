@@ -42,10 +42,10 @@
 
 .numbered-paging {
 	.pager { text-align: center; }
-	li { display: inline-block; margin: 2px; }
+	li { display: inline-block; margin: 2px !important; }
 
 	@include media('screen', 'mars') {
-		li { margin: 0 0 0 -1px; }
+		li { margin: 0 0 0 -1px !important; }
 		li a, li span { border-radius: 0; }
 		li:first-child {
 			a, span { border-radius: $bd-radius 0 0 $bd-radius; }

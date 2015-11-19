@@ -40,7 +40,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		} else {
 			$pattern_tags['link2'] = wp_get_shortlink($post_id);
 		}
-		$post_media = wp_get_attachment_image_src($post_id, 'blog-small');
+		$post_media = wp_get_attachment_image_src($post_id, 'blog-medium');
 		if ( ! empty($post_media[0]) ) {
 			$pattern_tags['thumb'] = $post_media[0];
 		} else if ( get_post_format($post_id) == 'image' ) {

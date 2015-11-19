@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
 
-	<?php // MIXT MODIFICATIONS ?>
+	<?php // MIXT MOD ?>
 	<div class="buttons btn-group">
 		<a href="<?php echo WC()->cart->get_cart_url(); ?>" class="btn btn-minimal"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
 		<a href="<?php echo WC()->cart->get_checkout_url(); ?>" class="btn btn-accent checkout"><?php _e( 'Checkout', 'woocommerce' ); ?></a>

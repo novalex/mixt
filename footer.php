@@ -43,7 +43,11 @@ $options = mixt_get_options( array(
 
 		?>
 
-	</div><?php // close #main-wrap-inner ?>
+	</div><?php // close #main-wrap-inner
+
+	do_action('mixt_before_footer');
+
+	?>
 
 	<footer id="colophon" class="theme-<?php echo Mixt_Options::get('themes', 'footer'); ?>">
 		<?php
@@ -147,9 +151,9 @@ $options = mixt_get_options( array(
 
 </div><?php // close #main-wrap
 
-do_action('mixt_body_code');
-
 wp_footer();
+
+do_action('mixt_body_code');
 
 ?>
 </body>

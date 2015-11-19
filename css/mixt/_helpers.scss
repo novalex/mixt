@@ -24,11 +24,21 @@
 }
 
 
+// COLORS
+
+@each $name, $color in $basic-colors {
+	.text-color-#{$name} { color: $color; }
+	.border-color-#{$name} { border-color: $color; }
+}
+
+
 // BORDERS
 
 	// Border Positions
-	.border-top, .border-top-btm { border-top-width: 1px; }
-	.border-btm, .border-top-btm { border-bottom-width: 1px; }
+	.border-top, .border-bottom, .border-top-bottom,
+	.border-left, .border-right, .border-sides { border-width: 0; }
+	.border-top, .border-top-bottom { border-top-width: 1px; }
+	.border-bottom, .border-top-bottom { border-bottom-width: 1px; }
 	.border-left, .border-sides { border-left-width: 1px; }
 	.border-right, .border-sides { border-right-width: 1px; }
 
@@ -57,6 +67,7 @@ $spacing-margin-sizes: (
 	's': $margin-s,
 	'm': $margin-m,
 	'l': $margin-l,
+	'none': 0,
 );
 @each $size, $margin in $spacing-margin-sizes {
 	.margin-#{$size}, .margin-top-#{$size} { margin-top: $margin; }

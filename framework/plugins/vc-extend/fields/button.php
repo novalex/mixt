@@ -130,4 +130,4 @@ function mixt_button_form_field( $settings, $value ) {
 
 	return $field->render();
 }
-add_shortcode_param('button', 'mixt_button_form_field');
+vc_add_shortcode_param('button', 'mixt_button_form_field');

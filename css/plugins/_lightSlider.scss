@@ -277,12 +277,13 @@
 		animation: rightEnd 0.3s;
 		position: relative;
 	}
-	.fix-height .lSSlideOuter {
+
+	.objectfit .fix-height .lSSlideOuter {
 		&,
 		.lSSlideWrapper,
 		.lSSlideWrapper ul,
 		.lSSlideWrapper li,
-		li dt, li a, li img { height: 100% !important; }
+		li div, li a, li img { height: 100% !important; }
 	}
 
 }

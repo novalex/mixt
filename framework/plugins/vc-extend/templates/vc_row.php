@@ -1,41 +1,113 @@
 <?php
-/** @var $this WPBakeryShortCode_VC_Row */
-$output = $el_class = $bg_image = $bg_color = $bg_image_repeat = $font_color = $padding = $margin_bottom = $css = $full_width = $el_id = $parallax_image = $parallax = '';
-extract( shortcode_atts( array(
-	'el_class'        => '',
-	'bg_image'        => '',
-	'bg_color'        => '',
-	'bg_image_repeat' => '',
-	'font_color'      => '',
-	'padding'         => '',
-	'margin_bottom'   => '',
-	'full_width'      => false,
-	'parallax'        => false,
-	'parallax_image'  => false,
-	'css'             => '',
-	'el_id'           => '',
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 
-	// MIXT Custom
-	'theme_color'      => 'auto',
-	'row_padding'      => '',
-	'separator'        => '',
-	'separator_color'  => '',
-	'separator_icon'   => '',
-	'first_row'        => false,
-	'cols_matchheight' => false,
-), $atts ) );
+/**
+ * Shortcode attributes
+ * @var $atts
+ * @var $el_class
+ * @var $full_width
+ * @var $full_height
+ * @var $content_placement
+ * @var $parallax
+ * @var $parallax_image
+ * @var $css
+ * @var $el_id
+ * @var $video_bg
+ * @var $video_bg_url
+ * @var $video_bg_parallax
+ * @var $content - shortcode content
+ * Shortcode class
+ * @var $this WPBakeryShortCode_VC_Row
+ */
+$el_class = $full_height = $full_width = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax = '';
+$output = $after_output = '';
 
-$parallax_image_id = '';
-$parallax_image_src = '';
+// MIXT MOD: Custom row atts
+$theme_color = 'auto';
+$first_row = $cols_matchheight = false;
+$row_padding = $separator = $separator_color = $separator_icon = '';
 
-// wp_enqueue_style( 'js_composer_front' );
+$atts = vc_map_get_attributes( $this->getShortcode(), $atts );
+extract( $atts );
+
 wp_enqueue_script( 'wpb_composer_front_js' );
-// wp_enqueue_style('js_composer_custom_css');
 
 $el_class = $this->getExtraClass( $el_class );
 
-$css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'vc_row wpb_row ' . ( $this->settings( 'base' ) === 'vc_row_inner' ? 'vc_inner ' : '' ) . get_row_css_class() . $el_class . vc_shortcode_custom_css_class( $css, ' ' ), $this->settings['base'], $atts );
+$css_classes = array(
+	'vc_row',
+	'wpb_row', //deprecated
+	'vc_row-fluid',
+	$el_class,
+	vc_shortcode_custom_css_class( $css ),
+);
+$wrapper_attributes = array();
+// build attributes for wrapper
+if ( ! empty( $el_id ) ) {
+	$wrapper_attributes[] = 'id="' . esc_attr( $el_id ) . '"';
+}
+if ( ! empty( $full_width ) ) {
+	$wrapper_attributes[] = 'data-vc-full-width="true"';
+	$wrapper_attributes[] = 'data-vc-full-width-init="false"';
+	if ( 'stretch_row_content' === $full_width ) {
+		$wrapper_attributes[] = 'data-vc-stretch-content="true"';
+	} elseif ( 'stretch_row_content_no_spaces' === $full_width ) {
+		$wrapper_attributes[] = 'data-vc-stretch-content="true"';
+		$css_classes[] = 'vc_row-no-padding';
+	}
+	$after_output .= '<div class="vc_row-full-width"></div>';
+}
 
+if ( ! empty( $full_height ) ) {
+	$css_classes[] = ' vc_row-o-full-height';
+	if ( ! empty( $content_placement ) ) {
+		$css_classes[] = ' vc_row-o-content-' . $content_placement;
+	}
+}
+
+$has_video_bg = ( ! empty( $video_bg ) && ! empty( $video_bg_url ) && vc_extract_youtube_id( $video_bg_url ) );
+
+if ( $has_video_bg ) {
+	$parallax = $video_bg_parallax;
+	$parallax_image = $video_bg_url;
+	$css_classes[] = ' vc_video-bg-container';
+	wp_enqueue_script( 'vc_youtube_iframe_api_js' );
+}
+
+if ( ! empty( $parallax ) ) {
+	// MIXT MOD: Replace VC skrollr plugin, increase speed from 1.5 to 2.5
+	mixt_enqueue_plugin('skrollr');
+	// wp_enqueue_script( 'vc_jquery_skrollr_js' );
+	$wrapper_attributes[] = 'data-vc-parallax="2.5"'; // parallax speed
+	$css_classes[] = 'vc_general vc_parallax vc_parallax-' . $parallax;
+	if ( false !== strpos( $parallax, 'fade' ) ) {
+		$css_classes[] = 'js-vc_parallax-o-fade';
+		$wrapper_attributes[] = 'data-vc-parallax-o-fade="on"';
+	} elseif ( false !== strpos( $parallax, 'fixed' ) ) {
+		$css_classes[] = 'js-vc_parallax-o-fixed';
+	}
+}
+
+if ( ! empty( $parallax_image ) ) {
+	if ( $has_video_bg ) {
+		$parallax_image_src = $parallax_image;
+	} else {
+		$parallax_image_id = preg_replace( '/[^\d]/', '', $parallax_image );
+		$parallax_image_src = wp_get_attachment_image_src( $parallax_image_id, 'full' );
+		if ( ! empty( $parallax_image_src[0] ) ) {
+			$parallax_image_src = $parallax_image_src[0];
+		}
+	}
+	$wrapper_attributes[] = 'data-vc-parallax-image="' . esc_attr( $parallax_image_src ) . '"';
+}
+if ( ! $parallax && $has_video_bg ) {
+	$wrapper_attributes[] = 'data-vc-video-bg="' . esc_attr( $video_bg_url ) . '"';
+}
+$css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $css_classes ) ), $this->settings['base'], $atts ) );
+
+// MIXT MOD: Apply custom classes
 if ( $theme_color != 'auto' ) $css_class .= ' theme-section-' . $theme_color;
 if ( $row_padding != '' ) {
 	$row_padding = explode(',', $row_padding);
@@ -46,53 +118,15 @@ if ( $separator != '' ) $css_class .= ' mixt-row-has-separator';
 if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' first-row';
 if ( filter_var($cols_matchheight, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' cols-match-height';
 
-$style = $this->buildStyle( $bg_image, $bg_color, $bg_image_repeat, $font_color, $padding, $margin_bottom );
-?>
-	<div <?php echo isset( $el_id ) && ! empty( $el_id ) ? "id='" . esc_attr( $el_id ) . "'" : ""; ?> <?php
-?>class="<?php echo esc_attr( $css_class ); ?><?php if ( $full_width == 'stretch_row_content_no_spaces' ): echo ' vc_row-no-padding'; endif; ?><?php if ( ! empty( $parallax ) ): echo ' vc_general vc_parallax vc_parallax-' . $parallax; endif; ?><?php if ( ! empty( $parallax ) && strpos( $parallax, 'fade' ) ): echo ' js-vc_parallax-o-fade'; endif; ?><?php if ( ! empty( $parallax ) && strpos( $parallax, 'fixed' ) ): echo ' js-vc_parallax-o-fixed'; endif; ?>"<?php if ( ! empty( $full_width ) ) {
-	echo ' data-vc-full-width="true" data-vc-full-width-init="false" ';
-	if ( $full_width == 'stretch_row_content' || $full_width == 'stretch_row_content_no_spaces' ) {
-		echo ' data-vc-stretch-content="true"';
-	}
-} ?>
-<?php
-// parallax bg values
+$wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
-$bgSpeed = 2.5;
-?>
-<?php
-if ( $parallax ) {
-	wp_deregister_script('vc_jquery_skrollr_js');
-	mixt_enqueue_plugin('skrollr');
+$output .= '<div ' . implode( ' ', $wrapper_attributes ) . '>';
+$output .= wpb_js_remove_wpautop( $content );
 
-	echo '
-            data-vc-parallax="' . $bgSpeed . '"
-        ';
-}
-if ( strpos( $parallax, 'fade' ) ) {
-	echo '
-            data-vc-parallax-o-fade="on"
-        ';
-}
-if ( $parallax_image ) {
-	$parallax_image_id = preg_replace( '/[^\d]/', '', $parallax_image );
-	$parallax_image_src = wp_get_attachment_image_src( $parallax_image_id, 'full' );
-	if ( ! empty( $parallax_image_src[0] ) ) {
-		$parallax_image_src = $parallax_image_src[0];
-	}
-	echo '
-                data-vc-parallax-image="' . $parallax_image_src . '"
-            ';
-}
-?>
-<?php echo $style; ?>><?php
-echo wpb_js_remove_wpautop( $content );
+// MIXT MOD: Add row separator
+if ( $separator != '' ) { $output .= mixt_row_separator($separator, $separator_color, $separator_icon); }
 
-// Row Separator
-if ( $separator != '' ) { mixt_row_separator($separator, $separator_color, $separator_icon); }
+$output .= '</div>';
+$output .= $after_output;
 
-?>
-</div><?php echo $this->endBlockComment( 'row' );
-if ( ! empty( $full_width ) ) {
-	echo '<div class="vc_row-full-width"></div>';
-}
+echo $output;

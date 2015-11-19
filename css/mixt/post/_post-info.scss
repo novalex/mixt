@@ -32,7 +32,8 @@
 }
 
 .single-post,
-.blog-standard {
+.blog-standard,
+.single-portfolio {
 	.has-info .post-feat { margin-top: $margin-m; }
 
 	@include media('screen', 'mars') {

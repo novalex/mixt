@@ -3,16 +3,21 @@
 
 .post-feat {
 	width: 100%;
-	min-height: 100px;
-	display: flex;
-	flex-shrink: 1;
-	align-items: center;
 	text-align: center;
+
+	.flexbox & {
+		display: flex;
+		flex-shrink: 1;
+		align-items: center;
+	}
 
 	> a {
 		width: 100%;
 		display: block;
 	}
+
+	&,
+	> .hover-content { min-height: 100px; }
 
 	// Featured Types
 

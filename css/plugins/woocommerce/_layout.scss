@@ -139,6 +139,14 @@
 				position: relative;
 			}
 
+			@include media('screen', '<venus') {
+				div.summary:first-child {
+					width: 100%;
+					float: none;
+					padding-right: 0;
+				}
+			}
+
 			@include media('screen', 'venus') {
 				// Tabs
 				.woocommerce-tabs {

@@ -16,6 +16,8 @@ $font-path: '../assets/fonts';
 $nav-item-height: 42px;
 $nav-sub-item-height: 36px;
 $menu-hover-bg: rgba(0,0,0,0.03);
+$nav-icon-size: 16px;
+$nav-icon-spacing: 8px;
 
 // Primary Navbar
 
@@ -35,6 +37,8 @@ $nav-primary-opacity: 0.95;
 $nav-primary-menu-opacity: 0.95;
 // Submenu item height
 $nav-primary-sub-item-height: 36px;
+// Menu item spacing
+$nav-primary-spacing: 14px;
 // Minimum width for the fixed (sticky) mode
 $nav-primary-fixed-breakpoint: 601px;
 // Main navbar mobile (mini) breakpoint - the width below which the navbar switches to mobile mode
@@ -133,7 +137,7 @@ $post-status-img: false;
 
 // MISCELLANEOUS
 
-$bd-radius-s: 1px;
+$bd-radius-s: 2px;
 $bd-radius:   2px;
 $bd-radius-l: 3px;
 
@@ -143,12 +147,24 @@ $rounded-radius: $bd-radius-l;
 $rtl: false;
 
 // Include various Internet Explorer tweaks and hacks
-$ie-hacks: true;
+$ie-support: true;
+
+// Responsive features (set to false to display site in desktop-only mode)
+$responsive: true;
+
+@if ( $responsive == false ) {
+	$screen-xs: 1px;
+	$screen-sm: 2px;
+	$screen-md: 3px;
+	$screen-lg: 4px;
+	$grid-float-breakpoint: 1px !default;
+}
 
 
 // PLUGIN CONFIG
 
 $portfolio:    true;
+$featherlight: true;
 $lightgallery: true;
 $lightslider:  true;
 $vcomposer:    true;

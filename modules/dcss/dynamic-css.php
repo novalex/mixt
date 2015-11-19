@@ -166,7 +166,7 @@ function mixt_custom_css() {
 		echo "}\n";
 
 		// Dark Bg Logo Color
-		if ( ! empty($mixt_opt['logo-text-inv']) ) { echo "#nav-logo .logo-dark { color: {$mixt_opt['logo-text-inv']}; }\n"; }
+		if ( ! empty($mixt_opt['logo-text-inv']) ) { echo ".bg-dark #nav-logo strong { color: {$mixt_opt['logo-text-inv']}; }\n"; }
 
 		// Logo Shrink
 		if ( $mixt_opt['logo-shrink'] != '0' ) {
@@ -219,8 +219,8 @@ function mixt_custom_css() {
 
 			$navbar_properties .= "padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px; ";
 
-			echo ".nav-full #main-nav-wrap { min-height: {$nav_height}px; }\n";
-			echo ".nav-full #main-nav-wrap.logo-center { min-height: {$nav_center_height}px; }\n";
+			echo ".nav-full #main-nav-wrap, .nav-full .head-media { min-height: {$nav_height}px; }\n";
+			echo ".nav-full #main-nav-wrap.logo-center, .nav-full .head-media.logo-center { min-height: {$nav_center_height}px; }\n";
 
 			echo "#main-wrap.nav-full.nav-transparent .head-media .container { padding-top: {$nav_height}px; }\n";
 			echo "#main-wrap.nav-full.nav-transparent .head-media.logo-center .container { padding-top: {$nav_center_height}px; }\n";

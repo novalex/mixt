@@ -94,9 +94,9 @@
 
 	// Menu Icons
 	.menu-icon {
-		font-size: 16px;
+		font-size: $nav-icon-size;
 		vertical-align: middle;
-		margin-right: 8px;
+		margin-right: $nav-icon-spacing;
 		line-height: 1.2;
 
 		&:last-child { margin-right: 0; }
@@ -351,7 +351,8 @@
 	.divider {
 		width: 1px;
 		opacity: 0.5;
-		margin: 0 10px;
+		margin-left: 10px !important;
+		margin-right: 10px !important;
 		border-width: 0 !important;
 	}
 

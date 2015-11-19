@@ -107,7 +107,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'em'     => array( 'class' => array() ),
 			);
 			// Textarea code field placeholder
-			$text_code_placeholder = __( 'Allowed HTML tags and attributes: <a href="" title="">, <i>, <span>, <strong>, <em>', 'mixt' );
+			$text_code_placeholder = __( 'Allowed HTML tags and attributes:', 'mixt' ) . ' <a href="" title="">, <i>, <span>, <strong>, <em>';
 
 			// Sidebars
 			$available_sidebars = array(
@@ -373,6 +373,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type'     => 'text',
 						'title'    => __( 'Site Width', 'mixt' ),
 						'subtitle' => __( 'Set a custom site width, e.g. \'1140px\' or \'100%\'', 'mixt' ),
+					),
+
+					// Responsive Layout
+					array(
+						'id'       => 'site-responsive',
+						'type'     => 'switch',
+						'title'    => __( 'Responsive Layout', 'mixt' ),
+						'subtitle' => __( 'Enable responsive features for the best experience on all screen sizes', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
 					),
 
 					// Header Code
@@ -801,7 +812,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'id'       => 'head-slider',
 							'type'     => 'text',
 							'title'    => __( 'Slider ID', 'mixt' ),
-							'subtitle' => __( 'The ID of the slider to use', 'mixt' ),
+							'subtitle' => __( 'The ID number or slug of the slider to use', 'mixt' ),
 							'required' => array('head-media-type', '=', 'slider'),
 						),
 
@@ -887,7 +898,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						array(
 							'id'      => 'head-code',
 							'type'    => 'editor',
-							'title'   => __( 'Custom Code', 'mixt' ),
+							'title'   => __( 'Custom Code Content', 'mixt' ),
 							'args' => array(
 								'teeny'         => false,
 								'wpautop'       => false,
@@ -2215,7 +2226,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			$this->sections[] = postsPageFields('category', 'folder-open');
 
 			// DATE PAGE SECTION
-			$this->sections[] = postsPageFields('date', 'time');
+			$this->sections[] = postsPageFields('date', 'time', array( 'post-info' => false ));
 
 			// SEARCH PAGE SECTION
 			$this->sections[] = postsPageFields('search', 'search', array( 'sidebar' => 'false', 'feat-show' => false, 'meta-show' => 'false' ));
@@ -2257,7 +2268,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'footer'  => __( 'In Footer', 'mixt' ),
 							'false'   => __( 'No', 'mixt' ),
 						),
-						'default'  => 'false',
+						'default'  => 'header',
 					),
 
 					// Post Tags
@@ -2710,7 +2721,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'id'          => 'short-url-login',
 						'type'        => 'password',
 						'title'       => __( 'Bit.ly login', 'mixt' ),
-						'subtitle'    => __( 'Your user and API key. Get them <a href="https://bitly.com/a/settings/advanced">here</a>', 'mixt' ),
+						'subtitle'    => sprintf(__( 'Your user and API key. Get them here: %s', 'mixt' ), '<a href="https://bitly.com/a/settings/advanced">Bit.ly Account</a>'),
 						'username'    => true,
 						'placeholder' => array(
 							'username' => __( 'Enter your Username', 'mixt' ),
@@ -2740,7 +2751,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'placeholder' => __( 'Share URL', 'mixt' ),
 							),
 							'icon' => array(
-								'icon'        => 'el-icon-idea',
+								'icon'        => 'el-icon-stop',
 								'wrap_class'  => 'social-label social-icon',
 								'input_class' => 'mixt-social-field network-icon',
 								'placeholder' => __( 'Icon', 'mixt' ),
@@ -2916,18 +2927,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Text Color Fade', 'mixt' ) . ' *',
 								),
 
-								// Inverse Text Color
-								'color-inv' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Color', 'mixt' ),
-								),
-
-								// Inverse Text Color Fade
-								'color-inv-fade' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Text Fade', 'mixt' ) . ' *',
-								),
-
 								// Border Color
 								'border' => array(
 									'type'  => 'color',
@@ -2940,6 +2939,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 									'label' => __( 'Inverse Background', 'mixt' ) . ' *',
 								),
 
+								// Inverse Text Color
+								'color-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Color', 'mixt' ),
+								),
+
+								// Inverse Text Color Fade
+								'color-inv-fade' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Text Fade', 'mixt' ) . ' *',
+								),
+
+								// Inverse Border Color
+								'border-inv' => array(
+									'type'  => 'color',
+									'label' => __( 'Inverse Border', 'mixt' ) . ' *',
+								),
+
 								// Alt Background Color
 								'bg-alt' => array(
 									'type'  => 'color',
@@ -2950,12 +2967,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'color-alt' => array(
 									'type'  => 'color',
 									'label' => __( 'Alt Text Color', 'mixt' ) . ' *',
-								),
-
-								// Inverse Border Color
-								'border-inv' => array(
-									'type'  => 'color',
-									'label' => __( 'Inverse Border', 'mixt' ) . ' *',
 								),
 
 								// Alt Border Color
@@ -3107,6 +3118,49 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				);
 
 			}
+
+
+			// ICONS
+			$this->sections[] = array(
+				'title'      => __( 'Icons', 'mixt' ),
+				'desc'       => __( 'Define various icons used throughout the site', 'mixt' ),
+				'icon'       => 'el-icon-adjust',
+				'customizer' => false,
+				'fields'     => array(
+
+					// Left Arrow
+					array(
+						'id'       => 'left-arrow-icon',
+						'type'     => 'text',
+						'title'    => __( 'Left Arrow', 'mixt' ),
+						'default'  => 'fa fa-chevron-left',
+					),
+
+					// Right Arrow
+					array(
+						'id'       => 'right-arrow-icon',
+						'type'     => 'text',
+						'title'    => __( 'Right Arrow', 'mixt' ),
+						'default'  => 'fa fa-chevron-right',
+					),
+
+					// Up Arrow
+					array(
+						'id'       => 'up-arrow-icon',
+						'type'     => 'text',
+						'title'    => __( 'Up Arrow', 'mixt' ),
+						'default'  => 'fa fa-chevron-up',
+					),
+
+					// Down Arrow
+					array(
+						'id'       => 'down-arrow-icon',
+						'type'     => 'text',
+						'title'    => __( 'Down Arrow', 'mixt' ),
+						'default'  => 'fa fa-chevron-down',
+					),
+				),
+			);
 			
 
 			// SOCIAL PROFILES
@@ -3152,7 +3206,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 								'placeholder' => __( 'URL', 'mixt' ),
 							),
 							'icon' => array(
-								'icon'        => 'el-icon-idea',
+								'icon'        => 'el-icon-stop',
 								'wrap_class'  => 'social-label social-icon',
 								'input_class' => 'mixt-social-field network-icon',
 								'placeholder' => __( 'Icon', 'mixt' ),
@@ -3267,55 +3321,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 
-			// ABOUT SECTION
-			ob_start();
-
-			$this->theme = wp_get_theme();
-
-			?>
-			<div id="current-theme">
-				<ul class="theme-info">
-					<li><?php printf( __( 'By %s', 'mixt' ), $this->theme->display( 'Author' ) ); ?></li>
-					<li><?php printf( __( 'Version %s', 'mixt' ), $this->theme->display( 'Version' ) ); ?></li>
-				</ul>
-				<?php
-					if ( $this->theme->parent() ) {
-						printf( ' <p class="howto">' . __( 'This <a href="%1$s">child theme</a> requires its parent theme, %2$s.', 'mixt' ) . '</p>', __( 'http://codex.wordpress.org/Child_Themes', 'mixt' ), $this->theme->parent()->display( 'Name' ) );
-					}
-				?>
-			</div>
-			<?php
-
-			$item_info = ob_get_clean();
-
-			$this->sections[] = array(
-				'icon'       => 'el-icon-list-alt',
-				'title'      => __( 'About MIXT', 'mixt' ),
-				'desc'       => __( 'Information about the theme', 'mixt' ),
-				'customizer' => false,
-				'fields'     => array(
-					array(
-						'id'      => 'theme-info',
-						'type'    => 'raw',
-						'content' => $item_info,
-					),
-
-					// Auto-Update Login
-					array(
-						'id'          => 'tf-update-login',
-						'type'        => 'password',
-						'title'       => __( 'Auto Update', 'mixt' ),
-						'subtitle'    => __( 'Your ThemeForest username and API key to enable auto-updates', 'mixt' ),
-						'username'    => true,
-						'placeholder' => array(
-							'username' => __( 'Username', 'mixt' ),
-							'password' => __( 'API Key', 'mixt' ),
-						),
-					),
-				),
-			);
-
-
 			// IMPORT & DEMOS SECTION
 			include_once( MIXT_PLUGINS_DIR . '/redux-extend/demos.php' );
 			$this->sections[] = array(
@@ -3335,12 +3340,13 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type' => 'wbc_importer',
 					),
 
-					// Settings
+					// Options Import/Export
 					array(
 						'id'         => 'opt-import-export',
 						'type'       => 'import_export',
 						'full_width' => true,
 					),
+					
 				)
 			);
 
@@ -3354,7 +3360,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 		public function setHelpTabs() {
 
 			$mixt_help_file = function($file) {
-				$file_path = MIXT_DIR . "/modules/help/$file.html";
+				$file_path = MIXT_FRAME_DIR . "/admin/help/$file.html";
 
 				if ( file_exists($file_path) ) {
 					return file_get_contents($file_path);
@@ -3364,6 +3370,36 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			};
 
 			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
+			$this->args['help_tabs'][] = array(
+				'id'      => 'help-global',
+				'title'   => __( 'Global Options', 'mixt' ),
+				'content' => $mixt_help_file('global'),
+			);
+
+			$this->args['help_tabs'][] = array(
+				'id'      => 'help-header',
+				'title'   => __( 'Header', 'mixt' ),
+				'content' => $mixt_help_file('header'),
+			);
+
+			$this->args['help_tabs'][] = array(
+				'id'      => 'help-navbars',
+				'title'   => __( 'Navbars', 'mixt' ),
+				'content' => $mixt_help_file('navbars'),
+			);
+
+			$this->args['help_tabs'][] = array(
+				'id'      => 'help-sidebars',
+				'title'   => __( 'Sidebars', 'mixt' ),
+				'content' => $mixt_help_file('sidebars'),
+			);
+
+			$this->args['help_tabs'][] = array(
+				'id'      => 'help-post-pages',
+				'title'   => __( 'Post Pages', 'mixt' ),
+				'content' => $mixt_help_file('post-pages'),
+			);
+
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-themes',
 				'title'   => __( 'Themes', 'mixt' ),
@@ -3377,7 +3413,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			);
 
 			// Set the help sidebar
-			$this->args['help_sidebar'] = '<p>The latest documentation is available at the <br><a class="button button-primary" href="https://bitbucket.org/nova-inc/mixt-docs/" target="_blank">MIXT Wiki</a></p>';
+			$this->args['help_sidebar'] = '<p>The latest documentation is available online.<br><a class="button button-primary" href="http://docs.mixt.novalx.com/" target="_blank">Documentation</a></p>';
 		}
 
 		/**
@@ -3393,12 +3429,12 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'global_variable'    => '',
 				'display_name'       => 'MIXT',
 				'display_version'    => $theme->get('Version'),
-				'menu_type'          => 'menu',
-				'allow_sub_menu'     => true,
-				'menu_title'         => __( 'MIXT', 'mixt' ),
+				'menu_type'          => 'submenu',
+				'allow_sub_menu'     => false,
+				'menu_title'         => __( 'Theme Options', 'mixt' ),
 				'page_title'         => __( 'MIXT Options', 'mixt' ),
 				'admin_bar'          => true,
-				'admin_bar_icon'     => 'dashicons-admin-generic',
+				'admin_bar_icon'     => 'dashicons-screenoptions',
 				'admin_bar_priority' => '31.6498',
 
 				'dev_mode'           => false,
@@ -3407,12 +3443,12 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				
 				'customizer'         => true,
 				
-				'page_priority'      => '59.6498',
-				'page_parent'        => 'themes.php',
+				'page_priority'      => null,
+				'page_parent'        => 'mixt-admin',
 				'page_permissions'   => 'manage_options',
-				'menu_icon'          => 'dashicons-screenoptions',
+				'menu_icon'          => '',
 				'page_icon'          => 'icon-themes',
-				'page_slug'          => 'mixt_options',
+				'page_slug'          => 'mixt-options',
 				'save_defaults'      => true,
 				'default_show'       => false,
 				'default_mark'       => '',
@@ -3482,7 +3518,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// $this->args['intro_text'] = __( '', 'mixt' );
 
 			// Add content after the form.
-			$this->args['footer_text'] = __( '<p>MiXT by <a href="http://novalx.com/">novalex</a></p>', 'mixt' );
+			$this->args['footer_text'] = '';
 		}
 	}
 

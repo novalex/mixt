@@ -106,29 +106,27 @@ function mixt_display_logo() {
 		),
 	) );
 
-	// Output Logo
+	$output = '';
 
+	// Logo Markup
 	if ( $options['type'] == 'img' && ! empty($options['img']['url']) ) {
 		if ( ! empty($options['img-inv']['url']) ) {
-			echo '<img class="logo-img logo-light" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
-			echo '<img class="logo-img logo-dark" src="' . $options['img-inv']['url'] . '" alt="' . $options['text'] . '">';
+			$output .= '<img class="logo-img logo-light" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
+			$output .= '<img class="logo-img logo-dark" src="' . $options['img-inv']['url'] . '" alt="' . $options['text'] . '">';
 		} else {
-			echo '<img class="logo-img" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
+			$output .= '<img class="logo-img" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
 		}
 	} else {
-		if ( ! empty($options['text-inv']) ) {
-			echo '<strong class="logo-light">' . $options['text'] . '</strong>';
-			echo '<strong class="logo-dark">' . $options['text'] . '</strong>';
-		} else {
-			echo '<strong>' . $options['text'] . '</strong>';
-		}
+		$output .= '<strong>' . $options['text'] . '</strong>';
 	}
 
-	// Output Tagline
-
+	// Tagline Markup
 	if ( $options['show-tagline'] && ! empty($options['tagline']) ) {
-		echo '<small>' . $options['tagline'] . '</small>';
+		$output .= '<small>' . $options['tagline'] . '</small>';
 	}
+
+	// Output Logo
+	echo apply_filters('mixt_logo_html', $output);
 }
 
 

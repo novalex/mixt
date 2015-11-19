@@ -112,8 +112,8 @@ if ( ! function_exists('mixt_content_nav') ) {
 				'current'   => $page_now,
 				'total'     => $page_max,
 				'type'      => 'array',
-				'prev_text' => '<i class="fa fa-chevron-left"></i>' . __( 'Previous', 'mixt' ),
-				'next_text' => __( 'Next', 'mixt' ) . '<i class="fa fa-chevron-right"></i>',
+				'prev_text' => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
+				'next_text' => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 			) );
 
 			if ( ! empty($page_links) ) {
@@ -141,7 +141,7 @@ if ( ! function_exists('mixt_content_nav') ) {
 						data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 						data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
 						data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
-					><i class="fa fa-chevron-down"></i><?php _e( 'Load more posts', 'mixt' ); ?></a></li>
+					><?php echo mixt_get_icon('down-arrow') . __( 'Load more posts', 'mixt' ); ?></a></li>
 				</ul>
 			</nav>
 			<?php
@@ -172,17 +172,17 @@ if ( ! function_exists('mixt_content_nav') ) {
 				<ul class="pager">
 				<?php
 					if ( $is_single ) { // Navigation links for single posts
-						previous_post_link( '<li class="nav-previous previous prev">%link</li>', '<i class="fa fa-chevron-left"></i> %title' );
-						next_post_link( '<li class="nav-next next">%link</li>', '%title <i class="fa fa-chevron-right"></i>' );
+						previous_post_link( '<li class="nav-previous previous prev">%link</li>', mixt_get_icon('left-arrow') . ' %title' );
+						next_post_link( '<li class="nav-next next">%link</li>', '%title ' . mixt_get_icon('right-arrow') );
 					} else {
 						if ( $previous ) {
 							echo '<li class="nav-previous prev">';
-								previous_posts_link( __( '<i class="fa fa-chevron-left"></i> Previous posts', 'mixt' ) );
+								previous_posts_link( mixt_get_icon('left-arrow') . __( 'Previous posts', 'mixt' ) );
 							echo '</li>';
 						}
 						if ( $next ) {
 							echo '<li class="nav-next next">';
-								next_posts_link( __( 'Next posts <i class="fa fa-chevron-right"></i>', 'mixt' ), $page_max );
+								next_posts_link( __( 'Next posts', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max );
 							echo '</li>';
 						}
 					}
@@ -299,7 +299,7 @@ if ( ! function_exists('mixt_comment_nav') ) {
 
 		if ( $options['display'] != $id && $options['display'] != 'both' ) { return; }
 
-		// Set type to classic for the top nav
+		// Set type to classic for the top nav if it is set to Ajax
 		if ( $id == 'top' && ( $options['type'] == 'ajax-click' || $options['type'] == 'ajax-scroll' ) ) { $options['type'] = 'classic'; }
 
 		$nav_id    = 'comment-nav-' . $id;
@@ -318,8 +318,8 @@ if ( ! function_exists('mixt_comment_nav') ) {
 					'type'         => 'array',
 					'total'        => $page_max,
 					'echo'         => false,
-					'prev_text'    => '<i class="fa fa-chevron-left"></i>' . __( 'Previous', 'mixt' ),
-					'next_text'    => __( 'Next', 'mixt' ) . '<i class="fa fa-chevron-right"></i>',
+					'prev_text'    => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
+					'next_text'    => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 				) );
 
 				if ( ! empty($page_links) ) {
@@ -335,7 +335,7 @@ if ( ! function_exists('mixt_comment_nav') ) {
 
 			// AJAX Navigation
 
-			} else if ( $ajax === true && ( $options['type'] == 'ajax-click' || $options['type'] == 'ajax-scroll' ) ) {
+			} else if ( $options['type'] == 'ajax-click' || $options['type'] == 'ajax-scroll' ) {
 				if ( $page_max < 2 || $id == 'top' ) { return; }
 				$nav_class .= 'paging-navigation ajax-paging';
 				$page_now   = ( get_query_var('cpage') > 1 ) ? get_query_var('cpage') : 1;
@@ -349,7 +349,7 @@ if ( ! function_exists('mixt_comment_nav') ) {
 							data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 							data-complete-text="<?php _e( 'No more comments to load', 'mixt' ); ?>" 
 							data-error-text="<?php _e( 'An error occured while trying to load the comments!', 'mixt' ); ?>"
-						><i class="fa fa-chevron-down"></i><?php _e( 'Load more', 'mixt' ); ?></a></li>
+						><?php echo mixt_get_icon('down-arrow') . __( 'Load more', 'mixt' ); ?></a></li>
 					</ul>
 				</nav>
 				<?php
@@ -363,8 +363,8 @@ if ( ! function_exists('mixt_comment_nav') ) {
 				<nav id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
 					<h5 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h5>
 					<ul class="pager">
-						<li class="nav-previous prev"><?php previous_comments_link( __( '<i class="fa fa-chevron-left"></i> Older comments', 'mixt' ) ); ?></li>
-						<li class="nav-next next"><?php next_comments_link( __( 'Newer comments <i class="fa fa-chevron-right"></i>', 'mixt' ) ); ?></li>
+						<li class="nav-previous prev"><?php previous_comments_link( mixt_get_icon('left-arrow') . __( 'Older comments', 'mixt' ) ); ?></li>
+						<li class="nav-next next"><?php next_comments_link( __( 'Newer comments', 'mixt' ) . mixt_get_icon('right-arrow') ); ?></li>
 					</ul>
 				</nav>
 

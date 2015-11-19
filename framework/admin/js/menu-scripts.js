@@ -92,7 +92,7 @@ jQuery(document).ready( function($) {
 	$.fn.extend({
 		mixtMenuItems: function() {
 			var item     = this,
-				itemType = item.find('.edit-menu-item-mixt-type').val();
+				itemType = item.find('.edit-mixt-menu-item-type').val();
 
 			// Divider
 			if ( itemType == 'divider' ) {
@@ -119,6 +119,11 @@ jQuery(document).ready( function($) {
 				item.find('.item-type').text('Shopping Cart');
 				item.find('.field-url, .field-link-target, .field-xfn, .field-mixt-megamenu').hide();
 
+			// Portfolio Archive Page
+			} else if ( itemType == 'archive-portfolio' ) {
+				item.find('.item-type').text('Archive Page');
+				item.find('.field-url, .field-link-target, .field-xfn').hide();
+
 			// Social Icon
 			} else if ( itemType == 'social-icon' ) {
 				item.find('.item-type').text('Social Icon');
@@ -138,10 +143,10 @@ jQuery(document).ready( function($) {
 				itemMeta   = itemChecks.last().parents('li');
 
 			if ( lastItem.length == 1 ) {
-				var itemType = lastItem.find('.edit-menu-item-mixt-type'),
-					itemIcon = lastItem.find('.edit-menu-item-mixt-icon'),
-					metaType = itemMeta.children('.menu-item-mixt-type').val(),
-					metaIcon = itemMeta.children('.menu-item-mixt-icon').val();
+				var itemType = lastItem.find('.edit-mixt-menu-item-type'),
+					itemIcon = lastItem.find('.edit-mixt-menu-item-icon'),
+					metaType = itemMeta.children('.mixt-menu-item-type').val(),
+					metaIcon = itemMeta.children('.mixt-menu-item-icon').val();
 				
 				if ( metaType !== '' && itemType.val() === '' ) { itemType.val(metaType); }
 				if ( metaIcon !== '' && itemIcon.val() === '' ) { itemIcon.val(metaIcon); }

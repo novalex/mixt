@@ -67,8 +67,8 @@ CUSTOMIZER INTEGRATION - NAVBARS
 
 		css += '.navbar-mixt { padding-top: '+padding+'px; padding-bottom: '+padding+'px; }\n';
 
-		css += '.nav-full #main-nav-wrap { min-height: '+nav_height+'px; }\n';
-		css += '.nav-full #main-nav-wrap.logo-center { min-height: '+nav_center_height+'px; }\n';
+		css += '.nav-full #main-nav-wrap, .nav-full .head-media { min-height: '+nav_height+'px; }\n';
+		css += '.nav-full #main-nav-wrap.logo-center, .nav-full .head-media.logo-center { min-height: '+nav_center_height+'px; }\n';
 
 		css += '#main-wrap.nav-full.nav-transparent .head-media .container { padding-top: '+nav_height+'px; }\n';
 		css += '#main-wrap.nav-full.nav-transparent .head-media.logo-center .container { padding-top: '+nav_center_height+'px; }\n';

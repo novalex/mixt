@@ -3,8 +3,7 @@
 /**
  * MIXT Custom Meta Boxes Config
  *
- * @category MIXT
- * @package  Metaboxes
+ * @package  MIXT\Plugins\CMB2
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
  * @link     https://github.com/webdevstudios/Custom-Metaboxes-and-Fields-for-WordPress
  */
@@ -97,9 +96,9 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			array(
 				'id'      => $prefix . 'nav-top-opacity',
 				'name'    => __( 'See-Through Opacity', 'mixt' ),
-				'desc'    => __( 'Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 (opaque)', 'mixt' ),
+				'desc'    => __( 'Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 (opaque), or auto to use global option', 'mixt' ),
 				'type'    => 'text',
-				'default'    => '0.25',
+				'default'    => 'auto',
 				'attributes' => array(
 					'class'             => 'conditional nested',
 					'data-parent-field' => $prefix . 'nav-transparent',
@@ -305,7 +304,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				array(
 					'id'      => $prefix . 'posts-page',
 					'name'    => __( 'Posts Per Page', 'mixt' ),
-					'desc'    => __( 'Number of posts to display on each page (-1 to display all, auto to display number set in options)', 'mixt' ),
+					'desc'    => __( 'Number of posts to display on each page (-1 to display all, auto to use value from site settings)', 'mixt' ),
 					'type'    => 'text',
 					'default' => 'auto',
 				),
@@ -629,7 +628,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			array(
 				'id'         => $prefix . 'head-slider',
 				'name'       => __( 'Slider ID', 'mixt' ),
-				'desc'       => __( 'The ID of the slider to use', 'mixt' ),
+				'desc'       => __( 'The ID number or slug of the slider to use', 'mixt' ),
 				'type'       => 'text',
 				'default'    => '',
 				'attributes' => array(
@@ -755,7 +754,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			// Custom Code Field
 			array(
 				'id'      => $prefix . 'head-code',
-				'name'    => __( 'Custom Code', 'mixt' ),
+				'name'    => __( 'Custom Code Content', 'mixt' ),
 				'type'    => 'wysiwyg',
 				'options' => array(
 					'wpautop'       => false,

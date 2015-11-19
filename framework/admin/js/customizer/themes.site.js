@@ -48,7 +48,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 
 		var css = '',
 			color_for_bg = tinycolor.mostReadable(color, ['#fff', '#333']).toHexString(),
-			border_color = tinycolor(color).darken(5).toString(),
+			border_color = tinycolor(color).darken(7).toString(),
 			text_shadow  = set_textsh_for_bg(color),
 			color_darker = tinycolor(color).darken(10).toString(),
 			btn_solid_hover_bg,
@@ -73,7 +73,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 		// Outline
 		
 		css += parse_selector(pre+' .btn-outline-{{sel}}:hover', sel) + ' { background-color: '+btn_outline_hover_bg+'; }';
-		css += parse_selector(pre+' .btn-outline-{{sel}}, '+pre+' .btn-hover-outline-{{sel}}:hover', sel) + ' { border: 1px solid '+border_color+'; text-shadow: none !important; background-color: transparent; }';
+		css += parse_selector(pre+' .btn-outline-{{sel}}, '+pre+' .btn-hover-outline-{{sel}}:hover', sel) + ' { border: 1px solid '+color+'; text-shadow: none !important; background-color: transparent; }';
 		css += parse_selector(pre+' .btn-outline-{{sel}}:active, '+pre+' .btn-outline-{{sel}}.active, '+pre+' .btn-hover-outline-{{sel}}:hover:active, '+pre+' .btn-hover-outline-{{sel}}:hover.active', sel) + ' { box-shadow: inset 0 1px 16px rgba(0,0,0,0.05); }';
 		css += parse_selector(pre+' .btn-hover-outline-{{sel}}:hover', sel) + ' { background-color: transparent !important; }';
 		css += parse_selector(pre+' .btn-outline-{{sel}}, '+pre+' a.btn-outline-{{sel}}, '+pre+' .btn-outline-{{sel}}:hover, '+pre+' .btn-outline-{{sel}}:focus, '+pre+' .btn-hover-outline-{{sel}}:hover, '+pre+' a.btn-hover-outline-{{sel}}:hover, '+pre+' .btn-hover-outline-{{sel}}:focus', sel) + ' { color: '+color+'; }';

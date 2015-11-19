@@ -1,6 +1,4 @@
 
-// Vertical Navbar
-
 @include media('screen', 'navbar') {
 	#main-wrap.nav-vertical {
 		position: relative;
@@ -188,6 +186,10 @@
 			width: 50%;
 		}
 	}
+}
+
+@include media('screen', '<navbar') {
+	#main-wrap.nav-vertical.nav-full #nav-logo img { width: auto !important; }
 }
 
 @include media('screen', 'venus') {

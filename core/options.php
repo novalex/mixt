@@ -96,6 +96,7 @@ class Mixt_Options {
 			),
 			'page' => array(
 				'layout'       => array( 'key' => 'site-layout', 'return' => 'value' ),
+				'responsive'   => array( 'key' => 'site-responsive' ),
 				'page-loader'  => array(),
 				'fullwidth'    => array( 'key' => 'page-fullwidth' ),
 				'location-bar' => array(),
@@ -164,7 +165,7 @@ class Mixt_Options {
 				$page_type = $page_options['page-type'];
 				if ( $page_type != 'blog' && $page_options['posts-page'] ) {
 					global $mixt_opt;
-					$page_type = ( ! empty($mixt_opt[$page_type.'-inherit']) && $mixt_opt[$page_type.'-inherit'] ) ? 'blog' : $page_type . '-page';
+					$page_type = ( ! empty($mixt_opt[$page_type.'-page-inherit']) && $mixt_opt[$page_type.'-page-inherit'] ) ? 'blog' : $page_type . '-page';
 				}
 				foreach ( $opts as $name => $data ) {
 					if ( isset($data['key']) ) { $opts[$name]['key'] = str_replace('{page_type}', $page_type, $data['key']); }
@@ -234,7 +235,7 @@ class Mixt_Options {
 		else if ( is_search() ) { $type = 'search'; }
 		else if ( is_tag() ) { $type = 'tag'; }
 		else if ( is_tax() ) { $type = 'taxonomy'; }
-		else if ( is_singular('portfolio') ) { $type = 'single-portfolio'; }
+		else if ( is_singular('portfolio') ) { $type = 'project'; }
 		else { $type = 'single'; }
 
 		return $type;
@@ -270,7 +271,7 @@ class Mixt_Options {
 		$single_pages = array(
 			'single',
 			'onepage',
-			'single-portfolio',
+			'project',
 		);
 		return ( ! in_array(self::page_type(), $single_pages) );
 	}
@@ -314,20 +315,24 @@ class Mixt_Options {
 			extract(wp_parse_args($option, $defaults));
 
 			// Get Page Specific Option Value
-			$meta_key = '_mixt-' . $key;
-			$meta_val = get_post_meta(get_queried_object_id(), $meta_key, true);
-			if ( ! empty($post_id) ) {
-				$page_value = get_post_meta($post_id, $meta_key, true);
-			} else if ( ! empty($mixt_opt[$page_type.'-'.$key]) && $meta_val == '' ) {
-				$page_value = $mixt_opt[$page_type.'-'.$key];
-			} else {
-				if ( $is_posts_page && ! in_array($page_type, array('blog', 'portfolio-page')) ) {
-					$page_value = null;
-				} else if ( class_exists('WooCommerce') && is_shop() ) {
-					$page_value = get_post_meta(wc_get_page_id('shop'), $meta_key, true);
+			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
+				$meta_key = '_mixt-' . $key;
+				$meta_val = get_post_meta(get_queried_object_id(), $meta_key, true);
+				if ( ! empty($post_id) ) {
+					$page_value = get_post_meta($post_id, $meta_key, true);
+				} else if ( ! empty($mixt_opt[$page_type.'-'.$key]) && $meta_val == '' ) {
+					$page_value = $mixt_opt[$page_type.'-'.$key];
 				} else {
-					$page_value = $meta_val;
+					if ( $is_posts_page && ! in_array($page_type, array('blog', 'portfolio-page')) ) {
+						$page_value = null;
+					} else if ( class_exists('WooCommerce') && is_shop() ) {
+						$page_value = get_post_meta(wc_get_page_id('shop'), $meta_key, true);
+					} else {
+						$page_value = $meta_val;
+					}
 				}
+			} else {
+				$page_value = null;
 			}
 			
 			// Get Global Option Value
@@ -337,28 +342,34 @@ class Mixt_Options {
 				else if ( $global_value == '0' ) { $global_value = 'false'; }
 			}
 
-			if ( ! empty($page_value) && $page_value != 'auto' ) { $option_value = $page_value; }
-			else { $option_value = $global_value; }
+			if ( ! empty($page_value) && $page_value != 'auto' ) {
+				$option_value = $page_value;
+			} else {
+				$option_value = $global_value;
+			}
 
 			if ( $return == 'bool' || $return == 'isset' ) {
 				if ( $option_value == $true ) {
-					$options[$k] = true;
+					$value = true;
 				} else {
-					if ( $return == 'isset' ) { $options[$k] = null; }
-					else if ( empty($option_value) && $option_value !== false ) { $options[$k] = $default; }
-					else { $options[$k] = false; }
+					if ( $return == 'isset' ) { $value = null; }
+					else if ( empty($option_value) && $option_value !== false ) { $value = $default; }
+					else { $value = false; }
 				}
 				
 			} else if ( $return == 'value' ) {
 				if ( empty($option_value) && ! empty($default) ) { $option_value = $default; }
-				$options[$k] = ( is_array($option_value) ) ? $option_value : $prefix . $option_value . $suffix;
+				$value = ( is_array($option_value) ) ? $option_value : $prefix . $option_value . $suffix;
 
 			} else if ( is_array($return) ) {
-				if ( isset($return[$option_value]) ) { $options[$k] = $return[$option_value]; }
-				else if ( isset($return['default']) ) { $options[$k] = $return['default']; }
-				else { $options[$k] = ''; }
+				if ( isset($return[$option_value]) ) { $value = $return[$option_value]; }
+				else if ( isset($return['default']) ) { $value = $return['default']; }
+				else { $value = ''; }
 			}
+
+			$options[$k] = apply_filters("mixt_option_$key", $value, $k);
 		}
+
 		return $options;
 	}
 }

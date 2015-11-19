@@ -15,11 +15,16 @@ $modules = array(
 	'head-media.php',
 	'breadcrumbs.php',
 	'social.php',
-	'gallery.php',
 	'extras.php',
 	'dcss/dynamic-css.php',
 );
 mixt_requires( $modules, 'modules' );
+
+
+// Admin Integration
+if ( is_admin() ) {
+	require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
+}
 
 
 /**
@@ -113,7 +118,7 @@ class Mixt_Plugins {
 				'name'     => 'WPBakery Visual Composer',
 				'slug'     => 'js_composer',
 				'source'   => 'js_composer.zip',
-				'version'  => '4.7.4',
+				'version'  => '4.8.1',
 				'force_deactivation' => true
 			);
 
@@ -126,19 +131,17 @@ class Mixt_Plugins {
 				'force_deactivation' => true
 			);
 
-		// Update Notifier
-			if ( file_exists( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' ) && ! empty($mixt_opt['tf-update-login']) && is_array($mixt_opt['tf-update-login']) ) {
-				$username = $mixt_opt['tf-update-login']['username'];
-				$api_key  = $mixt_opt['tf-update-login']['password'];
-				if ( ! empty($username) && ! empty($api_key) ) {
-					load_template( MIXT_PLUGINS_DIR . '/theme-update/envato-wp-theme-updater.php' );
-					Envato_WP_Theme_Updater::init( $username, $api_key, 'novalex' );
-				}
-			}
+		// Envato WordPress Toolkit
+			$this->plugins[] = array(
+				'name'     => 'Envato WordPress Toolkit',
+				'slug'     => 'envato-wordpress-toolkit',
+				'source'   => 'envato-wordpress-toolkit.zip',
+				'version'  => '1.7.3'
+			);
 
 		// TGM Plugin Activation
 			require_once( MIXT_PLUGINS_DIR . '/class-tgm-plugin-activation.php' );
-			add_action( 'tgmpa_register', array($this, 'tgmpa_init') );
+			add_action( 'tgmpa_register', array($this, 'init_tgmpa') );
 	}
 
 	/**
@@ -151,18 +154,18 @@ class Mixt_Plugins {
 	/**
 	 * TGM Plugin Activation
 	 */
-	public function tgmpa_init() {
+	public function init_tgmpa() {
 		$config = array(
-			'id'           => 'mixt_tgmpa',            // Unique ID for hashing notices for multiple instances of TGMPA.
-			'default_path' => MIXT_PLUGINS_DIR,        // Default absolute path to bundled plugins.
-			'menu'         => 'tgmpa-install-plugins', // Menu slug.
-			'parent_slug'  => 'themes.php',            // Parent menu slug.
-			'capability'   => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
-			'has_notices'  => true,                    // Show admin notices or not.
-			'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
-			'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
-			'is_automatic' => false,                   // Automatically activate plugins after installation or not.
-			'message'      => '',                      // Message to output right before the plugins table.
+			'id'           => 'mixt_tgmpa',         // Unique ID for hashing notices for multiple instances of TGMPA.
+			'default_path' => MIXT_PLUGINS_DIR.'/', // Default absolute path to bundled plugins.
+			'menu'         => 'mixt-plugins',       // Menu slug.
+			'parent_slug'  => 'mixt-admin',         // Parent menu slug.
+			'capability'   => 'manage_options',     // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+			'has_notices'  => true,                 // Show admin notices or not.
+			'dismissable'  => true,                 // If false, a user cannot dismiss the nag message.
+			'dismiss_msg'  => '',                   // If 'dismissable' is false, this message will be output at top of nag.
+			'is_automatic' => false,                // Automatically activate plugins after installation or not.
+			'message'      => '',                   // Message to output right before the plugins table.
 		);
 		tgmpa($this->plugins, $config);
 	}
@@ -235,20 +238,19 @@ if ( class_exists('WooCommerce') ) {
 }
 
 
-// Admin Integration
-if ( is_admin() ) {
-	require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
-}
-
-
 /**
  * Enqueue theme scripts and stylesheets
  */
 function mixt_scripts() {
-	// Main CSS
+	// Main Stylesheet
 	wp_enqueue_style( 'mixt-main', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
 
-	// Custom Dynamic Stylesheet
+	// Custom Stylesheet
+	if ( file_exists(MIXT_DIR . '/dist/dynamic.css') && filesize(MIXT_DIR . '/dist/custom.css') !== 0 ) {
+		wp_enqueue_style( 'mixt-custom', MIXT_URI . '/dist/custom.css', array(), MIXT_VERSION );
+	}
+
+	// Dynamic Stylesheet
 	if ( file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
 		wp_enqueue_style( 'mixt-dynamic', MIXT_UPLOAD_URI . '/dynamic.css', array(), MIXT_VERSION );
 	}
@@ -326,5 +328,5 @@ function mixt_local_options() {
 		}
 	}
 
-	return $opt;
+	return apply_filters('mixt_local_options', $opt);
 }

@@ -108,11 +108,10 @@ function mixt_head_media() {
 
 	if ( $options['type'] == 'slider' && ! empty($options['slider']) ) {
 		$wrap_classes .= ' media-slider';
-		$slider_id = intval(trim($options['slider'], '"'));
 
 		if ( class_exists('LS_Sliders') ) {
-			if ( is_array(LS_Sliders::find($slider_id) ) ) {
-				$slider = do_shortcode('[layerslider id="' . $slider_id . '"]');
+			if ( is_array(LS_Sliders::find($options['slider']) ) ) {
+				$slider = do_shortcode('[layerslider id="' . $options['slider'] . '"]');
 
 				// Adjust transparent navbar text color depending on slide luminosity ?>
 				<script type="text/javascript" id="mixt-slider-bg">
@@ -139,7 +138,9 @@ function mixt_head_media() {
 					}
 				</script><?php
 			// Show Slider Not Found Message
-			} else { $slider = '<p class="container">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>'; }
+			} else if ( current_user_can('manage_options') ) {
+				$slider = '<p class="container">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>';
+			}
 		// Show LayerSlider Deactivated Message
 		} else if ( current_user_can('manage_options') ) {
 			$wrap_classes .= ' no-slider';
@@ -177,7 +178,7 @@ function mixt_head_media() {
 
 			// If image was deleted or none was selected, use placeholder
 			if ( ! empty($img_response) && is_array($img_response) && $img_response['response']['code'] == '200' ) {
-				$img_color  = mixt_meta( '_image_color', $img_id );
+				$img_color  = mixt_meta( '_mixt_luminosity', $img_id );
 				$img_repeat = $options['img-repeat'];
 				$img_meta   = wp_get_attachment_metadata( $img_id );
 				$img_width  = $img_meta['width'];
@@ -186,7 +187,7 @@ function mixt_head_media() {
 				$img_repeat = true;
 				if ( ! empty($options['img-ph']['url']) ) {
 					$img_url   = $options['img-ph']['url'];
-					$img_color = mixt_meta( '_image_color', $options['img-ph']['id'] );
+					$img_color = mixt_meta( '_mixt_luminosity', $options['img-ph']['id'] );
 				} else {
 					$img_color  = 'dark';
 					$img_url    = MIXT_IMG_PLACEHOLDER;
@@ -209,7 +210,7 @@ function mixt_head_media() {
 				$img_atts .= 'data-top="transform: translate3d(0, 0%, 0);" data-top-bottom="transform: translate3d(0, 25%, 0);" ';
 			}
 
-			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-color: {$options['bg']}; background-image: url($img_url);'></div>";
+			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";
 		}
 
 		// Video Background
@@ -251,7 +252,7 @@ function mixt_head_media() {
 
 				// Video Loop
 				if ( $options['video-loop'] ) { $video_atts .= 'loop '; }
-				$media_bg  = "<video autoplay $video_atts class='media-container $media_cont_classes' poster='$poster_url'>$video_el</video>";
+				$media_bg  = "<video autoplay muted preload $video_atts class='media-container $media_cont_classes' poster='$poster_url'>$video_el</video>";
 			}
 		}
 
@@ -260,7 +261,7 @@ function mixt_head_media() {
 		else if ( $options['type'] == 'color' ) {
 			$wrap_classes .= ' head-color';
 			$wrap_classes .= ( hex_is_light($options['bg']) ) ? ' bg-light' : ' bg-dark';
-			$media_bg = "<div class='media-container $media_cont_classes' style='background-color: {$options['bg']};'></div>";
+			$media_bg = "<div class='media-container $media_cont_classes'></div>";
 		}
 	}
 

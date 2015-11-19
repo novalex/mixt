@@ -11,7 +11,7 @@ $sky: #5AA1E3;
 $turquoise: #00C1CF;
 $peacoc: #4CADC9;
 $vista-blue: #75D69C;
-$violet: #8D6DC4;
+$violet: #9B27BF;
 $purple: #B97EBB;
 
 $green: #7CAD24;
@@ -52,33 +52,33 @@ $button-colors: (
 	'orange': $orange,
 	'green': $green,
 	'blue': $blue,
-	'violet': #9B27BF,
+	'violet': $violet,
 );
 
 $element-colors: (
-	'white': #FFFFFF,
-	'off-white': #f0f0f0,
-	'grey': #EBEBEB,
-	'black': #2A2A2A,
+	'white': $white,
+	'off-white': $off-white,
+	'grey': $grey,
+	'black': $black,
 
-	'blue': #5472D2,
-	'sky': #5AA1E3,
-	'turquoise': #00C1CF,
-	'peacoc': #4CADC9,
-	'vista-blue': #75D69C,
-	'violet': #8D6DC4,
-	'purple': #B97EBB,
+	'blue': $blue,
+	'sky': $sky,
+	'turquoise': $turquoise,
+	'peacoc': $peacoc,
+	'vista-blue': $vista-blue,
+	'violet': $violet,
+	'purple': $purple,
 
-	'green': #6DAB3C,
-	'grace': #AED13B,
+	'green': $green,
+	'grace': $grace,
 
-	'pink': #FE6C61,
-	'juicy-pink': #F4524D,
-	'mulled-wine': #50485B,
+	'pink': $pink,
+	'juicy-pink': $juicy-pink,
+	'mulled-wine': $mulled-wine,
 
-	'chino': #CEC2AB,
-	'orange': #F7BE68,
-	'sandy-brown': #F79468,
+	'chino': $chino,
+	'orange': $orange,
+	'sandy-brown': $sandy-brown,
 
-	'red': #D81616,
+	'red': $red,
 );

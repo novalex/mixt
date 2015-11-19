@@ -835,6 +835,17 @@ class WP_Import extends WP_Importer {
 			'menu-item-status' => $item['status']
 		);
 
+		// MIXT MOD: add support for custom menu item meta
+		if ( ! empty($_mixt_menu_item_type) ) { $args['mixt-menu-item-type'] = $_mixt_menu_item_type; }
+		if ( ! empty($_mixt_menu_item_icon) ) {
+			$_mixt_menu_item_icon = maybe_unserialize($_mixt_menu_item_icon);
+			if ( is_array($_mixt_menu_item_icon) ) $_mixt_menu_item_icon = implode(' ', $_mixt_menu_item_icon);
+			$args['mixt-menu-item-icon'] = $_mixt_menu_item_icon;
+		}
+		if ( ! empty($_mixt_menu_item_no_label) ) { $args['mixt-menu-item-no-label'] = $_mixt_menu_item_no_label; }
+		if ( ! empty($_mixt_menu_item_disabled) ) { $args['mixt-menu-item-disabled'] = $_mixt_menu_item_disabled; }
+		if ( ! empty($_mixt_menu_item_megamenu) ) { $args['mixt-menu-item-megamenu'] = $_mixt_menu_item_megamenu; }
+
 		$id = wp_update_nav_menu_item( $menu_id, 0, $args );
 		if ( $id && ! is_wp_error( $id ) )
 			$this->processed_menu_items[intval($item['post_id'])] = (int) $id;

@@ -52,12 +52,9 @@
 	border-bottom: 0;
 	padding-bottom: 0;
 }
-	
-.page-title {
-	font-size: $font-size-l;
 
-	i { font-size: 80%; }
-}
+h2.page-title { font-size: $font-size-l; }
+.page-title i { font-size: 80%; }
 
 
 // FORMAT STYLING
@@ -78,11 +75,7 @@
 	}
 }
 
-.format-link {
-	.page-title {
-		&, + .meta-sep { display: none; }
-	}
-}
+.format-link:not(.no-feat) .page-title { display: none; }
 
 
 // BLOG STYLING

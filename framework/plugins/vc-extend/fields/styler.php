@@ -171,4 +171,4 @@ function mixt_styler_form_field( $settings, $value ) {
 
 	return $styler->render();
 }
-add_shortcode_param('styler', 'mixt_styler_form_field');
+vc_add_shortcode_param('styler', 'mixt_styler_form_field');

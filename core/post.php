@@ -107,20 +107,19 @@ if ( ! class_exists('Mixt_Post') ) {
 				$layout['posts-page'] = Mixt_Options::get('page', 'posts-page');
 			}
 			$this->layout = $layout;
-
-			$this->format = get_post_format($this->ID);
-
-			// Page type post
+			
+			// Set the post format
 			if ( $context == 'page' || $this->type == 'page' ) {
 				$this->format = 'page';
+			} else if ( $this->type == 'product' ) {
+				$this->format = 'product';
+			} else if ( $context == 'related' && is_preview() ) {
+				// Fix bug where get_post_format returns value set as query arg in preview mode
+				$this->format = false;
+			} else {
+				$this->format = get_post_format($this->ID);
+				if ( $this->format == false ) { $this->format = 'standard'; }
 			}
-			// Product type post
-			if ( $this->type == 'product' ) { $this->format = 'product'; }
-
-			// Do not display meta under special circumstances
-			if ( $this->display_component('meta') == false ) { $this->layout['meta-show'] = 'false'; }
-
-			if ( $this->format == false ) { $this->format = 'standard'; }
 
 			$this->options = mixt_get_options( array(
 				'format-icon' => array(
@@ -128,6 +127,10 @@ if ( ! class_exists('Mixt_Post') ) {
 					'return' => 'value',
 				),
 			) );
+			$this->options['header'] = Mixt_Options::get('header');
+
+			// Do not display meta under special circumstances
+			if ( $this->display_component('meta') == false ) { $this->layout['meta-show'] = 'false'; }
 		}
 
 		/**
@@ -150,7 +153,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 			if ( $this->layout['post-info'] ) $classes .= ' has-info';
 			if ( $this->layout['posts-page'] ) {
-				if ( $this->layout['feat-show'] == false ) {
+				if ( ! $this->display_component('featured') ) {
 					$classes .= ' no-feat';
 				} else if ( $this->layout['feat-size'] != 'blog-large' && $this->layout['type'] == 'standard' ) {
 					$classes .= ' feat-side';
@@ -181,8 +184,7 @@ if ( ! class_exists('Mixt_Post') ) {
 								return true;
 							} else if ( $this->context == 'single' ) {
 								if ( in_array($this->format, array('image', false)) ) {
-									$head_opt = Mixt_Options::get('header');
-									return ( ! ( $head_opt['enabled'] && $head_opt['media-type'] == 'image' && $head_opt['img-src'] == 'feat' ) );
+									return ( ! ( $this->options['header']['enabled'] && $this->options['header']['media-type'] == 'image' && $this->options['header']['img-src'] == 'feat' ) );
 								} else {
 									return true;
 								}
@@ -211,8 +213,10 @@ if ( ! class_exists('Mixt_Post') ) {
 
 					// Title
 					case 'title':
-						$head_opt = Mixt_Options::get('header');
-						return ( $this->context != 'single' || ! $head_opt['location-bar'] || ( $head_opt['loc-bar-left-content'] != 1 && $head_opt['loc-bar-right-content'] != 1 ) );
+						return (
+							$this->context != 'single' || ! $this->options['header']['location-bar'] ||
+							( $this->options['header']['loc-bar-left-content'] != 1 && $this->options['header']['loc-bar-right-content'] != 1 )
+						);
 						break;
 
 					// Meta
@@ -287,22 +291,23 @@ if ( ! class_exists('Mixt_Post') ) {
 			$output = '';
 
 			switch ($this->format) {
+
+				// Link, Aside, Quote and Status Format
 				case 'link':	
 				case 'aside':
 				case 'quote':
 				case 'status':
 					$feat_classes .= ' post-' . $this->format;
 
+					// Link Format
 					if ( $this->format == 'link' ) {
-						$link_query = '<a ';
-
 						// Anchor tag among other content
-						if ( substr($this->content, 0, strlen($link_query)) === $link_query && preg_match('/<a href="(.*?)".*?>(.*?)<\/a>/i', $this->content, $matches) ) {
+						if ( preg_match('/^<a href="(.*?)".*?>(.*?)<\/a>/i', $this->content, $matches) ) {
 							$post_link = $matches[1];
 							$link_title = ( empty($matches[2]) ) ? get_the_title() : $matches[2];
 							$this->content = str_replace($matches[0], '', $this->content);
 
-						// Simple link
+						// Simple URL link
 						} else {
 							$post_link = $this->content;
 							$link_title = get_the_title();
@@ -316,10 +321,12 @@ if ( ! class_exists('Mixt_Post') ) {
 								$output = str_replace($this->permalink, $post_link, $format_icon);
 							}
 						} else {
-							$output = '<div class="' . $feat_classes . '"><a href="' . $post_link . '" class="accent-bg" target="_blank">' .
-										  '<h2 class="title">' . $link_title . '</h2><small>' . $post_link . '</small>' .
-									  '</a></div>';
+							$output = "<div class='$feat_classes'>" .
+										  "<a href='$post_link' class='accent-bg' target='_blank'><h2 class='title'>$link_title</h2><small>$post_link</small></a>" .
+									  '</div>';
 						}
+
+					// Aside, Quote & Status Format
 					} else {
 						if ( $small_feat ) {
 							if ( ! empty($placeholder_img) ) {
@@ -327,11 +334,25 @@ if ( ! class_exists('Mixt_Post') ) {
 							} else {
 								$output = $format_icon;
 							}
+						} else if ( $this->format == 'quote' ) {
+							// Blockquote tag among other content
+							if ( preg_match('/^<blockquote[^\<]*>(.*)<\/blockquote>/si', $this->content, $matches) ) {
+								$quote = $matches[0];
+								$this->content = str_replace($matches[0], '', $this->content);
+
+							// Plain text quote
+							} else {
+								$quote = '<blockquote>' . $this->content . '</blockquote>';
+								$this->show_content = false;
+							}
+
+							$output = "<div class='$feat_classes'>$quote</div>";
 						} else {
 							$this->show_content = false;
-							$output = '<div class="' . $feat_classes . '">' . $this->content . '</div>';
+							$output = "<div class='$feat_classes'>$this->content</div>";
 						}
 					}
+
 					break;
 
 				// Gallery & Video Format
@@ -354,7 +375,7 @@ if ( ! class_exists('Mixt_Post') ) {
 									$output = $format_icon;
 								}
 							} else {
-								$output = '<div class="' . $feat_classes . '">' . $video_iframe . '</div>';
+								$output = "<div class='$feat_classes'>$video_iframe</div>";
 							}
 						}
 
@@ -376,7 +397,7 @@ if ( ! class_exists('Mixt_Post') ) {
 									$output = $format_icon;
 								}
 							} else {
-								$output = '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
+								$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
 							}
 
 						// Gallery Format
@@ -400,7 +421,7 @@ if ( ! class_exists('Mixt_Post') ) {
 									$output = $format_icon;
 								}
 							} else {
-								$output = '<div class="' . $feat_classes . '">' . do_shortcode($shortcode) . '</div>';
+								$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
 							}
 						}
 					} else if ( $this->context == 'related' ) {
@@ -410,17 +431,18 @@ if ( ! class_exists('Mixt_Post') ) {
 							$output = $format_icon;
 						}
 					}
+
 					break;
 
 				// Image Format
 				case 'image':
 					$feat_classes .= ' post-image';
 					if ( ! empty($feat_img) ) {
-						$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
+						$output = "<div class='$feat_classes'>{$permalink_start}{$feat_img}{$permalink_end}</div>";
 					} else {
 						$feat_id = mixt_get_post_image($this->content, 'id');
 						if ( ! empty($feat_id) ) {
-							$output = '<div class="' . $feat_classes . '">' . $permalink_start . wp_get_attachment_image($feat_id, $feat_size) . $permalink_end . '</div>';
+							$output = "<div class='$feat_classes'>" . $permalink_start . wp_get_attachment_image($feat_id, $feat_size) . $permalink_end . '</div>';
 							$this->content = str_replace(mixt_get_post_image($this->content), '', $this->content);
 						} else if ( ! empty($placeholder_img) ) {
 							$output = $placeholder_img;
@@ -428,6 +450,7 @@ if ( ! class_exists('Mixt_Post') ) {
 							$output = $format_icon;
 						}
 					}
+
 					break;
 
 				// Audio Format
@@ -446,7 +469,7 @@ if ( ! class_exists('Mixt_Post') ) {
 								$output = $format_icon;
 							}
 						} else {
-							$output = '<div class="' . $feat_classes . '">' . $audio_iframe . '</div>';
+							$output = "<div class='$feat_classes'>$audio_iframe</div>";
 						}
 					} else if ( $this->context == 'related' ) {
 						if ( ! empty($placeholder_img) ) {
@@ -455,13 +478,14 @@ if ( ! class_exists('Mixt_Post') ) {
 							$output = $format_icon;
 						}
 					}
+
 					break;
 
 				// Standard Format
 				default:
 					if ( ! empty($feat_img) ) {
 						$feat_classes .= ' post-image';
-						$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
+						$output = "<div class='$feat_classes'>{$permalink_start}{$feat_img}{$permalink_end}</div>";
 					} else if (
 						$this->context == 'related' ||
 						( $this->context != 'single' && ( $this->layout['type'] != 'standard' || $this->layout['feat-size'] != 'blog-large' ) && ! $this->layout['post-info'] )
@@ -472,12 +496,13 @@ if ( ! class_exists('Mixt_Post') ) {
 							$output = $format_icon;
 						}
 					}
+
 					break;
 			} // End Switch
 
 			if ( ( $output == $placeholder_img || $output == $format_icon ) && ! empty($feat_img) ) {
 				$feat_classes .= ' post-image';
-				$output = '<div class="' . $feat_classes . '">' . $permalink_start . $feat_img . $permalink_end . '</div>';
+				$output = "<div class='$feat_classes'>{$permalink_start}{$feat_img}{$permalink_end}</div>";
 			}
 
 			if ( $this->display_component('rollover') ) {
@@ -542,8 +567,6 @@ if ( ! class_exists('Mixt_Post') ) {
 		 * Display the post's header
 		 */
 		public function header() {
-			$head_opt = Mixt_Options::get('header');
-
 			$permalink_start = $permalink_end = '';
 			if ( $this->context != 'single' ) {
 				$permalink_start = '<a href="' . $this->permalink . '">';
@@ -588,7 +611,7 @@ if ( ! class_exists('Mixt_Post') ) {
 
 			// Display Post Title & Meta
 
-			if ( ( ! $head_opt['enabled'] || ! $head_opt['content-info'] ) || $this->context == 'blog' ) {
+			if ( $this->context == 'blog' || ( ! $this->options['header']['enabled'] || ! $this->options['header']['content-info'] ) ) {
 
 				// Title
 				if ( $this->display_component('title') ) {
@@ -641,7 +664,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 
 			// Footer Post Meta
-			if ( $this->layout['meta-show'] == 'footer' ) {
+			if ( $this->layout['meta-show'] == 'footer' && ( $this->context == 'blog' || ( ! $this->options['header']['enabled'] || ! $this->options['header']['content-info'] ) ) ) {
 				mixt_post_meta(null);
 			}
 		}
@@ -738,7 +761,6 @@ if ( ! function_exists('mixt_related_posts') ) {
 		if ( $type == 'project' ) { $args['related'] = 'type'; }
 
 		global $post;
-		$orig_post = $post;
 
 		$related_args = array();
 		if ( $args['related'] == 'tags' ) {
@@ -838,8 +860,6 @@ if ( ! function_exists('mixt_related_posts') ) {
 			</div>
 			<?php
 		}
-
-		$post = $orig_post;
 
 		wp_reset_query();
 	}

@@ -9,8 +9,6 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 
-// Load Modules
-foreach ( glob( __DIR__ . '/modules/*.php' ) as $file ) { require_once $file; }
 // Load Custom Fields
 foreach ( glob( __DIR__ . '/fields/*.php' ) as $file ) { require_once $file; }
 

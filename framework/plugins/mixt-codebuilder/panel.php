@@ -14,19 +14,26 @@ class Mixt_CB_Admin {
 	/** @var bool */
 	protected $editor_page = false;
 
-	/** @var array mapped elements */
+	/**
+	 * Mapped elements (shortcodes)
+	 * @var array
+	 */
 	public static $elements = array();
-	/** @var array available field types */
+	
+	/**
+	 * Available field types
+	 * @var array
+	 */
 	public static $fields = array();
 
 	public function __construct() {
 		global $pagenow;
-		$this->editor_page = in_array( $pagenow, array( 'post.php', 'page.php', 'post-new.php', 'post-edit.php' ) );
+		$this->editor_page = ( in_array( $pagenow, array( 'post.php', 'page.php', 'post-new.php', 'post-edit.php' ) ) || ( isset($_GET['page']) && $_GET['page'] == 'mixt-options' ) );
 
 		do_action('mixtcb_init');
 
-		// Add editor button and render panel HTML only if user can edit posts and pages, is on an editor page, and has rich editing enabled
-		if ( ! $this->editor_page || ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) || get_user_option('rich_editing') == 'false' ) { return; }
+		// Add editor button and render panel HTML only if user can edit posts and pages, is on an editor page, has rich editing enabled and there are mapped elements
+		if ( ! $this->editor_page || ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') ) || get_user_option('rich_editing') == 'false' || empty(self::$elements) ) { return; }
 
 		add_action( 'admin_head',  array($this, 'mixt_cb_add_button') );
 		add_action( 'admin_footer', array($this, 'mixt_cb_panel') );
@@ -293,8 +300,8 @@ function mixtcb_map($element) {
 /**
  * Add a field type to CodeBuilder
  * 
- * @param  string   $name     the name of the field
- * @param  callback $callback function that returns the field's markup
+ * @param string   $name     The name of the field
+ * @param callback $callback Function that returns the field's markup
  */
 function mixtcb_field($name, $callback) {
 	Mixt_CB_Admin::add_field($name, $callback);

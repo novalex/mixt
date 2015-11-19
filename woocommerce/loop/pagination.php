@@ -28,11 +28,11 @@ if ( $pag_type == 'classic' ) {
 		<h3 class="screen-reader-text"><?php _e( 'Shop navigation', 'mixt' ); ?></h3>
 		<ul class="pager">
 		<?php if ( get_previous_posts_link() ) : ?>
-			<li class="nav-previous prev"><?php previous_posts_link( __( '<i class="fa fa-chevron-left"></i> Previous products', 'mixt' ) ); ?></li>
+			<li class="nav-previous prev"><?php previous_posts_link( mixt_get_icon('left-arrow') . __( 'Previous products', 'mixt' ) ); ?></li>
 		<?php endif; ?>
 
 		<?php if ( get_next_posts_link(null, $page_max) ) : ?>
-			<li class="nav-next next"><?php next_posts_link( __( 'Next products <i class="fa fa-chevron-right"></i>', 'mixt' ), $page_max ); ?></li>
+			<li class="nav-next next"><?php next_posts_link( __( 'Next products', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max ); ?></li>
 		<?php endif; ?>
 		</ul>
 	</nav>
@@ -46,8 +46,8 @@ if ( $pag_type == 'classic' ) {
 		'current'   => max( 1, get_query_var( 'paged' ) ),
 		'total'     => $page_max,
 		'type'      => 'array',
-		'prev_text' => '<i class="fa fa-chevron-left"></i>' . __( 'Previous', 'mixt' ),
-		'next_text' => __( 'Next', 'mixt' ) . '<i class="fa fa-chevron-right"></i>',
+		'prev_text' => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
+		'next_text' => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 		'end_size'  => 3,
 		'mid_size'  => 3,
 	) ) );
@@ -76,7 +76,7 @@ if ( $pag_type == 'classic' ) {
 				data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
 				data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
 				data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
-			><i class="fa fa-chevron-down"></i><?php _e( 'Load more posts', 'mixt' ); ?></a></li>
+			><?php echo mixt_get_icon('down-arrow') . __( 'Load more posts', 'mixt' ); ?></a></li>
 		</ul>
 	</nav>
 	<?php

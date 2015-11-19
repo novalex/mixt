@@ -2,6 +2,7 @@
 
 // REDUX CUSTOMIZER FIELDS
 
+
 // GLOBAL OPTIONS SECTION
 
 $this->sections[] = array(

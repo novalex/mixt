@@ -16,7 +16,7 @@
  *
  * @package     ReduxFramework
  * @author      Dovy Paukstys (dovy)
- * @version     3.0.0
+ * @version     1.0.0
  *
  * This extension was modified for use with the MIXT theme
  */

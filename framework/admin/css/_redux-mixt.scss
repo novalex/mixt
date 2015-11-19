@@ -1,87 +1,8 @@
 
 // MIXT REDUX STYLING
 
-// COLORS
-
-$bg-main: #FFF;
-$bg-light: #eee;
-$bg-dark: #555;
-
-$bd-light: #d7d7d7;
-$bd-darker: #d0d0d0;
-
-$blue-accent: #5991CE;
-
-
-// MISC
-
 %transition {
 	transition: color 0.2s, background 0.2s, box-shadow 0.2s;
-}
-
-// BUTTONS
-
-%button {
-	display: inline-block;
-	padding: 4px 15px;
-	line-height: 20px;
-	color: #555;
-	font-weight: bold;
-	border: 1px solid #eee;
-	border-radius: 3px;
-	background-color: #f4f4f4;
-	text-decoration: none !important;
-	@extend %transition;
-}
-
-%button-default {
-	color: #555;
-	font-size: 13px;
-	font-weight: 700;
-	text-shadow: 0 1px 1px #FFF;
-
-	background-image: none !important;
-	background-color: #F5F5F5 !important;
-	border-color: $bd-light !important;
-	box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 1px rgba(0,0,0,0.1);
-	@extend %transition;
-}
-
-%button-blue {
-	color: #FFF;
-	text-shadow: 0 1px 1px #006ED0;
-
-	background-image: none !important;
-	background-color: $blue-accent !important;
-	border-color: #3C89B2 !important;
-	box-shadow: inset 0 1px 6px #77B5ED, 0 1px 0 #497AC7;
-	@extend %transition;
-}
-
-%button-red {
-	color: #FF7171 !important;
-	border-color: #ffa1a1 !important;
-	background-color: transparent !important;
-}
-
-// INPUTS
-
-%input {
-	border-color: $bd-darker;
-	background-color: #fafafa;
-	box-shadow: inset 0 1px 3px #efefef;
-	@extend %transition;
-
-	&:hover {
-		background-color: #FFF;
-		box-shadow: inset 0 1px 0 #f4f4f4;
-	}
-
-	&:focus {
-		border-color: #ccc;
-		background-color: #FFF;
-		box-shadow: 0 0 5px 1px #eee !important;
-	}
 }
 
 // GENERAL STYLING
@@ -392,63 +313,7 @@ $blue-accent: #5991CE;
 .redux-container,
 .redux-main {
 
-	// Buttons
-	
-	.button,
-	.button-secondary {
-		@extend %button-default;
-
-		&:focus,
-		&:hover {
-			background-color: #F9F9F9 !important;
-			box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 0 $bd-light !important;
-		}
-
-		&:active {
-			box-shadow: none !important;
-		}
-
-		i { line-height: inherit; }
-	}
-
-	.button-primary,
-	.button.button-primary {
-		@extend %button-blue;
-
-		&:focus,
-		&:hover {
-			background-color: #61ABEC !important;
-			box-shadow: inset 0 1px 8px #77B5ED, 0 1px 0 #497AC7 !important;
-		}
-
-		&:active {
-			box-shadow: inset 0 1px 8px #77B5ED !important;
-		}
-	}
-
-	.button.red {
-		@extend %button;
-		@extend %button-red;
-	}
-
-	a.deletion {
-		@extend %button;
-		@extend %button-red;
-		font-size: 12px;
-	}
-
 	// Inputs
-
-	input, textarea, pre.ace_editor {
-		@extend %input;
-
-		border-radius: 3px;
-	}
-
-	pre.ace_editor {
-		border-width: 1px;
-		border-style: solid;
-	}
 
 	.redux-container-spinner {
 		.spinner-wrpr {
@@ -491,10 +356,6 @@ $blue-accent: #5991CE;
 		border-color: #333;
 		background-color: $bg-dark;
 	}
-
-	// Misc
-
-	.red-text { color: red !important; }
 }
 
 .redux-main .redux-group-tab {

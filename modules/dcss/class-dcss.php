@@ -6,7 +6,7 @@ use Mexitek\PHPColors\Color;
 
 
 /**
- * Dynamic CSS helpers and functions
+ * Dynamic CSS functions and helpers
  */
 class Mixt_DCSS {
 
@@ -38,14 +38,10 @@ class Mixt_DCSS {
 	 * Media breakpoints defined in the CSS
 	 * @var array
 	 */
-	public static $media_bps = array(
-		'mercury' => 480,
-		'mars'    => 767,
-		'venus'   => 992,
-		'earth'   => 1200,
-	);
+	public static $media_bps = array();
 
 	public function __construct() {
+		$media_bps = mixt_media_breakpoints();
 
 		// Output CSS in the header
 		add_action('mixt_head_code', array($this, 'print_head_css'));
@@ -240,12 +236,12 @@ class Mixt_DCSS {
 		$color_ob = new Color($color);
 
 		$color_for_bg = $this->set_color_for_bg($color);
-		$border_color = '#'.$color_ob->darken(5);
+		$border_color = '#'.$color_ob->darken(7);
 		$text_shadow  = $this->set_textsh_for_bg($color);
 		$color_darker = '#'.$color_ob->darken(10);
 
 		if ( $this->lumin($color) == 'light' ) {
-			$btn_solid_hover_bg = '#' . $color_ob->darken(3);
+			$btn_solid_hover_bg = '#' . $color_ob->darken(5);
 			$btn_outline_hover_bg = 'rgba(0,0,0,0.03)';
 		} else {
 			$btn_solid_hover_bg = '#' . $color_ob->lighten(5);
@@ -269,7 +265,7 @@ class Mixt_DCSS {
 		
 		echo $this->parse_selector("$pre .btn-outline-{{sel}}:hover", $sel) . "{ background-color: $btn_outline_hover_bg; }\n";
 		echo $this->parse_selector("$pre .btn-outline-{{sel}}, $pre .btn-hover-outline-{{sel}}:hover", $sel) .
-			 "{ border: 1px solid $border_color; text-shadow: none !important; background-color: transparent; }\n";
+			 "{ border: 1px solid $color; text-shadow: none !important; background-color: transparent; }\n";
 		echo $this->parse_selector("$pre .btn-outline-{{sel}}:active, $pre .btn-outline-{{sel}}.active, $pre .btn-hover-outline-{{sel}}:hover:active, $pre .btn-hover-outline-{{sel}}:hover.active", $sel) .
 			 "{ box-shadow: inset 0 1px 16px rgba(0,0,0,0.05); }\n";
 		echo $this->parse_selector("$pre .btn-hover-outline-{{sel}}:hover", $sel) . "{ background-color: transparent !important; }\n";

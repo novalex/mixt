@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * MIXT Menu Item Custom Fields Config
+ *
+ * @package  MIXT\Plugins\Menu_Item_Custom_Fields
+ * @version  0.3.0
+ * @author   Dzikri Aziz <kvcrvt@gmail.com>
+ */
+
 class Mixt_Menu_Item_Custom_Fields {
 
 	/**
@@ -23,7 +31,7 @@ class Mixt_Menu_Item_Custom_Fields {
 				'label' => __('Menu Icon', 'mixt'),
 				'thin'  => true,
 			),
-			'no-label' => array(
+			'no_label' => array(
 				'label' => __('No Label', 'mixt'),
 				'type'  => 'checkbox',
 				'thin'  => true,
@@ -65,23 +73,25 @@ class Mixt_Menu_Item_Custom_Fields {
 		check_admin_referer( 'update-nav_menu', 'update-nav-menu-nonce' );
 
 		foreach ( self::$fields as $_key => $label ) {
-			$key = sprintf( 'menu-item-mixt-%s', $_key );
+			$key = 'mixt-menu-item-' . str_replace('_', '-', $_key);
+			$u_key = '_mixt_menu_item_' . $_key;
 
 			// Sanitize
-			if ( ! empty( $_POST[ $key ][ $menu_item_db_id ] ) ) {
-				// Do some checks here...
-				$value = $_POST[ $key ][ $menu_item_db_id ];
-			}
-			else {
+			if ( ! empty( $_POST[$key][$menu_item_db_id] ) ) {
+				if ( $_key == 'icon' ) {
+					$value = array_map('sanitize_html_class', explode(' ', $_POST[$key][$menu_item_db_id]));
+				} else {
+					$value = sanitize_key($_POST[$key][$menu_item_db_id]);
+				}
+			} else {
 				$value = null;
 			}
 
 			// Update
 			if ( ! is_null( $value ) ) {
-				update_post_meta( $menu_item_db_id, $key, $value );
-			}
-			else {
-				delete_post_meta( $menu_item_db_id, $key );
+				update_post_meta( $menu_item_db_id, $u_key, $value );
+			} else {
+				delete_post_meta( $menu_item_db_id, $u_key );
 			}
 		}
 	}
@@ -113,19 +123,25 @@ class Mixt_Menu_Item_Custom_Fields {
 				$fwidth = 'description-wide';
 			}
 
-			$key   = sprintf( 'menu-item-mixt-%s', $_key );
+			$key   = sprintf( 'mixt-menu-item-%s', str_replace('_', '-', $_key) );
 			$type  = sprintf( 'edit-%s', $key );
-			$id    = sprintf( 'edit-%s-%s', $key, $item->ID );
+			$id    = sprintf( '%s-%s', $type, $item->ID );
 			$name  = sprintf( '%s[%s]', $key, $item->ID );
 			$class = sprintf( 'field-mixt-%s', $_key ) . ' ' . $fwidth;
 
-			$fval  = $ftype == 'checkbox' ? 'true' : '';     // Set checkbox input value
-			$dbval = get_post_meta( $item->ID, $key, true ); // Get value stored in database
-			$value = $fval != '' ? $fval : $dbval;           // The input value
-			$fattr = '';                                     // Additional input attribute(s)
+			$fval  = ( $ftype == 'checkbox' ) ? 'true' : '';                       // Set checkbox input value
+			$dbval = get_post_meta( $item->ID, '_mixt_menu_item_' . $_key, true ); // Get value stored in database
+			if ( $_key == 'icon' && is_array($dbval) ) {
+				$dbval = implode(' ', (array) $dbval);
+			}
+			$value = ( $fval != '' ) ? $fval : $dbval; // The input value
+			$fattr = '';                               // Additional input attribute(s)
 
-			if ($ftype == 'checkbox' && $dbval == 'true') {
-				$fattr .= 'checked ';
+			if ( $ftype == 'checkbox' ) {
+				$field_string = '<label for="%1$s"><input type="%6$s" id="%1$s" class="widefat code %2$s %1$s" name="%4$s" value="%5$s" %7$s/> %3$s</label>';
+				if ( $dbval == 'true' ) { $fattr .= 'checked '; }
+			} else {
+				$field_string = '<label for="%1$s">%3$s<br /><input type="%6$s" id="%1$s" class="widefat code %2$s %1$s" name="%4$s" value="%5$s" %7$s/></label>';
 			}
 
 			$cont_attr = $ftype == 'hidden' ? 'style="display: none;"' : '';
@@ -135,7 +151,7 @@ class Mixt_Menu_Item_Custom_Fields {
 			if ($depth === false || $item_depth == $depth) :
 				echo '<p class="' . esc_attr( $class ) . ' description"' . $cont_attr . '>';
 					printf(
-						'<label for="%1$s">%3$s<br /><input type="%6$s" id="%1$s" class="widefat code %2$s %1$s" name="%4$s" value="%5$s" %7$s/></label>',
+						$field_string,
 						esc_attr( $id ),
 						esc_attr( $type ),
 						esc_html( $label ),

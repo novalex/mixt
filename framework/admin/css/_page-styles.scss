@@ -1,5 +1,88 @@
 
-// MIXT METABOX STYLING
+// Admin Menu Pages
+
+.mixt-admin-wrap {
+	.wp-badge {
+		color: #fff;
+		background-color: #fff;
+		background-image: url('#{$img-path}/logo.png');
+		background-size: 114px 41px;
+		background-position-y: 40px;
+
+		.version {
+			width: 100%;
+			height: 40px;
+			display: block;
+			line-height: 40px;
+			background-color: #333;
+		}
+	}
+
+	.red-text { color: $red; }
+	.green-text { color: $green; }
+
+	.margin-top { margin-top: 20px; }
+
+	.info-box {
+		$spacing: 20px;
+
+		padding-left: $spacing;
+		padding-right: $spacing;
+
+		.action { margin-bottom: $spacing; }
+
+		&.has-icon {
+			$icon-size: 100px;
+
+			position: relative;
+			min-height: $spacing * 2 + $icon-size;
+
+			.dashicons {
+				position: absolute;
+				top: 50%;
+				margin-top: $icon-size / -2;
+				width: $icon-size;
+				height: $icon-size;
+				color: #ddd;
+				font-size: $icon-size;
+			}
+
+			&.icon-l {
+				padding-left: $spacing * 2 + $icon-size;
+				.dashicons { left: 20px; }
+			}
+			&.icon-r {
+				padding-right: $spacing * 2 + $icon-size;
+				.dashicons { right: 20px; }
+			}
+		}
+	}
+
+	.mixt-alert {
+		display: block;
+		width: 100%;
+
+		p {
+			padding: 0 15px;
+			font-weight: bold;
+			font-size: 13px;
+		}
+
+		&.alert-ok { border-bottom-color: $green; }
+		&.alert-warn { border-bottom-color: $orange; }
+	}
+
+	.status-table {
+		th { font-weight: bold; }
+
+		tbody tr:nth-child(even) { background-color: #f8f8f8; }
+
+		td.label { width: 20%; }
+	}
+}
+
+
+// Page Metaboxes
 
 .postbox-container .cmb2-metabox {
 	.cmb-row.nest-parent {

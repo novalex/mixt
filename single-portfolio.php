@@ -12,12 +12,6 @@ get_header();
 
 		the_post();
 
-		// Set portfolio item display options
-		$options = array(
-			'meta' => false,
-		);
-		Mixt_Options::set('post-display', null, $options);
-
 		get_template_part( 'templates/content', 'portfolio' );
 
 		// Get project page options

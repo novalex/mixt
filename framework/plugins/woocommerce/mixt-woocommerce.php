@@ -19,7 +19,7 @@ function mixt_wc_wrap_class($classes) {
 	}
 	return $classes;
 }
-add_filter('mixt_content_class', 'mixt_wc_wrap_class');
+add_filter('mixt_content_wrap_class', 'mixt_wc_wrap_class');
 
 
 /**
@@ -161,7 +161,7 @@ function mixt_wc_badges() {
 	if ( mixt_wc_option('sale-badge') ) {
 		global $post, $product;
 		if ( $product->is_on_sale() ) {
-			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . __( 'Sale!', 'woocommerce' ) . '</span>', $post, $product );
+			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . __( 'Sale!', 'mixt' ) . '</span>', $post, $product );
 		}
 	}
 	// New Badge

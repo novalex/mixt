@@ -7,18 +7,25 @@ body {
 	min-width: 320px;
 	min-height: 100%;
 	line-height: $line-height-base;
-	overflow-x: hidden;
 	word-wrap: break-word;
 	font-size: $font-size;
 	font-family: $font-family-base;
+	overflow-x: hidden;
 
 	// Media query breakpoint values, for use in JS
 	&:before {
 		display: none;
-		content: 'pluto';
+		content: 'mercury';
 	}
 	@each $bp-name, $bp-value in $breakpoints {
 		@include media('screen', $bp-name) { &:before { content: '#{$bp-name}'; } }
+	}
+
+	&.no-responsive {
+		min-width: 1180px;
+		overflow-x: auto;
+
+		&:before { content: 'earth' !important; }
 	}
 }
 
@@ -124,6 +131,8 @@ p:empty { display: none; }
 
 #main-wrap-inner ::selection { text-shadow: none !important; }
 
+#wpadminbar #wp-admin-bar-mixt-options .ab-icon:before { top: 3px; }
+
 // Style Switcher
 
 #style-switcher {
@@ -153,13 +162,12 @@ p:empty { display: none; }
 		padding: 0;
 		cursor: pointer;
 		font-size: 16px;
-		line-height: 42px;
+		line-height: 38px;
 		text-align: center;
 		border-left-width: 0;
 		border-radius: 0 3px 3px 0;
 
 		i {
-			line-height: 40px;
 			font-size: 24px !important;
 			animation: spin 6s ease infinite;
 		}
@@ -168,9 +176,6 @@ p:empty { display: none; }
 	.reset {
 		position: absolute;
 		top: 8px; right: 10px;
-		border-radius: 2px;
-
-		i { font-size: 14px !important; }
 	}
 
 	.content {

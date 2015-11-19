@@ -73,6 +73,8 @@
 				.price {
 					font-weight: bold;
 					font-size: $font-size-m !important;
+
+					del { opacity: 0.8; font-size: 90%; }
 				}
 			}
 

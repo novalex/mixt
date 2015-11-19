@@ -10,13 +10,9 @@ body.one-page { position: relative; }
 .error-404 {
 	padding: $row-spacing-lg 0;
 
-	.page-header {
-		text-align: center;
-
-		.page-title {
-			font-size: 96px;
-			margin-top: 0;
-		}
+	.page-header .page-title {
+		font-size: 96px;
+		margin-top: 0;
 	}
 
 	.page-content > div { padding-top: $row-spacing-lg; }

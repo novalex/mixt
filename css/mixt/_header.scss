@@ -83,7 +83,6 @@ body.loading {
 
 	width: 100%;
 	height: auto;
-	min-height: $nav-primary-height;
 	position: relative;
 	margin: 0;
 	overflow: hidden;
@@ -244,10 +243,9 @@ body.loading {
 		transform: none !important;
 	}
 
-	// Transparent navbar padding
-	.nav-transparent.nav-below & {
-		.container { padding-top: 0 !important; }
-	}
+	// Transparent navbar
+	.nav-transparent & { min-height: $nav-primary-height; }
+	.nav-transparent.nav-below & .container { padding-top: 0 !important; }
 
 	@include media('screen', '<mars') {
 		.container { width: 100%; }
@@ -301,7 +299,7 @@ body.loading {
 		&:empty { display: none; }
 	}
 
-	@include media('screen', '(min-width: 480px)') {
+	@include media('screen', 'mercury') {
 		.inner { display: table; }
 		
 		.left-content,

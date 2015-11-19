@@ -34,6 +34,8 @@
 		}
 
 		&.post-audio { background-color: #000; }
+
+		.no-objectfit & img { height: auto; }
 	}
 
 	&.blog-2-col .posts-container { margin-right: -3px; }

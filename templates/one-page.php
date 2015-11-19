@@ -16,10 +16,6 @@ get_header();
 
 		$post_ob = new Mixt_Post('page');
 
-		// Scrolling Script
-		if ( wp_script_is('waypoints', 'registered') ) { wp_enqueue_script('waypoints'); }
-		else { mixt_enqueue_plugin('waypoints'); }
-
 		?>
 
 		<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( array($post_ob->classes(), 'one-page') ); ?>>

@@ -10,7 +10,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 // DEFINE THEME CONSTANTS
 
-define( 'MIXT_VERSION', '1.0' );
+define( 'MIXT_VERSION', wp_get_theme()->get('Version') );
 
 define('MIXT_DIR', get_template_directory());            // Base Theme Path
 define('MIXT_URI', get_template_directory_uri());        // Base Theme URI
@@ -93,7 +93,7 @@ function mixt_setup() {
 	}
 
 	// Add Translation Support
-	load_theme_textdomain('mixt', MIXT_DIR . '/lang');
+	load_theme_textdomain('mixt', apply_filters('mixt_lang_path', MIXT_DIR . '/lang'));
 
 	// Register Navigation Menus
 	register_nav_menus( array(
@@ -131,6 +131,8 @@ function mixt_widgets_init() {
 	if ( is_array($custom_sidebars) ) {
 		foreach ( $custom_sidebars as $sidebar ) {
 			if ( empty($sidebar['name']) || empty($sidebar['id']) ) continue;
+
+			$sidebar['id'] = sanitize_title($sidebar['id']);
 			
 			register_sidebar( array(
 				'name' => $sidebar['name'],

@@ -37,6 +37,13 @@
 		}
 	}
 
+	// Project Page
+	.article.portfolio {
+		&.has-info .page-header { position: static; }
+		
+		> .row { border-color: inherit; }
+	}
+
 	// Media
 	@include media('screen', 'mars') {
 		.portfolio.has-columns {

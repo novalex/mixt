@@ -96,8 +96,21 @@
 	}
 }
 
-// Fix IE10-11 not supporting preserve-3d & text not wrapping bug
-@if $ie-hacks {
+@if $ie-support {
+	// Hide front side and show back on hover for IE9
+	.ie9 .mixt-flipcard {
+		.front { display: block; }
+		.back { display: none; }
+
+		&:hover,
+		&:focus,
+		&.hover {
+			.front { display: none; }
+			.back { display: block; }
+		}
+	}
+
+	// Fix IE10-11 not supporting preserve-3d & text not wrapping bug
 	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 		.mixt-flipcard {
 			&:hover,

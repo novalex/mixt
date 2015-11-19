@@ -412,7 +412,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/logo.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -447,7 +447,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/logo-inv.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -482,7 +482,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/App-Galaxy.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -517,7 +517,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/iPhone-App.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -552,7 +552,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/iPad-App.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -646,7 +646,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/transparent-square-tiles.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -681,7 +681,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/James-Developer.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -716,7 +716,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/Jamie-PM.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -751,7 +751,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/Kelly-Marketing.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
@@ -786,7 +786,7 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 			<wp:meta_value><![CDATA[2015/07/Steve-Designer.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_image_color</wp:meta_key>
+			<wp:meta_key>_mixt_luminosity</wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>

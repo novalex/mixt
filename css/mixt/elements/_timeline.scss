@@ -98,6 +98,7 @@
 
 		.content {
 			position: relative;
+			min-height: $anchor-size;
 
 			> :last-child { margin-bottom: 0; }
 			> :not(:last-child) { margin-bottom: 15px; }

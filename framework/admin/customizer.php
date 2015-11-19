@@ -128,7 +128,7 @@ function mixt_customize_options() {
 	global $mixt_opt;
 
 	$nav_options = mixt_get_options( array(
-		'opacity' => array( 'key' => 'nav-opacity', 'type' => 'str', 'return' => 'value', 'default' => '0.95' ),
+		'opacity'    => array( 'key' => 'nav-opacity', 'type' => 'str', 'return' => 'value', 'default' => '0.95' ),
 		'second-nav' => array(),
 	) );
 	
@@ -141,7 +141,7 @@ function mixt_customize_options() {
 		'themes-enabled' => (bool) get_option('mixt-themes-enabled'),
 		'default-site-themes' => mixt_get_themes('site', 'default'),
 		'default-nav-themes' => mixt_get_themes('nav', 'default'),
-		'breakpoints' => Mixt_DCSS::$media_bps,
+		'breakpoints' => mixt_media_breakpoints(),
 		'mixt-uri' => MIXT_URI,
 	);
 }

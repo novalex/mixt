@@ -49,12 +49,7 @@ CUSTOMIZER INTEGRATION - LOGO
 				text_typo = mixt_customize.logo['text-typo'],
 				shrink_size;
 
-			if ( color_inv != '' ) {
-				html += '<strong class="logo-light">'+text+'</strong>';
-				html += '<strong class="logo-dark">'+text+'</strong>';
-			} else {
-				html += '<strong>'+text+'</strong>';
-			}
+			html += '<strong>'+text+'</strong>';
 
 			css += '#nav-logo strong {';
 				css += 'color: '+color+';';
@@ -63,7 +58,7 @@ CUSTOMIZER INTEGRATION - LOGO
 				css += 'font-weight: '+text_typo['font-weight']+';';
 				css += 'text-transform: '+text_typo['text-transform']+';';
 			css += '}';
-			css += '#nav-logo .logo-dark { color: '+color_inv+'; }';
+			css += '.bg-dark #nav-logo strong { color: '+color_inv+'; }';
 
 			// Logo Shrink
 			if ( shrink != '0' ) {

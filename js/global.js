@@ -7,8 +7,6 @@ GLOBAL JS FUNCTIONS
 
 	'use strict';
 
-	/* global mixt_opt */
-
 	var viewport = $(window),
 		bodyEl   = $('body');
 
@@ -109,6 +107,12 @@ GLOBAL JS FUNCTIONS
 				download: false,
 				selector: '.product-gallery-thumb'
 			});
+		}
+
+
+		// Placeholder Polyfill
+		if ( typeof $.fn.placeholder === 'function' ) {
+			$('input, textarea').placeholder();
 		}
 
 	}); // END RUN ON LOAD
