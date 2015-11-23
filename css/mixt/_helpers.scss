@@ -1,12 +1,6 @@
 
 // ALIGNMENT
 
-.flex-middle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .alignleft {
 	display: inline;
 	float: left;
@@ -21,6 +15,12 @@
 	clear: both;
 	display: block;
 	margin: 0 auto;
+}
+
+.flex-middle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
@@ -74,9 +74,25 @@ $spacing-margin-sizes: (
 	.margin-#{$size}, .margin-left-#{$size} { margin-left: $margin; }
 	.margin-#{$size}, .margin-right-#{$size} { margin-right: $margin; }
 	.margin-#{$size}, .margin-bottom-#{$size} { margin-bottom: $margin; }
+
+	@if ( $size != 'none' ) {
+		.margin-sep-#{$size} {
+			margin-top: -$margin;
+			> * { margin-top: $margin; margin-right: $margin; }
+		}
+	}
 }
 
 .no-margin { margin: 0 !important; }
+
+.padding-horizontal {
+	padding-left: $gutter-lg;
+	padding-right: $gutter-lg;
+}
+.padding-vertical {
+	padding-top: $row-spacing-lg;
+	padding-bottom: $row-spacing-lg;
+}
 
 
 // LISTS
@@ -86,20 +102,6 @@ $spacing-margin-sizes: (
 	list-style: none;
 
 	li:not(:last-child) { margin: 0; }
-}
-
-// IFRAME FLUID
-
-.iframe-fluid {
-	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	height: 0;
-}
-.iframe-fluid iframe {
-	position: absolute;
-	top: 0; left: 0;
-	width: 100%; height: 100%;
-	border: none;
 }
 
 
@@ -118,6 +120,19 @@ $spacing-margin-sizes: (
 	> * {
 		width: 1%;
 		display: table-cell;
+	}
+}
+
+.iframe-fluid {
+	height: 0;
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+
+	iframe {
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		border: none;
 	}
 }
 

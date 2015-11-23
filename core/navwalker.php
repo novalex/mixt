@@ -217,7 +217,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			$attributes .= ! empty( $attr_href )        ? ' href="'   . esc_attr( $attr_href        ) . '"' : '';
 			$attributes .= ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) . '"' : '';
 
-			$attributes .= $args->has_children  ? ' data-toggle="dropdown" data-target="#" class="dropdown-toggle disabled"' : '';
+			$attributes .= $args->has_children  ? ' class="dropdown-toggle disabled" data-toggle="dropdown"' : '';
 
 			$item_output = $args->before;
 

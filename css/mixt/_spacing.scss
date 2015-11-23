@@ -75,23 +75,6 @@ ul.wpb_thumbnails-fluid > li,
 .wpb_wrapper .mixt-element { margin-bottom: $row-spacing-lg; }
 
 
-// Spacing Classes
-
-.margin-sep-sm {
-	$margin: 10px;
-	margin-top: -$margin;
-	> * { margin-top: $margin; margin-right: $margin; }
-}
-.padding-horizontal {
-	padding-left: $gutter-lg;
-	padding-right: $gutter-lg;
-}
-.padding-vertical {
-	padding-top: $row-spacing-lg;
-	padding-bottom: $row-spacing-lg;
-}
-
-
 @include media('screen', 'mars') {
 	#content-wrap {
 		&.has-sidebar {

@@ -5,12 +5,15 @@
 
 /* TASKS ####################################
  *
+ * watch       - listen to file changes and perform the appropriate tasks
+ *
  * sass        - compile sass files
  * sass-admin  - compile admin sass files
  * sass-plugin - compile plugin sass files
  *
  * minify      - concat & minify js
  * minify-bs   - concat & minify Bootstrap js
+ * minify-customizer - concat & minify customizer JS
  *
  * OPTIONS ##################################
  *
@@ -155,4 +158,4 @@ gulp.task('watch', function() {
 });
 
 // Default
-gulp.task('default', ['sass', 'minify']);
+gulp.task('default', ['sass', 'sass-admin', 'sass-plugin', 'minify', 'minify-bs', 'minify-customizer']);

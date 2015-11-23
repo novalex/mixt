@@ -1529,7 +1529,7 @@
 			<wp:meta_value><![CDATA[<div class="intro-text">
 <h2 style="font-size: 36px">Hi There!</h2>
 <h3 style="font-size: 22px">I'm <strong>Clark</strong>, full-stack web developer, <br />and this is my portfolio.</h3>
-<p class="margin-sep-sm"><a class="btn btn-black btn-lg" href="http://novalx.com/themes/wp/mixt-portfolio/portfolio/">VIEW WORK</a><a class="btn btn-outline-white btn-lg" href="http://novalx.com/themes/wp/mixt-portfolio/contact/">CONTACT ME</a></p>
+<p class="margin-sep-s"><a class="btn btn-black btn-lg" href="http://novalx.com/themes/wp/mixt-portfolio/portfolio/">VIEW WORK</a><a class="btn btn-outline-white btn-lg" href="http://novalx.com/themes/wp/mixt-portfolio/contact/">CONTACT ME</a></p>
 </div>]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>

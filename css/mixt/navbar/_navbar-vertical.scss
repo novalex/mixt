@@ -117,7 +117,7 @@
 						}
 
 						&.divider {
-							height: 6px;
+							height: 10px;
 							margin: 0 !important;
 						}
 					}
@@ -135,6 +135,8 @@
 					border-width: 1px 0 1px 0;
 					margin-top: -1px;
 					margin-left: 0;
+
+					> a { line-height: $nav-vertical-item-height - 2px; }
 
 					> .sub-menu { top: -1px; }
 				}

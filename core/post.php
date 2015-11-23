@@ -517,11 +517,11 @@ if ( ! class_exists('Mixt_Post') ) {
 		 */
 		public function rollover($content, $classes) {
 			$options = mixt_get_options( array(
-				'rollover' => array( 'key' => 'portfolio-rollover' ),
-				'elem' => array( 'key' => 'portfolio-rollover-elem', 'return' => 'value' ),
-				'color' => array( 'key' => 'portfolio-rollover-color', 'return' => 'value' ),
-				'anim-in' => array( 'key' => 'portfolio-rollover-anim-in', 'return' => 'value' ),
-				'anim-out' => array( 'key' => 'portfolio-rollover-anim-out', 'return' => 'value' ),
+				'rollover'  => array( 'key' => 'portfolio-rollover' ),
+				'elem'      => array( 'key' => 'portfolio-rollover-elem', 'return' => 'value' ),
+				'color'     => array( 'key' => 'portfolio-rollover-color', 'return' => 'value' ),
+				'anim-in'   => array( 'key' => 'portfolio-rollover-anim-in', 'return' => 'value' ),
+				'anim-out'  => array( 'key' => 'portfolio-rollover-anim-out', 'return' => 'value' ),
 				'view-icon' => array( 'key' => 'portfolio-rollover-view-icon', 'return' => 'value' ),
 				'full-icon' => array( 'key' => 'portfolio-rollover-full-icon', 'return' => 'value' ),
 				'btn-color' => array( 'key' => 'portfolio-rollover-btn-color', 'return' => 'value' ),

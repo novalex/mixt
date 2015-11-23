@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2015-11-16 19:15+0200\n"
-"PO-Revision-Date: 2015-11-16 21:09+0200\n"
+"POT-Creation-Date: 2015-11-23 04:46+0200\n"
+"PO-Revision-Date: 2015-11-23 04:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -285,7 +285,7 @@ msgstr "Circle with shadow"
 msgid "3D Shadow"
 msgstr "3D Shadow"
 
-#: core/assets.php:337 templates/redux-templates/header.tpl.php:31
+#: core/assets.php:355 templates/redux-templates/header.tpl.php:31
 msgid "and"
 msgstr "and"
 
@@ -301,14 +301,14 @@ msgstr "Manage menus"
 msgid "Click here to assign one"
 msgstr "Click here to assign one"
 
-#: core/navwalker.php:368
+#: core/navwalker.php:383
 #, php-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] "%d item"
 msgstr[1] "%d items"
 
-#: core/navwalker.php:370
+#: core/navwalker.php:385
 msgid "No items in the cart"
 msgstr "No items in the cart"
 
@@ -410,12 +410,12 @@ msgid "Load more posts"
 msgstr "Load more posts"
 
 #: core/tags.php:180
-msgid "<i class=\"fa fa-chevron-left\"></i> Previous posts"
-msgstr "<i class=\"fa fa-chevron-left\"></i> Previous posts"
+msgid "Previous posts"
+msgstr "Previous posts"
 
 #: core/tags.php:185
-msgid "Next posts <i class=\"fa fa-chevron-right\"></i>"
-msgstr "Next posts <i class=\"fa fa-chevron-right\"></i>"
+msgid "Next posts"
+msgstr "Next posts"
 
 #: core/tags.php:214
 msgid "Pingback:"
@@ -452,12 +452,12 @@ msgid "Load more"
 msgstr "Load more"
 
 #: core/tags.php:366
-msgid "<i class=\"fa fa-chevron-left\"></i> Older comments"
-msgstr "<i class=\"fa fa-chevron-left\"></i> Older comments"
+msgid "Older comments"
+msgstr "Older comments"
 
 #: core/tags.php:367
-msgid "Newer comments <i class=\"fa fa-chevron-right\"></i>"
-msgstr "Newer comments <i class=\"fa fa-chevron-right\"></i>"
+msgid "Newer comments"
+msgstr "Newer comments"
 
 #: framework/admin/admin-menus.php:24
 msgid "MIXT Elements"
@@ -525,8 +525,8 @@ msgid "No social profiles set up!"
 msgstr "No social profiles set up!"
 
 #: framework/admin/media-meta.php:84
-msgid "Image Color"
-msgstr "Image Color"
+msgid "Luminosity"
+msgstr ""
 
 #: framework/admin/media-meta.php:88 framework/cmb2-config.php:616
 #: framework/plugins/redux-extend/customizer-fields.php:353
@@ -579,7 +579,7 @@ msgid "Options"
 msgstr "Options"
 
 #: framework/admin/menu-pages.php:123 framework/admin/views/welcome.php:17
-#: framework/redux-config.php:3263
+#: framework/redux-config.php:3306
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -1822,7 +1822,7 @@ msgid "Animation to use for the loader"
 msgstr "Animation to use for the loader"
 
 #: framework/plugins/redux-extend/customizer-fields.php:125
-#: framework/redux-config.php:568 framework/redux-config.php:3338
+#: framework/redux-config.php:568 framework/redux-config.php:3381
 msgid "Header"
 msgstr "Header"
 
@@ -1925,7 +1925,7 @@ msgstr "No Content"
 #: framework/plugins/redux-extend/customizer-fields.php:513
 #: framework/plugins/redux-extend/portfolio-fields.php:226
 #: framework/redux-config.php:986 framework/redux-config.php:1001
-#: framework/redux-config.php:2768 framework/redux-config.php:3180
+#: framework/redux-config.php:2768 framework/redux-config.php:3223
 msgid "Title"
 msgstr "Title"
 
@@ -1959,7 +1959,7 @@ msgid "Text to display before the breadcrumbs"
 msgstr "Text to display before the breadcrumbs"
 
 #: framework/plugins/redux-extend/customizer-fields.php:533
-#: framework/redux-config.php:2874 framework/redux-config.php:3362
+#: framework/redux-config.php:2874 framework/redux-config.php:3405
 msgid "Themes"
 msgstr "Themes"
 
@@ -2134,7 +2134,7 @@ msgid "Enable Opacity"
 msgstr "Enable Opacity"
 
 #: framework/plugins/redux-extend/customizer-fields.php:823
-#: framework/redux-config.php:1201 framework/redux-config.php:3344
+#: framework/redux-config.php:1201 framework/redux-config.php:3387
 msgid "Navbars"
 msgstr "Navbars"
 
@@ -2861,12 +2861,8 @@ msgid " In stock"
 msgstr " In stock"
 
 #: framework/redux-config.php:110
-msgid ""
-"Allowed HTML tags and attributes: <a href=\"\" title=\"\">, <i>, <span>, "
-"<strong>, <em>"
-msgstr ""
-"Allowed HTML tags and attributes: <a href=\"\" title=\"\">, <i>, <span>, "
-"<strong>, <em>"
+msgid "Allowed HTML tags and attributes:"
+msgstr "Allowed HTML tags and attributes:"
 
 #: framework/redux-config.php:139
 #, php-format
@@ -2878,7 +2874,7 @@ msgstr "%s Page"
 msgid "Manage the %s page and content appearance"
 msgstr "Manage the %s page and content appearance"
 
-#: framework/redux-config.php:289 framework/redux-config.php:3332
+#: framework/redux-config.php:289 framework/redux-config.php:3375
 msgid "Global Options"
 msgstr "Global Options"
 
@@ -3194,7 +3190,7 @@ msgstr "Settings for the secondary navbar"
 msgid "Show the secondary navbar above the header"
 msgstr "Show the secondary navbar above the header"
 
-#: framework/redux-config.php:1667 framework/redux-config.php:3350
+#: framework/redux-config.php:1667 framework/redux-config.php:3393
 msgid "Sidebars"
 msgstr "Sidebars"
 
@@ -3249,7 +3245,7 @@ msgid "New Sidebar"
 msgstr "New Sidebar"
 
 #: framework/redux-config.php:1746 framework/redux-config.php:2745
-#: framework/redux-config.php:3157 templates/comments.php:80
+#: framework/redux-config.php:3200 templates/comments.php:80
 #: woocommerce/single-product-reviews.php:65
 msgid "Name"
 msgstr "Name"
@@ -3274,8 +3270,8 @@ msgstr "Back To Top Icon"
 msgid "Hide the widget area on mobile / small screens"
 msgstr "Hide the widget area on mobile / small screens"
 
-#: framework/redux-config.php:1985 framework/redux-config.php:3125
-#: framework/redux-config.php:3368
+#: framework/redux-config.php:1985 framework/redux-config.php:3168
+#: framework/redux-config.php:3411
 msgid "Social Profiles"
 msgstr "Social Profiles"
 
@@ -3320,7 +3316,7 @@ msgstr "Make the info bar fixed (sticky)"
 msgid "Hide the info bar on mobile / small screens"
 msgstr "Hide the info bar on mobile / small screens"
 
-#: framework/redux-config.php:2063 framework/redux-config.php:3356
+#: framework/redux-config.php:2063 framework/redux-config.php:3399
 msgid "Post Pages"
 msgstr "Post Pages"
 
@@ -3586,24 +3582,24 @@ msgstr "Manage your social sharing profiles and add new ones"
 msgid "Display the share buttons"
 msgstr "Display the share buttons"
 
-#: framework/redux-config.php:2698 framework/redux-config.php:3135
+#: framework/redux-config.php:2698 framework/redux-config.php:3178
 msgid "Social Icons Color On Hover"
 msgstr "Social Icons Color On Hover"
 
-#: framework/redux-config.php:2699 framework/redux-config.php:3136
+#: framework/redux-config.php:2699 framework/redux-config.php:3179
 msgid "Color the icon, its background, or neither on hover"
 msgstr "Color the icon, its background, or neither on hover"
 
 #: framework/redux-config.php:2701 framework/redux-config.php:2757
-#: framework/redux-config.php:3138 framework/redux-config.php:3169
+#: framework/redux-config.php:3181 framework/redux-config.php:3212
 msgid "Icon"
 msgstr "Icon"
 
-#: framework/redux-config.php:2702 framework/redux-config.php:3139
+#: framework/redux-config.php:2702 framework/redux-config.php:3182
 msgid "Background"
 msgstr "Background"
 
-#: framework/redux-config.php:2703 framework/redux-config.php:3140
+#: framework/redux-config.php:2703 framework/redux-config.php:3183
 msgid "Neither"
 msgstr "Neither"
 
@@ -3620,12 +3616,9 @@ msgid "Bit.ly login"
 msgstr "Bit.ly login"
 
 #: framework/redux-config.php:2724
-msgid ""
-"Your user and API key. Get them <a href=\"https://bitly.com/a/settings/"
-"advanced\">here</a>"
-msgstr ""
-"Your user and API key. Get them <a href=\"https://bitly.com/a/settings/"
-"advanced\">here</a>"
+#, php-format
+msgid "Your user and API key. Get them here: %s"
+msgstr "Your user and API key. Get them here: %s"
 
 #: framework/redux-config.php:2727
 msgid "Enter your Username"
@@ -3635,7 +3628,7 @@ msgstr "Enter your Username"
 msgid "Enter your API Key"
 msgstr "Enter your API Key"
 
-#: framework/redux-config.php:2738 framework/redux-config.php:3150
+#: framework/redux-config.php:2738 framework/redux-config.php:3193
 msgid "New Profile"
 msgstr "New Profile"
 
@@ -3687,55 +3680,79 @@ msgstr "Allowed Tags"
 msgid "Display the allowed tags in the comment form"
 msgstr "Display the allowed tags in the comment form"
 
+#: framework/redux-config.php:3125
+msgid "Icons"
+msgstr "Icons"
+
 #: framework/redux-config.php:3126
+msgid "Define various icons used throughout the site"
+msgstr "Define various icons used throughout the site"
+
+#: framework/redux-config.php:3135
+msgid "Left Arrow"
+msgstr "Left Arrow"
+
+#: framework/redux-config.php:3143
+msgid "Right Arrow"
+msgstr "Right Arrow"
+
+#: framework/redux-config.php:3151
+msgid "Up Arrow"
+msgstr "Up Arrow"
+
+#: framework/redux-config.php:3159
+msgid "Down Arrow"
+msgstr "Down Arrow"
+
+#: framework/redux-config.php:3169
 msgid "Manage your social profiles and add new ones"
 msgstr "Manage your social profiles and add new ones"
 
-#: framework/redux-config.php:3163
+#: framework/redux-config.php:3206
 msgid "URL"
 msgstr "URL"
 
-#: framework/redux-config.php:3191
+#: framework/redux-config.php:3234
 msgid "Typography"
 msgstr "Typography"
 
-#: framework/redux-config.php:3192
+#: framework/redux-config.php:3235
 msgid "Manage the site's typography options and fonts."
 msgstr "Manage the site's typography options and fonts."
 
-#: framework/redux-config.php:3201
+#: framework/redux-config.php:3244
 msgid "Main Font"
 msgstr "Main Font"
 
-#: framework/redux-config.php:3202
+#: framework/redux-config.php:3245
 msgid "Select the font to use site-wide"
 msgstr "Select the font to use site-wide"
 
-#: framework/redux-config.php:3220
+#: framework/redux-config.php:3263
 msgid "Nav Menu Font"
 msgstr "Nav Menu Font"
 
-#: framework/redux-config.php:3221
+#: framework/redux-config.php:3264
 msgid "Select the font to use for the navigation menu"
 msgstr "Select the font to use for the navigation menu"
 
-#: framework/redux-config.php:3240
+#: framework/redux-config.php:3283
 msgid "Heading Font"
 msgstr "Heading Font"
 
-#: framework/redux-config.php:3241
+#: framework/redux-config.php:3284
 msgid "Select the font to use for headings"
 msgstr "Select the font to use for headings"
 
-#: framework/redux-config.php:3285
+#: framework/redux-config.php:3328
 msgid "Settings & Demos"
 msgstr "Settings & Demos"
 
-#: framework/redux-config.php:3286
+#: framework/redux-config.php:3329
 msgid "Manage your settings, and import demo content."
 msgstr "Manage your settings, and import demo content."
 
-#: framework/redux-config.php:3288
+#: framework/redux-config.php:3331
 msgid ""
 "Demos work best on clean, fresh sites. For complete content import, make "
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
@@ -3745,11 +3762,11 @@ msgstr ""
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
 "The page will reload after importing."
 
-#: framework/redux-config.php:3391
+#: framework/redux-config.php:3434
 msgid "Theme Options"
 msgstr "Theme Options"
 
-#: framework/redux-config.php:3392
+#: framework/redux-config.php:3435
 msgid "MIXT Options"
 msgstr "MIXT Options"
 
@@ -3777,21 +3794,25 @@ msgstr "Secondary Nav Right Side"
 msgid "404 Page Nav"
 msgstr "404 Page Nav"
 
-#: functions.php:146
+#: functions.php:148
 msgid "Footer Column 1"
 msgstr "Footer Column 1"
 
-#: functions.php:152
+#: functions.php:154
 msgid "Footer Column 2"
 msgstr "Footer Column 2"
 
-#: functions.php:158
+#: functions.php:160
 msgid "Footer Column 3"
 msgstr "Footer Column 3"
 
-#: functions.php:164
+#: functions.php:166
 msgid "Footer Column 4"
 msgstr "Footer Column 4"
+
+#: header.php:115
+msgid "Toggle navigation"
+msgstr ""
 
 #: modules/breadcrumbs.php:37 modules/breadcrumbs.php:173
 msgctxt "breadcrumb"
@@ -4141,8 +4162,8 @@ msgstr "Update Cart"
 
 #: woocommerce/cart/cross-sells.php:40
 #: woocommerce/single-product/up-sells.php:45
-msgid "You may also like"
-msgstr "You may also like"
+msgid "You may also like&hellip;"
+msgstr "You may also like&hellip;"
 
 #: woocommerce/cart/mini-cart.php:63
 msgid "No products in the cart."
@@ -4183,12 +4204,12 @@ msgid "Shop navigation"
 msgstr "Shop navigation"
 
 #: woocommerce/loop/pagination.php:31
-msgid "<i class=\"fa fa-chevron-left\"></i> Previous products"
-msgstr "<i class=\"fa fa-chevron-left\"></i> Previous products"
+msgid "Previous products"
+msgstr "Previous products"
 
 #: woocommerce/loop/pagination.php:35
-msgid "Next products <i class=\"fa fa-chevron-right\"></i>"
-msgstr "Next products <i class=\"fa fa-chevron-right\"></i>"
+msgid "Next products"
+msgstr "Next products"
 
 #: woocommerce/product-searchform.php:2
 msgctxt "placeholder"
@@ -4273,6 +4294,44 @@ msgstr ""
 #: woocommerce/single-product/product-image.php:43
 msgid "Placeholder"
 msgstr "Placeholder"
+
+#~ msgid "<i class=\"fa fa-chevron-left\"></i> Previous posts"
+#~ msgstr "<i class=\"fa fa-chevron-left\"></i> Previous posts"
+
+#~ msgid "Next posts <i class=\"fa fa-chevron-right\"></i>"
+#~ msgstr "Next posts <i class=\"fa fa-chevron-right\"></i>"
+
+#~ msgid "<i class=\"fa fa-chevron-left\"></i> Older comments"
+#~ msgstr "<i class=\"fa fa-chevron-left\"></i> Older comments"
+
+#~ msgid "Newer comments <i class=\"fa fa-chevron-right\"></i>"
+#~ msgstr "Newer comments <i class=\"fa fa-chevron-right\"></i>"
+
+#~ msgid "Image Color"
+#~ msgstr "Image Color"
+
+#~ msgid ""
+#~ "Allowed HTML tags and attributes: <a href=\"\" title=\"\">, <i>, <span>, "
+#~ "<strong>, <em>"
+#~ msgstr ""
+#~ "Allowed HTML tags and attributes: <a href=\"\" title=\"\">, <i>, <span>, "
+#~ "<strong>, <em>"
+
+#~ msgid ""
+#~ "Your user and API key. Get them <a href=\"https://bitly.com/a/settings/"
+#~ "advanced\">here</a>"
+#~ msgstr ""
+#~ "Your user and API key. Get them <a href=\"https://bitly.com/a/settings/"
+#~ "advanced\">here</a>"
+
+#~ msgid "You may also like"
+#~ msgstr "You may also like"
+
+#~ msgid "<i class=\"fa fa-chevron-left\"></i> Previous products"
+#~ msgstr "<i class=\"fa fa-chevron-left\"></i> Previous products"
+
+#~ msgid "Next products <i class=\"fa fa-chevron-right\"></i>"
+#~ msgstr "Next products <i class=\"fa fa-chevron-right\"></i>"
 
 #~ msgid "Demo Already Imported"
 #~ msgstr "Demo Already Imported"

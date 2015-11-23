@@ -1,7 +1,7 @@
 {
   "name": "MIXT",
   "version": "0.1.0",
-  "description": "MIXT - a beautiful, clean and responsive multipurpose theme for WordPress",
+  "description": "MIXT build system",
   "homepage": "http://mixt.novalx.com/",
   "private": true,
   "devDependencies": {
