@@ -15,11 +15,6 @@ function mixt_head_media() {
 			'return'  => 'value',
 			'default' => 'color',
 		),
-		'height' => array(
-			'type'   => 'str',
-			'key'    => 'head-height',
-			'return' => 'value',
-		),
 		// Header Colors
 		'bg' => array(
 			'key'     => 'head-bg-color',
@@ -97,6 +92,8 @@ function mixt_head_media() {
 			'return' => 'value',
 		),
 	) );
+
+	$height = Mixt_Options::get('header', 'height');
 
 	$wrap_classes = 'head-media';
 
@@ -272,9 +269,9 @@ function mixt_head_media() {
 
 // Output
 
-	echo "<header class='$wrap_classes'>";
-		echo $media_bg;
-		echo $slider;
+	$html = "<header class='$wrap_classes'>";
+		$html .= $media_bg;
+		$html .= $slider;
 
 		// Header Content (Custom Code, Post Info)
 
@@ -285,10 +282,12 @@ function mixt_head_media() {
 			else if ( $options['content-size'] == 'cover' ) $cont_classes .= ' fullwidth cover';
 			if ( $options['content-fade'] ) $cont_classes .= ' has-parallax';
 
-			echo "<div class='$cont_classes'";
-				if ( $options['height'] != '' && $options['height'] != 'none' ) echo " style='height: {$options['height']}px;'";
-				if ( $options['content-fade'] ) echo " data-top='opacity: 1; transform: translate3d(0, 0%, 0);' data--200-top-bottom='opacity: 0; transform: translate3d(0, 80%, 0);'";
-			echo '>';
+			$cont_atts = '';
+			if ( $options['content-fade'] ) $cont_atts .= ' data-top="opacity: 1; transform: translate3d(0, 0%, 0);" data--200-top-bottom="opacity: 0; transform: translate3d(0, 80%, 0);"';
+
+			ob_start();
+
+			echo "<div class='$cont_classes'$cont_atts>";
 
 				$inner_classes = 'media-inner';
 				if ( $options['align'] != 'left' ) { $inner_classes .= ' align-' . $options['align']; }
@@ -313,16 +312,18 @@ function mixt_head_media() {
 						}
 					}
 			echo '</div></div>';
-		} else if ( $options['height'] != '' && $options['height'] != 'none' ) {
-			echo "<div class='container' style='height: {$options['height']}px;'></div>";
+
+			$html .= ob_get_clean();
 		}
 
 		// Scroll To Content Icon
 		if ( Mixt_Options::get('header', 'scroll') ) {
-			echo "<span class='header-scroll icon {$options['scroll-icon']}'></span>";
+			$html .= "<span class='header-scroll icon {$options['scroll-icon']}'></span>";
 		}
 
-	echo '</header>';
+	$html .= '</header>';
+
+	echo $html;
 }
 
 /**
@@ -331,16 +332,20 @@ function mixt_head_media() {
 function mixt_head_media_css() {
 	if ( Mixt_Options::get('header', 'enabled') ) {
 		$options = mixt_get_options( array(
-			'bg' => array( 'return' => 'value', 'key' => 'head-bg-color' ),
-			'text' => array( 'return' => 'value', 'key' => 'head-text-color' ),
-			'inv-text' => array( 'return' => 'value', 'key' => 'head-inv-text-color' ),
+			'bg' => array( 'key' => 'head-bg-color', 'return' => 'value' ),
+			'text' => array( 'key' => 'head-text-color', 'return' => 'value' ),
+			'inv-text' => array( 'key' => 'head-inv-text-color', 'return' => 'value' ),
+			'min-height' => array( 'key' => 'head-min-height', 'return' => 'value' ),
 		) );
+
+		$height = Mixt_Options::get('header', 'height');
 
 		$hm = '.head-media';
 		$css = '';
+		$hm_styles = '';
 
 		if ( ! empty($options['bg']) ) {
-			$css .= "$hm { background-color: {$options['bg']}; }\n";
+			$hm_styles .= " background-color: {$options['bg']};";
 		}
 		if ( ! empty($options['text']) ) {
 			$hm_light = $hm.'.bg-light';
@@ -349,6 +354,15 @@ function mixt_head_media_css() {
 		if ( ! empty($options['inv-text']) ) {
 			$hm_dark = $hm.'.bg-dark';
 			$css .= "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$options['inv-text']} !important; }\n";
+		}
+		if ( is_array($height) && ! empty($height['height']) && $height['units'] == 'px' ) {
+			$hm_styles .= " height: {$height['height']}px;";
+		}
+		if ( is_array($options['min-height']) && ! empty($options['min-height']['height']) && $options['min-height']['units'] == 'px' ) {
+			$hm_styles .= " min-height: {$options['min-height']['height']}px;";
+		}
+		if ( $hm_styles != '' ) {
+			$css .= "$hm { $hm_styles }\n";
 		}
 
 		if ( $css != '' ) Mixt_DCSS::$head_css .= $css;

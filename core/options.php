@@ -121,7 +121,7 @@ class Mixt_Options {
 			),
 			'header' => array(
 				'enabled'      => array( 'key' => 'head-media' ),
-				'fullscreen'   => array( 'key' => 'head-fullscreen' ),
+				'height'       => array( 'key' => 'head-height', 'return' => 'value' ),
 				'content-info' => array( 'key' => 'head-content-info' ),
 				'content-fade' => array( 'key' => 'head-content-fade' ),
 				'scroll'       => array( 'key' => 'head-content-scroll' ),
@@ -181,6 +181,7 @@ class Mixt_Options {
 	 * Post-initialization functions
 	 */
 	protected function after_init() {
+		// Assign the sidebar ID
 		if ( in_array(self::get('sidebar', 'id'), array('none', 'auto')) ) {
 			if ( self::is_shop() ) {
 				// Set sidebar for shop pages
@@ -197,6 +198,14 @@ class Mixt_Options {
 			self::set('nav', 'mode', 'static');
 			self::set('nav', 'position', 'above');
 			self::set('nav', 'transparent', false);
+		}
+
+		// Add header fullscreen flag
+		$header_height = self::get('header', 'height');
+		if ( is_array($header_height) && $header_height['height'] == '100' && $header_height['units'] == '%' ) {
+			self::set('header', 'fullscreen', true);
+		} else {
+			self::set('header', 'fullscreen', false);
 		}
 
 		// Set the theme for elements when they are set to auto
@@ -376,6 +385,9 @@ class Mixt_Options {
 new Mixt_Options;
 
 // Wrapper functions
+if ( ! function_exists('mixt_get_option') ) {
+	function mixt_get_option($option) { return array_values( (array) Mixt_Options::get_options( array($option) ) )[0]; }
+}
 if ( ! function_exists('mixt_get_options') ) {
 	function mixt_get_options($option_arr) { return Mixt_Options::get_options($option_arr); }
 }

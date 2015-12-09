@@ -52,14 +52,14 @@ class Mixt_Plugins {
 			$this->plugins[] = array(
 				'name'     => 'MIXT Portfolio',
 				'slug'     => 'mixt-portfolio',
-				'source'   => 'portfolio.zip',
+				'source'   => 'mixt-portfolio.zip',
 			);
 
 		// MIXT Elements
 			$this->plugins[] = array(
 				'name'     => 'MIXT Elements',
 				'slug'     => 'mixt-elements',
-				'source'   => 'elements.zip',
+				'source'   => 'mixt-elements.zip',
 			);
 
 		// MIXT CodeBuilder
@@ -98,6 +98,9 @@ class Mixt_Plugins {
 					);
 				}
 				// CMB2 Extensions
+				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
+				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/slider-field.php' );
+				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/dimensions-field.php' );
 				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/post-search-field.php' );
 			}
 

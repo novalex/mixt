@@ -15,8 +15,7 @@ HEADER FUNCTIONS
 
 	// Head Media Functions
 	function headerFn() {
-		var container    = mediaWrap.children('.container'),
-			mediaCont    = mediaWrap.children('.media-container'),
+		var mediaCont    = mediaWrap.children('.media-container'),
 			topNavHeight = mainNav.outerHeight(),
 			wrapHeight   = mediaWrap.height(),
 			viewHeight   = viewport.height() - mediaWrap.offset().top;
@@ -25,14 +24,17 @@ HEADER FUNCTIONS
 		if ( mixt_opt.header.fullscreen ) {
 			var fullHeight = viewHeight;
 
-			mediaWrap.css('height', wrapHeight);
-
-			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) {
-				fullHeight -= topNavHeight;
-			}
+			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) fullHeight -= topNavHeight;
 
 			mediaWrap.css('height', fullHeight);
 			mediaCont.css('height', fullHeight);
+		} else if ( mixt_opt.header.height.height != '' && mixt_opt.header.height.units == '%' ) {
+			var height = mixt_opt.header.height.height / 100 * viewHeight;
+
+			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) height -= topNavHeight;
+
+			mediaWrap.css('height', height);
+			mediaCont.css('height', height);
 		}
 
 		// Prevent content fade if header is taller than viewport

@@ -49,6 +49,15 @@ add_action('admin_init', 'mixt_activation_redirect');
 
 
 /**
+ * Add mixt classes to admin body
+ */
+function mixt_admin_body_class( $classes ) {
+	return $classes . ' mixt';
+}
+add_filter('admin_body_class', 'mixt_admin_body_class');
+
+
+/**
  * Disable Redux Welcome page
  */
 function mixt_disable_redux_welcome() {
@@ -86,7 +95,7 @@ add_action('add_attachment', 'mixt_media_upload');
 function mixt_editor_styles() {
 	global $mixt_opt;
 	// Icon Fonts
-	$icon_fonts = $mixt_opt['icon-fonts'];
+	$icon_fonts = ( empty($mixt_opt['icon-fonts']) ) ? array() : $mixt_opt['icon-fonts'];
 	foreach ( $icon_fonts as $font => $val ) {
 		if ( $val ) add_editor_style(MIXT_URI . "/assets/fonts/$font/$font.css");
 	}

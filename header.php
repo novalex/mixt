@@ -57,7 +57,6 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 	if ( $nav_options['layout'] == 'vertical' ) $wrap_classes .= ( $nav_options['vertical-pos'] == 'left' ) ? ' nav-vertical nav-left' : ' nav-vertical nav-right';
 	if ( $header_options['enabled'] ) {
 		$wrap_classes .= ' has-head-media';
-		if ( $header_options['fullscreen'] ) $wrap_classes .= ' fullscreen';
 		if ( $nav_options['transparent'] ) $wrap_classes .= ' nav-transparent';
 		if ( $nav_options['position'] == 'below' ) $wrap_classes .= ' nav-below';
 	}
@@ -183,7 +182,7 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 				$content_wrap_classes .= ' has-sidebar';
 				if ( Mixt_Options::get('sidebar', 'position') == 'left' ) { $content_wrap_classes .= ' sidebar-left'; }
 			}
-			$content_wrap_classes = apply_filters('mixt_content_class', $content_wrap_classes);
+			$content_wrap_classes = apply_filters('mixt_content_wrap_class', $content_wrap_classes);
 
 			?>
 

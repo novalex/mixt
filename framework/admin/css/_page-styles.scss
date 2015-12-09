@@ -84,32 +84,139 @@
 
 // Page Metaboxes
 
-.postbox-container .cmb2-metabox {
-	.cmb-row.nest-parent {
-		padding-bottom: 0 !important;
+#poststuff #mixt_page_options {
+	.inside,
+	.mixt-tab-handles,
+	.mixt-tab-handles li {
+		margin: 0;
+		padding: 0;
+	}
 
-		> .cmb-th,
-		> .cmb-td {
-			margin-bottom: 10px;
+	.inside {
+		overflow: hidden;
+
+		&:before,
+		&:after {
+			content: " ";
+			display: table;
+		}
+		&:after { clear: both; }
+	}
+
+	$tab-width: 160px;
+
+	.mixt-tab-handles {
+		float: left;
+		width: $tab-width;
+
+		&:before {
+			content: ' ';
+			position: absolute;
+			top: 0; left: 0; bottom: 0;
+			width: $tab-width;
+			border-width: 0 1px 0 0;
+			border-style: solid;
+			border-color: inherit;
+			background-color: darken(#fff, 3);
+			z-index: 1;
+		}
+
+		li {
+			width: 100%;
+			border-radius: 0;
+			border-width: 0 0 1px 0;
+			border-style: solid;
+			border-color: inherit;
+			position: relative;
+			z-index: 2;
+
+			> a {
+				display: block;
+				padding: 12px 14px;
+				color: $text-fade;
+				font-weight: 600;
+				box-shadow: none;
+				text-decoration: none;
+				text-shadow: 0 1px 0 #fff;
+
+				span {
+					width: 16px;
+					height: 16px;
+					font-size: 16px;
+					margin: 2px 4px 0 0;
+				}
+			}
+
+			&.active {
+				width: $tab-width + 1px;
+				background-color: #fff;
+				box-shadow: -3px 1px 1px darken(#fff, 5);
+
+				> a { color: $black; }
+			}
 		}
 	}
 
-	.cmb-th + .cmb-td {
-		width: 78% !important;
-		padding-right: 2%;
+	.hndle,
+	.mixt-tab-handles,
+	.cmb2-wrap { border-color: darken(#fff, 14); }
+
+	.cmb2-wrap {
+		width: auto;
+		clear: none;
+		overflow: hidden;
+		padding: 0 20px;
+		border-width: 0 0 0 1px;
+		border-style: solid;
+	}
+
+	.cmb-row {
+		padding: 15px 0 !important;
+		margin-bottom: 0 !important;
+
+		&.nest-parent {
+			padding-bottom: 0 !important;
+
+			> .cmb-th,
+			> .cmb-td {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	.cmb-th {
+		label {
+			font-size: 12px;
+			color: #555;
+		}
+
+		+ .cmb-td {
+			width: 78% !important;
+			padding-right: 2%;
+		}
+	}
+
+	.cmb-td {
+		select {
+			padding: 4px;
+			height: 32px;
+		}
 	}
 
 	.cmb-row .cmb-row {
 		float: left;
 		width: 100%;
-		padding: 10px 0;
-		border-width: 0;
 		border-style: solid;
-		border-color: #e8e8e8;
-		border-top-width: 1px;
-		background-color: #f8f8f8;
+		border-color: darken(#fff, 10);
+		border-width: 1px 1px 0 1px;
+		background-color: darken(#fff, 1);
 
-		.cmb-th > label { padding-left: 10px; }
+		.cmb-th {
+			> label,
+			.mixt-field-auto { padding-left: 15px; }
+		}
+
+		.cmb-row { border-left-width: 0; }
 	}
 
 	> .cmb-row > .cmb-row {
@@ -117,9 +224,94 @@
 		border-left-width: 1px;
 		border-right-width: 1px;
 
-		&:last-child { border-bottom: 1px solid #e8e8e8; }
+		&:last-child { border-bottom: 1px solid $grey; }
+	}
+
+	.cmb2-metabox-description {
+		font-size: 11px;
+		font-style: normal;
+	}
+
+	// Radio Inline Buttons
+	.cmb-type-radio-inline {
+		.cmb2-list {
+			&:before,
+			&:after {
+				content: " ";
+				display: table;
+			}
+			&:after { clear: both; }
+
+			li {
+				float: left;
+				min-width: 60px;
+				padding: 0;
+				margin-left: -1px;
+				border: 1px solid darken(#fff, 14);
+				background-color: #fff;
+				box-shadow: 0 1px 1px darken(#fff, 3);
+
+				&:first-child {
+					margin-left: 0;
+					border-radius: $bd-radius 0 0 $bd-radius;
+				}
+				&:last-child { border-radius: 0 $bd-radius $bd-radius 0; }
+
+				&.active {
+					background-color: darken(#fff, 5);
+					box-shadow: none;
+
+					label { color: #555; }
+				}
+
+				input.cmb2-option { display: none; }
+
+				label {
+					display: block;
+					color: $text-fade;
+					font-size: 12px;
+					font-weight: 600;
+					text-align: center;
+					padding: 7px 10px !important;
+					margin: 0 !important;
+				}
+			}
+		}
+	}
+
+	// Dimensions Field
+	.cmb-type-dimensions {
+		input {
+			width: 100px;
+			line-height: 20px;
+		}
+		select {
+			margin: 1px !important;
+			vertical-align: top;
+		}
+	}
+
+	// Auto Field
+	.mixt-field-auto {
+		display: block;
+		margin-top: 5px;
+
+		label {
+			padding: 0 0 0 10px;
+			display: inline-block;
+		}
 	}
 }
 
 .cmb2-wrap input[type=checkbox], .cmb2-wrap input[type=radio] { margin-right: 0 !important; }
 .cmb2-wrap input[type=checkbox] + label, .cmb2-wrap input[type=radio] + label { padding-left: 10px; margin-left: -5px; }
+
+// Slider
+
+.cmb-type-slider {
+	.mixt-slider {
+		margin: 15px 0 0;
+		max-width: 300px;
+	}
+	.mixt-slider-value { display: none; }
+}

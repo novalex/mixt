@@ -1,7 +1,9 @@
 
-// MIXT Menu Handling Scripts
+/* ------------------------------------------------ /
+MENU HANDLING SCRIPTS
+/ ------------------------------------------------ */
 
-jQuery(document).ready( function($) {
+( function($) {
 
 	'use strict';
 
@@ -139,7 +141,7 @@ jQuery(document).ready( function($) {
 
 		mixtNewItem: function() {
 			var lastItem   = this,
-				itemChecks = mixtElems.find('.menu-item-checkbox.last'),
+				itemChecks = $('#posttype-mixt-elem').find('.menu-item-checkbox.last'),
 				itemMeta   = itemChecks.last().parents('li');
 
 			if ( lastItem.length == 1 ) {
@@ -158,18 +160,6 @@ jQuery(document).ready( function($) {
 		}
 	});
 
-	// Check for new items
-	// Fill out custom data like menu icon
-	var mixtElems = $('#posttype-mixt-elem'),
-		menuItems = $('#menu-to-edit');
-
-	mixtElems.find('input.menu-item-checkbox').on('change', function() {
-		var check = $(this),
-			cont  = check.parents('li');
-		cont.siblings('li').find('.menu-item-checkbox.last').prop('checked', false).removeClass('last');
-		check.addClass('last');
-	});
-
 	// Run Custom Menu Item Function
 	function runChecks() {
 		checkMegaMenu();
@@ -178,11 +168,29 @@ jQuery(document).ready( function($) {
 			$(this).mixtMenuItems();
 		});
 	}
-	runChecks();
+
+
+
+	$(document).ready( function() {
+		// Check for new items
+		// Fill out custom data like menu icon
+		var mixtElems = $('#posttype-mixt-elem');
+
+		mixtElems.find('input.menu-item-checkbox').on('change', function() {
+			var check = $(this),
+				cont  = check.parents('li');
+			cont.siblings('li').find('.menu-item-checkbox.last').prop('checked', false).removeClass('last');
+			check.addClass('last');
+		});
+
+		runChecks();
+	});
 
 	$(document).ajaxComplete(function() {
 		runChecks();
+		
+		var menuItems = $('#menu-to-edit');
 		menuItems.children('li.pending').last().mixtNewItem();
 	});
 
-});
+})(jQuery);

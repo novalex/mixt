@@ -247,7 +247,7 @@
 
 	.navbar-mixt {
 
-		.nav > li > a .drop-arrow { margin-top: -3px; } // Tweak drop arrow vertical alignment
+		&.horizontal .nav > li > a .drop-arrow { margin-top: -3px; } // Tweak drop arrow vertical alignment
 
 		.sub-menu a { max-width: 300px; }
 

@@ -5,7 +5,7 @@ $bd-radius: 3px;
 
 $item-bd-color: #eee;
 
-.vc_add-element-container .wpb-content-layouts li {
+.vc_ui-panel .vc_add-element-container .wpb-content-layouts li {
 	width: 14.28%;
 	height: 120px;
 	margin: -1px 0 0 -1px;
@@ -19,7 +19,7 @@ $item-bd-color: #eee;
 	}
 
 	a {
-	    padding: 5px;
+		padding: 5px;
 		text-align: center;
 	}
 
@@ -27,7 +27,7 @@ $item-bd-color: #eee;
 
 	.vc_element-icon {
 		position: static;
-	    margin: 0 auto 10px auto;
+		margin: 0 auto 10px auto;
 	}
 
 	@media (max-width: 1156px) {

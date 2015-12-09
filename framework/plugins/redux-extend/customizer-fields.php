@@ -144,14 +144,24 @@ $this->sections[] = array(
 			'off'      => __( 'No', 'mixt' ),
 		),
 
-		// Fullscreen
+		// Height
 		array(
-			'id'       => 'head-fullscreen',
-			'type'     => 'switch',
-			'title'    => __( 'Fullscreen', 'mixt' ),
-			'subtitle' => __( 'Header fills entire screen size', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'id'       => 'head-height',
+			'type'     => 'dimensions',
+			'title'    => __( 'Height', 'mixt' ),
+			'subtitle' => __( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
+			'units'    => array( 'px', '%' ),
+			'width'    => false,
+		),
+
+		// Min Height
+		array(
+			'id'       => 'head-min-height',
+			'type'     => 'dimensions',
+			'title'    => __( 'Minimum Height', 'mixt' ),
+			'subtitle' => __( 'Set a minimum height for the header', 'mixt' ),
+			'units'    => array( 'px' ),
+			'width'    => false,
 		),
 
 		// Height

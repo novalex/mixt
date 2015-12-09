@@ -414,7 +414,11 @@
 
 	// Select 2
 
-	.select2-container { min-width: 170px; }
+	.select2-container {
+		min-width: 170px;
+
+		&.redux-dimensions { min-width: 40px; }
+	}
 
 	.select2-container,
 	.select2-dropdown-open.select2-drop-above {

@@ -591,23 +591,24 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => false,
 						),
 
-						// Fullscreen
-						array(
-							'id'       => 'head-fullscreen',
-							'type'     => 'switch',
-							'title'    => __( 'Fullscreen', 'mixt' ),
-							'subtitle' => __( 'Header fills entire screen size', 'mixt' ),
-							'on'       => __( 'Yes', 'mixt' ),
-							'off'      => __( 'No', 'mixt' ),
-							'default'  => false,
-						),
-
 						// Height
 						array(
 							'id'       => 'head-height',
-							'type'     => 'text',
-							'title'    => __( 'Custom Height', 'mixt' ),
-							'subtitle' => __( 'Set a custom height (in px) for the header', 'mixt' ),
+							'type'     => 'dimensions',
+							'title'    => __( 'Height', 'mixt' ),
+							'subtitle' => __( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
+							'units'    => array( 'px', '%' ),
+							'width'    => false,
+						),
+
+						// Min Height
+						array(
+							'id'       => 'head-min-height',
+							'type'     => 'dimensions',
+							'title'    => __( 'Minimum Height', 'mixt' ),
+							'subtitle' => __( 'Set a minimum height for the header', 'mixt' ),
+							'units'    => array( 'px' ),
+							'width'    => false,
 						),
 
 						// Background Color

@@ -1,7 +1,9 @@
 
-// MIXT Redux Functions
+/* ------------------------------------------------ /
+REDUX OPTION PANEL SCRIPTS
+/ ------------------------------------------------ */
 
-jQuery(document).ready( function($) {
+( function($) {
 
 	'use strict';
 
@@ -19,12 +21,9 @@ jQuery(document).ready( function($) {
 
 	// Page Loader Function
 
-	var pageLoadImgSelect = $('#mixt_opt-page-loader-img'),
-		pageLoadColor = $('#page-loader-bg-color');
-
 	function pageLoadPreview() {
-		var pageLoadImage = pageLoadImgSelect.find('.redux-option-image'),
-			pageLoadColorVal = pageLoadColor.val();
+		var pageLoadImage = $('#mixt_opt-page-loader-img').find('.redux-option-image'),
+			pageLoadColorVal = $('#page-loader-bg-color').val();
 
 		pageLoadImage.css({
 			backgroundColor: pageLoadColorVal,
@@ -32,45 +31,47 @@ jQuery(document).ready( function($) {
 		});
 	}
 
-	pageLoadPreview();
+	$(document).ready( function() {
+		pageLoadPreview();
 
-	$('#mixt_opt-page-loader-bg').on('mouseup', function() { setTimeout(pageLoadPreview, 100); });
+		$('#mixt_opt-page-loader-bg').on('mouseup', function() { setTimeout(pageLoadPreview, 100); });
 
-	// Multi Input Fields
+		// Multi Input Fields
 
-	$('.mixt-multi-input').each( function() {
-		var cont = $(this),
-			parent = cont.parents('tr'),
-			parClass = 'multi-input-cont';
+		$('.mixt-multi-input').each( function() {
+			var cont = $(this),
+				parent = cont.parents('tr'),
+				parClass = 'multi-input-cont';
 
-		if ( cont.hasClass('no-title') ) {
-			parent.children('th').hide().siblings('td').attr('colspan', 2);
-		}
+			if ( cont.hasClass('no-title') ) {
+				parent.children('th').hide().siblings('td').attr('colspan', 2);
+			}
 
-		if ( cont.hasClass('sortable') ) {
-			cont.sortable({
-				opacity: 0.8,
-				revert: 200,
-				items: '> li:not(.multi-input-model)',
-				handle: '.sort-handle',
-				placeholder: 'sort-placeholder',
-				containment: cont,
-				tolerance: 'pointer',
-				forcePlaceholderSize: true
-			});
-		}
+			if ( cont.hasClass('sortable') ) {
+				cont.sortable({
+					opacity: 0.8,
+					revert: 200,
+					items: '> li:not(.multi-input-model)',
+					handle: '.sort-handle',
+					placeholder: 'sort-placeholder',
+					containment: cont,
+					tolerance: 'pointer',
+					forcePlaceholderSize: true
+				});
+			}
 
-		parent.addClass(parClass);
+			parent.addClass(parClass);
+		});
+
+		// Remove Unnecessary Borders
+
+		$('.form-table tr:last-child').each( function() {
+			var row = $(this);
+
+			if ( row.css('display') == 'none' ) {
+				row.prev('tr').css('border-bottom', '0');
+			}
+		});
 	});
 
-	// Remove Unnecessary Borders
-
-	$('.form-table tr:last-child').each( function() {
-		var row = $(this);
-
-		if ( row.css('display') == 'none' ) {
-			row.prev('tr').css('border-bottom', '0');
-		}
-	});
-
-});
+})(jQuery);

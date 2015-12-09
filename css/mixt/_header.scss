@@ -221,12 +221,7 @@ body.loading {
 		@extend %anim-goDown;
 	}
 
-	&.fullscreen {
-		height: 100vh;
-
-		&,
-		.media-container { min-height: 320px; }
-	}
+	&.fullscreen { height: 100vh; }
 
 	&.bg-dark:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
 
