@@ -71,13 +71,14 @@
 		.related-content {
 			margin: 0;
 			border-radius: 0 0 $bd-radius $bd-radius;
-			background-color: rgba(0,0,0,0.3);
+			background: rgba(0,0,0,0.4);
+			background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.3));
 			vertical-align: middle;
-			text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 			z-index: 1;
 		}
 
-		.related-title { padding: 6px 10px; }
+		.related-title { padding: $padding-m $padding-s 8px; }
 
 		.related-title-tip {
 			top: 0;

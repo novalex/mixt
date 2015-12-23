@@ -61,6 +61,9 @@ UI FUNCTIONS
 
 		elem.parent().addClass('active').siblings().removeClass('active');
 
+		// Remove animated class to prevent transition glitches
+		targetContainer.find('.article.animated').removeClass('animated');
+
 		if ( mixt_opt.layout.type == 'masonry' && typeof $.fn.isotope === 'function' ) {
 			if (targetTag == 'all') {
 				targetContainer.isotope({ filter: '*' });
@@ -113,8 +116,8 @@ UI FUNCTIONS
 
 			if ( cont.hasClass('hover-bg') || cont.parents('.no-hover-bg').length ) {
 				link.hover( function() {
-					link.css({ backgroundColor: dataColor, borderColor: dataColor, zIndex: 1 });
-				}, function() { link.css({ backgroundColor: '', borderColor: '', zIndex: '' }); });
+					link.css({ backgroundColor: dataColor, zIndex: 1 });
+				}, function() { link.css({ backgroundColor: '', zIndex: '' }); });
 			} else {
 				link.hover( function() {
 					link.css({ color: dataColor, zIndex: 1 });
@@ -122,6 +125,39 @@ UI FUNCTIONS
 			}
 		});
 	});
+
+
+	// On Hover Animations
+	function animateHoverIn(elem) {
+		elem.addClass('hovered');
+		var inner   = elem.children('.on-hover'),
+			animIn  = inner.data('anim-in') || 'fadeIn',
+			animOut = inner.data('anim-out') || 'fadeOut';
+		inner.removeClass(animOut).addClass('animated ' + animIn);
+	}
+
+	function animateHoverOut(elem) {
+		elem.removeClass('hovered');
+		var inner   = elem.children('.on-hover'),
+			animIn  = inner.data('anim-in') || 'fadeIn',
+			animOut = inner.data('anim-out') || 'fadeOut';
+		inner.removeClass(animIn).addClass(animOut);
+	}
+
+
+	// Post Grid Responsive Columns
+	function postGridColumns() {
+		$('.vc_grid-container.responsive-cols').each( function() {
+			var elem = $(this),
+				classes = elem[0].className.match(/resp-(\w{2}-\d{1,2})/g);
+			if ( classes !== null ) {
+				var children = elem.find('.vc_grid-item');
+				$(classes).each( function(index, val) {
+					children.addClass(val.replace('resp-', 'col-'));
+				});
+			}
+		});
+	}
 
 
 	// Functions run on page load and "refresh" event
@@ -132,25 +168,32 @@ UI FUNCTIONS
 			container: 'body'
 		});
 
-
 		// On Hover Animations Init
 		var animHoverEl = $('.anim-on-hover');
+		// On hoverIntent
 		animHoverEl.hoverIntent( function() {
-			$(this).addClass('hovered');
-			var inner   = $(this).children('.on-hover'),
-				animIn  = inner.data('anim-in') || 'fadeIn',
-				animOut = inner.data('anim-out') || 'fadeOut';
-			inner.removeClass(animOut).addClass('animated ' + animIn);
+			animateHoverIn($(this));
 		}, function() {
-			$(this).removeClass('hovered');
-			var inner   = $(this).children('.on-hover'),
-				animIn  = inner.data('anim-in') || 'fadeIn',
-				animOut = inner.data('anim-out') || 'fadeOut';
-			inner.removeClass(animIn).addClass(animOut);
-		}, 300);
+			animateHoverOut($(this));
+		}, 50);
+		// Handle Mobile Tap
+		animHoverEl.on('touchend', function(e) {
+			var $this = $(this);
+			if ( ! $this.hasClass('hovered') ) {
+				e.preventDefault();
+				e.stopPropagation();
+				animateHoverIn($this);
+				animHoverEl.not($this).each( function() {
+					animateHoverOut($(this));
+				});
+				return false;
+			}
+		});
+		// Clear animation
 		animHoverEl.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function() {
-			if ( ! $(this).hasClass('hovered') ) {
-				$(this).children('.on-hover').removeClass('animated');
+			var elem = $(this);
+			if ( ! elem.hasClass('hovered') ) {
+				elem.children('.on-hover').removeClass('animated');
 			}
 		});
 	}
@@ -158,13 +201,19 @@ UI FUNCTIONS
 		runOnRefresh();
 	}).trigger('refresh');
 
+	$(document).ajaxComplete( function() {
+		runOnRefresh();
+
+		postGridColumns();
+	});
+
 
 	// Back To Top Button
 	var backToTop = $('#back-to-top');
 
 	function backToTopDisplay() {
 		var scrollTop = viewport.scrollTop();
-		if ( scrollTop > 200 ) {
+		if ( scrollTop > 600 ) {
 			backToTop.fadeIn(300);
 		} else {
 			backToTop.fadeOut(300);

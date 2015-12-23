@@ -229,9 +229,9 @@ $this->sections[] = array(
 					'full'    => __( 'Full Image Button', 'mixt' ),
 				),
 				'default' => array(
-					'title'   => '0',
-					'excerpt' => '1',
-					'view'    => '1',
+					'title'   => '1',
+					'excerpt' => '0',
+					'view'    => '0',
 					'full'    => '0',
 				),
 				'required' => array('portfolio-rollover', '=', true),
@@ -253,7 +253,7 @@ $this->sections[] = array(
 				'type'     => 'select',
 				'title'    => __( 'Animation - In', 'mixt' ),
 				'options'  => mixt_css_anims('trans-in'),
-				'default'  => 'fadeInLeft',
+				'default'  => 'fadeIn',
 				'required' => array('portfolio-rollover', '=', true),
 			),
 
@@ -263,25 +263,7 @@ $this->sections[] = array(
 				'type'     => 'select',
 				'title'    => __( 'Animation - Out', 'mixt' ),
 				'options'  => mixt_css_anims('trans-out'),
-				'default'  => 'fadeOutRight',
-				'required' => array('portfolio-rollover', '=', true),
-			),
-
-			// View Post Icon
-			array(
-				'id'       => 'portfolio-rollover-view-icon',
-				'type'     => 'text',
-				'title'    => __( 'View Post Icon', 'mixt' ),
-				'default'  => 'fa fa-share',
-				'required' => array('portfolio-rollover', '=', true),
-			),
-
-			// Full Image Icon
-			array(
-				'id'       => 'portfolio-rollover-full-icon',
-				'type'     => 'text',
-				'title'    => __( 'Full Image Icon', 'mixt' ),
-				'default'  => 'fa fa-search',
+				'default'  => 'fadeOut',
 				'required' => array('portfolio-rollover', '=', true),
 			),
 
@@ -307,6 +289,20 @@ $this->sections[] = array(
 	'customizer' => false,
 	'subsection' => true,
 	'fields'     => array(
+
+		// Sidebar
+		array(
+			'id'       => 'project-sidebar',
+			'type'     => 'button_set',
+			'title'    => __( 'Show Sidebar', 'mixt' ),
+			'subtitle' => __( 'Display the sidebar on prohect pages', 'mixt' ),
+			'options'  => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default'  => 'auto',
+		),
 
 		// Layout
 		array(

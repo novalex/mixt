@@ -20,21 +20,19 @@
 
 		> a,
 		> span {
-			height: 34px;
+			height: 38px;
+			padding: 7px 16px;
 			font-size: $font-size;
 			border-radius: $bd-radius;
-			background-color: transparent;
+			background-color: rgba(0,0,0,0.03);
 		}
 
-		> a {
-			transition: color 0.2s, background 0.2s;
+		> a { transition: color 0.2s, background 0.2s; }
 
-			&:hover { background-color: rgba(0,0,0,0.03); }
-		}
+		> span { cursor: default; }
 
-		> span {
-			cursor: default;
-		}
+		> a:hover,
+		> span { background-color: transparent; }
 	}
 
 	a:not(:hover) { color: inherit !important; }

@@ -125,8 +125,7 @@
 
 .pricing-row {
 	&,
-	> .wpb_wrapper,
-	> .wpb_column > .wpb_wrapper {
+	.wpb_wrapper {
 		width: 100%;
 		clear: both;
 		display: table;
@@ -142,7 +141,7 @@
 @include media('screen', '<mars') {
 	.pricing-row {
 		&,
-		> .wpb_wrapper,
+		.wpb_wrapper,
 		.mixt-pricing { display: block !important; }
 
 		.mixt-pricing.highlight { padding: 5px 0; }

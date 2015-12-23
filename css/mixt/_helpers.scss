@@ -24,11 +24,21 @@
 }
 
 
+// TYPOGRAPHY
+
+.text-size-xs { font-size: $font-size-xs; }
+.text-size-s { font-size: $font-size-s; }
+.text-size-m { font-size: $font-size-m; }
+.text-size-l { font-size: $font-size-l; }
+.text-size-xl { font-size: $font-size-xl; }
+.text-size-xxl { font-size: $font-size-xxl; }
+
+
 // COLORS
 
 @each $name, $color in $basic-colors {
-	.text-color-#{$name} { color: $color; }
-	.border-color-#{$name} { border-color: $color; }
+	.text-color-#{$name} { color: $color !important; }
+	.border-color-#{$name} { border-color: $color !important; }
 }
 
 

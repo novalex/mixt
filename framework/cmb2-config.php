@@ -30,6 +30,8 @@ function mixt_cmb_show_tab($tab) {
 
 	$page_template = get_page_template_slug($post_id);
 
+	global $get_post_type;
+
 	switch ( $tab ) {
 		case 'blog':
 			$posts_page = get_option('page_for_posts');
@@ -95,6 +97,15 @@ function mixt_cmb_auto_label_cb($args, $field) {
 
 
 /**
+ * Sanitize WYSIWYG editor
+ */
+function mixt_cmb_sanitize_editor($override, $value, $object_id) {
+	return htmlspecialchars_decode( stripslashes( $value ) );
+}
+add_filter('cmb2_sanitize_wysiwyg', 'mixt_cmb_sanitize_editor', 10, 3);
+
+
+/**
  * Define the metabox and field configurations.
  *
  * @param  array $meta_boxes
@@ -109,19 +120,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 	$nav_themes = ( (bool) get_option('mixt-themes-enabled') ) ? mixt_get_themes('nav', 'all') : mixt_get_themes('nav', 'default');
 	$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
 
-	// PAGE OPTIONS
-
-	$meta_boxes['mixt_page_meta'] = array(
-		'id'           => 'mixt_page_options',
-		'title'        => __( 'Page Options', 'mixt' ),
-		'object_types' => array( 'page', 'post', 'portfolio', 'product' ),
-		'context'      => 'normal',
-		'priority'     => 'high',
-		'show_names'   => true,
-		'fields'       => array(),
-	);
-
-	$fields = &$meta_boxes['mixt_page_meta']['fields'];
+	$fields = array();
 
 
 	// GENERAl TAB
@@ -343,6 +342,30 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 			'default' => 'auto',
 		);
 	}
+
+	// Secondary Nav Switch
+	$navigation_fields[] = array(
+		'id'      => $prefix . 'second-nav',
+		'name'    => __( 'Secondary Navbar', 'mixt' ),
+		'desc'    => __( 'Show the secondary navbar', 'mixt' ),
+		'type'    => 'radio_inline',
+		'options' => array(
+			'auto'  => __( 'Auto', 'mixt' ),
+			'true'  => __( 'Yes', 'mixt' ),
+			'false' => __( 'No', 'mixt' ),
+		),
+		'default' => 'auto',
+	);
+
+	// Secondary Nav Theme
+	$navigation_fields[] = array(
+		'id'      => $prefix . 'sec-nav-theme',
+		'name'    => __( 'Secondary Nav Theme', 'mixt' ),
+		'desc'    => __( 'Select the theme for the secondary navbar', 'mixt' ),
+		'type'    => 'select',
+		'options' => $nav_themes,
+		'default' => 'auto',
+	);
 
 	mixt_cmb_make_tab( $fields, __( 'Navigation', 'mixt' ), 'dashicons dashicons-menu', $navigation_fields );
 
@@ -777,10 +800,6 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 				'textarea_name' => 'mixt-header-code-field',
 				'editor_class'  => 'nested conditional parent_' . $prefix . 'head-content-code',
 			),
-			'attributes' => array(
-				'data-parent-field' => $prefix . 'head-content-code',
-				'data-show-on-id'   => $prefix . 'head-content-code1',
-			),
 		),
 	) );
 
@@ -865,6 +884,51 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 	mixt_cmb_make_tab( $fields, __( 'Sidebar', 'mixt' ), 'dashicons dashicons-align-left', $sidebar_fields );
 
+
+	// FOOTER TAB
+	
+	mixt_cmb_make_tab( $fields, __( 'Footer', 'mixt' ), 'dashicons dashicons-minus', array(
+		// Widget Area Switch
+		array(
+			'id'      => $prefix . 'footer-widgets-show',
+			'name'    => __( 'Display Widget Area', 'mixt' ),
+			'desc'    => __( 'Show the footer widget area on this page', 'mixt' ),
+			'type'    => 'radio_inline',
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
+		// Copyright Area Switch
+		array(
+			'id'      => $prefix . 'footer-copy-show',
+			'name'    => __( 'Display Copyright Area', 'mixt' ),
+			'desc'    => __( 'Show the footer copyright area on this page', 'mixt' ),
+			'type'    => 'radio_inline',
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+	) );
+
+
+	// BUILD PAGE OPTIONS METABOX
+
+	$meta_boxes['mixt_page_meta'] = array(
+		'id'           => 'mixt_page_options',
+		'title'        => __( 'Page Options', 'mixt' ),
+		'object_types' => array( 'page', 'post', 'portfolio', 'product' ),
+		'context'      => 'normal',
+		'priority'     => 'high',
+		'show_names'   => true,
+		'fields'       => $fields,
+	);
 
 	return $meta_boxes;
 }

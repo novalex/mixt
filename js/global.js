@@ -110,22 +110,28 @@ GLOBAL JS FUNCTIONS
 		}
 
 
+		// BigText
+		if ( typeof $.fn.bigText === 'function' ) {
+			$('.big-text').bigText();
+		}
+
+
+		// Animate Elements On Load
+		$('.anim-on-load').each( function() {
+			var $this = $(this),
+				delay = $this.data('anim-delay') ? $this.data('anim-delay') : 0;
+			setTimeout( function() {
+				$this.removeClass('anim-pre');
+			}, delay);
+		});
+
+
 		// Placeholder Polyfill
 		if ( typeof $.fn.placeholder === 'function' ) {
 			$('input, textarea').placeholder();
 		}
 
 	}); // END RUN ON LOAD
-
-
-	// Functions To Run On Window Resize
-	function resizeFn() {
-		if ( typeof $.fn.matchHeight === 'function' ) {
-			var mhElements = $('.cols-match-height .wpb_column');
-			mhElements.matchHeight();
-		}
-	}
-	viewport.resize( $.debounce( 500, resizeFn )).resize();
 
 
 	// STYLE SWITCHER

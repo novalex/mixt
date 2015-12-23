@@ -5,6 +5,8 @@
 	// https://github.com/sachinchoolur/lightslider
 	// Copyright (c) 2015 Sachin N; Licensed MIT
 
+	$nav-size: 32px;
+
 	.lSSlideOuter {
 		overflow: hidden;
 		user-select: none;
@@ -16,6 +18,11 @@
 		&:before, &:after {
 			content: " ";
 			display: table;
+		}
+
+		&.item-padding .lslide {
+			padding-left: $nav-size + $padding-m;
+			padding-right: $nav-size + $padding-m;
 		}
 	}
 	.lSSlideWrapper {
@@ -155,15 +162,15 @@
 
 	.lSAction {
 		> a {
-			width: 32px;
+			width: $nav-size;
+			height: $nav-size;
 			display: block;
 			top: 50%;
-			height: 32px;
 			background-image: url('#{$img-path}/icons/lslider-controls.png');
 			cursor: pointer;
 			position: absolute;
 			z-index: 9990;
-			margin-top: -16px;
+			margin-top: $nav-size / -2;
 			opacity: 0;
 			transition: opacity 0.2s;
 
@@ -176,7 +183,7 @@
 		}
 
 		> .lSNext {
-			background-position: -32px 0;
+			background-position: -$nav-size 0;
 			right: 10px;
 		}
 	}
@@ -190,7 +197,7 @@
 	.lSSlideOuter.vertical .lSAction {
 		> a {
 			left: 50%;
-			margin-left: -16px;
+			margin-left: $nav-size / -2;
 			margin-top: 0;
 			background-image: url('#{$img-path}/icons/lslider-controls-vertical.png');
 		}
@@ -202,7 +209,7 @@
 		}
 
 		> .lSNext {
-			background-position: -32px 0;
+			background-position: -$nav-size 0;
 			bottom: 10px;
 			top: auto;
 		}

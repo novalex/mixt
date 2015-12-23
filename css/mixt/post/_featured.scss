@@ -3,6 +3,7 @@
 
 .post-feat {
 	width: 100%;
+	position: relative;
 	text-align: center;
 
 	.flexbox & {
@@ -152,6 +153,50 @@
 		-webkit-perspective: 1px; // Chrome border-radius bug fix
 	}
 }
+
+
+// Rollover
+
+.post-rollover {
+	$spacing: 8px;
+
+	position: absolute;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
+	border-radius: inherit;
+	z-index: 1;
+
+	.hover-content {
+		width: 100%;
+	}
+
+	.post-title,
+	.post-excerpt {
+		width: 100%;
+		display: block;
+		padding-top: $spacing;
+		padding-bottom: $spacing;
+	}
+
+	.post-title {
+		font-size: $font-size-l;
+		font-weight: bold;
+
+		+ .post-excerpt { padding-top: 0; }
+	}
+	.post-excerpt { font-size: $font-size-s; }
+
+	.btn {
+		margin-top: $spacing;
+		margin-bottom: $spacing;
+		font-size: 16px;
+		padding: 10px 12px;
+		line-height: 1;
+		margin-left: $spacing;
+		margin-right: $spacing;
+	}
+}
+
 
 // Pages Only
 

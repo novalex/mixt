@@ -18,7 +18,7 @@ class Mixt_Cmb_Dimensions_Field {
 	public function render_field( $field, $escaped_value, $object_id, $object_type, $field_type ) {
 		$html = '';
 
-		$values = array(
+		$value = array(
 			'width' => ( isset($escaped_value['width']) ) ? $escaped_value['width'] : '',
 			'height' => ( isset($escaped_value['height']) ) ? $escaped_value['height'] : '',
 			'units' => ( isset($escaped_value['units']) ) ? $escaped_value['units'] : '',
@@ -30,7 +30,7 @@ class Mixt_Cmb_Dimensions_Field {
 				'name'        => $field_type->_name('[width]'),
 				'id'          => $field_type->_id('_width'),
 				'class'       => 'mixt-dimensions-width regular-text',
-				'value'       => $values['width'],
+				'value'       =>  filter_var( $value['width'], FILTER_SANITIZE_NUMBER_FLOAT ),
 				'placeholder' => __( 'Width', 'mixt' ),
 				'desc'        => '',
 			) );
@@ -42,7 +42,7 @@ class Mixt_Cmb_Dimensions_Field {
 				'name'        => $field_type->_name('[height]'),
 				'id'          => $field_type->_id('_height'),
 				'class'       => 'mixt-dimensions-height regular-text',
-				'value'       => $values['height'],
+				'value'       =>  filter_var( $value['height'], FILTER_SANITIZE_NUMBER_FLOAT ),
 				'placeholder' => __( 'Height', 'mixt' ),
 				'desc'        => '',
 			) );
@@ -54,7 +54,7 @@ class Mixt_Cmb_Dimensions_Field {
 			$args = array(
 				'value' => $unit,
 				'label' => $unit,
-				'checked' => ( $values['units'] == $unit ),
+				'checked' => ( $value['units'] == $unit ),
 			);
 			$unit_options .= $field_type->select_option($args);
 		}
@@ -75,6 +75,15 @@ class Mixt_Cmb_Dimensions_Field {
 	public function sanitize_field($override, $value, $object_id, $field_args) {
 		if ( ( isset($field_args['width']) && $field_args['width'] == true && empty($value['width']) ) || ( isset($field_args['height']) && $field_args['height'] == true && empty($value['height']) ) ) {
 			return 'auto';
+		} else {
+			if ( ! empty($value['width']) ) {
+				$value['width'] = filter_var( $value['width'], FILTER_SANITIZE_NUMBER_FLOAT );
+				if ( ! empty($value['units']) ) { $value['width'] .= $value['units']; }
+			}
+			if ( ! empty($value['height']) ) {
+				$value['height'] = filter_var( $value['height'], FILTER_SANITIZE_NUMBER_FLOAT );
+				if ( ! empty($value['units']) ) { $value['height'] .= $value['units']; }
+			}
 		}
 		return $value;
 	}

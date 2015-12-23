@@ -202,7 +202,7 @@ class Mixt_Options {
 
 		// Add header fullscreen flag
 		$header_height = self::get('header', 'height');
-		if ( is_array($header_height) && $header_height['height'] == '100' && $header_height['units'] == '%' ) {
+		if ( is_array($header_height) && $header_height['height'] == '100%' ) {
 			self::set('header', 'fullscreen', true);
 		} else {
 			self::set('header', 'fullscreen', false);
@@ -218,6 +218,15 @@ class Mixt_Options {
 			if ( self::get('themes', 'sec-nav') == 'auto' ) self::set('themes', 'sec-nav', $site_theme);
 		}
 		if ( self::get('themes', 'footer') == 'auto' ) self::set('themes', 'footer', $site_theme);
+
+		// Override sidebar switch for project pages
+		if ( self::get('page', 'page-type') == 'project' && mixt_meta('_mixt-page-sidebar') == 'auto' ) {
+			$project_sidebar = mixt_get_option( array( 'key' => 'project-sidebar', 'return' => 'value' ) );
+			if ( $project_sidebar != 'auto' ) {
+				$sidebar_enabled = filter_var($project_sidebar, FILTER_VALIDATE_BOOLEAN);
+				self::set('sidebar', 'enabled', $sidebar_enabled);
+			}
+		}
 
 		// Perform "options set" action
 		do_action('mixt_options_set');
@@ -393,4 +402,30 @@ if ( ! function_exists('mixt_get_options') ) {
 }
 if ( ! function_exists('mixt_meta') ) {
 	function mixt_meta($key, $post_id = null, $single = true) { return Mixt_Options::get_meta($key, $post_id, $single); }
+}
+
+
+/**
+ * Function to normalize checkbox values
+ * @param $value The raw value
+ */
+function mixt_option_checkbox_val($value) {
+	$options = array();
+
+	if ( ! is_array($value) || empty($value) ) return array();
+
+	// Option => state type structure saved by Redux
+	if ( is_string(key($value)) ) {
+		foreach ( $value as $option => $state ) {
+			if ( filter_var($state, FILTER_VALIDATE_BOOLEAN) ) {
+				$options[] = $option;
+			}
+		}
+
+	// Simple multi checkbox structure saved by CMB2
+	} else if ( is_int(key($value)) ) {
+		$options = $value;
+	}
+
+	return $options;
 }

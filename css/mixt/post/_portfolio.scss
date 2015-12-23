@@ -9,6 +9,7 @@
 		.portfolio-sorter {
 			width: 100%;
 			font-size: $font-size-m;
+			text-align: center;
 
 			li:not(:last-child) {
 				&:after { content: '/'; }
@@ -21,20 +22,14 @@
 				border-bottom-style: solid;
 				border-bottom-color: inherit;
 			}
+
+			.fullwidth & { padding: 0 $padding-m; }
 		}
 	}
 
 	.blog-grid .post-rollover {
 		.hover-content,
 		.post-feat-rollover > a { display: block; }
-	}
-
-	.blog-grid,
-	.blog-masonry {
-		.portfolio-wrap .portfolio .page-title a {
-			color: inherit;
-			font-size: $font-size;
-		}
 	}
 
 	// Project Page

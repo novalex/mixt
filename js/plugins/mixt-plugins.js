@@ -179,6 +179,39 @@ function elemVisible(elem, cont) {
 
 
 ( function($) {
+
+	// Resize text based on container width
+	$.fn.bigText = function(options) {
+		var settings = $.extend({
+			'ratio':   1,
+			'minSize': 12,
+			'maxSize': 512
+		}, options);
+
+		return this.each( function() {
+			var $this = $(this),
+				data  = $this.data(),
+				ratio = data.hasOwnProperty('ratio') ? data.ratio : settings.ratio,
+				min   = data.hasOwnProperty('minSize') ? data.minSize : settings.minSize,
+				max   = data.hasOwnProperty('maxSize') ? data.maxSize : settings.maxSize,
+				fit = function () {
+					var chars = $this.text().length * 0.5737,
+						size = Math.max(Math.min($this.width() * (ratio / chars), parseFloat(max)), parseFloat(min));
+					$this.css('font-size', size);
+					if ( size <= min ) {
+						$this.addClass('wrap-text');
+					} else {
+						$this.removeClass('wrap-text');
+					}
+				};
+
+			fit();
+
+			$(window).on('resize orientationchange', fit);
+		});
+	};
+
+
 	// Fix WPML Dropdown
 	$('.menu-item-language').addClass('dropdown drop-menu').find('.sub-menu').addClass('dropdown-menu');
 

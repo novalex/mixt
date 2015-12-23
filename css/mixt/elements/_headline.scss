@@ -99,11 +99,12 @@
 	}
 
 	// Color Variants
-	@mixin headline_variants($selector, $color) {
+	@each $selector, $color in $element-colors {
 		.sideline.#{$selector}:after { border-color: $color; }
 	}
-	@each $selector, $color in $element-colors {
-		@include headline_variants($selector, $color);
+	// Accent Colors
+	@each $theme, $colors in $site-themes {
+		.theme-#{$theme} & .sideline.accent:after { border-color:  map-get($colors, 'accent'); }
 	}
 
 	// Flexbox Styling

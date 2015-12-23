@@ -28,8 +28,10 @@ HEADER FUNCTIONS
 
 			mediaWrap.css('height', fullHeight);
 			mediaCont.css('height', fullHeight);
+
+		// Set header height to viewport percentage
 		} else if ( mixt_opt.header.height.height != '' && mixt_opt.header.height.units == '%' ) {
-			var height = mixt_opt.header.height.height / 100 * viewHeight;
+			var height = parseInt(mixt_opt.header.height.height, 10) / 100 * viewHeight;
 
 			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) height -= topNavHeight;
 

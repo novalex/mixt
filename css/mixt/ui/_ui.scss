@@ -31,7 +31,8 @@
 
 // Link Lists
 
-.link-list {
+.link-list,
+.social-links {
 	@extend %reset-list;
 	margin-bottom: 0;
 
@@ -44,25 +45,19 @@
 		a {
 			display: block;
 			padding: 5px 10px;
-			transition: color 0.25s;
 		}
 	}
 }
+
+.link-list li a { transition: color 0.25s; }
 
 
 // Social Links
 
 .social-links {
-	@extend %reset-list;
-	margin-bottom: 0;
-
-	li {
-		display: inline-block;
-
-		> a i {
-			width: 16px;
-			font-size: 16px;
-		}
+	li > a i {
+		width: 16px;
+		font-size: 16px;
 	}
 
 	&.plain,
@@ -126,25 +121,44 @@
 		.inner {
 			padding: 10px;
 			text-align: center;
+			z-index: 1;
+		}
+
+		a.main-link {
+			position: absolute;
+			top: 0; left: 0;
+			right: 0; bottom: 0;
+			z-index: 0;
 		}
 
 		// Color Variants
 		@each $key, $color in $basic-colors {
-			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.25), true, true);
+			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.15), true, true);
 		}
 		// Accent Colors
 		@each $theme, $colors in $site-themes {
-			@include mixt-bg-variant('.theme-#{$theme} &.accent', fade-out(map-get($colors, 'accent'), 0.25), true, true);
+			@include mixt-bg-variant('.theme-#{$theme} &.accent', fade-out(map-get($colors, 'accent'), 0.15), true, true);
 		}
+
+		// Adjust animation duration
+		&.fadeIn,
+		&.fadeOut { animation-duration: 0.6s; }
 	}
 
-	&:not(.hovered) {
-		.on-hover {
+	&:not(.hovered) .on-hover { opacity: 0; }
+
+	// Animate inner content
+	&.anim-content {
+		.on-hover .inner {
 			opacity: 0;
-			transition: opacity 0.4s;
-			transition-delay: 0.35s;
+			transform: scale(0.94);
+			transition: transform 0.15s ease 0.25s, opacity 0.15s ease 0.2s;
 		}
-		&:hover .on-hover { opacity: 1; }
+
+		&.hovered .on-hover .inner {
+			opacity: 1;
+			transform: scale(1);
+		}
 	}
 }
 
@@ -265,4 +279,11 @@ img[class*="wp-image-"] {
 	width: 100%;
 	overflow: hidden;
 	margin: 0 0 $margin-m;
+}
+
+.big-text {
+	width: 100%;
+	white-space: nowrap;
+
+	&.wrap-text { white-space: initial; }
 }

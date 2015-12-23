@@ -21,8 +21,6 @@
 	&.wpb_row,
 	.wpb_content_element,
 	.wpb_wrapper .mixt-element { margin-bottom: $row-grid-sm-gutter; }
-	
-	.wpb_column > .wpb_wrapper > *:last-child { margin-bottom: 0; }
 }
 
 
@@ -100,7 +98,10 @@ ul.wpb_thumbnails-fluid > li,
 
 @include media('screen', '<mars') {
 	#content,
-	.sidebar-padder {
+	.sidebar-padder,
+	.container,
+	.container-fluid,
+	.vc_column_container {
 		padding-left: $gutter-sm / 2;
 		padding-right: $gutter-sm / 2;
 	}
@@ -118,15 +119,9 @@ ul.wpb_thumbnails-fluid > li,
 
 	.posts-container:last-child { padding-bottom: $gutter-sm; }
 
-	.container,
-	.container-fluid,
-	.vc_column_container {
-		padding-left: $gutter-sm / 2;
-		padding-right: $gutter-sm / 2;
-	}
 	.row {
-		margin-left: ($gutter-sm / -2);
-		margin-right: ($gutter-sm / -2);
+		margin-left: $gutter-sm / -2;
+		margin-right: $gutter-sm / -2;
 	}
 
 	.row-grid-sm {
@@ -147,7 +142,8 @@ ul.wpb_thumbnails-fluid > li,
 	.last_toggle_el_margin,
 	.wpb_button,
 	.wpb_wrapper .mixt-element,
-	.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child {
+	.wpb_column:not(:last-child) > .wpb_wrapper > :last-child,
+	.wpb_column:not(:last-child) > .vc_column-inner > .wpb_wrapper > :last-child {
 		margin-bottom: $row-spacing-sm;
 	}
 

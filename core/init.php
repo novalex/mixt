@@ -259,7 +259,7 @@ function mixt_scripts() {
 	}
 
 	// Icon Fonts
-	$icon_fonts = Mixt_Options::get('assets', 'icon-fonts');
+	$icon_fonts = (array) Mixt_Options::get('assets', 'icon-fonts');
 	foreach ( $icon_fonts as $font => $val ) {
 		if ( $val ) wp_enqueue_style( "mixt-$font", MIXT_URI . "/assets/fonts/$font/$font.css", array(), MIXT_VERSION );
 	}

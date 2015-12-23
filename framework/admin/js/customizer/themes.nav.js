@@ -124,7 +124,7 @@ CUSTOMIZER INTEGRATION - NAV THEMES
 					css += main_navbar+':not(.position-top):not(.vertical) { background-color: '+tinycolor(bg).setAlpha(main_nav_opacity).toPercentageRgbString()+'; }';
 				}
 
-				css += navbar+'.init { background-color: '+bg+' !important; }';
+				css += navbar+' .navbar-data { background-color: '+bg+' !important; }';
 
 				if ( bg_dark ) {
 					css += navbar+' .navbar-data:before { content: "dark"; }';

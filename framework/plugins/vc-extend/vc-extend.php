@@ -84,17 +84,6 @@ function mixt_vc_extend() {
 	}
 	vc_add_params( 'vc_row', $row_custom );
 
-	// Row Columns Equal Height
-	$cols_matchheight = array(
-		'type'        => 'checkbox',
-		'heading'     => __( 'Equal Columns Height', 'mixt' ),
-		'description' => __( 'Make the columns in this row equal height', 'mixt' ),
-		'param_name'  => 'cols_matchheight',
-		'std'         => false,
-	);
-	vc_add_param( 'vc_row', $cols_matchheight );
-	vc_add_param( 'vc_row_inner', $cols_matchheight );
-
 	// Remove VC Image Carousel
 	vc_remove_element( 'vc_images_carousel' );
 

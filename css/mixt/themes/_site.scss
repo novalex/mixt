@@ -64,7 +64,7 @@
 		}
 
 		.theme-section-alt {
-			$bg-alt: darken($bg, 3);
+			$bg-alt: darken($bg, 2);
 			$color-alt: $color;
 			@if ( map-has-key($theme, 'bg-alt') ) {
 				$bg-alt: map-get($theme, 'bg-alt');
@@ -101,10 +101,13 @@
 
 		a,
 		.post-meta a:hover,
+		h2.page-title a:hover,
 		#breadcrumbs a:hover,
 		.pager a:hover,
 		.pager li > span,
-		.hover-accent-color:hover { color: $accent; }
+		.hover-accent-color:hover,
+		.widget-area .nav li a:hover,
+		.sidebar .child-page-nav li a:hover { color: $accent; }
 
 		.post-meta a,
 		.post-meta > span,
@@ -185,16 +188,10 @@
 
 		// OTHER COLORS
 
-		.sidebar {
-			.child-page-nav li a:hover { color: $accent; }
-			
-			.child-page-nav .current_page_item {
-				&,
-				&:before { background-color: darken($bg, 3); }
-			}
+		.sidebar .child-page-nav .current_page_item {
+			&,
+			&:before { background-color: darken($bg, 3); }
 		}
-
-		.widget-area .nav li a:hover { color: $accent; }
 		
 		::selection {
 			background: $accent;
@@ -274,11 +271,14 @@
 					&:hover { color: $accent; }
 				}
 			}
+
 			.vc_separator.theme-bd .vc_sep_holder .vc_sep_line { border-color: $border; }
-			.mixt-grid-item .gitem-title-cont {
+
+			.mixt-grid-item.scale-and-rotate .gitem-title-cont {
 				color: $color;
 				background-color: lighten($bg, 5);
 			}
+
 			.vc_tta:not(.vc_tta-o-no-fill) {
 				&.vc_tta-style-classic,
 				&.vc_tta-style-modern {

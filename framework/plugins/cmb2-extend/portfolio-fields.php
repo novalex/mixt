@@ -19,13 +19,27 @@ if ( mixt_cmb_show_tab('project') ) {
 			),
 			'default' => 'auto',
 		),
+
+		// Display Featured Image
+		array(
+			'id'      => $prefix . 'project-feat-show',
+			'name'    => __( 'Show Featured Media', 'mixt' ),
+			'desc'    => __( 'Display the post featured media', 'mixt' ),
+			'type'    => 'radio_inline',
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default'    => 'auto',
+		),
 	) );
 }
 
 // PORTFOLIO TAB
 
 if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_field') ) {
-	mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-schedule', array(
+	mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-category', array(
 		// Type
 		array(
 			'id'      => $prefix . 'portfolio-page-type',
@@ -87,6 +101,20 @@ if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_
 			'default' => 'auto',
 		),
 
+		// Post Info Display
+		array(
+			'id'      => $prefix . 'portfolio-page-post-info',
+			'type'    => 'radio_inline',
+			'name'    => __( 'Post Info', 'mixt' ),
+			'desc'    => __( 'Display the post format and date', 'mixt' ),
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
 		// Meta Position / Display
 		array(
 			'id'       => $prefix . 'portfolio-page-meta-show',
@@ -102,18 +130,46 @@ if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_
 			'default'  => 'auto',
 		),
 
-		// Post Info Display
+		// Title Display
 		array(
-			'id'       => $prefix . 'portfolio-page-post-info',
-			'type'     => 'radio_inline',
-			'name'     => __( 'Post Info', 'mixt' ),
-			'desc'     => __( 'Display the post format and date', 'mixt' ),
-			'options'  => array(
+			'id'      => $prefix . 'portfolio-page-title',
+			'type'    => 'radio_inline',
+			'name'    => __( 'Post Title', 'mixt' ),
+			'desc'    => __( 'Display the post title', 'mixt' ),
+			'options' => array(
 				'auto'  => __( 'Auto', 'mixt' ),
 				'true'  => __( 'Yes', 'mixt' ),
 				'false' => __( 'No', 'mixt' ),
 			),
-			'default'  => 'auto',
+			'default' => 'auto',
+		),
+
+		// Excerpt Display
+		array(
+			'id'      => $prefix . 'portfolio-page-excerpt',
+			'type'    => 'radio_inline',
+			'name'    => __( 'Post Excerpt', 'mixt' ),
+			'desc'    => __( 'Display the post excerpt', 'mixt' ),
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
+		// Filters
+		array(
+			'id'      => $prefix . 'portfolio-page-filters',
+			'type'    => 'radio_inline',
+			'name'    => __( 'Filters', 'mixt' ),
+			'desc'    => __( 'Display filter links', 'mixt' ),
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
 		),
 
 		// Posts
@@ -132,6 +188,91 @@ if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_
 			'desc'    => __( 'Number of posts to display on each page (-1 to display all, auto to display number set in options)', 'mixt' ),
 			'type'    => 'text',
 			'default' => 'auto',
+		),
+
+		// Show Rollover
+		array(
+			'id'      => $prefix . 'portfolio-rollover',
+			'type'    => 'radio_inline',
+			'name'    => __( 'Show Rollover', 'mixt' ),
+			'desc'    => __( 'Display an overlay with useful links and info when a project is hovered', 'mixt' ),
+			'options' => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
+		// Rollover Elements
+		array(
+            'id'       => $prefix . 'portfolio-rollover-elem',
+			'type'     => 'multicheck',
+			'name'     => __( 'Elements', 'mixt' ),
+			'options'  => array(
+				'title'   => __( 'Title', 'mixt' ),
+				'excerpt' => __( 'Excerpt', 'mixt' ),
+				'view'    => __( 'View Post Button', 'mixt' ),
+				'full'    => __( 'Full Image Button', 'mixt' ),
+			),
+			'default'  => array( 'title' ),
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
+			'select_all_button' => false,
+		),
+
+		// Rollover Color
+		array(
+			'id'         => $prefix . 'portfolio-rollover-color',
+			'type'       => 'select',
+			'name'       => __( 'Background Color', 'mixt' ),
+			'options'    => array_merge( array('auto' => 'Auto' ), mixt_get_assets('colors', 'basic') ),
+			'default'    => 'auto',
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
+		),
+
+		// Animation - In
+		array(
+			'id'         => $prefix . 'portfolio-rollover-anim-in',
+			'type'       => 'select',
+			'name'       => __( 'Animation - In', 'mixt' ),
+			'options'    => array_merge( array('auto' => 'Auto' ), mixt_css_anims('trans-in') ),
+			'default'    => 'auto',
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
+		),
+
+		// Animation - Out
+		array(
+			'id'         => $prefix . 'portfolio-rollover-anim-out',
+			'type'       => 'select',
+			'name'       => __( 'Animation - Out', 'mixt' ),
+			'options'    => array_merge( array('auto' => 'Auto' ), mixt_css_anims('trans-out') ),
+			'default'    => 'auto',
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
+		),
+
+		// Button Color
+		array(
+			'id'         => $prefix . 'portfolio-rollover-btn-color',
+			'type'       => 'select',
+			'name'       => __( 'Button Color', 'mixt' ),
+			'options'    => array_merge( array('auto' => 'Auto' ), mixt_get_assets('colors', 'buttons') ),
+			'default'    => 'auto',
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
 		),
 	) );
 }

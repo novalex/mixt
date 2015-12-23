@@ -105,7 +105,7 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 			<div id="main-nav-wrap" role="banner" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
 
-				<nav id="main-nav" class="navbar navbar-mixt init site-navigation position-top <?php echo $nav_classes; ?>">
+				<nav id="main-nav" class="navbar navbar-mixt site-navigation position-top <?php echo $nav_classes; ?>">
 					<div class="container">
 
 						<?php // Main Navbar Header ?>

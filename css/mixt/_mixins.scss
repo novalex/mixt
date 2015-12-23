@@ -22,8 +22,8 @@
 @mixin mixt-bg-variant( $selector, $color, $set-color: false, $set-text-shadow: false ) {
 	#{$selector} {
 		background-color: $color;
-		@if ( $set-color ) { color: set-color-for-bg($color); }
 		@if ( opacity($color) < 1 ) { $color: fade-in($color, 1); }
+		@if ( $set-color ) { color: set-color-for-bg($color); }
 		@if ( $set-text-shadow ) { @include text-shadow-for-bg($color); }
 	}
 }

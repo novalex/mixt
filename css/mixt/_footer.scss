@@ -6,6 +6,7 @@
 	bottom: 15px; right: 15px;
 	opacity: 0.85;
 	display: none;
+	border-width: 0;
 	z-index: 1;
 }
 
@@ -51,6 +52,7 @@
 		.right-content {
 			padding-top: $spacing;
 			padding-bottom: $spacing;
+			text-align: center;
 		}
 
 		@include media('screen', 'mercury') {

@@ -20,6 +20,15 @@ POST FUNCTIONS
 
 		content.imagesLoaded( function() {
 
+			// Animate Posts
+			var animPostDelay = ( viewport.scrollTop() > 600 ) ? 0 : 200;
+			$('.posts-container .article.animated').each( function(index) {
+				var elem = $(this);
+				setTimeout( function() {
+					elem.removeClass('init');
+				}, index++ * animPostDelay);
+			});
+
 			// Featured Gallery Slider
 			if ( typeof $.fn.lightSlider === 'function' ) {
 				var gallerySlider = $('.gallery-slider').not('.lightSlider');
@@ -150,7 +159,7 @@ POST FUNCTIONS
 
 					// Update layout once posts have loaded
 					setTimeout( function() {
-						newPosts.removeClass('ajax-new');
+						newPosts.removeClass('ajax-new init');
 						if ( type == 'posts' ) {
 							iframeAspect();
 							postsPage();

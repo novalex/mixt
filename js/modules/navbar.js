@@ -31,8 +31,8 @@ NAVBAR FUNCTIONS
 
 		// Initialize Navbar
 		init: function(navbar) {
-			var bgColor  = navbar.css('background-color'),
-				dataCont = navbar.find('.navbar-data'),
+			var dataCont = navbar.find('.navbar-data'),
+				bgColor  = ( navbar.is(mainNavBar) ) ? dataCont.css('background-color') : navbar.css('background-color'),
 				colorLum = dataCont.length ? window.getComputedStyle(dataCont[0], ':before').getPropertyValue('content').replace(/"/g, '') : '';
 
 			if ( colorLum != 'dark' && colorLum != 'light' ) colorLum = colorLoD(bgColor);
@@ -76,7 +76,6 @@ NAVBAR FUNCTIONS
 					navbar.addClass('bg-light');
 				}
 			}
-			navbar.removeClass('init');
 		},
 
 		// Sticky (fixed) Navbar Functions
@@ -359,7 +358,7 @@ NAVBAR FUNCTIONS
 
 	mainNavBar.on('refresh', function() {
 		$('style[data-id="mixt-nav-css"]').remove();
-		mainNavBar.removeClass('bg-light bg-dark').addClass('init');
+		mainNavBar.removeClass('bg-light bg-dark');
 		Navbar.init(mainNavBar);
 
 	});

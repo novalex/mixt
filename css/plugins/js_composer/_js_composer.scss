@@ -8,20 +8,57 @@
 
 @if $vcomposer {
 
-	.vc_element div[class*=' col-'] { width: 100%; }
+	.vc_element > div[class*=' col-'] { width: 100%; }
 
 	.wpb_row,
 	.wpb_column,
 	.wpb_wrapper,
 	.wpb_text_column,
+	.vc_column-inner,
 	.compose-mode .vc_element,
 	.view-mode .vc_element { border-color: inherit; }
+
+	.wpb_column > .vc_column-inner,
+	.vc_row.vc_row-no-padding .wpb_column { padding-left: 0 !important; padding-right: 0 !important; }
 
 	.wpb_wrapper .mixt-element.mixt-headline { margin-bottom: 20px; }
 
 	.first-row .vc_controls-out-tl,
 	.first-row .vc_controls-out-tr {
 	    z-index: 9999 !important;
+	}
+
+	.wpb_column > .wpb_wrapper > :last-child,
+	.wpb_column > .vc_column-inner > .wpb_wrapper > :last-child { margin-bottom: 0; }
+
+	// Full-Width Rows For Boxed Layout
+	
+	.boxed {
+		.vc_row[data-vc-full-width='true'] {
+			left: 0 !important;
+			width: auto !important;
+			margin-left: -$gutter-lg;
+			margin-right: -$gutter-lg;
+			padding-left: $gutter-lg / 2 !important;
+			padding-right: $gutter-lg / 2 !important;
+
+			@include media('screen', '<mars') {
+				margin-left: -$gutter-sm;
+				margin-right: -$gutter-sm;
+				padding-left: $gutter-sm / 2 !important;
+				padding-right: $gutter-sm / 2 !important;
+			}
+
+			&[data-vc-stretch-content='true'] {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+
+				@include media('screen', '(max-width: #{$screen-md-min})') {
+					margin-left: $gutter-lg / -2;
+					margin-right: $gutter-lg / -2;
+				}
+			}
+		}
 	}
 
 	// Buttons

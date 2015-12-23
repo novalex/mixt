@@ -162,6 +162,9 @@ if ( ! class_exists('Mixt_Post') ) {
 			if ( ! $this->display_component('title') ) { $classes .= ' no-title'; }
 			if ( ! $this->display_component('content') ) { $classes .= ' no-content'; }
 
+			// Animate post on load
+			$classes .= ' animated init';
+
 			return $classes;
 		}
 
@@ -200,15 +203,14 @@ if ( ! class_exists('Mixt_Post') ) {
 					case 'small-feat':
 						return (
 							$this->context == 'related' ||
-							( $this->layout['posts-page'] && $this->layout['type'] == 'standard' && $this->layout['feat-size'] == 'blog-small' ) ||
-							$this->display_component('rollover')
+							( $this->layout['posts-page'] && $this->layout['type'] == 'standard' && $this->layout['feat-size'] == 'blog-small' )
 						);
 						break;
 
 					// Featured Media Rollover
 					case 'rollover':
-						global $mixt_opt;
-						return ( $this->layout['page-type'] == 'portfolio' && ( ! empty($mixt_opt['portfolio-rollover']) && $mixt_opt['portfolio-rollover'] ) );
+						return ( $this->layout['page-type'] == 'blog' && mixt_get_option( array( 'key' => 'blog-rollover' ) ) ) ||
+							   ( $this->layout['page-type'] == 'portfolio' && mixt_get_option( array( 'key' => 'portfolio-rollover' ) ) );
 						break;
 
 					// Title
@@ -302,7 +304,7 @@ if ( ! class_exists('Mixt_Post') ) {
 					// Link Format
 					if ( $this->format == 'link' ) {
 						// Anchor tag among other content
-						if ( preg_match('/^<a href="(.*?)".*?>(.*?)<\/a>/i', $this->content, $matches) ) {
+						if ( preg_match('/<a href="(.*?)".*?>(.*?)<\/a>/i', $this->content, $matches) ) {
 							$post_link = $matches[1];
 							$link_title = ( empty($matches[2]) ) ? get_the_title() : $matches[2];
 							$this->content = str_replace($matches[0], '', $this->content);
@@ -336,7 +338,7 @@ if ( ! class_exists('Mixt_Post') ) {
 							}
 						} else if ( $this->format == 'quote' ) {
 							// Blockquote tag among other content
-							if ( preg_match('/^<blockquote[^\<]*>(.*)<\/blockquote>/si', $this->content, $matches) ) {
+							if ( preg_match('/<blockquote[^\<]*>(.*)<\/blockquote>/si', $this->content, $matches) ) {
 								$quote = $matches[0];
 								$this->content = str_replace($matches[0], '', $this->content);
 
@@ -358,7 +360,9 @@ if ( ! class_exists('Mixt_Post') ) {
 				// Gallery & Video Format
 				case 'video':
 				case 'gallery':
-					$regex_pattern = get_shortcode_regex();
+
+					$video_shortcode_regex = '\[(\[?)(video)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)';
+					$gallery_shortcode_regex = '\[(\[?)(gallery)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)';
 
 					// Video Embed
 					if ( $this->format == 'video' && preg_match('/^<iframe.*?<\/iframe>/i', $this->content, $matches) ) {
@@ -368,7 +372,7 @@ if ( ! class_exists('Mixt_Post') ) {
 							$video_iframe = $matches[0];
 							$this->content = str_replace($video_iframe, '', $this->content);
 
-							if ( $small_feat ) {
+							if ( $small_feat || $this->context != 'single' ) {
 								if ( ! empty($placeholder_img) ) {
 									$output = $placeholder_img;
 								} else {
@@ -379,51 +383,59 @@ if ( ! class_exists('Mixt_Post') ) {
 							}
 						}
 
-					// Video & Gallery Shortcode
-					} else if ( preg_match_all( '/'.$regex_pattern.'/s', $this->content, $matches ) ) {
-						$shortcode      = $matches[0][0];
-						$shortcode_name = $matches[2][0];
+					// Video Shortcode
+					} else if ( $this->format == 'video' && preg_match_all('/'.$video_shortcode_regex.'/', $this->content, $matches ) ) {
+						$shortcode = $matches[0][0];
 
-						// Video Format
-						if ( $this->format == 'video' && $shortcode_name == 'video' ) {
-							$feat_classes .= ' post-video video-hosted';
+						$feat_classes .= ' post-video video-hosted';
+						$this->content = str_replace($shortcode, '', $this->content);
 
-							$this->content = str_replace($shortcode, '', $this->content);
-
-							if ( $small_feat ) {
-								if ( ! empty($placeholder_img) ) {
-									$output = $placeholder_img;
-								} else {
-									$output = $format_icon;
-								}
+						if ( $small_feat ) {
+							if ( ! empty($placeholder_img) ) {
+								$output = $placeholder_img;
 							} else {
-								$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
+								$output = $format_icon;
 							}
-
-						// Gallery Format
-						} else if ( $this->format == 'gallery' && $shortcode_name == 'gallery' ) {
-							$feat_classes .= ' post-gallery';
-							$this->content = str_replace($shortcode, '', $this->content);
-
-							// Override size and add featured attribute
-							preg_match('/size=.([\w]*)./i', $shortcode, $matches);
-							$new_attr = 'size="' . $feat_size . '" feat="true"';
-							if ( empty($matches[0]) ) {
-								$shortcode = str_replace(']', " $new_attr]", $shortcode);
-							} else {
-								$shortcode = str_replace($matches[0], $new_attr, $shortcode);
-							}
-
-							if ( ! empty($args['minimal']) ) {
-								if ( ! empty($placeholder_img) ) {
-									$output = $placeholder_img;
-								} else {
-									$output = $format_icon;
-								}
-							} else {
-								$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
-							}
+						} else {
+							$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
 						}
+
+					// Gallery Shortcode
+					} else if ( $this->format == 'gallery' && preg_match_all('/'.$gallery_shortcode_regex.'/', $this->content, $matches ) ) {
+						$shortcode = $matches[0][0];
+						$gallery_atts = $matches[3][0];
+
+						$feat_classes .= ' post-gallery';
+						$this->content = str_replace($shortcode, '', $this->content);
+
+						// Add featured attribute
+						$gallery_atts .= ' feat="true"';
+
+						// Override size attribute
+						preg_match('/size=.([\w]*)./i', $gallery_atts, $att_size);
+						$size_att = 'size="' . $feat_size . '"';
+						if ( empty($att_size[0]) ) {
+							$gallery_atts .= $size_att;
+						} else {
+							$gallery_atts = str_replace($att_size[0], $size_att, $gallery_atts);
+						}
+
+						// Check the gallery type
+						preg_match('/type=.([\w]*)./i', $gallery_atts, $type_att);
+						$gallery_type = ( empty($type_att[1]) ) ? 'lightbox' : $type_att[1];
+
+						if ( ! empty($args['minimal']) || ( $gallery_type == 'lightbox' && $this->context != 'single' ) ) {
+							if ( ! empty($placeholder_img) ) {
+								$output = $placeholder_img;
+							} else {
+								$output = $format_icon;
+							}
+						} else {
+							// Replace attributes with new ones and execute shortcode
+							$shortcode = str_replace($matches[3][0], $gallery_atts, $shortcode);
+							$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . '</div>';
+						}
+
 					} else if ( $this->context == 'related' ) {
 						if ( ! empty($placeholder_img) ) {
 							$output = $placeholder_img;
@@ -506,7 +518,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 
 			if ( $this->display_component('rollover') ) {
-				$output = $this->rollover($output, $feat_classes);
+				$output = $this->rollover($output);
 			}
 
 			echo $output;
@@ -515,52 +527,61 @@ if ( ! class_exists('Mixt_Post') ) {
 		/**
 		 * Display useful links and info when hovering the featured media
 		 */
-		public function rollover($content, $classes) {
+		public function rollover($content) {
+			$opt_pre = $this->layout['page-type'];
 			$options = mixt_get_options( array(
-				'rollover'  => array( 'key' => 'portfolio-rollover' ),
-				'elem'      => array( 'key' => 'portfolio-rollover-elem', 'return' => 'value' ),
-				'color'     => array( 'key' => 'portfolio-rollover-color', 'return' => 'value' ),
-				'anim-in'   => array( 'key' => 'portfolio-rollover-anim-in', 'return' => 'value' ),
-				'anim-out'  => array( 'key' => 'portfolio-rollover-anim-out', 'return' => 'value' ),
-				'view-icon' => array( 'key' => 'portfolio-rollover-view-icon', 'return' => 'value' ),
-				'full-icon' => array( 'key' => 'portfolio-rollover-full-icon', 'return' => 'value' ),
-				'btn-color' => array( 'key' => 'portfolio-rollover-btn-color', 'return' => 'value' ),
+				'rollover'  => array( 'key' => $opt_pre . '-rollover' ),
+				'elem'      => array( 'key' => $opt_pre . '-rollover-elem', 'return' => 'value' ),
+				'color'     => array( 'key' => $opt_pre . '-rollover-color', 'return' => 'value' ),
+				'anim-in'   => array( 'key' => $opt_pre . '-rollover-anim-in', 'return' => 'value' ),
+				'anim-out'  => array( 'key' => $opt_pre . '-rollover-anim-out', 'return' => 'value' ),
+				'btn-color' => array( 'key' => $opt_pre . '-rollover-btn-color', 'return' => 'value' ),
 			));
 
-			if ( ! $options['rollover'] ) return $content;
+			$exceptions = array('aside', 'link', 'quote', 'status', 'audio');
+			if ( ! $options['rollover'] || in_array($this->format, $exceptions) ) return $content;
+
+			$items = mixt_option_checkbox_val($options['elem']);
+
+			$btn_classes = "btn btn-{$options['btn-color']} no-border";
 
 			ob_start();
 
 			?>
 
-			<div class="post-rollover <?php echo $classes; ?>">
-				<div class="hover-content anim-on-hover">
-					<?php echo str_replace($classes, 'post-feat-rollover', $content); ?>
-					<div class="on-hover <?php echo $options['color']; ?>" data-anim-in="<?php echo $options['anim-in']; ?>" data-anim-out="<?php echo $options['anim-out']; ?>">
-						<div class="inner">
-							<?php
-								if ( $options['elem']['view'] ) {
-									$icon = '<i class="' . $options['view-icon'] . '"></i>';
-									echo "<a href='$this->permalink' class='btn btn-{$options['btn-color']} view-post' title='" . __('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+			<div class="post-rollover hover-content anim-on-hover anim-content">
+				<div class="on-hover <?php echo $options['color']; ?>" data-anim-in="<?php echo $options['anim-in']; ?>" data-anim-out="<?php echo $options['anim-out']; ?>">
+					<div class="inner">
+						<?php
+							if ( in_array('title', $items) ) {
+								echo "<a href='{$this->permalink}' class='post-title no-color'>" . get_the_title() . '</a>';
+							}
+							if ( in_array('excerpt', $items) ) {
+								$excerpt = get_the_excerpt();
+								if ( ! empty($excerpt) ) { echo "<a href='{$this->permalink}' class='post-excerpt no-color'>$excerpt</a>"; }
+							}
+							if ( in_array('view', $items) ) {
+								$icon = mixt_get_icon('view-post');
+								echo "<a href='$this->permalink' class='$btn_classes view-post' title='" . __('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+							}
+							if ( in_array('full', $items) ) {
+								$link = wp_get_attachment_url(get_post_thumbnail_id($this->ID));
+								if ( $link ) {
+									$icon = $icon = mixt_get_icon('view-image');
+									echo "<a href='$link' class='$btn_classes view-image' title='" . __('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
 								}
-								if ( $options['elem']['full'] ) {
-									$link = wp_get_attachment_url(get_post_thumbnail_id($this->ID));
-									if ( $link ) {
-										$icon = '<i class="' . $options['full-icon'] . '"></i>';
-										echo "<a href='$link' class='btn btn-{$options['btn-color']} full-image' title='" . __('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
-									}
-								}
-								if ( $options['elem']['title'] ) echo '<h3 class="title">' . get_the_title() . '</h3>';
-								if ( $options['elem']['excerpt'] ) echo '<p class="excerpt">' . get_the_excerpt() . '</p>';
-							?>
-						</div>
+							}
+						?>
 					</div>
+					<a href='<?php echo $this->permalink; ?>' class='main-link'></a>
 				</div>
 			</div>
 
 			<?php
 
-			return ob_get_clean();
+			$html = ob_get_clean();
+
+			return preg_replace('/<\/div>$/i', $html . '</div>', $content);
 		}
 
 		/**

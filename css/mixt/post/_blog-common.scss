@@ -68,7 +68,7 @@
 
 .blog-grid .posts-container .article,
 .blog-masonry .post-wrapper {
-	background-color: rgba(0,0,0,0.02);
+	box-shadow: 0 2px 1px rgba(0,0,0,0.025);
 
 	> :last-child:not(:empty) { padding-bottom: $post-inner-pad; }
 }
@@ -160,4 +160,18 @@
 			}
 		}
 	}
+}
+
+
+// Animated Posts On Load
+.js .posts-container .article.animated {
+	opacity: 1;
+	transform: translate3d(0,0,0);
+
+	&.init {
+		opacity: 0;
+		transform: translate3d(0,20px,0);
+	}
+
+	transition: opacity 0.4s, transform 0.4s;
 }

@@ -164,14 +164,6 @@ $this->sections[] = array(
 			'width'    => false,
 		),
 
-		// Height
-		array(
-			'id'       => 'head-height',
-			'type'     => 'text',
-			'title'    => __( 'Custom Height', 'mixt' ),
-			'subtitle' => __( 'Set a custom height (in px) for the header', 'mixt' ),
-		),
-
 		// Background Color
 		array(
 			'id'       => 'head-bg-color',

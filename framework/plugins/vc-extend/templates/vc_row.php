@@ -26,7 +26,7 @@ $output = $after_output = '';
 
 // MIXT MOD: Custom row atts
 $theme_color = 'auto';
-$first_row = $cols_matchheight = false;
+$first_row = false;
 $row_padding = $separator = $separator_color = $separator_icon = '';
 
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
@@ -116,7 +116,6 @@ if ( $row_padding != '' ) {
 }
 if ( $separator != '' ) $css_class .= ' mixt-row-has-separator';
 if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' first-row';
-if ( filter_var($cols_matchheight, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' cols-match-height';
 
 $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 

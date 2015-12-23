@@ -26,6 +26,15 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		'profiles' => array(),
 	)) );
 
+	$options = mixt_get_options( array(
+		'social-profiles'       => array( 'return' => 'value' ),
+		'social-profiles-color' => array( 'return' => 'value', 'default' => 'icon' ),
+		'social-icons-tooltip'  => array(),
+		'post-sharing-profiles' => array( 'return' => 'value' ),
+		'post-sharing-color'    => array( 'return' => 'value', 'default' => 'icon' ),
+		'post-sharing-short'    => array(),
+	) );
+
 	// Social Sharing Profiles
 	if ( $type == 'sharing' ) {
 		$post_id      = get_the_ID();
@@ -35,7 +44,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 			'link'   => get_permalink($post_id),
 			'thumb'  => '',
 		);
-		if ( ! empty($mixt_opt['post-sharing-short']) && $mixt_opt['post-sharing-short'] ) {
+		if ( $options['post-sharing-short'] ) {
 			$pattern_tags['link2'] = make_bitly_url(get_permalink($post_id));
 		} else {
 			$pattern_tags['link2'] = wp_get_shortlink($post_id);
@@ -48,36 +57,35 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		}
 	}
 
-	if ( empty($hover) || empty($profiles) ) global $mixt_opt;
-
 	if ( empty($hover) ) {
-		if ( $type == 'networks' ) { $hover  = isset($mixt_opt['social-profiles-color']) ? $mixt_opt['social-profiles-color'] : 'icon'; }
-		else if ( $type == 'sharing' ) { $hover  = isset($mixt_opt['post-sharing-color']) ? $mixt_opt['post-sharing-color'] : 'icon'; }
+		$hover = ( $type == 'networks' ) ? $options['social-profiles-color'] : $options['post-sharing-color'];
 	}
 
 	if ( empty($profiles) ) {
-		if ( $type == 'networks' && ! empty($mixt_opt['social-profiles']) ) { $profiles = $mixt_opt['social-profiles']; }
-		else if ( $type == 'sharing' && ! empty($mixt_opt['post-sharing-profiles']) ) { $profiles = $mixt_opt['post-sharing-profiles']; }
+		$profiles = ( $type == 'networks' ) ? $options['social-profiles'] : $options['post-sharing-profiles'];
 	}
 
 	$cont_classes = "social-links hover-$hover $class";
 
 	if ( $style == 'plain' ) { $cont_classes .= ' plain'; }
-	else if ( $style == 'nav' ) { $cont_classes .= ' nav link-list'; }
+	else if ( $style == 'nav' ) { $cont_classes .= ' nav'; }
 	else if ( $style == 'group' ) { $cont_classes .= ' btn-group'; }
 	else if ( $style == 'buttons' ) { $cont_classes .= ' buttons'; }
 
 	if ( is_array($profiles) && ! empty($profiles) ) {
 		$items = $item_class = '';
 
-		$link_atts = 'data-toggle="tooltip" role="button"';
+		$link_atts = 'role="button"';
+		if ( $options['social-icons-tooltip'] ) {
+			$link_atts .= ' data-toggle="tooltip"';
+		}
 		if ( $style == 'buttons' || $style == 'group' ) {
 			$size = ( empty($size) ) ? '' : $size;
 			$link_atts .= " class='btn btn-$color $size'";
 
 			if ( $style == 'group' ) { $item_class .= 'btn-group'; }
 		} else {
-			$item_class .= ' no-color';
+			$link_atts .= ' class="no-color"';
 		}
 
 		foreach ( $profiles as $profile ) {

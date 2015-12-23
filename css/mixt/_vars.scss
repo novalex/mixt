@@ -87,12 +87,12 @@ $font-size-xxl: 26px;
 
 $font-size-base: $font-size;
 
-$font-size-h1: 20px;
+$font-size-h1: $font-size-xl;
 $font-size-h2: 18px;
-$font-size-h3: 16px;
-$font-size-h4: 14px;
-$font-size-h5: 12px;
-$font-size-h6: 10px;
+$font-size-h3: $font-size-l;
+$font-size-h4: $font-size-m;
+$font-size-h5: $font-size-s;
+$font-size-h6: $font-size-xs;
 
 
 // SPACING, MARGINS & PADDINGS

@@ -30,7 +30,11 @@
 
 	embed, iframe, object { width: 100%; }
 
-	blockquote { overflow: hidden; }
+	blockquote {
+		overflow: hidden;
+
+		&:last-child { margin-bottom: 0; }
+	}
 
 	&.no-title {
 		.page-title { display: none; }
@@ -53,7 +57,11 @@
 	padding-bottom: 0;
 }
 
-h2.page-title { font-size: $font-size-l; }
+h2.page-title {
+	font-size: $font-size-l - 1px;
+
+	a:not(:hover) { color: inherit; }
+}
 .page-title i { font-size: 80%; }
 
 
@@ -98,45 +106,6 @@ h2.page-title { font-size: $font-size-l; }
 	.post-feat > a > img {
 		@extend %img-effect-hover;
 	}
-}
-
-
-// ROLLOVER
-
-.post-rollover {
-	$spacing: 8px;
-
-	.hover-content {
-		width: 100%;
-	}
-
-	.inner {
-		.title,
-		.excerpt,
-		.view-post,
-		.full-image {
-			margin-top: $spacing;
-			margin-bottom: $spacing;
-		}
-	}
-
-	.view-post,
-	.full-image {
-		font-size: 16px;
-		padding: 10px 12px;
-		line-height: 1;
-		margin-left: $spacing;
-		margin-right: $spacing;
-	}
-
-	.title {
-		font-size: $font-size-m;
-	}
-	.excerpt {
-		font-size: $font-size-s;
-	}
-
-	.lightbox-trigger:hover:after { display: none; }
 }
 
 

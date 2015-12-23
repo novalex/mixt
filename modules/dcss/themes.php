@@ -103,7 +103,7 @@ class Mixt_Themes extends Mixt_DCSS {
 				$bg_dark_color_fade = $color_inv_fade;
 			}
 
-			$bg_alt     = ! empty($theme['bg-alt']) ? $theme['bg-alt'] : $bg_darker;
+			$bg_alt     = ! empty($theme['bg-alt']) ? $theme['bg-alt'] : '#'.$bg_ob->darken(2);
 			$color_alt  = ! empty($theme['color-alt']) ? $theme['color-alt'] : $this->set_color_for_bg($bg_alt, array($bg_light_color, $bg_dark_color));
 			$border_alt = ! empty($theme['border-alt']) ? $theme['border-alt'] : $border;
 
@@ -149,7 +149,8 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Text Colors
 			
 			echo "$th, $th #content-wrap { color: $color; }\n";
-			echo "$th a, $th .post-meta a:hover, $th #breadcrumbs a:hover, $th .pager a:hover, $th .pager li > span, $th .hover-accent-color:hover { color: $accent; }\n";
+			echo "$th a, $th .post-meta a:hover, $th h2.page-title a:hover, $th #breadcrumbs a:hover, $th .pager a:hover, " .
+				 "$th .pager li > span, $th .hover-accent-color:hover, $th .widget-area .nav li a:hover, $th .sidebar .child-page-nav li a:hover { color: $accent; }\n";
 			echo "a.no-color { color: inherit; }\n";
 			echo "$th .post-meta a, $th .post-meta > span { color: $color_fade; }\n";
 			echo "$th .head-media.bg-light .container, $th .head-media.bg-light .media-inner > a, $th .head-media.bg-light .header-scroll, $th .head-media.bg-light #breadcrumbs > li + li:before { color: $bg_light_color; }\n";
@@ -176,7 +177,6 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th blockquote { border-color: $border; border-left-color: $accent; background-color: $bg_darker; }\n";
 			echo "$th blockquote cite { color: $color_fade; }\n";
 
-			echo "$th .sidebar .child-page-nav li a:hover, $th .widget-area .nav li a:hover { color: $accent; }\n";
 			echo "$th .sidebar .child-page-nav .current_page_item, $th .sidebar .child-page-nav .current_page_item:before { background-color: $bg_darker; }\n";
 
 			// Bootstrap Elements
@@ -207,7 +207,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Buttons
 			
 			echo $this->button_color(array('primary', 'accent'), $accent, $th);
-			echo $this->button_color('minimal', $bg_darker, $th);
+			echo $this->button_color('minimal', '#'.$bg_ob->darken(2), $th);
 
 			// Element Colors
 			
@@ -223,7 +223,8 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th .mixt-icon.icon-outline.accent, " .
 				 "$th .mixt-stat.color-outline.accent, " .
 				 "$th .mixt-iconbox .inner.bordered.accent, " .
-				 "$th .mixt-image .image-wrap.accent { border-color: $accent; }\n";
+				 "$th .mixt-image .image-wrap.accent, " .
+				 "$th .mixt-headline .sideline.accent:after { border-color: $accent; }\n";
 			// Accent Bg Variants
 			echo "$th .mixt-stat.color-bg.accent, " .
 				 "$th .mixt-icon.icon-solid.accent, " .
@@ -412,7 +413,7 @@ class Mixt_Themes extends Mixt_DCSS {
 				echo "$main_navbar:not(.position-top):not(.vertical) { background-color: rgba($bg_rgb, {$options['nav-opacity']}); }\n";
 			}
 
-			echo "$navbar.init { background-color: $bg !important; }\n";
+			echo "$navbar .navbar-data { background-color: $bg !important; }\n";
 
 			if ( $bg_dark ) {
 				echo "$navbar .navbar-data:before { content: 'dark'; }\n";

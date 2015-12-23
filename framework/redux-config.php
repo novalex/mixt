@@ -519,8 +519,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Icon Font Sets', 'mixt' ),
 							'subtitle' => __( 'Select which icon font sets you want to use.', 'mixt' ),
 							'options'  => array(
-								'fontawesome' => __( 'Font Awesome', 'mixt' ),
-								'linecons'    => __( 'Linecons', 'mixt' ),
+								'fontawesome' => 'Font Awesome',
+								'typicons'    => 'Typicons',
+								'entypo'      => 'Entypo',
+								'linecons'    => 'Linecons',
 							),
 							'default'  => array(
 								'fontawesome' => '1',
@@ -1806,6 +1808,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'title'    => __( 'Widget Area', 'mixt' ),
 						'indent'   => true,
 					),
+
+						// Display
+						array(
+							'id'       => 'footer-widgets-show',
+							'type'     => 'switch',
+							'title'    => __( 'Display Widget Area', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
 					
 						// Background Color
 						array(
@@ -1868,6 +1880,16 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'title'    => __( 'Copyright Area', 'mixt' ),
 						'indent'   => true,
 					),
+
+						// Display
+						array(
+							'id'       => 'footer-copy-show',
+							'type'     => 'switch',
+							'title'    => __( 'Display Copyright Area', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => true,
+						),
 					
 						// Background Color
 						array(
@@ -2168,6 +2190,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						),
 					),
 
+					// Post Info Display
+					array(
+						'id'       => 'blog-post-info',
+						'type'     => 'switch',
+						'title'    => __( 'Post Info', 'mixt' ),
+						'subtitle' => __( 'Display the post format and date', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => false,
+					),
+
 					// Meta Position / Display
 					array(
 						'id'       => 'blog-meta-show',
@@ -2207,16 +2240,90 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'required' => array('post-content', '=', 'excerpt'),
 					),
 
-					// Post Info Display
+					// Divider
 					array(
-						'id'       => 'blog-post-info',
-						'type'     => 'switch',
-						'title'    => __( 'Post Info', 'mixt' ),
-						'subtitle' => __( 'Display the post format and date', 'mixt' ),
-						'on'       => __( 'Yes', 'mixt' ),
-						'off'      => __( 'No', 'mixt' ),
-						'default'  => false,
+						'id'   => 'blog-divider',
+						'type' => 'divide',
 					),
+
+					// ROLLOVER SECTION
+					array(
+						'id'       => 'blog-rollover-section',
+						'type'     => 'section',
+						'title'    => __( 'Rollover', 'mixt' ),
+						'indent'   => true,
+					),
+
+						// Show Rollover
+						array(
+							'id'       => 'blog-rollover',
+							'type'     => 'switch',
+							'title'    => __( 'Show Rollover', 'mixt' ),
+							'subtitle' => __( 'Display an overlay with useful links and info when a post is hovered', 'mixt' ),
+							'on'       => __( 'Yes', 'mixt' ),
+							'off'      => __( 'No', 'mixt' ),
+							'default'  => false,
+						),
+
+						// Rollover Elements
+						array(
+			                'id'       => 'blog-rollover-elem',
+							'type'     => 'checkbox',
+							'title'    => __( 'Elements', 'mixt' ),
+							'options'  => array(
+								'title'   => __( 'Title', 'mixt' ),
+								'excerpt' => __( 'Excerpt', 'mixt' ),
+								'view'    => __( 'View Post Button', 'mixt' ),
+								'full'    => __( 'Full Image Button', 'mixt' ),
+							),
+							'default' => array(
+								'title'   => '1',
+								'excerpt' => '0',
+								'view'    => '0',
+								'full'    => '0',
+							),
+							'required' => array('blog-rollover', '=', true),
+						),
+
+						// Rollover Color
+						array(
+							'id'       => 'blog-rollover-color',
+							'type'     => 'select',
+							'title'    => __( 'Background Color', 'mixt' ),
+							'options'  => mixt_get_assets('colors', 'basic'),
+							'default'  => 'black',
+							'required' => array('blog-rollover', '=', true),
+						),
+
+						// Animation - In
+						array(
+							'id'       => 'blog-rollover-anim-in',
+							'type'     => 'select',
+							'title'    => __( 'Animation - In', 'mixt' ),
+							'options'  => mixt_css_anims('trans-in'),
+							'default'  => 'fadeIn',
+							'required' => array('blog-rollover', '=', true),
+						),
+
+						// Animation - Out
+						array(
+							'id'       => 'blog-rollover-anim-out',
+							'type'     => 'select',
+							'title'    => __( 'Animation - Out', 'mixt' ),
+							'options'  => mixt_css_anims('trans-out'),
+							'default'  => 'fadeOut',
+							'required' => array('blog-rollover', '=', true),
+						),
+
+						// Button Color
+						array(
+							'id'       => 'blog-rollover-btn-color',
+							'type'     => 'select',
+							'title'    => __( 'Button Color', 'mixt' ),
+							'options'  => mixt_get_assets('colors', 'buttons'),
+							'default'  => 'primary',
+							'required' => array('blog-rollover', '=', true),
+						),
 				),
 			);
 
@@ -3160,6 +3267,30 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'title'    => __( 'Down Arrow', 'mixt' ),
 						'default'  => 'fa fa-chevron-down',
 					),
+
+					// View Post
+					array(
+						'id'       => 'view-post-icon',
+						'type'     => 'text',
+						'title'    => __( 'View Post', 'mixt' ),
+						'default'  => 'fa fa-share',
+					),
+
+					// View Image
+					array(
+						'id'       => 'view-image-icon',
+						'type'     => 'text',
+						'title'    => __( 'View Image', 'mixt' ),
+						'default'  => 'fa fa-search',
+					),
+
+					// Comments
+					array(
+						'id'       => 'comments-icon',
+						'type'     => 'text',
+						'title'    => __( 'Comments', 'mixt' ),
+						'default'  => 'fa fa-comment',
+					),
 				),
 			);
 			
@@ -3174,16 +3305,27 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 					// Social Icons Color On Hover
 					array(
-						'id'   => 'social-profiles-color',
-						'type' => 'button_set',
+						'id'       => 'social-profiles-color',
+						'type'     => 'button_set',
 						'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
 						'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
-						'options' => array(
+						'options'  => array(
 							'icon' => __( 'Icon', 'mixt' ),
 							'bg'   => __( 'Background', 'mixt' ),
 							'none' => __( 'Neither', 'mixt' ),
 						),
-						'default' => 'bg',
+						'default'  => 'bg',
+					),
+
+					// Social Icons Tooltip
+					array(
+						'id'       => 'social-icons-tooltip',
+						'type'     => 'switch',
+						'title'    => __( 'Social Icons Tooltip', 'mixt' ),
+						'subtitle' => __( 'Show a tooltip when a social icon is hovered', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
 					),
 					
 					// Social Profiles

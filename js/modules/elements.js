@@ -44,11 +44,13 @@ ELEMENT FUNCTIONS
 
 		// Animate value
 		function statValue(el) {
-			var from  = el.data('from'),
-				to    = el.data('to'),
-				speed = el.data('speed');
+			var from   = el.data('from'),
+				to     = el.data('to'),
+				speed  = el.data('speed'),
+				linear = el.data('linear');
 			$({value: from}).animate({value: to}, {
 				duration: speed,
+				easing: ( linear == true ) ? 'linear' : 'swing',
 				step: function() { el.text(Math.round(this.value)); },
 				always: function() { el.text(to); }
 			});

@@ -150,7 +150,7 @@
 }
 @each $name, $theme in $site-themes {
 	.theme-#{$name} {
-		@include button-color('minimal', darken(map-get($theme, 'bg'), 5));
+		@include button-color('minimal', darken(map-get($theme, 'bg'), 2));
 		@include button-color('accent', map-get($theme, 'accent'));
 		.btn-primary { @extend .btn-accent; }
 		.btn-hover-primary { @extend .btn-hover-accent; }

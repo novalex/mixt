@@ -93,8 +93,6 @@ function mixt_head_media() {
 		),
 	) );
 
-	$height = Mixt_Options::get('header', 'height');
-
 	$wrap_classes = 'head-media';
 
 	if ( Mixt_Options::get('header', 'fullscreen') ) { $wrap_classes .= ' fullscreen'; }
@@ -356,10 +354,11 @@ function mixt_head_media_css() {
 			$css .= "$hm_dark .container, $hm_dark .media-inner > a, $hm_dark .header-scroll, $hm_dark #breadcrumbs > li + li:before { color: {$options['inv-text']} !important; }\n";
 		}
 		if ( is_array($height) && ! empty($height['height']) && $height['units'] == 'px' ) {
-			$hm_styles .= " height: {$height['height']}px;";
+			$hm_styles .= " height: {$height['height']};";
 		}
 		if ( is_array($options['min-height']) && ! empty($options['min-height']['height']) && $options['min-height']['units'] == 'px' ) {
-			$hm_styles .= " min-height: {$options['min-height']['height']}px;";
+			$hm_styles .= " min-height: {$options['min-height']['height']} !important;";
+			$css .= "$hm .container { min-height: {$options['min-height']['height']} !important; }\n";
 		}
 		if ( $hm_styles != '' ) {
 			$css .= "$hm { $hm_styles }\n";
