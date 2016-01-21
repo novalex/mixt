@@ -2,11 +2,19 @@
 /**
  * Mini-cart
  *
- * Contains the markup for the mini-cart, used by the cart widget
+ * Contains the markup for the mini-cart, used by the cart widget.
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.1.0
+ * This template can be overridden by copying it to yourtheme/woocommerce/cart/mini-cart.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
+ * will need to copy the new files to your theme to maintain compatibility. We try to do this.
+ * as little as possible, but it does happen. When this occurs the version of the template file will.
+ * be bumped and the readme will list any important changes.
+ *
+ * @see     http://docs.woothemes.com/document/template-structure/
+ * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 2.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -74,8 +82,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php // MIXT MOD ?>
 	<div class="buttons btn-group">
-		<a href="<?php echo WC()->cart->get_cart_url(); ?>" class="btn btn-minimal"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
-		<a href="<?php echo WC()->cart->get_checkout_url(); ?>" class="btn btn-accent checkout"><?php _e( 'Checkout', 'woocommerce' ); ?></a>
+		<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-minimal"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
+		<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-accent checkout"><?php _e( 'Checkout', 'woocommerce' ); ?></a>
 	</div>
 
 <?php endif; ?>

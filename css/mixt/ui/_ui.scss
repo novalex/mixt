@@ -42,7 +42,7 @@
 		&,
 		a { text-align: center; }
 
-		a {
+		a:not(.btn) {
 			display: block;
 			padding: 5px 10px;
 		}

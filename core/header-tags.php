@@ -283,31 +283,31 @@ function mixt_location_bar() {
 			<div class="container">
 				<div class="inner">
 
-					<div class="left-content"><?php
+					<div class="left-content">
+					<?php
 						// Left Side Title
-						if ( $options['left-content'] == '1' ) { ?>
-							<div class="page-title"><?php
-								echo $title_string; ?>
-							</div><?php
+						if ( $options['left-content'] == '1' ) {
+							echo "<div class='page-title'>$title_string</div>";
 
 						// Left Side Breadcrumbs
 						} else if ( $options['left-content'] == '2' && function_exists('mixt_breadcrumbs') ) {
 							mixt_breadcrumbs($page_title);
 						}
-					?></div>
+					?>
+					</div>
 
-					<div class="right-content"><?php
+					<div class="right-content">
+					<?php
 						// Right Side Title
-						if ( $options['right-content'] == '1' ) { ?>
-							<div class="page-title"><?php
-								echo $title_string; ?>
-							</div><?php
+						if ( $options['right-content'] == '1' ) {
+							echo "<div class='page-title'>$title_string</div>";
 
 						// Right Side Breadcrumbs
 						} else if ( $options['right-content'] == '2' && function_exists('mixt_breadcrumbs') ) {
 							mixt_breadcrumbs($page_title);
 						}
-					?></div>
+					?>
+					</div>
 
 				</div>
 			</div>

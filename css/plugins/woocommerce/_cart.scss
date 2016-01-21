@@ -5,11 +5,7 @@
 		table.cart {
 			input { line-height: $line-height-base; }
 
-			.coupon {
-				max-width: 50%;
-
-				.btn { border-left-width: 0; }
-			}
+			.coupon { max-width: 50%; }
 		}
 
 		.cart-collaterals {
