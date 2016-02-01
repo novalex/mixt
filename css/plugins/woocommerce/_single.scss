@@ -16,7 +16,7 @@
 			.product_title { margin-bottom: 5px; }
 
 			.woocommerce-product-rating,
-			.summary > div,
+			.summary > div:not(:last-child),
 			form.cart { margin-bottom: $spacing; }
 
 

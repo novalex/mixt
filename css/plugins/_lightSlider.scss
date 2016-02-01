@@ -20,9 +20,20 @@
 			display: table;
 		}
 
-		&.item-padding .lslide {
+		&.item-padding li.slider-item {
 			padding-left: $nav-size + $padding-m;
 			padding-right: $nav-size + $padding-m;
+		}
+
+		li.slider-item {
+			> :last-child { margin-bottom: 0; }
+
+			.slide-link {
+				position: absolute;
+				top: 0; left: 0; bottom: 0;
+				width: 100%;
+				z-index: 99;
+			}
 		}
 	}
 	.lSSlideWrapper {

@@ -95,13 +95,44 @@ $spacing-margin-sizes: (
 
 .no-margin { margin: 0 !important; }
 
+.padding-vertical {
+	padding-top: $row-spacing-lg;
+	padding-bottom: $row-spacing-lg;
+}
+.padding-vertical-l {
+	$padding: $row-spacing-lg * 1.5;
+	padding-top: $padding;
+	padding-bottom: $padding;
+}
+.padding-vertical-xl {
+	$padding: $row-spacing-lg * 2;
+	padding-top: $padding;
+	padding-bottom: $padding;
+}
 .padding-horizontal {
 	padding-left: $gutter-lg;
 	padding-right: $gutter-lg;
 }
-.padding-vertical {
-	padding-top: $row-spacing-lg;
-	padding-bottom: $row-spacing-lg;
+
+@include media('screen', '<mars') {
+	.padding-vertical {
+		padding-top: $row-spacing-sm;
+		padding-bottom: $row-spacing-sm;
+	}
+	.padding-vertical-l {
+		$padding: $row-spacing-sm * 1.5;
+		padding-top: $padding;
+		padding-bottom: $padding;
+	}
+	.padding-vertical-xl {
+		$padding: $row-spacing-sm * 2;
+		padding-top: $padding;
+		padding-bottom: $padding;
+	}
+	.padding-horizontal {
+		padding-left: $gutter-sm;
+		padding-right: $gutter-sm;
+	}
 }
 
 

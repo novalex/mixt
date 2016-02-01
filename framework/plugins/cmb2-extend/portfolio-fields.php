@@ -204,11 +204,11 @@ if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_
 			'default' => 'auto',
 		),
 
-		// Rollover Elements
+		// Rollover Items
 		array(
-            'id'       => $prefix . 'portfolio-rollover-elem',
+            'id'       => $prefix . 'portfolio-rollover-items',
 			'type'     => 'multicheck',
-			'name'     => __( 'Elements', 'mixt' ),
+			'name'     => __( 'Items', 'mixt' ),
 			'options'  => array(
 				'title'   => __( 'Title', 'mixt' ),
 				'excerpt' => __( 'Excerpt', 'mixt' ),
@@ -256,6 +256,24 @@ if ( mixt_cmb_show_tab('portfolio') && function_exists('cmb2_post_search_render_
 			'name'       => __( 'Animation - Out', 'mixt' ),
 			'options'    => array_merge( array('auto' => 'Auto' ), mixt_css_anims('trans-out') ),
 			'default'    => 'auto',
+			'attributes' => array(
+				'data-parent-field' => $prefix . 'portfolio-rollover',
+				'data-show-on'      => $prefix . 'portfolio-rollover',
+			),
+		),
+
+		// Item Style
+		array(
+			'id'       => $prefix . 'portfolio-rollover-item-style',
+			'type'     => 'select',
+			'name'     => __( 'Item Style', 'mixt' ),
+			'options'  => array(
+				'auto'          => 'Auto',
+				'plain'         => __( 'Plain', 'mixt' ),
+				'btn'           => __( 'Button', 'mixt' ),
+				'btn btn-round' => __( 'Round Button', 'mixt' ),
+			),
+			'default'  => 'auto',
 			'attributes' => array(
 				'data-parent-field' => $prefix . 'portfolio-rollover',
 				'data-show-on'      => $prefix . 'portfolio-rollover',

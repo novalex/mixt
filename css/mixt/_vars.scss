@@ -127,14 +127,6 @@ $padding-m:  20px;
 $padding-l:  30px;
 
 
-// POST FEATURED IMAGES
-
-$post-aside-img: '#{$img-path}/textures/ag-square.png';
-$post-link-img: '#{$img-path}/textures/transparent-square-tiles.png';
-$post-quote-img: false;
-$post-status-img: false;
-
-
 // MISCELLANEOUS
 
 $bd-radius-s: 2px;
@@ -142,6 +134,8 @@ $bd-radius:   2px;
 $bd-radius-l: 3px;
 
 $rounded-radius: $bd-radius-l;
+
+$quote-border-width: 3px;
 
 // Right-To-Left language support
 $rtl: false;

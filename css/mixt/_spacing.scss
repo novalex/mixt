@@ -154,13 +154,4 @@ ul.wpb_thumbnails-fluid > li,
 		.wpb_wrapper .mixt-element,
 		.wpb_column:not(:last-child) > .wpb_wrapper > *:last-child { margin-bottom: $row-grid-sm-gutter; }
 	}
-
-	.padding-horizontal {
-		padding-left: $gutter-sm;
-		padding-right: $gutter-sm;
-	}
-	.padding-vertical {
-		padding-top: $row-spacing-sm;
-		padding-bottom: $row-spacing-sm;
-	}
 }

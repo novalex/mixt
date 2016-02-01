@@ -217,11 +217,11 @@ $this->sections[] = array(
 				'default'  => true,
 			),
 
-			// Rollover Elements
+			// Rollover Items
 			array(
-                'id'       => 'portfolio-rollover-elem',
+                'id'       => 'portfolio-rollover-items',
 				'type'     => 'checkbox',
-				'title'    => __( 'Elements', 'mixt' ),
+				'title'    => __( 'Items', 'mixt' ),
 				'options'  => array(
 					'title'   => __( 'Title', 'mixt' ),
 					'excerpt' => __( 'Excerpt', 'mixt' ),
@@ -267,6 +267,20 @@ $this->sections[] = array(
 				'required' => array('portfolio-rollover', '=', true),
 			),
 
+			// Item Style
+			array(
+				'id'       => 'portfolio-rollover-item-style',
+				'type'     => 'select',
+				'title'    => __( 'Item Style', 'mixt' ),
+				'options'  => array(
+					'plain'         => __( 'Plain', 'mixt' ),
+					'btn'           => __( 'Button', 'mixt' ),
+					'btn btn-round' => __( 'Round Button', 'mixt' ),
+				),
+				'default'  => 'plain',
+				'required' => array('portfolio-rollover', '=', true),
+			),
+
 			// Button Color
 			array(
 				'id'       => 'portfolio-rollover-btn-color',
@@ -274,7 +288,10 @@ $this->sections[] = array(
 				'title'    => __( 'Button Color', 'mixt' ),
 				'options'  => mixt_get_assets('colors', 'buttons'),
 				'default'  => 'primary',
-				'required' => array('portfolio-rollover', '=', true),
+				'required' => array(
+					array('portfolio-rollover', '=', true),
+					array('portfolio-rollover-item-style', '!=', 'plain')
+				),
 			),
 	),
 );

@@ -64,6 +64,8 @@
 		border-radius: 0;
 		-webkit-perspective: none;
 	}
+
+	.post-quote blockquote { border-left-width: $quote-border-width; }
 }
 
 .blog-grid .posts-container .article,

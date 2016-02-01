@@ -147,13 +147,17 @@ p:empty { display: none; }
 	max-height: 580px;
 	color: #333;
 	border-bottom-right-radius: 3px;
-	border: 1px solid rgba(0,0,0,0.1);
-	border-left-width: 0;
-	background-color: #fbfbfb;
+	border-left-width: 0 !important;
 	transition: left 0.3s;
 	z-index: 10000;
 
 	&.show { left: 0; }
+
+	&,
+	.handle {
+		border: 1px solid rgba(0,0,0,0.1);
+		background-color: #fbfbfb;
+	}
 
 	.handle {
 		position: absolute;
@@ -180,7 +184,7 @@ p:empty { display: none; }
 
 	.content {
 		height: 100%;
-		overflow-y: auto;
+		overflow: hidden;
 	}
 
 	.field {
@@ -191,18 +195,22 @@ p:empty { display: none; }
 	}
 }
 
-#styler-bg-pat .btn {
-	width: 15%;
-	width: calc(16.666% - 2px);
-	height: 32px;
-	border-color: rgba(0,0,0,0.1);
+#styler-bg-pat {
+	background-image: url('#{$img-path}/misc/bg-pat-sprite.png');
+	background-size: 207px 202px;
+	background-repeat: no-repeat;
+	background-position: 1px 1px;
 
-	&.styler-no-bg {
-		background: #fff url('#{$img-path}/icons/none.png') center/100% auto no-repeat;
-	}
+	.btn {
+		width: 15%;
+		width: calc(16.666% - 2px);
+		height: 32px;
+		border-color: transparent !important;
+		background: transparent !important;
 
-	&.active {
-		box-shadow: 0 0 1px 1px #5991CE;
+		&.active {
+			box-shadow: 0 0 1px 1px #5991CE;
+		}
 	}
 }
 

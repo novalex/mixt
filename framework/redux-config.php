@@ -1229,6 +1229,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => true,
 					),
 
+					// Navbar Submenu Dropdown Arrows
+					array(
+						'id'       => 'nav-submenu-arrows',
+						'type'     => 'switch',
+						'title'    => __( 'Submenu Dropdown Arrows', 'mixt' ),
+						'subtitle' => __( 'Enable arrows for submenu items with dropdowns', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
 					// Divider
 					array(
 						'id'   => 'navbar-divider',
@@ -2089,6 +2100,17 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'customizer' => false,
 				'fields'     => array(
 
+					// Animate Posts On Load
+					array(
+						'id'       => 'animate-posts',
+						'type'     => 'switch',
+						'title'    => __( 'Animate Posts', 'mixt' ),
+						'subtitle' => __( 'Apply animation to posts on page load', 'mixt' ),
+						'on'       => __( 'Yes', 'mixt' ),
+						'off'      => __( 'No', 'mixt' ),
+						'default'  => true,
+					),
+
 					// Pagination Type
 					array(
 						'id'       => 'pagination-type',
@@ -2265,11 +2287,11 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => false,
 						),
 
-						// Rollover Elements
+						// Rollover Items
 						array(
-			                'id'       => 'blog-rollover-elem',
+			                'id'       => 'blog-rollover-items',
 							'type'     => 'checkbox',
-							'title'    => __( 'Elements', 'mixt' ),
+							'title'    => __( 'Items', 'mixt' ),
 							'options'  => array(
 								'title'   => __( 'Title', 'mixt' ),
 								'excerpt' => __( 'Excerpt', 'mixt' ),
@@ -2315,6 +2337,20 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'required' => array('blog-rollover', '=', true),
 						),
 
+						// Item Style
+						array(
+							'id'       => 'blog-rollover-item-style',
+							'type'     => 'select',
+							'title'    => __( 'Item Style', 'mixt' ),
+							'options'  => array(
+								'plain'         => __( 'Plain', 'mixt' ),
+								'btn'           => __( 'Button', 'mixt' ),
+								'btn btn-round' => __( 'Round Button', 'mixt' ),
+							),
+							'default'  => 'plain',
+							'required' => array('blog-rollover', '=', true),
+						),
+
 						// Button Color
 						array(
 							'id'       => 'blog-rollover-btn-color',
@@ -2322,7 +2358,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'title'    => __( 'Button Color', 'mixt' ),
 							'options'  => mixt_get_assets('colors', 'buttons'),
 							'default'  => 'primary',
-							'required' => array('blog-rollover', '=', true),
+							'required' => array(
+								array('blog-rollover', '=', true),
+								array('blog-rollover-item-style', '!=', 'plain')
+							),
 						),
 				),
 			);

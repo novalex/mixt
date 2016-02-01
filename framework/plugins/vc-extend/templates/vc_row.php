@@ -111,8 +111,14 @@ $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_
 if ( $theme_color != 'auto' ) $css_class .= ' theme-section-' . $theme_color;
 if ( $row_padding != '' ) {
 	$row_padding = explode(',', $row_padding);
+	if ( in_array('vertical-xl', $row_padding) ) {
+		$css_class .= ' padding-vertical-xl';
+	} else if ( in_array('vertical-l', $row_padding) ) {
+		$css_class .= ' padding-vertical-l';
+	} else if ( in_array('vertical', $row_padding) ) {
+		$css_class .= ' padding-vertical';
+	}
 	if ( in_array('horizontal', $row_padding) ) $css_class .= ' padding-horizontal';
-	if ( in_array('vertical', $row_padding) ) $css_class .= ' padding-vertical';
 }
 if ( $separator != '' ) $css_class .= ' mixt-row-has-separator';
 if ( filter_var($first_row, FILTER_VALIDATE_BOOLEAN) === true ) $css_class .= ' first-row';

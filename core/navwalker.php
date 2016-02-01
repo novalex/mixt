@@ -153,6 +153,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			// GET SETTINGS
 			$has_menu_icons = ( ! empty($menu_icon) );
 			$has_menu_arrows = isset($mixt_opt['nav-menu-arrows']) ? (bool) $mixt_opt['nav-menu-arrows'] : 0;
+			$has_submenu_arrows = isset($mixt_opt['nav-submenu-arrows']) ? (bool) $mixt_opt['nav-submenu-arrows'] : 0;
 
 			
 			// APPLY CUSTOM CLASSES
@@ -240,7 +241,6 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			if ( $args->has_children ) {
 
 				$arrow_classes = ' drop-arrow';
-				if ( $has_menu_arrows == 0 ) { $arrow_classes .= ' visible-mobile'; }
 
 				// Hardcode arrow icons for now
 				$arrow_left = 'fa fa-chevron-left';
@@ -248,6 +248,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 				$arrow_down = 'fa fa-chevron-down';
 
 				if ( $depth === 0 ) {
+					if ( $has_menu_arrows == 0 ) { $arrow_classes .= ' visible-mobile'; }
 					if ( Mixt_Options::get('nav', 'layout') == 'vertical' ) {
 						$arrow = ( Mixt_Options::get('nav', 'vertical-pos') == 'left' ) ? $arrow_right : $arrow_left;
 					} else {
@@ -255,11 +256,10 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 					}
 				} else if ( $depth > 0 ) {
 					if ( $is_megamenu($item->menu_item_parent) == 'true' ) {
-						if ( $has_menu_arrows != 0 ) {
-							$arrow_classes .= ' visible-mobile';
-						}
+						$arrow_classes .= ' visible-mobile';
 						$arrow = $arrow_down;
 					} else {
+						if ( $has_submenu_arrows == 0 ) { $arrow_classes .= ' visible-mobile'; }
 						$arrow = $arrow_right;
 					}
 				}

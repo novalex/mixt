@@ -67,6 +67,7 @@
 		.review-author {
 			display: table;
 			width: 100%;
+			text-align: left;
 			padding: 0 0 $spacing 0;
 
 			&:last-child { padding: $spacing 0 0 0; }

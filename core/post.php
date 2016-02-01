@@ -122,6 +122,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 
 			$this->options = mixt_get_options( array(
+				'animate-posts' => array(),
 				'format-icon' => array(
 					'key'    => 'format-' . $this->format . '-icon',
 					'return' => 'value',
@@ -163,7 +164,9 @@ if ( ! class_exists('Mixt_Post') ) {
 			if ( ! $this->display_component('content') ) { $classes .= ' no-content'; }
 
 			// Animate post on load
-			$classes .= ' animated init';
+			if ( $this->options['animate-posts'] ) {
+				$classes .= ' animated init';
+			}
 
 			return $classes;
 		}
@@ -336,6 +339,8 @@ if ( ! class_exists('Mixt_Post') ) {
 							} else {
 								$output = $format_icon;
 							}
+
+						// Quote
 						} else if ( $this->format == 'quote' ) {
 							// Blockquote tag among other content
 							if ( preg_match('/<blockquote[^\<]*>(.*)<\/blockquote>/si', $this->content, $matches) ) {
@@ -351,7 +356,7 @@ if ( ! class_exists('Mixt_Post') ) {
 							$output = "<div class='$feat_classes'>$quote</div>";
 						} else {
 							$this->show_content = false;
-							$output = "<div class='$feat_classes'>$this->content</div>";
+							$output = "<div class='$feat_classes'>$this->content <i class='format-bg-icon {$this->options['format-icon']}'></i></div>";
 						}
 					}
 
@@ -530,20 +535,22 @@ if ( ! class_exists('Mixt_Post') ) {
 		public function rollover($content) {
 			$opt_pre = $this->layout['page-type'];
 			$options = mixt_get_options( array(
-				'rollover'  => array( 'key' => $opt_pre . '-rollover' ),
-				'elem'      => array( 'key' => $opt_pre . '-rollover-elem', 'return' => 'value' ),
-				'color'     => array( 'key' => $opt_pre . '-rollover-color', 'return' => 'value' ),
-				'anim-in'   => array( 'key' => $opt_pre . '-rollover-anim-in', 'return' => 'value' ),
-				'anim-out'  => array( 'key' => $opt_pre . '-rollover-anim-out', 'return' => 'value' ),
-				'btn-color' => array( 'key' => $opt_pre . '-rollover-btn-color', 'return' => 'value' ),
+				'rollover'   => array( 'key' => $opt_pre . '-rollover' ),
+				'items'      => array( 'key' => $opt_pre . '-rollover-items', 'return' => 'value' ),
+				'color'      => array( 'key' => $opt_pre . '-rollover-color', 'return' => 'value' ),
+				'anim-in'    => array( 'key' => $opt_pre . '-rollover-anim-in', 'return' => 'value' ),
+				'anim-out'   => array( 'key' => $opt_pre . '-rollover-anim-out', 'return' => 'value' ),
+				'item-style' => array( 'key' => $opt_pre . '-rollover-item-style', 'return' => 'value' ),
+				'btn-color'  => array( 'key' => $opt_pre . '-rollover-btn-color', 'return' => 'value' ),
 			));
 
 			$exceptions = array('aside', 'link', 'quote', 'status', 'audio');
 			if ( ! $options['rollover'] || in_array($this->format, $exceptions) ) return $content;
 
-			$items = mixt_option_checkbox_val($options['elem']);
-
-			$btn_classes = "btn btn-{$options['btn-color']} no-border";
+			$items = mixt_option_checkbox_val($options['items']);
+			$item_style = $options['item-style'];
+			$item_classes = 'rollover-item ' . $item_style;
+			if ( $item_style != 'plain' ) { $item_classes .= " btn-{$options['btn-color']} no-border"; }
 
 			ob_start();
 
@@ -562,13 +569,13 @@ if ( ! class_exists('Mixt_Post') ) {
 							}
 							if ( in_array('view', $items) ) {
 								$icon = mixt_get_icon('view-post');
-								echo "<a href='$this->permalink' class='$btn_classes view-post' title='" . __('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+								echo "<a href='$this->permalink' class='$item_classes view-post' title='" . __('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
 							}
 							if ( in_array('full', $items) ) {
 								$link = wp_get_attachment_url(get_post_thumbnail_id($this->ID));
 								if ( $link ) {
-									$icon = $icon = mixt_get_icon('view-image');
-									echo "<a href='$link' class='$btn_classes view-image' title='" . __('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+									$icon = mixt_get_icon('view-image');
+									echo "<a href='$link' class='$item_classes view-image' title='" . __('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
 								}
 							}
 						?>
