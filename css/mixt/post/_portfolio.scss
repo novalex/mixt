@@ -38,12 +38,5 @@
 		
 		> .row { border-color: inherit; }
 	}
-
-	// Media
-	@include media('screen', 'mars') {
-		.portfolio.has-columns {
-			.entry-body { margin-top: 0; }
-		}
-	}
 	
 }

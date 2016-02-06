@@ -134,21 +134,23 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 							$nav_menu_classes .= ' no-active';
 						}
 
+						$main_nav_args = array(
+							'container_id'    => 'main-menu-wrap',
+							'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
+							'menu_class'      => $nav_menu_classes,
+							'fallback_cb'     => '__return_false',
+							'echo'            => false,
+							'menu_id'         => 'main-menu',
+							'walker'          => new Mixt_Navwalker(),
+						);
+
 						$main_nav_loc = 'primary';
 						if ( $page_options['page-type'] == 'onepage' ) { $main_nav_loc = 'onepage'; }
 
-						$main_nav_menu = wp_nav_menu(
-							array(
-								'theme_location'  => $main_nav_loc,
-								'container_id'    => 'main-menu-wrap',
-								'container_class' => 'navbar-inner collapse navbar-collapse navbar-responsive-collapse',
-								'menu_class'      => $nav_menu_classes,
-								'fallback_cb'     => '__return_false',
-								'echo'            => false,
-								'menu_id'         => 'main-menu',
-								'walker'          => new Mixt_Navwalker()
-							)
-						);
+						// $main_nav_args['theme_location'] = $main_nav_loc;
+						$main_nav_args['menu'] = '404 Menu';
+
+						$main_nav_menu = wp_nav_menu($main_nav_args);
 
 						// Check if a menu is assigned and display a message if not
 						if ( ! empty($main_nav_menu) ) {

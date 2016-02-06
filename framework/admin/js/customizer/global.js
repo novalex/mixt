@@ -25,7 +25,7 @@ window.MIXT = {
 	wp.customize('mixt_opt[site-layout]', function(value) {
 		value.bind( function(to) {
 			if ( $('#main-wrap').hasClass('nav-vertical') ) {
-				wp.customize.previewer.refresh();
+				wp.customize.preview.send('refresh');
 				return;
 			}
 			if ( to == 'wide' ) {

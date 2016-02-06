@@ -795,7 +795,7 @@ class WP_Import extends WP_Importer {
 		}
 
 		foreach ( $item['postmeta'] as $meta )
-			$$meta['key'] = $meta['value'];
+			${$meta['key']} = $meta['value'];
 
 		if ( 'taxonomy' == $_menu_item_type && isset( $this->processed_terms[intval($_menu_item_object_id)] ) ) {
 			$_menu_item_object_id = $this->processed_terms[intval($_menu_item_object_id)];
@@ -845,6 +845,7 @@ class WP_Import extends WP_Importer {
 		if ( ! empty($_mixt_menu_item_no_label) ) { $args['mixt-menu-item-no-label'] = $_mixt_menu_item_no_label; }
 		if ( ! empty($_mixt_menu_item_disabled) ) { $args['mixt-menu-item-disabled'] = $_mixt_menu_item_disabled; }
 		if ( ! empty($_mixt_menu_item_megamenu) ) { $args['mixt-menu-item-megamenu'] = $_mixt_menu_item_megamenu; }
+		// END MIXT MOD
 
 		$id = wp_update_nav_menu_item( $menu_id, 0, $args );
 		if ( $id && ! is_wp_error( $id ) )

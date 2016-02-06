@@ -16,8 +16,6 @@ function mixt_wbc_after_import($demo_import, $demo_dir) {
 	reset($demo_import);
 	$current_key = key($demo_import);
 
-	$debug = array();
-
 	if ( ! empty($demo_import[$current_key]['directory']) ) {
 		$demo_id = $demo_import[$current_key]['directory'];
 
@@ -149,7 +147,12 @@ function mixt_nav_menu_update_meta($menu_id, $menu_item_id, $args) {
 		$key = 'mixt-menu-item-' . $_key;
 		if ( array_key_exists($key, $args) ) {
 			$u_key = '_' . str_replace('-', '_', $key);
-			$value = sanitize_key($args[$key]);
+			if ( $_key == 'icon' ) {
+				$classes = explode(' ', $args[$key]);
+				$value = array_map('sanitize_html_class', $classes);
+			} else {
+				$value = sanitize_key($args[$key]);
+			}
 			update_post_meta($menu_item_id, $u_key, $value);
 
 			// Update URLs for archive pages

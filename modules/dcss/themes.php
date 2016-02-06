@@ -30,8 +30,8 @@ class Mixt_Themes extends Mixt_DCSS {
 			) );
 			$this->default_site_themes = mixt_get_themes('site', 'default');
 			$this->default_nav_themes = mixt_get_themes('nav', 'default');
-			$this->site_themes = array_merge( $this->default_site_themes, get_option('mixt-site-themes', array()) );
-			$this->nav_themes = array_merge( $this->default_nav_themes, get_option('mixt-nav-themes', array()) );
+			$this->site_themes = array_merge( $this->default_site_themes, (array) get_option('mixt-site-themes') );
+			$this->nav_themes = array_merge( $this->default_nav_themes, (array) get_option('mixt-nav-themes') );
 		}
 	}
 

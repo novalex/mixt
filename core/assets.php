@@ -374,8 +374,8 @@ function mixt_get_images($type) {
 	$images      = array();
 
 	if ( is_dir( $images_path ) ) {
-		if ( $images_dir = opendir( $images_path ) ) {
-			while ( ( $image_file = readdir( $images_dir ) ) !== false ) {
+		if ( $images_dir = scandir($images_path) ) {
+			foreach ( $images_dir as $image_file ) {
 				if ( stristr( $image_file, '.png' ) !== false || stristr( $image_file, '.jpg' ) !== false ) {
 					$name = explode( '.', $image_file );
 					$name = str_replace( '.' . end( $name ), '', $image_file );

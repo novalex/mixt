@@ -213,9 +213,30 @@ POST FUNCTIONS
 	}
 
 
+	// Keep post content above a minimum height to maintain readability
+	function postContentMinWidth() {
+		var minW = 320,
+			postMinW = minW * 2,
+			post = $('.single-content.has-columns'),
+			cont = $('.entry-body', post);
+		if ( cont.hasClass('col-sm-4') ) {
+			postMinW = minW * 3;
+		} else if ( cont.hasClass('col-sm-8') ) {
+			postMinW = minW * 1.5;
+		}
+		if ( post.width() < postMinW ) {
+			post.addClass('override-cols');
+		} else {
+			post.removeClass('override-cols');
+		}
+	}
+
+
 	// Functions To Run On Window Resize
 	function resizeFn() {
 		iframeAspect();
+
+		postContentMinWidth();
 	}
 	viewport.resize( $.debounce( 500, resizeFn ));
 
@@ -224,6 +245,8 @@ POST FUNCTIONS
 	viewport.load( function() {
 
 		postsPage();
+
+		postContentMinWidth();
 
 		// Isotope Masonry Init
 		if ( mixt_opt.layout.type == 'masonry' && typeof $.fn.isotope === 'function' ) {

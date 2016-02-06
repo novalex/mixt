@@ -866,15 +866,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'default'  => false,
 						),
 
-						// Scroll To Content Icon
-						array(
-							'id'       => 'head-content-scroll-icon',
-							'type'     => 'text',
-							'title'    => __( 'Scroll To Content Icon', 'mixt' ),
-							'default'  => 'fa fa-chevron-down',
-							'required' => array('head-content-scroll', '=', true),
-						),
-
 						// Post Info
 						array(
 							'id'       => 'head-content-info',
@@ -1129,6 +1120,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'type'     => 'spinner',
 						'title'    => __( 'Shrink', 'mixt' ),
 						'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 means no shrink)', 'mixt' ),
+						'min'      => '0',
 						'max'      => '20',
 						'step'     => '1',
 						'default'  => '6',
@@ -1795,15 +1787,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
 						'default'  => true,
-					),
-
-					// Back To Top Icon
-					array(
-						'id'       => 'back-to-top-icon',
-						'type'     => 'text',
-						'title'    => __( 'Back To Top Icon', 'mixt' ),
-						'default'  => 'fa fa-chevron-up',
-						'required' => array('back-to-top', '=', true),
 					),
 					
 					// Divider
@@ -2496,8 +2479,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 							'type'     => 'spinner',
 							'title'    => __( 'Number', 'mixt' ),
 							'subtitle' => __( 'How many related posts to display', 'mixt' ),
-							'max'      => '15',
 							'min'      => '1',
+							'max'      => '15',
 							'step'     => '1',
 							'default'  => '3',
 							'required' => array('post-related', '=', true),
@@ -2640,15 +2623,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => true,
 					),
 
-					// Author Icon
-					array(
-						'id'       => 'meta-author-icon',
-						'type'     => 'text',
-						'title'    => __( 'Author Icon', 'mixt' ),
-						'default'  => 'fa fa-user',
-						'required' => array('meta-author', '=', true),
-					),
-
 					// Meta Date
 					array(
 						'id'       => 'meta-date',
@@ -2658,15 +2632,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'on'       => __( 'Yes', 'mixt' ),
 						'off'      => __( 'No', 'mixt' ),
 						'default'  => true,
-					),
-
-					// Date Icon
-					array(
-						'id'       => 'meta-date-icon',
-						'type'     => 'text',
-						'title'    => __( 'Date Icon', 'mixt' ),
-						'default'  => 'fa fa-clock-o',
-						'required' => array('meta-date', '=', true),
 					),
 
 					// Meta Category
@@ -2680,15 +2645,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => true,
 					),
 
-					// Category Icon
-					array(
-						'id'       => 'meta-category-icon',
-						'type'     => 'text',
-						'title'    => __( 'Category Icon', 'mixt' ),
-						'default'  => 'fa fa-folder-open',
-						'required' => array('meta-category', '=', true),
-					),
-
 					// Meta Comments
 					array(
 						'id'       => 'meta-comments',
@@ -2700,120 +2656,12 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => true,
 					),
 
-					// Comments Icon
-					array(
-						'id'       => 'meta-comments-icon',
-						'type'     => 'text',
-						'title'    => __( 'Comments Icon', 'mixt' ),
-						'default'  => 'fa fa-comments',
-						'required' => array('meta-comments', '=', true),
-					),
-
 					// Meta Separator
 					array(
 						'id'       => 'meta-separator',
 						'type'     => 'text',
 						'title'    => __( 'Separator', 'mixt' ),
 						'subtitle' => __( 'Character(s) for the meta separator', 'mixt' ),
-					),
-				),
-			);
-
-			// POST FORMATS SECTION
-			$this->sections[] = array(
-				'title'      => __( 'Post Formats', 'mixt' ),
-				'desc'       => __( 'Configure the post formats and icons', 'mixt' ),
-				'icon'       => 'el-icon-paper-clip',
-				'subsection' => true,
-				'customizer' => false,
-				'fields'     => array(
-
-					// Standard Format Icon
-					array(
-						'id'       => 'format-standard-icon',
-						'type'     => 'text',
-						'title'    => __( 'Standard Format Icon', 'mixt' ),
-						'default'  => 'fa fa-align-left',
-					),
-
-					// Aside Format Icon
-					array(
-						'id'       => 'format-aside-icon',
-						'type'     => 'text',
-						'title'    => __( 'Aside Format Icon', 'mixt' ),
-						'default'  => 'fa fa-pencil',
-					),
-
-					// Image Format Icon
-					array(
-						'id'       => 'format-image-icon',
-						'type'     => 'text',
-						'title'    => __( 'Image Format Icon', 'mixt' ),
-						'default'  => 'fa fa-picture-o',
-					),
-
-					// Video Format Icon
-					array(
-						'id'       => 'format-video-icon',
-						'type'     => 'text',
-						'title'    => __( 'Video Format Icon', 'mixt' ),
-						'default'  => 'fa fa-play',
-					),
-
-					// Audio Format Icon
-					array(
-						'id'       => 'format-audio-icon',
-						'type'     => 'text',
-						'title'    => __( 'Audio Format Icon', 'mixt' ),
-						'default'  => 'fa fa-music',
-					),
-
-					// Gallery Format Icon
-					array(
-						'id'       => 'format-gallery-icon',
-						'type'     => 'text',
-						'title'    => __( 'Gallery Format Icon', 'mixt' ),
-						'default'  => 'fa fa-camera',
-					),
-
-					// Quote Format Icon
-					array(
-						'id'       => 'format-quote-icon',
-						'type'     => 'text',
-						'title'    => __( 'Quote Format Icon', 'mixt' ),
-						'default'  => 'fa fa-quote-right',
-					),
-
-					// Link Format Icon
-					array(
-						'id'       => 'format-link-icon',
-						'type'     => 'text',
-						'title'    => __( 'Link Format Icon', 'mixt' ),
-						'default'  => 'fa fa-link',
-					),
-
-					// Status Format Icon
-					array(
-						'id'       => 'format-status-icon',
-						'type'     => 'text',
-						'title'    => __( 'Status Format Icon', 'mixt' ),
-						'default'  => 'fa fa-sticky-note',
-					),
-
-					// Page Format Icon
-					array(
-						'id'       => 'format-page-icon',
-						'type'     => 'text',
-						'title'    => __( 'Page Format Icon', 'mixt' ),
-						'default'  => 'fa fa-file-text',
-					),
-
-					// Product Format Icon
-					array(
-						'id'       => 'format-product-icon',
-						'type'     => 'text',
-						'title'    => __( 'Product Format Icon', 'mixt' ),
-						'default'  => 'fa fa-shopping-cart',
 					),
 				),
 			);
@@ -3307,6 +3155,14 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'fa fa-chevron-down',
 					),
 
+					// Scroll To Content Icon
+					array(
+						'id'       => 'head-content-scroll-icon',
+						'type'     => 'text',
+						'title'    => __( 'Scroll To Content Icon', 'mixt' ),
+						'default'  => 'fa fa-chevron-down',
+					),
+
 					// View Post
 					array(
 						'id'       => 'view-post-icon',
@@ -3323,12 +3179,132 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 						'default'  => 'fa fa-search',
 					),
 
+					// Author Icon
+					array(
+						'id'       => 'author-icon',
+						'type'     => 'text',
+						'title'    => __( 'Author Icon', 'mixt' ),
+						'default'  => 'fa fa-user',
+					),
+
+					// Date Icon
+					array(
+						'id'       => 'date-icon',
+						'type'     => 'text',
+						'title'    => __( 'Date Icon', 'mixt' ),
+						'default'  => 'fa fa-clock-o',
+					),
+
+					// Category Icon
+					array(
+						'id'       => 'category-icon',
+						'type'     => 'text',
+						'title'    => __( 'Category Icon', 'mixt' ),
+						'default'  => 'fa fa-folder-open',
+					),
+
 					// Comments
 					array(
 						'id'       => 'comments-icon',
 						'type'     => 'text',
 						'title'    => __( 'Comments', 'mixt' ),
 						'default'  => 'fa fa-comment',
+					),
+
+					// Back To Top Icon
+					array(
+						'id'       => 'back-to-top-icon',
+						'type'     => 'text',
+						'title'    => __( 'Back To Top Icon', 'mixt' ),
+						'default'  => 'fa fa-chevron-up',
+					),
+
+					// Standard Format Icon
+					array(
+						'id'       => 'format-standard-icon',
+						'type'     => 'text',
+						'title'    => __( 'Standard Format Icon', 'mixt' ),
+						'default'  => 'fa fa-align-left',
+					),
+
+					// Aside Format Icon
+					array(
+						'id'       => 'format-aside-icon',
+						'type'     => 'text',
+						'title'    => __( 'Aside Format Icon', 'mixt' ),
+						'default'  => 'fa fa-pencil',
+					),
+
+					// Image Format Icon
+					array(
+						'id'       => 'format-image-icon',
+						'type'     => 'text',
+						'title'    => __( 'Image Format Icon', 'mixt' ),
+						'default'  => 'fa fa-picture-o',
+					),
+
+					// Video Format Icon
+					array(
+						'id'       => 'format-video-icon',
+						'type'     => 'text',
+						'title'    => __( 'Video Format Icon', 'mixt' ),
+						'default'  => 'fa fa-play',
+					),
+
+					// Audio Format Icon
+					array(
+						'id'       => 'format-audio-icon',
+						'type'     => 'text',
+						'title'    => __( 'Audio Format Icon', 'mixt' ),
+						'default'  => 'fa fa-music',
+					),
+
+					// Gallery Format Icon
+					array(
+						'id'       => 'format-gallery-icon',
+						'type'     => 'text',
+						'title'    => __( 'Gallery Format Icon', 'mixt' ),
+						'default'  => 'fa fa-camera',
+					),
+
+					// Quote Format Icon
+					array(
+						'id'       => 'format-quote-icon',
+						'type'     => 'text',
+						'title'    => __( 'Quote Format Icon', 'mixt' ),
+						'default'  => 'fa fa-quote-right',
+					),
+
+					// Link Format Icon
+					array(
+						'id'       => 'format-link-icon',
+						'type'     => 'text',
+						'title'    => __( 'Link Format Icon', 'mixt' ),
+						'default'  => 'fa fa-link',
+					),
+
+					// Status Format Icon
+					array(
+						'id'       => 'format-status-icon',
+						'type'     => 'text',
+						'title'    => __( 'Status Format Icon', 'mixt' ),
+						'default'  => 'fa fa-sticky-note',
+					),
+
+					// Page Format Icon
+					array(
+						'id'       => 'format-page-icon',
+						'type'     => 'text',
+						'title'    => __( 'Page Format Icon', 'mixt' ),
+						'default'  => 'fa fa-file-text',
+					),
+
+					// Product Format Icon
+					array(
+						'id'       => 'format-product-icon',
+						'type'     => 'text',
+						'title'    => __( 'Product Format Icon', 'mixt' ),
+						'default'  => 'fa fa-shopping-cart',
 					),
 				),
 			);

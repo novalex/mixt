@@ -177,3 +177,17 @@
 
 	transition: opacity 0.4s, transform 0.4s;
 }
+
+
+// Media
+@include media('screen', 'mars') {
+	.single-content.has-columns {
+		&.override-cols {
+			.page-header,
+			.entry-body { width: 100%; }
+		}
+		&:not(.override-cols) {
+			.entry-body { margin-top: 0; }
+		}
+	}
+}

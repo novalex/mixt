@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-<!-- generator="WordPress/4.3.1" created="2015-10-30 13:54" -->
+<!-- generator="WordPress/4.4.2" created="2016-02-04 10:04" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -28,19 +28,27 @@
 <channel>
 	<title>MIXT App</title>
 	<link>http://novalx.com/themes/wp/mixt-app</link>
-	<description>One Page Demo</description>
-	<pubDate>Fri, 30 Oct 2015 13:54:35 +0000</pubDate>
+	<description></description>
+	<pubDate>Thu, 04 Feb 2016 10:04:44 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://novalx.com/themes/wp/</wp:base_site_url>
 	<wp:base_blog_url>http://novalx.com/themes/wp/mixt-app</wp:base_blog_url>
 
-	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>alex</wp:author_login><wp:author_email>mail@example.com</wp:author_email><wp:author_display_name><![CDATA[Alex]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[alex]]></wp:author_login><wp:author_email><![CDATA[email@example.com]]></wp:author_email><wp:author_display_name><![CDATA[Alex]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 
-	<wp:category><wp:term_id>1</wp:term_id><wp:category_nicename>uncategorized</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name></wp:category>
-	<wp:term><wp:term_id>2</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug>main</wp:term_slug><wp:term_name><![CDATA[Main]]></wp:term_name></wp:term>
+	<wp:category><wp:term_id>1</wp:term_id><wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename><wp:category_parent><![CDATA[]]></wp:category_parent><wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name></wp:category>
+	<wp:term><wp:term_id>2</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main]]></wp:term_slug><wp:term_name><![CDATA[Main]]></wp:term_name></wp:term>
 
-	<generator>http://wordpress.org/?v=4.3.1</generator>
+	<generator>https://wordpress.org/?v=4.4.2</generator>
+
+<image>
+	<url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2016/02/favicon-120x120.png</url>
+	<title>MIXT App</title>
+	<link>http://novalx.com/themes/wp/mixt-app</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
 
 	<item>
 		<title>Features</title>
@@ -52,53 +60,53 @@
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>5</wp:post_id>
-		<wp:post_date>2015-07-17 21:39:03</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 21:39:03</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>closed</wp:ping_status>
-		<wp:post_name>features</wp:post_name>
-		<wp:status>publish</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 21:39:03]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 21:39:03]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[features]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>1</wp:menu_order>
-		<wp:post_type>nav_menu_item</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="nav_menu" nicename="main"><![CDATA[Main]]></category>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_menu_item_parent</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
 			<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[5]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_target</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_classes</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_xfn</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#features]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_vc_post_settings</wp:meta_key>
-			<wp:meta_value><![CDATA[a:2:{s:7:"vc_grid";a:0:{}s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_vc_post_settings]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:1:{s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
@@ -111,53 +119,53 @@
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>6</wp:post_id>
-		<wp:post_date>2015-07-17 21:39:03</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 21:39:03</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>closed</wp:ping_status>
-		<wp:post_name>reviews</wp:post_name>
-		<wp:status>publish</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 21:39:03]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 21:39:03]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[reviews]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>3</wp:menu_order>
-		<wp:post_type>nav_menu_item</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="nav_menu" nicename="main"><![CDATA[Main]]></category>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_menu_item_parent</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
 			<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[6]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_target</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_classes</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_xfn</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#reviews]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_vc_post_settings</wp:meta_key>
-			<wp:meta_value><![CDATA[a:2:{s:7:"vc_grid";a:0:{}s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_vc_post_settings]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:1:{s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
@@ -170,53 +178,53 @@
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>8</wp:post_id>
-		<wp:post_date>2015-07-17 21:39:03</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 21:39:03</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>closed</wp:ping_status>
-		<wp:post_name>get-in-touch</wp:post_name>
-		<wp:status>publish</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 21:39:03]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 21:39:03]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[get-in-touch]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>4</wp:menu_order>
-		<wp:post_type>nav_menu_item</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="nav_menu" nicename="main"><![CDATA[Main]]></category>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_menu_item_parent</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
 			<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[8]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_target</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_classes</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_xfn</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#contact-us]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_vc_post_settings</wp:meta_key>
-			<wp:meta_value><![CDATA[a:2:{s:7:"vc_grid";a:0:{}s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_vc_post_settings]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:1:{s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
@@ -237,157 +245,193 @@
 <p style="text-align: center;">Quickly deploy strategic networks with compelling e-business. Credibly pontificate highly efficient manufactured products and enabled data.</p>
 [/mixt_iconbox][/vc_column][/vc_row][vc_row full_width="stretch_row" first_row="" cols_matchheight="" css=".vc_custom_1437587084396{border-top-width: 1px !important;border-bottom-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background: #7cad24 url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/transparent-square-tiles.png?id=62) !important;background-position: 0 0 !important;background-repeat: repeat !important;border-top-color: #69911e !important;border-top-style: solid !important;border-bottom-color: #69911e !important;border-bottom-style: solid !important;}"][vc_column][vc_cta h2="" h4="GET THE BASIC PLAN FREE FOR A MONTH" style="flat" color="black" add_button="right" btn_title="GET STARTED" btn_style="flat" btn_shape="round" btn_color="green" btn_align="right" btn_css_animation="appear"]We want to convince you that our app is the way to go, and to do that we are giving away one month (30 days) of our basic plan, completely FREE![/vc_cta][/vc_column][/vc_row][vc_row][vc_column width="2/3"][mixt_headline style="line" tag="h2" sep_position="bottom" color="green"]WHAT MAKES US DIFFERENT[/mixt_headline][vc_column_text css=".vc_custom_1437870935993{margin-bottom: 20px !important;}"]Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.
 
-Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.[/vc_column_text][mixt_iconlist][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Relationships via premier niche markets[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dynamically innovate resource-leveling customer service[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dynamically procrastinate B2C users[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dramatically visualize customer directed convergence[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Collaboratively administrate empowered markets via plug-and-play networks[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]and much, much more[/mixt_iconlist_item][/mixt_iconlist][/vc_column][vc_column width="1/3"][vc_single_image image="43" img_size="full" alignment="center" css_animation="right-to-left"][/vc_column][/vc_row][vc_row full_width="stretch_row" first_row="" cols_matchheight="" el_id="pricing" css=".vc_custom_1437749123399{padding-top: 60px !important;padding-bottom: 60px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}" el_class="bg-fixed"][vc_column el_class="pricing-row"][mixt_pricing plan_name="Basic" plan_desc="For your primal needs" price="€25" btn_text="Go Basic" button="color:black" plan_time="per month" class="no-border"][mixt_pricing_row]5 Projects[/mixt_pricing_row][mixt_pricing_row]10 Collaborators[/mixt_pricing_row][mixt_pricing_row]<del>Automatic Backups</del>[/mixt_pricing_row][mixt_pricing_row]<del>Private Cloud Server</del>[/mixt_pricing_row][/mixt_pricing][mixt_pricing plan_name="Advanced" plan_desc="Basically more advanced" price="$49.99" color="green" btn_text="Go Advanced" button="color:green" plan_time="per month" highlight="true" class="no-border"][mixt_pricing_row]<span style="color: #99cc00;"><strong>Best Value</strong></span>[/mixt_pricing_row][mixt_pricing_row]50 Projects[/mixt_pricing_row][mixt_pricing_row]100 Collaborators[/mixt_pricing_row][mixt_pricing_row]Automatic Backups[/mixt_pricing_row][mixt_pricing_row]<del>Private Cloud Server</del>[/mixt_pricing_row][/mixt_pricing][mixt_pricing plan_name="Ultimate" plan_desc="You're not ready for this" price="199.99¥" btn_text="Go Ultimate" button="color:orange" plan_time="per month" class="no-border"][mixt_pricing_row]Unlimited Projects[/mixt_pricing_row][mixt_pricing_row]Unlimited Collaborators[/mixt_pricing_row][mixt_pricing_row]Automatic Backups[/mixt_pricing_row][mixt_pricing_row]Private Cloud Server[/mixt_pricing_row][/mixt_pricing][/vc_column][/vc_row][vc_row first_row="" cols_matchheight="" el_id="reviews" el_class="one-page-row"][vc_column][mixt_headline style="line" tag="h2" sep_position="bottom" color="green"]WHAT OUR CLIENTS ARE SAYING[/mixt_headline][vc_row_inner cols_matchheight="true"][vc_column_inner width="1/2"][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInLeft" name="Joshua Greene" title="CEO, Greene &amp; Co." web="http://greeneandco.com" image="67"]Progressively maintain extensive infomediaries via extensible niches. Dramatically disseminate standardized metrics after resource-leveling processes. Objectively pursue diverse catalysts for change for interoperable meta-services.[/mixt_review][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInLeft" name="Christina Ableton" title="Founder, The Ableton Journal" image="66"]Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures.[/mixt_review][/vc_column_inner][vc_column_inner width="1/2"][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInRight" name="Lucy Brown" title="Accountant" image="65"]Credibly innovate granular internal or "organic" sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas.[/mixt_review][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInRight" name="Mark Ashton" title="Customer" image="64"]Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks processes.[/mixt_review][/vc_column_inner][/vc_row_inner][/vc_column][/vc_row][vc_row full_width="stretch_row" first_row="" cols_matchheight="" css=".vc_custom_1437750023643{margin-bottom: 0px !important;border-top-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}" el_id="contact-us" el_class="bg-dark bg-fixed"][vc_column][mixt_headline style="line" tag="h2" sep_position="bottom" color="green"]DROP US A LINE[/mixt_headline][vc_row_inner][vc_column_inner width="1/2"][mixt_form labels="none" btn_text="SEND MESSAGE"][mixt_field cols="col-sm-6" id="name" label="Name" placeholder="Name" required="true"][mixt_field cols="col-sm-6" id="email" label="Email" placeholder="Email" required="true"][mixt_field id="subject" label="Subject" placeholder="Subject" required="true"][mixt_field type="textarea" id="message" label="Message" placeholder="Message" required="true"][/mixt_form][/vc_column_inner][vc_column_inner width="1/2"][mixt_map style="map-shadow-3d" height="236px" zoom="16"]601 W Temple St.
+Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.[/vc_column_text][mixt_iconlist][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Relationships via premier niche markets[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dynamically innovate resource-leveling customer service[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dynamically procrastinate B2C users[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Dramatically visualize customer directed convergence[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]Collaboratively administrate empowered markets via plug-and-play networks[/mixt_iconlist_item][mixt_iconlist_item icon_fontawesome="fa fa-check-circle" icon_color="green" icon_bg="accent"]and much, much more[/mixt_iconlist_item][/mixt_iconlist][/vc_column][vc_column width="1/3"][vc_single_image image="43" img_size="full" alignment="center" css_animation="right-to-left"][/vc_column][/vc_row][vc_row full_width="stretch_row" first_row="" cols_matchheight="" el_id="pricing" css=".vc_custom_1437749123399{padding-top: 60px !important;padding-bottom: 60px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}" el_class="bg-fixed"][vc_column el_class="pricing-row"][mixt_pricing plan_name="Basic" plan_desc="For your primal needs" price="€25" btn_text="Go Basic" button="color:black" plan_time="per month" class="no-border"][mixt_pricing_row]5 Projects[/mixt_pricing_row][mixt_pricing_row]10 Collaborators[/mixt_pricing_row][mixt_pricing_row]<del>Automatic Backups</del>[/mixt_pricing_row][mixt_pricing_row]<del>Private Cloud Server</del>[/mixt_pricing_row][/mixt_pricing][mixt_pricing plan_name="Advanced" plan_desc="Basically more advanced" price="$49.99" color="green" btn_text="Go Advanced" button="color:green" plan_time="per month" highlight="true" class="no-border"][mixt_pricing_row]<span style="color: #99cc00;"><strong>Best Value</strong></span>[/mixt_pricing_row][mixt_pricing_row]50 Projects[/mixt_pricing_row][mixt_pricing_row]100 Collaborators[/mixt_pricing_row][mixt_pricing_row]Automatic Backups[/mixt_pricing_row][mixt_pricing_row]<del>Private Cloud Server</del>[/mixt_pricing_row][/mixt_pricing][mixt_pricing plan_name="Ultimate" plan_desc="You're not ready for this" price="199.99¥" color="black" btn_text="Go Ultimate" button="color:orange" plan_time="per month" class="no-border"][mixt_pricing_row]Unlimited Projects[/mixt_pricing_row][mixt_pricing_row]Unlimited Collaborators[/mixt_pricing_row][mixt_pricing_row]Automatic Backups[/mixt_pricing_row][mixt_pricing_row]Private Cloud Server[/mixt_pricing_row][/mixt_pricing][/vc_column][/vc_row][vc_row first_row="" cols_matchheight="" el_id="reviews" el_class="one-page-row"][vc_column][mixt_headline style="line" tag="h2" sep_position="bottom" color="green"]WHAT OUR CLIENTS ARE SAYING[/mixt_headline][vc_row_inner cols_matchheight="true"][vc_column_inner width="1/2"][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInLeft" name="Joshua Greene" title="CEO, Greene &amp; Co." web="http://greeneandco.com" image="67"]Progressively maintain extensive infomediaries via extensible niches. Dramatically disseminate standardized metrics after resource-leveling processes. Objectively pursue diverse catalysts for change for interoperable meta-services.[/mixt_review][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInLeft" name="Christina Ableton" title="Founder, The Ableton Journal" image="66"]Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures.[/mixt_review][/vc_column_inner][vc_column_inner width="1/2"][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInRight" name="Lucy Brown" title="Accountant" image="65"]Credibly innovate granular internal or "organic" sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas.[/mixt_review][mixt_review style="bubble" bubble_color="white" layout="bottom" image_style="image-circle image-eclipse" animation="fadeInRight" name="Mark Ashton" title="Customer" image="64"]Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks processes.[/mixt_review][/vc_column_inner][/vc_row_inner][/vc_column][/vc_row][vc_row full_width="stretch_row" first_row="" cols_matchheight="" css=".vc_custom_1437750023643{margin-bottom: 0px !important;border-top-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}" el_id="contact-us" el_class="bg-dark bg-fixed"][vc_column][mixt_headline style="line" tag="h2" sep_position="bottom" color="green"]DROP US A LINE[/mixt_headline][vc_row_inner][vc_column_inner width="1/2"][mixt_form labels="none" btn_text="SEND MESSAGE"][mixt_field cols="col-sm-6" id="name" label="Name" placeholder="Name" required="true"][mixt_field cols="col-sm-6" id="email" label="Email" placeholder="Email" required="true"][mixt_field id="subject" label="Subject" placeholder="Subject" required="true"][mixt_field type="textarea" id="message" label="Message" placeholder="Message" required="true"][/mixt_form][/vc_column_inner][vc_column_inner width="1/2"][mixt_map style="map-shadow-3d" height="236px" zoom="16"]601 W Temple St.
 Los Angeles, CA 90012
 
 Phone: 1-800-GET-MIXT
 E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example.com</a>[/mixt_map][/vc_column_inner][/vc_row_inner][/vc_column][/vc_row]]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>12</wp:post_id>
-		<wp:post_date>2015-07-17 21:50:29</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 21:50:29</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>home</wp:post_name>
-		<wp:status>publish</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 21:50:29]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 21:50:29]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[home]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>page</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<wp:postmeta>
-			<wp:meta_key>_edit_last</wp:meta_key>
+			<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 			<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
 			<wp:meta_value><![CDATA[templates/one-page.php]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wpb_vc_js_status</wp:meta_key>
+			<wp:meta_key><![CDATA[_wpb_vc_js_status]]></wp:meta_key>
 			<wp:meta_value><![CDATA[true]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_vc_post_settings</wp:meta_key>
-			<wp:meta_value><![CDATA[a:2:{s:7:"vc_grid";a:0:{}s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_vc_post_settings]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:1:{s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-page-fullwidth</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-page-fullwidth]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-nav-mode</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-nav-mode]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-nav-theme</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-nav-theme]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-nav-transparent</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-nav-transparent]]></wp:meta_key>
 			<wp:meta_value><![CDATA[true]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-nav-top-opacity</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-nav-top-opacity]]></wp:meta_key>
 			<wp:meta_value><![CDATA[0.0]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-nav-position</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-nav-position]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-location-bar</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-location-bar]]></wp:meta_key>
 			<wp:meta_value><![CDATA[false]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-page-sidebar</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-page-sidebar]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-media</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-media]]></wp:meta_key>
 			<wp:meta_value><![CDATA[true]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-fullscreen</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-fullscreen]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-bg-color</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-bg-color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#000000]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-media-type</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-media-type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[slider]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-img-src</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-img-src]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-img-repeat</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-img-repeat]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-img-parallax</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-img-parallax]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-video-src</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-video-src]]></wp:meta_key>
 			<wp:meta_value><![CDATA[embed]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-video-loop</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-video-loop]]></wp:meta_key>
 			<wp:meta_value><![CDATA[true]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-video-lum</wp:meta_key>
-			<wp:meta_value><![CDATA[true]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_mixt-head-slider</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-slider]]></wp:meta_key>
 			<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-align</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-align]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-size</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-size]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-fade</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-fade]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-scroll</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-scroll]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-info</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-info]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-content-code</wp:meta_key>
+			<wp:meta_key><![CDATA[_mixt-head-content-code]]></wp:meta_key>
 			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wpb_shortcodes_custom_css</wp:meta_key>
-			<wp:meta_value><![CDATA[.vc_custom_1437587084396{border-top-width: 1px !important;border-bottom-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background: #7cad24 url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/transparent-square-tiles.png?id=62) !important;background-position: 0 0 !important;background-repeat: repeat !important;border-top-color: #69911e !important;border-top-style: solid !important;border-bottom-color: #69911e !important;border-bottom-style: solid !important;}.vc_custom_1437749123399{padding-top: 60px !important;padding-bottom: 60px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1437750023643{margin-bottom: 0px !important;border-top-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1437870935993{margin-bottom: 20px !important;}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>_wpb_post_custom_css</wp:meta_key>
+			<wp:meta_key><![CDATA[_wpb_post_custom_css]]></wp:meta_key>
 			<wp:meta_value><![CDATA[.mixt-headline .separator { width: 140px; }
 #content .page-content { padding-bottom: 0; }]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt-head-height</wp:meta_key>
-			<wp:meta_value><![CDATA[none]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_mixt-head-height]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_wpb_shortcodes_custom_css]]></wp:meta_key>
+			<wp:meta_value><![CDATA[.vc_custom_1437587084396{border-top-width: 1px !important;border-bottom-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background: #7cad24 url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/transparent-square-tiles.png?id=62) !important;background-position: 0 0 !important;background-repeat: repeat !important;border-top-color: #69911e !important;border-top-style: solid !important;border-bottom-color: #69911e !important;border-bottom-style: solid !important;}.vc_custom_1437749123399{padding-top: 60px !important;padding-bottom: 60px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1437750023643{margin-bottom: 0px !important;border-top-width: 1px !important;padding-top: 40px !important;padding-bottom: 40px !important;background-image: url(http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg?id=20) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1437870935993{margin-bottom: 20px !important;}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-site-theme]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-head-min-height]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-sidebar-position]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-sidebar-hide]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-child-page-nav]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-second-nav]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-sec-nav-theme]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-head-video-lum]]></wp:meta_key>
+			<wp:meta_value><![CDATA[light]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-footer-widgets-show]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt-footer-copy-show]]></wp:meta_key>
+			<wp:meta_value><![CDATA[auto]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
 		<title>logo</title>
-		<link>http://novalx.com/themes/wp/mixt-app/?attachment_id=17</link>
+		<link>http://novalx.com/themes/wp/mixt-app/logo/</link>
 		<pubDate>Fri, 17 Jul 2015 23:56:10 +0000</pubDate>
 		<dc:creator><![CDATA[alex]]></dc:creator>
 		<guid isPermaLink="false">http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo.png</guid>
@@ -395,34 +439,34 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>17</wp:post_id>
-		<wp:post_date>2015-07-17 23:56:10</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 23:56:10</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>logo</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 23:56:10]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 23:56:10]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[logo]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo.png</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo.png]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/logo.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:114;s:6:"height";i:41;s:4:"file";s:16:"2015/07/logo.png";s:5:"sizes";a:0:{}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
 		<title>logo-inv</title>
-		<link>http://novalx.com/themes/wp/mixt-app/?attachment_id=18</link>
+		<link>http://novalx.com/themes/wp/mixt-app/logo-inv/</link>
 		<pubDate>Fri, 17 Jul 2015 23:56:11 +0000</pubDate>
 		<dc:creator><![CDATA[alex]]></dc:creator>
 		<guid isPermaLink="false">http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo-inv.png</guid>
@@ -430,34 +474,34 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>18</wp:post_id>
-		<wp:post_date>2015-07-17 23:56:11</wp:post_date>
-		<wp:post_date_gmt>2015-07-17 23:56:11</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>logo-inv</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-17 23:56:11]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-17 23:56:11]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[logo-inv]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo-inv.png</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/logo-inv.png]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/logo-inv.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:114;s:6:"height";i:41;s:4:"file";s:20:"2015/07/logo-inv.png";s:5:"sizes";a:0:{}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
 		<title>App Galaxy</title>
-		<link>http://novalx.com/themes/wp/mixt-app/?attachment_id=20</link>
+		<link>http://novalx.com/themes/wp/mixt-app/app-galaxy/</link>
 		<pubDate>Sat, 18 Jul 2015 11:56:48 +0000</pubDate>
 		<dc:creator><![CDATA[alex]]></dc:creator>
 		<guid isPermaLink="false">http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg</guid>
@@ -465,34 +509,34 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>20</wp:post_id>
-		<wp:post_date>2015-07-18 11:56:48</wp:post_date>
-		<wp:post_date_gmt>2015-07-18 11:56:48</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>app-galaxy</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-18 11:56:48]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-18 11:56:48]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[app-galaxy]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/App-Galaxy.jpg]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/App-Galaxy.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:1920;s:6:"height";i:1080;s:4:"file";s:22:"2015/07/App-Galaxy.jpg";s:5:"sizes";a:6:{s:9:"thumbnail";a:4:{s:4:"file";s:22:"App-Galaxy-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:22:"App-Galaxy-300x169.jpg";s:5:"width";i:300;s:6:"height";i:169;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:23:"App-Galaxy-1024x576.jpg";s:5:"width";i:1024;s:6:"height";i:576;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-large";a:4:{s:4:"file";s:22:"App-Galaxy-960x460.jpg";s:5:"width";i:960;s:6:"height";i:460;s:9:"mime-type";s:10:"image/jpeg";}s:11:"blog-medium";a:4:{s:4:"file";s:22:"App-Galaxy-320x200.jpg";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-small";a:4:{s:4:"file";s:22:"App-Galaxy-120x120.jpg";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
 		<title>iPhone App</title>
-		<link>http://novalx.com/themes/wp/mixt-app/?attachment_id=21</link>
+		<link>http://novalx.com/themes/wp/mixt-app/iphone-app/</link>
 		<pubDate>Sat, 18 Jul 2015 11:58:10 +0000</pubDate>
 		<dc:creator><![CDATA[alex]]></dc:creator>
 		<guid isPermaLink="false">http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/iPhone-App.png</guid>
@@ -500,28 +544,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>21</wp:post_id>
-		<wp:post_date>2015-07-18 11:58:10</wp:post_date>
-		<wp:post_date_gmt>2015-07-18 11:58:10</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>iphone-app</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-18 11:58:10]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-18 11:58:10]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[iphone-app]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/iPhone-App.png</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/iPhone-App.png]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/iPhone-App.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:276;s:6:"height";i:489;s:4:"file";s:22:"2015/07/iPhone-App.png";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:22:"iPhone-App-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:6:"medium";a:4:{s:4:"file";s:22:"iPhone-App-169x300.png";s:5:"width";i:169;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:10:"blog-large";a:4:{s:4:"file";s:22:"iPhone-App-276x460.png";s:5:"width";i:276;s:6:"height";i:460;s:9:"mime-type";s:9:"image/png";}s:11:"blog-medium";a:4:{s:4:"file";s:22:"iPhone-App-276x200.png";s:5:"width";i:276;s:6:"height";i:200;s:9:"mime-type";s:9:"image/png";}s:10:"blog-small";a:4:{s:4:"file";s:22:"iPhone-App-120x120.png";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -535,28 +579,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>43</wp:post_id>
-		<wp:post_date>2015-07-20 21:42:50</wp:post_date>
-		<wp:post_date_gmt>2015-07-20 21:42:50</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>ipad-app</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-20 21:42:50]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-20 21:42:50]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[ipad-app]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/iPad-App.png</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/iPad-App.png]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/iPad-App.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:400;s:6:"height";i:493;s:4:"file";s:20:"2015/07/iPad-App.png";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:20:"iPad-App-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:6:"medium";a:4:{s:4:"file";s:20:"iPad-App-243x300.png";s:5:"width";i:243;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:10:"blog-large";a:4:{s:4:"file";s:20:"iPad-App-400x460.png";s:5:"width";i:400;s:6:"height";i:460;s:9:"mime-type";s:9:"image/png";}s:11:"blog-medium";a:4:{s:4:"file";s:20:"iPad-App-320x200.png";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:9:"image/png";}s:10:"blog-small";a:4:{s:4:"file";s:20:"iPad-App-120x120.png";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -570,53 +614,53 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>56</wp:post_id>
-		<wp:post_date>2015-07-22 12:05:22</wp:post_date>
-		<wp:post_date_gmt>2015-07-22 12:05:22</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>closed</wp:ping_status>
-		<wp:post_name>pricing</wp:post_name>
-		<wp:status>publish</wp:status>
+		<wp:post_date><![CDATA[2015-07-22 12:05:22]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-22 12:05:22]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[pricing]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>2</wp:menu_order>
-		<wp:post_type>nav_menu_item</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="nav_menu" nicename="main"><![CDATA[Main]]></category>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_menu_item_parent</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_menu_item_parent]]></wp:meta_key>
 			<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object_id]]></wp:meta_key>
 			<wp:meta_value><![CDATA[56]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_object]]></wp:meta_key>
 			<wp:meta_value><![CDATA[custom]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_target</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_target]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_classes</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_classes]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:1:{i:0;s:0:"";}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_xfn</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_xfn]]></wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_key><![CDATA[_menu_item_url]]></wp:meta_key>
 			<wp:meta_value><![CDATA[#pricing]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_vc_post_settings</wp:meta_key>
-			<wp:meta_value><![CDATA[a:2:{s:7:"vc_grid";a:0:{}s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
+			<wp:meta_key><![CDATA[_vc_post_settings]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:1:{s:10:"vc_grid_id";a:0:{}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
@@ -629,28 +673,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>62</wp:post_id>
-		<wp:post_date>2015-07-22 17:43:39</wp:post_date>
-		<wp:post_date_gmt>2015-07-22 17:43:39</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>transparent-square-tiles</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-22 17:43:39]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-22 17:43:39]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[transparent-square-tiles]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/transparent-square-tiles.png</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/transparent-square-tiles.png]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/transparent-square-tiles.png]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:252;s:6:"height";i:230;s:4:"file";s:36:"2015/07/transparent-square-tiles.png";s:5:"sizes";a:3:{s:9:"thumbnail";a:4:{s:4:"file";s:36:"transparent-square-tiles-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:11:"blog-medium";a:4:{s:4:"file";s:36:"transparent-square-tiles-252x200.png";s:5:"width";i:252;s:6:"height";i:200;s:9:"mime-type";s:9:"image/png";}s:10:"blog-small";a:4:{s:4:"file";s:36:"transparent-square-tiles-120x120.png";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -664,28 +708,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>64</wp:post_id>
-		<wp:post_date>2015-07-23 12:11:20</wp:post_date>
-		<wp:post_date_gmt>2015-07-23 12:11:20</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>james-developer</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-23 12:11:20]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-23 12:11:20]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[james-developer]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/James-Developer.jpg</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/James-Developer.jpg]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/James-Developer.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:500;s:6:"height";i:500;s:4:"file";s:27:"2015/07/James-Developer.jpg";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:27:"James-Developer-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:27:"James-Developer-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-large";a:4:{s:4:"file";s:27:"James-Developer-500x460.jpg";s:5:"width";i:500;s:6:"height";i:460;s:9:"mime-type";s:10:"image/jpeg";}s:11:"blog-medium";a:4:{s:4:"file";s:27:"James-Developer-320x200.jpg";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-small";a:4:{s:4:"file";s:27:"James-Developer-120x120.jpg";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -699,28 +743,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>65</wp:post_id>
-		<wp:post_date>2015-07-23 12:11:21</wp:post_date>
-		<wp:post_date_gmt>2015-07-23 12:11:21</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>jamie-pm</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-23 12:11:21]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-23 12:11:21]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[jamie-pm]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Jamie-PM.jpg</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Jamie-PM.jpg]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/Jamie-PM.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:500;s:6:"height";i:500;s:4:"file";s:20:"2015/07/Jamie-PM.jpg";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:20:"Jamie-PM-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:20:"Jamie-PM-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-large";a:4:{s:4:"file";s:20:"Jamie-PM-500x460.jpg";s:5:"width";i:500;s:6:"height";i:460;s:9:"mime-type";s:10:"image/jpeg";}s:11:"blog-medium";a:4:{s:4:"file";s:20:"Jamie-PM-320x200.jpg";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-small";a:4:{s:4:"file";s:20:"Jamie-PM-120x120.jpg";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -734,28 +778,28 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>66</wp:post_id>
-		<wp:post_date>2015-07-23 12:11:23</wp:post_date>
-		<wp:post_date_gmt>2015-07-23 12:11:23</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>kelly-marketing</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-23 12:11:23]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-23 12:11:23]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[kelly-marketing]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Kelly-Marketing.jpg</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Kelly-Marketing.jpg]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/Kelly-Marketing.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:500;s:6:"height";i:500;s:4:"file";s:27:"2015/07/Kelly-Marketing.jpg";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:27:"Kelly-Marketing-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:27:"Kelly-Marketing-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-large";a:4:{s:4:"file";s:27:"Kelly-Marketing-500x460.jpg";s:5:"width";i:500;s:6:"height";i:460;s:9:"mime-type";s:10:"image/jpeg";}s:11:"blog-medium";a:4:{s:4:"file";s:27:"Kelly-Marketing-320x200.jpg";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-small";a:4:{s:4:"file";s:27:"Kelly-Marketing-120x120.jpg";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
@@ -769,29 +813,64 @@ E-Mail: <a href="mailto:contact@example.com?subject=Send%20Mail">contact@example
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>67</wp:post_id>
-		<wp:post_date>2015-07-23 12:11:24</wp:post_date>
-		<wp:post_date_gmt>2015-07-23 12:11:24</wp:post_date_gmt>
-		<wp:comment_status>open</wp:comment_status>
-		<wp:ping_status>open</wp:ping_status>
-		<wp:post_name>steve-designer</wp:post_name>
-		<wp:status>inherit</wp:status>
+		<wp:post_date><![CDATA[2015-07-23 12:11:24]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2015-07-23 12:11:24]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[steve-designer]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
 		<wp:post_parent>12</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type>attachment</wp:post_type>
-		<wp:post_password></wp:post_password>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<wp:attachment_url>http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Steve-Designer.jpg</wp:attachment_url>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2015/07/Steve-Designer.jpg]]></wp:attachment_url>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attached_file</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 			<wp:meta_value><![CDATA[2015/07/Steve-Designer.jpg]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_mixt_luminosity</wp:meta_key>
+			<wp:meta_key><![CDATA[_image_color]]></wp:meta_key>
 			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>_wp_attachment_metadata</wp:meta_key>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:500;s:6:"height";i:500;s:4:"file";s:26:"2015/07/Steve-Designer.jpg";s:5:"sizes";a:5:{s:9:"thumbnail";a:4:{s:4:"file";s:26:"Steve-Designer-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:26:"Steve-Designer-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-large";a:4:{s:4:"file";s:26:"Steve-Designer-500x460.jpg";s:5:"width";i:500;s:6:"height";i:460;s:9:"mime-type";s:10:"image/jpeg";}s:11:"blog-medium";a:4:{s:4:"file";s:26:"Steve-Designer-320x200.jpg";s:5:"width";i:320;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:10:"blog-small";a:4:{s:4:"file";s:26:"Steve-Designer-120x120.jpg";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:11:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";s:11:"orientation";i:0;}}]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+	<item>
+		<title>favicon</title>
+		<link>http://novalx.com/themes/wp/mixt-app/favicon/</link>
+		<pubDate>Thu, 04 Feb 2016 10:04:13 +0000</pubDate>
+		<dc:creator><![CDATA[alex]]></dc:creator>
+		<guid isPermaLink="false">http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2016/02/favicon.png</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>111</wp:post_id>
+		<wp:post_date><![CDATA[2016-02-04 10:04:13]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2016-02-04 10:04:13]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[favicon]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:attachment_url><![CDATA[http://novalx.com/themes/wp/mixt-app/wp-content/uploads/sites/2/2016/02/favicon.png]]></wp:attachment_url>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+			<wp:meta_value><![CDATA[2016/02/favicon.png]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_mixt_luminosity]]></wp:meta_key>
+			<wp:meta_value><![CDATA[dark]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+			<wp:meta_value><![CDATA[a:5:{s:5:"width";i:200;s:6:"height";i:200;s:4:"file";s:19:"2016/02/favicon.png";s:5:"sizes";a:3:{s:9:"thumbnail";a:4:{s:4:"file";s:19:"favicon-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:11:"blog-medium";a:4:{s:4:"file";s:19:"favicon-200x200.png";s:5:"width";i:200;s:6:"height";i:200;s:9:"mime-type";s:9:"image/png";}s:10:"blog-small";a:4:{s:4:"file";s:19:"favicon-120x120.png";s:5:"width";i:120;s:6:"height";i:120;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 </channel>

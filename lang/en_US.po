@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2015-11-23 04:46+0200\n"
-"PO-Revision-Date: 2015-11-23 04:47+0200\n"
+"POT-Creation-Date: 2016-02-04 02:04+0200\n"
+"PO-Revision-Date: 2016-02-04 02:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -51,16 +51,16 @@ msgstr "Entries by this author"
 msgid "No entries by this author"
 msgstr "No entries by this author"
 
-#: core/assets.php:74 core/assets.php:81 framework/cmb2-config.php:667
-#: framework/plugins/redux-extend/customizer-fields.php:402
-#: framework/redux-config.php:838
+#: core/assets.php:74 core/assets.php:81 framework/cmb2-config.php:710
+#: framework/plugins/redux-extend/customizer-fields.php:404
+#: framework/redux-config.php:841
 msgid "Normal"
 msgstr "Normal"
 
-#: core/assets.php:75 framework/cmb2-config.php:238
-#: framework/plugins/cmb2-extend/portfolio-fields.php:103
+#: core/assets.php:75 framework/cmb2-config.php:213
+#: framework/plugins/cmb2-extend/portfolio-fields.php:97
 #: framework/plugins/redux-extend/portfolio-fields.php:123
-#: framework/redux-config.php:240 framework/redux-config.php:2159
+#: framework/redux-config.php:240 framework/redux-config.php:2186
 msgid "Large"
 msgstr "Large"
 
@@ -68,10 +68,10 @@ msgstr "Large"
 msgid "Extra Large"
 msgstr "Extra Large"
 
-#: core/assets.php:77 framework/cmb2-config.php:240
-#: framework/plugins/cmb2-extend/portfolio-fields.php:105
+#: core/assets.php:77 framework/cmb2-config.php:215
+#: framework/plugins/cmb2-extend/portfolio-fields.php:99
 #: framework/plugins/redux-extend/portfolio-fields.php:125
-#: framework/redux-config.php:242 framework/redux-config.php:2161
+#: framework/redux-config.php:242 framework/redux-config.php:2188
 msgid "Small"
 msgstr "Small"
 
@@ -99,7 +99,7 @@ msgstr "Go Down"
 msgid "Go Down on Hover"
 msgstr "Go Down on Hover"
 
-#: core/assets.php:103 framework/plugins/vc-extend/vc-extend.php:146
+#: core/assets.php:103 framework/plugins/vc-extend/vc-extend.php:159
 msgid "Theme Accent"
 msgstr "Theme Accent"
 
@@ -131,7 +131,7 @@ msgstr "Green"
 msgid "Blue"
 msgstr "Blue"
 
-#: core/assets.php:113 core/assets.php:150 framework/cmb2-config.php:158
+#: core/assets.php:113 core/assets.php:150 framework/cmb2-config.php:872
 #: framework/redux-config.php:114
 msgid "Default"
 msgstr "Default"
@@ -156,29 +156,39 @@ msgstr "Shine"
 msgid "Shade"
 msgstr "Shade"
 
-#: core/assets.php:128 framework/cmb2-config.php:44
-#: framework/cmb2-config.php:64 framework/cmb2-config.php:88
-#: framework/cmb2-config.php:116 framework/cmb2-config.php:130
-#: framework/cmb2-config.php:144 framework/cmb2-config.php:157
-#: framework/cmb2-config.php:191 framework/cmb2-config.php:206
-#: framework/cmb2-config.php:223 framework/cmb2-config.php:237
-#: framework/cmb2-config.php:252 framework/cmb2-config.php:267
-#: framework/cmb2-config.php:335 framework/cmb2-config.php:349
-#: framework/cmb2-config.php:424 framework/cmb2-config.php:445
-#: framework/cmb2-config.php:480 framework/cmb2-config.php:498
-#: framework/cmb2-config.php:647 framework/cmb2-config.php:666
-#: framework/cmb2-config.php:685 framework/cmb2-config.php:704
-#: framework/cmb2-config.php:723 framework/cmb2-config.php:742
-#: framework/plugins/cmb2-extend/portfolio-fields.php:21
-#: framework/plugins/cmb2-extend/portfolio-fields.php:56
-#: framework/plugins/cmb2-extend/portfolio-fields.php:71
-#: framework/plugins/cmb2-extend/portfolio-fields.php:88
-#: framework/plugins/cmb2-extend/portfolio-fields.php:102
-#: framework/plugins/cmb2-extend/portfolio-fields.php:117
-#: framework/plugins/cmb2-extend/portfolio-fields.php:132
+#: core/assets.php:128 framework/cmb2-config.php:90
+#: framework/cmb2-config.php:119 framework/cmb2-config.php:121
+#: framework/cmb2-config.php:146 framework/cmb2-config.php:166
+#: framework/cmb2-config.php:181 framework/cmb2-config.php:198
+#: framework/cmb2-config.php:212 framework/cmb2-config.php:227
+#: framework/cmb2-config.php:242 framework/cmb2-config.php:304
+#: framework/cmb2-config.php:338 framework/cmb2-config.php:353
+#: framework/cmb2-config.php:383 framework/cmb2-config.php:397
+#: framework/cmb2-config.php:481 framework/cmb2-config.php:501
+#: framework/cmb2-config.php:534 framework/cmb2-config.php:551
+#: framework/cmb2-config.php:691 framework/cmb2-config.php:709
+#: framework/cmb2-config.php:727 framework/cmb2-config.php:745
+#: framework/cmb2-config.php:763 framework/cmb2-config.php:781
+#: framework/cmb2-config.php:817 framework/cmb2-config.php:831
+#: framework/cmb2-config.php:845 framework/cmb2-config.php:859
+#: framework/cmb2-config.php:871 framework/cmb2-config.php:898
+#: framework/cmb2-config.php:912
+#: framework/plugins/cmb2-extend/portfolio-fields.php:14
+#: framework/plugins/cmb2-extend/portfolio-fields.php:30
+#: framework/plugins/cmb2-extend/portfolio-fields.php:50
+#: framework/plugins/cmb2-extend/portfolio-fields.php:65
+#: framework/plugins/cmb2-extend/portfolio-fields.php:82
+#: framework/plugins/cmb2-extend/portfolio-fields.php:96
+#: framework/plugins/cmb2-extend/portfolio-fields.php:111
+#: framework/plugins/cmb2-extend/portfolio-fields.php:125
+#: framework/plugins/cmb2-extend/portfolio-fields.php:140
+#: framework/plugins/cmb2-extend/portfolio-fields.php:154
+#: framework/plugins/cmb2-extend/portfolio-fields.php:168
+#: framework/plugins/cmb2-extend/portfolio-fields.php:200
 #: framework/plugins/redux-extend/portfolio-fields.php:28
 #: framework/plugins/redux-extend/portfolio-fields.php:41
-#: framework/plugins/vc-extend/vc-extend.php:32 framework/redux-config.php:81
+#: framework/plugins/redux-extend/portfolio-fields.php:317
+#: framework/plugins/vc-extend/vc-extend.php:33 framework/redux-config.php:81
 #: framework/redux-config.php:82 framework/redux-config.php:156
 #: framework/redux-config.php:169
 msgid "Auto"
@@ -312,48 +322,48 @@ msgstr[1] "%d items"
 msgid "No items in the cart"
 msgstr "No items in the cart"
 
-#: core/post.php:544
+#: core/post.php:572 framework/redux-config.php:3169
 msgid "View Post"
 msgstr "View Post"
 
-#: core/post.php:550
+#: core/post.php:578
 msgid "Full Image"
 msgstr "Full Image"
 
-#: core/post.php:657
+#: core/post.php:685
 msgid "Post pages"
 msgstr "Post pages"
 
-#: core/post.php:717
+#: core/post.php:745
 msgid "This author has not yet written their bio."
 msgstr "This author has not yet written their bio."
 
-#: core/post.php:728
+#: core/post.php:756
 msgctxt "author"
 msgid "About "
 msgstr "About "
 
-#: core/post.php:924
+#: core/post.php:952
 msgid "View all posts by "
 msgstr "View all posts by "
 
-#: core/post.php:926
+#: core/post.php:954
 msgid "By "
 msgstr "By "
 
-#: core/post.php:940
+#: core/post.php:968
 msgid "Updated"
 msgstr "Updated"
 
-#: core/post.php:967 templates/comments.php:26
+#: core/post.php:995 templates/comments.php:26
 msgid "No comments"
 msgstr "No comments"
 
-#: core/post.php:968 templates/comments.php:27
+#: core/post.php:996 templates/comments.php:27
 msgid " comments"
 msgstr " comments"
 
-#: core/post.php:969 templates/comments.php:28
+#: core/post.php:997 templates/comments.php:28
 msgid "1 comment"
 msgstr "1 comment"
 
@@ -464,7 +474,6 @@ msgid "MIXT Elements"
 msgstr "MIXT Elements"
 
 #: framework/admin/admin-menus.php:51
-#: framework/plugins/redux-extend/portfolio-fields.php:224
 msgid "Elements"
 msgstr "Elements"
 
@@ -473,12 +482,12 @@ msgid "Pages"
 msgstr "Pages"
 
 #: framework/admin/admin-menus.php:61 framework/admin/admin-menus.php:175
-#: framework/plugins/redux-extend/customizer-fields.php:1065
-#: framework/plugins/redux-extend/customizer-fields.php:1098
-#: framework/plugins/redux-extend/customizer-fields.php:1229
-#: framework/plugins/redux-extend/customizer-fields.php:1253
-#: framework/redux-config.php:1595 framework/redux-config.php:1633
-#: framework/redux-config.php:1916 framework/redux-config.php:1953
+#: framework/plugins/redux-extend/customizer-fields.php:1067
+#: framework/plugins/redux-extend/customizer-fields.php:1100
+#: framework/plugins/redux-extend/customizer-fields.php:1231
+#: framework/plugins/redux-extend/customizer-fields.php:1255
+#: framework/redux-config.php:1600 framework/redux-config.php:1638
+#: framework/redux-config.php:1932 framework/redux-config.php:1969
 msgid "Social Icons"
 msgstr "Social Icons"
 
@@ -491,12 +500,15 @@ msgid "Search Form"
 msgstr "Search Form"
 
 #: framework/admin/admin-menus.php:94
+#: framework/plugins/cmb2-extend/portfolio-fields.php:273
+#: framework/plugins/redux-extend/portfolio-fields.php:277
+#: framework/redux-config.php:2329
 msgid "Button"
 msgstr "Button"
 
 #: framework/admin/admin-menus.php:105
-#: framework/plugins/redux-extend/customizer-fields.php:1135
-#: framework/redux-config.php:1805
+#: framework/plugins/redux-extend/customizer-fields.php:1137
+#: framework/redux-config.php:1801
 msgid "Widget Area"
 msgstr "Widget Area"
 
@@ -526,17 +538,17 @@ msgstr "No social profiles set up!"
 
 #: framework/admin/media-meta.php:84
 msgid "Luminosity"
-msgstr ""
+msgstr "Luminosity"
 
-#: framework/admin/media-meta.php:88 framework/cmb2-config.php:616
-#: framework/plugins/redux-extend/customizer-fields.php:353
-#: framework/redux-config.php:803
+#: framework/admin/media-meta.php:88 framework/cmb2-config.php:662
+#: framework/plugins/redux-extend/customizer-fields.php:355
+#: framework/redux-config.php:806
 msgid "Light"
 msgstr "Light"
 
-#: framework/admin/media-meta.php:89 framework/cmb2-config.php:617
-#: framework/plugins/redux-extend/customizer-fields.php:354
-#: framework/redux-config.php:804
+#: framework/admin/media-meta.php:89 framework/cmb2-config.php:663
+#: framework/plugins/redux-extend/customizer-fields.php:356
+#: framework/redux-config.php:807
 msgid "Dark"
 msgstr "Dark"
 
@@ -579,7 +591,7 @@ msgid "Options"
 msgstr "Options"
 
 #: framework/admin/menu-pages.php:123 framework/admin/views/welcome.php:17
-#: framework/redux-config.php:3306
+#: framework/redux-config.php:3463
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -653,36 +665,42 @@ msgstr "Version"
 msgid "Child Theme"
 msgstr "Child Theme"
 
-#: framework/admin/views/status.php:26 framework/cmb2-config.php:65
-#: framework/cmb2-config.php:89 framework/cmb2-config.php:131
-#: framework/cmb2-config.php:145 framework/cmb2-config.php:224
-#: framework/cmb2-config.php:268 framework/cmb2-config.php:336
-#: framework/cmb2-config.php:350 framework/cmb2-config.php:481
-#: framework/cmb2-config.php:499 framework/cmb2-config.php:598
-#: framework/cmb2-config.php:686 framework/cmb2-config.php:705
-#: framework/cmb2-config.php:724 framework/cmb2-config.php:743
-#: framework/plugins/cmb2-extend/portfolio-fields.php:89
-#: framework/plugins/cmb2-extend/portfolio-fields.php:133
+#: framework/admin/views/status.php:26 framework/cmb2-config.php:147
+#: framework/cmb2-config.php:199 framework/cmb2-config.php:243
+#: framework/cmb2-config.php:305 framework/cmb2-config.php:354
+#: framework/cmb2-config.php:384 framework/cmb2-config.php:398
+#: framework/cmb2-config.php:535 framework/cmb2-config.php:552
+#: framework/cmb2-config.php:645 framework/cmb2-config.php:728
+#: framework/cmb2-config.php:746 framework/cmb2-config.php:764
+#: framework/cmb2-config.php:782 framework/cmb2-config.php:818
+#: framework/cmb2-config.php:846 framework/cmb2-config.php:860
+#: framework/cmb2-config.php:899 framework/cmb2-config.php:913
+#: framework/plugins/cmb2-extend/portfolio-fields.php:31
+#: framework/plugins/cmb2-extend/portfolio-fields.php:83
+#: framework/plugins/cmb2-extend/portfolio-fields.php:112
+#: framework/plugins/cmb2-extend/portfolio-fields.php:141
+#: framework/plugins/cmb2-extend/portfolio-fields.php:155
+#: framework/plugins/cmb2-extend/portfolio-fields.php:169
+#: framework/plugins/cmb2-extend/portfolio-fields.php:201
 #: framework/plugins/redux-extend/customizer-fields.php:51
 #: framework/plugins/redux-extend/customizer-fields.php:143
-#: framework/plugins/redux-extend/customizer-fields.php:153
-#: framework/plugins/redux-extend/customizer-fields.php:253
-#: framework/plugins/redux-extend/customizer-fields.php:262
-#: framework/plugins/redux-extend/customizer-fields.php:342
-#: framework/plugins/redux-extend/customizer-fields.php:413
-#: framework/plugins/redux-extend/customizer-fields.php:423
-#: framework/plugins/redux-extend/customizer-fields.php:433
-#: framework/plugins/redux-extend/customizer-fields.php:452
-#: framework/plugins/redux-extend/customizer-fields.php:917
-#: framework/plugins/redux-extend/customizer-fields.php:951
-#: framework/plugins/redux-extend/customizer-fields.php:961
-#: framework/plugins/redux-extend/customizer-fields.php:983
-#: framework/plugins/redux-extend/customizer-fields.php:1001
-#: framework/plugins/redux-extend/customizer-fields.php:1020
-#: framework/plugins/redux-extend/customizer-fields.php:1030
-#: framework/plugins/redux-extend/customizer-fields.php:1052
-#: framework/plugins/redux-extend/customizer-fields.php:1085
-#: framework/plugins/redux-extend/customizer-fields.php:1118
+#: framework/plugins/redux-extend/customizer-fields.php:255
+#: framework/plugins/redux-extend/customizer-fields.php:264
+#: framework/plugins/redux-extend/customizer-fields.php:344
+#: framework/plugins/redux-extend/customizer-fields.php:415
+#: framework/plugins/redux-extend/customizer-fields.php:425
+#: framework/plugins/redux-extend/customizer-fields.php:435
+#: framework/plugins/redux-extend/customizer-fields.php:454
+#: framework/plugins/redux-extend/customizer-fields.php:919
+#: framework/plugins/redux-extend/customizer-fields.php:953
+#: framework/plugins/redux-extend/customizer-fields.php:963
+#: framework/plugins/redux-extend/customizer-fields.php:985
+#: framework/plugins/redux-extend/customizer-fields.php:1003
+#: framework/plugins/redux-extend/customizer-fields.php:1022
+#: framework/plugins/redux-extend/customizer-fields.php:1032
+#: framework/plugins/redux-extend/customizer-fields.php:1054
+#: framework/plugins/redux-extend/customizer-fields.php:1087
+#: framework/plugins/redux-extend/customizer-fields.php:1120
 #: framework/plugins/redux-extend/portfolio-fields.php:29
 #: framework/plugins/redux-extend/portfolio-fields.php:42
 #: framework/plugins/redux-extend/portfolio-fields.php:53
@@ -692,14 +710,15 @@ msgstr "Child Theme"
 #: framework/plugins/redux-extend/portfolio-fields.php:179
 #: framework/plugins/redux-extend/portfolio-fields.php:190
 #: framework/plugins/redux-extend/portfolio-fields.php:215
-#: framework/plugins/redux-extend/portfolio-fields.php:332
-#: framework/plugins/redux-extend/portfolio-fields.php:357
-#: framework/plugins/redux-extend/portfolio-fields.php:367
-#: framework/plugins/redux-extend/portfolio-fields.php:388
-#: framework/plugins/redux-extend/portfolio-fields.php:399
-#: framework/plugins/redux-extend/portfolio-fields.php:423
-#: framework/plugins/redux-extend/portfolio-fields.php:447
-#: framework/plugins/redux-extend/portfolio-fields.php:533
+#: framework/plugins/redux-extend/portfolio-fields.php:318
+#: framework/plugins/redux-extend/portfolio-fields.php:345
+#: framework/plugins/redux-extend/portfolio-fields.php:370
+#: framework/plugins/redux-extend/portfolio-fields.php:380
+#: framework/plugins/redux-extend/portfolio-fields.php:401
+#: framework/plugins/redux-extend/portfolio-fields.php:412
+#: framework/plugins/redux-extend/portfolio-fields.php:436
+#: framework/plugins/redux-extend/portfolio-fields.php:460
+#: framework/plugins/redux-extend/portfolio-fields.php:546
 #: framework/plugins/redux-extend/woocommerce-fields.php:61
 #: framework/plugins/redux-extend/woocommerce-fields.php:83
 #: framework/plugins/redux-extend/woocommerce-fields.php:93
@@ -718,70 +737,78 @@ msgstr "Child Theme"
 #: framework/redux-config.php:157 framework/redux-config.php:170
 #: framework/redux-config.php:181 framework/redux-config.php:227
 #: framework/redux-config.php:258 framework/redux-config.php:384
-#: framework/redux-config.php:420 framework/redux-config.php:536
-#: framework/redux-config.php:547 framework/redux-config.php:558
-#: framework/redux-config.php:589 framework/redux-config.php:600
-#: framework/redux-config.php:700 framework/redux-config.php:711
-#: framework/redux-config.php:790 framework/redux-config.php:850
-#: framework/redux-config.php:861 framework/redux-config.php:881
-#: framework/redux-config.php:892 framework/redux-config.php:932
-#: framework/redux-config.php:1065 framework/redux-config.php:1140
-#: framework/redux-config.php:1213 framework/redux-config.php:1224
-#: framework/redux-config.php:1399 framework/redux-config.php:1442
-#: framework/redux-config.php:1453 framework/redux-config.php:1480
-#: framework/redux-config.php:1506 framework/redux-config.php:1540
-#: framework/redux-config.php:1552 framework/redux-config.php:1580
-#: framework/redux-config.php:1618 framework/redux-config.php:1656
-#: framework/redux-config.php:1679 framework/redux-config.php:1719
-#: framework/redux-config.php:1730 framework/redux-config.php:1781
-#: framework/redux-config.php:1852 framework/redux-config.php:1939
-#: framework/redux-config.php:1975 framework/redux-config.php:2010
-#: framework/redux-config.php:2034 framework/redux-config.php:2046
-#: framework/redux-config.php:2090 framework/redux-config.php:2147
-#: framework/redux-config.php:2215 framework/redux-config.php:2255
-#: framework/redux-config.php:2280 framework/redux-config.php:2291
-#: framework/redux-config.php:2302 framework/redux-config.php:2327
-#: framework/redux-config.php:2365 framework/redux-config.php:2451
-#: framework/redux-config.php:2491 framework/redux-config.php:2511
-#: framework/redux-config.php:2531 framework/redux-config.php:2551
-#: framework/redux-config.php:2689 framework/redux-config.php:2714
-#: framework/redux-config.php:2820 framework/redux-config.php:2831
-#: framework/redux-config.php:2842
+#: framework/redux-config.php:420 framework/redux-config.php:538
+#: framework/redux-config.php:549 framework/redux-config.php:560
+#: framework/redux-config.php:591 framework/redux-config.php:703
+#: framework/redux-config.php:714 framework/redux-config.php:793
+#: framework/redux-config.php:853 framework/redux-config.php:864
+#: framework/redux-config.php:875 framework/redux-config.php:886
+#: framework/redux-config.php:926 framework/redux-config.php:1059
+#: framework/redux-config.php:1134 framework/redux-config.php:1207
+#: framework/redux-config.php:1218 framework/redux-config.php:1229
+#: framework/redux-config.php:1404 framework/redux-config.php:1447
+#: framework/redux-config.php:1458 framework/redux-config.php:1485
+#: framework/redux-config.php:1511 framework/redux-config.php:1545
+#: framework/redux-config.php:1557 framework/redux-config.php:1585
+#: framework/redux-config.php:1623 framework/redux-config.php:1661
+#: framework/redux-config.php:1684 framework/redux-config.php:1724
+#: framework/redux-config.php:1735 framework/redux-config.php:1786
+#: framework/redux-config.php:1810 framework/redux-config.php:1858
+#: framework/redux-config.php:1882 framework/redux-config.php:1955
+#: framework/redux-config.php:1991 framework/redux-config.php:2026
+#: framework/redux-config.php:2050 framework/redux-config.php:2062
+#: framework/redux-config.php:2091 framework/redux-config.php:2117
+#: framework/redux-config.php:2174 framework/redux-config.php:2203
+#: framework/redux-config.php:2267 framework/redux-config.php:2384
+#: framework/redux-config.php:2409 framework/redux-config.php:2420
+#: framework/redux-config.php:2431 framework/redux-config.php:2456
+#: framework/redux-config.php:2494 framework/redux-config.php:2580
+#: framework/redux-config.php:2620 framework/redux-config.php:2631
+#: framework/redux-config.php:2642 framework/redux-config.php:2653
+#: framework/redux-config.php:2683 framework/redux-config.php:2708
+#: framework/redux-config.php:2814 framework/redux-config.php:2825
+#: framework/redux-config.php:2836 framework/redux-config.php:3340
 msgid "Yes"
 msgstr "Yes"
 
-#: framework/admin/views/status.php:27 framework/cmb2-config.php:66
-#: framework/cmb2-config.php:90 framework/cmb2-config.php:132
-#: framework/cmb2-config.php:146 framework/cmb2-config.php:225
-#: framework/cmb2-config.php:255 framework/cmb2-config.php:269
-#: framework/cmb2-config.php:337 framework/cmb2-config.php:351
-#: framework/cmb2-config.php:482 framework/cmb2-config.php:500
-#: framework/cmb2-config.php:599 framework/cmb2-config.php:687
-#: framework/cmb2-config.php:706 framework/cmb2-config.php:725
-#: framework/cmb2-config.php:744
-#: framework/plugins/cmb2-extend/portfolio-fields.php:90
-#: framework/plugins/cmb2-extend/portfolio-fields.php:120
-#: framework/plugins/cmb2-extend/portfolio-fields.php:134
+#: framework/admin/views/status.php:27 framework/cmb2-config.php:148
+#: framework/cmb2-config.php:200 framework/cmb2-config.php:230
+#: framework/cmb2-config.php:244 framework/cmb2-config.php:306
+#: framework/cmb2-config.php:355 framework/cmb2-config.php:385
+#: framework/cmb2-config.php:399 framework/cmb2-config.php:536
+#: framework/cmb2-config.php:553 framework/cmb2-config.php:646
+#: framework/cmb2-config.php:729 framework/cmb2-config.php:747
+#: framework/cmb2-config.php:765 framework/cmb2-config.php:783
+#: framework/cmb2-config.php:819 framework/cmb2-config.php:847
+#: framework/cmb2-config.php:861 framework/cmb2-config.php:900
+#: framework/cmb2-config.php:914
+#: framework/plugins/cmb2-extend/portfolio-fields.php:32
+#: framework/plugins/cmb2-extend/portfolio-fields.php:84
+#: framework/plugins/cmb2-extend/portfolio-fields.php:113
+#: framework/plugins/cmb2-extend/portfolio-fields.php:128
+#: framework/plugins/cmb2-extend/portfolio-fields.php:142
+#: framework/plugins/cmb2-extend/portfolio-fields.php:156
+#: framework/plugins/cmb2-extend/portfolio-fields.php:170
+#: framework/plugins/cmb2-extend/portfolio-fields.php:202
 #: framework/plugins/redux-extend/customizer-fields.php:52
 #: framework/plugins/redux-extend/customizer-fields.php:144
-#: framework/plugins/redux-extend/customizer-fields.php:154
-#: framework/plugins/redux-extend/customizer-fields.php:254
-#: framework/plugins/redux-extend/customizer-fields.php:263
-#: framework/plugins/redux-extend/customizer-fields.php:343
-#: framework/plugins/redux-extend/customizer-fields.php:414
-#: framework/plugins/redux-extend/customizer-fields.php:424
-#: framework/plugins/redux-extend/customizer-fields.php:434
-#: framework/plugins/redux-extend/customizer-fields.php:453
-#: framework/plugins/redux-extend/customizer-fields.php:918
-#: framework/plugins/redux-extend/customizer-fields.php:952
-#: framework/plugins/redux-extend/customizer-fields.php:962
-#: framework/plugins/redux-extend/customizer-fields.php:984
-#: framework/plugins/redux-extend/customizer-fields.php:1002
-#: framework/plugins/redux-extend/customizer-fields.php:1021
-#: framework/plugins/redux-extend/customizer-fields.php:1031
-#: framework/plugins/redux-extend/customizer-fields.php:1053
-#: framework/plugins/redux-extend/customizer-fields.php:1086
-#: framework/plugins/redux-extend/customizer-fields.php:1119
+#: framework/plugins/redux-extend/customizer-fields.php:256
+#: framework/plugins/redux-extend/customizer-fields.php:265
+#: framework/plugins/redux-extend/customizer-fields.php:345
+#: framework/plugins/redux-extend/customizer-fields.php:416
+#: framework/plugins/redux-extend/customizer-fields.php:426
+#: framework/plugins/redux-extend/customizer-fields.php:436
+#: framework/plugins/redux-extend/customizer-fields.php:455
+#: framework/plugins/redux-extend/customizer-fields.php:920
+#: framework/plugins/redux-extend/customizer-fields.php:954
+#: framework/plugins/redux-extend/customizer-fields.php:964
+#: framework/plugins/redux-extend/customizer-fields.php:986
+#: framework/plugins/redux-extend/customizer-fields.php:1004
+#: framework/plugins/redux-extend/customizer-fields.php:1023
+#: framework/plugins/redux-extend/customizer-fields.php:1033
+#: framework/plugins/redux-extend/customizer-fields.php:1055
+#: framework/plugins/redux-extend/customizer-fields.php:1088
+#: framework/plugins/redux-extend/customizer-fields.php:1121
 #: framework/plugins/redux-extend/portfolio-fields.php:30
 #: framework/plugins/redux-extend/portfolio-fields.php:43
 #: framework/plugins/redux-extend/portfolio-fields.php:54
@@ -792,15 +819,16 @@ msgstr "Yes"
 #: framework/plugins/redux-extend/portfolio-fields.php:180
 #: framework/plugins/redux-extend/portfolio-fields.php:191
 #: framework/plugins/redux-extend/portfolio-fields.php:216
-#: framework/plugins/redux-extend/portfolio-fields.php:333
+#: framework/plugins/redux-extend/portfolio-fields.php:319
 #: framework/plugins/redux-extend/portfolio-fields.php:346
-#: framework/plugins/redux-extend/portfolio-fields.php:358
-#: framework/plugins/redux-extend/portfolio-fields.php:368
-#: framework/plugins/redux-extend/portfolio-fields.php:389
-#: framework/plugins/redux-extend/portfolio-fields.php:400
-#: framework/plugins/redux-extend/portfolio-fields.php:424
-#: framework/plugins/redux-extend/portfolio-fields.php:448
-#: framework/plugins/redux-extend/portfolio-fields.php:534
+#: framework/plugins/redux-extend/portfolio-fields.php:359
+#: framework/plugins/redux-extend/portfolio-fields.php:371
+#: framework/plugins/redux-extend/portfolio-fields.php:381
+#: framework/plugins/redux-extend/portfolio-fields.php:402
+#: framework/plugins/redux-extend/portfolio-fields.php:413
+#: framework/plugins/redux-extend/portfolio-fields.php:437
+#: framework/plugins/redux-extend/portfolio-fields.php:461
+#: framework/plugins/redux-extend/portfolio-fields.php:547
 #: framework/plugins/redux-extend/woocommerce-fields.php:62
 #: framework/plugins/redux-extend/woocommerce-fields.php:84
 #: framework/plugins/redux-extend/woocommerce-fields.php:94
@@ -820,35 +848,38 @@ msgstr "Yes"
 #: framework/redux-config.php:182 framework/redux-config.php:228
 #: framework/redux-config.php:259 framework/redux-config.php:273
 #: framework/redux-config.php:385 framework/redux-config.php:421
-#: framework/redux-config.php:537 framework/redux-config.php:548
-#: framework/redux-config.php:559 framework/redux-config.php:590
-#: framework/redux-config.php:601 framework/redux-config.php:701
-#: framework/redux-config.php:712 framework/redux-config.php:791
-#: framework/redux-config.php:851 framework/redux-config.php:862
-#: framework/redux-config.php:882 framework/redux-config.php:893
-#: framework/redux-config.php:933 framework/redux-config.php:1066
-#: framework/redux-config.php:1141 framework/redux-config.php:1214
-#: framework/redux-config.php:1225 framework/redux-config.php:1400
-#: framework/redux-config.php:1443 framework/redux-config.php:1454
-#: framework/redux-config.php:1481 framework/redux-config.php:1507
-#: framework/redux-config.php:1541 framework/redux-config.php:1553
-#: framework/redux-config.php:1581 framework/redux-config.php:1619
-#: framework/redux-config.php:1657 framework/redux-config.php:1680
-#: framework/redux-config.php:1720 framework/redux-config.php:1731
-#: framework/redux-config.php:1782 framework/redux-config.php:1853
-#: framework/redux-config.php:1940 framework/redux-config.php:1976
-#: framework/redux-config.php:2011 framework/redux-config.php:2035
-#: framework/redux-config.php:2047 framework/redux-config.php:2091
-#: framework/redux-config.php:2148 framework/redux-config.php:2179
-#: framework/redux-config.php:2216 framework/redux-config.php:2256
-#: framework/redux-config.php:2269 framework/redux-config.php:2281
-#: framework/redux-config.php:2292 framework/redux-config.php:2303
-#: framework/redux-config.php:2328 framework/redux-config.php:2366
-#: framework/redux-config.php:2452 framework/redux-config.php:2492
-#: framework/redux-config.php:2512 framework/redux-config.php:2532
-#: framework/redux-config.php:2552 framework/redux-config.php:2690
-#: framework/redux-config.php:2715 framework/redux-config.php:2821
-#: framework/redux-config.php:2832 framework/redux-config.php:2843
+#: framework/redux-config.php:539 framework/redux-config.php:550
+#: framework/redux-config.php:561 framework/redux-config.php:592
+#: framework/redux-config.php:704 framework/redux-config.php:715
+#: framework/redux-config.php:794 framework/redux-config.php:854
+#: framework/redux-config.php:865 framework/redux-config.php:876
+#: framework/redux-config.php:887 framework/redux-config.php:927
+#: framework/redux-config.php:1060 framework/redux-config.php:1135
+#: framework/redux-config.php:1208 framework/redux-config.php:1219
+#: framework/redux-config.php:1230 framework/redux-config.php:1405
+#: framework/redux-config.php:1448 framework/redux-config.php:1459
+#: framework/redux-config.php:1486 framework/redux-config.php:1512
+#: framework/redux-config.php:1546 framework/redux-config.php:1558
+#: framework/redux-config.php:1586 framework/redux-config.php:1624
+#: framework/redux-config.php:1662 framework/redux-config.php:1685
+#: framework/redux-config.php:1725 framework/redux-config.php:1736
+#: framework/redux-config.php:1787 framework/redux-config.php:1811
+#: framework/redux-config.php:1859 framework/redux-config.php:1883
+#: framework/redux-config.php:1956 framework/redux-config.php:1992
+#: framework/redux-config.php:2027 framework/redux-config.php:2051
+#: framework/redux-config.php:2063 framework/redux-config.php:2092
+#: framework/redux-config.php:2118 framework/redux-config.php:2175
+#: framework/redux-config.php:2204 framework/redux-config.php:2217
+#: framework/redux-config.php:2268 framework/redux-config.php:2385
+#: framework/redux-config.php:2398 framework/redux-config.php:2410
+#: framework/redux-config.php:2421 framework/redux-config.php:2432
+#: framework/redux-config.php:2457 framework/redux-config.php:2495
+#: framework/redux-config.php:2581 framework/redux-config.php:2621
+#: framework/redux-config.php:2632 framework/redux-config.php:2643
+#: framework/redux-config.php:2654 framework/redux-config.php:2684
+#: framework/redux-config.php:2709 framework/redux-config.php:2815
+#: framework/redux-config.php:2826 framework/redux-config.php:2837
+#: framework/redux-config.php:3341
 msgid "No"
 msgstr "No"
 
@@ -976,618 +1007,716 @@ msgstr "Customize It!"
 msgid "That&#39;s All Folks! Go Forth And Create!"
 msgstr "That&#39;s All Folks! Go Forth And Create!"
 
-#: framework/cmb2-config.php:50
-msgid "Page Options"
-msgstr "Page Options"
+#: framework/cmb2-config.php:128
+#: framework/plugins/vc-extend/fields/styler.php:99
+msgid "General"
+msgstr "General"
 
-#: framework/cmb2-config.php:60 framework/cmb2-config.php:668
-#: framework/plugins/cmb2-extend/portfolio-fields.php:22
-#: framework/plugins/redux-extend/customizer-fields.php:403
+#: framework/cmb2-config.php:132 framework/cmb2-config.php:290
+#: framework/redux-config.php:1340 framework/redux-config.php:1520
+msgid "Theme"
+msgstr "Theme"
+
+#: framework/cmb2-config.php:133
+msgid "The site-wide theme for this page"
+msgstr "The site-wide theme for this page"
+
+#: framework/cmb2-config.php:142 framework/cmb2-config.php:711
+#: framework/plugins/cmb2-extend/portfolio-fields.php:15
+#: framework/plugins/redux-extend/customizer-fields.php:405
 #: framework/plugins/redux-extend/portfolio-fields.php:26
-#: framework/plugins/redux-extend/portfolio-fields.php:318
-#: framework/redux-config.php:154 framework/redux-config.php:839
+#: framework/plugins/redux-extend/portfolio-fields.php:331
+#: framework/redux-config.php:154 framework/redux-config.php:842
 msgid "Full Width"
 msgstr "Full Width"
 
-#: framework/cmb2-config.php:61
+#: framework/cmb2-config.php:143
 msgid "Display page in full width mode"
 msgstr "Display page in full width mode"
 
-#: framework/cmb2-config.php:74
-#: framework/plugins/redux-extend/customizer-fields.php:550
-msgid "Navbar Theme"
-msgstr "Navbar Theme"
+#: framework/cmb2-config.php:158
+msgid "Blog"
+msgstr "Blog"
 
-#: framework/cmb2-config.php:75
+#: framework/cmb2-config.php:162
+#: framework/plugins/cmb2-extend/portfolio-fields.php:46
+#: framework/plugins/redux-extend/portfolio-fields.php:62
+#: framework/redux-config.php:190 framework/redux-config.php:2141
+msgid "Layout Type"
+msgstr "Layout Type"
+
+#: framework/cmb2-config.php:163 framework/redux-config.php:2142
+msgid "Select the blog layout type"
+msgstr "Select the blog layout type"
+
+#: framework/cmb2-config.php:167
+#: framework/plugins/cmb2-extend/portfolio-fields.php:51
+#: framework/plugins/redux-extend/portfolio-fields.php:65
+#: framework/redux-config.php:193 framework/redux-config.php:2144
+msgid "Standard"
+msgstr "Standard"
+
+#: framework/cmb2-config.php:168
+#: framework/plugins/cmb2-extend/portfolio-fields.php:52
+#: framework/plugins/redux-extend/portfolio-fields.php:66
+#: framework/redux-config.php:194 framework/redux-config.php:2145
+msgid "Grid"
+msgstr "Grid"
+
+#: framework/cmb2-config.php:169
+#: framework/plugins/cmb2-extend/portfolio-fields.php:53
+#: framework/plugins/redux-extend/portfolio-fields.php:67
+#: framework/redux-config.php:195 framework/redux-config.php:2146
+msgid "Masonry"
+msgstr "Masonry"
+
+#: framework/cmb2-config.php:177 framework/redux-config.php:2155
+msgid "Blog Columns"
+msgstr "Blog Columns"
+
+#: framework/cmb2-config.php:178
+#: framework/plugins/cmb2-extend/portfolio-fields.php:62
+#: framework/plugins/redux-extend/portfolio-fields.php:78
+#: framework/redux-config.php:206 framework/redux-config.php:2156
+msgid "Number of columns for grid and masonry layout"
+msgstr "Number of columns for grid and masonry layout"
+
+#: framework/cmb2-config.php:194
+#: framework/plugins/cmb2-extend/portfolio-fields.php:78
+#: framework/plugins/redux-extend/portfolio-fields.php:97
+#: framework/redux-config.php:225 framework/redux-config.php:2172
+msgid "Show Media"
+msgstr "Show Media"
+
+#: framework/cmb2-config.php:195
+#: framework/plugins/cmb2-extend/portfolio-fields.php:27
+#: framework/plugins/cmb2-extend/portfolio-fields.php:79
+#: framework/plugins/redux-extend/portfolio-fields.php:98
+#: framework/redux-config.php:226 framework/redux-config.php:2173
+msgid "Display the post featured media"
+msgstr "Display the post featured media"
+
+#: framework/cmb2-config.php:208
+#: framework/plugins/cmb2-extend/portfolio-fields.php:92
+#: framework/plugins/redux-extend/portfolio-fields.php:120
+#: framework/redux-config.php:237 framework/redux-config.php:2183
+msgid "Media Size"
+msgstr "Media Size"
+
+#: framework/cmb2-config.php:209
+#: framework/plugins/cmb2-extend/portfolio-fields.php:93
+msgid "Select a size for the featured post media"
+msgstr "Select a size for the featured post media"
+
+#: framework/cmb2-config.php:214
+#: framework/plugins/cmb2-extend/portfolio-fields.php:98
+#: framework/plugins/redux-extend/portfolio-fields.php:124
+#: framework/redux-config.php:241 framework/redux-config.php:2187
+msgid "Medium"
+msgstr "Medium"
+
+#: framework/cmb2-config.php:224
+#: framework/plugins/cmb2-extend/portfolio-fields.php:122
+#: framework/plugins/redux-extend/portfolio-fields.php:151
+#: framework/plugins/redux-extend/portfolio-fields.php:354
+#: framework/redux-config.php:268 framework/redux-config.php:2212
+#: framework/redux-config.php:2393 framework/redux-config.php:2607
+msgid "Post Meta"
+msgstr "Post Meta"
+
+#: framework/cmb2-config.php:225
+#: framework/plugins/cmb2-extend/portfolio-fields.php:123
+#: framework/plugins/redux-extend/portfolio-fields.php:152
+#: framework/plugins/redux-extend/portfolio-fields.php:355
+#: framework/redux-config.php:269 framework/redux-config.php:2213
+#: framework/redux-config.php:2394
+msgid "Display the meta in the post header, footer, or do not display"
+msgstr "Display the meta in the post header, footer, or do not display"
+
+#: framework/cmb2-config.php:228
+#: framework/plugins/cmb2-extend/portfolio-fields.php:126
+#: framework/plugins/redux-extend/portfolio-fields.php:154
+#: framework/plugins/redux-extend/portfolio-fields.php:357
+#: framework/redux-config.php:271 framework/redux-config.php:2215
+#: framework/redux-config.php:2396
+msgid "In Header"
+msgstr "In Header"
+
+#: framework/cmb2-config.php:229
+#: framework/plugins/cmb2-extend/portfolio-fields.php:127
+#: framework/plugins/redux-extend/portfolio-fields.php:155
+#: framework/plugins/redux-extend/portfolio-fields.php:358
+#: framework/redux-config.php:272 framework/redux-config.php:2216
+#: framework/redux-config.php:2397
+msgid "In Footer"
+msgstr "In Footer"
+
+#: framework/cmb2-config.php:239 framework/cmb2-config.php:759
+#: framework/plugins/cmb2-extend/portfolio-fields.php:108
+#: framework/plugins/redux-extend/customizer-fields.php:433
+#: framework/plugins/redux-extend/portfolio-fields.php:139
+#: framework/plugins/redux-extend/portfolio-fields.php:343
+#: framework/redux-config.php:256 framework/redux-config.php:873
+#: framework/redux-config.php:2201 framework/redux-config.php:2382
+msgid "Post Info"
+msgstr "Post Info"
+
+#: framework/cmb2-config.php:240
+#: framework/plugins/cmb2-extend/portfolio-fields.php:109
+#: framework/plugins/redux-extend/portfolio-fields.php:140
+#: framework/plugins/redux-extend/portfolio-fields.php:344
+#: framework/redux-config.php:257 framework/redux-config.php:2202
+#: framework/redux-config.php:2383
+msgid "Display the post format and date"
+msgstr "Display the post format and date"
+
+#: framework/cmb2-config.php:255 framework/cmb2-config.php:259
+#: framework/plugins/cmb2-extend/portfolio-fields.php:178
+#: framework/redux-config.php:2372
+msgid "Posts"
+msgstr "Posts"
+
+#: framework/cmb2-config.php:260
+#: framework/plugins/cmb2-extend/portfolio-fields.php:179
+msgid "Select the posts to display on this page (empty to display all)"
+msgstr "Select the posts to display on this page (empty to display all)"
+
+#: framework/cmb2-config.php:268
+#: framework/plugins/cmb2-extend/portfolio-fields.php:187
+msgid "Posts Per Page"
+msgstr "Posts Per Page"
+
+#: framework/cmb2-config.php:269
+msgid ""
+"Number of posts to display on each page (-1 to display all, auto to use "
+"value from site settings)"
+msgstr ""
+"Number of posts to display on each page (-1 to display all, auto to use "
+"value from site settings)"
+
+#: framework/cmb2-config.php:291
 msgid "The navbar theme for this page"
 msgstr "The navbar theme for this page"
 
-#: framework/cmb2-config.php:84
-msgid "See-Through Navbar"
-msgstr "See-Through Navbar"
+#: framework/cmb2-config.php:300
+#: framework/plugins/redux-extend/customizer-fields.php:917
+#: framework/redux-config.php:1402
+msgid "See-Through"
+msgstr "See-Through"
 
-#: framework/cmb2-config.php:85
+#: framework/cmb2-config.php:301
 msgid "Navbar see-through when at the top"
 msgstr "Navbar see-through when at the top"
 
-#: framework/cmb2-config.php:98
-#: framework/plugins/redux-extend/customizer-fields.php:925
-#: framework/redux-config.php:1409
+#: framework/cmb2-config.php:314
+#: framework/plugins/redux-extend/customizer-fields.php:927
+#: framework/redux-config.php:1414
 msgid "See-Through Opacity"
 msgstr "See-Through Opacity"
 
-#: framework/cmb2-config.php:99
+#: framework/cmb2-config.php:315
 msgid ""
-"Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 "
-"(opaque), or auto to use global option"
+"Set the navbar&#39;s see-through opacity, between 0 (transparent) and 1 "
+"(opaque)"
 msgstr ""
-"Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and 1.0 "
-"(opaque), or auto to use global option"
+"Set the navbar&#39;s see-through opacity, between 0 (transparent) and 1 "
+"(opaque)"
 
-#: framework/cmb2-config.php:112
-msgid "Navbar Position"
-msgstr "Navbar Position"
+#: framework/cmb2-config.php:334 framework/cmb2-config.php:827
+#: framework/plugins/redux-extend/customizer-fields.php:939
+#: framework/redux-config.php:1266 framework/redux-config.php:1431
+#: framework/redux-config.php:1693
+msgid "Position"
+msgstr "Position"
 
-#: framework/cmb2-config.php:113
+#: framework/cmb2-config.php:335
 msgid "Navbar above or below header"
 msgstr "Navbar above or below header"
 
-#: framework/cmb2-config.php:117
-#: framework/plugins/redux-extend/customizer-fields.php:940
-#: framework/redux-config.php:1429
+#: framework/cmb2-config.php:339
+#: framework/plugins/redux-extend/customizer-fields.php:942
+#: framework/redux-config.php:1434
 msgid "Above"
 msgstr "Above"
 
-#: framework/cmb2-config.php:118
-#: framework/plugins/redux-extend/customizer-fields.php:941
-#: framework/redux-config.php:1430
+#: framework/cmb2-config.php:340
+#: framework/plugins/redux-extend/customizer-fields.php:943
+#: framework/redux-config.php:1435
 msgid "Below"
 msgstr "Below"
 
-#: framework/cmb2-config.php:126
-#: framework/plugins/redux-extend/customizer-fields.php:441
-#: framework/plugins/redux-extend/customizer-fields.php:450
-#: framework/redux-config.php:921 framework/redux-config.php:930
+#: framework/cmb2-config.php:349
+#: framework/plugins/redux-extend/customizer-fields.php:993
+#: framework/redux-config.php:1500
+msgid "Secondary Navbar"
+msgstr "Secondary Navbar"
+
+#: framework/cmb2-config.php:350
+msgid "Show the secondary navbar"
+msgstr "Show the secondary navbar"
+
+#: framework/cmb2-config.php:363
+msgid "Secondary Nav Theme"
+msgstr "Secondary Nav Theme"
+
+#: framework/cmb2-config.php:364
+#: framework/plugins/redux-extend/customizer-fields.php:562
+#: framework/redux-config.php:1521
+msgid "Select the theme for the secondary navbar"
+msgstr "Select the theme for the secondary navbar"
+
+#: framework/cmb2-config.php:370
+#: framework/plugins/redux-extend/customizer-fields.php:1066
+#: framework/plugins/redux-extend/customizer-fields.php:1099
+#: framework/redux-config.php:1599 framework/redux-config.php:1637
+msgid "Navigation"
+msgstr "Navigation"
+
+#: framework/cmb2-config.php:375
+#: framework/plugins/redux-extend/customizer-fields.php:125
+#: framework/redux-config.php:570 framework/redux-config.php:3538
+msgid "Header"
+msgstr "Header"
+
+#: framework/cmb2-config.php:379
+#: framework/plugins/redux-extend/customizer-fields.php:443
+#: framework/plugins/redux-extend/customizer-fields.php:452
+#: framework/redux-config.php:915 framework/redux-config.php:924
 msgid "Location Bar"
 msgstr "Location Bar"
 
-#: framework/cmb2-config.php:127
+#: framework/cmb2-config.php:380
 msgid "Show the location bar on this page"
 msgstr "Show the location bar on this page"
 
-#: framework/cmb2-config.php:140 framework/cmb2-config.php:163
+#: framework/cmb2-config.php:393
+#: framework/plugins/redux-extend/customizer-fields.php:132
+#: framework/redux-config.php:580
+msgid "Header Media"
+msgstr "Header Media"
+
+#: framework/cmb2-config.php:394
+msgid "Display media, a slider & other content in the header"
+msgstr "Display media, a slider & other content in the header"
+
+#: framework/cmb2-config.php:407
+#: framework/plugins/cmb2-extend/extensions/dimensions-field.php:46
+#: framework/plugins/redux-extend/customizer-fields.php:151
+#: framework/redux-config.php:600
+msgid "Height"
+msgstr "Height"
+
+#: framework/cmb2-config.php:408
+#: framework/plugins/redux-extend/customizer-fields.php:152
+#: framework/redux-config.php:601
+msgid ""
+"Set a height for the header, in pixels or percent (relative to viewport). "
+"100% will make the header cover the whole screen."
+msgstr ""
+"Set a height for the header, in pixels or percent (relative to viewport). "
+"100% will make the header cover the whole screen."
+
+#: framework/cmb2-config.php:421
+#: framework/plugins/redux-extend/customizer-fields.php:161
+#: framework/redux-config.php:610
+msgid "Minimum Height"
+msgstr "Minimum Height"
+
+#: framework/cmb2-config.php:422
+#: framework/plugins/redux-extend/customizer-fields.php:162
+#: framework/redux-config.php:611
+msgid "Set a minimum height for the header"
+msgstr "Set a minimum height for the header"
+
+#: framework/cmb2-config.php:435
+#: framework/plugins/cmb2-extend/portfolio-fields.php:230
+#: framework/plugins/redux-extend/customizer-fields.php:171
+#: framework/plugins/redux-extend/customizer-fields.php:462
+#: framework/plugins/redux-extend/customizer-fields.php:620
+#: framework/plugins/redux-extend/customizer-fields.php:739
+#: framework/plugins/redux-extend/customizer-fields.php:1146
+#: framework/plugins/redux-extend/customizer-fields.php:1191
+#: framework/plugins/redux-extend/portfolio-fields.php:244
+#: framework/redux-config.php:324 framework/redux-config.php:620
+#: framework/redux-config.php:935 framework/redux-config.php:1819
+#: framework/redux-config.php:1891 framework/redux-config.php:2296
+#: framework/redux-config.php:2909 framework/redux-config.php:3033
+msgid "Background Color"
+msgstr "Background Color"
+
+#: framework/cmb2-config.php:436
+#: framework/plugins/redux-extend/customizer-fields.php:172
+#: framework/redux-config.php:621
+msgid "Select a background color for the header"
+msgstr "Select a background color for the header"
+
+#: framework/cmb2-config.php:449
+#: framework/plugins/redux-extend/customizer-fields.php:181
+#: framework/plugins/redux-extend/customizer-fields.php:480
+#: framework/plugins/redux-extend/customizer-fields.php:626
+#: framework/plugins/redux-extend/customizer-fields.php:745
+#: framework/plugins/redux-extend/customizer-fields.php:1164
+#: framework/plugins/redux-extend/customizer-fields.php:1209
+#: framework/redux-config.php:631 framework/redux-config.php:956
+#: framework/redux-config.php:1097 framework/redux-config.php:1838
+#: framework/redux-config.php:1910 framework/redux-config.php:2915
+#: framework/redux-config.php:3039
+msgid "Text Color"
+msgstr "Text Color"
+
+#: framework/cmb2-config.php:450
+#: framework/plugins/redux-extend/customizer-fields.php:182
+#: framework/redux-config.php:632
+msgid "The color for text on light backgrounds"
+msgstr "The color for text on light backgrounds"
+
+#: framework/cmb2-config.php:463
+#: framework/plugins/redux-extend/customizer-fields.php:191
+#: framework/plugins/redux-extend/customizer-fields.php:638
+#: framework/plugins/redux-extend/customizer-fields.php:751
+#: framework/redux-config.php:642 framework/redux-config.php:2939
+#: framework/redux-config.php:3045
+msgid "Inverse Text Color"
+msgstr "Inverse Text Color"
+
+#: framework/cmb2-config.php:464
+#: framework/plugins/redux-extend/customizer-fields.php:192
+#: framework/redux-config.php:643
+msgid "The color for text on dark backgrounds"
+msgstr "The color for text on dark backgrounds"
+
+#: framework/cmb2-config.php:477
+#: framework/plugins/redux-extend/customizer-fields.php:201
+#: framework/redux-config.php:653
+msgid "Media Type"
+msgstr "Media Type"
+
+#: framework/cmb2-config.php:478
+#: framework/plugins/redux-extend/customizer-fields.php:202
+#: framework/redux-config.php:654
+msgid "Type of media to use in the header"
+msgstr "Type of media to use in the header"
+
+#: framework/cmb2-config.php:482
+#: framework/plugins/redux-extend/customizer-fields.php:204
+#: framework/redux-config.php:656
+msgid "Solid Color"
+msgstr "Solid Color"
+
+#: framework/cmb2-config.php:483
+#: framework/plugins/redux-extend/customizer-fields.php:63
+#: framework/plugins/redux-extend/customizer-fields.php:205
+#: framework/redux-config.php:433 framework/redux-config.php:657
+#: framework/redux-config.php:1027 framework/redux-config.php:1038
+msgid "Image"
+msgstr "Image"
+
+#: framework/cmb2-config.php:484 framework/cmb2-config.php:594
+#: framework/plugins/redux-extend/customizer-fields.php:206
+#: framework/plugins/redux-extend/customizer-fields.php:311
+#: framework/redux-config.php:658 framework/redux-config.php:757
+msgid "Video"
+msgstr "Video"
+
+#: framework/cmb2-config.php:485
+#: framework/plugins/redux-extend/customizer-fields.php:207
+#: framework/redux-config.php:659
+msgid "Slider"
+msgstr "Slider"
+
+#: framework/cmb2-config.php:497
+#: framework/plugins/redux-extend/customizer-fields.php:234
+#: framework/redux-config.php:679
+msgid "Image Source"
+msgstr "Image Source"
+
+#: framework/cmb2-config.php:498
+#: framework/plugins/redux-extend/customizer-fields.php:235
+#: framework/redux-config.php:680
+msgid "Select an image or use the featured one"
+msgstr "Select an image or use the featured one"
+
+#: framework/cmb2-config.php:502
+#: framework/plugins/redux-extend/customizer-fields.php:237
+#: framework/redux-config.php:682
+msgid "Gallery"
+msgstr "Gallery"
+
+#: framework/cmb2-config.php:503
+#: framework/plugins/redux-extend/customizer-fields.php:238
+#: framework/redux-config.php:683
+msgid "Featured"
+msgstr "Featured"
+
+#: framework/cmb2-config.php:515
+#: framework/plugins/redux-extend/customizer-fields.php:246
+#: framework/redux-config.php:693
+msgid "Select Image"
+msgstr "Select Image"
+
+#: framework/cmb2-config.php:516
+#: framework/plugins/redux-extend/customizer-fields.php:247
+#: framework/redux-config.php:694
+msgid "Select an image from the gallery or upload one"
+msgstr "Select an image from the gallery or upload one"
+
+#: framework/cmb2-config.php:531
+#: framework/plugins/redux-extend/customizer-fields.php:254
+#: framework/redux-config.php:702
+msgid "Repeat / Pattern Image"
+msgstr "Repeat / Pattern Image"
+
+#: framework/cmb2-config.php:548
+#: framework/plugins/redux-extend/customizer-fields.php:263
+#: framework/redux-config.php:713
+msgid "Parallax Effect"
+msgstr "Parallax Effect"
+
+#: framework/cmb2-config.php:566
+#: framework/plugins/redux-extend/customizer-fields.php:281
+#: framework/redux-config.php:724
+msgid "Video Source"
+msgstr "Video Source"
+
+#: framework/cmb2-config.php:567
+#: framework/plugins/redux-extend/customizer-fields.php:282
+#: framework/redux-config.php:725
+msgid "Use an embedded video or a hosted one"
+msgstr "Use an embedded video or a hosted one"
+
+#: framework/cmb2-config.php:569
+#: framework/plugins/redux-extend/customizer-fields.php:284
+#: framework/redux-config.php:727
+msgid "Embedded"
+msgstr "Embedded"
+
+#: framework/cmb2-config.php:570
+#: framework/plugins/redux-extend/customizer-fields.php:285
+#: framework/redux-config.php:728
+msgid "Hosted"
+msgstr "Hosted"
+
+#: framework/cmb2-config.php:583
+#: framework/plugins/redux-extend/customizer-fields.php:293
+#: framework/redux-config.php:738
+msgid "Video Embed Code"
+msgstr "Video Embed Code"
+
+#: framework/cmb2-config.php:584
+#: framework/plugins/redux-extend/customizer-fields.php:294
+#: framework/redux-config.php:739
+msgid "The embed code for the video you want to use"
+msgstr "The embed code for the video you want to use"
+
+#: framework/cmb2-config.php:595
+#: framework/plugins/redux-extend/customizer-fields.php:312
+#: framework/redux-config.php:758
+msgid "Select a video from the gallery or upload one"
+msgstr "Select a video from the gallery or upload one"
+
+#: framework/cmb2-config.php:610
+#: framework/plugins/redux-extend/customizer-fields.php:322
+#: framework/redux-config.php:769
+msgid "Video Fallback"
+msgstr "Video Fallback"
+
+#: framework/cmb2-config.php:611
+#: framework/plugins/redux-extend/customizer-fields.php:323
+#: framework/redux-config.php:770
+msgid "Select a fallback video from the gallery or upload one"
+msgstr "Select a fallback video from the gallery or upload one"
+
+#: framework/cmb2-config.php:626
+#: framework/plugins/redux-extend/customizer-fields.php:333
+#: framework/redux-config.php:781
+msgid "Video Poster"
+msgstr "Video Poster"
+
+#: framework/cmb2-config.php:627
+#: framework/plugins/redux-extend/customizer-fields.php:334
+#: framework/redux-config.php:782
+msgid ""
+"Select an image to show while the video loads or if video is not supported"
+msgstr ""
+"Select an image to show while the video loads or if video is not supported"
+
+#: framework/cmb2-config.php:642
+#: framework/plugins/redux-extend/customizer-fields.php:343
+#: framework/redux-config.php:792
+msgid "Video Loop"
+msgstr "Video Loop"
+
+#: framework/cmb2-config.php:658
+#: framework/plugins/redux-extend/customizer-fields.php:352
+#: framework/redux-config.php:803
+msgid "Video Luminance"
+msgstr "Video Luminance"
+
+#: framework/cmb2-config.php:659
+#: framework/plugins/redux-extend/customizer-fields.php:353
+#: framework/redux-config.php:804
+msgid "Header text color will be adjusted based on this"
+msgstr "Header text color will be adjusted based on this"
+
+#: framework/cmb2-config.php:675
+#: framework/plugins/redux-extend/customizer-fields.php:373
+#: framework/redux-config.php:817
+msgid "Slider ID"
+msgstr "Slider ID"
+
+#: framework/cmb2-config.php:676 framework/redux-config.php:818
+msgid "The ID number or slug of the slider to use"
+msgstr "The ID number or slug of the slider to use"
+
+#: framework/cmb2-config.php:688
+#: framework/plugins/redux-extend/customizer-fields.php:390
+#: framework/redux-config.php:826
+msgid "Content Align"
+msgstr "Content Align"
+
+#: framework/cmb2-config.php:692 framework/cmb2-config.php:832
+#: framework/plugins/redux-extend/customizer-fields.php:392
+#: framework/plugins/redux-extend/customizer-fields.php:855
+#: framework/plugins/redux-extend/customizer-fields.php:866
+#: framework/plugins/redux-extend/customizer-fields.php:974
+#: framework/plugins/redux-extend/customizer-fields.php:1043
+#: framework/redux-config.php:828 framework/redux-config.php:1269
+#: framework/redux-config.php:1315 framework/redux-config.php:1471
+#: framework/redux-config.php:1571 framework/redux-config.php:1696
+msgid "Left"
+msgstr "Left"
+
+#: framework/cmb2-config.php:693
+#: framework/plugins/redux-extend/customizer-fields.php:393
+#: framework/plugins/redux-extend/customizer-fields.php:867
+#: framework/redux-config.php:829 framework/redux-config.php:1316
+msgid "Center"
+msgstr "Center"
+
+#: framework/cmb2-config.php:694 framework/cmb2-config.php:833
+#: framework/plugins/redux-extend/customizer-fields.php:394
+#: framework/plugins/redux-extend/customizer-fields.php:856
+#: framework/plugins/redux-extend/customizer-fields.php:868
+#: framework/plugins/redux-extend/customizer-fields.php:975
+#: framework/plugins/redux-extend/customizer-fields.php:1044
+#: framework/redux-config.php:830 framework/redux-config.php:1270
+#: framework/redux-config.php:1317 framework/redux-config.php:1472
+#: framework/redux-config.php:1572 framework/redux-config.php:1697
+msgid "Right"
+msgstr "Right"
+
+#: framework/cmb2-config.php:706
+#: framework/plugins/redux-extend/customizer-fields.php:402
+#: framework/redux-config.php:839
+msgid "Content Size"
+msgstr "Content Size"
+
+#: framework/cmb2-config.php:712
+#: framework/plugins/redux-extend/customizer-fields.php:406
+#: framework/redux-config.php:843
+msgid "Cover"
+msgstr "Cover"
+
+#: framework/cmb2-config.php:724
+#: framework/plugins/redux-extend/customizer-fields.php:414
+#: framework/redux-config.php:852
+msgid "Content Fade Effect"
+msgstr "Content Fade Effect"
+
+#: framework/cmb2-config.php:741
+#: framework/plugins/redux-extend/customizer-fields.php:423
+#: framework/redux-config.php:862
+msgid "Scroll To Content"
+msgstr "Scroll To Content"
+
+#: framework/cmb2-config.php:742
+#: framework/plugins/redux-extend/customizer-fields.php:424
+#: framework/redux-config.php:863
+msgid "Show an arrow that scrolls down to the page content when clicked"
+msgstr "Show an arrow that scrolls down to the page content when clicked"
+
+#: framework/cmb2-config.php:760
+#: framework/plugins/redux-extend/customizer-fields.php:434
+#: framework/redux-config.php:874
+msgid "Show the post title and meta in the header"
+msgstr "Show the post title and meta in the header"
+
+#: framework/cmb2-config.php:777 framework/redux-config.php:884
+msgid "Custom Code"
+msgstr "Custom Code"
+
+#: framework/cmb2-config.php:778 framework/redux-config.php:885
+msgid "Output custom code in the header (can use shortcodes)"
+msgstr "Output custom code in the header (can use shortcodes)"
+
+#: framework/cmb2-config.php:795 framework/redux-config.php:895
+msgid "Custom Code Content"
+msgstr "Custom Code Content"
+
+#: framework/cmb2-config.php:813
+msgid "Display"
+msgstr "Display"
+
+#: framework/cmb2-config.php:814
+msgid "Show the sidebar on this page"
+msgstr "Show the sidebar on this page"
+
+#: framework/cmb2-config.php:828 framework/redux-config.php:1694
+msgid "Sidebar to the left or to the right of the page"
+msgstr "Sidebar to the left or to the right of the page"
+
+#: framework/cmb2-config.php:841 framework/redux-config.php:1722
+#: framework/redux-config.php:1856 framework/redux-config.php:2060
+msgid "Hide On Mobile"
+msgstr "Hide On Mobile"
+
+#: framework/cmb2-config.php:842 framework/redux-config.php:1723
+msgid "Hide sidebar on mobile / small screens"
+msgstr "Hide sidebar on mobile / small screens"
+
+#: framework/cmb2-config.php:855 framework/redux-config.php:1733
+msgid "Child Pages Menu"
+msgstr "Child Pages Menu"
+
+#: framework/cmb2-config.php:856 framework/redux-config.php:1734
+msgid "Display a navigation menu of child pages in the sidebar, when available"
+msgstr ""
+"Display a navigation menu of child pages in the sidebar, when available"
+
+#: framework/cmb2-config.php:877 framework/cmb2-config.php:885
 #: framework/plugins/redux-extend/woocommerce-fields.php:25 functions.php:123
 msgid "Sidebar"
 msgstr "Sidebar"
 
-#: framework/cmb2-config.php:141
-msgid "Show the sidebar on this page"
-msgstr "Show the sidebar on this page"
-
-#: framework/cmb2-config.php:164
+#: framework/cmb2-config.php:878
 msgid "The sidebar to use for this page"
 msgstr "The sidebar to use for this page"
 
-#: framework/cmb2-config.php:176
-msgid "Blog Options"
-msgstr "Blog Options"
-
-#: framework/cmb2-config.php:187
-#: framework/plugins/cmb2-extend/portfolio-fields.php:52
-#: framework/plugins/redux-extend/portfolio-fields.php:62
-#: framework/redux-config.php:190 framework/redux-config.php:2114
-msgid "Layout Type"
-msgstr "Layout Type"
-
-#: framework/cmb2-config.php:188 framework/redux-config.php:2115
-msgid "Select the blog layout type"
-msgstr "Select the blog layout type"
-
-#: framework/cmb2-config.php:192
-#: framework/plugins/cmb2-extend/portfolio-fields.php:57
-#: framework/plugins/redux-extend/portfolio-fields.php:65
-#: framework/redux-config.php:193 framework/redux-config.php:2117
-msgid "Standard"
-msgstr "Standard"
-
-#: framework/cmb2-config.php:193
-#: framework/plugins/cmb2-extend/portfolio-fields.php:58
-#: framework/plugins/redux-extend/portfolio-fields.php:66
-#: framework/redux-config.php:194 framework/redux-config.php:2118
-msgid "Grid"
-msgstr "Grid"
-
-#: framework/cmb2-config.php:194
-#: framework/plugins/cmb2-extend/portfolio-fields.php:59
-#: framework/plugins/redux-extend/portfolio-fields.php:67
-#: framework/redux-config.php:195 framework/redux-config.php:2119
-msgid "Masonry"
-msgstr "Masonry"
-
-#: framework/cmb2-config.php:202 framework/redux-config.php:2128
-msgid "Blog Columns"
-msgstr "Blog Columns"
-
-#: framework/cmb2-config.php:203
-#: framework/plugins/cmb2-extend/portfolio-fields.php:68
-#: framework/plugins/redux-extend/portfolio-fields.php:78
-#: framework/redux-config.php:206 framework/redux-config.php:2129
-msgid "Number of columns for grid and masonry layout"
-msgstr "Number of columns for grid and masonry layout"
-
-#: framework/cmb2-config.php:219
-#: framework/plugins/cmb2-extend/portfolio-fields.php:84
-#: framework/plugins/redux-extend/portfolio-fields.php:97
-#: framework/redux-config.php:225 framework/redux-config.php:2145
-msgid "Show Media"
-msgstr "Show Media"
-
-#: framework/cmb2-config.php:220
-#: framework/plugins/cmb2-extend/portfolio-fields.php:85
-#: framework/plugins/redux-extend/portfolio-fields.php:98
-#: framework/redux-config.php:226 framework/redux-config.php:2146
-msgid "Display the post featured media"
-msgstr "Display the post featured media"
-
-#: framework/cmb2-config.php:233
-#: framework/plugins/cmb2-extend/portfolio-fields.php:98
-#: framework/plugins/redux-extend/portfolio-fields.php:120
-#: framework/redux-config.php:237 framework/redux-config.php:2156
-msgid "Media Size"
-msgstr "Media Size"
-
-#: framework/cmb2-config.php:234
-#: framework/plugins/cmb2-extend/portfolio-fields.php:99
-msgid "Select a size for the featured post media"
-msgstr "Select a size for the featured post media"
-
-#: framework/cmb2-config.php:239
-#: framework/plugins/cmb2-extend/portfolio-fields.php:104
-#: framework/plugins/redux-extend/portfolio-fields.php:124
-#: framework/redux-config.php:241 framework/redux-config.php:2160
-msgid "Medium"
-msgstr "Medium"
-
-#: framework/cmb2-config.php:249
-#: framework/plugins/cmb2-extend/portfolio-fields.php:114
-#: framework/plugins/redux-extend/portfolio-fields.php:151
-#: framework/plugins/redux-extend/portfolio-fields.php:341
-#: framework/redux-config.php:268 framework/redux-config.php:2174
-#: framework/redux-config.php:2264 framework/redux-config.php:2478
-msgid "Post Meta"
-msgstr "Post Meta"
-
-#: framework/cmb2-config.php:250
-#: framework/plugins/cmb2-extend/portfolio-fields.php:115
-#: framework/plugins/redux-extend/portfolio-fields.php:152
-#: framework/plugins/redux-extend/portfolio-fields.php:342
-#: framework/redux-config.php:269 framework/redux-config.php:2175
-#: framework/redux-config.php:2265
-msgid "Display the meta in the post header, footer, or do not display"
-msgstr "Display the meta in the post header, footer, or do not display"
-
-#: framework/cmb2-config.php:253
-#: framework/plugins/cmb2-extend/portfolio-fields.php:118
-#: framework/plugins/redux-extend/portfolio-fields.php:154
-#: framework/plugins/redux-extend/portfolio-fields.php:344
-#: framework/redux-config.php:271 framework/redux-config.php:2177
-#: framework/redux-config.php:2267
-msgid "In Header"
-msgstr "In Header"
-
-#: framework/cmb2-config.php:254
-#: framework/plugins/cmb2-extend/portfolio-fields.php:119
-#: framework/plugins/redux-extend/portfolio-fields.php:155
-#: framework/plugins/redux-extend/portfolio-fields.php:345
-#: framework/redux-config.php:272 framework/redux-config.php:2178
-#: framework/redux-config.php:2268
-msgid "In Footer"
-msgstr "In Footer"
-
-#: framework/cmb2-config.php:264 framework/cmb2-config.php:719
-#: framework/plugins/cmb2-extend/portfolio-fields.php:129
-#: framework/plugins/redux-extend/customizer-fields.php:431
-#: framework/plugins/redux-extend/portfolio-fields.php:139
-#: framework/plugins/redux-extend/portfolio-fields.php:330
-#: framework/redux-config.php:256 framework/redux-config.php:879
-#: framework/redux-config.php:2213 framework/redux-config.php:2253
-msgid "Post Info"
-msgstr "Post Info"
-
-#: framework/cmb2-config.php:265
-#: framework/plugins/cmb2-extend/portfolio-fields.php:130
-#: framework/plugins/redux-extend/portfolio-fields.php:140
-#: framework/plugins/redux-extend/portfolio-fields.php:331
-#: framework/redux-config.php:257 framework/redux-config.php:2214
-#: framework/redux-config.php:2254
-msgid "Display the post format and date"
-msgstr "Display the post format and date"
-
-#: framework/cmb2-config.php:283 framework/cmb2-config.php:297
-#: framework/plugins/cmb2-extend/portfolio-fields.php:142
-#: framework/redux-config.php:2243
-msgid "Posts"
-msgstr "Posts"
-
-#: framework/cmb2-config.php:298
-#: framework/plugins/cmb2-extend/portfolio-fields.php:143
-msgid "Select the posts to display on this page (empty to display all)"
-msgstr "Select the posts to display on this page (empty to display all)"
-
-#: framework/cmb2-config.php:306
-#: framework/plugins/cmb2-extend/portfolio-fields.php:151
-msgid "Posts Per Page"
-msgstr "Posts Per Page"
-
-#: framework/cmb2-config.php:307
-msgid ""
-"Number of posts to display on each page (-1 to display all, auto to use "
-"value from site settings)"
-msgstr ""
-"Number of posts to display on each page (-1 to display all, auto to use "
-"value from site settings)"
-
-#: framework/cmb2-config.php:321
-msgid "Header Options"
-msgstr "Header Options"
-
-#: framework/cmb2-config.php:331
-#: framework/plugins/redux-extend/customizer-fields.php:132
-#: framework/redux-config.php:578
-msgid "Header Media"
-msgstr "Header Media"
-
-#: framework/cmb2-config.php:332
-msgid "Display media, a slider & other content in the header"
-msgstr "Display media, a slider & other content in the header"
-
-#: framework/cmb2-config.php:345
-#: framework/plugins/redux-extend/customizer-fields.php:151
-#: framework/redux-config.php:598
-msgid "Fullscreen"
-msgstr "Fullscreen"
-
-#: framework/cmb2-config.php:346
-#: framework/plugins/redux-extend/customizer-fields.php:152
-#: framework/redux-config.php:599
-msgid "Header fills entire screen size"
-msgstr "Header fills entire screen size"
-
-#: framework/cmb2-config.php:364
-#: framework/plugins/redux-extend/customizer-fields.php:161
-#: framework/redux-config.php:609
-msgid "Custom Height"
-msgstr "Custom Height"
-
-#: framework/cmb2-config.php:365
-#: framework/plugins/redux-extend/customizer-fields.php:162
-#: framework/redux-config.php:610
-msgid "Set a custom height (in px) for the header"
-msgstr "Set a custom height (in px) for the header"
-
-#: framework/cmb2-config.php:378
-#: framework/plugins/redux-extend/customizer-fields.php:169
-#: framework/plugins/redux-extend/customizer-fields.php:460
-#: framework/plugins/redux-extend/customizer-fields.php:618
-#: framework/plugins/redux-extend/customizer-fields.php:737
-#: framework/plugins/redux-extend/customizer-fields.php:1144
-#: framework/plugins/redux-extend/customizer-fields.php:1189
-#: framework/plugins/redux-extend/portfolio-fields.php:244
-#: framework/redux-config.php:324 framework/redux-config.php:617
-#: framework/redux-config.php:941 framework/redux-config.php:1813
-#: framework/redux-config.php:1875 framework/redux-config.php:2915
-#: framework/redux-config.php:3039
-msgid "Background Color"
-msgstr "Background Color"
-
-#: framework/cmb2-config.php:379
-#: framework/plugins/redux-extend/customizer-fields.php:170
-#: framework/redux-config.php:618
-msgid "Select a background color for the header"
-msgstr "Select a background color for the header"
-
-#: framework/cmb2-config.php:392
-#: framework/plugins/redux-extend/customizer-fields.php:179
-#: framework/plugins/redux-extend/customizer-fields.php:478
-#: framework/plugins/redux-extend/customizer-fields.php:624
-#: framework/plugins/redux-extend/customizer-fields.php:743
-#: framework/plugins/redux-extend/customizer-fields.php:1162
-#: framework/plugins/redux-extend/customizer-fields.php:1207
-#: framework/redux-config.php:628 framework/redux-config.php:962
-#: framework/redux-config.php:1103 framework/redux-config.php:1832
-#: framework/redux-config.php:1894 framework/redux-config.php:2921
-#: framework/redux-config.php:3045
-msgid "Text Color"
-msgstr "Text Color"
-
-#: framework/cmb2-config.php:393
-#: framework/plugins/redux-extend/customizer-fields.php:180
-#: framework/redux-config.php:629
-msgid "The color for text on light backgrounds"
-msgstr "The color for text on light backgrounds"
-
-#: framework/cmb2-config.php:406
-#: framework/plugins/redux-extend/customizer-fields.php:189
-#: framework/plugins/redux-extend/customizer-fields.php:636
-#: framework/plugins/redux-extend/customizer-fields.php:749
-#: framework/redux-config.php:639 framework/redux-config.php:2945
-#: framework/redux-config.php:3051
-msgid "Inverse Text Color"
-msgstr "Inverse Text Color"
-
-#: framework/cmb2-config.php:407
-#: framework/plugins/redux-extend/customizer-fields.php:190
-#: framework/redux-config.php:640
-msgid "The color for text on dark backgrounds"
-msgstr "The color for text on dark backgrounds"
-
-#: framework/cmb2-config.php:420
-#: framework/plugins/redux-extend/customizer-fields.php:199
-#: framework/redux-config.php:650
-msgid "Media Type"
-msgstr "Media Type"
-
-#: framework/cmb2-config.php:421
-#: framework/plugins/redux-extend/customizer-fields.php:200
-#: framework/redux-config.php:651
-msgid "Type of media to use in the header"
-msgstr "Type of media to use in the header"
-
-#: framework/cmb2-config.php:425
-#: framework/plugins/redux-extend/customizer-fields.php:202
-#: framework/redux-config.php:653
-msgid "Solid Color"
-msgstr "Solid Color"
-
-#: framework/cmb2-config.php:426
-#: framework/plugins/redux-extend/customizer-fields.php:63
-#: framework/plugins/redux-extend/customizer-fields.php:203
-#: framework/redux-config.php:433 framework/redux-config.php:654
-#: framework/redux-config.php:1033 framework/redux-config.php:1044
-msgid "Image"
-msgstr "Image"
-
-#: framework/cmb2-config.php:427 framework/cmb2-config.php:544
-#: framework/plugins/redux-extend/customizer-fields.php:204
-#: framework/plugins/redux-extend/customizer-fields.php:309
-#: framework/redux-config.php:655 framework/redux-config.php:754
-msgid "Video"
-msgstr "Video"
-
-#: framework/cmb2-config.php:428
-#: framework/plugins/redux-extend/customizer-fields.php:205
-#: framework/redux-config.php:656
-msgid "Slider"
-msgstr "Slider"
-
-#: framework/cmb2-config.php:441
-#: framework/plugins/redux-extend/customizer-fields.php:232
-#: framework/redux-config.php:676
-msgid "Image Source"
-msgstr "Image Source"
-
-#: framework/cmb2-config.php:442
-#: framework/plugins/redux-extend/customizer-fields.php:233
-#: framework/redux-config.php:677
-msgid "Select an image or use the featured one"
-msgstr "Select an image or use the featured one"
-
-#: framework/cmb2-config.php:446
-#: framework/plugins/redux-extend/customizer-fields.php:235
-#: framework/redux-config.php:679
-msgid "Gallery"
-msgstr "Gallery"
-
-#: framework/cmb2-config.php:447
-#: framework/plugins/redux-extend/customizer-fields.php:236
-#: framework/redux-config.php:680
-msgid "Featured"
-msgstr "Featured"
-
-#: framework/cmb2-config.php:460
-#: framework/plugins/redux-extend/customizer-fields.php:244
-#: framework/redux-config.php:690
-msgid "Select Image"
-msgstr "Select Image"
-
-#: framework/cmb2-config.php:461
-#: framework/plugins/redux-extend/customizer-fields.php:245
-#: framework/redux-config.php:691
-msgid "Select an image from the gallery or upload one"
-msgstr "Select an image from the gallery or upload one"
-
-#: framework/cmb2-config.php:477
-#: framework/plugins/redux-extend/customizer-fields.php:252
-#: framework/redux-config.php:699
-msgid "Repeat / Pattern Image"
-msgstr "Repeat / Pattern Image"
-
-#: framework/cmb2-config.php:495
-#: framework/plugins/redux-extend/customizer-fields.php:261
-#: framework/redux-config.php:710
-msgid "Parallax Effect"
-msgstr "Parallax Effect"
-
-#: framework/cmb2-config.php:514
-#: framework/plugins/redux-extend/customizer-fields.php:279
-#: framework/redux-config.php:721
-msgid "Video Source"
-msgstr "Video Source"
-
-#: framework/cmb2-config.php:515
-#: framework/plugins/redux-extend/customizer-fields.php:280
-#: framework/redux-config.php:722
-msgid "Use an embedded video or a hosted one"
-msgstr "Use an embedded video or a hosted one"
-
-#: framework/cmb2-config.php:517
-#: framework/plugins/redux-extend/customizer-fields.php:282
-#: framework/redux-config.php:724
-msgid "Embedded"
-msgstr "Embedded"
-
-#: framework/cmb2-config.php:518
-#: framework/plugins/redux-extend/customizer-fields.php:283
-#: framework/redux-config.php:725
-msgid "Hosted"
-msgstr "Hosted"
-
-#: framework/cmb2-config.php:532
-#: framework/plugins/redux-extend/customizer-fields.php:291
-#: framework/redux-config.php:735
-msgid "Video Embed Code"
-msgstr "Video Embed Code"
-
-#: framework/cmb2-config.php:533
-#: framework/plugins/redux-extend/customizer-fields.php:292
-#: framework/redux-config.php:736
-msgid "The embed code for the video you want to use"
-msgstr "The embed code for the video you want to use"
-
-#: framework/cmb2-config.php:545
-#: framework/plugins/redux-extend/customizer-fields.php:310
-#: framework/redux-config.php:755
-msgid "Select a video from the gallery or upload one"
-msgstr "Select a video from the gallery or upload one"
-
-#: framework/cmb2-config.php:561
-#: framework/plugins/redux-extend/customizer-fields.php:320
-#: framework/redux-config.php:766
-msgid "Video Fallback"
-msgstr "Video Fallback"
-
-#: framework/cmb2-config.php:562
-#: framework/plugins/redux-extend/customizer-fields.php:321
-#: framework/redux-config.php:767
-msgid "Select a fallback video from the gallery or upload one"
-msgstr "Select a fallback video from the gallery or upload one"
-
-#: framework/cmb2-config.php:578
-#: framework/plugins/redux-extend/customizer-fields.php:331
-#: framework/redux-config.php:778
-msgid "Video Poster"
-msgstr "Video Poster"
-
-#: framework/cmb2-config.php:579
-#: framework/plugins/redux-extend/customizer-fields.php:332
-#: framework/redux-config.php:779
-msgid ""
-"Select an image to show while the video loads or if video is not supported"
-msgstr ""
-"Select an image to show while the video loads or if video is not supported"
-
-#: framework/cmb2-config.php:595
-#: framework/plugins/redux-extend/customizer-fields.php:341
-#: framework/redux-config.php:789
-msgid "Video Loop"
-msgstr "Video Loop"
-
-#: framework/cmb2-config.php:612
-#: framework/plugins/redux-extend/customizer-fields.php:350
-#: framework/redux-config.php:800
-msgid "Video Luminance"
-msgstr "Video Luminance"
-
-#: framework/cmb2-config.php:613
-#: framework/plugins/redux-extend/customizer-fields.php:351
-#: framework/redux-config.php:801
-msgid "Header text color will be adjusted based on this"
-msgstr "Header text color will be adjusted based on this"
-
-#: framework/cmb2-config.php:630
-#: framework/plugins/redux-extend/customizer-fields.php:371
-#: framework/redux-config.php:814
-msgid "Slider ID"
-msgstr "Slider ID"
-
-#: framework/cmb2-config.php:631 framework/redux-config.php:815
-msgid "The ID number or slug of the slider to use"
-msgstr "The ID number or slug of the slider to use"
-
-#: framework/cmb2-config.php:644
-#: framework/plugins/redux-extend/customizer-fields.php:388
-#: framework/redux-config.php:823
-msgid "Content Align"
-msgstr "Content Align"
-
-#: framework/cmb2-config.php:648
-#: framework/plugins/redux-extend/customizer-fields.php:390
-#: framework/plugins/redux-extend/customizer-fields.php:853
-#: framework/plugins/redux-extend/customizer-fields.php:864
-#: framework/plugins/redux-extend/customizer-fields.php:972
-#: framework/plugins/redux-extend/customizer-fields.php:1041
-#: framework/redux-config.php:825 framework/redux-config.php:1264
-#: framework/redux-config.php:1310 framework/redux-config.php:1466
-#: framework/redux-config.php:1566 framework/redux-config.php:1691
-msgid "Left"
-msgstr "Left"
-
-#: framework/cmb2-config.php:649
-#: framework/plugins/redux-extend/customizer-fields.php:391
-#: framework/plugins/redux-extend/customizer-fields.php:865
-#: framework/redux-config.php:826 framework/redux-config.php:1311
-msgid "Center"
-msgstr "Center"
-
-#: framework/cmb2-config.php:650
-#: framework/plugins/redux-extend/customizer-fields.php:392
-#: framework/plugins/redux-extend/customizer-fields.php:854
-#: framework/plugins/redux-extend/customizer-fields.php:866
-#: framework/plugins/redux-extend/customizer-fields.php:973
-#: framework/plugins/redux-extend/customizer-fields.php:1042
-#: framework/redux-config.php:827 framework/redux-config.php:1265
-#: framework/redux-config.php:1312 framework/redux-config.php:1467
-#: framework/redux-config.php:1567 framework/redux-config.php:1692
-msgid "Right"
-msgstr "Right"
-
-#: framework/cmb2-config.php:663
-#: framework/plugins/redux-extend/customizer-fields.php:400
-#: framework/redux-config.php:836
-msgid "Content Size"
-msgstr "Content Size"
-
-#: framework/cmb2-config.php:669
-#: framework/plugins/redux-extend/customizer-fields.php:404
-#: framework/redux-config.php:840
-msgid "Cover"
-msgstr "Cover"
-
-#: framework/cmb2-config.php:682
-#: framework/plugins/redux-extend/customizer-fields.php:412
-#: framework/redux-config.php:849
-msgid "Content Fade Effect"
-msgstr "Content Fade Effect"
-
-#: framework/cmb2-config.php:700
-#: framework/plugins/redux-extend/customizer-fields.php:421
-#: framework/redux-config.php:859
-msgid "Scroll To Content"
-msgstr "Scroll To Content"
-
-#: framework/cmb2-config.php:701
-#: framework/plugins/redux-extend/customizer-fields.php:422
-#: framework/redux-config.php:860
-msgid "Show an arrow that scrolls down to the page content when clicked"
-msgstr "Show an arrow that scrolls down to the page content when clicked"
-
-#: framework/cmb2-config.php:720
-#: framework/plugins/redux-extend/customizer-fields.php:432
-#: framework/redux-config.php:880
-msgid "Show the post title and meta in the header"
-msgstr "Show the post title and meta in the header"
-
-#: framework/cmb2-config.php:738 framework/redux-config.php:890
-msgid "Custom Code"
-msgstr "Custom Code"
-
-#: framework/cmb2-config.php:739 framework/redux-config.php:891
-msgid "Output custom code in the header (can use shortcodes)"
-msgstr "Output custom code in the header (can use shortcodes)"
-
-#: framework/cmb2-config.php:757 framework/redux-config.php:901
-msgid "Custom Code Content"
-msgstr "Custom Code Content"
+#: framework/cmb2-config.php:890
+#: framework/plugins/redux-extend/customizer-fields.php:1130
+#: framework/redux-config.php:1765
+msgid "Footer"
+msgstr "Footer"
+
+#: framework/cmb2-config.php:894 framework/redux-config.php:1809
+msgid "Display Widget Area"
+msgstr "Display Widget Area"
+
+#: framework/cmb2-config.php:895
+msgid "Show the footer widget area on this page"
+msgstr "Show the footer widget area on this page"
+
+#: framework/cmb2-config.php:908 framework/redux-config.php:1881
+msgid "Display Copyright Area"
+msgstr "Display Copyright Area"
+
+#: framework/cmb2-config.php:909
+msgid "Show the footer copyright area on this page"
+msgstr "Show the footer copyright area on this page"
+
+#: framework/cmb2-config.php:925
+msgid "Page Options"
+msgstr "Page Options"
 
 #: framework/micf-config.php:31
 msgid "Menu Icon"
@@ -1605,6 +1734,11 @@ msgstr "Disabled"
 msgid "Mega Menu"
 msgstr "Mega Menu"
 
+#: framework/plugins/cmb2-extend/extensions/dimensions-field.php:34
+#: framework/redux-config.php:1280 framework/redux-config.php:1706
+msgid "Width"
+msgstr "Width"
+
 #: framework/plugins/cmb2-extend/extensions/post-search-field.php:62
 msgid "An error has occurred. Please reload the page and try again."
 msgstr "An error has occurred. Please reload the page and try again."
@@ -1613,19 +1747,23 @@ msgstr "An error has occurred. Please reload the page and try again."
 msgid "Find Posts or Pages"
 msgstr "Find Posts or Pages"
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:7
-msgid "Project Options"
-msgstr "Project Options"
+#: framework/plugins/cmb2-extend/extensions/slider-field.php:23
+msgid "The min, max and step values of the slider must be numeric!"
+msgstr "The min, max and step values of the slider must be numeric!"
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:17
-#: framework/plugins/redux-extend/customizer-fields.php:839
-#: framework/plugins/redux-extend/portfolio-fields.php:315
-#: framework/redux-config.php:1248
+#: framework/plugins/cmb2-extend/portfolio-fields.php:6
+msgid "Project"
+msgstr "Project"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:10
+#: framework/plugins/redux-extend/customizer-fields.php:841
+#: framework/plugins/redux-extend/portfolio-fields.php:328
+#: framework/redux-config.php:1253
 msgid "Layout"
 msgstr "Layout"
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:18
-#: framework/plugins/redux-extend/portfolio-fields.php:316
+#: framework/plugins/cmb2-extend/portfolio-fields.php:11
+#: framework/plugins/redux-extend/portfolio-fields.php:329
 msgid ""
 "Set the project featured media width. The content will fill the remaining "
 "space."
@@ -1633,28 +1771,147 @@ msgstr ""
 "Set the project featured media width. The content will fill the remaining "
 "space."
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:38
-msgid "Portfolio Options"
-msgstr "Portfolio Options"
+#: framework/plugins/cmb2-extend/portfolio-fields.php:26
+msgid "Show Featured Media"
+msgstr "Show Featured Media"
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:53
+#: framework/plugins/cmb2-extend/portfolio-fields.php:42
+#: framework/plugins/redux-extend/portfolio-fields.php:16
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:47
 msgid "Select the layout type"
 msgstr "Select the layout type"
 
-#: framework/plugins/cmb2-extend/portfolio-fields.php:67
+#: framework/plugins/cmb2-extend/portfolio-fields.php:61
 #: framework/plugins/redux-extend/portfolio-fields.php:77
-#: framework/plugins/redux-extend/portfolio-fields.php:460
-#: framework/redux-config.php:205 framework/redux-config.php:2378
+#: framework/plugins/redux-extend/portfolio-fields.php:473
+#: framework/redux-config.php:205 framework/redux-config.php:2507
 msgid "Columns"
 msgstr "Columns"
 
+#: framework/plugins/cmb2-extend/portfolio-fields.php:137
+#: framework/plugins/redux-extend/portfolio-fields.php:166
+msgid "Post Title"
+msgstr "Post Title"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:138
+#: framework/plugins/redux-extend/portfolio-fields.php:167
+msgid "Display the post title"
+msgstr "Display the post title"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:151
+#: framework/plugins/redux-extend/portfolio-fields.php:177
+msgid "Post Excerpt"
+msgstr "Post Excerpt"
+
 #: framework/plugins/cmb2-extend/portfolio-fields.php:152
+#: framework/plugins/redux-extend/portfolio-fields.php:178
+msgid "Display the post excerpt"
+msgstr "Display the post excerpt"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:165
+#: framework/plugins/redux-extend/portfolio-fields.php:188
+msgid "Filters"
+msgstr "Filters"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:166
+#: framework/plugins/redux-extend/portfolio-fields.php:189
+msgid "Display filter links"
+msgstr "Display filter links"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:188
 msgid ""
 "Number of posts to display on each page (-1 to display all, auto to display "
 "number set in options)"
 msgstr ""
 "Number of posts to display on each page (-1 to display all, auto to display "
 "number set in options)"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:197
+#: framework/plugins/redux-extend/portfolio-fields.php:213
+#: framework/redux-config.php:2265
+msgid "Show Rollover"
+msgstr "Show Rollover"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:198
+#: framework/plugins/redux-extend/portfolio-fields.php:214
+msgid "Display an overlay with useful links and info when a project is hovered"
+msgstr ""
+"Display an overlay with useful links and info when a project is hovered"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:211
+#: framework/plugins/redux-extend/portfolio-fields.php:224
+#: framework/redux-config.php:2276
+msgid "Items"
+msgstr "Items"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:213
+#: framework/plugins/redux-extend/customizer-fields.php:502
+#: framework/plugins/redux-extend/customizer-fields.php:515
+#: framework/plugins/redux-extend/portfolio-fields.php:226
+#: framework/redux-config.php:980 framework/redux-config.php:995
+#: framework/redux-config.php:2278 framework/redux-config.php:2762
+#: framework/redux-config.php:3380
+msgid "Title"
+msgstr "Title"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:214
+#: framework/plugins/redux-extend/portfolio-fields.php:227
+#: framework/plugins/redux-extend/portfolio-fields.php:528
+#: framework/redux-config.php:2230 framework/redux-config.php:2279
+#: framework/redux-config.php:2562
+msgid "Excerpt"
+msgstr "Excerpt"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:215
+#: framework/plugins/redux-extend/portfolio-fields.php:228
+#: framework/redux-config.php:2280
+msgid "View Post Button"
+msgstr "View Post Button"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:216
+#: framework/plugins/redux-extend/portfolio-fields.php:229
+#: framework/redux-config.php:2281
+msgid "Full Image Button"
+msgstr "Full Image Button"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:243
+#: framework/plugins/redux-extend/portfolio-fields.php:254
+#: framework/redux-config.php:2306
+msgid "Animation - In"
+msgstr "Animation - In"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:256
+#: framework/plugins/redux-extend/portfolio-fields.php:264
+#: framework/redux-config.php:2316
+msgid "Animation - Out"
+msgstr "Animation - Out"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:269
+#: framework/plugins/redux-extend/portfolio-fields.php:274
+#: framework/redux-config.php:2326
+msgid "Item Style"
+msgstr "Item Style"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:272
+#: framework/plugins/redux-extend/portfolio-fields.php:276
+#: framework/redux-config.php:2328
+msgid "Plain"
+msgstr "Plain"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:274
+#: framework/plugins/redux-extend/portfolio-fields.php:278
+#: framework/redux-config.php:2330
+msgid "Round Button"
+msgstr "Round Button"
+
+#: framework/plugins/cmb2-extend/portfolio-fields.php:287
+#: framework/plugins/redux-extend/portfolio-fields.php:288
+#: framework/redux-config.php:2340
+msgid "Button Color"
+msgstr "Button Color"
 
 #: framework/plugins/mixt-codebuilder/mixt-codebuilder.php:43
 #: framework/plugins/mixt-codebuilder/panel.php:64
@@ -1821,194 +2078,180 @@ msgstr "Loader Animation"
 msgid "Animation to use for the loader"
 msgstr "Animation to use for the loader"
 
-#: framework/plugins/redux-extend/customizer-fields.php:125
-#: framework/redux-config.php:568 framework/redux-config.php:3381
-msgid "Header"
-msgstr "Header"
-
 #: framework/plugins/redux-extend/customizer-fields.php:141
-#: framework/redux-config.php:587 framework/redux-config.php:1677
+#: framework/redux-config.php:589 framework/redux-config.php:1682
 msgid "Enabled"
 msgstr "Enabled"
 
 #: framework/plugins/redux-extend/customizer-fields.php:142
-#: framework/redux-config.php:588
+#: framework/redux-config.php:590
 msgid "Display the header media element on all pages where possible"
 msgstr "Display the header media element on all pages where possible"
 
-#: framework/plugins/redux-extend/customizer-fields.php:213
+#: framework/plugins/redux-extend/customizer-fields.php:215
 msgid "Header Image"
 msgstr "Header Image"
 
-#: framework/plugins/redux-extend/customizer-fields.php:222
-#: framework/redux-config.php:665
+#: framework/plugins/redux-extend/customizer-fields.php:224
+#: framework/redux-config.php:668
 msgid "Image Placeholder"
 msgstr "Image Placeholder"
 
-#: framework/plugins/redux-extend/customizer-fields.php:223
-#: framework/redux-config.php:666
+#: framework/plugins/redux-extend/customizer-fields.php:225
+#: framework/redux-config.php:669
 msgid "Select a placeholder image to show if the desired image can't be found"
 msgstr "Select a placeholder image to show if the desired image can't be found"
 
-#: framework/plugins/redux-extend/customizer-fields.php:270
+#: framework/plugins/redux-extend/customizer-fields.php:272
 msgid "Header Video"
 msgstr "Header Video"
 
-#: framework/plugins/redux-extend/customizer-fields.php:313
-#: framework/plugins/redux-extend/customizer-fields.php:324
-#: framework/redux-config.php:758 framework/redux-config.php:770
+#: framework/plugins/redux-extend/customizer-fields.php:315
+#: framework/plugins/redux-extend/customizer-fields.php:326
+#: framework/redux-config.php:761 framework/redux-config.php:773
 msgid "No video selected"
 msgstr "No video selected"
 
-#: framework/plugins/redux-extend/customizer-fields.php:362
+#: framework/plugins/redux-extend/customizer-fields.php:364
 msgid "Header Slider"
 msgstr "Header Slider"
 
-#: framework/plugins/redux-extend/customizer-fields.php:372
+#: framework/plugins/redux-extend/customizer-fields.php:374
 msgid "The ID of the slider to use"
 msgstr "The ID of the slider to use"
 
-#: framework/plugins/redux-extend/customizer-fields.php:379
+#: framework/plugins/redux-extend/customizer-fields.php:381
 msgid "Header Content"
 msgstr "Header Content"
 
-#: framework/plugins/redux-extend/customizer-fields.php:451
-#: framework/redux-config.php:931
+#: framework/plugins/redux-extend/customizer-fields.php:453
+#: framework/redux-config.php:925
 msgid "Display the location bar"
 msgstr "Display the location bar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:469
-#: framework/plugins/redux-extend/customizer-fields.php:1153
-#: framework/plugins/redux-extend/customizer-fields.php:1198
-#: framework/redux-config.php:352 framework/redux-config.php:951
-#: framework/redux-config.php:1822 framework/redux-config.php:1884
+#: framework/plugins/redux-extend/customizer-fields.php:471
+#: framework/plugins/redux-extend/customizer-fields.php:1155
+#: framework/plugins/redux-extend/customizer-fields.php:1200
+#: framework/redux-config.php:352 framework/redux-config.php:945
+#: framework/redux-config.php:1828 framework/redux-config.php:1900
 msgid "Background Pattern"
 msgstr "Background Pattern"
 
-#: framework/plugins/redux-extend/customizer-fields.php:487
-#: framework/plugins/redux-extend/customizer-fields.php:648
-#: framework/plugins/redux-extend/customizer-fields.php:755
-#: framework/plugins/redux-extend/customizer-fields.php:1171
-#: framework/plugins/redux-extend/customizer-fields.php:1216
-#: framework/redux-config.php:972 framework/redux-config.php:1841
-#: framework/redux-config.php:1903 framework/redux-config.php:2933
-#: framework/redux-config.php:3057
+#: framework/plugins/redux-extend/customizer-fields.php:489
+#: framework/plugins/redux-extend/customizer-fields.php:650
+#: framework/plugins/redux-extend/customizer-fields.php:757
+#: framework/plugins/redux-extend/customizer-fields.php:1173
+#: framework/plugins/redux-extend/customizer-fields.php:1218
+#: framework/redux-config.php:966 framework/redux-config.php:1847
+#: framework/redux-config.php:1919 framework/redux-config.php:2927
+#: framework/redux-config.php:3051
 msgid "Border Color"
 msgstr "Border Color"
 
-#: framework/plugins/redux-extend/customizer-fields.php:496
-#: framework/plugins/redux-extend/customizer-fields.php:1060
-#: framework/plugins/redux-extend/customizer-fields.php:1225
-#: framework/redux-config.php:982 framework/redux-config.php:1590
-#: framework/redux-config.php:1912
+#: framework/plugins/redux-extend/customizer-fields.php:498
+#: framework/plugins/redux-extend/customizer-fields.php:1062
+#: framework/plugins/redux-extend/customizer-fields.php:1227
+#: framework/redux-config.php:976 framework/redux-config.php:1595
+#: framework/redux-config.php:1928
 msgid "Left Side Content"
 msgstr "Left Side Content"
 
-#: framework/plugins/redux-extend/customizer-fields.php:497
-#: framework/redux-config.php:983
+#: framework/plugins/redux-extend/customizer-fields.php:499
+#: framework/redux-config.php:977
 msgid "Content to show on the left side of the bar"
 msgstr "Content to show on the left side of the bar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:499
-#: framework/plugins/redux-extend/customizer-fields.php:512
-#: framework/plugins/redux-extend/customizer-fields.php:1063
-#: framework/plugins/redux-extend/customizer-fields.php:1096
-#: framework/plugins/redux-extend/customizer-fields.php:1228
-#: framework/plugins/redux-extend/customizer-fields.php:1252
-#: framework/redux-config.php:985 framework/redux-config.php:1000
-#: framework/redux-config.php:1593 framework/redux-config.php:1631
-#: framework/redux-config.php:1915 framework/redux-config.php:1952
+#: framework/plugins/redux-extend/customizer-fields.php:501
+#: framework/plugins/redux-extend/customizer-fields.php:514
+#: framework/plugins/redux-extend/customizer-fields.php:1065
+#: framework/plugins/redux-extend/customizer-fields.php:1098
+#: framework/plugins/redux-extend/customizer-fields.php:1230
+#: framework/plugins/redux-extend/customizer-fields.php:1254
+#: framework/redux-config.php:979 framework/redux-config.php:994
+#: framework/redux-config.php:1598 framework/redux-config.php:1636
+#: framework/redux-config.php:1931 framework/redux-config.php:1968
 msgid "No Content"
 msgstr "No Content"
 
-#: framework/plugins/redux-extend/customizer-fields.php:500
-#: framework/plugins/redux-extend/customizer-fields.php:513
-#: framework/plugins/redux-extend/portfolio-fields.php:226
-#: framework/redux-config.php:986 framework/redux-config.php:1001
-#: framework/redux-config.php:2768 framework/redux-config.php:3223
-msgid "Title"
-msgstr "Title"
-
-#: framework/plugins/redux-extend/customizer-fields.php:501
-#: framework/plugins/redux-extend/customizer-fields.php:514
-#: framework/redux-config.php:987 framework/redux-config.php:1002
+#: framework/plugins/redux-extend/customizer-fields.php:503
+#: framework/plugins/redux-extend/customizer-fields.php:516
+#: framework/redux-config.php:981 framework/redux-config.php:996
 msgid "Breadcrumbs"
 msgstr "Breadcrumbs"
 
-#: framework/plugins/redux-extend/customizer-fields.php:509
-#: framework/plugins/redux-extend/customizer-fields.php:1093
-#: framework/plugins/redux-extend/customizer-fields.php:1249
-#: framework/redux-config.php:997 framework/redux-config.php:1628
-#: framework/redux-config.php:1949
+#: framework/plugins/redux-extend/customizer-fields.php:511
+#: framework/plugins/redux-extend/customizer-fields.php:1095
+#: framework/plugins/redux-extend/customizer-fields.php:1251
+#: framework/redux-config.php:991 framework/redux-config.php:1633
+#: framework/redux-config.php:1965
 msgid "Right Side Content"
 msgstr "Right Side Content"
 
-#: framework/plugins/redux-extend/customizer-fields.php:510
-#: framework/redux-config.php:998
+#: framework/plugins/redux-extend/customizer-fields.php:512
+#: framework/redux-config.php:992
 msgid "Content to show on the right side of the bar"
 msgstr "Content to show on the right side of the bar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:522
-#: framework/redux-config.php:1012
+#: framework/plugins/redux-extend/customizer-fields.php:524
+#: framework/redux-config.php:1006
 msgid "Breadcrumbs Prefix"
 msgstr "Breadcrumbs Prefix"
 
-#: framework/plugins/redux-extend/customizer-fields.php:523
-#: framework/redux-config.php:1013
+#: framework/plugins/redux-extend/customizer-fields.php:525
+#: framework/redux-config.php:1007
 msgid "Text to display before the breadcrumbs"
 msgstr "Text to display before the breadcrumbs"
 
-#: framework/plugins/redux-extend/customizer-fields.php:533
-#: framework/redux-config.php:2874 framework/redux-config.php:3405
+#: framework/plugins/redux-extend/customizer-fields.php:535
+#: framework/redux-config.php:2868 framework/redux-config.php:3562
 msgid "Themes"
 msgstr "Themes"
 
-#: framework/plugins/redux-extend/customizer-fields.php:541
+#: framework/plugins/redux-extend/customizer-fields.php:543
 #: framework/redux-config.php:364
 msgid "Site Theme"
 msgstr "Site Theme"
 
-#: framework/plugins/redux-extend/customizer-fields.php:542
+#: framework/plugins/redux-extend/customizer-fields.php:544
 #: framework/redux-config.php:365
 msgid "Select the theme to be used site-wide"
 msgstr "Select the theme to be used site-wide"
 
-#: framework/plugins/redux-extend/customizer-fields.php:551
-#: framework/redux-config.php:1336
+#: framework/plugins/redux-extend/customizer-fields.php:552
+msgid "Navbar Theme"
+msgstr "Navbar Theme"
+
+#: framework/plugins/redux-extend/customizer-fields.php:553
+#: framework/redux-config.php:1341
 msgid "Select the theme for the primary navbar"
 msgstr "Select the theme for the primary navbar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:559
+#: framework/plugins/redux-extend/customizer-fields.php:561
 msgid "Secondary Navbar Theme"
 msgstr "Secondary Navbar Theme"
 
-#: framework/plugins/redux-extend/customizer-fields.php:560
-#: framework/redux-config.php:1516
-msgid "Select the theme for the secondary navbar"
-msgstr "Select the theme for the secondary navbar"
-
-#: framework/plugins/redux-extend/customizer-fields.php:568
-#: framework/redux-config.php:1770
+#: framework/plugins/redux-extend/customizer-fields.php:570
+#: framework/redux-config.php:1775
 msgid "Footer Theme"
 msgstr "Footer Theme"
 
-#: framework/plugins/redux-extend/customizer-fields.php:569
-#: framework/redux-config.php:1771
+#: framework/plugins/redux-extend/customizer-fields.php:571
+#: framework/redux-config.php:1776
 msgid "Select the theme to be used for the footer"
 msgstr "Select the theme to be used for the footer"
 
-#: framework/plugins/redux-extend/customizer-fields.php:579
+#: framework/plugins/redux-extend/customizer-fields.php:581
 msgid "Site Themes"
 msgstr "Site Themes"
 
-#: framework/plugins/redux-extend/customizer-fields.php:580
-#: framework/redux-config.php:2875
+#: framework/plugins/redux-extend/customizer-fields.php:582
+#: framework/redux-config.php:2869
 msgid "Create and manage site-wide themes."
 msgstr "Create and manage site-wide themes."
 
-#: framework/plugins/redux-extend/customizer-fields.php:581
-#: framework/plugins/redux-extend/customizer-fields.php:695
-#: framework/redux-config.php:2876 framework/redux-config.php:2993
+#: framework/plugins/redux-extend/customizer-fields.php:583
+#: framework/plugins/redux-extend/customizer-fields.php:697
+#: framework/redux-config.php:2870 framework/redux-config.php:2987
 msgid ""
 "Fields marked * can be left empty and their respective colors will be "
 "automatically generated."
@@ -2016,357 +2259,330 @@ msgstr ""
 "Fields marked * can be left empty and their respective colors will be "
 "automatically generated."
 
-#: framework/plugins/redux-extend/customizer-fields.php:590
-#: framework/plugins/redux-extend/customizer-fields.php:703
-#: framework/redux-config.php:2887 framework/redux-config.php:3005
+#: framework/plugins/redux-extend/customizer-fields.php:592
+#: framework/plugins/redux-extend/customizer-fields.php:705
+#: framework/redux-config.php:2881 framework/redux-config.php:2999
 msgid "New Theme"
 msgstr "New Theme"
 
-#: framework/plugins/redux-extend/customizer-fields.php:597
-#: framework/plugins/redux-extend/customizer-fields.php:710
-#: framework/redux-config.php:2894 framework/redux-config.php:3012
+#: framework/plugins/redux-extend/customizer-fields.php:599
+#: framework/plugins/redux-extend/customizer-fields.php:712
+#: framework/redux-config.php:2888 framework/redux-config.php:3006
 msgid "Theme Name"
 msgstr "Theme Name"
 
-#: framework/plugins/redux-extend/customizer-fields.php:605
-#: framework/plugins/redux-extend/customizer-fields.php:718
-#: framework/redux-config.php:2902 framework/redux-config.php:3020
+#: framework/plugins/redux-extend/customizer-fields.php:607
+#: framework/plugins/redux-extend/customizer-fields.php:720
+#: framework/redux-config.php:2896 framework/redux-config.php:3014
 msgid "Theme ID"
 msgstr "Theme ID"
 
-#: framework/plugins/redux-extend/customizer-fields.php:612
-#: framework/plugins/redux-extend/customizer-fields.php:725
-#: framework/plugins/vc-extend/vc-extend.php:36
-#: framework/redux-config.php:2909 framework/redux-config.php:3027
+#: framework/plugins/redux-extend/customizer-fields.php:614
+#: framework/plugins/redux-extend/customizer-fields.php:727
+#: framework/plugins/vc-extend/vc-extend.php:37
+#: framework/redux-config.php:2903 framework/redux-config.php:3021
 msgid "Accent"
 msgstr "Accent"
 
-#: framework/plugins/redux-extend/customizer-fields.php:630
-#: framework/redux-config.php:2927
+#: framework/plugins/redux-extend/customizer-fields.php:632
+#: framework/redux-config.php:2921
 msgid "Text Color Fade"
 msgstr "Text Color Fade"
 
-#: framework/plugins/redux-extend/customizer-fields.php:642
-#: framework/redux-config.php:2951
+#: framework/plugins/redux-extend/customizer-fields.php:644
+#: framework/redux-config.php:2945
 msgid "Inverse Text Fade"
 msgstr "Inverse Text Fade"
 
-#: framework/plugins/redux-extend/customizer-fields.php:654
-#: framework/redux-config.php:2939
+#: framework/plugins/redux-extend/customizer-fields.php:656
+#: framework/redux-config.php:2933
 msgid "Inverse Background"
 msgstr "Inverse Background"
 
-#: framework/plugins/redux-extend/customizer-fields.php:660
-#: framework/redux-config.php:2963
+#: framework/plugins/redux-extend/customizer-fields.php:662
+#: framework/redux-config.php:2957
 msgid "Alt Background"
 msgstr "Alt Background"
 
-#: framework/plugins/redux-extend/customizer-fields.php:666
-#: framework/redux-config.php:2969
+#: framework/plugins/redux-extend/customizer-fields.php:668
+#: framework/redux-config.php:2963
 msgid "Alt Text Color"
 msgstr "Alt Text Color"
 
-#: framework/plugins/redux-extend/customizer-fields.php:672
-#: framework/plugins/redux-extend/customizer-fields.php:761
-#: framework/redux-config.php:2957 framework/redux-config.php:3063
+#: framework/plugins/redux-extend/customizer-fields.php:674
+#: framework/plugins/redux-extend/customizer-fields.php:763
+#: framework/redux-config.php:2951 framework/redux-config.php:3057
 msgid "Inverse Border"
 msgstr "Inverse Border"
 
-#: framework/plugins/redux-extend/customizer-fields.php:678
-#: framework/redux-config.php:2975
+#: framework/plugins/redux-extend/customizer-fields.php:680
+#: framework/redux-config.php:2969
 msgid "Alt Border"
 msgstr "Alt Border"
 
-#: framework/plugins/redux-extend/customizer-fields.php:684
-#: framework/plugins/redux-extend/customizer-fields.php:803
-#: framework/redux-config.php:2981 framework/redux-config.php:3105
+#: framework/plugins/redux-extend/customizer-fields.php:686
+#: framework/plugins/redux-extend/customizer-fields.php:805
+#: framework/redux-config.php:2975 framework/redux-config.php:3099
 msgid "Dark Background"
 msgstr "Dark Background"
 
-#: framework/plugins/redux-extend/customizer-fields.php:693
-#: framework/redux-config.php:2991
+#: framework/plugins/redux-extend/customizer-fields.php:695
+#: framework/redux-config.php:2985
 msgid "Navbar Themes"
 msgstr "Navbar Themes"
 
-#: framework/plugins/redux-extend/customizer-fields.php:694
-#: framework/redux-config.php:2992
+#: framework/plugins/redux-extend/customizer-fields.php:696
+#: framework/redux-config.php:2986
 msgid "Create and manage themes for the navbar."
 msgstr "Create and manage themes for the navbar."
 
-#: framework/plugins/redux-extend/customizer-fields.php:731
-#: framework/redux-config.php:3033
+#: framework/plugins/redux-extend/customizer-fields.php:733
+#: framework/redux-config.php:3027
 msgid "Inverse Accent"
 msgstr "Inverse Accent"
 
-#: framework/plugins/redux-extend/customizer-fields.php:767
-#: framework/redux-config.php:3069
+#: framework/plugins/redux-extend/customizer-fields.php:769
+#: framework/redux-config.php:3063
 msgid "Menu Background"
 msgstr "Menu Background"
 
-#: framework/plugins/redux-extend/customizer-fields.php:773
-#: framework/redux-config.php:3075
+#: framework/plugins/redux-extend/customizer-fields.php:775
+#: framework/redux-config.php:3069
 msgid "Menu Text Color"
 msgstr "Menu Text Color"
 
-#: framework/plugins/redux-extend/customizer-fields.php:779
-#: framework/redux-config.php:3081
+#: framework/plugins/redux-extend/customizer-fields.php:781
+#: framework/redux-config.php:3075
 msgid "Menu Text Fade"
 msgstr "Menu Text Fade"
 
-#: framework/plugins/redux-extend/customizer-fields.php:785
-#: framework/redux-config.php:3087
+#: framework/plugins/redux-extend/customizer-fields.php:787
+#: framework/redux-config.php:3081
 msgid "Menu Hover Bg"
 msgstr "Menu Hover Bg"
 
-#: framework/plugins/redux-extend/customizer-fields.php:791
-#: framework/redux-config.php:3093
+#: framework/plugins/redux-extend/customizer-fields.php:793
+#: framework/redux-config.php:3087
 msgid "Menu Hover Text"
 msgstr "Menu Hover Text"
 
-#: framework/plugins/redux-extend/customizer-fields.php:797
-#: framework/redux-config.php:3099
+#: framework/plugins/redux-extend/customizer-fields.php:799
+#: framework/redux-config.php:3093
 msgid "Menu Border"
 msgstr "Menu Border"
 
-#: framework/plugins/redux-extend/customizer-fields.php:809
-#: framework/redux-config.php:3111
+#: framework/plugins/redux-extend/customizer-fields.php:811
+#: framework/redux-config.php:3105
 msgid "Enable Opacity"
 msgstr "Enable Opacity"
 
-#: framework/plugins/redux-extend/customizer-fields.php:823
-#: framework/redux-config.php:1201 framework/redux-config.php:3387
+#: framework/plugins/redux-extend/customizer-fields.php:825
+#: framework/redux-config.php:1195 framework/redux-config.php:3544
 msgid "Navbars"
 msgstr "Navbars"
 
-#: framework/plugins/redux-extend/customizer-fields.php:830
-#: framework/redux-config.php:1239
+#: framework/plugins/redux-extend/customizer-fields.php:832
+#: framework/redux-config.php:1244
 msgid "Primary Navbar"
 msgstr "Primary Navbar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:840
-#: framework/redux-config.php:1249
+#: framework/plugins/redux-extend/customizer-fields.php:842
+#: framework/redux-config.php:1254
 msgid "Set the navbar layout (orientation)"
 msgstr "Set the navbar layout (orientation)"
 
-#: framework/plugins/redux-extend/customizer-fields.php:842
-#: framework/plugins/vc-extend/vc-extend.php:46
-#: framework/redux-config.php:1251
+#: framework/plugins/redux-extend/customizer-fields.php:844
+#: framework/plugins/vc-extend/vc-extend.php:51
+#: framework/redux-config.php:1256
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: framework/plugins/redux-extend/customizer-fields.php:843
-#: framework/plugins/vc-extend/vc-extend.php:47
-#: framework/redux-config.php:1252
+#: framework/plugins/redux-extend/customizer-fields.php:845
+#: framework/plugins/vc-extend/vc-extend.php:48
+#: framework/redux-config.php:1257
 msgid "Vertical"
 msgstr "Vertical"
 
-#: framework/plugins/redux-extend/customizer-fields.php:851
+#: framework/plugins/redux-extend/customizer-fields.php:853
 msgid "Vertical Position"
 msgstr "Vertical Position"
 
-#: framework/plugins/redux-extend/customizer-fields.php:862
-#: framework/redux-config.php:1307
+#: framework/plugins/redux-extend/customizer-fields.php:864
+#: framework/redux-config.php:1312
 msgid "Logo Alignment"
 msgstr "Logo Alignment"
 
-#: framework/plugins/redux-extend/customizer-fields.php:874
-#: framework/plugins/redux-extend/customizer-fields.php:1009
-#: framework/redux-config.php:1345 framework/redux-config.php:1526
+#: framework/plugins/redux-extend/customizer-fields.php:876
+#: framework/plugins/redux-extend/customizer-fields.php:1011
+#: framework/redux-config.php:1350 framework/redux-config.php:1531
 msgid "Texture"
 msgstr "Texture"
 
-#: framework/plugins/redux-extend/customizer-fields.php:883
-#: framework/redux-config.php:1356
+#: framework/plugins/redux-extend/customizer-fields.php:885
+#: framework/redux-config.php:1361
 msgid "Padding"
 msgstr "Padding"
 
-#: framework/plugins/redux-extend/customizer-fields.php:884
-#: framework/redux-config.php:1357
+#: framework/plugins/redux-extend/customizer-fields.php:886
+#: framework/redux-config.php:1362
 msgid "Set the navbar's padding (in px) when at the top"
 msgstr "Set the navbar's padding (in px) when at the top"
 
-#: framework/plugins/redux-extend/customizer-fields.php:893
-#: framework/redux-config.php:1368
+#: framework/plugins/redux-extend/customizer-fields.php:895
+#: framework/redux-config.php:1373
 msgid "Padding When Fixed"
 msgstr "Padding When Fixed"
 
-#: framework/plugins/redux-extend/customizer-fields.php:894
-#: framework/redux-config.php:1369
+#: framework/plugins/redux-extend/customizer-fields.php:896
+#: framework/redux-config.php:1374
 msgid "Set the navbar's padding (in px) when fixed"
 msgstr "Set the navbar's padding (in px) when fixed"
 
-#: framework/plugins/redux-extend/customizer-fields.php:903
-#: framework/redux-config.php:1383
+#: framework/plugins/redux-extend/customizer-fields.php:905
+#: framework/redux-config.php:1388
 msgid "Opacity"
 msgstr "Opacity"
 
-#: framework/plugins/redux-extend/customizer-fields.php:904
-#: framework/redux-config.php:1384
+#: framework/plugins/redux-extend/customizer-fields.php:906
+#: framework/redux-config.php:1389
 msgid "Set the navbar's opacity when fixed"
 msgstr "Set the navbar's opacity when fixed"
 
-#: framework/plugins/redux-extend/customizer-fields.php:915
-#: framework/redux-config.php:1397
-msgid "See-Through"
-msgstr "See-Through"
-
-#: framework/plugins/redux-extend/customizer-fields.php:916
-#: framework/redux-config.php:1398
+#: framework/plugins/redux-extend/customizer-fields.php:918
+#: framework/redux-config.php:1403
 msgid "Make navbar transparent (when possible)"
 msgstr "Make navbar transparent (when possible)"
 
-#: framework/plugins/redux-extend/customizer-fields.php:926
-#: framework/redux-config.php:1410
+#: framework/plugins/redux-extend/customizer-fields.php:928
+#: framework/redux-config.php:1415
 msgid "Set the navbar's see-through opacity"
 msgstr "Set the navbar's see-through opacity"
 
-#: framework/plugins/redux-extend/customizer-fields.php:937
-#: framework/redux-config.php:1261 framework/redux-config.php:1426
-#: framework/redux-config.php:1688
-msgid "Position"
-msgstr "Position"
-
-#: framework/plugins/redux-extend/customizer-fields.php:938
-#: framework/redux-config.php:1427
+#: framework/plugins/redux-extend/customizer-fields.php:940
+#: framework/redux-config.php:1432
 msgid "Display navbar above or below header (when possible)"
 msgstr "Display navbar above or below header (when possible)"
 
-#: framework/plugins/redux-extend/customizer-fields.php:949
-#: framework/plugins/redux-extend/customizer-fields.php:1018
-#: framework/redux-config.php:1440 framework/redux-config.php:1538
+#: framework/plugins/redux-extend/customizer-fields.php:951
+#: framework/plugins/redux-extend/customizer-fields.php:1020
+#: framework/redux-config.php:1445 framework/redux-config.php:1543
 msgid "Hover Item Background"
 msgstr "Hover Item Background"
 
-#: framework/plugins/redux-extend/customizer-fields.php:950
-#: framework/plugins/redux-extend/customizer-fields.php:1019
-#: framework/redux-config.php:1441 framework/redux-config.php:1539
+#: framework/plugins/redux-extend/customizer-fields.php:952
+#: framework/plugins/redux-extend/customizer-fields.php:1021
+#: framework/redux-config.php:1446 framework/redux-config.php:1544
 msgid "Item background color on hover"
 msgstr "Item background color on hover"
 
-#: framework/plugins/redux-extend/customizer-fields.php:959
-#: framework/plugins/redux-extend/customizer-fields.php:1028
-#: framework/redux-config.php:1451 framework/redux-config.php:1550
+#: framework/plugins/redux-extend/customizer-fields.php:961
+#: framework/plugins/redux-extend/customizer-fields.php:1030
+#: framework/redux-config.php:1456 framework/redux-config.php:1555
 msgid "Active Item Bar"
 msgstr "Active Item Bar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:960
-#: framework/plugins/redux-extend/customizer-fields.php:1029
-#: framework/redux-config.php:1452 framework/redux-config.php:1551
+#: framework/plugins/redux-extend/customizer-fields.php:962
+#: framework/plugins/redux-extend/customizer-fields.php:1031
+#: framework/redux-config.php:1457 framework/redux-config.php:1556
 msgid "Show an accent bar for active menu items"
 msgstr "Show an accent bar for active menu items"
 
-#: framework/plugins/redux-extend/customizer-fields.php:969
-#: framework/plugins/redux-extend/customizer-fields.php:1038
-#: framework/redux-config.php:1462 framework/redux-config.php:1562
+#: framework/plugins/redux-extend/customizer-fields.php:971
+#: framework/plugins/redux-extend/customizer-fields.php:1040
+#: framework/redux-config.php:1467 framework/redux-config.php:1567
 msgid "Active Bar Position"
 msgstr "Active Bar Position"
 
-#: framework/plugins/redux-extend/customizer-fields.php:971
-#: framework/plugins/redux-extend/customizer-fields.php:1040
-#: framework/redux-config.php:1465 framework/redux-config.php:1565
-#: framework/redux-config.php:2807
+#: framework/plugins/redux-extend/customizer-fields.php:973
+#: framework/plugins/redux-extend/customizer-fields.php:1042
+#: framework/redux-config.php:1470 framework/redux-config.php:1570
+#: framework/redux-config.php:2801
 msgid "Top"
 msgstr "Top"
 
-#: framework/plugins/redux-extend/customizer-fields.php:974
-#: framework/plugins/redux-extend/customizer-fields.php:1043
-#: framework/redux-config.php:1468 framework/redux-config.php:1568
-#: framework/redux-config.php:2808
+#: framework/plugins/redux-extend/customizer-fields.php:976
+#: framework/plugins/redux-extend/customizer-fields.php:1045
+#: framework/redux-config.php:1473 framework/redux-config.php:1573
+#: framework/redux-config.php:2802
 msgid "Bottom"
 msgstr "Bottom"
 
-#: framework/plugins/redux-extend/customizer-fields.php:982
-#: framework/plugins/redux-extend/customizer-fields.php:1051
-#: framework/redux-config.php:1478 framework/redux-config.php:1578
+#: framework/plugins/redux-extend/customizer-fields.php:984
+#: framework/plugins/redux-extend/customizer-fields.php:1053
+#: framework/redux-config.php:1483 framework/redux-config.php:1583
 msgid "Border Items"
 msgstr "Border Items"
 
-#: framework/plugins/redux-extend/customizer-fields.php:991
-#: framework/redux-config.php:1495
-msgid "Secondary Navbar"
-msgstr "Secondary Navbar"
-
-#: framework/plugins/redux-extend/customizer-fields.php:1000
-#: framework/redux-config.php:1504
+#: framework/plugins/redux-extend/customizer-fields.php:1002
+#: framework/redux-config.php:1509
 msgid "Enable Secondary Navbar"
 msgstr "Enable Secondary Navbar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1061
-#: framework/redux-config.php:1591
+#: framework/plugins/redux-extend/customizer-fields.php:1063
+#: framework/redux-config.php:1596
 msgid "Content to show on the left side of the navbar"
 msgstr "Content to show on the left side of the navbar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1064
-#: framework/plugins/redux-extend/customizer-fields.php:1097
-#: framework/redux-config.php:1594 framework/redux-config.php:1632
-msgid "Navigation"
-msgstr "Navigation"
-
-#: framework/plugins/redux-extend/customizer-fields.php:1066
-#: framework/plugins/redux-extend/customizer-fields.php:1099
-#: framework/plugins/redux-extend/customizer-fields.php:1230
-#: framework/plugins/redux-extend/customizer-fields.php:1254
-#: framework/redux-config.php:1596 framework/redux-config.php:1634
-#: framework/redux-config.php:1917 framework/redux-config.php:1954
+#: framework/plugins/redux-extend/customizer-fields.php:1068
+#: framework/plugins/redux-extend/customizer-fields.php:1101
+#: framework/plugins/redux-extend/customizer-fields.php:1232
+#: framework/plugins/redux-extend/customizer-fields.php:1256
+#: framework/redux-config.php:1601 framework/redux-config.php:1639
+#: framework/redux-config.php:1933 framework/redux-config.php:1970
 msgid "Custom Text / Code"
 msgstr "Custom Text / Code"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1074
-#: framework/plugins/redux-extend/customizer-fields.php:1238
-#: framework/redux-config.php:1606 framework/redux-config.php:1926
+#: framework/plugins/redux-extend/customizer-fields.php:1076
+#: framework/plugins/redux-extend/customizer-fields.php:1240
+#: framework/redux-config.php:1611 framework/redux-config.php:1942
 msgid "Left Side Code"
 msgstr "Left Side Code"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1075
-#: framework/plugins/redux-extend/customizer-fields.php:1239
-#: framework/redux-config.php:1607 framework/redux-config.php:1927
+#: framework/plugins/redux-extend/customizer-fields.php:1077
+#: framework/plugins/redux-extend/customizer-fields.php:1241
+#: framework/redux-config.php:1612 framework/redux-config.php:1943
 msgid "Text or code to display on the left side"
 msgstr "Text or code to display on the left side"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1084
-#: framework/redux-config.php:1617 framework/redux-config.php:1938
+#: framework/plugins/redux-extend/customizer-fields.php:1086
+#: framework/redux-config.php:1622 framework/redux-config.php:1954
 msgid "Hide Left Side On Mobile"
 msgstr "Hide Left Side On Mobile"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1094
-#: framework/redux-config.php:1629
+#: framework/plugins/redux-extend/customizer-fields.php:1096
+#: framework/redux-config.php:1634
 msgid "Content to show on the right side of the navbar"
 msgstr "Content to show on the right side of the navbar"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1107
-#: framework/plugins/redux-extend/customizer-fields.php:1262
-#: framework/redux-config.php:1644 framework/redux-config.php:1963
+#: framework/plugins/redux-extend/customizer-fields.php:1109
+#: framework/plugins/redux-extend/customizer-fields.php:1264
+#: framework/redux-config.php:1649 framework/redux-config.php:1979
 msgid "Right Side Code"
 msgstr "Right Side Code"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1108
-#: framework/plugins/redux-extend/customizer-fields.php:1263
-#: framework/redux-config.php:1645 framework/redux-config.php:1964
+#: framework/plugins/redux-extend/customizer-fields.php:1110
+#: framework/plugins/redux-extend/customizer-fields.php:1265
+#: framework/redux-config.php:1650 framework/redux-config.php:1980
 msgid "Text or code to display on the right side"
 msgstr "Text or code to display on the right side"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1117
-#: framework/redux-config.php:1655 framework/redux-config.php:1974
+#: framework/plugins/redux-extend/customizer-fields.php:1119
+#: framework/redux-config.php:1660 framework/redux-config.php:1990
 msgid "Hide Right Side On Mobile"
 msgstr "Hide Right Side On Mobile"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1128
-#: framework/redux-config.php:1760
-msgid "Footer"
-msgstr "Footer"
-
-#: framework/plugins/redux-extend/customizer-fields.php:1180
-#: framework/redux-config.php:1867
+#: framework/plugins/redux-extend/customizer-fields.php:1182
+#: framework/redux-config.php:1873
 msgid "Copyright Area"
 msgstr "Copyright Area"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1226
-#: framework/redux-config.php:1913
+#: framework/plugins/redux-extend/customizer-fields.php:1228
+#: framework/redux-config.php:1929
 msgid "Content to show on the left side of the footer"
 msgstr "Content to show on the left side of the footer"
 
-#: framework/plugins/redux-extend/customizer-fields.php:1250
-#: framework/redux-config.php:1950
+#: framework/plugins/redux-extend/customizer-fields.php:1252
+#: framework/redux-config.php:1966
 msgid "Content to show on the right side of the footer"
 msgstr "Content to show on the right side of the footer"
 
@@ -2374,15 +2590,12 @@ msgstr "Content to show on the right side of the footer"
 msgid "Add More"
 msgstr "Add More"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:16
-msgid "Portfolio"
-msgstr "Portfolio"
-
 #: framework/plugins/redux-extend/portfolio-fields.php:17
 msgid "Customize the portfolio's options and appearance"
 msgstr "Customize the portfolio's options and appearance"
 
 #: framework/plugins/redux-extend/portfolio-fields.php:39
+#: framework/plugins/redux-extend/portfolio-fields.php:314
 #: framework/redux-config.php:167
 msgid "Show Sidebar"
 msgstr "Show Sidebar"
@@ -2398,13 +2611,13 @@ msgid "Select the layout type for this page"
 msgstr "Select the layout type for this page"
 
 #: framework/plugins/redux-extend/portfolio-fields.php:109
-#: framework/plugins/redux-extend/portfolio-fields.php:546
-#: framework/redux-config.php:2464
+#: framework/plugins/redux-extend/portfolio-fields.php:559
+#: framework/redux-config.php:2593
 msgid "Featured Media Placeholder"
 msgstr "Featured Media Placeholder"
 
 #: framework/plugins/redux-extend/portfolio-fields.php:110
-#: framework/plugins/redux-extend/portfolio-fields.php:547
+#: framework/plugins/redux-extend/portfolio-fields.php:560
 msgid ""
 "Select a placeholder image to show if a project does not have any featured "
 "media"
@@ -2413,218 +2626,156 @@ msgstr ""
 "media"
 
 #: framework/plugins/redux-extend/portfolio-fields.php:121
-#: framework/redux-config.php:238 framework/redux-config.php:2157
+#: framework/redux-config.php:238 framework/redux-config.php:2184
 msgid "Select a size for the post featured media"
 msgstr "Select a size for the post featured media"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:166
-msgid "Post Title"
-msgstr "Post Title"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:167
-msgid "Display the post title"
-msgstr "Display the post title"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:177
-msgid "Post Excerpt"
-msgstr "Post Excerpt"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:178
-msgid "Display the post excerpt"
-msgstr "Display the post excerpt"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:188
-msgid "Filters"
-msgstr "Filters"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:189
-msgid "Display filter links"
-msgstr "Display filter links"
-
 #: framework/plugins/redux-extend/portfolio-fields.php:205
+#: framework/redux-config.php:2257
 msgid "Rollover"
 msgstr "Rollover"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:213
-msgid "Show Rollover"
-msgstr "Show Rollover"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:214
-msgid "Display an overlay with useful links and info when a project is hovered"
-msgstr ""
-"Display an overlay with useful links and info when a project is hovered"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:227
-#: framework/plugins/redux-extend/portfolio-fields.php:515
-#: framework/redux-config.php:2192 framework/redux-config.php:2433
-msgid "Excerpt"
-msgstr "Excerpt"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:228
-msgid "View Post Button"
-msgstr "View Post Button"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:229
-msgid "Full Image Button"
-msgstr "Full Image Button"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:254
-msgid "Animation - In"
-msgstr "Animation - In"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:264
-msgid "Animation - Out"
-msgstr "Animation - Out"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:274
-msgid "View Post Icon"
-msgstr "View Post Icon"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:283
-msgid "Full Image Icon"
-msgstr "Full Image Icon"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:292
-msgid "Button Color"
-msgstr "Button Color"
-
-#: framework/plugins/redux-extend/portfolio-fields.php:304
+#: framework/plugins/redux-extend/portfolio-fields.php:303
 msgid "Project Page"
 msgstr "Project Page"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:305
+#: framework/plugins/redux-extend/portfolio-fields.php:304
 msgid "Manage the single project pages"
 msgstr "Manage the single project pages"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:355
+#: framework/plugins/redux-extend/portfolio-fields.php:315
+msgid "Display the sidebar on prohect pages"
+msgstr "Display the sidebar on prohect pages"
+
+#: framework/plugins/redux-extend/portfolio-fields.php:368
 msgid "Show Taxonomies"
 msgstr "Show Taxonomies"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:356
+#: framework/plugins/redux-extend/portfolio-fields.php:369
 msgid "Display project types and attributes"
 msgstr "Display project types and attributes"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:366
+#: framework/plugins/redux-extend/portfolio-fields.php:379
 #: framework/plugins/redux-extend/woocommerce-fields.php:279
 msgid "Show Sharing Buttons"
 msgstr "Show Sharing Buttons"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:376
+#: framework/plugins/redux-extend/portfolio-fields.php:389
 #: framework/plugins/redux-extend/woocommerce-fields.php:289
 msgid "Sharing Profiles"
 msgstr "Sharing Profiles"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:377
+#: framework/plugins/redux-extend/portfolio-fields.php:390
 #: framework/plugins/redux-extend/woocommerce-fields.php:290
 msgid "Select which sharing profiles to display"
 msgstr "Select which sharing profiles to display"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:386
+#: framework/plugins/redux-extend/portfolio-fields.php:399
 msgid "Project Navigation"
 msgstr "Project Navigation"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:387
+#: framework/plugins/redux-extend/portfolio-fields.php:400
 msgid "Show links to next and previous projects"
 msgstr "Show links to next and previous projects"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:397
-#: framework/plugins/redux-extend/portfolio-fields.php:514
-#: framework/redux-config.php:2432 framework/redux-config.php:2549
-#: framework/redux-config.php:2778
+#: framework/plugins/redux-extend/portfolio-fields.php:410
+#: framework/plugins/redux-extend/portfolio-fields.php:527
+#: framework/redux-config.php:2561 framework/redux-config.php:2651
+#: framework/redux-config.php:2772 framework/redux-config.php:3209
 msgid "Comments"
 msgstr "Comments"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:398
+#: framework/plugins/redux-extend/portfolio-fields.php:411
 msgid "Show comments"
 msgstr "Show comments"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:414
-#: framework/plugins/redux-extend/portfolio-fields.php:432
+#: framework/plugins/redux-extend/portfolio-fields.php:427
+#: framework/plugins/redux-extend/portfolio-fields.php:445
 msgid "Related Projects"
 msgstr "Related Projects"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:422
+#: framework/plugins/redux-extend/portfolio-fields.php:435
 msgid "Show Related Projects"
 msgstr "Show Related Projects"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:433
+#: framework/plugins/redux-extend/portfolio-fields.php:446
 msgid "How many related projects to display"
 msgstr "How many related projects to display"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:445
-#: framework/redux-config.php:2363
+#: framework/plugins/redux-extend/portfolio-fields.php:458
+#: framework/redux-config.php:2492
 msgid "Slider Style"
 msgstr "Slider Style"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:446
+#: framework/plugins/redux-extend/portfolio-fields.php:459
 msgid "Display related projects in a slider/carousel"
 msgstr "Display related projects in a slider/carousel"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:461
+#: framework/plugins/redux-extend/portfolio-fields.php:474
 msgid "How many columns (related projects per row) to display"
 msgstr "How many columns (related projects per row) to display"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:472
-#: framework/redux-config.php:2390
+#: framework/plugins/redux-extend/portfolio-fields.php:485
+#: framework/redux-config.php:2519
 msgid "Tablet Columns"
 msgstr "Tablet Columns"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:473
-#: framework/redux-config.php:2391
+#: framework/plugins/redux-extend/portfolio-fields.php:486
+#: framework/redux-config.php:2520
 msgid "How many columns to display on tablets / medium screens"
 msgstr "How many columns to display on tablets / medium screens"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:484
-#: framework/redux-config.php:2402
+#: framework/plugins/redux-extend/portfolio-fields.php:497
+#: framework/redux-config.php:2531
 msgid "Mobile Columns"
 msgstr "Mobile Columns"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:485
-#: framework/redux-config.php:2403
+#: framework/plugins/redux-extend/portfolio-fields.php:498
+#: framework/redux-config.php:2532
 msgid "How many columns to display on mobiles / small screens"
 msgstr "How many columns to display on mobiles / small screens"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:496
-#: framework/redux-config.php:1030 framework/redux-config.php:2414
+#: framework/plugins/redux-extend/portfolio-fields.php:509
+#: framework/redux-config.php:1024 framework/redux-config.php:2543
 msgid "Type"
 msgstr "Type"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:497
+#: framework/plugins/redux-extend/portfolio-fields.php:510
 msgid "Display text-only projects or with featured media"
 msgstr "Display text-only projects or with featured media"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:499
-#: framework/redux-config.php:1034 framework/redux-config.php:1075
-#: framework/redux-config.php:2418
+#: framework/plugins/redux-extend/portfolio-fields.php:512
+#: framework/redux-config.php:1028 framework/redux-config.php:1069
+#: framework/redux-config.php:2547
 msgid "Text"
 msgstr "Text"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:500
-#: framework/redux-config.php:2417
+#: framework/plugins/redux-extend/portfolio-fields.php:513
+#: framework/redux-config.php:2546
 msgid "Media"
 msgstr "Media"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:510
+#: framework/plugins/redux-extend/portfolio-fields.php:523
 msgid "Text Elements"
 msgstr "Text Elements"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:511
-#: framework/redux-config.php:2429
+#: framework/plugins/redux-extend/portfolio-fields.php:524
+#: framework/redux-config.php:2558
 msgid "Select which elements to display"
 msgstr "Select which elements to display"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:513
-#: framework/redux-config.php:2431 framework/redux-config.php:2509
+#: framework/plugins/redux-extend/portfolio-fields.php:526
+#: framework/redux-config.php:2560 framework/redux-config.php:2629
 msgid "Date"
 msgstr "Date"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:531
-#: framework/redux-config.php:2449
+#: framework/plugins/redux-extend/portfolio-fields.php:544
+#: framework/redux-config.php:2578
 msgid "Minimal Style"
 msgstr "Minimal Style"
 
-#: framework/plugins/redux-extend/portfolio-fields.php:532
-#: framework/redux-config.php:2450
+#: framework/plugins/redux-extend/portfolio-fields.php:545
+#: framework/redux-config.php:2579
 msgid "Hide the title and shrink items on small screens"
 msgstr "Hide the title and shrink items on small screens"
 
@@ -2768,67 +2919,55 @@ msgstr "Related Product Columns"
 msgid "How many columns (related products per row) to display"
 msgstr "How many columns (related products per row) to display"
 
-#: framework/plugins/vc-extend/fields/styler.php:99
-msgid "General"
-msgstr "General"
-
-#: framework/plugins/vc-extend/vc-extend.php:27
+#: framework/plugins/vc-extend/vc-extend.php:28
 msgid "Row Color"
 msgstr "Row Color"
 
-#: framework/plugins/vc-extend/vc-extend.php:28
+#: framework/plugins/vc-extend/vc-extend.php:29
 msgid "Set a theme color for this row"
 msgstr "Set a theme color for this row"
 
-#: framework/plugins/vc-extend/vc-extend.php:33
+#: framework/plugins/vc-extend/vc-extend.php:34
 msgid "Main"
 msgstr "Main"
 
-#: framework/plugins/vc-extend/vc-extend.php:34
+#: framework/plugins/vc-extend/vc-extend.php:35
 msgid "Alternative"
 msgstr "Alternative"
 
-#: framework/plugins/vc-extend/vc-extend.php:35
+#: framework/plugins/vc-extend/vc-extend.php:36
 msgid "Inverse"
 msgstr "Inverse"
 
-#: framework/plugins/vc-extend/vc-extend.php:42
+#: framework/plugins/vc-extend/vc-extend.php:44
 msgid "Row Padding"
 msgstr "Row Padding"
 
-#: framework/plugins/vc-extend/vc-extend.php:43
+#: framework/plugins/vc-extend/vc-extend.php:45
 msgid "Apply padding to this row"
 msgstr "Apply padding to this row"
 
-#: framework/plugins/vc-extend/vc-extend.php:52
-msgid "Separator Color"
-msgstr "Separator Color"
+#: framework/plugins/vc-extend/vc-extend.php:49
+msgid "Vertical (large)"
+msgstr "Vertical (large)"
 
-#: framework/plugins/vc-extend/vc-extend.php:53
-msgid ""
-"The separator's color. Select the same color as the row for normal "
-"separators, or the next row's color for inverted ones."
-msgstr ""
-"The separator's color. Select the same color as the row for normal "
-"separators, or the next row's color for inverted ones."
+#: framework/plugins/vc-extend/vc-extend.php:50
+msgid "Vertical (extra)"
+msgstr "Vertical (extra)"
 
-#: framework/plugins/vc-extend/vc-extend.php:60
-msgid "Separator Icon"
-msgstr "Separator Icon"
-
-#: framework/plugins/vc-extend/vc-extend.php:68
+#: framework/plugins/vc-extend/vc-extend.php:58
 msgid "First Row"
 msgstr "First Row"
 
-#: framework/plugins/vc-extend/vc-extend.php:69
+#: framework/plugins/vc-extend/vc-extend.php:59
 msgid "Check if this row should sit flush against the header"
 msgstr "Check if this row should sit flush against the header"
 
-#: framework/plugins/vc-extend/vc-extend.php:78
+#: framework/plugins/vc-extend/vc-extend.php:69
 msgid "Row Separator"
 msgstr "Row Separator"
 
-#: framework/plugins/vc-extend/vc-extend.php:79
+#: framework/plugins/vc-extend/vc-extend.php:70
 msgid ""
 "Apply a separator to this row. Use inverted separators when using a "
 "background image for this row."
@@ -2836,13 +2975,29 @@ msgstr ""
 "Apply a separator to this row. Use inverted separators when using a "
 "background image for this row."
 
-#: framework/plugins/vc-extend/vc-extend.php:90
-msgid "Equal Columns Height"
-msgstr "Equal Columns Height"
+#: framework/plugins/vc-extend/vc-extend.php:77
+msgid "Separator Color"
+msgstr "Separator Color"
 
-#: framework/plugins/vc-extend/vc-extend.php:91
-msgid "Make the columns in this row equal height"
-msgstr "Make the columns in this row equal height"
+#: framework/plugins/vc-extend/vc-extend.php:78
+msgid ""
+"The separator's color. Select the same color as the row for normal "
+"separators, or the next row's color for inverted ones."
+msgstr ""
+"The separator's color. Select the same color as the row for normal "
+"separators, or the next row's color for inverted ones."
+
+#: framework/plugins/vc-extend/vc-extend.php:85
+msgid "Separator Icon"
+msgstr "Separator Icon"
+
+#: framework/plugins/vc-extend/vc-extend.php:141
+msgid "MIXT - Masonry: Scale And Rotate"
+msgstr "MIXT - Masonry: Scale And Rotate"
+
+#: framework/plugins/vc-extend/vc-extend.php:145
+msgid "MIXT - Grid: Fade In With Title"
+msgstr "MIXT - Grid: Fade In With Title"
 
 #: framework/plugins/woocommerce/mixt-woocommerce.php:164
 msgid "Sale!"
@@ -2874,7 +3029,7 @@ msgstr "%s Page"
 msgid "Manage the %s page and content appearance"
 msgstr "Manage the %s page and content appearance"
 
-#: framework/redux-config.php:289 framework/redux-config.php:3375
+#: framework/redux-config.php:289 framework/redux-config.php:3532
 msgid "Global Options"
 msgstr "Global Options"
 
@@ -2946,19 +3101,11 @@ msgstr "Icon Font Sets"
 msgid "Select which icon font sets you want to use."
 msgstr "Select which icon font sets you want to use."
 
-#: framework/redux-config.php:522
-msgid "Font Awesome"
-msgstr "Font Awesome"
-
-#: framework/redux-config.php:523
-msgid "Linecons"
-msgstr "Linecons"
-
-#: framework/redux-config.php:534
+#: framework/redux-config.php:536
 msgid "Enable Themes"
 msgstr "Enable Themes"
 
-#: framework/redux-config.php:535
+#: framework/redux-config.php:537
 msgid ""
 "Add theme sections and management. Disable if customizing themes in CSS "
 "directly."
@@ -2966,63 +3113,59 @@ msgstr ""
 "Add theme sections and management. Disable if customizing themes in CSS "
 "directly."
 
-#: framework/redux-config.php:545
+#: framework/redux-config.php:547
 msgid "Page Option Metaboxes"
 msgstr "Page Option Metaboxes"
 
-#: framework/redux-config.php:546
+#: framework/redux-config.php:548
 msgid "Enable option metaboxes when editing pages or posts"
 msgstr "Enable option metaboxes when editing pages or posts"
 
-#: framework/redux-config.php:556
+#: framework/redux-config.php:558
 msgid "BrowserSync Script"
 msgstr "BrowserSync Script"
 
-#: framework/redux-config.php:557
+#: framework/redux-config.php:559
 msgid "Add BrowserSync script in the footer (only for logged in admins)"
 msgstr "Add BrowserSync script in the footer (only for logged in admins)"
 
-#: framework/redux-config.php:569
+#: framework/redux-config.php:571
 msgid "Customize the site header"
 msgstr "Customize the site header"
 
-#: framework/redux-config.php:579
+#: framework/redux-config.php:581
 msgid "Configure the header media element and its appearance"
 msgstr "Configure the header media element and its appearance"
 
-#: framework/redux-config.php:870
-msgid "Scroll To Content Icon"
-msgstr "Scroll To Content Icon"
-
-#: framework/redux-config.php:922
+#: framework/redux-config.php:916
 msgid "Configure the location bar and its appearance"
 msgstr "Configure the location bar and its appearance"
 
-#: framework/redux-config.php:1022
+#: framework/redux-config.php:1016
 msgid "Logo"
 msgstr "Logo"
 
-#: framework/redux-config.php:1031
+#: framework/redux-config.php:1025
 msgid "Display text or an image as the logo"
 msgstr "Display text or an image as the logo"
 
-#: framework/redux-config.php:1045
+#: framework/redux-config.php:1039
 msgid "Select the image you want to use as the site's logo"
 msgstr "Select the image you want to use as the site's logo"
 
-#: framework/redux-config.php:1054
+#: framework/redux-config.php:1048
 msgid "Inverse Image"
 msgstr "Inverse Image"
 
-#: framework/redux-config.php:1055
+#: framework/redux-config.php:1049
 msgid "Select an inverse logo image for dark backgrounds"
 msgstr "Select an inverse logo image for dark backgrounds"
 
-#: framework/redux-config.php:1063
+#: framework/redux-config.php:1057
 msgid "Hi-Res"
 msgstr "Hi-Res"
 
-#: framework/redux-config.php:1064
+#: framework/redux-config.php:1058
 msgid ""
 "Scale down logo to half size so it will look sharp on high-resolution "
 "screens like Retina"
@@ -3030,35 +3173,35 @@ msgstr ""
 "Scale down logo to half size so it will look sharp on high-resolution "
 "screens like Retina"
 
-#: framework/redux-config.php:1076
+#: framework/redux-config.php:1070
 msgid "Enter the logo text (leave empty to use the site name)"
 msgstr "Enter the logo text (leave empty to use the site name)"
 
-#: framework/redux-config.php:1084
+#: framework/redux-config.php:1078
 msgid "Text Style"
 msgstr "Text Style"
 
-#: framework/redux-config.php:1085
+#: framework/redux-config.php:1079
 msgid "Set up how you want your text logo to look"
 msgstr "Set up how you want your text logo to look"
 
-#: framework/redux-config.php:1104
+#: framework/redux-config.php:1098
 msgid "Select a logo text color"
 msgstr "Select a logo text color"
 
-#: framework/redux-config.php:1115
+#: framework/redux-config.php:1109
 msgid "Text Inverse Color"
 msgstr "Text Inverse Color"
 
-#: framework/redux-config.php:1116
+#: framework/redux-config.php:1110
 msgid "Select a logo text color for dark backgrounds"
 msgstr "Select a logo text color for dark backgrounds"
 
-#: framework/redux-config.php:1127
+#: framework/redux-config.php:1121
 msgid "Shrink"
 msgstr "Shrink"
 
-#: framework/redux-config.php:1128
+#: framework/redux-config.php:1122
 msgid ""
 "Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 "
 "means no shrink)"
@@ -3066,224 +3209,198 @@ msgstr ""
 "Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 "
 "means no shrink)"
 
-#: framework/redux-config.php:1138
+#: framework/redux-config.php:1132
 msgid "Tagline"
 msgstr "Tagline"
 
-#: framework/redux-config.php:1139
+#: framework/redux-config.php:1133
 msgid "Show the site's tagline (or a custom one) next to the logo"
 msgstr "Show the site's tagline (or a custom one) next to the logo"
 
-#: framework/redux-config.php:1149
+#: framework/redux-config.php:1143
 msgid "Tagline Text"
 msgstr "Tagline Text"
 
-#: framework/redux-config.php:1150
+#: framework/redux-config.php:1144
 msgid "Enter the tagline text (leave empty to use the site tagline)"
 msgstr "Enter the tagline text (leave empty to use the site tagline)"
 
-#: framework/redux-config.php:1158
+#: framework/redux-config.php:1152
 msgid "Tagline Style"
 msgstr "Tagline Style"
 
-#: framework/redux-config.php:1176
+#: framework/redux-config.php:1170
 msgid "Tagline Color"
 msgstr "Tagline Color"
 
-#: framework/redux-config.php:1177
+#: framework/redux-config.php:1171
 msgid "Select a tagline text color"
 msgstr "Select a tagline text color"
 
-#: framework/redux-config.php:1188
+#: framework/redux-config.php:1182
 msgid "Tagline Inverse Color"
 msgstr "Tagline Inverse Color"
 
-#: framework/redux-config.php:1189
+#: framework/redux-config.php:1183
 msgid "Select a tagline text color for dark backgrounds"
 msgstr "Select a tagline text color for dark backgrounds"
 
-#: framework/redux-config.php:1202
+#: framework/redux-config.php:1196
 msgid "Customize the primary and secondary navbars"
 msgstr "Customize the primary and secondary navbars"
 
-#: framework/redux-config.php:1211
+#: framework/redux-config.php:1205
 msgid "Menu Icons"
 msgstr "Menu Icons"
 
-#: framework/redux-config.php:1212
+#: framework/redux-config.php:1206
 msgid "Enable icons for menu items"
 msgstr "Enable icons for menu items"
 
-#: framework/redux-config.php:1222
+#: framework/redux-config.php:1216
 msgid "Menu Dropdown Arrows"
 msgstr "Menu Dropdown Arrows"
 
-#: framework/redux-config.php:1223
+#: framework/redux-config.php:1217
 msgid "Enable arrows for menu items with dropdowns"
 msgstr "Enable arrows for menu items with dropdowns"
 
-#: framework/redux-config.php:1240
+#: framework/redux-config.php:1227
+msgid "Submenu Dropdown Arrows"
+msgstr "Submenu Dropdown Arrows"
+
+#: framework/redux-config.php:1228
+msgid "Enable arrows for submenu items with dropdowns"
+msgstr "Enable arrows for submenu items with dropdowns"
+
+#: framework/redux-config.php:1245
 msgid "Settings for the primary navbar"
 msgstr "Settings for the primary navbar"
 
-#: framework/redux-config.php:1262
+#: framework/redux-config.php:1267
 msgid "Position the navbar to the left or right of the page"
 msgstr "Position the navbar to the left or right of the page"
 
-#: framework/redux-config.php:1275 framework/redux-config.php:1701
-msgid "Width"
-msgstr "Width"
-
-#: framework/redux-config.php:1276
+#: framework/redux-config.php:1281
 msgid "Set a custom navbar width, e.g. '150px' or '20%'"
 msgstr "Set a custom navbar width, e.g. '150px' or '20%'"
 
-#: framework/redux-config.php:1284 framework/redux-config.php:1709
+#: framework/redux-config.php:1289 framework/redux-config.php:1714
 msgid "Small Width"
 msgstr "Small Width"
 
-#: framework/redux-config.php:1285
+#: framework/redux-config.php:1290
 msgid "Set a custom navbar width for smaller screens, e.g. '150px' or '20%'"
 msgstr "Set a custom navbar width for smaller screens, e.g. '150px' or '20%'"
 
-#: framework/redux-config.php:1293 framework/redux-config.php:1321
+#: framework/redux-config.php:1298 framework/redux-config.php:1326
 msgid "Mode"
 msgstr "Mode"
 
-#: framework/redux-config.php:1294 framework/redux-config.php:1322
+#: framework/redux-config.php:1299 framework/redux-config.php:1327
 msgid "Navbar fixed (scrolls with page) or static (stays at the top)"
 msgstr "Navbar fixed (scrolls with page) or static (stays at the top)"
 
-#: framework/redux-config.php:1296 framework/redux-config.php:1324
+#: framework/redux-config.php:1301 framework/redux-config.php:1329
 msgid "Fixed"
 msgstr "Fixed"
 
-#: framework/redux-config.php:1297 framework/redux-config.php:1325
+#: framework/redux-config.php:1302 framework/redux-config.php:1330
 msgid "Static"
 msgstr "Static"
 
-#: framework/redux-config.php:1308
+#: framework/redux-config.php:1313
 msgid "Where the logo will be displayed in the navbar"
 msgstr "Where the logo will be displayed in the navbar"
 
-#: framework/redux-config.php:1335 framework/redux-config.php:1515
-msgid "Theme"
-msgstr "Theme"
-
-#: framework/redux-config.php:1346 framework/redux-config.php:1527
+#: framework/redux-config.php:1351 framework/redux-config.php:1532
 msgid "Texture the navbar"
 msgstr "Texture the navbar"
 
-#: framework/redux-config.php:1463 framework/redux-config.php:1563
+#: framework/redux-config.php:1468 framework/redux-config.php:1568
 msgid "Where will the active bar be placed"
 msgstr "Where will the active bar be placed"
 
-#: framework/redux-config.php:1479 framework/redux-config.php:1579
+#: framework/redux-config.php:1484 framework/redux-config.php:1584
 msgid "Add borders to the navbar items"
 msgstr "Add borders to the navbar items"
 
-#: framework/redux-config.php:1496
+#: framework/redux-config.php:1501
 msgid "Settings for the secondary navbar"
 msgstr "Settings for the secondary navbar"
 
-#: framework/redux-config.php:1505
+#: framework/redux-config.php:1510
 msgid "Show the secondary navbar above the header"
 msgstr "Show the secondary navbar above the header"
 
-#: framework/redux-config.php:1667 framework/redux-config.php:3393
+#: framework/redux-config.php:1672 framework/redux-config.php:3550
 msgid "Sidebars"
 msgstr "Sidebars"
 
-#: framework/redux-config.php:1668
+#: framework/redux-config.php:1673
 msgid "Configure the sidebars and their appearance"
 msgstr "Configure the sidebars and their appearance"
 
-#: framework/redux-config.php:1678
+#: framework/redux-config.php:1683
 msgid "Display the sidebar"
 msgstr "Display the sidebar"
 
-#: framework/redux-config.php:1689
-msgid "Sidebar to the left or to the right of the page"
-msgstr "Sidebar to the left or to the right of the page"
-
-#: framework/redux-config.php:1702
+#: framework/redux-config.php:1707
 msgid "Set a custom sidebar width, e.g. '300px' or '25%'"
 msgstr "Set a custom sidebar width, e.g. '300px' or '25%'"
 
-#: framework/redux-config.php:1710
+#: framework/redux-config.php:1715
 msgid "Set a custom sidebar width for smaller screens, e.g. '200px' or '30%'"
 msgstr "Set a custom sidebar width for smaller screens, e.g. '200px' or '30%'"
 
-#: framework/redux-config.php:1717 framework/redux-config.php:1850
-#: framework/redux-config.php:2044
-msgid "Hide On Mobile"
-msgstr "Hide On Mobile"
-
-#: framework/redux-config.php:1718
-msgid "Hide sidebar on mobile / small screens"
-msgstr "Hide sidebar on mobile / small screens"
-
-#: framework/redux-config.php:1728
-msgid "Child Pages Menu"
-msgstr "Child Pages Menu"
-
-#: framework/redux-config.php:1729
-msgid "Display a navigation menu of child pages in the sidebar, when available"
-msgstr ""
-"Display a navigation menu of child pages in the sidebar, when available"
-
-#: framework/redux-config.php:1739
+#: framework/redux-config.php:1744
 msgid "Custom Sidebars"
 msgstr "Custom Sidebars"
 
-#: framework/redux-config.php:1740
+#: framework/redux-config.php:1745
 msgid "Register custom sidebars to use on different pages or locations"
 msgstr "Register custom sidebars to use on different pages or locations"
 
-#: framework/redux-config.php:1741
+#: framework/redux-config.php:1746
 msgid "New Sidebar"
 msgstr "New Sidebar"
 
-#: framework/redux-config.php:1746 framework/redux-config.php:2745
-#: framework/redux-config.php:3200 templates/comments.php:80
+#: framework/redux-config.php:1751 framework/redux-config.php:2739
+#: framework/redux-config.php:3357 templates/comments.php:80
 #: woocommerce/single-product-reviews.php:65
 msgid "Name"
 msgstr "Name"
 
-#: framework/redux-config.php:1750
+#: framework/redux-config.php:1755
 msgid "ID"
 msgstr "ID"
 
-#: framework/redux-config.php:1761
+#: framework/redux-config.php:1766
 msgid "Customize the site footer"
 msgstr "Customize the site footer"
 
-#: framework/redux-config.php:1780
+#: framework/redux-config.php:1785
 msgid "Back To Top Button"
 msgstr "Back To Top Button"
 
-#: framework/redux-config.php:1790
-msgid "Back To Top Icon"
-msgstr "Back To Top Icon"
-
-#: framework/redux-config.php:1851
+#: framework/redux-config.php:1857
 msgid "Hide the widget area on mobile / small screens"
 msgstr "Hide the widget area on mobile / small screens"
 
-#: framework/redux-config.php:1985 framework/redux-config.php:3168
-#: framework/redux-config.php:3411
+#: framework/redux-config.php:2001 framework/redux-config.php:3314
+#: framework/redux-config.php:3568
 msgid "Social Profiles"
 msgstr "Social Profiles"
 
-#: framework/redux-config.php:1986
+#: framework/redux-config.php:2002
 msgid "Select which social profiles to display"
 msgstr "Select which social profiles to display"
 
-#: framework/redux-config.php:2000
+#: framework/redux-config.php:2016
 msgid "Info Bar"
 msgstr "Info Bar"
 
-#: framework/redux-config.php:2001
+#: framework/redux-config.php:2017
 msgid ""
 "Settings for the info bar. Can be used to show the cookie law notice, a "
 "promotion or any other information."
@@ -3291,468 +3408,488 @@ msgstr ""
 "Settings for the info bar. Can be used to show the cookie law notice, a "
 "promotion or any other information."
 
-#: framework/redux-config.php:2009 framework/redux-config.php:2325
-#: framework/redux-config.php:2687
+#: framework/redux-config.php:2025 framework/redux-config.php:2454
+#: framework/redux-config.php:2681
 msgid "Show"
 msgstr "Show"
 
-#: framework/redux-config.php:2019
+#: framework/redux-config.php:2035
 msgid "Content"
 msgstr "Content"
 
-#: framework/redux-config.php:2020
+#: framework/redux-config.php:2036
 msgid "Text or code to display in the info bar"
 msgstr "Text or code to display in the info bar"
 
-#: framework/redux-config.php:2032
+#: framework/redux-config.php:2048
 msgid "Fixed Position"
 msgstr "Fixed Position"
 
-#: framework/redux-config.php:2033
+#: framework/redux-config.php:2049
 msgid "Make the info bar fixed (sticky)"
 msgstr "Make the info bar fixed (sticky)"
 
-#: framework/redux-config.php:2045
+#: framework/redux-config.php:2061
 msgid "Hide the info bar on mobile / small screens"
 msgstr "Hide the info bar on mobile / small screens"
 
-#: framework/redux-config.php:2063 framework/redux-config.php:3399
+#: framework/redux-config.php:2079 framework/redux-config.php:3556
 msgid "Post Pages"
 msgstr "Post Pages"
 
-#: framework/redux-config.php:2064
+#: framework/redux-config.php:2080
 msgid "Manage post and archive pages"
 msgstr "Manage post and archive pages"
 
-#: framework/redux-config.php:2073 framework/redux-config.php:2789
+#: framework/redux-config.php:2089
+msgid "Animate Posts"
+msgstr "Animate Posts"
+
+#: framework/redux-config.php:2090
+msgid "Apply animation to posts on page load"
+msgstr "Apply animation to posts on page load"
+
+#: framework/redux-config.php:2100 framework/redux-config.php:2783
 msgid "Pagination"
 msgstr "Pagination"
 
-#: framework/redux-config.php:2074
+#: framework/redux-config.php:2101
 msgid "Select a pagination type"
 msgstr "Select a pagination type"
 
-#: framework/redux-config.php:2076 framework/redux-config.php:2792
+#: framework/redux-config.php:2103 framework/redux-config.php:2786
 msgid "Classic"
 msgstr "Classic"
 
-#: framework/redux-config.php:2077 framework/redux-config.php:2793
+#: framework/redux-config.php:2104 framework/redux-config.php:2787
 msgid "Numbered"
 msgstr "Numbered"
 
-#: framework/redux-config.php:2078 framework/redux-config.php:2794
+#: framework/redux-config.php:2105 framework/redux-config.php:2788
 msgid "Ajax On Click"
 msgstr "Ajax On Click"
 
-#: framework/redux-config.php:2079 framework/redux-config.php:2795
+#: framework/redux-config.php:2106 framework/redux-config.php:2789
 msgid "Ajax On Scroll"
 msgstr "Ajax On Scroll"
 
-#: framework/redux-config.php:2088
+#: framework/redux-config.php:2115
 msgid "Show Page Numbers"
 msgstr "Show Page Numbers"
 
-#: framework/redux-config.php:2089
+#: framework/redux-config.php:2116
 msgid "Display a link with the current page number"
 msgstr "Display a link with the current page number"
 
-#: framework/redux-config.php:2103
+#: framework/redux-config.php:2130
 msgid "Blog Page"
 msgstr "Blog Page"
 
-#: framework/redux-config.php:2104
+#: framework/redux-config.php:2131
 msgid "Manage the blog page and post appearance"
 msgstr "Manage the blog page and post appearance"
 
-#: framework/redux-config.php:2188
+#: framework/redux-config.php:2226
 msgid "Post Content"
 msgstr "Post Content"
 
-#: framework/redux-config.php:2189
+#: framework/redux-config.php:2227
 msgid "Show the post's excerpt or full content"
 msgstr "Show the post's excerpt or full content"
 
-#: framework/redux-config.php:2191
+#: framework/redux-config.php:2229
 msgid "Full"
 msgstr "Full"
 
-#: framework/redux-config.php:2201
+#: framework/redux-config.php:2239
 msgid "Excerpt Limit"
 msgstr "Excerpt Limit"
 
-#: framework/redux-config.php:2202
+#: framework/redux-config.php:2240
 msgid "Set a maximum excerpt length (in words)"
 msgstr "Set a maximum excerpt length (in words)"
 
-#: framework/redux-config.php:2244
+#: framework/redux-config.php:2266
+msgid "Display an overlay with useful links and info when a post is hovered"
+msgstr "Display an overlay with useful links and info when a post is hovered"
+
+#: framework/redux-config.php:2373
 msgid "Configure the post's appearance"
 msgstr "Configure the post's appearance"
 
-#: framework/redux-config.php:2278
+#: framework/redux-config.php:2407
 msgid "Post Tags"
 msgstr "Post Tags"
 
-#: framework/redux-config.php:2279
+#: framework/redux-config.php:2408
 msgid "Show the post's tags"
 msgstr "Show the post's tags"
 
-#: framework/redux-config.php:2289
+#: framework/redux-config.php:2418
 msgid "Post Navigation"
 msgstr "Post Navigation"
 
-#: framework/redux-config.php:2290
+#: framework/redux-config.php:2419
 msgid "Display links to the previous and next posts"
 msgstr "Display links to the previous and next posts"
 
-#: framework/redux-config.php:2300
+#: framework/redux-config.php:2429
 msgid "About The Author"
 msgstr "About The Author"
 
-#: framework/redux-config.php:2301
+#: framework/redux-config.php:2430
 msgid "Show info about the author"
 msgstr "Show info about the author"
 
-#: framework/redux-config.php:2317 single.php:60
+#: framework/redux-config.php:2446 single.php:60
 msgid "Related Posts"
 msgstr "Related Posts"
 
-#: framework/redux-config.php:2326
+#: framework/redux-config.php:2455
 msgid "Display related posts at the bottom of the post"
 msgstr "Display related posts at the bottom of the post"
 
-#: framework/redux-config.php:2336
+#: framework/redux-config.php:2465
 msgid "Related By"
 msgstr "Related By"
 
-#: framework/redux-config.php:2337
+#: framework/redux-config.php:2466
 msgid "Show posts related by tags or categories"
 msgstr "Show posts related by tags or categories"
 
-#: framework/redux-config.php:2339
+#: framework/redux-config.php:2468
 msgid "Tags"
 msgstr "Tags"
 
-#: framework/redux-config.php:2340
+#: framework/redux-config.php:2469
 msgid "Categories"
 msgstr "Categories"
 
-#: framework/redux-config.php:2350
+#: framework/redux-config.php:2479
 msgid "Number"
 msgstr "Number"
 
-#: framework/redux-config.php:2351
+#: framework/redux-config.php:2480
 msgid "How many related posts to display"
 msgstr "How many related posts to display"
 
-#: framework/redux-config.php:2364
+#: framework/redux-config.php:2493
 msgid "Display related posts in a slider/carousel"
 msgstr "Display related posts in a slider/carousel"
 
-#: framework/redux-config.php:2379
+#: framework/redux-config.php:2508
 msgid "How many columns (related posts per row) to display"
 msgstr "How many columns (related posts per row) to display"
 
-#: framework/redux-config.php:2415
+#: framework/redux-config.php:2544
 msgid "Display posts with media or text only"
 msgstr "Display posts with media or text only"
 
-#: framework/redux-config.php:2428
+#: framework/redux-config.php:2557
 msgid "Post Elements"
 msgstr "Post Elements"
 
-#: framework/redux-config.php:2465
+#: framework/redux-config.php:2594
 msgid ""
 "Select a placeholder image to show if a post does not have any featured media"
 msgstr ""
 "Select a placeholder image to show if a post does not have any featured media"
 
-#: framework/redux-config.php:2479
+#: framework/redux-config.php:2608
 msgid "Configure the post meta appearance and icons"
 msgstr "Configure the post meta appearance and icons"
 
-#: framework/redux-config.php:2489
+#: framework/redux-config.php:2618
 msgid "Author"
 msgstr "Author"
 
-#: framework/redux-config.php:2490
+#: framework/redux-config.php:2619
 msgid "Display the post author"
 msgstr "Display the post author"
 
-#: framework/redux-config.php:2500
-msgid "Author Icon"
-msgstr "Author Icon"
-
-#: framework/redux-config.php:2510
+#: framework/redux-config.php:2630
 msgid "Display the post date and time"
 msgstr "Display the post date and time"
 
-#: framework/redux-config.php:2520
-msgid "Date Icon"
-msgstr "Date Icon"
-
-#: framework/redux-config.php:2529
+#: framework/redux-config.php:2640
 msgid "Category"
 msgstr "Category"
 
-#: framework/redux-config.php:2530
+#: framework/redux-config.php:2641
 msgid "Display the post category(es)"
 msgstr "Display the post category(es)"
 
-#: framework/redux-config.php:2540
-msgid "Category Icon"
-msgstr "Category Icon"
-
-#: framework/redux-config.php:2550
+#: framework/redux-config.php:2652
 msgid "Display the comments number"
 msgstr "Display the comments number"
 
-#: framework/redux-config.php:2560
-msgid "Comments Icon"
-msgstr "Comments Icon"
-
-#: framework/redux-config.php:2569
+#: framework/redux-config.php:2662
 msgid "Separator"
 msgstr "Separator"
 
-#: framework/redux-config.php:2570
+#: framework/redux-config.php:2663
 msgid "Character(s) for the meta separator"
 msgstr "Character(s) for the meta separator"
 
-#: framework/redux-config.php:2577
-msgid "Post Formats"
-msgstr "Post Formats"
-
-#: framework/redux-config.php:2578
-msgid "Configure the post formats and icons"
-msgstr "Configure the post formats and icons"
-
-#: framework/redux-config.php:2588
-msgid "Standard Format Icon"
-msgstr "Standard Format Icon"
-
-#: framework/redux-config.php:2596
-msgid "Aside Format Icon"
-msgstr "Aside Format Icon"
-
-#: framework/redux-config.php:2604
-msgid "Image Format Icon"
-msgstr "Image Format Icon"
-
-#: framework/redux-config.php:2612
-msgid "Video Format Icon"
-msgstr "Video Format Icon"
-
-#: framework/redux-config.php:2620
-msgid "Audio Format Icon"
-msgstr "Audio Format Icon"
-
-#: framework/redux-config.php:2628
-msgid "Gallery Format Icon"
-msgstr "Gallery Format Icon"
-
-#: framework/redux-config.php:2636
-msgid "Quote Format Icon"
-msgstr "Quote Format Icon"
-
-#: framework/redux-config.php:2644
-msgid "Link Format Icon"
-msgstr "Link Format Icon"
-
-#: framework/redux-config.php:2652
-msgid "Status Format Icon"
-msgstr "Status Format Icon"
-
-#: framework/redux-config.php:2660
-msgid "Page Format Icon"
-msgstr "Page Format Icon"
-
-#: framework/redux-config.php:2668
-msgid "Product Format Icon"
-msgstr "Product Format Icon"
-
-#: framework/redux-config.php:2676
+#: framework/redux-config.php:2670
 msgid "Social Sharing"
 msgstr "Social Sharing"
 
-#: framework/redux-config.php:2677
+#: framework/redux-config.php:2671
 msgid "Manage your social sharing profiles and add new ones"
 msgstr "Manage your social sharing profiles and add new ones"
 
-#: framework/redux-config.php:2688
+#: framework/redux-config.php:2682
 msgid "Display the share buttons"
 msgstr "Display the share buttons"
 
-#: framework/redux-config.php:2698 framework/redux-config.php:3178
+#: framework/redux-config.php:2692 framework/redux-config.php:3324
 msgid "Social Icons Color On Hover"
 msgstr "Social Icons Color On Hover"
 
-#: framework/redux-config.php:2699 framework/redux-config.php:3179
+#: framework/redux-config.php:2693 framework/redux-config.php:3325
 msgid "Color the icon, its background, or neither on hover"
 msgstr "Color the icon, its background, or neither on hover"
 
-#: framework/redux-config.php:2701 framework/redux-config.php:2757
-#: framework/redux-config.php:3181 framework/redux-config.php:3212
+#: framework/redux-config.php:2695 framework/redux-config.php:2751
+#: framework/redux-config.php:3327 framework/redux-config.php:3369
 msgid "Icon"
 msgstr "Icon"
 
-#: framework/redux-config.php:2702 framework/redux-config.php:3182
+#: framework/redux-config.php:2696 framework/redux-config.php:3328
 msgid "Background"
 msgstr "Background"
 
-#: framework/redux-config.php:2703 framework/redux-config.php:3183
+#: framework/redux-config.php:2697 framework/redux-config.php:3329
 msgid "Neither"
 msgstr "Neither"
 
-#: framework/redux-config.php:2712
+#: framework/redux-config.php:2706
 msgid "Shorten URLs"
 msgstr "Shorten URLs"
 
-#: framework/redux-config.php:2713
+#: framework/redux-config.php:2707
 msgid "Shorten the {link2} tag with Bit.ly"
 msgstr "Shorten the {link2} tag with Bit.ly"
 
-#: framework/redux-config.php:2723
+#: framework/redux-config.php:2717
 msgid "Bit.ly login"
 msgstr "Bit.ly login"
 
-#: framework/redux-config.php:2724
+#: framework/redux-config.php:2718
 #, php-format
 msgid "Your user and API key. Get them here: %s"
 msgstr "Your user and API key. Get them here: %s"
 
-#: framework/redux-config.php:2727
+#: framework/redux-config.php:2721
 msgid "Enter your Username"
 msgstr "Enter your Username"
 
-#: framework/redux-config.php:2728
+#: framework/redux-config.php:2722
 msgid "Enter your API Key"
 msgstr "Enter your API Key"
 
-#: framework/redux-config.php:2738 framework/redux-config.php:3193
+#: framework/redux-config.php:2732 framework/redux-config.php:3350
 msgid "New Profile"
 msgstr "New Profile"
 
-#: framework/redux-config.php:2751
+#: framework/redux-config.php:2745
 msgid "Share URL"
 msgstr "Share URL"
 
-#: framework/redux-config.php:2779
+#: framework/redux-config.php:2773
 msgid "Configure the comments' appearance"
 msgstr "Configure the comments' appearance"
 
-#: framework/redux-config.php:2790
+#: framework/redux-config.php:2784
 msgid "Select a comment pagination type"
 msgstr "Select a comment pagination type"
 
-#: framework/redux-config.php:2804
+#: framework/redux-config.php:2798
 msgid "Pagination Display"
 msgstr "Pagination Display"
 
-#: framework/redux-config.php:2805
+#: framework/redux-config.php:2799
 msgid "Show pagination links at top of comments, at the bottom, or both"
 msgstr "Show pagination links at top of comments, at the bottom, or both"
 
-#: framework/redux-config.php:2809
+#: framework/redux-config.php:2803
 msgid "Both"
 msgstr "Both"
 
-#: framework/redux-config.php:2818
+#: framework/redux-config.php:2812
 msgid "Show Before Notes"
 msgstr "Show Before Notes"
 
-#: framework/redux-config.php:2819
+#: framework/redux-config.php:2813
 msgid "Display the notes before the comment fields for users not logged in"
 msgstr "Display the notes before the comment fields for users not logged in"
 
-#: framework/redux-config.php:2829
+#: framework/redux-config.php:2823
 msgid "Logged in as"
 msgstr "Logged in as"
 
-#: framework/redux-config.php:2830
+#: framework/redux-config.php:2824
 msgid "Display the &quot;logged in as&quot; message"
 msgstr "Display the &quot;logged in as&quot; message"
 
-#: framework/redux-config.php:2840
+#: framework/redux-config.php:2834
 msgid "Allowed Tags"
 msgstr "Allowed Tags"
 
-#: framework/redux-config.php:2841
+#: framework/redux-config.php:2835
 msgid "Display the allowed tags in the comment form"
 msgstr "Display the allowed tags in the comment form"
 
-#: framework/redux-config.php:3125
+#: framework/redux-config.php:3119
 msgid "Icons"
 msgstr "Icons"
 
-#: framework/redux-config.php:3126
+#: framework/redux-config.php:3120
 msgid "Define various icons used throughout the site"
 msgstr "Define various icons used throughout the site"
 
-#: framework/redux-config.php:3135
+#: framework/redux-config.php:3129
 msgid "Left Arrow"
 msgstr "Left Arrow"
 
-#: framework/redux-config.php:3143
+#: framework/redux-config.php:3137
 msgid "Right Arrow"
 msgstr "Right Arrow"
 
-#: framework/redux-config.php:3151
+#: framework/redux-config.php:3145
 msgid "Up Arrow"
 msgstr "Up Arrow"
 
-#: framework/redux-config.php:3159
+#: framework/redux-config.php:3153
 msgid "Down Arrow"
 msgstr "Down Arrow"
 
-#: framework/redux-config.php:3169
+#: framework/redux-config.php:3161
+msgid "Scroll To Content Icon"
+msgstr "Scroll To Content Icon"
+
+#: framework/redux-config.php:3177
+msgid "View Image"
+msgstr "View Image"
+
+#: framework/redux-config.php:3185
+msgid "Author Icon"
+msgstr "Author Icon"
+
+#: framework/redux-config.php:3193
+msgid "Date Icon"
+msgstr "Date Icon"
+
+#: framework/redux-config.php:3201
+msgid "Category Icon"
+msgstr "Category Icon"
+
+#: framework/redux-config.php:3217
+msgid "Back To Top Icon"
+msgstr "Back To Top Icon"
+
+#: framework/redux-config.php:3225
+msgid "Standard Format Icon"
+msgstr "Standard Format Icon"
+
+#: framework/redux-config.php:3233
+msgid "Aside Format Icon"
+msgstr "Aside Format Icon"
+
+#: framework/redux-config.php:3241
+msgid "Image Format Icon"
+msgstr "Image Format Icon"
+
+#: framework/redux-config.php:3249
+msgid "Video Format Icon"
+msgstr "Video Format Icon"
+
+#: framework/redux-config.php:3257
+msgid "Audio Format Icon"
+msgstr "Audio Format Icon"
+
+#: framework/redux-config.php:3265
+msgid "Gallery Format Icon"
+msgstr "Gallery Format Icon"
+
+#: framework/redux-config.php:3273
+msgid "Quote Format Icon"
+msgstr "Quote Format Icon"
+
+#: framework/redux-config.php:3281
+msgid "Link Format Icon"
+msgstr "Link Format Icon"
+
+#: framework/redux-config.php:3289
+msgid "Status Format Icon"
+msgstr "Status Format Icon"
+
+#: framework/redux-config.php:3297
+msgid "Page Format Icon"
+msgstr "Page Format Icon"
+
+#: framework/redux-config.php:3305
+msgid "Product Format Icon"
+msgstr "Product Format Icon"
+
+#: framework/redux-config.php:3315
 msgid "Manage your social profiles and add new ones"
 msgstr "Manage your social profiles and add new ones"
 
-#: framework/redux-config.php:3206
+#: framework/redux-config.php:3338
+msgid "Social Icons Tooltip"
+msgstr "Social Icons Tooltip"
+
+#: framework/redux-config.php:3339
+msgid "Show a tooltip when a social icon is hovered"
+msgstr "Show a tooltip when a social icon is hovered"
+
+#: framework/redux-config.php:3363
 msgid "URL"
 msgstr "URL"
 
-#: framework/redux-config.php:3234
+#: framework/redux-config.php:3391
 msgid "Typography"
 msgstr "Typography"
 
-#: framework/redux-config.php:3235
+#: framework/redux-config.php:3392
 msgid "Manage the site's typography options and fonts."
 msgstr "Manage the site's typography options and fonts."
 
-#: framework/redux-config.php:3244
+#: framework/redux-config.php:3401
 msgid "Main Font"
 msgstr "Main Font"
 
-#: framework/redux-config.php:3245
+#: framework/redux-config.php:3402
 msgid "Select the font to use site-wide"
 msgstr "Select the font to use site-wide"
 
-#: framework/redux-config.php:3263
+#: framework/redux-config.php:3420
 msgid "Nav Menu Font"
 msgstr "Nav Menu Font"
 
-#: framework/redux-config.php:3264
+#: framework/redux-config.php:3421
 msgid "Select the font to use for the navigation menu"
 msgstr "Select the font to use for the navigation menu"
 
-#: framework/redux-config.php:3283
+#: framework/redux-config.php:3440
 msgid "Heading Font"
 msgstr "Heading Font"
 
-#: framework/redux-config.php:3284
+#: framework/redux-config.php:3441
 msgid "Select the font to use for headings"
 msgstr "Select the font to use for headings"
 
-#: framework/redux-config.php:3328
+#: framework/redux-config.php:3485
 msgid "Settings & Demos"
 msgstr "Settings & Demos"
 
-#: framework/redux-config.php:3329
+#: framework/redux-config.php:3486
 msgid "Manage your settings, and import demo content."
 msgstr "Manage your settings, and import demo content."
 
-#: framework/redux-config.php:3331
+#: framework/redux-config.php:3488
 msgid ""
 "Demos work best on clean, fresh sites. For complete content import, make "
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
@@ -3762,11 +3899,11 @@ msgstr ""
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
 "The page will reload after importing."
 
-#: framework/redux-config.php:3434
+#: framework/redux-config.php:3591
 msgid "Theme Options"
 msgstr "Theme Options"
 
-#: framework/redux-config.php:3435
+#: framework/redux-config.php:3592
 msgid "MIXT Options"
 msgstr "MIXT Options"
 
@@ -3810,9 +3947,9 @@ msgstr "Footer Column 3"
 msgid "Footer Column 4"
 msgstr "Footer Column 4"
 
-#: header.php:115
+#: header.php:114
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Toggle navigation"
 
 #: modules/breadcrumbs.php:37 modules/breadcrumbs.php:173
 msgctxt "breadcrumb"
@@ -3838,79 +3975,79 @@ msgstr "Search"
 msgid "Read More"
 msgstr "Read More"
 
-#: modules/head-media.php:142
+#: modules/head-media.php:137
 msgid "Slider with specified ID not found!"
 msgstr "Slider with specified ID not found!"
 
-#: modules/head-media.php:147
+#: modules/head-media.php:142
 msgid "LayerSlider plugin not installed or deactivated!"
 msgstr "LayerSlider plugin not installed or deactivated!"
 
-#: modules/social.php:164
+#: modules/social.php:172
 msgid "Like us on Facebook"
 msgstr "Like us on Facebook"
 
-#: modules/social.php:172
+#: modules/social.php:180
 msgid "Follow us on Twitter"
 msgstr "Follow us on Twitter"
 
-#: modules/social.php:180
+#: modules/social.php:188
 msgid "Follow us on Google+"
 msgstr "Follow us on Google+"
 
-#: modules/social.php:188
+#: modules/social.php:196
 msgid "Subscribe to us on Youtube"
 msgstr "Subscribe to us on Youtube"
 
-#: modules/social.php:196
+#: modules/social.php:204
 msgid "Connect on LinkedIn"
 msgstr "Connect on LinkedIn"
 
-#: modules/social.php:204
+#: modules/social.php:212
 msgid "Follow us on Instagram"
 msgstr "Follow us on Instagram"
 
-#: modules/social.php:212
+#: modules/social.php:220
 msgid "Follow us on Pinterest"
 msgstr "Follow us on Pinterest"
 
-#: modules/social.php:220
+#: modules/social.php:228
 msgid "Follow us on Tumblr"
 msgstr "Follow us on Tumblr"
 
-#: modules/social.php:232
+#: modules/social.php:240
 msgid "Share on Facebook"
 msgstr "Share on Facebook"
 
-#: modules/social.php:240
+#: modules/social.php:248
 msgid "Share on Twitter"
 msgstr "Share on Twitter"
 
-#: modules/social.php:248
+#: modules/social.php:256
 msgid "Share on Google+"
 msgstr "Share on Google+"
 
-#: modules/social.php:256
+#: modules/social.php:264
 msgid "Share on reddit"
 msgstr "Share on reddit"
 
-#: modules/social.php:264
+#: modules/social.php:272
 msgid "Share on LinkedIn"
 msgstr "Share on LinkedIn"
 
-#: modules/social.php:272
+#: modules/social.php:280
 msgid "Share on Pinterest"
 msgstr "Share on Pinterest"
 
-#: modules/social.php:280
+#: modules/social.php:288
 msgid "Share on Tumblr"
 msgstr "Share on Tumblr"
 
-#: modules/social.php:288
+#: modules/social.php:296
 msgid "Share on StumbleUpon"
 msgstr "Share on StumbleUpon"
 
-#: modules/social.php:296
+#: modules/social.php:304
 msgid "Share via email"
 msgstr "Share via email"
 
@@ -3919,12 +4056,12 @@ msgctxt "placeholder"
 msgid "Search..."
 msgstr "Search..."
 
-#: searchform.php:12 woocommerce/product-searchform.php:2
+#: searchform.php:12 woocommerce/product-searchform.php:26
 msgctxt "label"
 msgid "Search for:"
 msgstr "Search for:"
 
-#: searchform.php:14 woocommerce/product-searchform.php:4
+#: searchform.php:14 woocommerce/product-searchform.php:28
 msgctxt "submit button"
 msgid "Search"
 msgstr "Search"
@@ -4098,7 +4235,7 @@ msgstr "Return To Shop"
 msgid "Cart Totals"
 msgstr "Cart Totals"
 
-#: woocommerce/cart/cart-totals.php:24 woocommerce/cart/mini-cart.php:71
+#: woocommerce/cart/cart-totals.php:24 woocommerce/cart/mini-cart.php:79
 msgid "Subtotal"
 msgstr "Subtotal"
 
@@ -4136,7 +4273,7 @@ msgstr "Price"
 msgid "Quantity"
 msgstr "Quantity"
 
-#: woocommerce/cart/cart.php:50 woocommerce/cart/mini-cart.php:40
+#: woocommerce/cart/cart.php:50 woocommerce/cart/mini-cart.php:48
 msgid "Remove this item"
 msgstr "Remove this item"
 
@@ -4165,15 +4302,15 @@ msgstr "Update Cart"
 msgid "You may also like&hellip;"
 msgstr "You may also like&hellip;"
 
-#: woocommerce/cart/mini-cart.php:63
+#: woocommerce/cart/mini-cart.php:71
 msgid "No products in the cart."
 msgstr "No products in the cart."
 
-#: woocommerce/cart/mini-cart.php:77
+#: woocommerce/cart/mini-cart.php:85
 msgid "View Cart"
 msgstr "View Cart"
 
-#: woocommerce/cart/mini-cart.php:78
+#: woocommerce/cart/mini-cart.php:86
 msgid "Checkout"
 msgstr "Checkout"
 
@@ -4181,16 +4318,16 @@ msgstr "Checkout"
 msgid "Have a coupon?"
 msgstr "Have a coupon?"
 
-#: woocommerce/global/quantity-input.php:17
+#: woocommerce/global/quantity-input.php:25
 msgid "Decrease Quantity"
 msgstr "Decrease Quantity"
 
-#: woocommerce/global/quantity-input.php:24
+#: woocommerce/global/quantity-input.php:32
 msgctxt "Product quantity input tooltip"
 msgid "Qty"
 msgstr "Qty"
 
-#: woocommerce/global/quantity-input.php:28
+#: woocommerce/global/quantity-input.php:36
 msgid "Increase Quantity"
 msgstr "Increase Quantity"
 
@@ -4211,7 +4348,7 @@ msgstr "Previous products"
 msgid "Next products"
 msgstr "Next products"
 
-#: woocommerce/product-searchform.php:2
+#: woocommerce/product-searchform.php:26
 msgctxt "placeholder"
 msgid "Search Products&hellip;"
 msgstr "Search Products&hellip;"
@@ -4294,6 +4431,70 @@ msgstr ""
 #: woocommerce/single-product/product-image.php:43
 msgid "Placeholder"
 msgstr "Placeholder"
+
+#~ msgid "See-Through Navbar"
+#~ msgstr "See-Through Navbar"
+
+#~ msgid ""
+#~ "Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and "
+#~ "1.0 (opaque), or auto to use global option"
+#~ msgstr ""
+#~ "Set the navbar&#39;s see-through opacity, between 0.0 (transparent) and "
+#~ "1.0 (opaque), or auto to use global option"
+
+#~ msgid "Navbar Position"
+#~ msgstr "Navbar Position"
+
+#~ msgid "Blog Options"
+#~ msgstr "Blog Options"
+
+#~ msgid "Header Options"
+#~ msgstr "Header Options"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Fullscreen"
+
+#~ msgid "Header fills entire screen size"
+#~ msgstr "Header fills entire screen size"
+
+#~ msgid "Custom Height"
+#~ msgstr "Custom Height"
+
+#~ msgid "Set a custom height (in px) for the header"
+#~ msgstr "Set a custom height (in px) for the header"
+
+#~ msgid "Project Options"
+#~ msgstr "Project Options"
+
+#~ msgid "Portfolio Options"
+#~ msgstr "Portfolio Options"
+
+#~ msgid "View Post Icon"
+#~ msgstr "View Post Icon"
+
+#~ msgid "Full Image Icon"
+#~ msgstr "Full Image Icon"
+
+#~ msgid "Equal Columns Height"
+#~ msgstr "Equal Columns Height"
+
+#~ msgid "Make the columns in this row equal height"
+#~ msgstr "Make the columns in this row equal height"
+
+#~ msgid "Font Awesome"
+#~ msgstr "Font Awesome"
+
+#~ msgid "Linecons"
+#~ msgstr "Linecons"
+
+#~ msgid "Comments Icon"
+#~ msgstr "Comments Icon"
+
+#~ msgid "Post Formats"
+#~ msgstr "Post Formats"
+
+#~ msgid "Configure the post formats and icons"
+#~ msgstr "Configure the post formats and icons"
 
 #~ msgid "<i class=\"fa fa-chevron-left\"></i> Previous posts"
 #~ msgstr "<i class=\"fa fa-chevron-left\"></i> Previous posts"
@@ -5349,9 +5550,6 @@ msgstr "Placeholder"
 
 #~ msgid "To "
 #~ msgstr "To "
-
-#~ msgid "Height"
-#~ msgstr "Height"
 
 #~ msgid "Units"
 #~ msgstr "Units"

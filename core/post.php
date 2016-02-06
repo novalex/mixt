@@ -938,7 +938,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// Author
 		if ( $args['author'] ) {
 			$author_name   = get_the_author();
-			$author_icon   = empty($mixt_opt['meta-author-icon']) ? '' : '<i class="' . $mixt_opt['meta-author-icon'] . '"></i>';
+			$author_icon   = mixt_get_icon('author');
 			if ( empty($author_name) ) {
 				$queried_ob  = get_queried_object();
 				$author_id   = $queried_ob->post_author;
@@ -960,7 +960,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 			$date_iso    = esc_attr( get_the_date('c') );
 			$date_format = esc_html( get_the_date('F jS, Y') );
 			$date_url    = get_day_link( get_the_date('Y'), get_the_date('m'), get_the_date('d') );
-			$date_icon   = empty($mixt_opt['meta-date-icon']) ? '' : '<i class="' . $mixt_opt['meta-date-icon'] . '"></i>';
+			$date_icon   = mixt_get_icon('date');
 			$date_title  = get_the_time();
 
 			if ( get_the_time('U') !== get_the_modified_time( 'U' ) ) {
@@ -976,7 +976,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// Category
 		if ( $args['category'] ) {
 			$cats     = get_the_category();
-			$cat_icon = empty($mixt_opt['meta-category-icon']) ? '' : '<i class="' . $mixt_opt['meta-category-icon'] . '"></i>';
+			$cat_icon = mixt_get_icon('category');
 			if ( ! empty($cats) && is_array($cats) ) {
 				$category = '<span class="cat">' . $cat_icon;
 				foreach ( $cats as $cat ) {
@@ -989,7 +989,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// Comments
 		if ( $args['comments'] && ( comments_open() || '0' != get_comments_number() ) ) {
 			$comments_num  = get_comments_number();
-			$comments_icon = empty($mixt_opt['meta-comments-icon']) ? '' : '<i class="' . $mixt_opt['meta-comments-icon'] . '"></i>';
+			$comments_icon = mixt_get_icon('comments');
 
 			
 			if ( $comments_num == 0 ) { $comments_text = __( 'No comments', 'mixt' ); }
