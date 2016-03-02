@@ -170,5 +170,6 @@
 		&.btn-sm { border-radius: floor(($padding-small-vertical * 2 + $font-size-small * $line-height-small) / 2); }
 		&.btn-xs { border-radius: floor(($padding-xs-vertical * 2 + $font-size-small * $line-height-small) / 2); }
 	}
+	
 	// Embossed
 	.btn-emboss:not(:active) { box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2); }

@@ -6,10 +6,10 @@
 
 %img-effect,
 %img-effect-hover {
-	transition: transform 0.8s ease-out;
+	transition: transform 0.4s ease-out;
 }
 
 %img-effect,
 %img-effect-hover:hover {
-	-webkit-transform: scale(1.02) rotate(0.1deg);
+	-webkit-transform: scale(1.02) rotate(0.01deg);
 }
