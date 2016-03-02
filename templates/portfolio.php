@@ -20,12 +20,13 @@ get_header();
 
 	endwhile; // End The Loop
 
+	$cont_classes = 'portfolio-wrap';
+
+	$is_sortable = ( mixt_get_option( array( 'key' => 'portfolio-page-filters' ) ) && function_exists('mixt_portfolio_filters') );
+	
+	if ( $is_sortable ) { $cont_classes .= ' portfolio-sortable'; }
+
 	// Attached Posts Loop
-
-	$cont_classes = 'portfolio-wrap page-padding';
-
-	$is_sortable = ( mixt_get_options( array('portfolio-page-filters' => array()) ) && function_exists('mixt_portfolio_filters') );
-	if ( $is_sortable ) $cont_classes .= ' portfolio-sortable';
 
 	echo "<div class='$cont_classes'>";
 
@@ -40,7 +41,7 @@ get_header();
 				'default' => true,
 			),
 			'content' => array(
-				'key'     => 'portfolio-page-excerpt',
+				'key'     => 'portfolio-page-content',
 				'default' => false,
 			),
 			'meta-comments' => array(
@@ -55,9 +56,11 @@ get_header();
 			mixt_portfolio_filters();
 		}
 
-		$post_ids = mixt_meta('_mixt-portfolio-attached-posts');
+		// Attached Posts Loop
+		
+		$post_ids = mixt_meta('_mixt-attached-posts');
 		$post_ids = empty($post_ids) ? array() : explode(', ', $post_ids);
-		$post_nr  = mixt_meta('_mixt-portfolio-posts-page');
+		$post_nr  = mixt_meta('_mixt-posts-page');
 		if ( $post_nr == 'auto' ) {
 			$post_nr = get_option('posts_per_page', 10);
 		} else {

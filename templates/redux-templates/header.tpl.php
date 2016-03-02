@@ -47,7 +47,12 @@
 				</div>
 			<?php } ?>
 
-			<h2><?php echo $this->parent->args['display_name']; ?></h2>
+			<h2 class="logo">
+				<?php
+				// echo $this->parent->args['display_name'];
+				echo '<img src="' . MIXT_URI . '/assets/img/logo.png" alt="MIXT" />';
+				?>
+			</h2>
 
 			<?php if ( ! empty( $this->parent->args['display_version'] ) ) : ?>
 				<span><?php echo $this->parent->args['display_version']; ?></span>

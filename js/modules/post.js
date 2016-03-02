@@ -21,13 +21,17 @@ POST FUNCTIONS
 		content.imagesLoaded( function() {
 
 			// Animate Posts
-			var animPostDelay = ( viewport.scrollTop() > 600 ) ? 0 : 200;
-			$('.posts-container .article.animated').each( function(index) {
+			var animPosts     = $('.posts-container .article.animated'),
+				animPostDelay = ( viewport.scrollTop() > 600 ) ? 10 : 200;
+			animPosts.each( function(index) {
 				var elem = $(this);
 				setTimeout( function() {
 					elem.removeClass('init');
 				}, index++ * animPostDelay);
 			});
+			setTimeout( function() {
+				animPosts.removeClass('animated');
+			}, (animPosts.length + 1) * animPostDelay);
 
 			// Featured Gallery Slider
 			if ( typeof $.fn.lightSlider === 'function' ) {

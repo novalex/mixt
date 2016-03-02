@@ -3,7 +3,7 @@
 
 .post-meta {
 	padding: 0;
-	font-size: 12px;
+	font-size: $font-size-xs;
 	display: table;
 	table-layout: fixed;
 
@@ -20,7 +20,10 @@
 
 		a { display: inline-block; }
 
-		i { margin-right: 6px; }
+		i {
+			margin-right: 6px;
+			font-size: 13px;
+		}
 
 		&:last-child { margin-right: 0; }
 	}
@@ -97,10 +100,9 @@
 }
 
 .article {
-	.post-meta { margin-top: $margin-m; }
+	.page-title + .post-meta { margin-top: $margin-s; }
 
-	.page-title + .post-meta,
-	&.no-title .page-header .post-meta { margin-top: $margin-s; }
+	&.no-title .page-header .post-meta { margin-top: $margin-m; }
 
 	&.no-content .post-meta:last-child { margin-bottom: $margin-s; }
 }

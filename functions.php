@@ -90,6 +90,9 @@ function mixt_setup() {
 
 		// Enable support for Post Formats
 		add_theme_support('post-formats', array( 'aside', 'image', 'video', 'audio', 'gallery', 'link', 'quote', 'status' ));
+
+		// HTML5 support
+		add_theme_support('html5', array( 'gallery', 'caption' ));
 	}
 
 	// Add Translation Support
@@ -98,7 +101,6 @@ function mixt_setup() {
 	// Register Navigation Menus
 	register_nav_menus( array(
 		'primary'          => __( 'Main Nav', 'mixt' ),
-		'onepage'          => __( 'One-Page Layout Nav', 'mixt' ),
 		'sec_navbar_left'  => __( 'Secondary Nav Left Side', 'mixt' ),
 		'sec_navbar_right' => __( 'Secondary Nav Right Side', 'mixt' ),
 		'404_page'         => __( '404 Page Nav', 'mixt' ),
@@ -174,11 +176,12 @@ add_action('widgets_init', 'mixt_widgets_init');
 
 // Title Tag Backwards Compatibility
 if ( ! function_exists( '_wp_render_title_tag' ) ) {
-	function mixt_render_title() { ?>
-		<title><?php wp_title( '-', true, 'right' ); ?></title>
-	<?php }
+	function mixt_render_title() {
+		echo '<title>' . wp_title( '-', false, 'right' ) . '</title>';
+	}
 	add_action('wp_head', 'mixt_render_title');
 }
+
 
 // Remove admin bar inline styles
 function remove_adminbar_styles() {

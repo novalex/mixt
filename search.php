@@ -8,7 +8,7 @@
 
 get_header();
 
-	if ( have_posts() ) :
+	if ( have_posts() && strlen(trim(get_search_query())) != 0 ) :
 
 		echo '<div class="posts-container">';
 

@@ -2,40 +2,45 @@
 // Standard Blog Styling
 
 .blog-standard {
-	.posts-container .article {
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
+	.posts-container {
+		.article {
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
 
-		&:after {
-			content: " ";
-			display: table;
-			clear: both;
+			&:after {
+				content: " ";
+				display: table;
+				clear: both;
+			}
 		}
+
+		&:last-child > .article:last-child {
+			padding-bottom: 0;
+			border-bottom-width: 0;
+		}
+
+
 
 		.post-feat {
 
 			&.feat-format { display: inline-block; }
 
-			// Featured Sizes
-			// Make sure these are updated as well if image sizes are changed in functions.php
-			$blog-large-w: 960px;
-			$blog-large-h: 460px;
-			$blog-medium-w: 320px;
-			$blog-medium-h: 200px;
-			$blog-small-w: 120px;
-			$blog-small-h: 120px;
-
 			&.feat-blog-large {
 				max-width: $blog-large-w;
 				max-height: $blog-large-h;
 
-				img,
-				.lightbox-trigger { width: auto; }
+				img { width: auto; }
 			}
 
 			&.feat-blog-medium {
 				max-width: $blog-medium-w;
 				max-height: $blog-medium-h;
+
+				&.feat-format {
+					width: $blog-medium-w;
+					height: $blog-medium-h;
+					line-height: $blog-medium-h - 4px;
+				}
 
 				&.post-video > div,
 				&.post-video > iframe {
@@ -70,25 +75,26 @@
 		.page-title,
 		.post-meta { min-width: 140px; }
 
-		.page-title a { display: inline-block; }
-	}
+		.page-title {
+			&:first-child { margin-top: 0; }
 
-	.sticky {
-		padding: $post-inner-pad;
-		@extend .well;
-
-		.post-info {
-			top: -1px; left: -1px;
-			border-top-right-radius: 0;
-			border-bottom-left-radius: 0;
+			a { display: inline-block; }
 		}
-	}
 
-	.entry-body:empty { margin-top: 0; }
+		.entry-body:empty { margin-top: 0; }
+	}
 
 	.ajax-page {
 		border-bottom-width: 1px;
 		border-bottom-style: solid;
 		border-color: inherit;
 	}
+}
+
+.no-sidebar .blog-standard .posts-container .post-feat.feat-blog-large {
+	max-width: 100%;
+	max-height: none;
+
+	> a,
+	img { width: 100%; }
 }

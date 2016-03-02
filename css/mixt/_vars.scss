@@ -15,6 +15,8 @@ $font-path: '../assets/fonts';
 
 $nav-item-height: 42px;
 $nav-sub-item-height: 36px;
+$nav-sub-pad-h: 10px;
+$nav-sub-pad-v: 12px;
 $menu-hover-bg: rgba(0,0,0,0.03);
 $nav-icon-size: 16px;
 $nav-icon-spacing: 8px;
@@ -34,9 +36,13 @@ $nav-primary-fixed-height: $nav-primary-item-height + $nav-primary-fixed-pad * 2
 // Opacity
 $nav-primary-opacity: 0.95;
 // Submenu opacity
-$nav-primary-menu-opacity: 0.95;
+$nav-primary-menu-opacity: 1;
 // Submenu item height
 $nav-primary-sub-item-height: 36px;
+// Submenu item horizontal padding
+$nav-primary-sub-pad-h: 12px;
+// Submenu item vertical padding
+$nav-primary-sub-pad-v: 14px;
 // Menu item spacing
 $nav-primary-spacing: 14px;
 // Minimum width for the fixed (sticky) mode
@@ -58,9 +64,32 @@ $nav-vertical-content-max-width: 1200px;
 // Secondary Navbar
 
 // Item height
-$sec-nav-item-height: 32px;
+$sec-nav-item-height: 38px;
 // Submenu item height
 $sec-nav-sub-item-height: 32px;
+
+// Navbar line height correction
+$nav-line-height-correction: -2px;
+
+
+// POSTS
+
+// Spacing for post elements
+$post-inner-pad: 15px;
+// Format icon size
+$post-format-icon-size: 36px;
+// Featured background format icon size
+$post-format-bg-icon-size: 24px;
+// Masonry gutter width
+$masonry-gutter: 10px;
+// Featured Sizes
+// Make sure these are updated as well if image sizes are changed in functions.php
+$blog-large-w: 960px;
+$blog-large-h: 460px;
+$blog-medium-w: 320px;
+$blog-medium-h: 200px;
+$blog-small-w: 120px;
+$blog-small-h: 120px;
 
 
 // SIDEBAR
@@ -73,22 +102,36 @@ $sidebar-width-sm: 30%;
 
 // TYPOGRAPHY
 
-$font-family-base: 'Roboto', 'Verdana', sans-serif;
+$font-family-base: sans-serif;
 
 $line-height-base: 1.618;
+$headings-line-height: 1.2;
 
-$font-size-xs:  11px;
-$font-size-s:   12px;
-$font-size:     13px;
-$font-size-m:   14px;
-$font-size-l:   16px;
-$font-size-xl:  20px;
-$font-size-xxl: 26px;
-
+$font-size: 14px;
 $font-size-base: $font-size;
 
-$font-size-h1: $font-size-xl;
-$font-size-h2: 18px;
+$font-size-xs:  $font-size - 2px;
+$font-size-s:   $font-size - 1px;
+$font-size-m:   $font-size + 1px;
+$font-size-l:   $font-size + 3px;
+$font-size-xl:  $font-size + 6px;
+$font-size-xxl: $font-size + 8px;
+
+// Rem based font sizes
+$rem-font-sizes: true;
+
+@if $rem-font-sizes {
+	$font-size-xs:  0.85rem;
+	$font-size-s:   0.925rem;
+	$font-size-m:   1.1rem;
+	$font-size-l:   1.25rem;
+	$font-size-xl:  1.35rem;
+	$font-size-xxl: 1.55rem;
+}
+
+// Heading font sizes
+$font-size-h1: $font-size-xxl;
+$font-size-h2: $font-size-xl;
 $font-size-h3: $font-size-l;
 $font-size-h4: $font-size-m;
 $font-size-h5: $font-size-s;
@@ -112,9 +155,6 @@ $form-gutter: 15px;
 $row-spacing-lg: 40px;
 // Row spacing on small screens
 $row-spacing-sm: 30px;
-
-// Spacing for post elements
-$post-inner-pad: 15px;
 
 $margin-xs: 5px;
 $margin-s:  10px;

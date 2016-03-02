@@ -13,18 +13,14 @@
 		vertical-align: middle;
 	}
 
-	.heading {
-		white-space: pre;
-
-		p { margin: 0; }
-	}
+	.heading { white-space: pre; }
 
 	.heading,
+	.heading p,
 	.subheading,
 	.separator {
 		clear: both;
-		margin: 0;
-		padding: 5px 0;
+		margin: 0 !important;
 	}
 
 	.separator {
@@ -49,6 +45,8 @@
 
 		&:not(:first-child) .heading { padding-left: 15px; }
 		&:not(:last-child) .heading { padding-right: 15px; }
+
+		> :not(:first-child) { padding-top: 8px; }
 	}
 
 	.headline-left,

@@ -60,6 +60,7 @@ class Mixt_Plugins {
 				'name'     => 'MIXT Elements',
 				'slug'     => 'mixt-elements',
 				'source'   => 'mixt-elements.zip',
+				'required' => true,
 			);
 
 		// MIXT CodeBuilder
@@ -76,7 +77,7 @@ class Mixt_Plugins {
 					$this->plugins[] = array(
 						'name'     => 'Redux Framework',
 						'slug'     => 'redux-framework',
-						'required' => true
+						'required' => true,
 					);
 				}
 			}
@@ -94,7 +95,7 @@ class Mixt_Plugins {
 					$this->plugins[] = array(
 						'name'     => 'CMB2',
 						'slug'     => 'cmb2',
-						'required' => true
+						'required' => true,
 					);
 				}
 				// CMB2 Extensions
@@ -111,7 +112,7 @@ class Mixt_Plugins {
 				$this->plugins[] = array(
 					'name'     => 'Menu Item Custom Fields',
 					'slug'     => 'menu-item-custom-fields',
-					'required' => true
+					'required' => true,
 				);
 			}
 			include_once( MIXT_FRAME_DIR . '/micf-config.php' );
@@ -122,7 +123,7 @@ class Mixt_Plugins {
 				'slug'     => 'js_composer',
 				'source'   => 'js_composer.zip',
 				'version'  => '4.8.1',
-				'force_deactivation' => true
+				'force_deactivation' => true,
 			);
 
 		// LayerSlider
@@ -131,7 +132,7 @@ class Mixt_Plugins {
 				'slug'     => 'LayerSlider',
 				'source'   => 'layerslider.zip',
 				'version'  => '5.6.2',
-				'force_deactivation' => true
+				'force_deactivation' => true,
 			);
 
 		// Envato WordPress Toolkit
@@ -139,7 +140,7 @@ class Mixt_Plugins {
 				'name'     => 'Envato WordPress Toolkit',
 				'slug'     => 'envato-wordpress-toolkit',
 				'source'   => 'envato-wordpress-toolkit.zip',
-				'version'  => '1.7.3'
+				'version'  => '1.7.3',
 			);
 
 		// TGM Plugin Activation

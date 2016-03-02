@@ -1,0 +1,125 @@
+<wpml-config>
+
+	<custom-fields>
+		<!-- General -->
+		<custom-field action="ignore">_mixt-site-theme</custom-field>
+		<custom-field action="ignore">_mixt-page-fullwidth</custom-field>
+		<!-- Posts Page -->
+		<custom-field action="ignore">_mixt-attached-posts</custom-field>
+		<custom-field action="ignore">_mixt-posts-page</custom-field>
+		<!-- Post / Project -->
+		<custom-field action="ignore">_mixt-feat-show</custom-field>
+		<custom-field action="ignore">_mixt-post-info</custom-field>
+		<custom-field action="ignore">_mixt-meta-show</custom-field>
+		<custom-field action="ignore">_mixt-post-layout</custom-field>
+		<custom-field action="ignore">_mixt-post-tags</custom-field>
+		<custom-field action="ignore">_mixt-post-sharing</custom-field>
+		<custom-field action="ignore">_mixt-post-navigation</custom-field>
+		<custom-field action="ignore">_mixt-post-about-author</custom-field>
+		<custom-field action="ignore">_mixt-project-layout</custom-field>
+		<custom-field action="ignore">_mixt-project-tags</custom-field>
+		<custom-field action="ignore">_mixt-project-sharing</custom-field>
+		<custom-field action="ignore">_mixt-project-navigation</custom-field>
+		<custom-field action="ignore">_mixt-project-about-author</custom-field>
+		<!-- Blog -->
+		<custom-field action="ignore">_mixt-layout-type</custom-field>
+		<custom-field action="ignore">_mixt-layout-columns</custom-field>
+		<custom-field action="ignore">_mixt-feat-size</custom-field>
+		<custom-field action="ignore">_mixt-blog-page-title</custom-field>
+		<custom-field action="ignore">_mixt-blog-page-content</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-items</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-color</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-anim-in</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-anim-out</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-item-style</custom-field>
+		<custom-field action="ignore">_mixt-blog-rollover-btn-color</custom-field>
+		<!-- Portfolio -->
+		<custom-field action="ignore">_mixt-portfolio-page-title</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-page-content</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-page-filters</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-items</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-color</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-anim-in</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-anim-out</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-item-style</custom-field>
+		<custom-field action="ignore">_mixt-portfolio-rollover-btn-color</custom-field>
+		<!-- Navigation -->
+		<custom-field action="ignore">_mixt-nav-menu</custom-field>
+		<custom-field action="ignore">_mixt-nav-theme</custom-field>
+		<custom-field action="ignore">_mixt-nav-transparent</custom-field>
+		<custom-field action="ignore">_mixt-nav-top-opacity</custom-field>
+		<custom-field action="ignore">_mixt-nav-position</custom-field>
+		<custom-field action="ignore">_mixt-second-nav</custom-field>
+		<custom-field action="ignore">_mixt-sec-nav-theme</custom-field>
+		<!-- Header -->
+		<custom-field action="ignore">_mixt-location-bar</custom-field>
+		<custom-field action="ignore">_mixt-head-media</custom-field>
+		<custom-field action="ignore">_mixt-head-height</custom-field>
+		<custom-field action="ignore">_mixt-head-min-height</custom-field>
+		<custom-field action="ignore">_mixt-head-bg-color</custom-field>
+		<custom-field action="ignore">_mixt-head-text-color</custom-field>
+		<custom-field action="ignore">_mixt-head-inv-text-color</custom-field>
+		<custom-field action="ignore">_mixt-head-media-type</custom-field>
+		<custom-field action="ignore">_mixt-head-img-src</custom-field>
+		<custom-field action="ignore">_mixt-head-img</custom-field>
+		<custom-field action="ignore">_mixt-head-img-repeat</custom-field>
+		<custom-field action="ignore">_mixt-head-video-src</custom-field>
+		<custom-field action="ignore">_mixt-head-video-embed</custom-field>
+		<custom-field action="ignore">_mixt-head-video</custom-field>
+		<custom-field action="ignore">_mixt-head-video-2</custom-field>
+		<custom-field action="ignore">_mixt-head-video-poster</custom-field>
+		<custom-field action="ignore">_mixt-head-video-loop</custom-field>
+		<custom-field action="ignore">_mixt-head-video-lum</custom-field>
+		<custom-field action="ignore">_mixt-head-slider</custom-field>
+		<custom-field action="ignore">_mixt-head-parallax</custom-field>
+		<custom-field action="ignore">_mixt-head-content-align</custom-field>
+		<custom-field action="ignore">_mixt-head-content-size</custom-field>
+		<custom-field action="ignore">_mixt-head-content-fade</custom-field>
+		<custom-field action="ignore">_mixt-head-content-scroll</custom-field>
+		<custom-field action="ignore">_mixt-head-content-info</custom-field>
+		<custom-field action="translate">_mixt-head-content-code</custom-field>
+		<!-- Sidebar -->
+		<custom-field action="ignore">_mixt-page-sidebar</custom-field>
+		<custom-field action="ignore">_mixt-sidebar-position</custom-field>
+		<custom-field action="ignore">_mixt-sidebar-hide</custom-field>
+		<custom-field action="ignore">_mixt-child-page-nav</custom-field>
+		<custom-field action="ignore">_mixt-sidebar-id</custom-field>
+		<!-- Footer -->
+		<custom-field action="ignore">_mixt-footer-copy-show</custom-field>
+		<custom-field action="ignore">_mixt-footer-widgets-show</custom-field>
+		<!-- Menus -->
+		<custom-field action="ignore">_mixt_menu_item_type</custom-field>
+		<custom-field action="ignore">_mixt_menu_item_icon</custom-field>
+		<custom-field action="ignore">_mixt_menu_item_disabled</custom-field>
+		<custom-field action="ignore">_mixt_menu_item_no_label</custom-field>
+		<custom-field action="ignore">_mixt_menu_item_megamenu</custom-field>
+	</custom-fields>
+
+	<admin-texts>
+		<key name="mixt_opt">
+			<key name="head-code" />
+			<key name="breadcrumbs-prefix" />
+			<key name="logo-text" />
+			<key name="logo-tagline" />
+			<key name="sec-nav-left-code" />
+			<key name="sec-nav-right-code" />
+			<key name="footer-left-code" />
+			<key name="footer-right-code" />
+			<key name="info-bar-content" />
+			<key name="sticky-label" />
+			<key name="post-sharing-profiles">
+				<key name="*">
+					<key name="title" />
+				</key>
+			</key>
+			<key name="social-profiles">
+				<key name="*">
+					<key name="title" />
+				</key>
+			</key>
+		</key>
+	</admin-texts>
+
+</wpml-config>

@@ -334,28 +334,23 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
  * Register Menu Widget Areas
  */
 function mixt_nav_menu_widgets() {
-	$locations = get_nav_menu_locations();
-	if ( array_key_exists('primary', $locations) ) {
-		$menu_id = $locations['primary'];
-	} else if ( array_key_exists('onepage', $locations) ) {
-		$menu_id = $locations['onepage'];
-	} else {
-		return null;
-	}
-	$menu = wp_get_nav_menu_object($menu_id);
-	if ( $menu ) {
-		$items = wp_get_nav_menu_items($menu->term_id);
-		foreach ( $items as $item ) {
-			if ( $item->type != 'custom' ) continue;
-			if ( get_post_meta($item->ID, '_mixt_menu_item_type', true) == 'widget' ) {
-				$area_name = empty($item->title) ? 'Nav Widget Area' : $item->title;
-				$area_id = empty($item->attr_title) ? 'nav-widgets-' . $item->ID : $item->attr_title;
-				register_sidebar( array(
-					'name' => $area_name,
-					'id'   => $area_id,
-					'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
-					'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
-				) );
+	$menus = mixt_get_nav_menus();
+	foreach ( $menus as $menu_id => $menu_name ) {
+		$menu = wp_get_nav_menu_object($menu_id);
+		if ( $menu ) {
+			$items = wp_get_nav_menu_items($menu_id);
+			foreach ( $items as $item ) {
+				if ( $item->type != 'custom' ) continue;
+				if ( get_post_meta($item->ID, '_mixt_menu_item_type', true) == 'widget' ) {
+					$area_name = empty($item->title) ? 'Nav Widget Area' : $item->title;
+					$area_id = empty($item->attr_title) ? 'nav-widgets-' . $item->ID : $item->attr_title;
+					register_sidebar( array(
+						'name' => $area_name,
+						'id'   => $area_id,
+						'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+						'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+					) );
+				}
 			}
 		}
 	}

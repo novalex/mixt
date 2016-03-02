@@ -1,15 +1,14 @@
 
 html {
 	height: 100%;
+	font-size: $font-size;
 }
 
 body {
-	min-width: 320px;
+	min-width: 300px;
 	min-height: 100%;
-	line-height: $line-height-base;
 	word-wrap: break-word;
-	font-size: $font-size;
-	font-family: $font-family-base;
+	line-height: $line-height-base;
 	overflow-x: hidden;
 
 	// Media query breakpoint values, for use in JS
@@ -21,7 +20,7 @@ body {
 		@include media('screen', $bp-name) { &:before { content: '#{$bp-name}'; } }
 	}
 
-	&.no-responsive {
+	&.non-responsive {
 		min-width: 1180px;
 		overflow-x: auto;
 
@@ -53,7 +52,7 @@ body { margin: 0 !important; }
 ol, ul {
 	padding-left: 30px;
 
-	li:not(:last-child) { margin-bottom: 10px; }
+	li:not(:last-child) { margin-bottom: $margin-xs; }
 
 	&.no-style { @extend %reset-list; }
 }
@@ -86,30 +85,6 @@ a:focus,
 a:hover,
 a:active,
 .no-outline a { outline: none !important; }
-
-
-// Local Font
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('#{$font-path}/roboto/Roboto-Regular-webfont.eot');
-    src: url('#{$font-path}/roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('#{$font-path}/roboto/Roboto-Regular-webfont.woff') format('woff'),
-         url('#{$font-path}/roboto/Roboto-Regular-webfont.ttf') format('truetype'),
-         url('#{$font-path}/roboto/Roboto-Regular-webfont.svg#robotoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Roboto';
-    src: url('#{$font-path}/roboto/Roboto-Medium-webfont.eot');
-    src: url('#{$font-path}/roboto/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
-         url('#{$font-path}/roboto/Roboto-Medium-webfont.woff') format('woff'),
-         url('#{$font-path}/roboto/Roboto-Medium-webfont.ttf') format('truetype'),
-         url('#{$font-path}/roboto/Roboto-Medium-webfont.svg#robotomedium') format('svg');
-    font-weight: bold;
-    font-style: normal;
-}
 
 // Screen Reader Text
 
@@ -144,7 +119,7 @@ p:empty { display: none; }
 	left: -$width;
 	width: $width;
 	min-height: 300px;
-	max-height: 580px;
+	max-height: 613px;
 	color: #333;
 	border-bottom-right-radius: 3px;
 	border-left-width: 0 !important;
@@ -179,7 +154,7 @@ p:empty { display: none; }
 
 	.reset {
 		position: absolute;
-		top: 8px; right: 10px;
+		top: 8px; right: $spacing;
 	}
 
 	.content {

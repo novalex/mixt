@@ -19,7 +19,7 @@ get_header();
 		?>
 
 		<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( array($post_ob->classes(), 'one-page') ); ?>>
-			<div class="entry-body entry-content"><?php
+			<div class="entry-body entry-content page-content"><?php
 
 				$post_ob->content();
 

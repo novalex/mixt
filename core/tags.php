@@ -41,7 +41,7 @@ if ( ! function_exists('mixt_get_title') ) {
 				$title = single_cat_title('', false);
 			}
 		} else if ( is_search() ) {
-			$title = __( 'Results for ', 'mixt' ) . '"' . get_search_query() . '"';
+			$title = __( 'Search Results for ', 'mixt' ) . '"' . get_search_query() . '"';
 		} else if ( is_404() ) {
 			$title = '404 - ' . __( 'Not Found', 'mixt' );
 		} else {
@@ -243,7 +243,7 @@ if ( ! function_exists('mixt_comment') ) {
 						<?php edit_comment_link( __( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
 
 						<div class="comment-meta">
-							<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" class="no-color">
+							<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" class="color-fade no-color">
 								<time datetime="<?php comment_time( 'c' ); ?>">
 									<?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'mixt' ), get_comment_date(), get_comment_time() ); ?>
 								</time>
@@ -395,3 +395,59 @@ if ( ! function_exists('mixt_child_page_nav') ) {
 		if ( $children ) echo "<div class='child-page-nav widget'><ul class='nav'>$children</ul></div>";
 	}
 }
+
+
+if ( ! function_exists('mixt_chat_format_content') ) {
+	/**
+	 * Format chat posts
+	 *
+	 * Based on code by David Chandra (http://www.turtlepod.org) and Justin Tadlock (http://justintadlock.com)
+	 * http://justintadlock.com/archives/2012/08/21/post-formats-chat
+	 */
+	function mixt_chat_format_content($content) {
+		if ( ! has_post_format('chat') ) return $content;
+
+		$separator = apply_filters('mixt_chat_format_separator', ':');
+
+		$rows = preg_split("/(\r?\n)+|(<br\s*\/?>\s*)+/", $content);
+
+		$authors = array();
+
+		$output = '';
+
+		foreach ( $rows as $row ) {
+			if ( strpos($row, $separator) ) {
+				if ( $output != '' ) $output .= '</div>'; // Close previous row
+
+				$row_split = explode($separator, trim($row), 2);
+				$author = strip_tags(rtrim($row_split[0]));
+				$text = apply_filters('mixt_chat_format_text', ltrim($row_split[1]));
+
+				$_author = strtolower(strip_tags($author));
+
+				$author_id = array_search($_author, $authors);
+
+				if ( $author_id !== false ) {
+					$author_id = absint($author_id) + 1;
+				} else {
+					$authors[] = $_author;
+					end($authors);
+					$author_id = key($authors) + 1;
+				}
+
+				/* Open the chat row. */
+				$output .= '<div class="chat-row chat-author-' . sanitize_html_class($author_id) . '">' .
+							   '<strong class="chat-author">' . $author . '</strong>' .
+							   '<div class="chat-text">' . $text . '</div>';
+			} else if ( ! empty($row) ) {
+				$output .= '<div class="chat-text">' . str_replace(array("\r","\n","\t"), '', $row) . '</div>';
+			}
+		}
+
+		if ( $output != '' ) $output .= '</div>'; // Close last row
+
+		return $output;
+	}
+}
+add_filter('the_content', 'mixt_chat_format_content');
+add_filter('mixt_chat_format_text', 'wpautop');

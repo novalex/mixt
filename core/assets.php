@@ -61,6 +61,40 @@ function mixt_get_themes($elem, $type = 'all') {
 
 
 /**
+ * Return array of nav menus with ID and name
+ *
+ * @param bool $show_auto Include 'Auto' option
+ */
+function mixt_get_nav_menus( $show_auto = true ) {
+	$nav_menus = array();
+	if ( $show_auto ) { $nav_menus['auto'] = __( 'Auto', 'mixt'); }
+	foreach ( get_terms( 'nav_menu', array( 'hide_empty' => false ) ) as $menu ) {
+		$nav_menus[$menu->term_id] = $menu->name;
+	}
+
+	return $nav_menus;
+}
+
+
+/**
+ * Return array of sidebars with ID and name
+ *
+ * @param  bool $$show_auto Include 'Auto' option
+ */
+function mixt_get_sidebars( $show_auto = true ) {
+	$available_sidebars = array();
+	if ( $show_auto ) { $available_sidebars['auto'] = __( 'Auto', 'mixt'); }
+	$available_sidebars['sidebar-1'] = __( 'Default', 'mixt' );
+	$custom_sidebars = get_option('mixt-sidebars');
+	if ( $custom_sidebars ) {
+		foreach ( $custom_sidebars as $sidebar ) { $available_sidebars[$sidebar['id']] = $sidebar['name']; }
+	}
+
+	return $available_sidebars;
+}
+
+
+/**
  * Return various assets by groups
  *
  * @param  string $group    Main group of assets to retreive

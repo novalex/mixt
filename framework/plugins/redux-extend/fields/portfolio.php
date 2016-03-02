@@ -1,17 +1,5 @@
 <?php
 
-// REDUX PORTFOLIO FIELDS
-
-
-// DIVIDER
-
-$this->sections[] = array(
-	'type' => 'divide',
-);
-
-
-// PORTFOLIO SECTION
-
 $this->sections[] = array(
 	'title'      => __( 'Portfolio', 'mixt' ),
 	'desc'       => __( 'Customize the portfolio\'s options and appearance', 'mixt' ),
@@ -19,166 +7,24 @@ $this->sections[] = array(
 	'customizer' => false,
 	'fields'     => array(
 
-		// Fullwidth
+		// Show Projects On Author Archives
 		array(
-			'id'       => 'portfolio-page-page-fullwidth',
-			'type'     => 'button_set',
-			'title'    => __( 'Full Width', 'mixt' ),
-			'options'  => array(
-				'auto'  => __( 'Auto', 'mixt' ),
-				'true'  => __( 'Yes', 'mixt' ),
-				'false' => __( 'No', 'mixt' ),
-			),
-			'default'  => 'auto',
-		),
-
-		// Sidebar
-		array(
-			'id'       => 'portfolio-page-page-sidebar',
-			'type'     => 'button_set',
-			'title'    => __( 'Show Sidebar', 'mixt' ),
-			'options'  => array(
-				'auto'  => __( 'Auto', 'mixt' ),
-				'true'  => __( 'Yes', 'mixt' ),
-				'false' => __( 'No', 'mixt' ),
-			),
-			'default'  => 'auto',
-		),
-
-		// Inherit Blog Settings
-		array(
-			'id'       => 'portfolio-page-inherit',
+			'id'       => 'show-projects-author-archives',
 			'type'     => 'switch',
-			'title'    => __( 'Inherit Blog Layout', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
-		),
-
-		// Layout Type
-		array(
-			'id'       => 'portfolio-page-type',
-			'type'     => 'button_set',
-			'title'    => __( 'Layout Type', 'mixt' ),
-			'subtitle' => __( 'Select the layout type for this page', 'mixt' ),
-			'options'  => array(
-				'standard' => __( 'Standard', 'mixt' ),
-				'grid'     => __( 'Grid', 'mixt' ),
-				'masonry'  => __( 'Masonry', 'mixt' ),
-			),
-			'default'  => 'grid',
-			'required' => array('portfolio-page-inherit', '=', false),
-		),
-
-		// Columns
-		array(
-			'id'       => 'portfolio-page-columns',
-			'type'     => 'button_set',
-			'title'    => __( 'Columns', 'mixt' ),
-			'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
-			'options'  => array(
-				'2' => '2',
-				'3' => '3',
-				'4' => '4',
-				'5' => '5',
-				'6' => '6',
-			),
-			'default'  => '3',
-			'required' => array(
-				array('portfolio-page-inherit', '=', false),
-				array('portfolio-page-type', '!=', 'standard'),
-			),
-		),
-
-		// Post Media Display
-		array(
-			'id'       => 'portfolio-page-feat-show',
-			'type'     => 'switch',
-			'title'    => __( 'Show Media', 'mixt' ),
-			'subtitle' => __( 'Display the post featured media', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
-			'default'  => true,
-			'required' => array('portfolio-page-inherit', '=', false),
-		),
-
-		// Featured Media Placeholder
-		array(
-			'id'             => 'portfolio-page-feat-ph',
-			'type'           => 'media',
-			'title'          => __( 'Featured Media Placeholder', 'mixt' ),
-			'subtitle'       => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
-			'mode'           => 'jpg, jpeg, png',
-			'library_filter' => array( 'jpg', 'jpeg', 'png' ),
-			'required' => array('portfolio-page-feat-show', '=', true),
-		),
-
-		// Post Media Size
-		array(
-			'id'       => 'portfolio-page-feat-size',
-			'type'     => 'button_set',
-			'title'    => __( 'Media Size', 'mixt' ),
-			'subtitle' => __( 'Select a size for the post featured media', 'mixt' ),
-			'options'  => array(
-				'blog-large'  => __( 'Large', 'mixt' ),
-				'blog-medium' => __( 'Medium', 'mixt' ),
-				'blog-small'  => __( 'Small', 'mixt' ),
-			),
-			'default'  => 'blog-large',
-			'required' => array(
-				array('portfolio-page-inherit', '=', false),
-				array('portfolio-page-type', '=', 'standard'),
-				array('portfolio-page-feat-show', '=', true),
-			),
-		),
-
-		// Post Info Display
-		array(
-			'id'       => 'portfolio-page-post-info',
-			'type'     => 'switch',
-			'title'    => __( 'Post Info', 'mixt' ),
-			'subtitle' => __( 'Display the post format and date', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
-			'required' => array('portfolio-page-inherit', '=', false),
-		),
-
-		// Meta Position / Display
-		array(
-			'id'       => 'portfolio-page-meta-show',
-			'type'     => 'button_set',
-			'title'    => __( 'Post Meta', 'mixt' ),
-			'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
-			'options'  => array(
-				'header'  => __( 'In Header', 'mixt' ),
-				'footer'  => __( 'In Footer', 'mixt' ),
-				'false'   => __( 'No', 'mixt' ),
-			),
-			'default'  => 'false',
-			'required' => array('portfolio-page-inherit', '=', false),
-		),
-
-		// Title Display
-		array(
-			'id'       => 'portfolio-page-title',
-			'type'     => 'switch',
-			'title'    => __( 'Post Title', 'mixt' ),
-			'subtitle' => __( 'Display the post title', 'mixt' ),
+			'title'    => __( 'Show projects on author archives', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
-		// Excerpt Display
+		// Show Projects On Date Archives
 		array(
-			'id'       => 'portfolio-page-excerpt',
+			'id'       => 'show-projects-date-archives',
 			'type'     => 'switch',
-			'title'    => __( 'Post Excerpt', 'mixt' ),
-			'subtitle' => __( 'Display the post excerpt', 'mixt' ),
+			'title'    => __( 'Show projects on date archives', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
+			'default'  => true,
 		),
 
 		// Filters
@@ -198,7 +44,224 @@ $this->sections[] = array(
 			'type' => 'divide',
 		),
 
-		// ROLLOVER SECTION
+		// LAYOUT OPTIONS
+		array(
+			'id'       => 'portfolio-layout-section',
+			'type'     => 'section',
+			'title'    => __( 'Layout', 'mixt' ),
+			'indent'   => true,
+		),
+
+			// Inherit Blog Settings
+			array(
+				'id'       => 'portfolio-page-inherit',
+				'type'     => 'switch',
+				'title'    => __( 'Inherit Blog Options', 'mixt' ),
+				'subtitle' => __( 'Enable to inherit all options from the blog page', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => false,
+			),
+
+			// Nav Menu
+			array(
+				'id'       => 'portfolio-page-nav-menu',
+				'type'     => 'select',
+				'title'    => __( 'Nav Menu', 'mixt' ),
+				'subtitle' => __( 'Select the menu for this page', 'mixt' ),
+				'options'  => $nav_menus,
+				'default'  => 'auto',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Fullwidth
+			array(
+				'id'       => 'portfolio-page-page-fullwidth',
+				'type'     => 'button_set',
+				'title'    => __( 'Full Width', 'mixt' ),
+				'options'  => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Sidebar
+			array(
+				'id'       => 'portfolio-page-page-sidebar',
+				'type'     => 'button_set',
+				'title'    => __( 'Show Sidebar', 'mixt' ),
+				'options'  => array(
+					'auto'  => __( 'Auto', 'mixt' ),
+					'true'  => __( 'Yes', 'mixt' ),
+					'false' => __( 'No', 'mixt' ),
+				),
+				'default'  => 'auto',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Sidebar ID
+			array(
+				'id'       => 'portfolio-page-sidebar-id',
+				'type'     => 'select',
+				'title'    => __( 'Sidebar', 'mixt' ),
+				'subtitle' => __( 'Select a sidebar to use on this page', 'mixt' ),
+				'options'  => $available_sidebars,
+				'default'  => '',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Layout Type
+			array(
+				'id'       => 'portfolio-page-layout-type',
+				'type'     => 'button_set',
+				'title'    => __( 'Layout Type', 'mixt' ),
+				'subtitle' => __( 'Select the layout type for this page', 'mixt' ),
+				'options'  => array(
+					'standard' => __( 'Standard', 'mixt' ),
+					'grid'     => __( 'Grid', 'mixt' ),
+					'masonry'  => __( 'Masonry', 'mixt' ),
+				),
+				'default'  => 'grid',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Columns
+			array(
+				'id'       => 'portfolio-page-layout-columns',
+				'type'     => 'button_set',
+				'title'    => __( 'Columns', 'mixt' ),
+				'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+				'options'  => array(
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+					'5' => '5',
+					'6' => '6',
+				),
+				'default'  => '3',
+				'required' => array(
+					array('portfolio-page-inherit', '=', false),
+					array('portfolio-page-layout-type', '!=', 'standard'),
+				),
+			),
+
+			// Post Media Display
+			array(
+				'id'       => 'portfolio-page-feat-show',
+				'type'     => 'switch',
+				'title'    => __( 'Show Media', 'mixt' ),
+				'subtitle' => __( 'Display the post featured media', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => true,
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Featured Media Placeholder
+			array(
+				'id'             => 'portfolio-page-feat-ph',
+				'type'           => 'media',
+				'title'          => __( 'Featured Media Placeholder', 'mixt' ),
+				'subtitle'       => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
+				'mode'           => 'jpg, jpeg, png',
+				'library_filter' => array( 'jpg', 'jpeg', 'png' ),
+				'required' => array('portfolio-page-feat-show', '=', true),
+			),
+
+			// Post Media Size
+			array(
+				'id'       => 'portfolio-page-feat-size',
+				'type'     => 'button_set',
+				'title'    => __( 'Media Size', 'mixt' ),
+				'subtitle' => __( 'Select a size for the post featured media', 'mixt' ),
+				'options'  => array(
+					'blog-large'  => __( 'Large', 'mixt' ),
+					'blog-medium' => __( 'Medium', 'mixt' ),
+					'blog-small'  => __( 'Small', 'mixt' ),
+				),
+				'default'  => 'blog-large',
+				'required' => array(
+					array('portfolio-page-inherit', '=', false),
+					array('portfolio-page-layout-type', '=', 'standard'),
+					array('portfolio-page-feat-show', '=', true),
+				),
+			),
+
+			// Post Info Display
+			array(
+				'id'       => 'portfolio-page-post-info',
+				'type'     => 'switch',
+				'title'    => __( 'Post Info', 'mixt' ),
+				'subtitle' => __( 'Display the post format and date', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => false,
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Meta Position / Display
+			array(
+				'id'       => 'portfolio-page-meta-show',
+				'type'     => 'button_set',
+				'title'    => __( 'Post Meta', 'mixt' ),
+				'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+				'options'  => array(
+					'header'  => __( 'In Header', 'mixt' ),
+					'footer'  => __( 'In Footer', 'mixt' ),
+					'false'   => __( 'No', 'mixt' ),
+				),
+				'default'  => 'false',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Title Display
+			array(
+				'id'       => 'portfolio-page-title',
+				'type'     => 'switch',
+				'title'    => __( 'Post Title', 'mixt' ),
+				'subtitle' => __( 'Display the post title', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => true,
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Content Display
+			array(
+				'id'       => 'portfolio-page-content',
+				'type'     => 'switch',
+				'title'    => __( 'Post Content', 'mixt' ),
+				'subtitle' => __( 'Display the post content', 'mixt' ),
+				'on'       => __( 'Yes', 'mixt' ),
+				'off'      => __( 'No', 'mixt' ),
+				'default'  => false,
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+			// Post Content Type
+			array(
+				'id'       => 'portfolio-page-post-content-type',
+				'type'     => 'button_set',
+				'title'    => __( 'Post Content Type', 'mixt' ),
+				'subtitle' => __( 'Show the post\'s excerpt or full content', 'mixt' ),
+				'options'  => array(
+					'full'    => __( 'Full', 'mixt' ),
+					'excerpt' => __( 'Excerpt', 'mixt' ),
+				),
+				'default'  => 'full',
+				'required' => array('portfolio-page-inherit', '=', false),
+			),
+
+		// Divider
+		array(
+			'id'   => 'portfolio-divider-2',
+			'type' => 'divide',
+		),
+
+		// ROLLOVER
 		array(
 			'id'       => 'portfolio-rollover-section',
 			'type'     => 'section',
@@ -290,14 +353,15 @@ $this->sections[] = array(
 				'default'  => 'primary',
 				'required' => array(
 					array('portfolio-rollover', '=', true),
-					array('portfolio-rollover-item-style', '!=', 'plain')
+					array('portfolio-rollover-item-style', '!=', 'plain'),
+					array('portfolio-rollover-item-style', '!=', '')
 				),
 			),
 	),
 );
 
 
-// SINGLE PROJECT PAGE SECTION
+// SINGLE PROJECT PAGE
 
 $this->sections[] = array(
 	'title'      => __( 'Project Page', 'mixt' ),
@@ -312,7 +376,7 @@ $this->sections[] = array(
 			'id'       => 'project-sidebar',
 			'type'     => 'button_set',
 			'title'    => __( 'Show Sidebar', 'mixt' ),
-			'subtitle' => __( 'Display the sidebar on prohect pages', 'mixt' ),
+			'subtitle' => __( 'Display the sidebar on project pages', 'mixt' ),
 			'options'  => array(
 				'auto'  => __( 'Auto', 'mixt' ),
 				'true'  => __( 'Yes', 'mixt' ),
@@ -333,7 +397,7 @@ $this->sections[] = array(
 				'half'       => '1/2',
 				'one-third'  => '1/3',
 			),
-			'default'  => 'half',
+			'default'  => 'full',
 		),
 
 		// Post Info
@@ -361,11 +425,11 @@ $this->sections[] = array(
 			'default'  => 'header',
 		),
 
-		// Taxonomies
+		// Tags
 		array(
-			'id'       => 'project-taxonomies',
+			'id'       => 'project-tags',
 			'type'     => 'switch',
-			'title'    => __( 'Show Taxonomies', 'mixt' ),
+			'title'    => __( 'Show Tags', 'mixt' ),
 			'subtitle' => __( 'Display project types and attributes', 'mixt' ),
 			'on'       => __( 'Yes', 'mixt' ),
 			'off'      => __( 'No', 'mixt' ),
@@ -420,7 +484,7 @@ $this->sections[] = array(
 			'type' => 'divide',
 		),
 
-		// RELATED PROJECTS SECTION
+		// RELATED PROJECTS
 		array(
 			'id'       => 'project-related-section',
 			'type'     => 'section',
@@ -509,8 +573,8 @@ $this->sections[] = array(
 				'title'    => __( 'Type', 'mixt' ),
 				'subtitle' => __( 'Display text-only projects or with featured media', 'mixt' ),
 				'options'  => array(
-					'text'  => __( 'Text', 'mixt' ),
 					'media' => __( 'Media', 'mixt' ),
+					'text'  => __( 'Text', 'mixt' ),
 				),
 				'default'  => 'media',
 				'required' => array('project-related', '=', true),

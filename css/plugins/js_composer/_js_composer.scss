@@ -8,7 +8,20 @@
 
 @if $vcomposer {
 
-	.vc_element > div[class*=' col-'] { width: 100%; }
+	.vc_row.row {
+		margin-left: ceil(($grid-gutter-width / -2));
+		margin-right: ceil(($grid-gutter-width / -2));
+	}
+
+	.vc_column_container[class*=' col-'] {
+		padding-left: ceil(($grid-gutter-width / 2));
+		padding-right: ceil(($grid-gutter-width / 2));
+	}
+
+	.vc_element > div[class*=' col-'] {
+		width: 100%;
+		margin-left: 0;
+	}
 
 	.wpb_row,
 	.wpb_column,
@@ -21,6 +34,11 @@
 	.wpb_column > .vc_column-inner,
 	.vc_row.vc_row-no-padding .wpb_column { padding-left: 0 !important; padding-right: 0 !important; }
 
+	.wpb_wrapper {
+		> :first-child { margin-top: 0; }
+		> :last-child { margin-bottom: 0; }
+	}
+
 	.wpb_wrapper .mixt-element.mixt-headline { margin-bottom: 20px; }
 
 	.first-row .vc_controls-out-tl,
@@ -29,7 +47,8 @@
 	}
 
 	.wpb_column > .wpb_wrapper > :last-child,
-	.wpb_column > .vc_column-inner > .wpb_wrapper > :last-child { margin-bottom: 0; }
+	.wpb_column > .vc_column-inner > .wpb_wrapper > :last-child,
+	.wpb_content_element:last-child { margin-bottom: 0; }
 
 	// Full-Width Rows For Boxed Layout
 	
@@ -61,10 +80,29 @@
 		}
 	}
 
-	// Buttons
+	// Rounded radius
 
-	.vc_btn3 {
-		&.vc_btn3-shape-rounded { border-radius: $bd-radius; }
+	.vc_toggle,
+	.vc_call_to_action,
+	.vc_message_box-rounded,
+	.vc_btn3.vc_btn3-shape-rounded,
+	.vc_tta.vc_tta-shape-rounded .vc_tta-panel-body,
+	.vc_tta.vc_tta-shape-rounded .vc_tta-panel-heading,
+	.vc_tta.vc_tta-shape-rounded .vc_tta-tab > a,
+	.vc_progress_bar .vc_single_bar,
+	.vc_progress_bar .vc_single_bar .vc_bar,
+	.vc_general.vc_cta3.vc_cta3-shape-rounded,
+	.vc_non_responsive .vc_tta.vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panels,
+	.vc_tta-o-non-responsive .vc_tta.vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panels,
+	.vc_non_responsive .vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::after,
+	.vc_non_responsive .vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::before,
+	.vc_tta-o-non-responsive .vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::after,
+	.vc_tta-o-non-responsive .vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::before { border-radius: $bd-radius; }
+
+	@media (min-width: 768px) {
+		.vc_tta.vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panels,
+		.vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::after,
+		.vc_tta-shape-rounded.vc_tta-tabs .vc_tta-panel-body::before { border-radius: $bd-radius; }
 	}
 
 	@media (max-width: 768px) {
@@ -74,4 +112,10 @@
 		}
 	}
 
+	// Editor Mode
+	.vc_editor {
+		.mixt-animate { opacity: 1 !important; }
+
+		.article.no-content .entry-body { display: block !important; }
+	}
 }

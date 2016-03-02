@@ -32,8 +32,8 @@
 					}
 
 					> .sub-menu {
-						left: auto; right: 100%;
-						margin-left: 0; margin-right: 10px !important;
+						top: 0; left: 100%;
+						margin-top: 0; margin-left: 10px !important;
 					}
 				}
 			}
@@ -47,10 +47,17 @@
 			.navbar-mixt {
 				border-left-width: 1px;
 
-				.nav > li > a .drop-arrow {
-					float: left;
-					margin-left: 0;
-					margin-right: $margin-s;
+				.nav > li {
+					> a .drop-arrow {
+						float: left;
+						margin-left: 0;
+						margin-right: $margin-s;
+					}
+
+					> .sub-menu {
+						left: auto; right: 100%;
+						margin-left: 0; margin-right: 10px !important;
+					}
 				}
 			}
 		}
@@ -106,10 +113,7 @@
 							.drop-arrow { line-height: $nav-vertical-item-height - 1px; }
 						}
 
-						> .sub-menu {
-							top: 0; left: 100%;
-							margin-top: 0; margin-left: 10px !important;
-						}
+						> .sub-menu { margin-top: 0 !important; }
 
 						&:hover,
 						&.hover {
@@ -127,7 +131,8 @@
 
 					.sub-menu li > a {
 						max-height: $nav-vertical-item-height + 1px;
-						padding: ($nav-vertical-item-height - $font-size) / 2;
+						padding: $nav-primary-sub-pad-h $nav-primary-sub-pad-v;
+						line-height: $nav-vertical-item-height - $nav-primary-sub-pad-h * 2;
 					}
 				}
 

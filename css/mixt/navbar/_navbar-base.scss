@@ -165,8 +165,8 @@
 		li .menu-item > a,
 		.mega-menu-column li > a {
 			clear: both;
-			padding: ($nav-sub-item-height - $font-size) / 2;
-			font-size: $font-size;
+			padding: $nav-sub-pad-h $nav-sub-pad-v;
+			font-size: inherit;
 			line-height: 1;
 			border-bottom-width: 1px;
 			border-bottom-style: solid;
@@ -225,9 +225,9 @@
 				border-right-width: 1px;
 
 				> a {
-					height: $nav-item-height;
+					font-weight: 600;
 					max-height: $nav-item-height;
-					padding-top: ($nav-item-height - $font-size) / 2;
+					padding-top: $nav-sub-pad-h + 2px;
 				}
 
 				&:nth-child(4n),

@@ -12,14 +12,14 @@ echo '<div class="author-wrap page-padding">';
 	mixt_about_the_author(false);
 echo '</div>';
 
-echo '<div class="posts-container page-padding">';
+echo mixt_heading( __( 'Entries by this author', 'mixt' ) );
+
+echo '<div class="posts-container">';
 
 if ( have_posts() ) {
 
 	// Set display options
 	Mixt_Options::set('post-display', null, array('meta-author' => false));
-
-	echo mixt_heading( __( 'Entries by this author', 'mixt' ) );
 
 	while ( have_posts() ) : // Start The Loop
 

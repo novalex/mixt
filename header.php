@@ -36,7 +36,7 @@ $layout_options = Mixt_Options::get('layout');
 
 $body_classes = "no-js body-theme-{$theme_options['site']}";
 if ( $page_options['layout'] == 'boxed' ) $body_classes .= ' boxed';
-if ( ! $page_options['responsive'] ) $body_classes .= ' no-responsive';
+if ( ! $page_options['responsive'] ) $body_classes .= ' non-responsive';
 if ( $page_options['page-type'] == 'onepage' ) $body_classes .= ' one-page';
 if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
@@ -144,11 +144,11 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 							'walker'          => new Mixt_Navwalker(),
 						);
 
-						$main_nav_loc = 'primary';
-						if ( $page_options['page-type'] == 'onepage' ) { $main_nav_loc = 'onepage'; }
-
-						// $main_nav_args['theme_location'] = $main_nav_loc;
-						$main_nav_args['menu'] = '404 Menu';
+						if ( $nav_options['menu'] == 'auto' ) {
+							$main_nav_args['theme_location'] = 'primary';
+						} else {
+							$main_nav_args['menu'] = intval($nav_options['menu']);
+						}
 
 						$main_nav_menu = wp_nav_menu($main_nav_args);
 
@@ -183,6 +183,8 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 			if ( Mixt_Options::get('sidebar', 'enabled') && $page_options['page-type'] != 'onepage' ) {
 				$content_wrap_classes .= ' has-sidebar';
 				if ( Mixt_Options::get('sidebar', 'position') == 'left' ) { $content_wrap_classes .= ' sidebar-left'; }
+			} else {
+				$content_wrap_classes .= ' no-sidebar';
 			}
 			$content_wrap_classes = apply_filters('mixt_content_wrap_class', $content_wrap_classes);
 

@@ -35,7 +35,10 @@
 .page-padding,
 .sidebar-padder,
 .blog-grid .posts-container:first-child,
-.blog-masonry .posts-container:first-child { padding-top: $gutter-lg; }
+.blog-grid .portfolio-sorter + .posts-container,
+.blog-masonry .posts-container:first-child,
+.blog-masonry .portfolio-sorter + .posts-container,
+.portfolio-wrap.portfolio-sortable:first-child { padding-top: $gutter-lg; }
 
 
 // Page Header Spacing
@@ -115,7 +118,10 @@ ul.wpb_thumbnails-fluid > li,
 	.page-padding,
 	.sidebar-padder,
 	.blog-grid .posts-container:first-child,
-	.blog-masonry .posts-container:first-child { padding-top: $gutter-sm; }
+	.blog-grid .portfolio-sorter + .posts-container,
+	.blog-masonry .posts-container:first-child,
+	.blog-masonry .portfolio-sorter + .posts-container,
+	.portfolio-wrap.portfolio-sortable:first-child { padding-top: $gutter-sm; }
 
 	.posts-container:last-child { padding-bottom: $gutter-sm; }
 

@@ -18,6 +18,20 @@
 @import 'widgets';
 
 
+// Animations
+
+.mixt-animate {
+	opacity: 1;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+
+	&:not(.anim-start) {
+		opacity: 0;
+		animation-name: none;
+	}
+}
+
+
 // Search Widget
 
 .search-form {
@@ -25,6 +39,7 @@
 		margin-left: -1px;
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
+		z-index: 2;
 	}
 }
 
@@ -124,25 +139,22 @@
 			z-index: 1;
 		}
 
-		a.main-link {
-			position: absolute;
-			top: 0; left: 0;
-			right: 0; bottom: 0;
-			z-index: 0;
-		}
-
 		// Color Variants
 		@each $key, $color in $basic-colors {
-			@include mixt-bg-variant('&.#{$key}', fade-out($color, 0.15), true, true);
+			&.#{$key} {
+				@include mixt-bg-variant(fade-out($color, 0.1), true, true);
+			}
 		}
 		// Accent Colors
 		@each $theme, $colors in $site-themes {
-			@include mixt-bg-variant('.theme-#{$theme} &.accent', fade-out(map-get($colors, 'accent'), 0.15), true, true);
+			.theme-#{$theme} &.accent {
+				@include mixt-bg-variant(fade-out(map-get($colors, 'accent'), 0.1), true, true);
+			}
 		}
 
 		// Adjust animation duration
 		&.fadeIn,
-		&.fadeOut { animation-duration: 0.6s; }
+		&.fadeOut { animation-duration: 0.5s; }
 	}
 
 	&:not(.hovered) .on-hover { opacity: 0; }
@@ -179,7 +191,7 @@
 // Testimonial
 
 .mixt-testimonial {
-	font-size: 14px;
+	font-size: $font-size-m;
 	font-weight: bold;
 	text-align: left;
 }
@@ -194,12 +206,14 @@ blockquote {
 	border-radius: $bd-radius;
 	border-width: 1px 1px 1px $quote-border-width;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
 
-	cite {
-		display: block;
-		margin-top: 6px;
-		font-size: $font-size-s;
-	}
+cite {
+	display: block;
+	margin-top: 6px;
+	font-style: normal;
+	font-size: $font-size-s;
+	opacity: 0.8;
 }
 
 
@@ -246,7 +260,8 @@ img[class*="wp-image-"] {
 	padding: 4px 8px;
 	margin: 0 5px 5px 0;
 	color: #fff !important;
-	font-size: $font-size-s !important;
+	font-size: $font-size-xs !important;
+	line-height: 18px;
 	border-radius: $bd-radius;
 	background-color: #555;
 	transition: color 0.2s, background 0.2s;
@@ -286,4 +301,17 @@ img[class*="wp-image-"] {
 	white-space: nowrap;
 
 	&.wrap-text { white-space: initial; }
+
+	&:not(.mixt-animate) {
+		opacity: 1;
+		transition: opacity 0.4s;
+	}
+}
+.js .big-text:not(.init):not(.mixt-animate) { opacity: 0; }
+
+a.main-link {
+	position: absolute;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
+	z-index: 0;
 }

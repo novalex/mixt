@@ -21,19 +21,11 @@ $is_masonry = Mixt_Options::get('layout', 'type') == 'masonry';
 
 	?></header>
 
-	<?php if ( is_archive() || ( Mixt_Options::get('page', 'page-type') != 'blog' && Mixt_Options::get('page', 'posts-page') ) ) : // Display Excerpts for Archive Pages ?>
-		<div class="entry-body entry-summary"><?php
+	<div class="entry-body entry-content post-content"><?php
 
-			$post_ob->content('excerpt');
+		$post_ob->content();
 
-		?></div>
-	<?php else : ?>
-		<div class="entry-body entry-content"><?php
-
-			$post_ob->content();
-
-		?></div>
-	<?php endif; ?>
+	?></div>
 
 	<?php if ( $is_masonry ) { echo '</div>'; } // Close .post-wrapper ?>
 

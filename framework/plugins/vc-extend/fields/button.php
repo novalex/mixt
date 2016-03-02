@@ -15,14 +15,20 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 		/** @var string */
 		protected $value = '';
 
-		/** @var array button colors */
+		/** @var array */
+		protected $types = array();
+		/** @var array */
 		protected $colors = array();
-		/** @var array button sizes */
+		/** @var array */
 		protected $sizes = array();
+		/** @var array */
+		protected $anims = array();
 
 		function __construct() {
+			$this->types = mixt_get_assets('button', 'types');
 			$this->colors = mixt_get_assets('colors', 'buttons');
 			$this->sizes = mixt_get_assets('button', 'sizes');
+			$this->anims = mixt_get_assets('button', 'animations');
 		}
 
 		/**
@@ -82,15 +88,25 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 			$output = '';
 			$values = mixt_element_button($this->value(), 'value');
 
+			// Type Select
+			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Type', 'mixt' ) .
+						   '<select class="button-field type-select button-colors" data-attr="type">' . $this->select_options($this->types, $values['type']) . '</select>' .
+					   '</label></div>';
+
 			// Color Select
-			$output .= '<div class="vc_col-sm-6"><select class="button-field color-select button-colors" data-attr="color">' .
-						   $this->select_options($this->colors, $values['color']) .
-					   '</select></div>';
+			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Color', 'mixt' ) .
+						   '<select class="button-field color-select button-colors" data-attr="color">' . $this->select_options($this->colors, $values['color']) . '</select>' .
+					   '</label></div>';
 
 			// Size Select
-			$output .= '<div class="vc_col-sm-6"><select class="button-field button-sizes" data-attr="size">' .
-						   $this->select_options($this->sizes, $values['size']) .
-					   '</select></div>';
+			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Size', 'mixt' ) .
+						   '<select class="button-field button-sizes" data-attr="size">' . $this->select_options($this->sizes, $values['size']) . '</select>' .
+					   '</label></div>';
+
+			// Animation Select
+			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Animation', 'mixt' ) . 
+						   '<select class="button-field anim-select button-colors" data-attr="anim">' . $this->select_options($this->anims, $values['anim']) . '</select>' .
+					   '</label></div>';
 
 			return $output;
 		}

@@ -9,6 +9,69 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 /**
+ * Add Open Graph Attributes
+ */
+function mixt_og_xmlns($output) {
+	return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+}
+
+/**
+ * Add Open Graph Meta Information
+ */
+function mixt_og_meta() {
+	if ( ! is_singular() ) return;
+
+	global $post;
+
+	$options = mixt_get_options( array(
+		'fb-appid'  => array( 'key' => 'social-fb-appid', 'return' => 'value' ),
+		'fb-admins' => array( 'key' => 'social-fb-admins', 'return' => 'value' ),
+		'site-name' => array( 'key' => 'social-site-name', 'return' => 'value' ),
+		'img-ph'    => array( 'key' => 'social-img-ph', 'return' => 'value' ),
+	));
+
+	if ( ! empty($options['fb-appid']) ) {
+		echo "<meta property='fb:app_id' content='" . esc_attr($options['fb-appid']) . "' />\n";
+	}
+	if ( ! empty($options['fb-admins']) && ! empty($options['fb-admins'][0]) ) {
+		foreach ( $options['fb-admins'] as $admin_id ) {
+			if ( ! empty($admin_id) ) { echo "<meta property='fb:admins' content='" . esc_attr($admin_id) . "' />\n"; }
+		}
+	}
+	echo "<meta property='og:type' content='article' />\n";
+	echo "<meta property='og:title' content='" . esc_attr(get_the_title()) . "' />\n";
+	echo "<meta property='og:url' content='" . esc_attr(get_permalink()) . "' />\n";
+
+	$site_name = ( empty($options['site-name']) ) ? get_bloginfo('name', 'display') : $options['site-name'];
+	echo "<meta property='og:site_name' content='" . esc_attr($site_name) . "' />\n";
+
+	if ( has_post_thumbnail($post->ID) ) {
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
+		echo "<meta property='og:image' content='" . esc_attr($image[0]) . "' />\n";
+	} else if ( ! empty($options['img-ph']) && ! empty($options['img-ph']['url']) ) {
+		$image = $options['img-ph']['url'];
+		echo "<meta property='og:image' content='" . esc_attr($image) . "' />\n";
+	}
+
+	$description = get_the_excerpt();
+	if ( ! empty($description) ) {
+		echo "<meta property='og:description' content='" . esc_attr($description) . "' />\n";
+	}
+}
+
+/**
+ * Initialize Social Open Graph Meta
+ */
+function mixt_social_og() {
+	if ( mixt_get_option(array('key' => 'social-og-meta')) ) {
+		add_filter('language_attributes', 'mixt_og_xmlns');
+		add_action('wp_head', 'mixt_og_meta', 5);
+	}
+}
+add_action('init', 'mixt_social_og');
+
+
+/**
  * Get Social Profiles & Output Links or Return Data
  *
  * @param bool   $echo true to echo links, false to return them as a string
@@ -28,7 +91,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 
 	$options = mixt_get_options( array(
 		'social-profiles'       => array( 'return' => 'value' ),
-		'social-profiles-color' => array( 'return' => 'value', 'default' => 'icon' ),
+		'social-icons-color'    => array( 'return' => 'value', 'default' => 'icon' ),
 		'social-icons-tooltip'  => array(),
 		'post-sharing-profiles' => array( 'return' => 'value' ),
 		'post-sharing-color'    => array( 'return' => 'value', 'default' => 'icon' ),
@@ -49,7 +112,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		} else {
 			$pattern_tags['link2'] = wp_get_shortlink($post_id);
 		}
-		$post_media = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'blog-medium');
+		$post_media = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'blog-large');
 		if ( ! empty($post_media[0]) ) {
 			$pattern_tags['thumb'] = $post_media[0];
 		} else if ( get_post_format($post_id) == 'image' ) {
@@ -58,7 +121,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 	}
 
 	if ( empty($hover) ) {
-		$hover = ( $type == 'networks' ) ? $options['social-profiles-color'] : $options['post-sharing-color'];
+		$hover = ( $type == 'networks' ) ? $options['social-icons-color'] : $options['post-sharing-color'];
 	}
 
 	if ( empty($profiles) ) {

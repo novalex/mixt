@@ -19,21 +19,8 @@
 	}
 
 	.post-feat {
-		position: relative;
-
-		> a,
 		img,
 		.lSSlideOuter { height: 100%; }
-
-		&.post-link a,
-		&.post-quote blockquote {
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-		}
-
-		&.post-audio { background-color: #000; }
 
 		.no-objectfit & img { height: auto; }
 	}
@@ -43,4 +30,9 @@
 	&.blog-4-col .posts-container { margin-right: -5px; }
 	&.blog-5-col .posts-container { margin-right: -6px; }
 	&.blog-6-col .posts-container { margin-right: -7px; }
+
+	.post-rollover {
+		.hover-content,
+		.post-feat-rollover > a { display: block; }
+	}
 }

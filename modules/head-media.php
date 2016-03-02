@@ -41,7 +41,6 @@ function mixt_head_media() {
 			'return' => 'value',
 		),
 		'img-repeat' => array( 'key' => 'head-img-repeat' ),
-		'parallax' => array( 'key' => 'head-img-parallax' ),
 		// Video
 		'video-src' => array(
 			'key'    => 'head-video-src',
@@ -69,6 +68,8 @@ function mixt_head_media() {
 			'return'  => 'value',
 		),
 		'video-loop' => array( 'key' => 'head-video-loop' ),
+		// Parallax
+		'parallax' => array( 'key' => 'head-parallax', 'return' => 'value' ),
 		// Content
 		'content-size' => array(
 			'key'     => 'head-content-size',
@@ -96,6 +97,9 @@ function mixt_head_media() {
 	$wrap_classes = 'head-media';
 
 	if ( Mixt_Options::get('header', 'fullscreen') ) { $wrap_classes .= ' fullscreen'; }
+	if ( $options['parallax'] != 'none' ) {
+		$wrap_classes .= ' has-parallax parallax-' . $options['parallax'];
+	}
 
 	$media_bg = $slider = $media_cont_classes = '';
 
@@ -173,7 +177,7 @@ function mixt_head_media() {
 
 			// If image was deleted or none was selected, use placeholder
 			if ( ! empty($img_response) && is_array($img_response) && $img_response['response']['code'] == '200' ) {
-				$img_color  = mixt_meta( '_mixt_luminosity', $img_id );
+				$lumin      = mixt_meta( '_mixt_luminosity', $img_id );
 				$img_repeat = $options['img-repeat'];
 				$img_meta   = wp_get_attachment_metadata( $img_id );
 				$img_width  = $img_meta['width'];
@@ -181,15 +185,19 @@ function mixt_head_media() {
 			} else {
 				$img_repeat = true;
 				if ( ! empty($options['img-ph']['url']) ) {
-					$img_url   = $options['img-ph']['url'];
-					$img_color = mixt_meta( '_mixt_luminosity', $options['img-ph']['id'] );
+					$img_url = $options['img-ph']['url'];
+					$lumin   = mixt_meta( '_mixt_luminosity', $options['img-ph']['id'] );
 				} else {
-					$img_color  = 'dark';
-					$img_url    = MIXT_IMG_PLACEHOLDER;
+					$lumin   = 'dark';
+					$img_url = MIXT_IMG_PLACEHOLDER;
 				}
 			}
 
-			$wrap_classes .= ( $img_color == 'dark' ) ? ' bg-dark' : ' bg-light';
+			if ( $lumin == 'none' && ! empty($options['bg']) && $options['bg'] != '#' ) {
+				$lumin = ( hex_is_light($options['bg']) ) ? 'light' : 'dark';
+			}
+
+			$wrap_classes .= ( $lumin == 'dark' ) ? ' bg-dark' : ' bg-light';
 
 			// Add pattern or image proportion class
 			if ( $img_repeat ) {
@@ -197,12 +205,6 @@ function mixt_head_media() {
 			} else {
 				if ( $img_width > $img_height ) { $media_cont_classes .= ' img-wide'; }
 				else { $media_cont_classes .= ' img-tall'; }
-			}
-
-			// Parallax
-			if ( $options['parallax'] ) {
-				$media_cont_classes .= ' has-parallax';
-				$img_atts .= 'data-top="transform: translate3d(0, 0%, 0);" data-top-bottom="transform: translate3d(0, 25%, 0);" ';
 			}
 
 			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";
@@ -263,7 +265,9 @@ function mixt_head_media() {
 	if ( $options['code'] && ! empty($options['code-content']) ) { $wrap_classes .= ' media-code'; }
 
 	// Load Skrollr.js if parallax or content fade effect is enabled
-	if ( ( $options['type'] == 'image' && $options['parallax'] ) || ( ( $options['info'] || $options['code'] ) && $options['content-fade'] ) ) { wp_enqueue_script( 'mixt-skrollr' ); }
+	if ( $options['parallax'] || ( ( $options['info'] || $options['code'] ) && $options['content-fade'] ) ) {
+		wp_enqueue_script( 'mixt-skrollr' );
+	}
 
 // Output
 
@@ -274,18 +278,16 @@ function mixt_head_media() {
 		// Header Content (Custom Code, Post Info)
 
 		if ( $options['info'] || $options['code'] ) {
-
 			$cont_classes = 'container';
+			
 			if ( $options['content-size'] == 'fullwidth' ) $cont_classes .= ' fullwidth';
 			else if ( $options['content-size'] == 'cover' ) $cont_classes .= ' fullwidth cover';
-			if ( $options['content-fade'] ) $cont_classes .= ' has-parallax';
 
-			$cont_atts = '';
-			if ( $options['content-fade'] ) $cont_atts .= ' data-top="opacity: 1; transform: translate3d(0, 0%, 0);" data--200-top-bottom="opacity: 0; transform: translate3d(0, 80%, 0);"';
+			if ( $options['content-fade'] ) { $cont_classes .= ' has-parallax'; }
 
 			ob_start();
 
-			echo "<div class='$cont_classes'$cont_atts>";
+			echo "<div class='$cont_classes'>";
 
 				$inner_classes = 'media-inner';
 				if ( $options['align'] != 'left' ) { $inner_classes .= ' align-' . $options['align']; }

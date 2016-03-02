@@ -83,6 +83,31 @@ if ( ! function_exists('mixt_shortcode_unwrap') ) {
 add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
 
 
+if ( ! function_exists('mixt_regex_pattern') ) {
+	/**
+	 * Retreive a regex pattern for specific purpose
+	 *
+	 * @param string $type
+	 */
+	function mixt_regex_pattern($type) {
+		$pat = array(
+			'url'               => "https?:\/\/[\S]*",
+			'image'             => "(<img [^>]* \/>)",
+			'iframe'            => "<iframe.*?<\/iframe>",
+			'cite'              => "<cite[^\<]*>(.*)<\/cite>",
+			'anchor'            => "<a href=\"(.*?)\".*?>(.*?)<\/a>",
+			'blockquote'        => "<blockquote[^\<]*>(.*)<\/blockquote>",
+			'image-attributes'  => "([\\w\\-]+)=([^\"'>]+|(['\"]?)(?:[^\\3]|\\3+)+?\\3)",
+			'audio-shortcode'   => "\[(\[?)(audio)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)",
+			'video-shortcode'   => "\[(\[?)(video)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)",
+			'gallery-shortcode' => "\[(\[?)(gallery)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)",
+		);
+
+		if ( array_key_exists($type, $pat) ) { return $pat[$type]; }
+	}
+}
+
+
 /**
  * Display a message when no menu is assigned to a location
  *

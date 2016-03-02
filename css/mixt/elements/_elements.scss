@@ -32,18 +32,6 @@
 // Timeline
 @import 'timeline';
 
-// Animations
-.mixt-animate {
-	opacity: 1;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-
-	&.anim-pre {
-		opacity: 0;
-		animation-name: none;
-	}
-}
-
 // Form
 .mixt-form {
 	.submit-box {
@@ -55,7 +43,9 @@
 	.alert-box .alert { margin-bottom: 0; }
 }
 
+
 // VC Integration
+
 .vc_mixt_form,
 .vc_mixt_pricing,
 .vc_mixt_iconlist,
@@ -67,4 +57,14 @@
 	@extend %clearfix;
 }
 
-.vc_editor .mixt-animate.anim-pre { opacity: 1; }
+// Accent Colors
+@each $theme, $colors in $site-themes {
+	$accent: map-get($colors, 'accent');
+
+	.theme-#{$theme} {
+		.vc_progress-bar-color-accent {
+			.vc_label { color: set-color-for-bg($accent); }
+			.vc_bar { background-color: $accent; }
+		}
+	}
+}

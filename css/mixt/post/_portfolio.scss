@@ -26,17 +26,5 @@
 			.fullwidth & { padding: 0 $padding-m; }
 		}
 	}
-
-	.blog-grid .post-rollover {
-		.hover-content,
-		.post-feat-rollover > a { display: block; }
-	}
-
-	// Project Page
-	.article.portfolio {
-		&.has-info .page-header { position: static; }
-		
-		> .row { border-color: inherit; }
-	}
 	
 }

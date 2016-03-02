@@ -19,6 +19,11 @@ get_header();
 
 		get_template_part( 'templates/content', 'page' );
 
+		// Comments
+		if ( mixt_get_option(array('key' => 'page-show-comments')) && ( comments_open() || '0' != get_comments_number() ) ) {
+			comments_template('/templates/comments.php');
+		}
+
 	endwhile; // End The Loop
 
 get_sidebar();

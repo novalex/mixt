@@ -39,9 +39,6 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 
 			global $mixt_opt;
 
-			// Define Custom Menu Item Icons
-			$cart_icon   = 'fa fa-shopping-cart';
-			$search_icon = 'fa fa-search';
 			?>
 
 			<div id="posttype-mixt-elem" class="posttypediv">
@@ -86,7 +83,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 							<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
 							<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="nav-search">
 							<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="search">
-							<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo $search_icon ?>">
+							<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo mixt_get_icon('search', false); ?>">
 						</li>
 						<?php // Button ?>
 						<li>
@@ -121,7 +118,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 								<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="#">
 								<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="cart woo-cart">
 								<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="cart">
-								<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo $cart_icon ?>">
+								<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo mixt_get_icon('shop-cart', false); ?>">
 							</li>
 						<?php } ?>
 					</ul>

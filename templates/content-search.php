@@ -21,9 +21,9 @@ $is_masonry = Mixt_Options::get('layout', 'type') == 'masonry';
 
 	?></header>
 
-	<div class="entry-body entry-summary"><?php
+	<div class="entry-body entry-summary post-content"><?php
 
-		$post_ob->content('excerpt');
+		$post_ob->content();
 
 	?></div>
 

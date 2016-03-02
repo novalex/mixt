@@ -161,13 +161,18 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// Border Colors
 			
-			echo "$th, $th #content-wrap, $th .sidebar ul, $th .post-feat.feat-format, $th .wp-caption, $th hr { border-color: $border; }\n";
+			echo "$th, $th #content-wrap, $th .sidebar ul, $th .wp-caption, $th hr { border-color: $border; }\n";
+			echo "$th .article.sticky .page-title, $th .article.sticky-post .page-title { border-color: $accent; }\n";
 			echo "$th .comment-list .bypostauthor > .comment-cont { border-left-color: $accent; }\n";
 
 
 			// Background Colors
 			
-			echo "$th .accent-bg:hover, $th .hover-accent-bg:hover, $th .tag-list a:hover, $th .tagcloud a:hover { color: $color_for_accent !important; background-color: $accent; }\n";
+			echo "$th .accent-bg:hover, $th .hover-accent-bg:hover, " .
+				 "$th .post-feat.post-link, $th .post-feat.feat-format, $th .post-feat.post-quote, " .
+				 "$th .tag-list a:hover, $th .tagcloud a:hover { color: $color_for_accent !important; background-color: $accent; }\n";
+			echo "$th .post-feat.post-aside { color: $color_inv; background-color: ".$this->hex2rgba($bg_inv, 0.8)."; }\n";
+			echo "$th .post-feat.post-status { color: $color_alt; background-color: $bg_alt; }\n";
 			echo "$th .article .post-info .post-date { background-color: $bg_darker; }\n";
 
 			// Other Colors
@@ -175,7 +180,6 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$th ::selection { opacity: 0.8; background: $accent; color: $color_for_accent; }\n";
 
 			echo "$th blockquote { border-color: $border; border-left-color: $accent; background-color: $bg_darker; }\n";
-			echo "$th blockquote cite { color: $color_fade; }\n";
 
 			echo "$th .sidebar .child-page-nav .current_page_item, $th .sidebar .child-page-nav .current_page_item:before { background-color: $bg_darker; }\n";
 
@@ -194,7 +198,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			// Inputs
 			
 			echo "$th input:not([type=submit]):not([type=button]):not(.btn), $th select, $th textarea, $th .form-control, " .
-				 "$th .post-password-form input[type='password'], $th .woocommerce .input-text { color: $color; border-color: $input_border; background-color: $bg_darker; }\n";
+				 "$th .post-password-form input[type='password'], $th .woocommerce .input-text { color: $color; border-color: $input_border; background-color: #".$bg_ob->darken(2)."; }\n";
 			echo "$th input:not([type=submit]):not([type=button]):not(.btn):focus, $th select:focus, $th textarea:focus, $th .form-control:focus, " .
 				 "$th .post-password-form input[type='password']:focus, $th .woocommerce .input-text:focus { border-color: $input_border; background-color: #".$bg_ob->lighten(2)."; }\n";
 			echo "$th input::-webkit-input-placeholder,$th .form-control::-webkit-input-placeholder { color: $color_fade; }\n";
@@ -237,7 +241,7 @@ class Mixt_Themes extends Mixt_DCSS {
 				 "$th .mixt-timeline .timeline-block .content.bubble.accent:before, " .
 				 "$th .hover-content .on-hover.accent { color: $color_for_accent; border-color: $accent_darker; background-color: $accent; text-shadow: 0 1px 1px $textsh_for_accent; }\n";
 			echo "$th .mixt-icon.icon-solid.accent.anim-invert:hover, $th .icon-cont:hover .mixt-icon.icon-solid.accent.anim-invert { color: $accent; border-color: $accent_darker; background-color: $color_for_accent; text-shadow: 0 1px 1px ".$this->set_textsh_for_bg($color_for_accent)."; }\n";
-			echo "$th .hover-content .on-hover.accent { background-color: ".$this->hex2rgba($accent, 0.75)."; }\n";
+			echo "$th .hover-content .on-hover.accent { background-color: ".$this->hex2rgba($accent, 0.9)."; }\n";
 
 			// Plugin Colors
 
@@ -260,6 +264,10 @@ class Mixt_Themes extends Mixt_DCSS {
 				echo "$th .vc_separator.theme-bd .vc_sep_holder .vc_sep_line { border-color: $border; }\n";
 				echo "$th .mixt-grid-item .gitem-title-cont { color: $color; background-color: $bg_lighter; }\n";
 				echo "$th .vc_tta.vc_tta-style-classic:not(.vc_tta-o-no-fill) .vc_tta-panel-body, $th .vc_tta.vc_tta-style-modern:not(.vc_tta-o-no-fill) .vc_tta-panel-body { color: $bg_light_color; }\n";
+
+				// Accent Colors
+				echo "$th .vc_progress-bar-color-accent .vc_label { color: $color_for_accent; }\n";
+				echo "$th .vc_progress-bar-color-accent .vc_bar { background-color: $accent; }\n";
 			}
 
 			// WooCommerce
@@ -430,7 +438,7 @@ class Mixt_Themes extends Mixt_DCSS {
 			echo "$navbar .sub-menu { background-color: $menu_bg; $menu_bg_rgba }\n";
 			echo "$navbar .sub-menu li > a:hover, $navbar .sub-menu li > a:hover:focus, " .
 				 "$navbar .sub-menu li:hover > a:hover, $navbar .sub-menu li.hover > a:hover { color: $menu_hover_color; background-color: $menu_bg_hover; }\n";
-			echo "$navbar .sub-menu li > a, $navbar .sub-menu input { color: $menu_color; }\n";
+			echo "$navbar .sub-menu li, $navbar .sub-menu li > a, $navbar .sub-menu input { color: $menu_color; }\n";
 			echo "$navbar .sub-menu input::-webkit-input-placeholder { color: $menu_color_fade; }\n";
 			echo "$navbar .sub-menu input::-moz-placeholder { color: $menu_color_fade; }\n";
 			echo "$navbar .sub-menu input:-ms-input-placeholder { color: $menu_color_fade; }\n";

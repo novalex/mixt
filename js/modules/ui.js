@@ -125,6 +125,37 @@ UI FUNCTIONS
 			}
 		});
 	});
+	
+
+	// Element Animations
+	function mixtAnimations() {
+		var animElems = $('.mixt-animate');
+
+		if ( animElems.length === 0 ) { return; }
+
+		viewport.load( function() {
+			animElems.each( function() {
+				var $this = $(this),
+					delay = $this.data('anim-delay') ? Math.abs(parseInt($this.data('anim-delay'))) : 0;
+				if ( $this.hasClass('anim-on-view') && typeof $.fn.waypoint === 'function' ) {
+					$this.waypoint( function() {	
+						setTimeout( function() {
+							$this.removeClass('anim-pre').addClass('anim-start');
+						}, delay);
+						if ( typeof this.destroy === 'function' ) this.destroy();
+					}, {
+						offset: '85%',
+						triggerOnce: true
+					});
+				} else {
+					setTimeout( function() {
+						$this.removeClass('anim-pre').addClass('anim-start');
+					}, delay);
+				}
+			});
+		});
+	}
+	mixtAnimations();
 
 
 	// On Hover Animations
@@ -201,7 +232,7 @@ UI FUNCTIONS
 		runOnRefresh();
 	}).trigger('refresh');
 
-	$(document).ajaxComplete( function() {
+	$(document).ajaxStop( function() {
 		runOnRefresh();
 
 		postGridColumns();

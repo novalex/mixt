@@ -200,6 +200,7 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 				// Border Colors
 				
 				css += th+', '+th+' #content-wrap, '+th+' .sidebar ul, '+th+' .post-feat.feat-format, '+th+' .wp-caption, '+th+' hr { border-color: '+border+'; }';
+				css += th+' .article.sticky .page-title, '+th+' .article.sticky-post .page-title { border-color: '+accent+'; }';
 				css += th+' .comment-list .bypostauthor > .comment-cont { border-left-color: '+accent+'; }';
 
 

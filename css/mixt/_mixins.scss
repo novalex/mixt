@@ -19,19 +19,17 @@
 }
 
 
-@mixin mixt-bg-variant( $selector, $color, $set-color: false, $set-text-shadow: false ) {
-	#{$selector} {
-		background-color: $color;
-		@if ( opacity($color) < 1 ) { $color: fade-in($color, 1); }
-		@if ( $set-color ) { color: set-color-for-bg($color); }
-		@if ( $set-text-shadow ) { @include text-shadow-for-bg($color); }
-	}
+@mixin mixt-bg-variant( $color, $set-color: false, $set-text-shadow: false ) {
+	background-color: $color;
+	@if ( opacity($color) < 1 ) { $color: fade-in($color, 1); }
+	@if ( $set-color ) { color: set-color-for-bg($color); }
+	@if ( $set-text-shadow ) { @include text-shadow-for-bg($color); }
 }
 
 
 // TEXT SHADOW
 
-@mixin text-shadow-for-bg( $bg, $light: rgba(255,255,255,0.1), $dark: rgba(0,0,0,0.1) ) {
+@mixin text-shadow-for-bg( $bg, $light: rgba(255,255,255,0.1), $dark: rgba(0,0,0,0.15) ) {
 	text-shadow: 0 1px 1px set-textsh-for-bg($bg, $light, $dark);
 }
 

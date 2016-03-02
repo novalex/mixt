@@ -45,7 +45,7 @@ get_header();
 		if ( $posts->have_posts() ) {
 			while ( $posts->have_posts() ) {
 				$posts->the_post();
-				get_template_part( 'templates/content' );
+				get_template_part( 'templates/content', get_post_format() );
 			}
 			wp_reset_postdata();
 		}

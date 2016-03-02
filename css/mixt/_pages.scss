@@ -1,23 +1,35 @@
 
-// Specific Page Styling
+// Page Styling
 
+.page-header {
+	margin: 0;
+	padding-bottom: 0;
+	border-bottom-width: 0;
+}
+
+// One-Page
 body.one-page { position: relative; }
-
-// Author Page
-.author .about-the-author { margin-bottom: 0; }
 
 // 404 Page
 .error-404 {
 	padding: $row-spacing-lg 0;
 
-	.page-header .page-title {
-		font-size: 96px;
-		margin-top: 0;
-	}
+	.page-header .page-title { font-size: 96px; }
 
 	.page-content > div { padding-top: $row-spacing-lg; }
 
 	#menu-404 li a { padding: 0; }
+}
+
+// No Results Page
+.no-results {
+	.page-content {
+		margin-top: $margin-l;
+
+		> p,
+		> ul { margin-bottom: $margin-m; }
+	}
+	.search-form { max-width: 300px; }
 }
 
 // Blank Page

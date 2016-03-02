@@ -17,9 +17,6 @@
 		background-color: rgba(0,0,0,0.1);
 		box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
 
-		&,
-		.vc_bar { border-radius: $bd-radius; }
-
 		.vc_bar { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 1px 0 4px rgba(0,0,0,0.1); }
 
 		.vc_label {

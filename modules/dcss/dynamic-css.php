@@ -22,10 +22,23 @@ function mixt_custom_css() {
 	if ( ! is_array($mixt_opt) ) { return; }
 
 	$defaults = apply_filters( 'mixt_dcss_defaults', array(
-		'nav-padding'       => 20,
-		'nav-fixed-padding' => 0,
-		'nav-item-height'   => 50,
+		'nav-padding'                => 20,
+		'nav-fixed-padding'          => 0,
+		'nav-item-height'            => 50,
+		'nav-line-height-correction' => -2,
 	) );
+
+
+	$dimension_field = function($field) {
+		global $mixt_opt;
+		if ( empty($mixt_opt[$field]) ) return false;
+
+		if ( is_array($mixt_opt[$field]) && intval($mixt_opt[$field]['width']) != 0 ) {
+			return $mixt_opt[$field];
+		} else {
+			return false;
+		}
+	};
 
 
 	// START CSS RULES
@@ -76,55 +89,55 @@ function mixt_custom_css() {
 	}
 
 	// Site width
-	if ( ! empty($mixt_opt['site-width']) ) {
-		if ( substr($mixt_opt['site-width'], -1) == '%' ) {
-			echo ".container, .boxed #main-wrap, .boxed #main-nav { width: {$mixt_opt['site-width']}; }\n";
-			echo "#main-wrap.nav-vertical .container { max-width: 100%; }\n";
+	$site_width = $dimension_field('site-width');
+	if ( $site_width ) {
+		$width = $site_width['width'];
+		if ( $site_width['units'] == '%' ) {
+			$width = min(max(intval($width), 40), 100) . '%';
+			echo "\t.container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { width: $width; }\n";
 		} else {
-			echo ".container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { max-width: {$mixt_opt['site-width']}; }\n";
-			echo "@media only screen and ( min-width: {$mixt_opt['site-width']} ) {\n";
-				echo "\t.container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { width: {$mixt_opt['site-width']}; }\n";
+			echo "@media only screen and ( min-width: $width ) {\n";
+				echo "\t.container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { width: $width; }\n";
 			echo "}\n";
 		}
+		echo ".container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { max-width: 100%; }\n";
 	}
 
 	// Sidebar Width
-	if ( ! empty($mixt_opt['sidebar-width-sm']) ) {
-		if ( substr($mixt_opt['sidebar-width-sm'], -1) == '%' ) {
-			$content_width = 100 - intval($mixt_opt['sidebar-width-sm']) . '%';
+	$sidebar_width_sm = $dimension_field('sidebar-width-sm');
+	if ( $sidebar_width_sm ) {
+		$width_sm = $sidebar_width_sm['width'];
+		if ( $sidebar_width_sm['units'] == '%' ) {
+			$width_sm = min(max(intval($width_sm), 10), 100) . '%';
+			$content_width = 100 - intval($width_sm) . '%';
 		} else {
-			$content_width = "calc(100% - {$mixt_opt['sidebar-width-sm']})";
+			$content_width = "calc(100% - $width_sm)";
 		}
 		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('mars', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
-			echo "\t#content-wrap.has-sidebar .sidebar { width: {$mixt_opt['sidebar-width-sm']}; }\n";
+			echo "\t#content-wrap.has-sidebar .sidebar { width: $width_sm; }\n";
 		echo "}\n";
 	}
-	if ( ! empty($mixt_opt['sidebar-width']) ) {
-		if ( substr($mixt_opt['sidebar-width'], -1) == '%' ) {
-			$content_width = 100 - intval($mixt_opt['sidebar-width']) . '%';
+	$sidebar_width = $dimension_field('sidebar-width');
+	if ( $sidebar_width ) {
+		$width = $sidebar_width['width'];
+		if ( $sidebar_width['units'] == '%' ) {
+			$width = min(max(intval($width), 10), 100) . '%';
+			$content_width = 100 - intval($width) . '%';
 		} else {
-			$content_width = "calc(100% - {$mixt_opt['sidebar-width']})";
+			$content_width = "calc(100% - $width)";
 		}
 		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('venus', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
-			echo "\t#content-wrap.has-sidebar .sidebar { width: {$mixt_opt['sidebar-width']}; }\n";
+			echo "\t#content-wrap.has-sidebar .sidebar { width: $width; }\n";
 		echo "}\n";
 	}
 
-	// Typography
-	$site_font = $mixt_opt['font-sitewide'];
-	if ( ! empty($site_font['font-family']) ) {
-		if ( ! empty($site_font['font-backup']) ) {
-			$site_font['font-family'] .= ', ' . $site_font['font-backup'];
-		}
-		$body_styles .= "font-family: {$site_font['font-family']}; ";
-	}
-	if ( ! empty($site_font['font-size']) ) {
-		$body_styles .= "font-size: {$site_font['font-size']}; ";
-	}
-
 	if ( $body_styles != '' ) { echo "body { $body_styles }\n"; }
+
+	// Typography
+	$site_typo = Mixt_DCSS::parse_typo_field('font-sitewide');
+	if ( $site_typo != '' ) { echo "html, body { $site_typo }\n"; }
 
 
 	// LOGO STYLING
@@ -149,21 +162,11 @@ function mixt_custom_css() {
 
 	// Text Logo
 	} else {
-		$logo_font = $mixt_opt['logo-text-typo'];
-		$font_size = ! empty($logo_font['font-size']) ? $logo_font['font-size'] : '24px';
-
-		echo "#nav-logo strong { ";
-			echo "font-size: $font_size; ";
-			if ( ! empty($mixt_opt['logo-text-color']) ) { echo "color: {$mixt_opt['logo-text-color']}; "; }
-			if ( ! empty($logo_font['font-family']) ) {
-				if ( ! empty($logo_font['font-backup']) ) {
-					$logo_font['font-family'] .= ', ' . $logo_font['font-backup'];
-				}
-				echo "font-family: {$logo_font['font-family']} !important; ";
-			}
-			if ( ! empty($logo_font['font-weight']) ) { echo "font-weight: {$logo_font['font-weight']}; "; }
-			if ( ! empty($logo_font['text-transform']) ) { echo "text-transform: {$logo_font['text-transform']}; "; }
-		echo "}\n";
+		$logo_font = Mixt_DCSS::parse_typo_field('logo-text-typo',
+			array( 'color' => mixt_get_option( array( 'key' => 'logo-text-color', 'return' => 'value' ) ) ),
+			array('font-family')
+		);
+		if ( ! empty($logo_font) ) echo "#nav-logo strong { $logo_font }\n";
 
 		// Dark Bg Logo Color
 		if ( ! empty($mixt_opt['logo-text-inv']) ) { echo ".bg-dark #nav-logo strong { color: {$mixt_opt['logo-text-inv']}; }\n"; }
@@ -171,6 +174,7 @@ function mixt_custom_css() {
 		// Logo Shrink
 		if ( $mixt_opt['logo-shrink'] != '0' ) {
 			$shrink_amount = $mixt_opt['logo-shrink'];
+			$font_size = ( empty($mixt_opt['logo-text-typo']['font-size']) ) ? '24px' : $mixt_opt['logo-text-typo']['font-size'];
 			$shrink_size   = intval($font_size) - $shrink_amount . 'px';
 
 			echo ".fixed-nav #nav-logo strong { font-size: $shrink_size; }\n";
@@ -178,19 +182,11 @@ function mixt_custom_css() {
 	}
 
 	// Logo Tagline
-	echo "#nav-logo small { ";
-		if ( ! empty($mixt_opt['logo-tagline-color']) ) { echo "color: {$mixt_opt['logo-tagline-color']}; "; }
-		if ( ! empty($mixt_opt['logo-tagline-typo']['font-family']) ) {
-			$tagline_font_family = $mixt_opt['logo-tagline-typo']['font-family'];
-			if ( ! empty($mixt_opt['logo-tagline-typo']['font-backup']) ) {
-				$tagline_font_family .= ', ' . $mixt_opt['logo-tagline-typo']['font-backup'];
-			}
-			echo "font-family: $tagline_font_family !important; ";
-		}
-		if ( ! empty($mixt_opt['logo-tagline-typo']['font-size']) ) { echo "font-size: {$mixt_opt['logo-tagline-typo']['font-size']}; "; }
-		if ( ! empty($mixt_opt['logo-tagline-typo']['font-weight']) ) { echo "font-weight: {$mixt_opt['logo-tagline-typo']['font-weight']}; "; }
-		if ( ! empty($mixt_opt['logo-tagline-typo']['text-transform']) ) { echo "text-transform: {$mixt_opt['logo-tagline-typo']['text-transform']}; "; }
-	echo "}\n";
+	$tagline_font = Mixt_DCSS::parse_typo_field('logo-tagline-typo',
+		array( 'color' => mixt_get_option( array( 'key' => 'logo-tagline-color', 'return' => 'value' ) ) ),
+		array('font-family')
+	);
+	if ( ! empty($logo_font) ) echo "#nav-logo small { $tagline_font }\n";
 
 	// Dark Bg Tagline Color
 	if ( ! empty($mixt_opt['logo-tagline-inv']) ) { echo ".bg-dark #nav-logo small { color: {$mixt_opt['logo-tagline-inv']}; }\n"; }
@@ -237,6 +233,7 @@ function mixt_custom_css() {
 			$half_padding = $nav_pad / 2;
 			$nav_center_height = $nav_height + $defaults['nav-item-height'];
 			$nav_center_item_height = $nav_height - $nav_pad;
+			$nav_line_height_correction = $defaults['nav-line-height-correction'];
 
 			echo ".fixed-nav .nav-full #main-nav-wrap { min-height: {$nav_height}px; }\n";
 			echo ".fixed-nav .nav-full .navbar-mixt { padding-top: {$nav_pad}px; padding-bottom: {$nav_pad}px; }\n";
@@ -245,42 +242,55 @@ function mixt_custom_css() {
 
 			if ( $nav_pad > 0 ) {
 				echo ".fixed-nav .nav-full .navbar-mixt .nav > li { margin-top: -{$nav_pad}px; margin-bottom: -{$nav_pad}px; }\n";
-				echo ".fixed-nav .nav-full .navbar-mixt .nav > li, .fixed-nav .nav-full .navbar-mixt .nav > li > a { height: {$nav_height}px; line-height: " . ($nav_height - 3) . "px; }\n";
+				echo ".fixed-nav .nav-full .navbar-mixt .nav > li, " .
+					 ".fixed-nav .nav-full .navbar-mixt .nav > li > a { height: {$nav_height}px; line-height: " . ($nav_height + $nav_line_height_correction) . "px; }\n";
 
 				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .navbar-header { margin-top: -{$half_padding}px; }\n";
 				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li { margin-top: {$half_padding}px; margin-bottom: -{$nav_pad}px; }\n";
-				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li, .fixed-nav .nav-full .logo-center .navbar-mixt .nav > li > a { height: {$nav_center_item_height}px; line-height: " . ($nav_center_item_height - 3) . "px; }\n";
+				echo ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li, " .
+					 ".fixed-nav .nav-full .logo-center .navbar-mixt .nav > li > a { height: {$nav_center_item_height}px; line-height: " . ($nav_center_item_height + $nav_line_height_correction) . "px; }\n";
 			}
 		}
 	}
 
 	// Vertical Navbar Width
 	if ( $mixt_opt['nav-layout'] == 'vertical' ) {
-		if ( ! empty($mixt_opt['nav-vertical-width-sm']) ) {
-			echo "#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: {$mixt_opt['nav-vertical-width-sm']}; }\n";
-			echo "#main-wrap.nav-vertical.nav-full.nav-left { padding-left: {$mixt_opt['nav-vertical-width-sm']}; }\n";
-			echo "#main-wrap.nav-vertical.nav-full.nav-right { padding-right: {$mixt_opt['nav-vertical-width-sm']}; }\n";
+		$navbar_width_sm = $dimension_field('nav-vertical-width-sm');
+		if ( $navbar_width_sm ) {
+			$width_sm = $navbar_width_sm['width'];
+			if ( $navbar_width_sm['units'] == '%' ) {
+				$width_sm = min(max(intval($width_sm), 10), 100) . '%';
+			}
+			echo "#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: $width_sm; }\n";
+			echo "#main-wrap.nav-vertical.nav-full.nav-left { padding-left: $width_sm; }\n";
+			echo "#main-wrap.nav-vertical.nav-full.nav-right { padding-right: $width_sm; }\n";
 		}
-		if ( ! empty($mixt_opt['nav-vertical-width']) ) {
+
+		$navbar_width = $dimension_field('nav-vertical-width');
+		if ( $navbar_width ) {
+			$width = $navbar_width['width'];
+			if ( $navbar_width['units'] == '%' ) {
+				$width = min(max(intval($width), 10), 100) . '%';
+			}
 			echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('earth', 'min') . " ) {\n";
-				echo "\t#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: {$mixt_opt['nav-vertical-width']}; }\n";
-				echo "\t#main-wrap.nav-vertical.nav-full.nav-left { padding-left: {$mixt_opt['nav-vertical-width']}; }\n";
-				echo "\t#main-wrap.nav-vertical.nav-full.nav-right { padding-right: {$mixt_opt['nav-vertical-width']}; }\n";
+				echo "\t#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: $width; }\n";
+				echo "\t#main-wrap.nav-vertical.nav-full.nav-left { padding-left: $width; }\n";
+				echo "\t#main-wrap.nav-vertical.nav-full.nav-right { padding-right: $width; }\n";
 			echo "}\n";
 		}
 	}
 
-	// Navbar Typography
-	$nav_font = $mixt_opt['font-nav'];
-	if ( ! empty($nav_font['font-family']) ) {
-		if ( ! empty($nav_font['font-backup']) ) { $nav_font['font-family'] .= ', ' . $nav_font['font-backup']; }
-		$navbar_properties .= "font-family: {$nav_font['font-family']}; ";
-	}
-	if ( ! empty($nav_font['font-size']) ) { $navbar_properties .= "font-size: {$nav_font['font-size']}; "; }
-	if ( ! empty($nav_font['font-weight']) ) { $navbar_properties .= "font-weight: {$nav_font['font-weight']}; "; }
-	if ( ! empty($nav_font['text-transform']) ) { $navbar_properties .= "text-transform: {$nav_font['text-transform']}; "; }
-
 	if ( $navbar_properties != '' ) echo ".navbar-mixt { $navbar_properties }\n";
+
+	// Navbar Typography
+	$navbar_item_properties = Mixt_DCSS::parse_typo_field('font-nav');
+
+	if ( $navbar_item_properties != '' ) echo ".navbar-mixt .nav > li > a { $navbar_item_properties }\n";
+
+	// Navbar Submenu Typography
+	$navbar_sub_item_properties = Mixt_DCSS::parse_typo_field('font-nav-sub');;
+
+	if ( $navbar_sub_item_properties != '' ) echo ".navbar-mixt .sub-menu li > a { $navbar_sub_item_properties }\n";
 
 
 	// LOCATION BAR STYLING
@@ -300,6 +310,24 @@ function mixt_custom_css() {
 
 		if ( $loc_bar_styles != '' ) echo "#location-bar { $loc_bar_styles }\n";
 		if ( ! empty($loc_bar_options['text-color']) ) { echo "#location-bar, #location-bar a:hover, #location-bar li:before { color: {$loc_bar_options['text-color']}; }\n"; }
+	}
+
+
+	// HEADING TYPOGRAPHY
+
+	$heading_typo_main = Mixt_DCSS::parse_typo_field('font-heading-main');
+	if ( ! empty($heading_typo_main) ) {
+		echo "h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { $heading_typo_main }\n";
+	}
+
+	$hx = 1;
+
+	while ( $hx <= 6 ) {
+		$heading_typo = Mixt_DCSS::parse_typo_field('font-heading-h'.$hx);
+		if ( ! empty($heading_typo) ) {
+			echo "h{$hx}, .h{$hx} { $heading_typo }\n";
+		}
+		$hx++;
 	}
 
 

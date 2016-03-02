@@ -28,7 +28,7 @@ if ( have_posts() ) {
 				'default' => true,
 			),
 			'content' => array(
-				'key'     => 'portfolio-page-excerpt',
+				'key'     => 'portfolio-page-content',
 				'default' => false,
 			),
 			'meta-comments' => array(

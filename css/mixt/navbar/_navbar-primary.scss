@@ -1,7 +1,7 @@
 
 #main-nav-wrap {
 	position: relative;
-	transition: min-height 0.3s;
+	transition: min-height 0.25s ease-out;
 	z-index: 9999;
 }
 
@@ -16,7 +16,7 @@
 	z-index: 9999;
 	background-image: none;
 	transform: translate3d(0,0,0);
-	transition: padding 0.3s, box-shadow 0.2s, background 0.4s;
+	transition: padding 0.25s ease-out, box-shadow 0.2s, background 0.4s;
 
 	// Header & Logo
 
@@ -35,7 +35,8 @@
 		// Text Logo
 		strong {
 			white-space: nowrap;
-			transition: color 0.3s, font-size 0.2s, visiblity 0.3s, opacity 0.3s;
+			font-size: $font-size-xxl;
+			transition: font-size 0.2s ease-out, color 0.25s, visiblity 0.2s ease-out 0.1s, opacity 0.2s ease-out 0.1s;
 		}
 
 		// Image Logo
@@ -47,7 +48,7 @@
 			line-height: 1;
 			display: inline-block;
 			vertical-align: middle;
-			transition: max-width 0.3s, visiblity 0.2s ease-out 0.1s, opacity 0.2s ease-out 0.1s;
+			transition: max-width 0.2s ease-out, visiblity 0.2s ease-out 0.1s, opacity 0.2s ease-out 0.1s;
 		}
 
 		// Logo Tagline
@@ -67,7 +68,7 @@
 	.nav > li > a,
 	.no-menu-msg {
 		height: $nav-primary-item-height;
-		line-height: $nav-primary-item-height - 3px;
+		line-height: $nav-primary-item-height + $nav-line-height-correction;
 	}
 
 	// Nav Menu
@@ -105,14 +106,13 @@
 		li > a,
 		li .menu-item > a,
 		.mega-menu-column li > a {
-			padding: ($nav-primary-sub-item-height - $font-size) / 2;
+			padding: $nav-primary-sub-pad-h $nav-primary-sub-pad-v;
 		}
 	}
 
 	.mega-menu > .sub-menu > li > a {
-		height: $nav-primary-item-height;
 		max-height: $nav-primary-item-height;
-		padding-top: ($nav-primary-item-height - $font-size) / 2;
+		padding-top: $nav-primary-sub-pad-h + 2px;
 	}
 
 	// Mobile Expand / Collapse Handle
@@ -325,7 +325,7 @@
 			.navbar-mixt .nav > li {
 				margin-top: -$nav-primary-fixed-pad; margin-bottom: -$nav-primary-fixed-pad;
 
-				&, > a { height: $fixed-item-height; line-height: $fixed-item-height - 3px; }
+				&, > a { height: $fixed-item-height; line-height: $fixed-item-height + $nav-line-height-correction; }
 			}
 
 			.logo-center .navbar-mixt {
@@ -334,7 +334,7 @@
 				.nav > li {
 					margin-top: $half-padding; margin-bottom: -$nav-primary-fixed-pad;
 
-					&, > a { height: $fixed-center-item-height; line-height: $fixed-center-item-height - 3px; }
+					&, > a { height: $fixed-center-item-height; line-height: $fixed-center-item-height + $nav-line-height-correction; }
 				}
 			}
 		}
@@ -441,7 +441,6 @@
 		.drop-submenu.arrow-right,
 		.mega-menu-column {
 			> a {
-				font-size: 13px;
 				padding-right: $nav-primary-item-height !important;
 
 				@if $rtl {

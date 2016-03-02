@@ -110,8 +110,6 @@ body.loading {
 		background-repeat: no-repeat;
 		background-position: center top;
 		z-index: 1;
-
-		&.has-parallax { transition: transform 0.05s ease-out; }
 	}
 
 	&.media-image {
@@ -145,7 +143,6 @@ body.loading {
 		display: table;
 		table-layout: fixed;
 		vertical-align: middle;
-		transition: opacity 0.05s ease-out, transform 0.05s ease-out;
 		z-index: 2;
 
 		&.fullwidth {
@@ -198,10 +195,7 @@ body.loading {
 		 > span { margin-right: $margin-s; }
 	}
 
-	.page-title {
-		font-size: $font-size-xxl;
-		margin-top: $margin-l;
-	}
+	.page-title { margin-top: $margin-m; }
 
 	#breadcrumbs {
 		padding-top: 0;
@@ -242,6 +236,15 @@ body.loading {
 	.nav-transparent & { min-height: $nav-primary-height; }
 	.nav-transparent.nav-below & .container { padding-top: 0 !important; }
 
+	// Parallax
+	&.has-parallax {
+		.media-container,
+		.ls-container {
+			will-change: transform;
+		}
+	}
+
+	// Shrink spacing on small screens
 	@include media('screen', '<mars') {
 		.container { width: 100%; }
 		.media-inner { padding: ( $spacing-sm - $spacing-content ) 0 $spacing-sm 0 !important; }
@@ -258,8 +261,8 @@ body.loading {
 
 	.container { height: auto; }
 
-	$padding: 15px;
-	$spacing: $margin-s;
+	$padding: $margin-s + 5px;
+	$spacing: $padding;
 
 	.inner {
 		width: 100%;
@@ -271,7 +274,7 @@ body.loading {
 	.page-title {
 		h1 {
 			margin: 0;
-			font-size: 16px;
+			font-size: $font-size-h3;
 		}
 
 		p {
@@ -313,6 +316,7 @@ body.loading {
 #breadcrumbs {
 	border-radius: 0;
 	margin-bottom: 0;
+	min-width: 160px;
 	background: none;
 
 	@extend %reset-list;

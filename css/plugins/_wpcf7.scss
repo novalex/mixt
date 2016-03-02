@@ -33,7 +33,7 @@
 		&.wpcf7-mail-sent-ng { @extend .alert-danger; }
 	}
 	.wpcf7-not-valid-tip {
-		font-size: 12px;
+		font-size: $font-size-xs;
 		color: $red;
 	}
 	.wpcf7-submit {

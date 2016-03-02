@@ -24,8 +24,20 @@
 
 	$bg-dark-color: if( $theme-dark, $color, $color-inv );
 	$bg-dark-color-fade: if( $theme-dark, $color-fade, $color-inv-fade );
+
+	$bg-alt: darken($bg, 2);
+	$color-alt: $color;
+	@if ( map-has-key($theme, 'bg-alt') ) {
+		$bg-alt: map-get($theme, 'bg-alt');
+		$color-alt: contrast-color($bg-alt, $color, $color-inv);
+	}
+	$color-alt: theme-color($theme, 'color-alt', $color-alt);
+	$border-alt: theme-color($theme, 'border-alt', $border);
+
+	$bg-inv: theme-color($theme, 'bg-inv', lighten(invert($bg), 10));
+	$border-inv: theme-color($theme, 'border-inv', darken($bg-inv, 10));
 		
-	$input-bg: darken($bg, 3);
+	$input-bg: darken($bg, 2);
 	$input-border: darken($bg, 10);
 
 	.theme-#{$name} {
@@ -64,15 +76,6 @@
 		}
 
 		.theme-section-alt {
-			$bg-alt: darken($bg, 2);
-			$color-alt: $color;
-			@if ( map-has-key($theme, 'bg-alt') ) {
-				$bg-alt: map-get($theme, 'bg-alt');
-				$color-alt: contrast-color($bg-alt, $color, $color-inv);
-			}
-			$color-alt: theme-color($theme, 'color-alt', $color-alt);
-			$border-alt: theme-color($theme, 'border-alt', $border);
-
 			color: $color-alt;
 			border-color: $border-alt;
 			background-color: $bg-alt;
@@ -85,9 +88,6 @@
 		}
 
 		.theme-section-inv {
-			$bg-inv: theme-color($theme, 'bg-inv', lighten(invert($bg), 10));
-			$border-inv: theme-color($theme, 'border-inv', darken($bg-inv, 10));
-
 			color: $color-inv;
 			border-color: $border-inv;
 			background-color: $bg-inv;
@@ -142,11 +142,11 @@
 		&,
 		#content-wrap,
 		.sidebar ul,
-		.post-feat.feat-format,
 		.wp-caption,
-		hr {
-			border-color: $border;
-		}
+		hr { border-color: $border; }
+
+		.article.sticky .page-title,
+		.article.sticky-post .page-title { border-color: $accent; }
 
 		.comment-list .bypostauthor > .comment-cont { border-left-color: $accent; }
 
@@ -155,10 +155,23 @@
 		
 		.accent-bg:hover,
 		.hover-accent-bg:hover,
+		.post-feat.post-link,
+		.post-feat.feat-format,
+		.post-feat.post-quote,
 		.tag-list a:hover,
 		.tagcloud a:hover {
 			color: set-color-for-bg($accent) !important;
 			background-color: $accent;
+		}
+
+		.post-feat.post-aside {
+			color: $color-inv;
+			background-color: fade-out($bg-inv, 0.2);
+		}
+
+		.post-feat.post-status {
+			color: $color-alt;
+			background-color: $bg-alt;
 		}
 
 		.article .post-info .post-date { background-color: darken($bg, 5); }
@@ -203,8 +216,6 @@
 			border-color: darken($bg, 10);
 			border-left-color: $accent;
 			background-color: darken($bg, 2);
-
-			cite { color: $color-fade; }
 		}
 
 

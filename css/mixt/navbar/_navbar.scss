@@ -87,7 +87,7 @@
 			}
 		}
 
-		li > a { font-size: 12px; }
+		&.social-links > li > a { width: $sec-nav-item-height; }
 
 		.menu-icon { font-size: 14px; }
 
@@ -127,7 +127,6 @@
 	// Custom Code / Text
 	.content-code { display: table; }
 	.code-inner {
-		font-size: 13px;
 		display: table-cell;
 		vertical-align: middle;
 

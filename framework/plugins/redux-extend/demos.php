@@ -25,11 +25,7 @@ function mixt_wbc_after_import($demo_import, $demo_dir) {
 		$menu_locations = get_theme_mod('nav_menu_locations');
 
 		if ( isset( $main_menu->term_id ) ) {
-			if ( $demo_id == 'one-page' ) {
-				$menu_locations['onepage'] = $main_menu->term_id;
-			} else {
-				$menu_locations['primary'] = $main_menu->term_id;
-			}
+			$menu_locations['primary'] = $main_menu->term_id;
 		}
 
 		if ( $demo_id == 'classic' ) {

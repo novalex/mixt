@@ -46,6 +46,8 @@ $item-bd-color: #eee;
 .wpb_el_type_button .mixt-button-field {
 	.button-fields-wrap {
 		width: 100%;
+
+		label > select { margin-top: 5px; }
 	}
 }
 

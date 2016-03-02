@@ -16,17 +16,30 @@
 	.comment-cont,
 	.comment-nav { border-color: inherit; }
 
-	.comment-list .bypostauthor {
-		> .comment-cont {
-			border-left-width: 2px;
-			border-left-style: solid;
+	.comment-list {
+		.pingback {
+			padding: $padding-s 0;
+
+			.edit-link { margin-left: $margin-xs; }
 		}
-		
-		article,
-		#respond { padding-left: $padding-m; }
+
+		.bypostauthor {
+			> .comment-cont {
+				border-left-width: 2px;
+				border-left-style: solid;
+			}
+			
+			article,
+			#respond { padding-left: $padding-m; }
+		}
+
+		+ .no-comments { margin-top: $margin-m; }
 	}
 
-	.no-comments { font-size: 15px; }
+	.no-comments {
+		font-size: $font-size-m;
+		font-weight: bold;
+	}
 }
 
 .comment {
@@ -51,12 +64,13 @@
 	&.depth-1 > .children { margin-left: 0; }
 
 	.edit-link { margin-left: 5px; }
-	.comment-reply-link { font-size: $font-size + 1px; }
+	.comment-reply-link { font-size: $font-size-m; }
 
 	#respond { margin-bottom: $margin-m; }
 }
 
 .comment-cont,
+.comment-list .pingback,
 #comment-nav-bottom {
 	margin-top: -1px;
 	padding: $padding-m 0;
@@ -78,9 +92,9 @@
 	.comment-meta { font-size: $font-size-s; }
 }
 
-.comment-content {
-	margin-top: $margin-s;
-}
+.comment-content,
+.comment-reply { margin-top: $margin-s; }
+.comment-content p:last-child { margin-bottom: 0; }
 
 .comment-nav {
 	.pager { margin: 15px 0; }
@@ -92,17 +106,21 @@
 	#reply-title {
 		margin: $margin-m 0;
 		font-size: $font-size-l;
+
+		small:not(:only-child) > a { margin-left: 5px; }
 	}
-	#cancel-comment-reply-link {
-		margin-left: 5px;
-		font-size: $font-size-s;
-	}
+	#cancel-comment-reply-link { font-size: $font-size-s; }
+	
 	.logged-in-as,
 	.comment-notes,
-	.form-allowed-tags { font-size: $font-size-s; }
+	.form-allowed-tags,
+	.allowed-tags { font-size: $font-size-s; }
 
 	.required { color: $red; }
 
 	.form-submit { margin: 0; }
 }
-.headline + .comment-list > .comment:first-child > .comment-cont:first-child { border-top-width: 0; padding-top: 0; }
+.headline + .comment-list {
+	> .pingback:first-child,
+	> .comment:first-child > .comment-cont:first-child { border-top-width: 0; padding-top: 0; }
+}

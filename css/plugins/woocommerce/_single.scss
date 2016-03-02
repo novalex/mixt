@@ -39,7 +39,18 @@
 				}
 
 				.price {
-					font-size: $font-size-xl !important;
+					font-weight: bold;
+
+					&,
+					ins,
+					del,
+					.amount { line-height: 32px; }
+					
+					> .amount,
+					ins {
+						font-size: $font-size-xl !important;
+						vertical-align: middle;
+					}
 
 					del { font-size: $font-size-l; }
 				}
@@ -60,19 +71,24 @@
 
 				.label {
 					display: table-cell;
+					font-size: $font-size;
 					padding: 0 $wc-spacing $wc-spacing-s;
 
 					label {
 						margin: 0;
-						font-size: $font-size;
+						font-weight: bold;
 
 						a { color: inherit; }
 					}
 				}
 
 				.price {
-					font-weight: bold;
-					font-size: $font-size-m !important;
+					line-height: 1;
+
+					> .amount,
+					ins {
+						font-size: $font-size-m !important;
+					}
 
 					del { opacity: 0.8; font-size: 90%; }
 				}
@@ -187,6 +203,7 @@
 					h2 {
 						margin-top: 0;
 						margin-bottom: $spacing;
+						font-size: $font-size-h3;
 					}
 				}
 
@@ -223,8 +240,8 @@
 								border: 0;
 
 								p.meta {
-									font-size: 85%;
-									margin-bottom: $spacing;
+									font-size: 90%;
+									margin-bottom: $margin-s;
 								}
 
 								.description > :last-child {

@@ -16,9 +16,9 @@ if ( empty($post_content) ) return;
 
 ?>
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( $post_ob->classes() ); ?>>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( array($post_ob->classes(), 'posts-page-content' ) ); ?>>
 
-	<div class="entry-body entry-content"><?php
+	<div class="entry-body entry-content page-content"><?php
 
 		echo $post_content;
 

@@ -1,16 +1,5 @@
 <?php
 
-// REDUX WOOCOMMERCE FIELDS
-
-// DIVIDER
-
-$this->sections[] = array(
-	'type' => 'divide',
-);
-
-
-// SHOP SECTION
-
 $this->sections[] = array(
 	'title'      => __( 'Shop', 'mixt' ),
 	'desc'       => __( 'Customize the shop\'s options and appearance', 'mixt' ),
@@ -18,12 +7,48 @@ $this->sections[] = array(
 	'customizer' => false,
 	'fields'     => array(
 
+		// Nav Menu
+		array(
+			'id'       => 'shop-page-nav-menu',
+			'type'     => 'select',
+			'title'    => __( 'Nav Menu', 'mixt' ),
+			'subtitle' => __( 'Select the menu for this page', 'mixt' ),
+			'options'  => $nav_menus,
+			'default'  => 'auto',
+		),
+
+		// Fullwidth
+		array(
+			'id'       => 'shop-page-page-fullwidth',
+			'type'     => 'button_set',
+			'title'    => __( 'Full Width', 'mixt' ),
+			'options'  => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default'  => 'auto',
+		),
+
+		// Sidebar
+		array(
+			'id'       => 'shop-page-page-sidebar',
+			'type'     => 'button_set',
+			'title'    => __( 'Show Sidebar', 'mixt' ),
+			'options'  => array(
+				'auto'  => __( 'Auto', 'mixt' ),
+				'true'  => __( 'Yes', 'mixt' ),
+				'false' => __( 'No', 'mixt' ),
+			),
+			'default'  => 'auto',
+		),
+
 		// Shop Sidebar
 		array(
-			'id'       => 'wc-sidebar',
+			'id'       => 'shop-page-sidebar-id',
 			'type'     => 'select',
 			'title'    => __( 'Sidebar', 'mixt' ),
-			'desc'     => __( 'Select a sidebar to use on shop pages', 'mixt' ),
+			'subtitle' => __( 'Select a sidebar to use on this page', 'mixt' ),
 			'options'  => $available_sidebars,
 			'default'  => '',
 		),
@@ -34,7 +59,7 @@ $this->sections[] = array(
 			'type' => 'divide',
 		),
 
-		// RELATED POSTS SECTION
+		// RELATED POSTS
 		array(
 			'id'       => 'shop-catalog-section',
 			'type'     => 'section',
@@ -215,7 +240,7 @@ $this->sections[] = array(
 );
 
 
-// SINGLE PRODUCT PAGE SECTION
+// SINGLE PRODUCT PAGE
 
 $this->sections[] = array(
 	'title'      => __( 'Product Page', 'mixt' ),

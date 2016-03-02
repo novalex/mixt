@@ -11,26 +11,20 @@ $post_ob = new Mixt_Post('single');
 $post_classes = array(
 	$post_ob->classes(),
 );
-
 $header_classes = 'page-header';
-$content_classes = 'entry-body entry-content';
+$content_classes = 'entry-body entry-content post-content';
 
 $has_columns = false;
 
 if ( is_single() ) {
-	$options = mixt_get_options( array(
-		'project-layout' => array(
-			'return'  => 'value',
-			'default' => 'full',
-		),
-	) );
+	$layout = mixt_get_option( array( 'key' => 'project-layout', 'return'  => 'value', 'default' => 'full' ) );
 
-	if ( $options['project-layout'] != 'full' && $post_ob->display_component('featured') ) {
+	if ( $layout != 'full' && $post_ob->display_component('featured') ) {
 		$has_columns = true;
 
 		$post_classes[] = 'has-columns';
 
-		switch ( $options['project-layout'] ) {
+		switch ( $layout ) {
 			case 'two-thirds':
 				$header_classes .= ' col-sm-8';
 				$content_classes .= ' col-sm-4';

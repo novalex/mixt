@@ -41,7 +41,6 @@ class Mixt_DCSS {
 	public static $media_bps = array();
 
 	public function __construct() {
-		$media_bps = mixt_media_breakpoints();
 
 		// Output CSS in the header
 		add_action('mixt_head_code', array($this, 'print_head_css'));
@@ -106,6 +105,10 @@ class Mixt_DCSS {
 	 * @return string
 	 */
 	public static function media_bp($bp, $range = 'max') {
+		if ( empty(self::$media_bps) ) self::$media_bps = mixt_media_breakpoints();
+
+		if ( ! isset($bp, self::$media_bps) ) return '0px';
+
 		if ( $range == 'max' ) {
 			return self::$media_bps[$bp] - 1 . 'px';
 		} else {
@@ -293,6 +296,50 @@ class Mixt_DCSS {
 		}
 
 		return ob_get_clean();
+	}
+
+
+	/**
+	 * Parse typography field and return CSS string of all applicable rules
+	 *
+	 * @param string $id         The ID of the typography field
+	 * @param array  $defaults   Default values
+	 * @param array  $importants Properties that will be made "important"
+	 */
+	public static function parse_typo_field($id, $defaults = array(), $importants = array() ) {
+		$field = mixt_get_option( array( 'key' => $id, 'return' => 'value' ) );
+		if ( empty($field) && empty($defaults) ) {
+			return '';
+		} else {
+			$field = (array) $field + (array) $defaults;
+		}
+
+		$string = '';
+
+		// Font family and backup font
+		if ( ! empty($field['font-family']) ) {
+			if ( preg_match('/\s/', $field['font-family']) ) {
+				$font_family = '"' . $field['font-family'] . '"';
+			} else {
+				$font_family = $field['font-family'];
+			}
+			if ( ! empty($field['font-backup']) ) {
+				$font_family .= ', ' . $field['font-backup'];
+			}
+			if ( array_key_exists('font-family', $importants) ) $font_family .= ' !important';
+			$string .= "font-family: {$font_family}; ";
+		}
+
+		// Other properties
+		foreach ( $field as $prop => $val ) {
+			if ( in_array($prop, array('font-family', 'font-backup', 'google', 'subsets') ) || empty($val) ) continue;
+
+			if ( array_key_exists($prop, $importants) ) $val .= ' !important';
+
+			$string .= "$prop: $val; ";
+		}
+
+		return rtrim($string);
 	}
 }
 new Mixt_DCSS();

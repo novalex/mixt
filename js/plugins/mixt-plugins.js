@@ -9,13 +9,13 @@ JS PLUGINS
 
 
 // Get Current Breakpoint (Global)
-var breakpoint = {};
-breakpoint.refresh = function() {
-	this.name = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+var breakpoint = {
+	name: '',
+	refresh: function() {
+		this.name = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+	}
 };
-jQuery(window).resize( function() {
-	breakpoint.refresh();
-}).resize();
+jQuery(window).resize( function() { breakpoint.refresh(); }).resize();
 
 
 // Resize Iframes Proportionally
@@ -36,14 +36,16 @@ function iframeAspect(selector) {
 }
 
 
-// Lighten / Darken Color - Credit "Pimp Trizkit" - http://stackoverflow.com/users/693927/pimp-trizkit
+// Lighten / Darken Color
+// Credit "Pimp Trizkit" - http://stackoverflow.com/users/693927/pimp-trizkit
 function shadeColor(color, percent) {   
 	var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
 	return '#'+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
 }
 
 
-// Blend Colors - Credit "Pimp Trizkit" - http://stackoverflow.com/users/693927/pimp-trizkit
+// Blend Colors
+// Credit "Pimp Trizkit" - http://stackoverflow.com/users/693927/pimp-trizkit
 function blendColors(c0, c1, p) {
 	var f=parseInt(c0.slice(1),16),t=parseInt(c1.slice(1),16),R1=f>>16,G1=f>>8&0x00FF,B1=f&0x0000FF,R2=t>>16,G2=t>>8&0x00FF,B2=t&0x0000FF;
 	return '#'+(0x1000000+(Math.round((R2-R1)*p)+R1)*0x10000+(Math.round((G2-G1)*p)+G1)*0x100+(Math.round((B2-B1)*p)+B1)).toString(16).slice(1);
@@ -68,7 +70,8 @@ function colorToRgba(color, opacity) {
 }
 
 
-// Color Light Or Dark - Credit "Larry Fox" - https://gist.github.com/larryfox/1636338
+// Color Light Or Dark
+// Credit "Larry Fox" - https://gist.github.com/larryfox/1636338
 function colorLoD(color) {
 	var r,b,g,hsp,a = color;
 	if (a.match(/^rgb/)) {
@@ -87,7 +90,8 @@ function colorLoD(color) {
 } 
 
 
-// Image Light Or Dark Image - Credit "Joseph Portelli" - http://stackoverflow.com/users/149636/joseph-portelli
+// Image Light Or Dark Image
+// Credit "Joseph Portelli" - http://stackoverflow.com/users/149636/joseph-portelli
 function imageLoD(imageSrc, callback) {
 	var img = document.createElement('img');
 	img.src = imageSrc;
@@ -178,8 +182,169 @@ function elemVisible(elem, cont) {
 }
 
 
-( function($) {
+// Smooth Scrolling For Webkit Browsers
+// Based on https://github.com/iahnn/Firefox-like-smooth-scroll-for-chrome
+var Mixt_SmoothScroll = {
+	root:    document.documentElement,
+	active:  document.body,
+	pending: false,
+	frame:   false,
+	cache:   {},
+	queue:   {},
+	dir:     { x: 0, y: 0 },
+	framerate: 60,
+	anim_time: 200,
+	step_size: 50,
 
+	init: function() {
+		var platform  = navigator.platform.toLowerCase();
+		if ( ! jQuery.browser.webkit || ( platform.indexOf('win') != 0 && platform.indexOf('linux') != 0 ) ) return;
+
+		var body = document.body,
+			doc = document.documentElement,
+			innerHeight = window.innerHeight,
+			scrollHeight = body.scrollHeight;
+
+		Mixt_SmoothScroll.addListeners();
+
+		Mixt_SmoothScroll.root = ( document.compatMode.indexOf('CSS') >= 0 ) ? doc : body;
+		Mixt_SmoothScroll.active = body;
+		if ( window.top != window.self ) {
+			Mixt_SmoothScroll.frame = true;
+		} else if ( scrollHeight > innerHeight && ( body.offsetHeight <= innerHeight || doc.offsetHeight <= innerHeight ) ) {
+			Mixt_SmoothScroll.root.style.height = 'auto';
+			if ( Mixt_SmoothScroll.root.offsetHeight <= innerHeight ) {
+				var i = document.createElement('div');
+				i.style.clear = 'both';
+				body.appendChild(i);
+			}
+		}
+		window.setInterval( function () { Mixt_SmoothScroll.cache = {}; }, 10000 );
+	},
+
+	addListeners: function() {
+		window.addEventListener('mousedown', Mixt_SmoothScroll.mousedown);
+		window.addEventListener('mousewheel', Mixt_SmoothScroll.mousewheel);
+	},
+
+	mousedown: function(e) { Mixt_SmoothScroll.active = e.target; },
+
+	scrollArray: function(e, t, n, r) {
+		r = r || 1000;
+		Mixt_SmoothScroll.directionCheck(t, n);
+		Mixt_SmoothScroll.queue.push({
+			x: t, y: n,
+			lastX: t < 0 ? 0.99 : -0.99,
+			lastY: n < 0 ? 0.99 : -0.99,
+			start: +(new Date())
+		});
+
+		if ( Mixt_SmoothScroll.pending ) return;
+
+		var i = function () {
+			var s = +(new Date()),
+				o = 0,
+				u = 0;
+			for ( var a = 0; a < Mixt_SmoothScroll.queue.length; a++ ) {
+				var f = Mixt_SmoothScroll.queue[a],
+					l = s - f.start,
+					c = l >= Mixt_SmoothScroll.anim_time,
+					h = c ? 1 : l / Mixt_SmoothScroll.anim_time,
+					p = f.x * h - f.lastX >> 0,
+					d = f.y * h - f.lastY >> 0;
+				o += p;
+				u += d;
+				f.lastX += p;
+				f.lastY += d;
+				if ( c ) {
+					Mixt_SmoothScroll.queue.splice(a, 1);
+					a--;
+				}
+			}
+			if ( t ) {
+				var v = e.scrollLeft;
+				e.scrollLeft += o;
+				if ( o && e.scrollLeft === v ) { t = 0; }
+			}
+			if ( n) {
+				var m = e.scrollTop;
+				e.scrollTop += u;
+				if ( u && e.scrollTop === m ) { n = 0; }
+			}
+			if ( ! t && ! n ) Mixt_SmoothScroll.queue = [];
+
+			if ( Mixt_SmoothScroll.queue.length ) {
+				setTimeout(i, r / Mixt_SmoothScroll.framerate + 1);
+			} else {
+				Mixt_SmoothScroll.pending = false;
+			}
+		};
+		setTimeout(i, 0);
+		Mixt_SmoothScroll.pending = true;
+	},
+
+	directionCheck: function(e, t) {
+	    e = e > 0 ? 1 : -1;
+	    t = t > 0 ? 1 : -1;
+	    if ( Mixt_SmoothScroll.dir.x !== e || Mixt_SmoothScroll.dir.y !== t ) {
+	        Mixt_SmoothScroll.dir.x = e;
+	        Mixt_SmoothScroll.dir.y = t;
+	        Mixt_SmoothScroll.queue = [];
+	    }
+	},
+
+	mousewheel: function(e) {
+		var t = e.target,
+			obj = Mixt_SmoothScroll,
+			n = obj.overflowingAncestor(t);
+		if ( ! n || e.defaultPrevented || obj.isNodeName(obj.active, 'embed') || obj.isNodeName(t, 'embed') && /\.pdf/i.test(t.src) ) { return true; }
+		var r = e.wheelDeltaX || 0,
+			i = e.wheelDeltaY || 0;
+		if ( ! r && ! i ) i = e.wheelDelta || 0;
+		if ( Math.abs(r) > 1.2 ) r *= obj.step_size / 120;
+		if ( Math.abs(i) > 1.2 ) i *= obj.step_size / 120;
+		obj.scrollArray(n, -r, -i);
+		e.preventDefault();
+	},
+
+	overflowingAncestor: function(e) {
+		var t = [];
+		var n = Mixt_SmoothScroll.root.scrollHeight;
+		do {
+			var r = Mixt_SmoothScroll.cache[Mixt_SmoothScroll.uniqueID(e)];
+			if ( r ) { return Mixt_SmoothScroll.setCache(t, r); }
+			t.push(e);
+			if ( n === e.scrollHeight ) {
+				if ( ! Mixt_SmoothScroll.frame || Mixt_SmoothScroll.root.clientHeight + 10 < n ) {
+					return Mixt_SmoothScroll.setCache(t, document.body);
+				}
+			} else if ( e.clientHeight + 10 < e.scrollHeight ) {
+				var overflow = getComputedStyle(e, '').getPropertyValue('overflow');
+				if ( overflow === 'scroll' || overflow === 'auto' ) { return Mixt_SmoothScroll.setCache(t, e); }
+			}
+		} while ( ( e = e.parentNode ) !== null );
+	},
+
+	uniqueID: function() {
+		var e = 0;
+		return function (t) {
+			return t.Mixt_SmoothScroll.uniqueID || ( t.Mixt_SmoothScroll.uniqueID = e++ );
+		};
+	},
+
+	isNodeName: function(e, t) {
+		return e.nodeName.toLowerCase() === t.toLowerCase();
+	},
+
+	setCache: function(e, t) {
+		for ( var n = e.length; n--; ) Mixt_SmoothScroll.cache[Mixt_SmoothScroll.uniqueID(e[n])] = t;
+		return t;
+	}
+};
+
+
+( function($) {
+	
 	// Resize text based on container width
 	$.fn.bigText = function(options) {
 		var settings = $.extend({
@@ -203,6 +368,7 @@ function elemVisible(elem, cont) {
 					} else {
 						$this.removeClass('wrap-text');
 					}
+					$this.addClass('init');
 				};
 
 			fit();

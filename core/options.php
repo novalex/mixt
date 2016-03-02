@@ -78,9 +78,8 @@ class Mixt_Options {
 	}
 
 	/**
-	 * Retrieve a group of options
+	 * Set global options by group
 	 * 
-	 * @param  string $group
 	 * @return array
 	 */
 	public static function set_options() {
@@ -95,13 +94,15 @@ class Mixt_Options {
 				'icon-fonts' => array( 'return' => 'value' ),
 			),
 			'page' => array(
-				'layout'       => array( 'key' => 'site-layout', 'return' => 'value' ),
-				'responsive'   => array( 'key' => 'site-responsive' ),
-				'page-loader'  => array(),
-				'fullwidth'    => array( 'key' => 'page-fullwidth' ),
-				'location-bar' => array(),
+				'layout'        => array( 'key' => 'site-layout', 'return' => 'value' ),
+				'responsive'    => array( 'key' => 'site-responsive' ),
+				'page-loader'   => array(),
+				'fullwidth'     => array( 'key' => 'page-fullwidth', 'inherited' => true ),
+				'location-bar'  => array(),
+				'smooth-scroll' => array(),
 			),
 			'nav' => array(
+				'menu'           => array( 'key' => 'nav-menu', 'return' => 'value', 'default' => 'auto', 'inherited' => true ),
 				'layout'         => array( 'key' => 'nav-layout', 'return' => 'value' ),
 				'mode'           => array( 'key' => 'nav-mode', 'return' => 'value' ),
 				'vertical-mode'  => array( 'key' => 'nav-vertical-mode', 'return' => 'value' ),
@@ -127,27 +128,27 @@ class Mixt_Options {
 				'scroll'       => array( 'key' => 'head-content-scroll' ),
 				'media-type'   => array( 'key' => 'head-media-type', 'type' => 'str', 'return' => 'value', 'default' => 'color' ),
 				'img-src'      => array( 'key' => 'head-img-src', 'type' => 'str', 'return' => 'value' ),
-				'parallax'     => array( 'key' => 'head-img-parallax' ),
+				'parallax'     => array( 'key' => 'head-parallax', 'return' => 'value' ),
 
 				'location-bar' => array(),
 				'loc-bar-left-content' => array( 'type' => 'str', 'return' => 'value' ),
 				'loc-bar-right-content' => array( 'type' => 'str', 'return' => 'value' ),
 			),
 			'layout' => array(
-				'type'            => array( 'key' => '{page_type}-type', 'return' => 'value', 'default' => 'standard' ),
-				'columns'         => array( 'key' => '{page_type}-columns', 'return' => 'value', 'default' => '2' ),
-				'feat-show'       => array( 'key' => '{page_type}-feat-show', 'default' => true ),
-				'feat-size'       => array( 'key' => '{page_type}-feat-size', 'return' => 'value', 'default' => 'blog-large' ),
-				'post-info'       => array( 'key' => '{page_type}-post-info', 'default' => false ),
-				'post-content'    => array( 'return' => 'value' ),
-				'meta-show'       => array( 'key' => '{page_type}-meta-show', 'return' => 'value', 'default' => 'header' ),
-				'pagination-type' => array( 'return' => 'value' ),
-				'show-page-nr'    => array(),
+				'type'              => array( 'key' => 'layout-type', 'return' => 'value', 'default' => 'standard', 'inherited' => true ),
+				'columns'           => array( 'key' => 'layout-columns', 'return' => 'value', 'default' => '2', 'inherited' => true ),
+				'feat-show'         => array( 'default' => true, 'inherited' => true ),
+				'feat-size'         => array( 'return' => 'value', 'default' => 'blog-large', 'inherited' => true ),
+				'post-info'         => array( 'default' => false, 'inherited' => true ),
+				'post-content-type' => array( 'return' => 'value', 'default' => 'full', 'inherited' => true ),
+				'meta-show'         => array( 'return' => 'value', 'default' => 'header', 'inherited' => true ),
+				'pagination-type'   => array( 'return' => 'value' ),
+				'show-page-nr'      => array(),
 				'comment-pagination-type' => array( 'return' => 'value' ),
 			),
 			'sidebar' => array(
-				'enabled'  => array( 'key' => 'page-sidebar' ),
-				'id'       => array( 'key' => 'sidebar-id', 'type' => 'str', 'return' => 'value', 'default' => 'none' ),
+				'enabled'  => array( 'key' => 'page-sidebar', 'inherited' => true ),
+				'id'       => array( 'key' => 'sidebar-id', 'type' => 'str', 'return' => 'value', 'default' => 'none', 'inherited' => true ),
 				'position' => array( 'key' => 'sidebar-position', 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
 				'hide'     => array( 'key' => 'sidebar-hide' ),
 				'page-nav' => array( 'key' => 'child-page-nav' ),
@@ -160,17 +161,10 @@ class Mixt_Options {
 			'show-admin-bar' => is_admin_bar_showing(),
 		);
 
+		/**
+		 * Process options
+		 */
 		foreach ( $options as $group => $opts ) {
-			if ( $group == 'layout' ) {
-				$page_type = $page_options['page-type'];
-				if ( $page_type != 'blog' && $page_options['posts-page'] ) {
-					global $mixt_opt;
-					$page_type = ( ! empty($mixt_opt[$page_type.'-page-inherit']) && $mixt_opt[$page_type.'-page-inherit'] ) ? 'blog' : $page_type . '-page';
-				}
-				foreach ( $opts as $name => $data ) {
-					if ( isset($data['key']) ) { $opts[$name]['key'] = str_replace('{page_type}', $page_type, $data['key']); }
-				}
-			}
 			self::set($group, null, self::get_options($opts));
 		}
 
@@ -186,7 +180,7 @@ class Mixt_Options {
 			if ( self::is_shop() ) {
 				// Set sidebar for shop pages
 				global $mixt_opt;
-				if ( isset($mixt_opt['wc-sidebar']) ) self::set('sidebar', 'id', $mixt_opt['wc-sidebar']);
+				if ( isset($mixt_opt['shop-page-sidebar-id']) ) self::set('sidebar', 'id', $mixt_opt['shop-page-sidebar-id']);
 			} else {
 				self::set('sidebar', 'id', 'sidebar-1');
 			}
@@ -219,15 +213,6 @@ class Mixt_Options {
 		}
 		if ( self::get('themes', 'footer') == 'auto' ) self::set('themes', 'footer', $site_theme);
 
-		// Override sidebar switch for project pages
-		if ( self::get('page', 'page-type') == 'project' && mixt_meta('_mixt-page-sidebar') == 'auto' ) {
-			$project_sidebar = mixt_get_option( array( 'key' => 'project-sidebar', 'return' => 'value' ) );
-			if ( $project_sidebar != 'auto' ) {
-				$sidebar_enabled = filter_var($project_sidebar, FILTER_VALIDATE_BOOLEAN);
-				self::set('sidebar', 'enabled', $sidebar_enabled);
-			}
-		}
-
 		// Perform "options set" action
 		do_action('mixt_options_set');
 	}
@@ -243,16 +228,16 @@ class Mixt_Options {
 		if ( $type != '' && ! $refresh ) return $type;
 
 		if ( is_author() ) { $type = 'author'; }
+		else if ( is_tag() ) { $type = 'tag'; }
+		else if ( is_date() ) { $type = 'date'; }
+		else if ( is_tax() ) { $type = 'taxonomy'; }
+		else if ( is_search() ) { $type = 'search'; }
+		else if ( is_category() ) { $type = 'category'; }
 		else if ( self::is_blog() ) { $type = 'blog'; }
 		else if ( self::is_portfolio() ) { $type = 'portfolio'; }
 		else if ( self::is_shop('catalog') ) { $type = 'shop'; }
 		else if ( get_page_template_slug() == 'templates/one-page.php' ) { $type = 'onepage'; }
 		else if ( get_page_template_slug() == 'templates/blank.php' ) { $type = 'blank'; }
-		else if ( is_category() ) { $type = 'category'; }
-		else if ( is_date() ) { $type = 'date'; }
-		else if ( is_search() ) { $type = 'search'; }
-		else if ( is_tag() ) { $type = 'tag'; }
-		else if ( is_tax() ) { $type = 'taxonomy'; }
 		else if ( is_singular('portfolio') ) { $type = 'project'; }
 		else { $type = 'single'; }
 
@@ -261,7 +246,7 @@ class Mixt_Options {
 
 	// Check if page is a blog page
 	public static function is_blog() {
-		return ( ! is_front_page() && is_home() || get_page_template_slug() == 'templates/blog.php' );
+		return ( ( is_home() && ( ! is_front_page() || get_option('show_on_front') == 'posts' ) ) || get_page_template_slug() == 'templates/blog.php' );
 	}
 
 	// Check if page is a portfolio page
@@ -288,6 +273,7 @@ class Mixt_Options {
 	public static function is_posts_page() {
 		$single_pages = array(
 			'single',
+			'blank',
 			'onepage',
 			'project',
 		);
@@ -317,47 +303,76 @@ class Mixt_Options {
 
 		$page_type     = self::page_type();
 		$is_posts_page = self::is_posts_page();
-		if ( $page_type != 'blog' && $is_posts_page ) { $page_type .= '-page'; }
+
+		if ( empty($post_id) && ( is_singular() || ( ! is_front_page() && is_home() ) ) ) {
+			$post_id = get_queried_object_id();
+		}
 
 		foreach ( $option_arr as $k => $option ) {
 			$defaults = array(
-				'key'     => $k,
-				'type'    => 'bool',
-				'true'    => 'true',
-				'false'   => 'false',
-				'default' => '',
-				'return'  => 'bool',
-				'prefix'  => '',
-				'suffix'  => '',
+				'key'       => $k,
+				'type'      => 'bool',
+				'true'      => 'true',
+				'false'     => 'false',
+				'default'   => '',
+				'return'    => 'bool',
+				'prefix'    => '',
+				'suffix'    => '',
+				'inherited' => false,
 			);
 			extract(wp_parse_args($option, $defaults));
 
-			// Get Page Specific Option Value
-			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
-				$meta_key = '_mixt-' . $key;
-				$meta_val = get_post_meta(get_queried_object_id(), $meta_key, true);
-				if ( ! empty($post_id) ) {
-					$page_value = get_post_meta($post_id, $meta_key, true);
-				} else if ( ! empty($mixt_opt[$page_type.'-'.$key]) && $meta_val == '' ) {
-					$page_value = $mixt_opt[$page_type.'-'.$key];
+			// Handle inherited options
+			if ( $page_type != 'blog' && $is_posts_page ) {
+				if ( $inherited && ! empty($mixt_opt[$page_type.'-page-inherit']) && $mixt_opt[$page_type.'-page-inherit'] ) {
+					$page_type_now = 'blog';
 				} else {
-					if ( $is_posts_page && ! in_array($page_type, array('blog', 'portfolio-page')) ) {
+					$page_type_now = $page_type . '-page';
+				}
+			} else {
+				$page_type_now = $page_type;
+			}
+			$page_type_option = $page_type_now . '-' . $key;
+
+			// Get Page Specific Option Value
+			if ( ! empty($post_id) && ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) {
+				$page_meta_key = '_mixt-' . $key;
+				$page_value = get_post_meta($post_id, $page_meta_key, true);
+				if ( $page_value == '' ) {
+					$page_type_meta_key = '_mixt-' . $page_type_option;
+					$page_value = get_post_meta($post_id, $page_type_meta_key, true);
+				}
+				if ( $page_value == '' ) {
+					if ( ! empty($mixt_opt[$page_type_option]) ) {
+						$page_value = $mixt_opt[$page_type_option];
+					} else if ( $is_posts_page && ! in_array($page_type_option, array('blog', 'portfolio-page')) ) {
 						$page_value = null;
 					} else if ( class_exists('WooCommerce') && is_shop() ) {
-						$page_value = get_post_meta(wc_get_page_id('shop'), $meta_key, true);
-					} else {
-						$page_value = $meta_val;
+						$page_value = get_post_meta(wc_get_page_id('shop'), $page_meta_key, true);
 					}
 				}
+			} else if ( ! empty($mixt_opt[$page_type_option]) ) {
+				$page_value = $mixt_opt[$page_type_option];
 			} else {
 				$page_value = null;
 			}
 			
 			// Get Global Option Value
-			$global_value = isset( $mixt_opt[$key] ) ? $mixt_opt[$key] : '';
+			if ( isset($mixt_opt[$page_type_option]) && $mixt_opt[$page_type_option] != 'auto' ) {
+				$global_value = $mixt_opt[$page_type_option];
+			} else if ( isset($mixt_opt[$key]) ) {
+				$global_value = $mixt_opt[$key];
+			} else {
+				$global_value = '';
+			}
+
 			if ( $type == 'bool' ) {
-				if ( $global_value == '1' ) { $global_value = 'true'; }
-				else if ( $global_value == '0' ) { $global_value = 'false'; }
+				if ( $page_value === '1' || $page_value === '0' ) {
+					$page_value = filter_var($page_value, FILTER_VALIDATE_BOOLEAN);
+				}
+				if ( $global_value === '1' || $global_value === '0' ) {
+					$global_value = filter_var($global_value, FILTER_VALIDATE_BOOLEAN);
+				}
 			}
 
 			if ( ! empty($page_value) && $page_value != 'auto' ) {

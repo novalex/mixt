@@ -11,7 +11,7 @@
 	> a {
 		display: table-cell;
 		text-align: center;
-		padding: 10px 0;
+		padding: 5px;
 		border-width: 0;
 		border-style: solid;
 		border-left-width: 1px;
@@ -22,11 +22,7 @@
 		&:first-child { border-left-width: 0; }
 	}
 
-	.post-format {
-		padding: 5px;
-
-		i { font-size: 16px; line-height: 1.6; }
-	}
+	.post-format i { font-size: 16px; line-height: 1.6; }
 
 	.post-date strong { margin-right: 6px; }
 }
@@ -34,6 +30,7 @@
 .single-post,
 .blog-standard,
 .single-portfolio {
+
 	.has-info .post-feat { margin-top: $margin-m; }
 
 	@include media('screen', 'mars') {
@@ -44,6 +41,7 @@
 
 			.post-feat { margin-top: 0; }
 		}
+
 		.post-info {
 			position: absolute;
 			top: 0; left: 0;
@@ -53,6 +51,8 @@
 
 			> a {
 				display: block;
+				padding-top: 10px;
+				padding-bottom: 10px;
 				border-top-width: 1px;
 				border-left-width: 0 !important;
 				border-right-width: 0 !important;
@@ -63,13 +63,26 @@
 
 			.post-format i { font-size: 23px; }
 
-			.post-date strong {
-				display: block;
+			.post-date {
 				line-height: 1;
-				margin-right: 0;
-				margin-bottom: 5px;
-				font-size: 20px;
+
+				strong {
+					display: block;
+					margin-right: 0;
+					margin-bottom: 5px;
+					font-size: 20px;
+				}
 			}
 		}
+	}
+}
+
+.blog-grid,
+.blog-masonry {
+	.posts-container .article .post-info {
+		border-width: 0;
+		border-radius: 0;
+
+		.post-date { border-bottom-width: 1px; }
 	}
 }

@@ -3,7 +3,7 @@
 // REDUX CUSTOMIZER FIELDS
 
 
-// GLOBAL OPTIONS SECTION
+// GLOBAL OPTIONS
 
 $this->sections[] = array(
 	'title'           => __( 'Global', 'mixt' ),
@@ -119,7 +119,7 @@ $this->sections[] = array(
 );
 
 
-// HEADER SECTION
+// HEADER
 
 $this->sections[] = array(
 	'title'           => __( 'Header', 'mixt' ),
@@ -127,7 +127,7 @@ $this->sections[] = array(
 	'fields'          => array(),
 );
 
-// HEADER MEDIA SECTION
+// HEADER MEDIA
 $this->sections[] = array(
 	'title'           => __( 'Header Media', 'mixt' ),
 	'subsection'      => true,
@@ -207,10 +207,23 @@ $this->sections[] = array(
 				'slider' => __( 'Slider', 'mixt' ),
 			),
 		),
+
+		// Parallax Effect
+		array(
+			'id'       => 'head-parallax',
+			'type'     => 'button_set',
+			'title'    => __( 'Parallax Effect', 'mixt' ),
+			'options'  => array(
+				'none' => __( 'None', 'mixt' ),
+				'slow' => __( 'Slow', 'mixt' ),
+				'fast' => __( 'Fast', 'mixt' ),
+			),
+			'default'  => 'none',
+		),
 	),
 );
 
-// HEADER MEDIA IMAGE SECTION
+// HEADER MEDIA IMAGE
 $this->sections[] = array(
 	'title'  => __( 'Header Image', 'mixt' ),
 	'subsection'      => true,
@@ -255,19 +268,10 @@ $this->sections[] = array(
 			'on'      => __( 'Yes', 'mixt' ),
 			'off'     => __( 'No', 'mixt' ),
 		),
-
-		// Parallax Effect
-		array(
-			'id'      => 'head-img-parallax',
-			'type'    => 'switch',
-			'title'   => __( 'Parallax Effect', 'mixt' ),
-			'on'      => __( 'Yes', 'mixt' ),
-			'off'     => __( 'No', 'mixt' ),
-		),
 	),
 );
 
-// HEADER MEDIA VIDEO SECTION
+// HEADER MEDIA VIDEO
 $this->sections[] = array(
 	'title'  => __( 'Header Video', 'mixt' ),
 	'subsection'      => true,
@@ -359,7 +363,7 @@ $this->sections[] = array(
 	),
 );
 
-// HEADER MEDIA SLIDER SECTION
+// HEADER MEDIA SLIDER
 $this->sections[] = array(
 	'title'  => __( 'Header Slider', 'mixt' ),
 	'subsection'      => true,
@@ -376,7 +380,7 @@ $this->sections[] = array(
 	),
 );
 
-// HEADER MEDIA CONTENT SECTION
+// HEADER MEDIA CONTENT
 $this->sections[] = array(
 	'title'  => __( 'Header Content', 'mixt' ),
 	'subsection'      => true,
@@ -438,7 +442,7 @@ $this->sections[] = array(
 	),
 );
 
-// LOCATION BAR SECTION
+// LOCATION BAR
 $this->sections[] = array(
 	'title'  => __( 'Location Bar', 'mixt' ),
 	'subsection'      => true,
@@ -528,7 +532,7 @@ $this->sections[] = array(
 );
 
 
-// THEMES SECTION
+// THEMES
 
 $this->sections[] = array(
 	'id'              => 'mixt-themes',
@@ -576,7 +580,7 @@ $this->sections[] = array(
 
 if ( $themes_enabled ) {
 
-	// SITE-WIDE THEMES SECTION
+	// SITE-WIDE THEMES
 	$this->sections[] = array(
 		'title'  => __( 'Site Themes', 'mixt' ),
 		'desc'   => __( 'Create and manage site-wide themes.', 'mixt' ) . ' ' .
@@ -690,7 +694,7 @@ if ( $themes_enabled ) {
 		),
 	);
 
-	// NAVBAR THEMES SECTION
+	// NAVBAR THEMES
 	$this->sections[] = array(
 		'title'  => __( 'Navbar Themes', 'mixt' ),
 		'desc'   => __( 'Create and manage themes for the navbar.', 'mixt' ) . ' ' .
@@ -819,7 +823,7 @@ if ( $themes_enabled ) {
 }
 
 
-// NAVBARS SECTION
+// NAVBARS
 
 $this->sections[] = array(
 	'title'           => __( 'Navbars', 'mixt' ),
@@ -827,7 +831,7 @@ $this->sections[] = array(
 	'fields'          => array(),
 );
 
-// PRIMARY NAVBAR SECTION
+// PRIMARY NAVBAR
 $this->sections[] = array(
 	'title'           => __( 'Primary Navbar', 'mixt' ),
 	'subsection'      => true,
@@ -988,7 +992,7 @@ $this->sections[] = array(
 	),
 );
 
-// SECONDARY NAVBAR SECTION
+// SECONDARY NAVBAR
 $this->sections[] = array(
 	'title'           => __( 'Secondary Navbar', 'mixt' ),
 	'subsection'      => true,
@@ -1124,7 +1128,7 @@ $this->sections[] = array(
 );
 
 
-// FOOTER SECTION
+// FOOTER
 
 $this->sections[] = array(
 	'title'           => __( 'Footer', 'mixt' ),
@@ -1132,7 +1136,7 @@ $this->sections[] = array(
 	'fields'          => array(),
 );
 
-// FOOTER WIDGET AREA SECTION
+// FOOTER WIDGET AREA
 $this->sections[] = array(
 	'title'           => __( 'Widget Area', 'mixt' ),
 	'customizer_only' => true,
@@ -1177,7 +1181,7 @@ $this->sections[] = array(
 	),
 );
 
-// FOOTER COPYRIGHT AREA SECTION
+// FOOTER COPYRIGHT AREA
 $this->sections[] = array(
 	'title'           => __( 'Copyright Area', 'mixt' ),
 	'customizer_only' => true,

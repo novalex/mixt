@@ -63,7 +63,7 @@ if ( comments_open() ) {
 	$logged_in_as = $comment_notes_before = $comment_notes_after = '';
 
 	if ( $options['logged-in-as'] ) {
-		$logged_in_as = '<p class="logged-in-as">' .
+		$logged_in_as = '<p class="logged-in-as form-group col-sm-12">' .
 			sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'mixt' ),
 				admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) )
 			) .
@@ -71,7 +71,7 @@ if ( comments_open() ) {
 	}
 
 	if ( $options['notes-before'] ) {
-		$comment_notes_before = '<p class="comment-notes">' .
+		$comment_notes_before = '<p class="comment-notes form-group col-sm-12">' .
 			__( 'Your email address will not be published.', 'mixt' ) . ( $req ? __( ' Required fields are marked *', 'mixt' ) : '' ) .
 		'</p>';
 	}
@@ -107,9 +107,10 @@ if ( comments_open() ) {
 	'</p>';
 
 	if ( $options['notes-after'] ) {
-		$comment_notes_after  = '<p class="form-allowed-tags">' .
-			__( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'mixt' ) . '</p>' .
-		'<pre class="allowed-tags">' . allowed_tags() . '</pre>';
+		$comment_notes_after  = '<div class="form-allowed-tags form-group col-sm-12">' .
+			'<p>' . __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'mixt' ) . '</p>' .
+			'<samp class="allowed-tags color-fade">' . allowed_tags() . '</samp>' .
+		'</div>';
 	}
 
 	$args = array(
@@ -144,7 +145,7 @@ if ( comments_open() ) {
 		ob_get_clean()
 	);
 
-// If comments are closed and there are comments, let's leave a little note, shall we?
+// If comments are closed and there are comments
 } else if ( $comments_num != '0' && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 	<p class="no-comments">
 		<?php _e( 'Comments are closed.', 'mixt' ); ?>

@@ -14,7 +14,7 @@
 .aligncenter {
 	clear: both;
 	display: block;
-	margin: 0 auto;
+	margin: auto;
 }
 
 .flex-middle {
@@ -33,12 +33,57 @@
 .text-size-xl { font-size: $font-size-xl; }
 .text-size-xxl { font-size: $font-size-xxl; }
 
+.text-size-16 { font-size: 16px; }
+.text-size-24 { font-size: 24px; }
+.text-size-32 { font-size: 32px; }
+.text-size-48 { font-size: 48px; }
+.text-size-64 { font-size: 64px; }
+.text-size-80 { font-size: 80px; }
+.text-size-96 { font-size: 96px; }
+
+
+// RESPONSIVE HELPER CLASSES
+
+$responsive-bps: (
+	'md': '<venus',
+	'sm': '<mars',
+	'xs': '<mercury',
+);
+
+@each $class, $bp in $responsive-bps {
+	@include media('screen', $bp) {
+		.#{$class}-text-left { text-align: left; }
+		.#{$class}-text-center { text-align: center; }
+		.#{$class}-text-right { text-align: right; }
+
+		.#{$class}-alignleft { display: inline; float: left; }
+		.#{$class}-alignright { display: inline; float: right; }
+		.#{$class}-aligncenter { clear: both; display: block; margin: auto; }
+
+		.#{$class}-text-size-xs { font-size: $font-size-xs; }
+		.#{$class}-text-size-s { font-size: $font-size-s; }
+		.#{$class}-text-size-m { font-size: $font-size-m; }
+		.#{$class}-text-size-l { font-size: $font-size-l; }
+		.#{$class}-text-size-xl { font-size: $font-size-xl; }
+		.#{$class}-text-size-xxl { font-size: $font-size-xxl; }
+
+		.#{$class}-text-size-16 { font-size: 16px; }
+		.#{$class}-text-size-24 { font-size: 24px; }
+		.#{$class}-text-size-32 { font-size: 32px; }
+		.#{$class}-text-size-48 { font-size: 48px; }
+		.#{$class}-text-size-64 { font-size: 64px; }
+		.#{$class}-text-size-80 { font-size: 80px; }
+		.#{$class}-text-size-96 { font-size: 96px; }
+	}
+}
+
 
 // COLORS
 
 @each $name, $color in $basic-colors {
 	.text-color-#{$name} { color: $color !important; }
 	.border-color-#{$name} { border-color: $color !important; }
+	.background-color-#{$name} { @include mixt-bg-variant($color, true); }
 }
 
 
@@ -92,8 +137,22 @@ $spacing-margin-sizes: (
 		}
 	}
 }
-
 .no-margin { margin: 0 !important; }
+
+
+$spacing-padding-sizes: (
+	's': $padding-s,
+	'm': $padding-m,
+	'l': $padding-l,
+	'none': 0,
+);
+@each $size, $padding in $spacing-padding-sizes {
+	.padding-#{$size}, .padding-top-#{$size} { padding-top: $padding; }
+	.padding-#{$size}, .padding-left-#{$size} { padding-left: $padding; }
+	.padding-#{$size}, .padding-right-#{$size} { padding-right: $padding; }
+	.padding-#{$size}, .padding-bottom-#{$size} { padding-bottom: $padding; }
+}
+.no-padding { padding: 0 !important; }
 
 .padding-vertical {
 	padding-top: $row-spacing-lg;
@@ -120,12 +179,12 @@ $spacing-margin-sizes: (
 		padding-bottom: $row-spacing-sm;
 	}
 	.padding-vertical-l {
-		$padding: $row-spacing-sm * 1.5;
+		$padding: $row-spacing-sm + 10px;
 		padding-top: $padding;
 		padding-bottom: $padding;
 	}
 	.padding-vertical-xl {
-		$padding: $row-spacing-sm * 2;
+		$padding: $row-spacing-sm + 20px;
 		padding-top: $padding;
 		padding-bottom: $padding;
 	}

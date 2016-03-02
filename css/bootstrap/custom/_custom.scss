@@ -23,7 +23,10 @@
 
 // Tooltips
 
-.tooltip { z-index: 10000; }
+.tooltip {
+	font-family: inherit;
+	z-index: 10000;
+}
 .tooltip.fade { transition: opacity 0.2s ease; }
 .tooltip.fade.in { transition: opacity 0.3s ease 0.4s; }
 .tooltip-inner { font-size: $font-size; padding: 6px 10px; }

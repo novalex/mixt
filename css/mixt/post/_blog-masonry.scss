@@ -1,25 +1,23 @@
 
 // Masonry Blog Styling
 
-.blog-masonry {
-	$gutter-width: 10px;
+.blog-masonry .posts-container {
+	margin-top: -$masonry-gutter;
+	margin-left: -$masonry-gutter;
+	margin-right: -$masonry-gutter;
 
-	.posts-container {
-		margin-top: -$gutter-width;
-		margin-left: -$gutter-width;
-		margin-right: -$gutter-width;
+	.article {
+		margin: 0;
+		padding: $masonry-gutter;
+		overflow: hidden;
 
-		.article {
-			margin: 0;
-			padding: $gutter-width;
-			overflow: hidden;
-
-			.post-wrapper {
-				width: 100%;
-				border: 1px solid;
-				border-color: inherit;
-				margin: -1px 0 0 -1px;
-			}
+		.post-wrapper {
+			width: 100%;
+			border: 1px solid;
+			border-color: inherit;
+			margin: -1px 0 0 -1px;
 		}
+
+		.post-info { margin-left: 1px; }
 	}
 }

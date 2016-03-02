@@ -86,7 +86,9 @@ function mixt_wc_option($option, $default = false) {
 // APPLY OPTIONS
 
 // Columns / Products per row
-function mixt_wc_cols() { return mixt_wc_option('cols'); }
+function mixt_wc_cols() {
+	return mixt_wc_option('cols');
+}
 add_filter('loop_shop_columns', 'mixt_wc_cols', 999);
 
 // Product Count
@@ -161,7 +163,7 @@ function mixt_wc_badges() {
 	if ( mixt_wc_option('sale-badge') ) {
 		global $post, $product;
 		if ( $product->is_on_sale() ) {
-			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . __( 'Sale!', 'mixt' ) . '</span>', $post, $product );
+			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . __( 'Sale', 'mixt' ) . '</span>', $post, $product );
 		}
 	}
 	// New Badge
@@ -204,6 +206,27 @@ function mixt_wc_product_thumb() {
 
 
 /**
+ * Display product title and rating (in the loop)
+ */
+function mixt_wc_loop_item_title() {
+	?>
+	<div class="title">
+		<h3><?php the_title(); ?></h3>
+
+		<?php
+		if ( mixt_wc_option('rating') && get_option( 'woocommerce_enable_review_rating' ) !== 'no' ) {
+			global $product;
+			if ( $rating_html = $product->get_rating_html() ) {
+				echo "<div class='rating-cont'>$rating_html</div>";
+			}
+		}
+		?>
+	</div>
+	<?php
+}
+
+
+/**
  * Display product categories
  */
 function mixt_wc_product_cats() {
@@ -233,6 +256,9 @@ function mixt_wc_product_stock() {
 
 // Remove default actions that get customized
 remove_action('woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
+
+remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
+add_action('woocommerce_shop_loop_item_title', 'mixt_wc_loop_item_title', 10);
 
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);

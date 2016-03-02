@@ -123,7 +123,8 @@ function mixt_vc_custom_classes( $classes, $tag ) {
 		case 'vc_column':
 		case 'vc_column_inner':
 			preg_match_all('/vc_(col-\w{2}-\d{1,2})/', $classes, $col_classes);
-			return $classes . ' ' . implode(' ', $col_classes[1]);
+			preg_match_all('/vc_(col-\w{2}-offset-\d{1,2})/', $classes, $offset_classes);
+			return $classes . ' ' . implode(' ', $col_classes[1]) . ' ' . implode(' ', $offset_classes[1]);
 			break;
 		default:
 			return $classes;
@@ -156,7 +157,7 @@ add_filter('vc_grid_item_predefined_templates', 'mixt_vc_grid_templates');
 function mixt_vc_colors() {
 	// Progress Bar
 	$param = WPBMap::getParam('vc_progress_bar', 'bgcolor');
-	$param['value'][__( 'Theme Accent', 'mixt' )] = 'bar_accent';
+	$param['value'][__( 'Theme Accent', 'mixt' )] = 'accent';
 	vc_update_shortcode_param('vc_progress_bar', $param);
 }
 add_action('vc_after_init', 'mixt_vc_colors');

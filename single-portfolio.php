@@ -16,19 +16,20 @@ get_header();
 
 		// Get project page options
 		$options = mixt_get_options( array(
-			'project-taxonomies' => array(),
-			'project-sharing'    => array(),
-			'project-navigation' => array(),
-			'project-related'    => array(),
-			'project-comments'   => array(),
+			'project-tags'         => array(),
+			'project-sharing'      => array(),
+			'project-navigation'   => array(),
+			'project-about-author' => array(),
+			'project-related'      => array(),
+			'project-comments'     => array(),
 		) );
 
 		// Project Taxonomies
-		if ( $options['project-taxonomies'] ) {
+		if ( $options['project-tags'] ) {
 			//global $post;
 			
 			$types = get_the_term_list($post->ID, 'project-type', '<p class="tag-list"><strong>' . __( 'Type:', 'mixt' ) . '</strong>', '', '</p>');
-			$attrs = get_the_term_list($post->ID, 'project-attributes', '<p class="tag-list"><strong>' . __( 'Attributes:', 'mixt' ) . '</strong>', '', '</p>');
+			$attrs = get_the_term_list($post->ID, 'project-attribute', '<p class="tag-list"><strong>' . __( 'Attributes:', 'mixt' ) . '</strong>', '', '</p>');
 			if ( $types != '' || $attrs != '' ) {
 				echo '<footer class="entry-footer post-tags post-extra">' . $types . $attrs . '</footer>';
 			}
@@ -65,6 +66,11 @@ get_header();
 		// Post Navigation
 		if ( $options['project-navigation'] ) {
 			mixt_content_nav('post-nav');
+		}
+
+		// About The Author
+		if ( $options['project-about-author'] ) {
+			mixt_about_the_author();
 		}
 
 		// Related Posts

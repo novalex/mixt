@@ -28,10 +28,11 @@
 			.badge {
 				width: 54px;
 				padding: 7px;
-				font-size: 14px;
+				font-size: $font-size-s;
 				text-align: center;
 				margin: 0 5px 5px 0;
 				border-radius: $bd-radius;
+				text-transform: uppercase;
 
 				&.new-badge { background-color: $green; }
 			}
@@ -79,7 +80,12 @@
 			width: 120px;
 			margin-right: 10px !important;
 
-			.btn { width: 36px; }
+			.btn {
+				width: 36px;
+				height: $input-height-base;
+				font-size: 14px;
+				font-weight: bold;
+			}
 
 			.form-control {
 				width: auto;
@@ -102,7 +108,10 @@
 
 		// Remove icon
 		a.remove {
-			color: $red;
+			color: $red !important;
+			width: 22px;
+			height: 22px;
+			line-height: 0.99;
 			border-radius: $bd-radius;
 			transition: color 0.2s, background 0.2s;
 
@@ -147,6 +156,8 @@
 			border-collapse: collapse;
 
 			td { padding: $wc-spacing-s; }
+
+			.product-subtotal { font-weight: bold; }
 		}
 
 

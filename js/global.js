@@ -10,6 +10,8 @@ GLOBAL JS FUNCTIONS
 	var viewport = $(window),
 		bodyEl   = $('body');
 
+	/* global mixt_opt */
+
 
 	// RUN ON LOAD
 
@@ -33,19 +35,33 @@ GLOBAL JS FUNCTIONS
 		// Set Content Min Height
 		var content = $('#content-wrap');
 		if ( content.length ) {
-			content.css('min-height', viewport.height() - content.offset().top - $('#colophon').height());
+			var contentH = viewport.height() - content.offset().top - $('#colophon').height();
+			content.add($('.sidebar', content)).css('min-height', contentH);
+		}
+
+
+		// Initialize smooth scrolling
+		if ( mixt_opt.page['smooth-scroll'] && typeof Mixt_SmoothScroll !== 'undefined' ) {
+			/* global Mixt_SmoothScroll */
+			Mixt_SmoothScroll.init();
 		}
 
 
 		// Skrollr Parallax
-		if ( typeof skrollr !== 'undefined' ) { /* global skrollr */
-			skrollr.init({
+		if ( typeof skrollr !== 'undefined' && ! window.mobileCheck() ) {
+			viewport.resize();
+			
+			/* global skrollr */
+			var Skrollr = skrollr.init({
 				forceHeight: false,
+				skrollrBody: 'main-wrap',
 				smoothScrolling: false,
 				mobileCheck: function () {
 					return false;
 				}
 			});
+
+			viewport.on('refresh-skrollr', function(event, elements) { Skrollr.refresh(elements); });
 		}
 
 
@@ -114,16 +130,6 @@ GLOBAL JS FUNCTIONS
 		if ( typeof $.fn.bigText === 'function' ) {
 			$('.big-text').bigText();
 		}
-
-
-		// Animate Elements On Load
-		$('.anim-on-load').each( function() {
-			var $this = $(this),
-				delay = $this.data('anim-delay') ? $this.data('anim-delay') : 0;
-			setTimeout( function() {
-				$this.removeClass('anim-pre');
-			}, delay);
-		});
 
 
 		// Placeholder Polyfill
