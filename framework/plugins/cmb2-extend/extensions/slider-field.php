@@ -20,7 +20,7 @@ class Mixt_Cmb_Slider_Field {
 		$step = ( empty($field->step()) ) ? 'none' : $field->step();
 
 		if ( ! is_numeric($min) || ! is_numeric($max) || ! is_numeric($step) ) {
-			echo '<p>' . __( 'The min, max and step values of the slider must be numeric!', 'mixt' ) . '</p>';
+			echo '<p>' . esc_html__( 'The min, max and step values of the slider must be numeric!', 'mixt' ) . '</p>';
 		} else {
 			$slider_value = ( $escaped_value == 'auto' ) ? ( $max + $min ) / 2 : $escaped_value;
 
@@ -28,12 +28,12 @@ class Mixt_Cmb_Slider_Field {
 			echo $field_type->input( array(
 				'type'         => 'text',
 				'class'        => 'mixt-slider-value',
-				'value'        => $escaped_value,
-				'data-value'   => $slider_value,
-				'data-min'     => $min,
-				'data-max'     => $max,
-				'data-step'    => $step,
-				'data-tooltip' => $field->tooltip(),
+				'value'        => esc_attr($escaped_value),
+				'data-value'   => esc_attr($slider_value),
+				'data-min'     => esc_attr($min),
+				'data-max'     => esc_attr($max),
+				'data-step'    => esc_attr($step),
+				'data-tooltip' => esc_attr($field->tooltip()),
 				'desc'         => '',
 			) );
 		}

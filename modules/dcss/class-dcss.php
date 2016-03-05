@@ -43,9 +43,9 @@ class Mixt_DCSS {
 	public function __construct() {
 
 		// Output CSS in the header
-		add_action('mixt_head_code', array($this, 'print_head_css'));
+		add_action('wp_head', array($this, 'print_head_css'), 999);
 		// Output CSS in the body
-		add_action('mixt_body_code', array($this, 'print_body_css'));
+		add_action('wp_footer', array($this, 'print_body_css'), 999);
 
 		// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
 		if ( ( function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) || file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {

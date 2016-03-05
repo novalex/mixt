@@ -1,18 +1,18 @@
 <?php
 
-mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-category', array(
+mixt_cmb_make_tab( $fields, esc_html__( 'Portfolio', 'mixt' ), 'dashicons dashicons-category', array(
 	
 	// Type
 	array(
 		'id'      => $prefix . 'layout-type',
-		'name'    => __( 'Layout Type', 'mixt' ),
-		'desc'    => __( 'Select the layout type', 'mixt' ),
+		'name'    => esc_html__( 'Layout Type', 'mixt' ),
+		'desc'    => esc_html__( 'Select the layout type', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'     => __( 'Auto', 'mixt' ),
-			'standard' => __( 'Standard', 'mixt' ),
-			'grid'     => __( 'Grid', 'mixt' ),
-			'masonry'  => __( 'Masonry', 'mixt' ),
+			'auto'     => esc_html__( 'Auto', 'mixt' ),
+			'standard' => esc_html__( 'Standard', 'mixt' ),
+			'grid'     => esc_html__( 'Grid', 'mixt' ),
+			'masonry'  => esc_html__( 'Masonry', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -20,11 +20,11 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	// Columns
 	array(
 		'id'      => $prefix . 'layout-columns',
-		'name'    => __( 'Columns', 'mixt' ),
-		'desc'    => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+		'name'    => esc_html__( 'Columns', 'mixt' ),
+		'desc'    => esc_html__( 'Number of columns for grid and masonry layout', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto' => __( 'Auto', 'mixt' ),
+			'auto' => esc_html__( 'Auto', 'mixt' ),
 			'2'    => '2',
 			'3'    => '3',
 			'4'    => '4',
@@ -37,13 +37,13 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	// Post Media Display
 	array(
 		'id'      => $prefix . 'feat-show',
-		'name'    => __( 'Show Media', 'mixt' ),
-		'desc'    => __( 'Display the post featured media', 'mixt' ),
+		'name'    => esc_html__( 'Show Media', 'mixt' ),
+		'desc'    => esc_html__( 'Display the post featured media', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 	),
@@ -51,14 +51,14 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	// Post Media Size
 	array(
 		'id'      => $prefix . 'feat-size',
-		'name'    => __( 'Media Size', 'mixt' ),
-		'desc'    => __( 'Select a size for the featured post media', 'mixt' ),
+		'name'    => esc_html__( 'Media Size', 'mixt' ),
+		'desc'    => esc_html__( 'Select a size for the featured post media', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'   => __( 'Auto', 'mixt' ),
-			'blog-large'  => __( 'Large', 'mixt' ),
-			'blog-medium' => __( 'Medium', 'mixt' ),
-			'blog-small'  => __( 'Small', 'mixt' ),
+			'auto'   => esc_html__( 'Auto', 'mixt' ),
+			'mixt-large'  => esc_html__( 'Large', 'mixt' ),
+			'mixt-medium' => esc_html__( 'Medium', 'mixt' ),
+			'mixt-small'  => esc_html__( 'Small', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -67,12 +67,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'      => $prefix . 'post-info',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Post Info', 'mixt' ),
-		'desc'    => __( 'Display the post format and date', 'mixt' ),
+		'name'    => esc_html__( 'Post Info', 'mixt' ),
+		'desc'    => esc_html__( 'Display the post format and date', 'mixt' ),
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -81,13 +81,13 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'       => $prefix . 'meta-show',
 		'type'     => 'radio_inline',
-		'name'     => __( 'Post Meta', 'mixt' ),
-		'desc'     => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+		'name'     => esc_html__( 'Post Meta', 'mixt' ),
+		'desc'     => esc_html__( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 		'options'  => array(
-			'auto'    => __( 'Auto', 'mixt' ),
-			'header'  => __( 'In Header', 'mixt' ),
-			'footer'  => __( 'In Footer', 'mixt' ),
-			'false'   => __( 'No', 'mixt' ),
+			'auto'    => esc_html__( 'Auto', 'mixt' ),
+			'header'  => esc_html__( 'In Header', 'mixt' ),
+			'footer'  => esc_html__( 'In Footer', 'mixt' ),
+			'false'   => esc_html__( 'No', 'mixt' ),
 		),
 		'default'  => 'auto',
 	),
@@ -96,12 +96,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'      => $prefix . 'portfolio-page-title',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Post Title', 'mixt' ),
-		'desc'    => __( 'Display the post title', 'mixt' ),
+		'name'    => esc_html__( 'Post Title', 'mixt' ),
+		'desc'    => esc_html__( 'Display the post title', 'mixt' ),
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -110,12 +110,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'      => $prefix . 'portfolio-page-content',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Post Content', 'mixt' ),
-		'desc'    => __( 'Display the post content', 'mixt' ),
+		'name'    => esc_html__( 'Post Content', 'mixt' ),
+		'desc'    => esc_html__( 'Display the post content', 'mixt' ),
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -124,12 +124,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'      => $prefix . 'portfolio-page-filters',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Filters', 'mixt' ),
-		'desc'    => __( 'Display filter links', 'mixt' ),
+		'name'    => esc_html__( 'Filters', 'mixt' ),
+		'desc'    => esc_html__( 'Display filter links', 'mixt' ),
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -138,12 +138,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'      => $prefix . 'portfolio-rollover',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Show Rollover', 'mixt' ),
-		'desc'    => __( 'Display an overlay with useful links and info when a project is hovered', 'mixt' ),
+		'name'    => esc_html__( 'Show Rollover', 'mixt' ),
+		'desc'    => esc_html__( 'Display an overlay with useful links and info when a project is hovered', 'mixt' ),
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -152,12 +152,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
         'id'       => $prefix . 'portfolio-rollover-items',
 		'type'     => 'multicheck',
-		'name'     => __( 'Items', 'mixt' ),
+		'name'     => esc_html__( 'Items', 'mixt' ),
 		'options'  => array(
-			'title'   => __( 'Title', 'mixt' ),
-			'excerpt' => __( 'Excerpt', 'mixt' ),
-			'view'    => __( 'View Post Button', 'mixt' ),
-			'full'    => __( 'Full Image Button', 'mixt' ),
+			'title'   => esc_html__( 'Title', 'mixt' ),
+			'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
+			'view'    => esc_html__( 'View Post Button', 'mixt' ),
+			'full'    => esc_html__( 'Full Image Button', 'mixt' ),
 		),
 		'default'  => array( 'title' ),
 		'attributes' => array(
@@ -171,7 +171,7 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'         => $prefix . 'portfolio-rollover-color',
 		'type'       => 'select',
-		'name'       => __( 'Background Color', 'mixt' ),
+		'name'       => esc_html__( 'Background Color', 'mixt' ),
 		'options'    => array_merge( array('auto' => 'Auto' ), mixt_get_assets('colors', 'basic') ),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -184,7 +184,7 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'         => $prefix . 'portfolio-rollover-anim-in',
 		'type'       => 'select',
-		'name'       => __( 'Animation - In', 'mixt' ),
+		'name'       => esc_html__( 'Animation - In', 'mixt' ),
 		'options'    => array_merge( array('auto' => 'Auto' ), mixt_css_anims('trans-in') ),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -197,7 +197,7 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'         => $prefix . 'portfolio-rollover-anim-out',
 		'type'       => 'select',
-		'name'       => __( 'Animation - Out', 'mixt' ),
+		'name'       => esc_html__( 'Animation - Out', 'mixt' ),
 		'options'    => array_merge( array('auto' => 'Auto' ), mixt_css_anims('trans-out') ),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -210,12 +210,12 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'       => $prefix . 'portfolio-rollover-item-style',
 		'type'     => 'select',
-		'name'     => __( 'Item Style', 'mixt' ),
+		'name'     => esc_html__( 'Item Style', 'mixt' ),
 		'options'  => array(
 			'auto'          => 'Auto',
-			'plain'         => __( 'Plain', 'mixt' ),
-			'btn'           => __( 'Button', 'mixt' ),
-			'btn btn-round' => __( 'Round Button', 'mixt' ),
+			'plain'         => esc_html__( 'Plain', 'mixt' ),
+			'btn'           => esc_html__( 'Button', 'mixt' ),
+			'btn btn-round' => esc_html__( 'Round Button', 'mixt' ),
 		),
 		'default'  => 'auto',
 		'attributes' => array(
@@ -228,7 +228,7 @@ mixt_cmb_make_tab( $fields, __( 'Portfolio', 'mixt' ), 'dashicons dashicons-cate
 	array(
 		'id'         => $prefix . 'portfolio-rollover-btn-color',
 		'type'       => 'select',
-		'name'       => __( 'Button Color', 'mixt' ),
+		'name'       => esc_html__( 'Button Color', 'mixt' ),
 		'options'    => array_merge( array('auto' => 'Auto' ), mixt_get_assets('colors', 'buttons') ),
 		'default'    => 'auto',
 		'attributes' => array(

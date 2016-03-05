@@ -83,6 +83,23 @@ if ( ! function_exists('mixt_shortcode_unwrap') ) {
 add_filter('mixt_sc_unwrap', 'mixt_shortcode_unwrap');
 
 
+if ( ! function_exists('mixt_sanitize_html_classes') && function_exists('sanitize_html_class') ) {
+	/**
+	 * Sanitize a string or array of multiple HTML classes
+	 *
+	 * @param mixed  $cls
+	 * @param string $fallback
+	 */
+	function mixt_sanitize_html_classes($cls, $fallback = null) {
+		if ( ! is_string($cls) ) {
+			$cls = implode(' ', $cls);
+		}
+		$cls = array_map('sanitize_html_class', explode(' ', $cls));
+		return implode(' ', $cls);
+	}
+}
+
+
 if ( ! function_exists('mixt_regex_pattern') ) {
 	/**
 	 * Retreive a regex pattern for specific purpose

@@ -25,26 +25,26 @@
 
 			&.feat-format { display: inline-block; }
 
-			&.feat-blog-large {
-				max-width: $blog-large-w;
-				max-height: $blog-large-h;
+			&.feat-mixt-large {
+				max-width: $feat-large-w;
+				max-height: $feat-large-h;
 
 				img { width: auto; }
 			}
 
-			&.feat-blog-medium {
-				max-width: $blog-medium-w;
-				max-height: $blog-medium-h;
+			&.feat-mixt-medium {
+				max-width: $feat-medium-w;
+				max-height: $feat-medium-h;
 
 				&.feat-format {
-					width: $blog-medium-w;
-					height: $blog-medium-h;
-					line-height: $blog-medium-h - 4px;
+					width: $feat-medium-w;
+					height: $feat-medium-h;
+					line-height: $feat-medium-h - 4px;
 				}
 
 				&.post-video > div,
 				&.post-video > iframe {
-					min-width: $blog-medium-w;
+					min-width: $feat-medium-w;
 				}
 
 				@include media('screen', '<mercury') {
@@ -53,23 +53,28 @@
 				}
 			}
 
-			&.feat-blog-small {
-				max-width: $blog-small-w;
-				max-height: $blog-small-h;
+			&.feat-mixt-small {
+				max-width: $feat-small-w;
+				max-height: $feat-small-h;
 
 				&.feat-format {
-					width: $blog-small-w;
-					height: $blog-small-h;
-					line-height: $blog-small-h - 4px;
+					width: $feat-small-w;
+					height: $feat-small-h;
+					line-height: $feat-small-h - 4px;
 				}
 			}
 
-			&.feat-blog-medium,
-			&.feat-blog-small {
+			&.feat-mixt-medium,
+			&.feat-mixt-small {
 				float: left;
 				margin-right: $margin-m;
 				margin-bottom: $margin-s;
 			}
+
+			&.post-link,
+			&.post-aside,
+			&.post-status,
+			&.post-quote { max-height: none !important; }
 		}
 
 		.page-title,
@@ -91,10 +96,13 @@
 	}
 }
 
-.no-sidebar .blog-standard .posts-container .post-feat.feat-blog-large {
+.no-sidebar .blog-standard .posts-container .post-feat.feat-mixt-large {
 	max-width: 100%;
 	max-height: none;
 
 	> a,
 	img { width: 100%; }
 }
+
+// Fix IE image width auto bug
+.ie .blog-standard .post-feat.feat-mixt-large img { width: 100%; }

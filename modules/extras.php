@@ -8,7 +8,7 @@
 
 
 /**
- * Hook into the header action and output relevant code
+ * Hook into the wp_head action and output relevant code
  */
 function mixt_head_code_output() {
 	global $mixt_opt;
@@ -18,7 +18,7 @@ function mixt_head_code_output() {
 		echo $mixt_opt['head-user-code'];
 	}
 }
-add_action('mixt_head_code', 'mixt_head_code_output', 99);
+add_action('wp_head', 'mixt_head_code_output', 99);
 
 
 /**

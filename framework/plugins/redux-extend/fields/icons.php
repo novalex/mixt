@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Icons', 'mixt' ),
-	'desc'       => __( 'Define various icons used throughout the site', 'mixt' ),
+	'title'      => esc_html__( 'Icons', 'mixt' ),
+	'desc'       => esc_html__( 'Define various icons used throughout the site', 'mixt' ),
 	'icon'       => 'el-icon-adjust',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,7 +11,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'left-arrow-icon',
 			'type'     => 'text',
-			'title'    => __( 'Left Arrow', 'mixt' ),
+			'title'    => esc_html__( 'Left Arrow', 'mixt' ),
 			'default'  => 'fa fa-chevron-left',
 		),
 
@@ -19,7 +19,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'right-arrow-icon',
 			'type'     => 'text',
-			'title'    => __( 'Right Arrow', 'mixt' ),
+			'title'    => esc_html__( 'Right Arrow', 'mixt' ),
 			'default'  => 'fa fa-chevron-right',
 		),
 
@@ -27,7 +27,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'up-arrow-icon',
 			'type'     => 'text',
-			'title'    => __( 'Up Arrow', 'mixt' ),
+			'title'    => esc_html__( 'Up Arrow', 'mixt' ),
 			'default'  => 'fa fa-chevron-up',
 		),
 
@@ -35,7 +35,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'down-arrow-icon',
 			'type'     => 'text',
-			'title'    => __( 'Down Arrow', 'mixt' ),
+			'title'    => esc_html__( 'Down Arrow', 'mixt' ),
 			'default'  => 'fa fa-chevron-down',
 		),
 
@@ -43,7 +43,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'search-icon',
 			'type'     => 'text',
-			'title'    => __( 'Search', 'mixt' ),
+			'title'    => esc_html__( 'Search', 'mixt' ),
 			'default'  => 'fa fa-search',
 		),
 
@@ -51,7 +51,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'head-content-scroll-icon',
 			'type'     => 'text',
-			'title'    => __( 'Scroll To Content', 'mixt' ),
+			'title'    => esc_html__( 'Scroll To Content', 'mixt' ),
 			'default'  => 'fa fa-chevron-down',
 		),
 
@@ -59,7 +59,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'view-post-icon',
 			'type'     => 'text',
-			'title'    => __( 'View Post', 'mixt' ),
+			'title'    => esc_html__( 'View Post', 'mixt' ),
 			'default'  => 'fa fa-share',
 		),
 
@@ -67,7 +67,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'view-image-icon',
 			'type'     => 'text',
-			'title'    => __( 'View Image', 'mixt' ),
+			'title'    => esc_html__( 'View Image', 'mixt' ),
 			'default'  => 'fa fa-search',
 		),
 
@@ -75,7 +75,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'author-icon',
 			'type'     => 'text',
-			'title'    => __( 'Author', 'mixt' ),
+			'title'    => esc_html__( 'Author', 'mixt' ),
 			'default'  => 'fa fa-user',
 		),
 
@@ -83,7 +83,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'date-icon',
 			'type'     => 'text',
-			'title'    => __( 'Date', 'mixt' ),
+			'title'    => esc_html__( 'Date', 'mixt' ),
 			'default'  => 'fa fa-clock-o',
 		),
 
@@ -91,7 +91,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'category-icon',
 			'type'     => 'text',
-			'title'    => __( 'Category', 'mixt' ),
+			'title'    => esc_html__( 'Category', 'mixt' ),
 			'default'  => 'fa fa-folder-open',
 		),
 
@@ -99,7 +99,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'comments-icon',
 			'type'     => 'text',
-			'title'    => __( 'Comments', 'mixt' ),
+			'title'    => esc_html__( 'Comments', 'mixt' ),
 			'default'  => 'fa fa-comment',
 		),
 
@@ -107,7 +107,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'back-to-top-icon',
 			'type'     => 'text',
-			'title'    => __( 'Back To Top', 'mixt' ),
+			'title'    => esc_html__( 'Back To Top', 'mixt' ),
 			'default'  => 'fa fa-chevron-up',
 		),
 
@@ -115,7 +115,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'shop-cart-icon',
 			'type'     => 'text',
-			'title'    => __( 'Shopping Cart', 'mixt' ),
+			'title'    => esc_html__( 'Shopping Cart', 'mixt' ),
 			'default'  => 'fa fa-shopping-cart',
 		),
 
@@ -123,7 +123,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-standard-icon',
 			'type'     => 'text',
-			'title'    => __( 'Standard Format', 'mixt' ),
+			'title'    => esc_html__( 'Standard Format', 'mixt' ),
 			'default'  => 'fa fa-align-left',
 		),
 
@@ -131,7 +131,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-aside-icon',
 			'type'     => 'text',
-			'title'    => __( 'Aside Format', 'mixt' ),
+			'title'    => esc_html__( 'Aside Format', 'mixt' ),
 			'default'  => 'fa fa-pencil',
 		),
 
@@ -139,7 +139,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-image-icon',
 			'type'     => 'text',
-			'title'    => __( 'Image Format', 'mixt' ),
+			'title'    => esc_html__( 'Image Format', 'mixt' ),
 			'default'  => 'fa fa-picture-o',
 		),
 
@@ -147,7 +147,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-video-icon',
 			'type'     => 'text',
-			'title'    => __( 'Video Format', 'mixt' ),
+			'title'    => esc_html__( 'Video Format', 'mixt' ),
 			'default'  => 'fa fa-play',
 		),
 
@@ -155,7 +155,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-audio-icon',
 			'type'     => 'text',
-			'title'    => __( 'Audio Format', 'mixt' ),
+			'title'    => esc_html__( 'Audio Format', 'mixt' ),
 			'default'  => 'fa fa-music',
 		),
 
@@ -163,7 +163,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-gallery-icon',
 			'type'     => 'text',
-			'title'    => __( 'Gallery Format', 'mixt' ),
+			'title'    => esc_html__( 'Gallery Format', 'mixt' ),
 			'default'  => 'fa fa-camera',
 		),
 
@@ -171,7 +171,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-quote-icon',
 			'type'     => 'text',
-			'title'    => __( 'Quote Format', 'mixt' ),
+			'title'    => esc_html__( 'Quote Format', 'mixt' ),
 			'default'  => 'fa fa-quote-right',
 		),
 
@@ -179,7 +179,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-link-icon',
 			'type'     => 'text',
-			'title'    => __( 'Link Format', 'mixt' ),
+			'title'    => esc_html__( 'Link Format', 'mixt' ),
 			'default'  => 'fa fa-link',
 		),
 
@@ -187,7 +187,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-status-icon',
 			'type'     => 'text',
-			'title'    => __( 'Status Format', 'mixt' ),
+			'title'    => esc_html__( 'Status Format', 'mixt' ),
 			'default'  => 'fa fa-sticky-note',
 		),
 
@@ -195,7 +195,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-chat-icon',
 			'type'     => 'text',
-			'title'    => __( 'Chat Format', 'mixt' ),
+			'title'    => esc_html__( 'Chat Format', 'mixt' ),
 			'default'  => 'fa fa-comments',
 		),
 
@@ -203,7 +203,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-page-icon',
 			'type'     => 'text',
-			'title'    => __( 'Page Format', 'mixt' ),
+			'title'    => esc_html__( 'Page Format', 'mixt' ),
 			'default'  => 'fa fa-file-text',
 		),
 
@@ -211,7 +211,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'format-product-icon',
 			'type'     => 'text',
-			'title'    => __( 'Product Format', 'mixt' ),
+			'title'    => esc_html__( 'Product Format', 'mixt' ),
 			'default'  => 'fa fa-shopping-cart',
 		),
 	),

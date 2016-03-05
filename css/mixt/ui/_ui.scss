@@ -1,4 +1,9 @@
 
+/* --------------------------
+ 13. UI
+-------------------------- */
+
+
 // Image Styles
 @import 'image';
 
@@ -208,7 +213,9 @@ blockquote {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-cite {
+blockquote cite,
+blockquote + cite,
+.post-quote cite {
 	display: block;
 	margin-top: 6px;
 	font-style: normal;
@@ -314,4 +321,8 @@ a.main-link {
 	top: 0; left: 0;
 	right: 0; bottom: 0;
 	z-index: 0;
+}
+
+iframe {
+	border-width: 0;
 }

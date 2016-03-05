@@ -1,8 +1,8 @@
 <?php
 
 $this->screen_header(
-	__( 'Status', 'mixt' ),
-	__( 'Check the status of your server and the theme, environmental variables and other information.', 'mixt' )
+	esc_html__( 'Status', 'mixt' ),
+	esc_html__( 'Check the status of your server and the theme, environmental variables and other information.', 'mixt' )
 );
 
 	// Tabs
@@ -13,18 +13,22 @@ $this->screen_header(
 	?>
 	<table class="status-table theme-info widefat">
 		<thead>
-			<tr><th colspan="2"><?php _e( 'Theme Info', 'mixt' ); ?></th></tr>
+			<tr><th colspan="2"><?php esc_html_e( 'Theme Info', 'mixt' ); ?></th></tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="label"><?php _e( 'Version', 'mixt' ); ?></td>
+				<td class="label"><?php esc_html_e( 'Version', 'mixt' ); ?></td>
 				<td><?php echo MIXT_VERSION; ?></td>
 			</tr>
 			<tr>
-				<td class="label"><?php _e( 'Child Theme', 'mixt' ); ?></td>
+				<td class="label"><?php esc_html_e( 'Child Theme', 'mixt' ); ?></td>
 				<td><?php
-					if ( is_child_theme() ) { _e( 'Yes', 'mixt' ); }
-					else { echo __( 'No', 'mixt' ) . ' - <small>' . __( 'Use a child theme if you intend to modify any code in the theme to keep updating as simple as possible!', 'mixt' ) . '</small>'; }
+					if ( ! is_child_theme() ) {
+						esc_html_e( 'Yes', 'mixt' );
+					} else {
+						echo esc_html__( 'No', 'mixt' ) . ' - ' .
+							 esc_html__( 'Use a child theme if you intend to modify any code in the theme to keep updating as simple as possible!', 'mixt' );
+					}
 				?></td>
 			</tr>
 		</tbody>
@@ -37,7 +41,7 @@ $this->screen_header(
 	?>
 	<table class="status-table server-info widefat margin-top">
 		<thead>
-			<tr><th colspan="2"><?php _e( 'Server Info', 'mixt' ); ?></th></tr>
+			<tr><th colspan="2"><?php esc_html_e( 'Server Info', 'mixt' ); ?></th></tr>
 		</thead>
 		<tbody>
 			<?php
@@ -68,10 +72,10 @@ $this->screen_header(
 
 	if ( $has_warn ) {
 		echo '<div class="stuffbox mixt-alert alert-warn margin-top"><p>' .
-			__( 'One or more server configuration variables are set lower than the minimum recommended. This might cause issues!', 'mixt' ) .
+			esc_html__( 'One or more server configuration variables are set lower than the minimum recommended. This might cause issues!', 'mixt' ) .
 		'</p></div>';
 	} else {
-		echo '<div class="stuffbox mixt-alert alert-ok margin-top"><p>' . __( 'Everything seems to be in order. Sweet!', 'mixt' ) . '</p></div>';
+		echo '<div class="stuffbox mixt-alert alert-ok margin-top"><p>' . esc_html__( 'Everything seems to be in order. Sweet!', 'mixt' ) . '</p></div>';
 	}
 
 	echo $theme_info;

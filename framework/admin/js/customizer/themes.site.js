@@ -206,8 +206,13 @@ CUSTOMIZER INTEGRATION - SITE THEMES
 
 				// Background Colors
 				
-				css += th+' .accent-bg:hover, '+th+' .hover-accent-bg:hover, '+th+' .tag-list a:hover, '+th+' .tagcloud a:hover { color: '+color_for_accent+' !important; background-color: '+accent+'; }';
+				css += th+' .accent-bg:hover, '+th+' .hover-accent-bg:hover, ' +
+					   th+' .post-feat.post-link, '+th+' .post-feat.feat-format, '+th+' .post-feat.post-quote,' +
+					   th+' .tag-list a:hover, '+th+' .tagcloud a:hover { color: '+color_for_accent+' !important; background-color: '+accent+'; }';
 				css += th+' .article .post-info .post-date { background-color: '+bg_darker+'; }';
+
+				css += th+' .post-feat.post-aside { color: '+color_inv+'; background-color: '+tinycolor(bg_inv).setAlpha(0.8).toPercentageRgbString()+'; }';
+				css += th+' .post-feat.post-status { color: '+color_alt+'; background-color: '+bg_alt+'; }';
 
 				// Other Colors
 				

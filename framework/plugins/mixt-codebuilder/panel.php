@@ -61,13 +61,16 @@ class Mixt_CB_Admin {
 	public function mixt_cb_panel() {
 		// Only run in add/edit screens
 		if ( $this->editor_page ) { ?>
-			<a href="#TB_inline?width=600&amp;height=800&amp;inlineId=mixt-cb-panel" id="mixt-cb-trigger" class="thickbox" title="<?php _e('Build Shortcode', 'mixt'); ?>"></a>
+			<a href="#TB_inline?width=600&amp;height=800&amp;inlineId=mixt-cb-panel" id="mixt-cb-trigger" class="thickbox" title="<?php esc_attr_e('Build Shortcode', 'mixt'); ?>"></a>
 
 			<div id="mixt-cb-panel" style="display: none;">
 				<div id="mixt-cb-wrap">
 					<div id="mcb-main-select">
 						<?php foreach ( self::$elements as $key => $element ) {
-							echo "<div class='el-button $key'><a href='#$key'><span class='el-icon'></span><strong>{$element['title']}</strong></a></div>";
+							$key_class = sanitize_html_class($key);
+							$key_url = esc_attr($key);
+							$title = esc_html($element['title']);
+							echo "<div class='el-button $key_class'><a href='#{$key_url}'><span class='el-icon'></span><strong>$title</strong></a></div>";
 						} ?>
 					</div>
 
@@ -76,8 +79,8 @@ class Mixt_CB_Admin {
 					<div class="panel-body"><?php // Elements go here ?></div>
 
 					<div class="submit">
-						<input type="button" id="mcb-add-shortcode" class="button add-sc" value="<?php _e('Add Shortcode', 'mixt'); ?>" />
-						<a href="#mixt-cb-wrap" id="mcb-cancel" class="button cancel-sc" onclick="tb_remove();"><?php _e('Cancel', 'mixt'); ?></a>
+						<input type="button" id="mcb-add-shortcode" class="button add-sc" value="<?php esc_attr_e('Add Shortcode', 'mixt'); ?>" />
+						<a href="#mixt-cb-wrap" id="mcb-cancel" class="button cancel-sc" onclick="tb_remove();"><?php esc_html_e('Cancel', 'mixt'); ?></a>
 					</div>
 				</div>
 			</div>
@@ -109,14 +112,14 @@ class Mixt_CB_Admin {
 		$element = self::$elements[$key];
 
 		$clone_button = array( 'show' => false );
-		$remove_button = '<a href="#" class="mcb-remove">' . __('Remove', 'mixt') . '</a>';
+		$remove_button = '<a href="#" class="mcb-remove">' . esc_html__('Remove', 'mixt') . '</a>';
 
-		$template = ' data-shortcode-template="' . $element['template'] . '"';
+		$template = 'data-shortcode-template="' . esc_attr($element['template']) . '"';
 		if ( array_key_exists('nested', $element ) ) {
-			$template .= ' data-shortcode-child-template="' . $element['nested']['template'] . '"';
+			$template .= ' data-shortcode-child-template="' . esc_attr($element['nested']['template']) . '"';
 		}
 
-		$html = "<div id='$key' class='mcb-element-cont field mcb-element-field' $template>";
+		$html = "<div id='" . esc_attr($key) . "' class='mcb-element-cont field mcb-element-field' $template>";
 
 			$html .= '<div class="field parent-field">';
 			foreach( $element['params'] as $key => $param ) {
@@ -129,15 +132,15 @@ class Mixt_CB_Admin {
 			if ( array_key_exists('nested', $element ) ) {
 				$child = $element['nested'];
 				if ( isset($child['shortcode']) ) { $html .= $child['shortcode']; }
-				if ( empty($child['child_title']) ) $child['child_title'] = __( 'Child Element', 'mixt' );
+				if ( empty($child['child_title']) ) $child['child_title'] = esc_html__( 'Child Element', 'mixt' );
 				$clone_button['show'] = true;
-				$clone_button['text'] = ( empty($child['clone_button']) ) ? __( 'Add Element', 'mixt' ) : $child['clone_button'];
+				$clone_button['text'] = ( empty($child['clone_button']) ) ? esc_html__( 'Add Element', 'mixt' ) : $child['clone_button'];
 
 				$html .= '<div class="mcb-sortable row">';
 
 					// Render template (model) child
-					$html .= '<div id="clone-' . $key . '" class="field child-field hidden mcb-clone-template">';
-						$html .= '<div class="field-title toggle">' . $child['child_title'];
+					$html .= '<div id="clone-' . sanitize_html_class($key) . '" class="field child-field hidden mcb-clone-template">';
+						$html .= '<div class="field-title toggle">' . esc_html($child['child_title']);
 							if ( $clone_button['show'] ) { $html .= $remove_button; }
 						$html .= '</div><div class="field-content">';
 							foreach( $child['params'] as $key => $param ) {
@@ -150,7 +153,7 @@ class Mixt_CB_Admin {
 					if ( ! empty($child['presets']) ) {
 						foreach ( $child['presets'] as $preset_param ) {
 							$html .= '<div class="field child-field preset">';
-								$html .= '<div class="field-title toggle">' . $child['child_title'];
+								$html .= '<div class="field-title toggle">' . esc_html($child['child_title']);
 									if ( $clone_button['show'] ) { $html .= $remove_button; }
 								$html .= '</div><div class="field-content">';
 									foreach( $child['params'] as $key => $param ) {
@@ -163,14 +166,16 @@ class Mixt_CB_Admin {
 					
 					// Clone Field Button
 					if ( $clone_button['show'] ) {
-						$html .= '<a id="add-' . $key . '" href="#" class="button-secondary field-repeat">' . $clone_button['text'] . '</a>';
+						$html .= '<a id="add-' . esc_attr($key) . '" href="#" class="button-secondary field-repeat">' . esc_html($clone_button['text']) . '</a>';
 						$clone_button['show'] = false;
 					}
 				$html .= '</div>'; // Close .mcb-sortable
 			}
 
 			// Display notes if provided
-			if ( ! empty($element['notes']) ) { $html .= "<p class='mcb-notes'>{$element['notes']}</p>"; }
+			if ( ! empty($element['notes']) ) {
+				$html .= '<p class="mcb-notes">' . esc_html($element['notes']) . '</p>';
+			}
 
 		$html .= '</div>'; // Close .mcb-element-field
 
@@ -204,21 +209,25 @@ class Mixt_CB_Admin {
 		if ( ! empty($param['required']) ) {
 			$row_class .= ' requires';
 			$req_data = implode($param['required'], ',');
-			$row_atts .= " data-required='$req_data'";
+			$row_atts .= ' data-required="' . esc_attr($req_data) . '"';
 		}
 
 		$html = "<div class='$row_class' $row_atts>";
-			$html .= "<label class='label'>{$param['label']}</label>";
+			$html .= '<label class="label">' . esc_html($param['label']) . '</label>';
 
-			$field_atts  = "data-attr='$key'";
-			if ( $param['std'] != '' ) $field_atts .= " data-std='{$param['std']}'";
+			$field_atts = 'data-attr="' . esc_attr($key) . '"';
+			if ( $param['std'] != '' ) {
+				$field_atts .= ' data-std="' . esc_attr($param['std']) . '"';
+			}
 
 			$field_class = 'mcb-input';
-			if ( ! empty($param['class']) ) $field_class .= ' ' . $param['class'];
+			if ( ! empty($param['class']) ) {
+				$field_class .= ' ' . mixt_sanitize_html_classes($param['class']);
+			}
 
 			switch ( $param['type'] ) {
 				case 'text':
-					$html .= "<input type='text' $field_atts class='$field_class' value='{$param['std']}'>\n";
+					$html .= "<input type='text' $field_atts class='$field_class' value='" . esc_attr($param['std']) . "'>\n";
 					break;
 				case 'textarea':
 					$html .= "<textarea rows='5' cols='30' $field_atts class='$field_class'>{$param['std']}</textarea>\n";
@@ -237,36 +246,43 @@ class Mixt_CB_Admin {
 						$html .= '<div class="mcb-multi-input">';
 						foreach ( $param['options'] as $value => $label ) {
 							$is_checked = in_array($value, $checked_std);
-							$html .= "<label class='mcb-input-cont'>$label" .
-										 "<input type='checkbox' class='mcb-child-input mcb-checkbox' value='$value' " . ( $is_checked ? 'checked' : '' ) . ">" .
+							$html .= "<label class='mcb-input-cont'>" . esc_html($label) .
+										 "<input type='checkbox' class='mcb-child-input mcb-checkbox' value='" . esc_attr($value) . "' " . ( $is_checked ? 'checked' : '' ) . ">" .
 									 "</label>\n";
 						}
-						$html .= "<input type='hidden' $field_atts class='$field_class mcb-checkbox' value='{$param['std']}'></div>";
+						$html .= "<input type='hidden' $field_atts class='$field_class mcb-checkbox' value='" . esc_attr($param['std']) . "'></div>";
 					} else {
 						$is_checked = $param['std'] != false;
 						$html .= "<input type='checkbox' $field_atts class='$field_class mcb-checkbox' value='true' " . ( $is_checked ? 'checked' : '' ) . ">\n";
 					}
 					break;
 				case 'colorpicker':
-					$html .= "<input type='text' $field_atts class='$field_class mcb-color' value='{$param['std']}'>\n";
+					$html .= "<input type='text' $field_atts class='$field_class mcb-color' value='" . esc_attr($param['std']) . "'>\n";
 					break;
 				case 'media':
 				case 'media_multi':
 					if ( $param['type'] == 'media_multi' ) $field_atts .= ' data-multiple="true"';
-					$html .= "<input type='text' $field_atts class='$field_class mcb-media-select' value='{$param['std']}'>\n";
+					$html .= "<input type='text' $field_atts class='$field_class mcb-media-select' value='" . esc_attr($param['std']) . "'>\n";
 					break;
 				case 'select':
 				case 'select_multi':
-					if ( $param['type'] == 'select_multi' ) { $field_atts .= ' multiple'; }
-					if ( $param['std'] == '' ) { $param['std'] = array(); }
-					else { $param['std'] = explode(',', $param['std']); }
+					if ( $param['type'] == 'select_multi' ) {
+						$field_atts .= ' multiple';
+					}
+					if ( $param['std'] == '' ) {
+						$param['std'] = array();
+					} else {
+						$param['std'] = explode(',', $param['std']);
+					}
 					$html .= "<select $field_atts class='$field_class'>\n";
 					foreach( $param['options'] as $value => $option ) {
-						if ( is_int($value) ) $value = $option;
+						if ( is_int($value) ) {
+							$value = $option;
+						}
 						if ( in_array($value, $param['std']) ) {
-							$html .= "<option value='$value' selected>$option</option>\n";
+							$html .= "<option value='" . esc_attr($value) . "' selected>" . esc_html($option) . "</option>\n";
 						} else {
-							$html .= "<option value='$value'>$option</option>\n";
+							$html .= "<option value='" . esc_attr($value) . "'>" . esc_html($option) . "</option>\n";
 						}
 					}
 					$html .= "</select>\n";
@@ -276,7 +292,7 @@ class Mixt_CB_Admin {
 						$param['key'] = $key;
 						$html .= call_user_func(self::$fields[$param['type']], $param);
 					} else {
-						$html .= '<span class="no-field-type-msg">' . __( 'No field of type', 'mixt' ) . ' ' . $param['type'] . '!</span>';
+						$html .= '<span class="no-field-type-msg">' . esc_html__( 'No field of type', 'mixt' ) . ' ' . $param['type'] . '!</span>';
 					}
 					break;
 			}

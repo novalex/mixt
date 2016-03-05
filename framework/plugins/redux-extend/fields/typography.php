@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Typography', 'mixt' ),
-	'desc'       => __( 'Manage the site\'s typography options and fonts.', 'mixt' ),
+	'title'      => esc_html__( 'Typography', 'mixt' ),
+	'desc'       => esc_html__( 'Manage the site\'s typography options and fonts.', 'mixt' ),
 	'icon'       => 'el-icon-font',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,8 +11,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'font-sitewide',
 			'type'        => 'typography',
-			'title'       => __( 'Main Font', 'mixt' ),
-			'subtitle'    => __( 'Select the font to use site-wide', 'mixt' ),
+			'title'       => esc_html__( 'Main Font', 'mixt' ),
+			'subtitle'    => esc_html__( 'Select the font to use site-wide', 'mixt' ),
 			'google'      => true,
 			'font-backup' => true,
 			'all_styles'  => true,
@@ -34,8 +34,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'font-nav',
 			'type'        => 'typography',
-			'title'       => __( 'Navbar Font', 'mixt' ),
-			'subtitle'    => __( 'Select the font to use for the navbar', 'mixt' ),
+			'title'       => esc_html__( 'Navbar Font', 'mixt' ),
+			'subtitle'    => esc_html__( 'Select the font to use for the navbar', 'mixt' ),
 			'google'      => true,
 			'font-backup' => true,
 			'color'       => false,
@@ -54,8 +54,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'font-nav-sub',
 			'type'        => 'typography',
-			'title'       => __( 'Navbar Submenu Font', 'mixt' ),
-			'subtitle'    => __( 'Select the font to use for the navbar submenus', 'mixt' ),
+			'title'       => esc_html__( 'Navbar Submenu Font', 'mixt' ),
+			'subtitle'    => esc_html__( 'Select the font to use for the navbar submenus', 'mixt' ),
 			'google'      => true,
 			'font-backup' => true,
 			'color'       => false,
@@ -80,8 +80,8 @@ $heading_fields = array(
 	array(
 		'id'          => 'font-heading-main',
 		'type'        => 'typography',
-		'title'       => __( 'Heading Font', 'mixt' ),
-		'subtitle'    => __( 'Set the default options for headings (can be overridden individually below)', 'mixt' ),
+		'title'       => esc_html__( 'Heading Font', 'mixt' ),
+		'subtitle'    => esc_html__( 'Set the default options for headings (can be overridden individually below)', 'mixt' ),
 		'google'      => true,
 		'font-backup' => true,
 		'color'       => false,
@@ -106,7 +106,7 @@ while ( $hx <= 6 ) {
 	$heading_fields[] = array(
 		'id'          => "font-heading-h{$hx}",
 		'type'        => 'typography',
-		'title'       => sprintf( __( 'Heading %d', 'mixt' ), $hx ),
+		'title'       => sprintf( esc_html__( 'Heading %d', 'mixt' ), $hx ),
 		'google'      => true,
 		'font-backup' => true,
 		'color'       => false,
@@ -126,7 +126,7 @@ while ( $hx <= 6 ) {
 }
 
 $this->sections[] = array(
-	'title'      => __( 'Headings', 'mixt' ),
+	'title'      => esc_html__( 'Headings', 'mixt' ),
 	'icon'       => 'el-icon-fontsize',
 	'subsection' => true,
 	'customizer' => false,

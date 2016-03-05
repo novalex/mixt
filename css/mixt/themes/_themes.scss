@@ -1,13 +1,18 @@
 
-$themes: ();
-$site-themes: ();
-$nav-themes: ();
+/* --------------------------
+ 7. Themes
+-------------------------- */
+
 
 // =====================================================
 // When adding or removing themes, also update the
 // respective array in the 'mixt_get_themes' function in 'core/assets.php',
 // or use the default theme filters in your child theme
 // =====================================================
+
+$themes: ();
+$site-themes: ();
+$nav-themes: ();
 
 @import 'lava';
 @import 'eco';

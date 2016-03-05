@@ -34,7 +34,7 @@ function mixt_breadcrumbs($page_title = '') {
 				echo '<li class="bc-prefix">' . esc_html($prefix) . '</li>';
 			}
 
-			echo '<li><a href="' . home_url() . '">' . _x( 'Home', 'breadcrumb', 'mixt' ) . '</a></li>';
+			echo '<li><a href="' . home_url() . '">' . esc_html_x( 'Home', 'breadcrumb', 'mixt' ) . '</a></li>';
 
 			// Category Or Single Page
 			if ( is_category() || is_single() ) {
@@ -94,7 +94,7 @@ function mixt_breadcrumbs($page_title = '') {
 
 			// Tag Page
 			} else if ( is_tag() ) {
-				echo '<li>' . _x( 'Tag: ', 'breadcrumb', 'mixt' ) . single_tag_title('', false) . '</li>';
+				echo '<li>' . esc_html_x( 'Tag: ', 'breadcrumb', 'mixt' ) . single_tag_title('', false) . '</li>';
 
 			// Taxonomy Page
 			} else if ( is_tax() ) {
@@ -102,17 +102,17 @@ function mixt_breadcrumbs($page_title = '') {
 				$tax = get_taxonomy($tax_slug);
 				$term = get_term_by('slug', get_query_var('term'), $tax_slug);
 				echo '<li>';
-					echo $tax->labels->singular_name . ': ' . $term->name;
+					echo esc_html($tax->labels->singular_name . ': ' . $term->name);
 				echo '</li>';
 
 			// Author Archive Page
 			} else if ( is_author() ) {
 				$author = get_queried_object();
-				echo '<li>' . _x('Author: ', 'breadcrumb', 'mixt') . $author->display_name . '</li>';
+				echo '<li>' . esc_html_x( 'Author: ', 'breadcrumb', 'mixt' ) . $author->display_name . '</li>';
 
 			// Search Page
 			} else if ( is_search() ) {
-				echo '<li>' . _x( 'Search', 'breadcrumb', 'mixt' ) . '</li>';
+				echo '<li>' . esc_html_x( 'Search', 'breadcrumb', 'mixt' ) . '</li>';
 
 			// "Page" Type Page
 			} else if ( is_page() ) {
@@ -127,7 +127,7 @@ function mixt_breadcrumbs($page_title = '') {
 						$title     = get_the_title($ancestor);
 						$permalink = get_permalink($ancestor);
 						if ( ! empty($title) ) {
-							$output = '<li><a href="' . $permalink . '" title="' . $title . '">' . $title . '</a></li>';
+							$output = '<li><a href="' . $permalink . '" title="' . esc_attr($title) . '">' . $title . '</a></li>';
 						}
 					}
 					echo $output;
@@ -170,7 +170,7 @@ function mixt_woocommerce_breadcrumbs() {
 		'wrap_after'  => '</ol>',
 		'before'      => '<li>',
 		'after'       => '</li>',
-		'home'        => _x( 'Home', 'breadcrumb', 'mixt' ),
+		'home'        => esc_html_x( 'Home', 'breadcrumb', 'mixt' ),
 	);
 }
 add_filter('woocommerce_breadcrumb_defaults', 'mixt_woocommerce_breadcrumbs');

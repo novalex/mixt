@@ -1,4 +1,9 @@
 
+/* --------------------------
+ 17. Post
+-------------------------- */
+
+
 @import 'featured';
 
 @import 'post-info';
@@ -96,7 +101,7 @@
 	}
 
 	&.no-title {
-		.page-title { display: none; }
+		.page-title:not(.force-display) { display: none; }
 		.entry-body {
 			&:first-child { margin-top: $margin-m; }
 			&:empty { margin-top: 0; }

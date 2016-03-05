@@ -20,9 +20,10 @@
 
 	.post-feat {
 		img,
+		> a,
 		.lSSlideOuter { height: 100%; }
 
-		.no-objectfit & img { height: auto; }
+		.no-objectfit & img { width: auto; height: auto; }
 	}
 
 	&.blog-2-col .posts-container { margin-right: -3px; }

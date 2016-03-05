@@ -1,5 +1,8 @@
 
-// RTL
+/* --------------------------
+ 23. RTL
+-------------------------- */
+
 
 @if $rtl {
 
@@ -133,11 +136,11 @@
 		.tagcloud a,
 		.post-meta > span,
 		#respond .form-submit,
-		.blog-standard .posts-container .article .post-feat.feat-blog-medium,
-		.blog-standard .posts-container .article .post-feat.feat-blog-small { float: right; }
+		.blog-standard .posts-container .article .post-feat.feat-mixt-medium,
+		.blog-standard .posts-container .article .post-feat.feat-mixt-small { float: right; }
 
-		.blog-standard .posts-container .article .post-feat.feat-blog-medium,
-		.blog-standard .posts-container .article .post-feat.feat-blog-small { margin-right: 0; margin-left: $margin-m; }
+		.blog-standard .posts-container .article .post-feat.feat-mixt-medium,
+		.blog-standard .posts-container .article .post-feat.feat-mixt-small { margin-right: 0; margin-left: $margin-m; }
 
 		.widget-area .nav li .post-count { float: left; }
 

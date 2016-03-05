@@ -15,7 +15,7 @@ if ( ! WC()->cart->coupons_enabled() ) {
 	return;
 }
 
-$info_message = apply_filters( 'woocommerce_checkout_coupon_message', __( 'Have a coupon?', 'woocommerce' ) );
+$info_message = apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) );
 
 ?>
 

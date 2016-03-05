@@ -1,4 +1,9 @@
 
+/* --------------------------
+ 8. Base
+-------------------------- */
+
+
 html {
 	height: 100%;
 	font-size: $font-size;
@@ -107,128 +112,3 @@ p:empty { display: none; }
 #main-wrap-inner ::selection { text-shadow: none !important; }
 
 #wpadminbar #wp-admin-bar-mixt-options .ab-icon:before { top: 3px; }
-
-// Style Switcher
-
-#style-switcher {
-	$width: 240px;
-	$spacing: 15px;
-
-	position: fixed;
-	top: 20%; bottom: 20px;
-	left: -$width;
-	width: $width;
-	min-height: 300px;
-	max-height: 613px;
-	color: #333;
-	border-bottom-right-radius: 3px;
-	border-left-width: 0 !important;
-	transition: left 0.3s;
-	z-index: 10000;
-
-	&.show { left: 0; }
-
-	&,
-	.handle {
-		border: 1px solid rgba(0,0,0,0.1);
-		background-color: #fbfbfb;
-	}
-
-	.handle {
-		position: absolute;
-		top: -1px; right: -48px;
-		width: 48px; height: 42px;
-		padding: 0;
-		cursor: pointer;
-		font-size: 16px;
-		line-height: 38px;
-		text-align: center;
-		border-left-width: 0;
-		border-radius: 0 3px 3px 0;
-
-		i {
-			font-size: 24px !important;
-			animation: spin 6s ease infinite;
-		}
-	}
-
-	.reset {
-		position: absolute;
-		top: 8px; right: $spacing;
-	}
-
-	.content {
-		height: 100%;
-		overflow: hidden;
-	}
-
-	.field {
-		padding: $spacing;
-		border-bottom: 1px solid #ddd;
-
-		&:last-child { border-bottom-width: 0; }
-	}
-}
-
-#styler-bg-pat {
-	background-image: url('#{$img-path}/misc/bg-pat-sprite.png');
-	background-size: 207px 202px;
-	background-repeat: no-repeat;
-	background-position: 1px 1px;
-
-	.btn {
-		width: 15%;
-		width: calc(16.666% - 2px);
-		height: 32px;
-		border-color: transparent !important;
-		background: transparent !important;
-
-		&.active {
-			box-shadow: 0 0 1px 1px #5991CE;
-		}
-	}
-}
-
-#styler-theme .btn {
-	width: 48%;
-	width: calc(50% - 2px);
-
-	@each $name, $theme in $site-themes {
-		&.theme-btn-#{$name} {
-			color: map-get($theme, 'accent');
-			border-color: map-get($theme, 'border');
-			background-color: map-get($theme, 'bg');
-			text-shadow: 0 1px 1px set-textsh-for-bg(map-get($theme, 'bg'));
-
-			&.active {
-				color: map-get($theme, 'bg');
-				border-color: map-get($theme, 'accent');
-				background-color: map-get($theme, 'accent');
-				box-shadow: none;
-			}
-		}
-	}
-}
-
-#styler-theme-elem {
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-#styler-bg-pat,
-#styler-theme {
-	@include clearfix;
-
-	.btn {
-		float: left;
-		position: relative;
-		margin: 1px;
-		z-index: 1;
-
-		&:active { box-shadow: none !important; }
-		&.active {
-			border-color: transparent;
-			z-index: 2;
-		}
-	}
-}

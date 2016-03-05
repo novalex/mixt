@@ -26,10 +26,8 @@ get_header();
 
 		// Project Taxonomies
 		if ( $options['project-tags'] ) {
-			//global $post;
-			
-			$types = get_the_term_list($post->ID, 'project-type', '<p class="tag-list"><strong>' . __( 'Type:', 'mixt' ) . '</strong>', '', '</p>');
-			$attrs = get_the_term_list($post->ID, 'project-attribute', '<p class="tag-list"><strong>' . __( 'Attributes:', 'mixt' ) . '</strong>', '', '</p>');
+			$types = get_the_term_list($post->ID, 'project-type', '<p class="tag-list"><strong>' . esc_html__( 'Type:', 'mixt' ) . '</strong>', '', '</p>');
+			$attrs = get_the_term_list($post->ID, 'project-attribute', '<p class="tag-list"><strong>' . esc_html__( 'Attributes:', 'mixt' ) . '</strong>', '', '</p>');
 			if ( $types != '' || $attrs != '' ) {
 				echo '<footer class="entry-footer post-tags post-extra">' . $types . $attrs . '</footer>';
 			}
@@ -37,13 +35,16 @@ get_header();
 
 		// Post Social Sharing Buttons
 		if ( $options['project-sharing'] ) {
-			global $mixt_opt;
-
 			$profiles = array();
 
+			$sel_profiles = mixt_get_option( array( 'key' => 'project-sharing-profiles', 'return' => 'value' ) );
+			$set_profiles = mixt_get_option( array( 'key' => 'social-sharing-profiles', 'return' => 'value' ) );
+
 			// Build array of selected sharing profiles
-			if ( $sel_profiles = $mixt_opt['project-sharing-profiles'] ) {
-				$set_profiles = ( ! empty($mixt_opt['social-sharing-profiles']) ) ? $mixt_opt['social-sharing-profiles'] : mixt_preset_social_profiles('sharing');
+			if ( ! empty($sel_profiles) ) {
+				if ( empty($set_profiles) ) {
+					$set_profiles = mixt_preset_social_profiles('sharing');
+				}
 				foreach ( $set_profiles as $key => $profile ) {
 					if ( ! empty($sel_profiles[$key]) ) $profiles[$key] = $profile;
 				}
@@ -57,7 +58,7 @@ get_header();
 			));
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';
-					echo mixt_heading( __( 'Share this', 'mixt' ) );
+					echo mixt_heading( esc_html__( 'Share this', 'mixt' ) );
 					echo $icons;
 				echo '</div>';
 			}
@@ -75,7 +76,7 @@ get_header();
 
 		// Related Posts
 		if ( $options['project-related'] ) {
-			mixt_related_posts('project', __( 'Other Projects', 'mixt' ));
+			mixt_related_posts('project', esc_html__( 'Other Projects', 'mixt' ));
 		}
 
 		// Comments

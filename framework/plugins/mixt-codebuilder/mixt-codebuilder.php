@@ -40,8 +40,8 @@ class Mixt_CodeBuilder {
 
 		$local = array(
 			'dir'          => MIXTCB_URL,
-			'button_title' => __( 'Build Shortcode', 'mixt' ),
-			'media_frame_title' => __( 'Select Media', 'mixt' ),
+			'button_title' => esc_html__( 'Build Shortcode', 'mixt' ),
+			'media_frame_title' => esc_html__( 'Select Media', 'mixt' ),
 		);
 		wp_localize_script( 'jquery', 'mixt_cb', $local );
 	}

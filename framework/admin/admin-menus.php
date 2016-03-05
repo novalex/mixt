@@ -21,7 +21,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 		}
 
 		public function add_meta_boxes() {
-			add_meta_box('mixt_nav_meta', __( 'MIXT Elements', 'mixt' ), array( $this, 'nav_menu_items'), 'nav-menus', 'side', 'high');
+			add_meta_box('mixt_nav_meta', esc_html__( 'MIXT Elements', 'mixt' ), array( $this, 'nav_menu_items'), 'nav-menus', 'side', 'high');
 		}
 
 		public function update_nav_menu_items($menu_id, $menu_item_id, $args) {
@@ -45,17 +45,17 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 				<ul id="posttype-page-tabs" class="posttype-tabs add-menu-item-tabs">
 					<li class="tabs">
 						<a class="nav-tab-link" data-type="tabs-panel-mixt-elems" href="#tabs-panel-mixt-elems">
-							<?php _e('Elements', 'mixt'); ?>
+							<?php esc_html_e( 'Elements', 'mixt' ); ?>
 						</a>
 					</li>
 					<li>
 						<a class="nav-tab-link" data-type="tabs-panel-mixt-pages" href="#tabs-panel-mixt-pages">
-							<?php _e('Pages', 'mixt'); ?>
+							<?php esc_html_e( 'Pages', 'mixt' ); ?>
 						</a>
 					</li>
 					<li>
 						<a class="nav-tab-link" data-type="tabs-panel-mixt-social" href="#tabs-panel-mixt-social">
-							<?php _e('Social Icons', 'mixt'); ?>
+							<?php esc_html_e( 'Social Icons', 'mixt' ); ?>
 						</a>
 					</li>
 				</ul>
@@ -65,7 +65,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Divider ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Divider', 'mixt' ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e( 'Divider', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Divider">
@@ -76,7 +76,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Search Form Element ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Search Form', 'mixt' ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e( 'Search Form', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Search">
@@ -88,7 +88,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Button ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Button', 'mixt' ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e( 'Button', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Button">
@@ -99,7 +99,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 						<?php // Widget Area ?>
 						<li>
 							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Widget Area', 'mixt' ); ?>
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e( 'Widget Area', 'mixt' ); ?>
 							</label>
 							<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 							<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Widget Area">
@@ -111,7 +111,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 							if ( class_exists( 'WooCommerce' ) ) { ?>
 							<li>
 								<label class="menu-item-title">
-									<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e( 'Cart', 'mixt' ); ?>
+									<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e( 'Cart', 'mixt' ); ?>
 								</label>
 								<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 								<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="Cart">
@@ -138,17 +138,17 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 									<li>
 										<label class="menu-item-title">
 											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1">
-											<?php echo $post_type->labels->name . ' ' . __('Archive', 'mixt'); ?>
+											<?php echo esc_html($post_type->labels->name . ' ' . __( 'Archive', 'mixt' ) ); ?>
 										</label>
 										<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
-										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo $post_type->labels->name; ?>">
+										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo esc_attr($post_type->labels->name); ?>">
 										<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="<?php echo get_post_type_archive_link($post_type->name); ?>">
-										<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="archive-<?php echo $post_type->name; ?>">
+										<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="archive-<?php echo esc_attr($post_type->name); ?>">
 									</li>
 									<?php
 								}
 							} else {
-								echo '<li><label>' . __( 'No pages avaialble!', 'mixt' ) . '</label></li>';
+								echo '<li><label>' . esc_html__( 'No pages avaialble!', 'mixt' ) . '</label></li>';
 							}
 						?>
 					</ul>
@@ -166,10 +166,10 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 									?>
 									<li>
 										<label class="menu-item-title">
-											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php _e('All Icons', 'mixt'); ?>
+											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"><?php esc_html_e('All Icons', 'mixt'); ?>
 										</label>
 										<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
-										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php _e('Social Icons', 'mixt'); ?>">
+										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php esc_attr_e('Social Icons', 'mixt'); ?>">
 										<input type="hidden" class="menu-item-classes" name="menu-item[-1][menu-item-classes]" value="mixt-social-icons">
 										<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="social-icons">
 										<br><br>
@@ -191,19 +191,19 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 									?>
 									<li>
 										<label class="menu-item-title">
-											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"> <?php echo $name; ?>
+											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1"> <?php echo esc_html($name); ?>
 										</label>
 										<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
-										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo $name; ?>">
-										<input type="hidden" class="menu-item-attr-title" name="menu-item[-1][menu-item-attr-title]" value="<?php echo $title; ?>">
-										<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="<?php echo $url; ?>">
+										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo esc_attr($name); ?>">
+										<input type="hidden" class="menu-item-attr-title" name="menu-item[-1][menu-item-attr-title]" value="<?php echo esc_attr($title); ?>">
+										<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="<?php echo esc_url($url); ?>">
 										<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="social-icon">
-										<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo $icon; ?>">
+										<input type="hidden" class="mixt-menu-item-icon" name="menu-item[-1][mixt-menu-item-icon]" value="<?php echo esc_attr($icon); ?>">
 									</li>
 									<?php
 								}
 							} else {
-								echo '<li><label>' . __( 'No social profiles set up!', 'mixt' ) . '</label></li>';
+								echo '<li><label>' . esc_html__( 'No social profiles set up!', 'mixt' ) . '</label></li>';
 							}
 						?>
 					</ul>

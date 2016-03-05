@@ -20,7 +20,7 @@ if ( ! function_exists('mixt_get_title') ) {
 			if ( get_option('page_for_posts', true) ) {
 				$title = get_the_title(get_option('page_for_posts', true));
 			} else {
-				$title = __( 'Latest Posts', 'mixt' );
+				$title = esc_html__( 'Latest Posts', 'mixt' );
 			}
 		} else if ( is_archive() ) {
 			$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
@@ -29,11 +29,11 @@ if ( ! function_exists('mixt_get_title') ) {
 			} else if ( is_post_type_archive() ) {
 				$title = get_queried_object()->labels->name;
 			} else if ( is_day() ) {
-				$title = __( 'Daily Archives: ', 'mixt' ) . get_the_date();
+				$title = esc_html__( 'Daily Archives: ', 'mixt' ) . get_the_date();
 			} else if ( is_month() ) {
-				$title = __( 'Monthly Archives: ', 'mixt' ) . get_the_date('F Y');
+				$title = esc_html__( 'Monthly Archives: ', 'mixt' ) . get_the_date('F Y');
 			} else if ( is_year() ) {
-				$title = __( 'Yearly Archives: ', 'mixt' ) . get_the_date('Y');
+				$title = esc_html__( 'Yearly Archives: ', 'mixt' ) . get_the_date('Y');
 			} else if ( is_author() ) {
 				$author = get_queried_object();
 				$title = $author->display_name;
@@ -41,9 +41,9 @@ if ( ! function_exists('mixt_get_title') ) {
 				$title = single_cat_title('', false);
 			}
 		} else if ( is_search() ) {
-			$title = __( 'Search Results for ', 'mixt' ) . '"' . get_search_query() . '"';
+			$title = esc_html__( 'Search Results for ', 'mixt' ) . '"' . get_search_query() . '"';
 		} else if ( is_404() ) {
-			$title = '404 - ' . __( 'Not Found', 'mixt' );
+			$title = esc_html__( '404 - Not Found', 'mixt' );
 		} else {
 			$title = get_the_title();
 		}
@@ -112,14 +112,14 @@ if ( ! function_exists('mixt_content_nav') ) {
 				'current'   => $page_now,
 				'total'     => $page_max,
 				'type'      => 'array',
-				'prev_text' => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
-				'next_text' => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
+				'prev_text' => mixt_get_icon('left-arrow') . esc_html__( 'Previous', 'mixt' ),
+				'next_text' => esc_html__( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 			) );
 
 			if ( ! empty($page_links) ) {
 				?>
-				<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-					<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
+				<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>">
+					<h3 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'mixt' ); ?></h3>
 					<ul class="pager">
 						<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
 					</ul>
@@ -133,15 +133,15 @@ if ( ! function_exists('mixt_content_nav') ) {
 			$nav_class .= 'paging-navigation ajax-paging';
 
 			?>
-			<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
-				 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
-				<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
+			<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>"
+				 data-page-now="<?php echo esc_attr($page_now); ?>" data-page-max="<?php echo esc_attr($page_max); ?>">
+				<h3 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'mixt' ); ?></h3>
 				<ul class="pager">
 					<li><a href="<?php echo next_posts($page_max, false); ?>" class="ajax-more" 
-						data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
-						data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
-						data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
-					><?php echo mixt_get_icon('down-arrow') . __( 'Load more posts', 'mixt' ); ?></a></li>
+						data-loading-text="<?php esc_attr_e( 'Loading...', 'mixt' ); ?>" 
+						data-complete-text="<?php esc_attr_e( 'No more posts to load', 'mixt' ); ?>" 
+						data-error-text="<?php esc_attr_e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
+					><?php echo mixt_get_icon('down-arrow') . esc_html__( 'Load more posts', 'mixt' ); ?></a></li>
 				</ul>
 			</nav>
 			<?php
@@ -167,8 +167,8 @@ if ( ! function_exists('mixt_content_nav') ) {
 			}
 
 			?>
-			<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-				<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
+			<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>">
+				<h3 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'mixt' ); ?></h3>
 				<ul class="pager">
 				<?php
 					if ( $is_single ) { // Navigation links for single posts
@@ -177,12 +177,12 @@ if ( ! function_exists('mixt_content_nav') ) {
 					} else {
 						if ( $previous ) {
 							echo '<li class="nav-previous prev">';
-								previous_posts_link( mixt_get_icon('left-arrow') . __( 'Previous posts', 'mixt' ) );
+								previous_posts_link( mixt_get_icon('left-arrow') . esc_html__( 'Previous posts', 'mixt' ) );
 							echo '</li>';
 						}
 						if ( $next ) {
 							echo '<li class="nav-next next">';
-								next_posts_link( __( 'Next posts', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max );
+								next_posts_link( esc_html__( 'Next posts', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max );
 							echo '</li>';
 						}
 					}
@@ -211,9 +211,9 @@ if ( ! function_exists('mixt_comment') ) {
 			?>
 			<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 				<div class="comment-body">
-					<?php _e( 'Pingback:', 'mixt' ); ?> 
+					<?php esc_html_e( 'Pingback:', 'mixt' ); ?> 
 					<?php comment_author_link(); ?> 
-					<?php edit_comment_link( __( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
+					<?php edit_comment_link( esc_html__( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
 				</div>
 			<?php
 
@@ -240,12 +240,12 @@ if ( ! function_exists('mixt_comment') ) {
 							<?php echo get_comment_author_link(); ?>
 						</cite>
 
-						<?php edit_comment_link( __( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( esc_html__( 'Edit', 'mixt' ), '<span class="edit-link">', '</span>' ); ?>
 
 						<div class="comment-meta">
 							<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" class="color-fade no-color">
 								<time datetime="<?php comment_time( 'c' ); ?>">
-									<?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'mixt' ), get_comment_date(), get_comment_time() ); ?>
+									<?php printf( esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'mixt' ), get_comment_date(), get_comment_time() ); ?>
 								</time>
 							</a>
 						</div>
@@ -257,7 +257,7 @@ if ( ! function_exists('mixt_comment') ) {
 						<div class="comment-content">
 							<?php
 								if ( '0' == $comment->comment_approved ) { ?>
-									<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'mixt' ); ?></p>
+									<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'mixt' ); ?></p>
 								<?php }
 
 								comment_text();
@@ -318,14 +318,14 @@ if ( ! function_exists('mixt_comment_nav') ) {
 					'type'         => 'array',
 					'total'        => $page_max,
 					'echo'         => false,
-					'prev_text'    => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
-					'next_text'    => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
+					'prev_text'    => mixt_get_icon('left-arrow') . esc_html__( 'Previous', 'mixt' ),
+					'next_text'    => esc_html__( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 				) );
 
 				if ( ! empty($page_links) ) {
 					?>
-					<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-						<h3 class="screen-reader-text"><?php _e( 'Post navigation', 'mixt' ); ?></h3>
+					<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>">
+						<h3 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'mixt' ); ?></h3>
 						<ul class="pager">
 							<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
 						</ul>
@@ -341,15 +341,15 @@ if ( ! function_exists('mixt_comment_nav') ) {
 				$page_now   = ( get_query_var('cpage') > 1 ) ? get_query_var('cpage') : 1;
 
 				?>
-				<nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>"
-					 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
-					<h3 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h3>
+				<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>"
+					 data-page-now="<?php echo esc_attr($page_now); ?>" data-page-max="<?php echo esc_attr($page_max); ?>">
+					<h3 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'mixt' ); ?></h3>
 					<ul class="pager">
 						<li><a href="<?php echo get_comments_pagenum_link($page_now + 1); ?>" class="ajax-more" 
-							data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
-							data-complete-text="<?php _e( 'No more comments to load', 'mixt' ); ?>" 
-							data-error-text="<?php _e( 'An error occured while trying to load the comments!', 'mixt' ); ?>"
-						><?php echo mixt_get_icon('down-arrow') . __( 'Load more', 'mixt' ); ?></a></li>
+							data-loading-text="<?php esc_attr_e( 'Loading...', 'mixt' ); ?>" 
+							data-complete-text="<?php esc_attr_e( 'No more comments to load', 'mixt' ); ?>" 
+							data-error-text="<?php esc_attr_e( 'An error occured while trying to load the comments!', 'mixt' ); ?>"
+						><?php echo mixt_get_icon('down-arrow') . esc_html__( 'Load more', 'mixt' ); ?></a></li>
 					</ul>
 				</nav>
 				<?php
@@ -360,11 +360,11 @@ if ( ! function_exists('mixt_comment_nav') ) {
 				$nav_class .= 'classic-paging';
 				?>
 
-				<nav id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
-					<h5 class="screen-reader-text"><?php _e( 'Comment navigation', 'mixt' ); ?></h5>
+				<nav id="<?php echo esc_attr($nav_id); ?>" class="<?php echo $nav_class; ?>">
+					<h5 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'mixt' ); ?></h5>
 					<ul class="pager">
-						<li class="nav-previous prev"><?php previous_comments_link( mixt_get_icon('left-arrow') . __( 'Older comments', 'mixt' ) ); ?></li>
-						<li class="nav-next next"><?php next_comments_link( __( 'Newer comments', 'mixt' ) . mixt_get_icon('right-arrow') ); ?></li>
+						<li class="nav-previous prev"><?php previous_comments_link( mixt_get_icon('left-arrow') . esc_html__( 'Older comments', 'mixt' ) ); ?></li>
+						<li class="nav-next next"><?php next_comments_link( esc_html__( 'Newer comments', 'mixt' ) . mixt_get_icon('right-arrow') ); ?></li>
 					</ul>
 				</nav>
 
@@ -436,7 +436,7 @@ if ( ! function_exists('mixt_chat_format_content') ) {
 				}
 
 				/* Open the chat row. */
-				$output .= '<div class="chat-row chat-author-' . sanitize_html_class($author_id) . '">' .
+				$output .= '<div class="chat-row chat-author-' . $author_id . '">' .
 							   '<strong class="chat-author">' . $author . '</strong>' .
 							   '<div class="chat-text">' . $text . '</div>';
 			} else if ( ! empty($row) ) {

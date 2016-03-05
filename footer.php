@@ -91,7 +91,6 @@ $options = mixt_get_options( array(
 
 			if ( $options['left-content'] == '1' || $options['right-content'] == '1' ) {
 				$profiles = array();
-				global $mixt_opt;
 				$set_profiles = get_option('mixt-social-profiles', mixt_preset_social_profiles('networks'));
 				foreach ( $set_profiles as $key => $profile ) {
 					if ( ! empty($options['social-profiles'][$key]) ) $profiles[$key] = $profile;
@@ -158,8 +157,6 @@ $options = mixt_get_options( array(
 </div><?php // close #main-wrap
 
 wp_footer();
-
-do_action('mixt_body_code');
 
 ?>
 </body>

@@ -59,8 +59,8 @@ function cmb2_post_search_render_js(  $cmb_id, $object_id, $object_type, $cmb ) 
 	// markup needed for modal
 	add_action( 'admin_footer', 'find_posts_div' );
 
-	$error = __( 'An error has occurred. Please reload the page and try again.', 'mixt' ); // MIXT: added textdomain
-	$find  = __( 'Find Posts or Pages', 'mixt' ); // MIXT: added textdomain
+	$error = esc_html__( 'An error has occurred. Please reload the page and try again.', 'mixt' ); // MIXT: added textdomain
+	$find  = esc_html__( 'Find Posts or Pages', 'mixt' ); // MIXT: added textdomain
 
 	// @TODO this should really be in its own JS file.
 	?>

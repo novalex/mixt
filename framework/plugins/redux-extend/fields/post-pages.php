@@ -18,7 +18,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 		'type'              => 'standard',
 		'columns'           => '3',
 		'feat-show'         => true,
-		'feat-size'         => 'blog-small',
+		'feat-size'         => 'mixt-small',
 		'post-info'         => true,
 		'meta-show'         => 'header',
 		'page-title'        => true,
@@ -42,10 +42,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-inherit',
 				'type'     => 'switch',
-				'title'    => __( 'Inherit Blog Options', 'mixt' ),
-				'subtitle' => __( 'Enable to inherit all options from the blog page', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Inherit Blog Options', 'mixt' ),
+				'subtitle' => esc_html__( 'Enable to inherit all options from the blog page', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => $defaults['inherit'],
 			),
 
@@ -53,8 +53,8 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-nav-menu',
 				'type'     => 'select',
-				'title'    => __( 'Nav Menu', 'mixt' ),
-				'subtitle' => __( 'Select the menu for this page', 'mixt' ),
+				'title'    => esc_html__( 'Nav Menu', 'mixt' ),
+				'subtitle' => esc_html__( 'Select the menu for this page', 'mixt' ),
 				'options'  => mixt_get_nav_menus(),
 				'default'  => 'auto',
 				'required' => array($type.'-page-inherit', '=', false),
@@ -64,11 +64,11 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-page-fullwidth',
 				'type'     => 'button_set',
-				'title'    => __( 'Full Width', 'mixt' ),
+				'title'    => esc_html__( 'Full Width', 'mixt' ),
 				'options'  => array(
-					'auto'  => __( 'Auto', 'mixt' ),
-					'true'  => __( 'Yes', 'mixt' ),
-					'false' => __( 'No', 'mixt' ),
+					'auto'  => esc_html__( 'Auto', 'mixt' ),
+					'true'  => esc_html__( 'Yes', 'mixt' ),
+					'false' => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => $defaults['fullwidth'],
 				'required' => array($type.'-page-inherit', '=', false),
@@ -78,11 +78,11 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-page-sidebar',
 				'type'     => 'button_set',
-				'title'    => __( 'Show Sidebar', 'mixt' ),
+				'title'    => esc_html__( 'Show Sidebar', 'mixt' ),
 				'options'  => array(
-					'auto'  => __( 'Auto', 'mixt' ),
-					'true'  => __( 'Yes', 'mixt' ),
-					'false' => __( 'No', 'mixt' ),
+					'auto'  => esc_html__( 'Auto', 'mixt' ),
+					'true'  => esc_html__( 'Yes', 'mixt' ),
+					'false' => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => $defaults['sidebar'],
 				'required' => array($type.'-page-inherit', '=', false),
@@ -92,8 +92,8 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-sidebar-id',
 				'type'     => 'select',
-				'title'    => __( 'Sidebar', 'mixt' ),
-				'desc'     => __( 'Select a sidebar to use on this page', 'mixt' ),
+				'title'    => esc_html__( 'Sidebar', 'mixt' ),
+				'desc'     => esc_html__( 'Select a sidebar to use on this page', 'mixt' ),
 				'options'  => mixt_get_sidebars(),
 				'default'  => 'auto',
 				'required' => array($type.'-page-inherit', '=', false),
@@ -103,12 +103,12 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-layout-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Layout Type', 'mixt' ),
-				'subtitle' => __( 'Select the layout type for this page', 'mixt' ),
+				'title'    => esc_html__( 'Layout Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Select the layout type for this page', 'mixt' ),
 				'options'  => array(
-					'standard' => __( 'Standard', 'mixt' ),
-					'grid'     => __( 'Grid', 'mixt' ),
-					'masonry'  => __( 'Masonry', 'mixt' ),
+					'standard' => esc_html__( 'Standard', 'mixt' ),
+					'grid'     => esc_html__( 'Grid', 'mixt' ),
+					'masonry'  => esc_html__( 'Masonry', 'mixt' ),
 				),
 				'default'  => $defaults['type'],
 				'required' => array($type.'-page-inherit', '=', false),
@@ -118,8 +118,8 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-layout-columns',
 				'type'     => 'button_set',
-				'title'    => __( 'Columns', 'mixt' ),
-				'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+				'title'    => esc_html__( 'Columns', 'mixt' ),
+				'subtitle' => esc_html__( 'Number of columns for grid and masonry layout', 'mixt' ),
 				'options'  => array(
 					'2' => '2',
 					'3' => '3',
@@ -138,10 +138,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-feat-show',
 				'type'     => 'switch',
-				'title'    => __( 'Show Media', 'mixt' ),
-				'subtitle' => __( 'Display the post featured media', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Show Media', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post featured media', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => $defaults['feat-show'],
 				'required' => array($type.'-page-inherit', '=', false),
 			),
@@ -150,12 +150,12 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-feat-size',
 				'type'     => 'button_set',
-				'title'    => __( 'Media Size', 'mixt' ),
-				'subtitle' => __( 'Select a size for the post featured media', 'mixt' ),
+				'title'    => esc_html__( 'Media Size', 'mixt' ),
+				'subtitle' => esc_html__( 'Select a size for the post featured media', 'mixt' ),
 				'options'  => array(
-					'blog-large'  => __( 'Large', 'mixt' ),
-					'blog-medium' => __( 'Medium', 'mixt' ),
-					'blog-small'  => __( 'Small', 'mixt' ),
+					'mixt-large'  => esc_html__( 'Large', 'mixt' ),
+					'mixt-medium' => esc_html__( 'Medium', 'mixt' ),
+					'mixt-small'  => esc_html__( 'Small', 'mixt' ),
 				),
 				'default'  => $defaults['feat-size'],
 				'required' => array(
@@ -169,10 +169,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-post-info',
 				'type'     => 'switch',
-				'title'    => __( 'Post Info', 'mixt' ),
-				'subtitle' => __( 'Display the post format and date', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Info', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post format and date', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => $defaults['post-info'],
 				'required' => array($type.'-page-inherit', '=', false),
 			),
@@ -181,12 +181,12 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-meta-show',
 				'type'     => 'button_set',
-				'title'    => __( 'Post Meta', 'mixt' ),
-				'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+				'title'    => esc_html__( 'Post Meta', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 				'options'  => array(
-					'header'  => __( 'In Header', 'mixt' ),
-					'footer'  => __( 'In Footer', 'mixt' ),
-					'false'   => __( 'No', 'mixt' ),
+					'header'  => esc_html__( 'In Header', 'mixt' ),
+					'footer'  => esc_html__( 'In Footer', 'mixt' ),
+					'false'   => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => $defaults['meta-show'],
 				'required' => array($type.'-page-inherit', '=', false),
@@ -196,10 +196,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-title',
 				'type'     => 'switch',
-				'title'    => __( 'Post Title', 'mixt' ),
-				'subtitle' => __( 'Display the post title', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Title', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post title', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => $defaults['page-title'],
 				'required' => array($type.'-page-inherit', '=', false),
 			),
@@ -208,10 +208,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-content',
 				'type'     => 'switch',
-				'title'    => __( 'Post Content', 'mixt' ),
-				'subtitle' => __( 'Display the post content', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Content', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post content', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => $defaults['page-content'],
 				'required' => array($type.'-page-inherit', '=', false),
 			),
@@ -220,11 +220,11 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-page-post-content-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Post Content Type', 'mixt' ),
-				'subtitle' => __( 'Show the post\'s excerpt or full content', 'mixt' ),
+				'title'    => esc_html__( 'Post Content Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Show the post\'s excerpt or full content', 'mixt' ),
 				'options'  => array(
-					'full'    => __( 'Full', 'mixt' ),
-					'excerpt' => __( 'Excerpt', 'mixt' ),
+					'full'    => esc_html__( 'Full', 'mixt' ),
+					'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
 				),
 				'default'  => $defaults['post-content-type'],
 				'required' => array($type.'-page-inherit', '=', false),
@@ -240,7 +240,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 			array(
 				'id'       => $type.'-rollover-section',
 				'type'     => 'section',
-				'title'    => __( 'Rollover', 'mixt' ),
+				'title'    => esc_html__( 'Rollover', 'mixt' ),
 				'indent'   => true,
 			),
 
@@ -248,10 +248,10 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover',
 					'type'     => 'switch',
-					'title'    => __( 'Show Rollover', 'mixt' ),
-					'subtitle' => __( 'Display an overlay with useful links and info when a post is hovered', 'mixt' ),
-					'on'       => __( 'Yes', 'mixt' ),
-					'off'      => __( 'No', 'mixt' ),
+					'title'    => esc_html__( 'Show Rollover', 'mixt' ),
+					'subtitle' => esc_html__( 'Display an overlay with useful links and info when a post is hovered', 'mixt' ),
+					'on'       => esc_html__( 'Yes', 'mixt' ),
+					'off'      => esc_html__( 'No', 'mixt' ),
 					'default'  => false,
 				),
 
@@ -259,12 +259,12 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 	                'id'       => $type.'-rollover-items',
 					'type'     => 'checkbox',
-					'title'    => __( 'Items', 'mixt' ),
+					'title'    => esc_html__( 'Items', 'mixt' ),
 					'options'  => array(
-						'title'   => __( 'Title', 'mixt' ),
-						'excerpt' => __( 'Excerpt', 'mixt' ),
-						'view'    => __( 'View Post Button', 'mixt' ),
-						'full'    => __( 'Full Image Button', 'mixt' ),
+						'title'   => esc_html__( 'Title', 'mixt' ),
+						'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
+						'view'    => esc_html__( 'View Post Button', 'mixt' ),
+						'full'    => esc_html__( 'Full Image Button', 'mixt' ),
 					),
 					'default' => array(
 						'title'   => '1',
@@ -279,7 +279,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover-color',
 					'type'     => 'select',
-					'title'    => __( 'Background Color', 'mixt' ),
+					'title'    => esc_html__( 'Background Color', 'mixt' ),
 					'options'  => mixt_get_assets('colors', 'basic'),
 					'default'  => 'black',
 					'required' => array($type.'-rollover', '=', true),
@@ -289,7 +289,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover-anim-in',
 					'type'     => 'select',
-					'title'    => __( 'Animation - In', 'mixt' ),
+					'title'    => esc_html__( 'Animation - In', 'mixt' ),
 					'options'  => mixt_css_anims('trans-in'),
 					'default'  => 'fadeIn',
 					'required' => array($type.'-rollover', '=', true),
@@ -299,7 +299,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover-anim-out',
 					'type'     => 'select',
-					'title'    => __( 'Animation - Out', 'mixt' ),
+					'title'    => esc_html__( 'Animation - Out', 'mixt' ),
 					'options'  => mixt_css_anims('trans-out'),
 					'default'  => 'fadeOut',
 					'required' => array($type.'-rollover', '=', true),
@@ -309,11 +309,11 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover-item-style',
 					'type'     => 'select',
-					'title'    => __( 'Item Style', 'mixt' ),
+					'title'    => esc_html__( 'Item Style', 'mixt' ),
 					'options'  => array(
-						'plain'         => __( 'Plain', 'mixt' ),
-						'btn'           => __( 'Button', 'mixt' ),
-						'btn btn-round' => __( 'Round Button', 'mixt' ),
+						'plain'         => esc_html__( 'Plain', 'mixt' ),
+						'btn'           => esc_html__( 'Button', 'mixt' ),
+						'btn btn-round' => esc_html__( 'Round Button', 'mixt' ),
 					),
 					'default'  => 'plain',
 					'required' => array($type.'-rollover', '=', true),
@@ -323,7 +323,7 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 				array(
 					'id'       => $type.'-rollover-btn-color',
 					'type'     => 'select',
-					'title'    => __( 'Button Color', 'mixt' ),
+					'title'    => esc_html__( 'Button Color', 'mixt' ),
 					'options'  => mixt_get_assets('colors', 'buttons'),
 					'default'  => 'primary',
 					'required' => array(
@@ -340,8 +340,8 @@ function postsPageFields( $type, $icon = 'check-empty', $defaults = array() ) {
 
 // GENERAL
 $this->sections[] = array(
-	'title'      => __( 'Post Pages', 'mixt' ),
-	'desc'       => __( 'Manage post and archive pages', 'mixt' ),
+	'title'      => esc_html__( 'Post Pages', 'mixt' ),
+	'desc'       => esc_html__( 'Manage post and archive pages', 'mixt' ),
 	'icon'       => 'el-icon-book',
 	'customizer' => false,
 	'fields'     => array(
@@ -350,10 +350,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'animate-posts',
 			'type'     => 'switch',
-			'title'    => __( 'Animate Posts', 'mixt' ),
-			'subtitle' => __( 'Apply animation to posts on page load', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Animate Posts', 'mixt' ),
+			'subtitle' => esc_html__( 'Apply animation to posts on page load', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -361,13 +361,13 @@ $this->sections[] = array(
 		array(
 			'id'       => 'pagination-type',
 			'type'     => 'select',
-			'title'    => __( 'Pagination', 'mixt' ),
-			'subtitle' => __( 'Select a pagination type', 'mixt' ),
+			'title'    => esc_html__( 'Pagination', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a pagination type', 'mixt' ),
 			'options'  => array(
-				'classic'     => __( 'Classic', 'mixt' ),
-				'numbered'    => __( 'Numbered', 'mixt' ),
-				'ajax-click'  => __( 'Ajax On Click', 'mixt' ),
-				'ajax-scroll' => __( 'Ajax On Scroll', 'mixt' ),
+				'classic'     => esc_html__( 'Classic', 'mixt' ),
+				'numbered'    => esc_html__( 'Numbered', 'mixt' ),
+				'ajax-click'  => esc_html__( 'Ajax On Click', 'mixt' ),
+				'ajax-scroll' => esc_html__( 'Ajax On Scroll', 'mixt' ),
 			),
 			'default'  => 'numbered',
 		),
@@ -376,10 +376,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'show-page-nr',
 			'type'     => 'switch',
-			'title'    => __( 'Show Page Numbers', 'mixt' ),
-			'subtitle' => __( 'Display a link with the current page number', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Show Page Numbers', 'mixt' ),
+			'subtitle' => esc_html__( 'Display a link with the current page number', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 			'required' => array(
 				array('pagination-type', '!=', 'classic'),
@@ -391,8 +391,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'post-excerpt-length',
 			'type'     => 'slider',
-			'title'    => __( 'Excerpt Limit', 'mixt' ),
-			'subtitle' => __( 'Set a maximum excerpt length (in words)', 'mixt' ),
+			'title'    => esc_html__( 'Excerpt Limit', 'mixt' ),
+			'subtitle' => esc_html__( 'Set a maximum excerpt length (in words)', 'mixt' ),
 			'default'  => 55,
 			'min'      => 10,
 			'max'      => 200,
@@ -402,17 +402,17 @@ $this->sections[] = array(
 		array(
 			'id'       => 'sticky-label',
 			'type'     => 'text',
-			'title'    => __( 'Sticky Label', 'mixt' ),
-			'subtitle' => __( 'Set the sticky post label text, or empty to hide the label', 'mixt' ),
-			'default'  => __( 'Sticky', 'mixt' ),
+			'title'    => esc_html__( 'Sticky Label', 'mixt' ),
+			'subtitle' => esc_html__( 'Set the sticky post label text, or empty to hide the label', 'mixt' ),
+			'default'  => esc_html__( 'Sticky', 'mixt' ),
 		),
 	),
 );
 
 // BLOG PAGE
 $this->sections[] = array(
-	'title'      => __( 'Blog Page', 'mixt' ),
-	'desc'       => __( 'Manage the blog page and post appearance', 'mixt' ),
+	'title'      => esc_html__( 'Blog Page', 'mixt' ),
+	'desc'       => esc_html__( 'Manage the blog page and post appearance', 'mixt' ),
 	'icon'       => 'el-icon-th-list',
 	'subsection' => true,
 	'customizer' => false,
@@ -422,8 +422,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-nav-menu',
 			'type'     => 'select',
-			'title'    => __( 'Nav Menu', 'mixt' ),
-			'subtitle' => __( 'Select the menu for this page', 'mixt' ),
+			'title'    => esc_html__( 'Nav Menu', 'mixt' ),
+			'subtitle' => esc_html__( 'Select the menu for this page', 'mixt' ),
 			'options'  => mixt_get_nav_menus(),
 			'default'  => 'auto',
 		),
@@ -432,11 +432,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-page-fullwidth',
 			'type'     => 'button_set',
-			'title'    => __( 'Full Width', 'mixt' ),
+			'title'    => esc_html__( 'Full Width', 'mixt' ),
 			'options'  => array(
-				'auto'  => __( 'Auto', 'mixt' ),
-				'true'  => __( 'Yes', 'mixt' ),
-				'false' => __( 'No', 'mixt' ),
+				'auto'  => esc_html__( 'Auto', 'mixt' ),
+				'true'  => esc_html__( 'Yes', 'mixt' ),
+				'false' => esc_html__( 'No', 'mixt' ),
 			),
 			'default'  => 'auto',
 		),
@@ -445,11 +445,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-page-sidebar',
 			'type'     => 'button_set',
-			'title'    => __( 'Show Sidebar', 'mixt' ),
+			'title'    => esc_html__( 'Show Sidebar', 'mixt' ),
 			'options'  => array(
-				'auto'  => __( 'Auto', 'mixt' ),
-				'true'  => __( 'Yes', 'mixt' ),
-				'false' => __( 'No', 'mixt' ),
+				'auto'  => esc_html__( 'Auto', 'mixt' ),
+				'true'  => esc_html__( 'Yes', 'mixt' ),
+				'false' => esc_html__( 'No', 'mixt' ),
 			),
 			'default'  => 'auto',
 		),
@@ -458,8 +458,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-sidebar-id',
 			'type'     => 'select',
-			'title'    => __( 'Sidebar', 'mixt' ),
-			'desc'     => __( 'Select a sidebar to use on this page', 'mixt' ),
+			'title'    => esc_html__( 'Sidebar', 'mixt' ),
+			'desc'     => esc_html__( 'Select a sidebar to use on this page', 'mixt' ),
 			'options'  => mixt_get_sidebars(),
 			'default'  => 'auto',
 		),
@@ -468,12 +468,12 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-layout-type',
 			'type'     => 'button_set',
-			'title'    => __( 'Layout Type', 'mixt' ),
-			'subtitle' => __( 'Select the blog layout type', 'mixt' ),
+			'title'    => esc_html__( 'Layout Type', 'mixt' ),
+			'subtitle' => esc_html__( 'Select the blog layout type', 'mixt' ),
 			'options'  => array(
-				'standard' => __( 'Standard', 'mixt' ),
-				'grid'     => __( 'Grid', 'mixt' ),
-				'masonry'  => __( 'Masonry', 'mixt' ),
+				'standard' => esc_html__( 'Standard', 'mixt' ),
+				'grid'     => esc_html__( 'Grid', 'mixt' ),
+				'masonry'  => esc_html__( 'Masonry', 'mixt' ),
 			),
 			'default'  => 'standard',
 		),
@@ -482,8 +482,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-layout-columns',
 			'type'     => 'button_set',
-			'title'    => __( 'Blog Columns', 'mixt' ),
-			'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+			'title'    => esc_html__( 'Blog Columns', 'mixt' ),
+			'subtitle' => esc_html__( 'Number of columns for grid and masonry layout', 'mixt' ),
 			'options'  => array(
 				'2' => '2',
 				'3' => '3',
@@ -499,10 +499,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-feat-show',
 			'type'     => 'switch',
-			'title'    => __( 'Show Media', 'mixt' ),
-			'subtitle' => __( 'Display the post featured media', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Show Media', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the post featured media', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -510,14 +510,14 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-feat-size',
 			'type'     => 'button_set',
-			'title'    => __( 'Media Size', 'mixt' ),
-			'subtitle' => __( 'Select a size for the post featured media', 'mixt' ),
+			'title'    => esc_html__( 'Media Size', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a size for the post featured media', 'mixt' ),
 			'options'  => array(
-				'blog-large'  => __( 'Large', 'mixt' ),
-				'blog-medium' => __( 'Medium', 'mixt' ),
-				'blog-small'  => __( 'Small', 'mixt' ),
+				'mixt-large'  => esc_html__( 'Large', 'mixt' ),
+				'mixt-medium' => esc_html__( 'Medium', 'mixt' ),
+				'mixt-small'  => esc_html__( 'Small', 'mixt' ),
 			),
-			'default'  => 'blog-large',
+			'default'  => 'mixt-large',
 			'required' => array(
 				array('blog-layout-type', '=', 'standard'),
 				array('blog-feat-show', '=', true),
@@ -528,10 +528,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-post-info',
 			'type'     => 'switch',
-			'title'    => __( 'Post Info', 'mixt' ),
-			'subtitle' => __( 'Display the post format and date', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Post Info', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the post format and date', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -539,12 +539,12 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-meta-show',
 			'type'     => 'button_set',
-			'title'    => __( 'Post Meta', 'mixt' ),
-			'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+			'title'    => esc_html__( 'Post Meta', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 			'options'  => array(
-				'header'  => __( 'In Header', 'mixt' ),
-				'footer'  => __( 'In Footer', 'mixt' ),
-				'false'   => __( 'No', 'mixt' ),
+				'header'  => esc_html__( 'In Header', 'mixt' ),
+				'footer'  => esc_html__( 'In Footer', 'mixt' ),
+				'false'   => esc_html__( 'No', 'mixt' ),
 			),
 			'default'  => 'header',
 		),
@@ -553,10 +553,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-page-title',
 			'type'     => 'switch',
-			'title'    => __( 'Post Title', 'mixt' ),
-			'subtitle' => __( 'Display the post title', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Post Title', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the post title', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -564,10 +564,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-page-content',
 			'type'     => 'switch',
-			'title'    => __( 'Post Content', 'mixt' ),
-			'subtitle' => __( 'Display the post content', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Post Content', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the post content', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -575,11 +575,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-post-content-type',
 			'type'     => 'button_set',
-			'title'    => __( 'Post Content Type', 'mixt' ),
-			'subtitle' => __( 'Show the post\'s excerpt or full content', 'mixt' ),
+			'title'    => esc_html__( 'Post Content Type', 'mixt' ),
+			'subtitle' => esc_html__( 'Show the post\'s excerpt or full content', 'mixt' ),
 			'options'  => array(
-				'full'    => __( 'Full', 'mixt' ),
-				'excerpt' => __( 'Excerpt', 'mixt' ),
+				'full'    => esc_html__( 'Full', 'mixt' ),
+				'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
 			),
 			'default'  => 'full',
 		),
@@ -594,7 +594,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'blog-rollover-section',
 			'type'     => 'section',
-			'title'    => __( 'Rollover', 'mixt' ),
+			'title'    => esc_html__( 'Rollover', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -602,10 +602,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover',
 				'type'     => 'switch',
-				'title'    => __( 'Show Rollover', 'mixt' ),
-				'subtitle' => __( 'Display an overlay with useful links and info when a post is hovered', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Show Rollover', 'mixt' ),
+				'subtitle' => esc_html__( 'Display an overlay with useful links and info when a post is hovered', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -613,12 +613,12 @@ $this->sections[] = array(
 			array(
                 'id'       => 'blog-rollover-items',
 				'type'     => 'checkbox',
-				'title'    => __( 'Items', 'mixt' ),
+				'title'    => esc_html__( 'Items', 'mixt' ),
 				'options'  => array(
-					'title'   => __( 'Title', 'mixt' ),
-					'excerpt' => __( 'Excerpt', 'mixt' ),
-					'view'    => __( 'View Post Button', 'mixt' ),
-					'full'    => __( 'Full Image Button', 'mixt' ),
+					'title'   => esc_html__( 'Title', 'mixt' ),
+					'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
+					'view'    => esc_html__( 'View Post Button', 'mixt' ),
+					'full'    => esc_html__( 'Full Image Button', 'mixt' ),
 				),
 				'default' => array(
 					'title'   => '1',
@@ -633,7 +633,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover-color',
 				'type'     => 'select',
-				'title'    => __( 'Background Color', 'mixt' ),
+				'title'    => esc_html__( 'Background Color', 'mixt' ),
 				'options'  => mixt_get_assets('colors', 'basic'),
 				'default'  => 'black',
 				'required' => array('blog-rollover', '=', true),
@@ -643,7 +643,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover-anim-in',
 				'type'     => 'select',
-				'title'    => __( 'Animation - In', 'mixt' ),
+				'title'    => esc_html__( 'Animation - In', 'mixt' ),
 				'options'  => mixt_css_anims('trans-in'),
 				'default'  => 'fadeIn',
 				'required' => array('blog-rollover', '=', true),
@@ -653,7 +653,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover-anim-out',
 				'type'     => 'select',
-				'title'    => __( 'Animation - Out', 'mixt' ),
+				'title'    => esc_html__( 'Animation - Out', 'mixt' ),
 				'options'  => mixt_css_anims('trans-out'),
 				'default'  => 'fadeOut',
 				'required' => array('blog-rollover', '=', true),
@@ -663,11 +663,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover-item-style',
 				'type'     => 'select',
-				'title'    => __( 'Item Style', 'mixt' ),
+				'title'    => esc_html__( 'Item Style', 'mixt' ),
 				'options'  => array(
-					'plain'         => __( 'Plain', 'mixt' ),
-					'btn'           => __( 'Button', 'mixt' ),
-					'btn btn-round' => __( 'Round Button', 'mixt' ),
+					'plain'         => esc_html__( 'Plain', 'mixt' ),
+					'btn'           => esc_html__( 'Button', 'mixt' ),
+					'btn btn-round' => esc_html__( 'Round Button', 'mixt' ),
 				),
 				'default'  => 'plain',
 				'required' => array('blog-rollover', '=', true),
@@ -677,7 +677,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'blog-rollover-btn-color',
 				'type'     => 'select',
-				'title'    => __( 'Button Color', 'mixt' ),
+				'title'    => esc_html__( 'Button Color', 'mixt' ),
 				'options'  => mixt_get_assets('colors', 'buttons'),
 				'default'  => 'primary',
 				'required' => array(

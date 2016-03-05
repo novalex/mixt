@@ -1,5 +1,8 @@
 
-// Page Styling
+/* --------------------------
+ 22. Pages
+-------------------------- */
+
 
 .page-header {
 	margin: 0;
@@ -7,10 +10,14 @@
 	border-bottom-width: 0;
 }
 
+
 // One-Page
+
 body.one-page { position: relative; }
 
+
 // 404 Page
+
 .error-404 {
 	padding: $row-spacing-lg 0;
 
@@ -21,7 +28,9 @@ body.one-page { position: relative; }
 	#menu-404 li a { padding: 0; }
 }
 
+
 // No Results Page
+
 .no-results {
 	.page-content {
 		margin-top: $margin-l;
@@ -32,7 +41,9 @@ body.one-page { position: relative; }
 	.search-form { max-width: 300px; }
 }
 
+
 // Blank Page
+
 .page-template-blank {
 	#main-wrap { padding: 0 !important; }
 	
@@ -46,7 +57,9 @@ body.one-page { position: relative; }
 	}
 }
 
+
 // Services Page
+
 .services-testimonial-carousel {
 	blockquote { display: inline-block; }
 }

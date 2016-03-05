@@ -75,6 +75,8 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 		public function select_options($options, $selected = null) {
 			$output = '';
 			foreach ( $options as $value => $name ) {
+				$value = esc_attr($value);
+				$name  = esc_html($name);
 				if ( $value == $selected ) {
 					$output .= "<option value='$value' selected>$name</option>";
 				} else {
@@ -89,22 +91,22 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 			$values = mixt_element_button($this->value(), 'value');
 
 			// Type Select
-			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Type', 'mixt' ) .
+			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Type', 'mixt' ) .
 						   '<select class="button-field type-select button-colors" data-attr="type">' . $this->select_options($this->types, $values['type']) . '</select>' .
 					   '</label></div>';
 
 			// Color Select
-			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Color', 'mixt' ) .
+			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Color', 'mixt' ) .
 						   '<select class="button-field color-select button-colors" data-attr="color">' . $this->select_options($this->colors, $values['color']) . '</select>' .
 					   '</label></div>';
 
 			// Size Select
-			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Size', 'mixt' ) .
+			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Size', 'mixt' ) .
 						   '<select class="button-field button-sizes" data-attr="size">' . $this->select_options($this->sizes, $values['size']) . '</select>' .
 					   '</label></div>';
 
 			// Animation Select
-			$output .= '<div class="vc_col-sm-3"><label>' . __( 'Animation', 'mixt' ) . 
+			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Animation', 'mixt' ) . 
 						   '<select class="button-field anim-select button-colors" data-attr="anim">' . $this->select_options($this->anims, $values['anim']) . '</select>' .
 					   '</label></div>';
 
@@ -120,7 +122,12 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 		function render() {
 			$output = '<div class="mixt-button-field vc_row">' .
 						  '<div class="button-fields-wrap">' . $this->render_fields() . '</div>' .
-						  '<input name="' . $this->setting( 'param_name' ) . '" class="wpb_vc_param_value  ' . $this->setting( 'type' ) . '_field" type="hidden" value="' . esc_attr( $this->value() ) . '">' .
+						  '<input 
+							  name="' . esc_attr($this->setting('param_name')) . '" 
+							  class="wpb_vc_param_value  ' . sanitize_html_class($this->setting('type')) . '_field" 
+							  type="hidden" 
+							  value="' . esc_attr( $this->value() ) . 
+						  '">' .
 					  '</div>';
 
 			if ( ! $this->js_appended ) {

@@ -1,7 +1,7 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Logo', 'mixt' ),
+	'title'      => esc_html__( 'Logo', 'mixt' ),
 	'icon'       => 'el-icon-globe',
 	'fields'     => array(
 
@@ -9,11 +9,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-type',
 			'type'     => 'button_set',
-			'title'    => __( 'Type', 'mixt' ),
-			'subtitle' => __( 'Display text or an image as the logo', 'mixt' ),
+			'title'    => esc_html__( 'Type', 'mixt' ),
+			'subtitle' => esc_html__( 'Display text or an image as the logo', 'mixt' ),
 			'options'  => array(
-				'img'  => __( 'Image', 'mixt' ),
-				'text' => __( 'Text', 'mixt' ),
+				'img'  => esc_html__( 'Image', 'mixt' ),
+				'text' => esc_html__( 'Text', 'mixt' ),
 			),
 			'default'  => 'text',
 		),
@@ -23,8 +23,8 @@ $this->sections[] = array(
 			'id'       => 'logo-img',
 			'type'     => 'media',
 			'url'      => false,
-			'title'    => __( 'Image', 'mixt' ),
-			'subtitle' => __( 'Select the image you want to use as the site\'s logo', 'mixt' ),
+			'title'    => esc_html__( 'Image', 'mixt' ),
+			'subtitle' => esc_html__( 'Select the image you want to use as the site\'s logo', 'mixt' ),
 			'required' => array('logo-type', '=', 'img'),
 		),
 
@@ -33,8 +33,8 @@ $this->sections[] = array(
 			'id'       => 'logo-img-inv',
 			'type'     => 'media',
 			'url'      => false,
-			'title'    => __( 'Inverse Image', 'mixt' ),
-			'subtitle' => __( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
+			'title'    => esc_html__( 'Inverse Image', 'mixt' ),
+			'subtitle' => esc_html__( 'Select an inverse logo image for dark backgrounds', 'mixt' ),
 			'required' => array('logo-type', '=', 'img'),
 		),
 
@@ -42,10 +42,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-img-hr',
 			'type'     => 'switch',
-			'title'    => __( 'Hi-Res', 'mixt' ),
-			'subtitle' => __( 'Scale down logo to half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Hi-Res', 'mixt' ),
+			'subtitle' => esc_html__( 'Scale down logo to half size so it will look sharp on high-resolution screens like Retina', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 			'required' => array('logo-type', '=', 'img'),
 		),
@@ -54,8 +54,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-text',
 			'type'     => 'text',
-			'title'    => __( 'Text', 'mixt' ),
-			'subtitle' => __( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
+			'title'    => esc_html__( 'Text', 'mixt' ),
+			'subtitle' => esc_html__( 'Enter the logo text (leave empty to use the site name)', 'mixt' ),
 			'required' => array('logo-type', '=', 'text'),
 		),
 
@@ -63,8 +63,8 @@ $this->sections[] = array(
 		array(
 			'id'             => 'logo-text-typo',
 			'type'           => 'typography',
-			'title'          => __( 'Text Style', 'mixt' ),
-			'subtitle'       => __( 'Set up how you want your text logo to look', 'mixt' ),
+			'title'          => esc_html__( 'Text Style', 'mixt' ),
+			'subtitle'       => esc_html__( 'Set up how you want your text logo to look', 'mixt' ),
 			'color'          => false,
 			'google'         => true,
 			'font-backup'    => true,
@@ -82,8 +82,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-text-color',
 			'type'     => 'color',
-			'title'    => __( 'Text Color', 'mixt' ),
-			'subtitle' => __( 'Select a logo text color', 'mixt' ),
+			'title'    => esc_html__( 'Text Color', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a logo text color', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
 			'default'  => '#333',
@@ -94,8 +94,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-text-inv',
 			'type'     => 'color',
-			'title'    => __( 'Text Inverse Color', 'mixt' ),
-			'subtitle' => __( 'Select a logo text color for dark backgrounds', 'mixt' ),
+			'title'    => esc_html__( 'Text Inverse Color', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a logo text color for dark backgrounds', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
 			'default'  => '#fff',
@@ -106,8 +106,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-shrink',
 			'type'     => 'spinner',
-			'title'    => __( 'Shrink', 'mixt' ),
-			'subtitle' => __( 'Amount of pixels the logo will shrink when the navbar becomes fixed <br>(0 means no shrink)', 'mixt' ),
+			'title'    => esc_html__( 'Shrink', 'mixt' ),
+			'subtitle' => esc_html__( 'Amount of pixels the logo will shrink when the navbar becomes fixed (0 means no shrink)', 'mixt' ),
 			'min'      => '0',
 			'max'      => '20',
 			'step'     => '1',
@@ -118,10 +118,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-show-tagline',
 			'type'     => 'switch',
-			'title'    => __( 'Tagline', 'mixt' ),
-			'subtitle' => __( 'Show the site\'s tagline (or a custom one) next to the logo', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Tagline', 'mixt' ),
+			'subtitle' => esc_html__( 'Show the site\'s tagline (or a custom one) next to the logo', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -129,8 +129,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-tagline',
 			'type'     => 'text',
-			'title'    => __( 'Tagline Text', 'mixt' ),
-			'subtitle' => __( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
+			'title'    => esc_html__( 'Tagline Text', 'mixt' ),
+			'subtitle' => esc_html__( 'Enter the tagline text (leave empty to use the site tagline)', 'mixt' ),
 			'required' => array('logo-show-tagline', '=', true),
 		),
 
@@ -138,7 +138,7 @@ $this->sections[] = array(
 		array(
 			'id'             => 'logo-tagline-typo',
 			'type'           => 'typography',
-			'title'          => __( 'Tagline Style', 'mixt' ),
+			'title'          => esc_html__( 'Tagline Style', 'mixt' ),
 			'color'          => false,
 			'google'         => true,
 			'font-backup'    => true,
@@ -156,8 +156,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-tagline-color',
 			'type'     => 'color',
-			'title'    => __( 'Tagline Color', 'mixt' ),
-			'subtitle' => __( 'Select a tagline text color', 'mixt' ),
+			'title'    => esc_html__( 'Tagline Color', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a tagline text color', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
 			'default'  => '#333',
@@ -168,8 +168,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'logo-tagline-inv',
 			'type'     => 'color',
-			'title'    => __( 'Tagline Inverse Color', 'mixt' ),
-			'subtitle' => __( 'Select a tagline text color for dark backgrounds', 'mixt' ),
+			'title'    => esc_html__( 'Tagline Inverse Color', 'mixt' ),
+			'subtitle' => esc_html__( 'Select a tagline text color for dark backgrounds', 'mixt' ),
 			'transparent' => false,
 			'validate' => 'color',
 			'default'  => '#fff',

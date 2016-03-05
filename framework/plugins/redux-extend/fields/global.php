@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Global Options', 'mixt' ),
-	'desc'       => __( 'Customize the site\'s global options and settings', 'mixt' ),
+	'title'      => esc_html__( 'Global Options', 'mixt' ),
+	'desc'       => esc_html__( 'Customize the site\'s global options and settings', 'mixt' ),
 	'icon'       => 'el-icon-off',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,11 +11,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-layout',
 			'type'     => 'button_set',
-			'title'    => __( 'Site Layout', 'mixt' ),
-			'subtitle' => __( 'Choose the layout for the site', 'mixt' ),
+			'title'    => esc_html__( 'Site Layout', 'mixt' ),
+			'subtitle' => esc_html__( 'Choose the layout for the site', 'mixt' ),
 			'options'  => array(
-				'wide'  => __( 'Wide', 'mixt' ),
-				'boxed' => __( 'Boxed', 'mixt' ),
+				'wide'  => esc_html__( 'Wide', 'mixt' ),
+				'boxed' => esc_html__( 'Boxed', 'mixt' ),
 			),
 			'default'  => 'wide',
 		),
@@ -25,7 +25,7 @@ $this->sections[] = array(
 			'id'       => 'site-layout-warn',
 			'type'     => 'info',
 			'style'    => 'warning',
-			'subtitle' => __( 'The site layout cannot be boxed while the navbar is vertical. Wide layout will be used instead.', 'mixt' ),
+			'subtitle' => esc_html__( 'The site layout cannot be boxed while the navbar is vertical. Wide layout will be used instead.', 'mixt' ),
 			'required' => array(
 				array('site-layout', '=', 'boxed'),
 				array('nav-layout', '=', 'vertical'),
@@ -36,8 +36,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'site-bg-color',
 			'type'        => 'color',
-			'title'       => __( 'Background Color', 'mixt' ),
-			'subtitle'    => __( 'Select the site background color', 'mixt' ),
+			'title'       => esc_html__( 'Background Color', 'mixt' ),
+			'subtitle'    => esc_html__( 'Select the site background color', 'mixt' ),
 			'transparent' => false,
 			'default'     => '#fff',
 			'validate'    => 'color',
@@ -48,8 +48,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-bg',
 			'type'     => 'background',
-			'title'    => __( 'Site Background', 'mixt' ),
-			'subtitle' => __( 'Choose an image and other options for the site background', 'mixt' ),
+			'title'    => esc_html__( 'Site Background', 'mixt' ),
+			'subtitle' => esc_html__( 'Choose an image and other options for the site background', 'mixt' ),
 			'default'  => array(
 				'background-attachment' => 'fixed',
 				'background-size'       => 'cover',
@@ -64,8 +64,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-bg-pat',
 			'type'     => 'mixt_image_select',
-			'title'    => __( 'Background Pattern', 'mixt' ),
-			'subtitle' => __( 'Choose a pattern for the site background', 'mixt' ),
+			'title'    => esc_html__( 'Background Pattern', 'mixt' ),
+			'subtitle' => esc_html__( 'Choose a pattern for the site background', 'mixt' ),
 			'options'  => $img_patterns,
 			'empty'    => true,
 			'default'  => '',
@@ -76,8 +76,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-theme',
 			'type'     => 'select',
-			'title'    => __( 'Site Theme', 'mixt' ),
-			'subtitle' => __( 'Select the theme to be used site-wide', 'mixt' ),
+			'title'    => esc_html__( 'Site Theme', 'mixt' ),
+			'subtitle' => esc_html__( 'Select the theme to be used site-wide', 'mixt' ),
 			'options'  => $site_themes,
 			'default'  => MIXT_THEME,
 		),
@@ -86,8 +86,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-width',
 			'type'     => 'dimensions',
-			'title'    => __( 'Site Width', 'mixt' ),
-			'subtitle' => __( 'Set a custom site width', 'mixt' ),
+			'title'    => esc_html__( 'Site Width', 'mixt' ),
+			'subtitle' => esc_html__( 'Set a custom site width', 'mixt' ),
 			'units'    => array('px', '%'),
 			'height'   => false,
 		),
@@ -96,10 +96,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'site-responsive',
 			'type'     => 'switch',
-			'title'    => __( 'Responsive Layout', 'mixt' ),
-			'subtitle' => __( 'Enable responsive features for the best experience on all screen sizes', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Responsive Layout', 'mixt' ),
+			'subtitle' => esc_html__( 'Enable responsive features for the best experience on all screen sizes', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -107,8 +107,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'head-user-code',
 			'type'     => 'ace_editor',
-			'title'    => __( 'Head Code', 'mixt' ),
-			'subtitle' => __( 'Add custom code before the closing &lt;head&gt; tag', 'mixt' ),
+			'title'    => esc_html__( 'Head Code', 'mixt' ),
+			'subtitle' => esc_html__( 'Add custom code before the closing &lt;head&gt; tag', 'mixt' ),
 			'mode'     => 'html',
 			'theme'    => 'chrome',
 		),
@@ -118,8 +118,8 @@ $this->sections[] = array(
 
 // PAGE LOADER
 $this->sections[] = array(
-	'title'      => __( 'Page Loader', 'mixt' ),
-	'desc'       => __( 'Settings for the page loader', 'mixt' ),
+	'title'      => esc_html__( 'Page Loader', 'mixt' ),
+	'desc'       => esc_html__( 'Settings for the page loader', 'mixt' ),
 	'icon'       => 'el-icon-record',
 	'subsection' => true,
 	'customizer' => false,
@@ -129,10 +129,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-loader',
 			'type'     => 'switch',
-			'title'    => __( 'Enable', 'mixt' ),
-			'subtitle' => __( 'Show animations when pages are loading', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Enable', 'mixt' ),
+			'subtitle' => esc_html__( 'Show animations when pages are loading', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -140,11 +140,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-loader-type',
 			'type'     => 'button_set',
-			'title'    => __( 'Type', 'mixt' ),
-			'subtitle' => __( 'Use a shape or image for the loader', 'mixt' ),
+			'title'    => esc_html__( 'Type', 'mixt' ),
+			'subtitle' => esc_html__( 'Use a shape or image for the loader', 'mixt' ),
 			'options'  => array(
-				'1' => __( 'Shape', 'mixt' ),
-				'2' => __( 'Image', 'mixt' ),
+				'1' => esc_html__( 'Shape', 'mixt' ),
+				'2' => esc_html__( 'Image', 'mixt' ),
 			),
 			'default'  => '1',
 			'required' => array('page-loader', '=', true),
@@ -154,13 +154,13 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-loader-shape',
 			'type'     => 'select',
-			'title'    => __( 'Shape', 'mixt' ),
-			'subtitle' => __( 'Shape to use for the loader', 'mixt' ),
+			'title'    => esc_html__( 'Shape', 'mixt' ),
+			'subtitle' => esc_html__( 'Shape to use for the loader', 'mixt' ),
 			'options'  => array(
-				'circle'  => __( 'Circle', 'mixt' ),
-				'ring'    => __( 'Ring', 'mixt' ),
-				'square'  => __( 'Square', 'mixt' ),
-				'square2' => __( 'Empty Square', 'mixt' ),
+				'circle'  => esc_html__( 'Circle', 'mixt' ),
+				'ring'    => esc_html__( 'Ring', 'mixt' ),
+				'square'  => esc_html__( 'Square', 'mixt' ),
+				'square2' => esc_html__( 'Empty Square', 'mixt' ),
 			),
 			'default'  => 'ring',
 			'required' => array('page-loader-type', '=', '1'),
@@ -170,8 +170,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'page-loader-color',
 			'type'        => 'color',
-			'title'       => __( 'Shape Color', 'mixt' ),
-			'subtitle'    => __( 'Select a loader shape color', 'mixt' ),
+			'title'       => esc_html__( 'Shape Color', 'mixt' ),
+			'subtitle'    => esc_html__( 'Select a loader shape color', 'mixt' ),
 			'transparent' => false,
 			'default'     => '#333333',
 			'validate'    => 'color',
@@ -183,8 +183,8 @@ $this->sections[] = array(
 			'id'       => 'page-loader-img',
 			'type'     => 'media',
 			'url'      => false,
-			'title'    => __( 'Image', 'mixt' ),
-			'subtitle' => __( 'Image to use for the loader', 'mixt' ),
+			'title'    => esc_html__( 'Image', 'mixt' ),
+			'subtitle' => esc_html__( 'Image to use for the loader', 'mixt' ),
 			'required' => array('page-loader-type', '=', '2'),
 		),
 
@@ -192,8 +192,8 @@ $this->sections[] = array(
 		array(
 			'id'          => 'page-loader-bg',
 			'type'        => 'color',
-			'title'       => __( 'Background Color', 'mixt' ),
-			'subtitle'    => __( 'The page loader background color', 'mixt' ),
+			'title'       => esc_html__( 'Background Color', 'mixt' ),
+			'subtitle'    => esc_html__( 'The page loader background color', 'mixt' ),
 			'transparent' => false,
 			'default'     => '#ffffff',
 			'validate'    => 'color',
@@ -204,8 +204,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-loader-anim',
 			'type'     => 'select',
-			'title'    => __( 'Animation', 'mixt' ),
-			'subtitle' => __( 'Animation to use for the loader', 'mixt' ),
+			'title'    => esc_html__( 'Animation', 'mixt' ),
+			'subtitle' => esc_html__( 'Animation to use for the loader', 'mixt' ),
 			'options'  => $page_loader_anims,
 			'default'  => 'pulsate',
 			'required' => array('page-loader', '=', true),
@@ -216,7 +216,7 @@ $this->sections[] = array(
 
 // MISCELLANEOUS
 $this->sections[] = array(
-	'title'      => __( 'Miscellaneous', 'mixt' ),
+	'title'      => esc_html__( 'Miscellaneous', 'mixt' ),
 	'icon'       => 'el-icon-adjust-alt',
 	'subsection' => true,
 	'customizer' => false,
@@ -226,10 +226,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'smooth-scroll',
 			'type'     => 'switch',
-			'title'    => __( 'Smooth Scrolling', 'mixt' ),
-			'subtitle' => __( 'Enable smooth scrolling for browsers without native support', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Smooth Scrolling', 'mixt' ),
+			'subtitle' => esc_html__( 'Enable smooth scrolling for browsers without native support', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -237,11 +237,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-show-comments',
 			'type'     => 'switch',
-			'title'    => __( 'Page Comments', 'mixt' ),
-			'subtitle' => __( 'Show comments on single pages', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
-			'default'  => false,
+			'title'    => esc_html__( 'Page Comments', 'mixt' ),
+			'subtitle' => esc_html__( 'Show comments on single pages', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
+			'default'  => true,
 		),
 
 		// Divider
@@ -255,7 +255,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'modules-section',
 			'type'     => 'section',
-			'title'    => __( 'Modules', 'mixt' ),
+			'title'    => esc_html__( 'Modules', 'mixt' ),
 			'indent'   => true,
 		),	
 
@@ -263,8 +263,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'icon-fonts',
 				'type'     => 'checkbox',
-				'title'    => __( 'Icon Font Sets', 'mixt' ),
-				'subtitle' => __( 'Select which icon font sets you want to use.', 'mixt' ),
+				'title'    => esc_html__( 'Icon Font Sets', 'mixt' ),
+				'subtitle' => esc_html__( 'Select which icon font sets you want to use.', 'mixt' ),
 				'options'  => array(
 					'fontawesome' => 'Font Awesome',
 					'typicons'    => 'Typicons',
@@ -280,10 +280,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'themes-master',
 				'type'     => 'switch',
-				'title'    => __( 'Enable Themes', 'mixt' ),
-				'subtitle' => __( 'Add theme sections and management. Disable if customizing themes in CSS directly.', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Enable Themes', 'mixt' ),
+				'subtitle' => esc_html__( 'Add theme sections and management. Disable if customizing themes in CSS directly.', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 			),
 
@@ -291,10 +291,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'page-metaboxes',
 				'type'     => 'switch',
-				'title'    => __( 'Page Option Metaboxes', 'mixt' ),
-				'subtitle' => __( 'Enable option metaboxes when editing pages or posts', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Page Option Metaboxes', 'mixt' ),
+				'subtitle' => esc_html__( 'Enable option metaboxes when editing pages or posts', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 			),
 
@@ -302,10 +302,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'bsync-script',
 				'type'     => 'switch',
-				'title'    => __( 'BrowserSync Script', 'mixt' ),
-				'subtitle' => __( 'Add BrowserSync script in the footer (only for logged in admins)', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'BrowserSync Script', 'mixt' ),
+				'subtitle' => esc_html__( 'Add BrowserSync script in the footer (only for logged in admins)', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 	),

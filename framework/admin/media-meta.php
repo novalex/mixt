@@ -81,12 +81,12 @@ if ( ! class_exists('Mixt_Media_Meta') ) {
 }
 $media_meta_fields = array(
 	'luminosity' => array(
-		'label'   => __( 'Luminosity', 'mixt' ),
+		'label'   => esc_html__( 'Luminosity', 'mixt' ),
 		'input'   => 'select',
 		'options' => array(
 			'none'  => '-',
-			'light' => __( 'Light', 'mixt' ),
-			'dark'  => __( 'Dark', 'mixt' ),
+			'light' => esc_html__( 'Light', 'mixt' ),
+			'dark'  => esc_html__( 'Dark', 'mixt' ),
 		),
 		'application' => 'image',
 		'exclusions'  => array('audio', 'video'),

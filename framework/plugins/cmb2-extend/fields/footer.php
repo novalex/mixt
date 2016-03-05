@@ -1,17 +1,17 @@
 <?php
 
-mixt_cmb_make_tab( $fields, __( 'Footer', 'mixt' ), 'dashicons dashicons-minus', array(
+mixt_cmb_make_tab( $fields, esc_html__( 'Footer', 'mixt' ), 'dashicons dashicons-minus', array(
 
 	// Widget Area Switch
 	array(
 		'id'      => $prefix . 'footer-widgets-show',
-		'name'    => __( 'Display Widget Area', 'mixt' ),
-		'desc'    => __( 'Show the footer widget area on this page', 'mixt' ),
+		'name'    => esc_html__( 'Display Widget Area', 'mixt' ),
+		'desc'    => esc_html__( 'Show the footer widget area on this page', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -19,13 +19,13 @@ mixt_cmb_make_tab( $fields, __( 'Footer', 'mixt' ), 'dashicons dashicons-minus',
 	// Copyright Area Switch
 	array(
 		'id'      => $prefix . 'footer-copy-show',
-		'name'    => __( 'Display Copyright Area', 'mixt' ),
-		'desc'    => __( 'Show the footer copyright area on this page', 'mixt' ),
+		'name'    => esc_html__( 'Display Copyright Area', 'mixt' ),
+		'desc'    => esc_html__( 'Show the footer copyright area on this page', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),

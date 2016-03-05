@@ -377,7 +377,7 @@ if ( class_exists('WooCommerce') ) {
 			if ( $cart_items > 0 ) {
 				$output .= wp_kses_data( sprintf( _n( '%d item', '%d items', $cart_items, 'mixt' ), $cart_items ) ) . ' - <span class="amount">' . wp_kses_data( WC()->cart->get_cart_total() ) . '</span>';
 			} else {
-				$output .= __( 'No items in the cart', 'mixt' );
+				$output .= esc_html__( 'No items in the cart', 'mixt' );
 			}
 		$output .= '</span></a>';
 		return $output;

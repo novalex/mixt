@@ -25,38 +25,38 @@ function mixt_vc_extend() {
 		// Row Theme Color
 		array(
 			'type'        => 'dropdown',
-			'heading'     => __( 'Row Color', 'mixt' ),
-			'description' => __( 'Set a theme color for this row', 'mixt' ),
+			'heading'     => esc_html__( 'Row Color', 'mixt' ),
+			'description' => esc_html__( 'Set a theme color for this row', 'mixt' ),
 			'param_name'  => 'theme_color',
 			'std'         => 'auto',
 			'value'       => array(
-				__( 'Auto', 'mixt' )        => 'auto',
-				__( 'Main', 'mixt' )        => 'main',
-				__( 'Alternative', 'mixt' ) => 'alt',
-				__( 'Inverse', 'mixt' )     => 'inv',
-				__( 'Accent', 'mixt' )      => 'accent',
+				esc_html__( 'Auto', 'mixt' )        => 'auto',
+				esc_html__( 'Main', 'mixt' )        => 'main',
+				esc_html__( 'Alternative', 'mixt' ) => 'alt',
+				esc_html__( 'Inverse', 'mixt' )     => 'inv',
+				esc_html__( 'Accent', 'mixt' )      => 'accent',
 			),
 		),
 
 		// Row Padding
 		array(
 			'type'        => 'checkbox',
-			'heading'     => __( 'Row Padding', 'mixt' ),
-			'description' => __( 'Apply padding to this row', 'mixt' ),
+			'heading'     => esc_html__( 'Row Padding', 'mixt' ),
+			'description' => esc_html__( 'Apply padding to this row', 'mixt' ),
 			'param_name'  => 'row_padding',
 			'value'       => array(
-				__( 'Vertical', 'mixt' )         => 'vertical',
-				__( 'Vertical (large)', 'mixt' ) => 'vertical-l',
-				__( 'Vertical (extra)', 'mixt' ) => 'vertical-xl',
-				__( 'Horizontal', 'mixt' )       => 'horizontal',
+				esc_html__( 'Vertical', 'mixt' )         => 'vertical',
+				esc_html__( 'Vertical (large)', 'mixt' ) => 'vertical-l',
+				esc_html__( 'Vertical (extra)', 'mixt' ) => 'vertical-xl',
+				esc_html__( 'Horizontal', 'mixt' )       => 'horizontal',
 			),
 		),
 
 		// First Row Check
 		array(
 			'type'        => 'checkbox',
-			'heading'     => __( 'First Row', 'mixt' ),
-			'description' => __( 'Check if this row should sit flush against the header', 'mixt' ),
+			'heading'     => esc_html__( 'First Row', 'mixt' ),
+			'description' => esc_html__( 'Check if this row should sit flush against the header', 'mixt' ),
 			'param_name'  => 'first_row',
 			'std' => false,
 		),
@@ -66,23 +66,23 @@ function mixt_vc_extend() {
 		// Separators
 		$row_custom[] = array(
 			'type'        => 'dropdown',
-			'heading'     => __( 'Row Separator', 'mixt' ),
-			'description' => __( 'Apply a separator to this row. Use inverted separators when using a background image for this row.', 'mixt' ),
+			'heading'     => esc_html__( 'Row Separator', 'mixt' ),
+			'description' => esc_html__( 'Apply a separator to this row. Use inverted separators when using a background image for this row.', 'mixt' ),
 			'param_name'  => 'separator',
 			'std'         => '',
 			'value'       => array_flip(mixt_element_assets('row-separators')),
 		);
 		$row_custom[] = array(
 			'type'        => 'colorpicker',
-			'heading'     => __( 'Separator Color', 'mixt' ),
-			'description' => __( 'The separator\'s color. Select the same color as the row for normal separators, or the next row\'s color for inverted ones.', 'mixt' ),
+			'heading'     => esc_html__( 'Separator Color', 'mixt' ),
+			'description' => esc_html__( 'The separator\'s color. Select the same color as the row for normal separators, or the next row\'s color for inverted ones.', 'mixt' ),
 			'param_name'  => 'separator_color',
 			'std'         => '',
 			'dependency'  => array('element' => 'separator', 'not_empty' => true),
 		);
 		$row_custom[] = array(
 			'type'        => 'iconpicker',
-			'heading'     => __( 'Separator Icon', 'mixt' ),
+			'heading'     => esc_html__( 'Separator Icon', 'mixt' ),
 			'param_name'  => 'separator_icon',
 			'std'         => '',
 			'dependency'  => array('element' => 'separator', 'not_empty' => true),
@@ -139,11 +139,11 @@ add_filter('vc_shortcodes_css_class', 'mixt_vc_custom_classes', 10, 2);
 function mixt_vc_grid_templates($templates) {
 	return array_merge( array(
 		'masonry-scale-rotate' => array(
-			'name'     => __( 'MIXT - Masonry: Scale And Rotate', 'mixt' ),
+			'name'     => esc_html__( 'MIXT - Masonry: Scale And Rotate', 'mixt' ),
 			'template' => '[vc_gitem c_zone_position="bottom" el_class="mixt-grid-item scale-and-rotate"][vc_gitem_animated_block animation="scaleRotateIn"][vc_gitem_zone_a height_mode="original" featured_image="yes" css=".vc_custom_1437041109909{background-position: 0 0 !important;background-repeat: repeat !important;}"][vc_gitem_row position="top"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="middle"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="bottom"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][/vc_gitem_zone_a][vc_gitem_zone_b][vc_gitem_row position="top"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="middle"][vc_gitem_col el_class="col-xs-6"][mixt_gitem_hover link_post="" hover_color="accent" items="image,post"][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="bottom"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][/vc_gitem_zone_b][/vc_gitem_animated_block][vc_gitem_zone_c el_class="gitem-title-cont"][vc_gitem_row][vc_gitem_col][vc_gitem_post_title link="post_link" font_container="tag:h4|text_align:left"][/vc_gitem_col][/vc_gitem_row][/vc_gitem_zone_c][/vc_gitem]',
 		),
 		'grid-fadein-title' => array(
-			'name'     => __( 'MIXT - Grid: Fade In With Title', 'mixt' ),
+			'name'     => esc_html__( 'MIXT - Grid: Fade In With Title', 'mixt' ),
 			'template' => '[vc_gitem el_class="mixt-grid-item fade-in with-title"][vc_gitem_animated_block][vc_gitem_zone_a height_mode="4-3" featured_image="yes"][vc_gitem_row position="top"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="middle"][vc_gitem_col][mixt_gitem_hover hover_color="accent" btn_color="default"][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="bottom"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][/vc_gitem_zone_a][vc_gitem_zone_b][vc_gitem_row position="top"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="middle"][vc_gitem_col][mixt_gitem_hover hover_color="accent" item_style="" btn_color="default"][/vc_gitem_col][/vc_gitem_row][vc_gitem_row position="bottom"][vc_gitem_col][/vc_gitem_col][/vc_gitem_row][/vc_gitem_zone_b][/vc_gitem_animated_block][/vc_gitem]',
 		),
 	), $templates);
@@ -157,7 +157,7 @@ add_filter('vc_grid_item_predefined_templates', 'mixt_vc_grid_templates');
 function mixt_vc_colors() {
 	// Progress Bar
 	$param = WPBMap::getParam('vc_progress_bar', 'bgcolor');
-	$param['value'][__( 'Theme Accent', 'mixt' )] = 'accent';
+	$param['value'][esc_html__( 'Theme Accent', 'mixt' )] = 'accent';
 	vc_update_shortcode_param('vc_progress_bar', $param);
 }
 add_action('vc_after_init', 'mixt_vc_colors');

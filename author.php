@@ -12,7 +12,7 @@ echo '<div class="author-wrap page-padding">';
 	mixt_about_the_author(false);
 echo '</div>';
 
-echo mixt_heading( __( 'Entries by this author', 'mixt' ) );
+echo mixt_heading( esc_html__( 'Entries by this author', 'mixt' ) );
 
 echo '<div class="posts-container">';
 
@@ -33,7 +33,7 @@ if ( have_posts() ) {
 
 } else {
 
-	echo mixt_heading( __( 'No entries by this author', 'mixt' ) );
+	echo mixt_heading( esc_html__( 'No entries by this author', 'mixt' ) );
 
 }
 

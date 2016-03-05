@@ -68,11 +68,11 @@ class Mixt_Admin_Menu {
 		?>
 		<div class="wrap about-wrap mixt-admin-wrap">
 
-			<h1><?php echo $title; ?></h1>
+			<h1><?php echo esc_html($title); ?></h1>
 			<div class="about-text"><?php echo $description; ?></div>
 
 			<div class="wp-badge mixt-badge">
-				<span class="version"><?php printf( __( 'Version %s', 'mixt' ), MIXT_VERSION ); ?></span>
+				<span class="version"><?php printf( esc_html__( 'Version %s', 'mixt' ), MIXT_VERSION ); ?></span>
 			</div>
 		<?php
 	}
@@ -99,10 +99,10 @@ class Mixt_Admin_Menu {
 		$selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'mixt-admin';
 		?>
 		<h2 class="nav-tab-wrapper">
-			<a class="nav-tab <?php echo $selected == 'mixt-admin' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-admin'), 'admin.php') ) ); ?>">
-				<?php echo ( $this->welcome_mode ) ? esc_attr__( 'Getting Started', 'mixt' ) : esc_attr__( 'About', 'mixt' ); ?>
+			<a class="nav-tab <?php echo ( $selected == 'mixt-admin' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-admin'), 'admin.php') ) ); ?>">
+				<?php echo ( $this->welcome_mode ) ? esc_html__( 'Getting Started', 'mixt' ) : esc_html__( 'About', 'mixt' ); ?>
 			</a>
-			<a class="nav-tab <?php echo $selected == 'mixt-status' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-status'), 'admin.php') ) ); ?>">
+			<a class="nav-tab <?php echo ( $selected == 'mixt-status' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-status'), 'admin.php') ) ); ?>">
 				<?php esc_attr_e( 'Status', 'mixt' ); ?>
 			</a>
 			<?php if ( $this->tgmpa_active ) { ?>
@@ -120,9 +120,9 @@ class Mixt_Admin_Menu {
 	public function support_links() {
 		$output = '';
 
-		$output .= "<a href='{$this->help_links['docs']}' class='button button-white' target='_blank'>" . esc_attr__( 'Documentation', 'mixt' ) . "</a>&nbsp;";
-		$output .= "<a href='{$this->help_links['support']}' class='button button-white' target='_blank'>" . esc_attr__( 'Support', 'mixt' ) . "</a>&nbsp;";
-		$output .= "<a href='{$this->help_links['forums']}' class='button button-white' target='_blank'>" . esc_attr__( 'Forums', 'mixt' ) . "</a>&nbsp;";
+		$output .= "<a href='{$this->help_links['docs']}' class='button button-white' target='_blank'>" . esc_html__( 'Documentation', 'mixt' ) . "</a>&nbsp;";
+		$output .= "<a href='{$this->help_links['support']}' class='button button-white' target='_blank'>" . esc_html__( 'Support', 'mixt' ) . "</a>&nbsp;";
+		$output .= "<a href='{$this->help_links['forums']}' class='button button-white' target='_blank'>" . esc_html__( 'Forums', 'mixt' ) . "</a>&nbsp;";
 
 		return $output;
 	}

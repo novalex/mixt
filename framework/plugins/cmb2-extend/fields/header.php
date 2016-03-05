@@ -1,17 +1,17 @@
 <?php
 
-mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-center', array(
+mixt_cmb_make_tab( $fields, esc_html__( 'Header', 'mixt' ), 'dashicons dashicons-align-center', array(
 
 	// Location Bar Switch
 	array(
 		'id'      => $prefix . 'location-bar',
-		'name'    => __( 'Location Bar', 'mixt' ),
-		'desc'    => __( 'Show the location bar on this page', 'mixt' ),
+		'name'    => esc_html__( 'Location Bar', 'mixt' ),
+		'desc'    => esc_html__( 'Show the location bar on this page', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -19,13 +19,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Enable Header Media
 	array(
 		'id'      => $prefix . 'head-media',
-		'name'    => __( 'Header Media', 'mixt' ),
-		'desc'    => __( 'Display media, a slider & other content in the header', 'mixt' ),
+		'name'    => esc_html__( 'Header Media', 'mixt' ),
+		'desc'    => esc_html__( 'Display media, a slider & other content in the header', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default' => 'auto',
 	),
@@ -33,8 +33,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Height
 	array(
 		'id'         => $prefix . 'head-height',
-		'name'       => __( 'Height', 'mixt' ),
-		'desc'       => __( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
+		'name'       => esc_html__( 'Height', 'mixt' ),
+		'desc'       => esc_html__( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
 		'type'       => 'dimensions',
 		'height'     => true,
 		'units'      => array('px', '%'),
@@ -47,8 +47,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Min Height
 	array(
 		'id'         => $prefix . 'head-min-height',
-		'name'       => __( 'Minimum Height', 'mixt' ),
-		'desc'       => __( 'Set a minimum height for the header', 'mixt' ),
+		'name'       => esc_html__( 'Minimum Height', 'mixt' ),
+		'desc'       => esc_html__( 'Set a minimum height for the header', 'mixt' ),
 		'type'       => 'dimensions',
 		'height'     => true,
 		'units'      => array('px'),
@@ -61,8 +61,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Background Color
 	array(
 		'id'      => $prefix . 'head-bg-color',
-		'name'    => __( 'Background Color', 'mixt' ),
-		'desc'    => __( 'Select a background color for the header', 'mixt' ),
+		'name'    => esc_html__( 'Background Color', 'mixt' ),
+		'desc'    => esc_html__( 'Select a background color for the header', 'mixt' ),
 		'type'    => 'colorpicker',
 		'default' => '',
 		'attributes' => array(
@@ -75,8 +75,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Text Color
 	array(
 		'id'      => $prefix . 'head-text-color',
-		'name'    => __( 'Text Color', 'mixt' ),
-		'desc'    => __( 'The color for text on light backgrounds', 'mixt' ),
+		'name'    => esc_html__( 'Text Color', 'mixt' ),
+		'desc'    => esc_html__( 'The color for text on light backgrounds', 'mixt' ),
 		'type'    => 'colorpicker',
 		'default' => '',
 		'attributes' => array(
@@ -89,8 +89,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Inverse Text Color
 	array(
 		'id'      => $prefix . 'head-inv-text-color',
-		'name'    => __( 'Inverse Text Color', 'mixt' ),
-		'desc'    => __( 'The color for text on dark backgrounds', 'mixt' ),
+		'name'    => esc_html__( 'Inverse Text Color', 'mixt' ),
+		'desc'    => esc_html__( 'The color for text on dark backgrounds', 'mixt' ),
 		'type'    => 'colorpicker',
 		'default' => '',
 		'attributes' => array(
@@ -103,15 +103,15 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Media Type
 	array(
 		'id'      => $prefix . 'head-media-type',
-		'name'    => __( 'Media Type', 'mixt' ),
-		'desc'    => __( 'Type of media to use in the header', 'mixt' ),
+		'name'    => esc_html__( 'Media Type', 'mixt' ),
+		'desc'    => esc_html__( 'Type of media to use in the header', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'   => __( 'Auto', 'mixt' ),
-			'color'  => __( 'Solid Color', 'mixt' ),
-			'image'  => __( 'Image', 'mixt' ),
-			'video'  => __( 'Video', 'mixt' ),
-			'slider' => __( 'Slider', 'mixt' ),
+			'auto'   => esc_html__( 'Auto', 'mixt' ),
+			'color'  => esc_html__( 'Solid Color', 'mixt' ),
+			'image'  => esc_html__( 'Image', 'mixt' ),
+			'video'  => esc_html__( 'Video', 'mixt' ),
+			'slider' => esc_html__( 'Slider', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -123,13 +123,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Image Source
 	array(
 		'id'      => $prefix . 'head-img-src',
-		'name'    => __( 'Image Source', 'mixt' ),
-		'desc'    => __( 'Select an image or use the featured one', 'mixt' ),
+		'name'    => esc_html__( 'Image Source', 'mixt' ),
+		'desc'    => esc_html__( 'Select an image or use the featured one', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'    => __( 'Auto', 'mixt' ),
-			'gallery' => __( 'Gallery', 'mixt' ),
-			'feat'    => __( 'Featured', 'mixt' ),
+			'auto'    => esc_html__( 'Auto', 'mixt' ),
+			'gallery' => esc_html__( 'Gallery', 'mixt' ),
+			'feat'    => esc_html__( 'Featured', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -141,8 +141,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Image Select
 	array(
 		'id'    => $prefix . 'head-img',
-		'name'  => __( 'Select Image', 'mixt' ),
-		'desc'  => __( 'Select an image from the gallery or upload one', 'mixt' ),
+		'name'  => esc_html__( 'Select Image', 'mixt' ),
+		'desc'  => esc_html__( 'Select an image from the gallery or upload one', 'mixt' ),
 		'type'  => 'file',
 		'allow' => array( 'attachment' ),
 		'options' => array(
@@ -157,12 +157,12 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Repeat / Pattern Image
 	array(
 		'id'      => $prefix . 'head-img-repeat',
-		'name'    => __( 'Repeat / Pattern Image', 'mixt' ),
+		'name'    => esc_html__( 'Repeat / Pattern Image', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -175,11 +175,11 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	array(
 		'id'      => $prefix . 'head-video-src',
 		'type'    => 'radio_inline',
-		'name'    => __( 'Video Source', 'mixt' ),
-		'desc'    => __( 'Use an embedded video or a hosted one', 'mixt' ),
+		'name'    => esc_html__( 'Video Source', 'mixt' ),
+		'desc'    => esc_html__( 'Use an embedded video or a hosted one', 'mixt' ),
 		'options' => array(
-			'embed' => __( 'Embedded', 'mixt' ),
-			'local' => __( 'Hosted', 'mixt' ),
+			'embed' => esc_html__( 'Embedded', 'mixt' ),
+			'local' => esc_html__( 'Hosted', 'mixt' ),
 		),
 		'default'  => 'embed',
 		'attributes' => array(
@@ -192,8 +192,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	array(
 		'id'       => $prefix . 'head-video-embed',
 		'type'     => 'textarea_code',
-		'name'     => __( 'Video Embed Code', 'mixt' ),
-		'desc'     => __( 'The embed code for the video you want to use', 'mixt' ),
+		'name'     => esc_html__( 'Video Embed Code', 'mixt' ),
+		'desc'     => esc_html__( 'The embed code for the video you want to use', 'mixt' ),
 		'attributes' => array(
 			'data-parent-field' => $prefix . 'head-video-src',
 			'data-show-on-id'   => $prefix . 'head-video-src1',
@@ -203,8 +203,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Video Select
 	array(
 		'id'         => $prefix . 'head-video',
-		'name'       => __( 'Video', 'mixt' ),
-		'desc'       => __( 'Select a video from the gallery or upload one', 'mixt' ),
+		'name'       => esc_html__( 'Video', 'mixt' ),
+		'desc'       => esc_html__( 'Select a video from the gallery or upload one', 'mixt' ),
 		'type'       => 'file',
 		'allow'      => array( 'attachment' ),
 		'options' => array(
@@ -219,8 +219,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Video Fallback Select
 	array(
 		'id'         => $prefix . 'head-video-2',
-		'name'       => __( 'Video Fallback', 'mixt' ),
-		'desc'       => __( 'Select a fallback video from the gallery or upload one', 'mixt' ),
+		'name'       => esc_html__( 'Video Fallback', 'mixt' ),
+		'desc'       => esc_html__( 'Select a fallback video from the gallery or upload one', 'mixt' ),
 		'type'       => 'file',
 		'allow'      => array( 'attachment' ),
 		'options'    => array(
@@ -235,8 +235,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Video Poster Select
 	array(
 		'id'             => $prefix . 'head-video-poster',
-		'name'           => __( 'Video Poster', 'mixt' ),
-		'desc'           => __( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
+		'name'           => esc_html__( 'Video Poster', 'mixt' ),
+		'desc'           => esc_html__( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
 		'type'           => 'file',
 		'allow'          => array( 'attachment' ),
 		'options'        => array(
@@ -251,11 +251,11 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Video Loop
 	array(
 		'id'         => $prefix . 'head-video-loop',
-		'name'       => __( 'Video Loop', 'mixt' ),
+		'name'       => esc_html__( 'Video Loop', 'mixt' ),
 		'type'       => 'radio_inline',
 		'options'    => array(
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'true',
 		'attributes' => array(
@@ -267,12 +267,12 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Video Luminance
 	array(
 		'id'         => $prefix . 'head-video-lum',
-		'name'       => __( 'Video Luminance', 'mixt' ),
-		'desc'       => __( 'Header text color will be adjusted based on this', 'mixt' ),
+		'name'       => esc_html__( 'Video Luminance', 'mixt' ),
+		'desc'       => esc_html__( 'Header text color will be adjusted based on this', 'mixt' ),
 		'type'       => 'radio_inline',
 		'options'    => array(
-			'light' => __( 'Light', 'mixt' ),
-			'dark'  => __( 'Dark', 'mixt' ),
+			'light' => esc_html__( 'Light', 'mixt' ),
+			'dark'  => esc_html__( 'Dark', 'mixt' ),
 		),
 		'default'    => 'light',
 		'attributes' => array(
@@ -284,8 +284,8 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Slider ID Field
 	array(
 		'id'         => $prefix . 'head-slider',
-		'name'       => __( 'Slider ID', 'mixt' ),
-		'desc'       => __( 'The ID number or slug of the slider to use', 'mixt' ),
+		'name'       => esc_html__( 'Slider ID', 'mixt' ),
+		'desc'       => esc_html__( 'The ID number or slug of the slider to use', 'mixt' ),
 		'type'       => 'text',
 		'default'    => '',
 		'attributes' => array(
@@ -297,13 +297,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Parallax Effect
 	array(
 		'id'      => $prefix . 'head-parallax',
-		'name'    => __( 'Parallax Effect', 'mixt' ),
+		'name'    => esc_html__( 'Parallax Effect', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto' => __( 'Auto', 'mixt' ),
-			'none' => __( 'None', 'mixt' ),
-			'slow' => __( 'Slow', 'mixt' ),
-			'fast' => __( 'Fast', 'mixt' ),
+			'auto' => esc_html__( 'Auto', 'mixt' ),
+			'none' => esc_html__( 'None', 'mixt' ),
+			'slow' => esc_html__( 'Slow', 'mixt' ),
+			'fast' => esc_html__( 'Fast', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -315,13 +315,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Content Align
 	array(
 		'id'      => $prefix . 'head-content-align',
-		'name'    => __( 'Content Align', 'mixt' ),
+		'name'    => esc_html__( 'Content Align', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'   => __( 'Auto', 'mixt' ),
-			'left'   => __( 'Left', 'mixt' ),
-			'center' => __( 'Center', 'mixt' ),
-			'right'  => __( 'Right', 'mixt' ),
+			'auto'   => esc_html__( 'Auto', 'mixt' ),
+			'left'   => esc_html__( 'Left', 'mixt' ),
+			'center' => esc_html__( 'Center', 'mixt' ),
+			'right'  => esc_html__( 'Right', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -333,13 +333,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Content Size
 	array(
 		'id'      => $prefix . 'head-content-size',
-		'name'    => __( 'Content Size', 'mixt' ),
+		'name'    => esc_html__( 'Content Size', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'      => __( 'Auto', 'mixt' ),
-			'normal'    => __( 'Normal', 'mixt' ),
-			'fullwidth' => __( 'Full Width', 'mixt' ),
-			'cover'     => __( 'Cover', 'mixt' ),
+			'auto'      => esc_html__( 'Auto', 'mixt' ),
+			'normal'    => esc_html__( 'Normal', 'mixt' ),
+			'fullwidth' => esc_html__( 'Full Width', 'mixt' ),
+			'cover'     => esc_html__( 'Cover', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -351,12 +351,12 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Content Fade Effect
 	array(
 		'id'      => $prefix . 'head-content-fade',
-		'name'    => __( 'Content Fade Effect', 'mixt' ),
+		'name'    => esc_html__( 'Content Fade Effect', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -368,13 +368,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Scroll To Content
 	array(
 		'id'      => $prefix . 'head-content-scroll',
-		'name'    => __( 'Scroll To Content', 'mixt' ),
-		'desc'    => __( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
+		'name'    => esc_html__( 'Scroll To Content', 'mixt' ),
+		'desc'    => esc_html__( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -386,13 +386,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Post Info In Header
 	array(
 		'id'      => $prefix . 'head-content-info',
-		'name'    => __( 'Post Info', 'mixt' ),
-		'desc'    => __( 'Show the post title and meta in the header', 'mixt' ),
+		'name'    => esc_html__( 'Post Info', 'mixt' ),
+		'desc'    => esc_html__( 'Show the post title and meta in the header', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -404,13 +404,13 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Custom Code
 	array(
 		'id'      => $prefix . 'head-content-code',
-		'name'    => __( 'Custom Code', 'mixt' ),
-		'desc'    => __( 'Output custom code in the header (can use shortcodes)', 'mixt' ),
+		'name'    => esc_html__( 'Custom Code', 'mixt' ),
+		'desc'    => esc_html__( 'Output custom code in the header (can use shortcodes)', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 		'attributes' => array(
@@ -422,7 +422,7 @@ mixt_cmb_make_tab( $fields, __( 'Header', 'mixt' ), 'dashicons dashicons-align-c
 	// Custom Code Field
 	array(
 		'id'      => $prefix . 'head-code',
-		'name'    => __( 'Custom Code Content', 'mixt' ),
+		'name'    => esc_html__( 'Custom Code Content', 'mixt' ),
 		'type'    => 'wysiwyg',
 		'options' => array(
 			'wpautop'       => false,

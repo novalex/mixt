@@ -138,7 +138,7 @@ class Mixt_Options {
 				'type'              => array( 'key' => 'layout-type', 'return' => 'value', 'default' => 'standard', 'inherited' => true ),
 				'columns'           => array( 'key' => 'layout-columns', 'return' => 'value', 'default' => '2', 'inherited' => true ),
 				'feat-show'         => array( 'default' => true, 'inherited' => true ),
-				'feat-size'         => array( 'return' => 'value', 'default' => 'blog-large', 'inherited' => true ),
+				'feat-size'         => array( 'return' => 'value', 'default' => 'mixt-large', 'inherited' => true ),
 				'post-info'         => array( 'default' => false, 'inherited' => true ),
 				'post-content-type' => array( 'return' => 'value', 'default' => 'full', 'inherited' => true ),
 				'meta-show'         => array( 'return' => 'value', 'default' => 'header', 'inherited' => true ),

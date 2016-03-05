@@ -38,14 +38,14 @@ function mixt_page_loader() {
 	$load_classes  = 'loader ';
 
 	// Loader Animation
-	if ( $options['anim'] != 'none' ) $load_classes .= 'animated infinite ' . $options['anim'] . ' ';
+	if ( $options['anim'] != 'none' ) $load_classes .= 'animated infinite ' . sanitize_html_class($options['anim']) . ' ';
 
 	// Loader Shape
 	if ( $options['type'] == '1' ) {
-		$load_elem = '<div class="' . $load_classes . $options['shape'] . '"></div>';
+		$load_elem = '<div class="' . $load_classes . sanitize_html_class($options['shape']) . '"></div>';
 	// Loader Image
 	} else if ( is_array($options['img']) && ! empty($options['img']['url']) ) {
-		$load_elem = '<img src="' . $options['img']['url'] . '" alt="Loading..." class="' . $load_classes . '">';
+		$load_elem = '<img src="' . esc_attr($options['img']['url']) . '" alt="' . esc_attr__( 'Loading...', 'mixt' ) . '" class="' . $load_classes . '">';
 	// Default Loader
 	} else {
 		$load_elem = '<div class="ring ' . $load_classes . '"></div>';

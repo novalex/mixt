@@ -138,12 +138,12 @@ function mixt_head_media() {
 				</script><?php
 			// Show Slider Not Found Message
 			} else if ( current_user_can('manage_options') ) {
-				$slider = '<p class="container">' . __( 'Slider with specified ID not found!', 'mixt' ) . '</p>';
+				$slider = '<p class="container">' . esc_html__( 'Slider with specified ID not found!', 'mixt' ) . '</p>';
 			}
 		// Show LayerSlider Deactivated Message
 		} else if ( current_user_can('manage_options') ) {
 			$wrap_classes .= ' no-slider';
-			$slider = '<p class="container">' . __( 'LayerSlider plugin not installed or deactivated!', 'mixt' ) . '</p>';
+			$slider = '<p class="container">' . esc_html__( 'LayerSlider plugin not installed or deactivated!', 'mixt' ) . '</p>';
 		}
 
 	} else {

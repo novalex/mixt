@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Sidebars', 'mixt' ),
-	'desc'       => __( 'Configure the sidebars and their appearance', 'mixt' ),
+	'title'      => esc_html__( 'Sidebars', 'mixt' ),
+	'desc'       => esc_html__( 'Configure the sidebars and their appearance', 'mixt' ),
 	'icon'       => 'el-icon-pause',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,10 +11,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'page-sidebar',
 			'type'     => 'switch',
-			'title'    => __( 'Enabled', 'mixt' ),
-			'subtitle' => __( 'Display the sidebar', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Enabled', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the sidebar', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -22,11 +22,11 @@ $this->sections[] = array(
 		array(
 			'id'       => 'sidebar-position',
 			'type'     => 'button_set',
-			'title'    => __( 'Position', 'mixt' ),
-			'subtitle' => __( 'Sidebar to the left or to the right of the page', 'mixt' ),
+			'title'    => esc_html__( 'Position', 'mixt' ),
+			'subtitle' => esc_html__( 'Sidebar to the left or to the right of the page', 'mixt' ),
 			'options'  => array(
-				'left'  => __( 'Left', 'mixt' ),
-				'right' => __( 'Right', 'mixt' ),
+				'left'  => esc_html__( 'Left', 'mixt' ),
+				'right' => esc_html__( 'Right', 'mixt' ),
 			),
 			'default'  => 'right',
 		),
@@ -35,8 +35,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'sidebar-width',
 			'type'     => 'dimensions',
-			'title'    => __( 'Width', 'mixt' ),
-			'subtitle' => __( 'Set a custom sidebar width', 'mixt' ),
+			'title'    => esc_html__( 'Width', 'mixt' ),
+			'subtitle' => esc_html__( 'Set a custom sidebar width', 'mixt' ),
 			'units'    => array('px', '%'),
 			'height'   => false,
 		),
@@ -45,8 +45,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'sidebar-width-sm',
 			'type'     => 'dimensions',
-			'title'    => __( 'Small Width', 'mixt' ),
-			'subtitle' => __( 'Set a custom sidebar width for smaller screens', 'mixt' ),
+			'title'    => esc_html__( 'Small Width', 'mixt' ),
+			'subtitle' => esc_html__( 'Set a custom sidebar width for smaller screens', 'mixt' ),
 			'units'    => array('px', '%'),
 			'height'   => false,
 		),
@@ -55,10 +55,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'sidebar-hide',
 			'type'     => 'switch',
-			'title'    => __( 'Hide On Mobile', 'mixt' ),
-			'subtitle' => __( 'Hide sidebar on mobile / small screens', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Hide On Mobile', 'mixt' ),
+			'subtitle' => esc_html__( 'Hide sidebar on mobile / small screens', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -66,10 +66,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'child-page-nav',
 			'type'     => 'switch',
-			'title'    => __( 'Child Pages Menu', 'mixt' ),
-			'subtitle' => __( 'Display a navigation menu of child pages in the sidebar, when available', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Child Pages Menu', 'mixt' ),
+			'subtitle' => esc_html__( 'Display a navigation menu of child pages in the sidebar, when available', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -77,18 +77,18 @@ $this->sections[] = array(
 		array(
 			'id'       => 'reg-sidebars',
 			'type'     => 'mixt_multi_input',
-			'title'    => __( 'Custom Sidebars', 'mixt' ),
-			'subtitle' => __( 'Register custom sidebars to use on different pages or locations', 'mixt' ),
-			'add_text' => __( 'New Sidebar', 'mixt' ),
+			'title'    => esc_html__( 'Custom Sidebars', 'mixt' ),
+			'subtitle' => esc_html__( 'Register custom sidebars to use on different pages or locations', 'mixt' ),
+			'add_text' => esc_html__( 'New Sidebar', 'mixt' ),
 			'sortable' => true,
 			'inputs'   => array(
 				'name' => array(
 					'wrap_class'  => 'sidebar-custom sidebar-name',
-					'placeholder' => __( 'Name', 'mixt' ),
+					'placeholder' => esc_html__( 'Name', 'mixt' ),
 				),
 				'id' => array(
 					'wrap_class'  => 'sidebar-custom sidebar-id',
-					'placeholder' => __( 'ID', 'mixt' ),
+					'placeholder' => esc_html__( 'ID', 'mixt' ),
 				),
 			),
 		),

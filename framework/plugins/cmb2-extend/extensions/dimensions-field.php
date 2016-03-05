@@ -31,7 +31,7 @@ class Mixt_Cmb_Dimensions_Field {
 				'id'          => $field_type->_id('_width'),
 				'class'       => 'mixt-dimensions-width regular-text',
 				'value'       =>  filter_var( $value['width'], FILTER_SANITIZE_NUMBER_FLOAT ),
-				'placeholder' => __( 'Width', 'mixt' ),
+				'placeholder' => esc_attr__( 'Width', 'mixt' ),
 				'desc'        => '',
 			) );
 		}
@@ -43,7 +43,7 @@ class Mixt_Cmb_Dimensions_Field {
 				'id'          => $field_type->_id('_height'),
 				'class'       => 'mixt-dimensions-height regular-text',
 				'value'       =>  filter_var( $value['height'], FILTER_SANITIZE_NUMBER_FLOAT ),
-				'placeholder' => __( 'Height', 'mixt' ),
+				'placeholder' => esc_attr__( 'Height', 'mixt' ),
 				'desc'        => '',
 			) );
 		}

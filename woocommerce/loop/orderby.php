@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<form class="products-per-page" method="get">
 			<select class="per-page-select" name="per_page" onchange="this.form.submit()">
 				<?php foreach ( $per_page_options as $option ) { ?>
-					<option value="<?php echo esc_attr($option); ?>" <?php selected($option, $per_page_now); ?>><?php echo $option . ' ' . __( 'Products per page', 'mixt' ); ?></option>
+					<option value="<?php echo esc_attr($option); ?>" <?php selected($option, $per_page_now); ?>><?php echo $option . ' ' . esc_html__( 'Products per page', 'mixt' ); ?></option>
 				<?php } ?>
 			</select>
 			<?php mixt_wc_query_params('per_page'); ?>

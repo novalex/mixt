@@ -87,7 +87,7 @@
 	//	$system_info = new Simple_System_Info();
 	//	?>
 	<!--	<div id="system_info_default_section_group" class="redux-group-tab">-->
-	<!--		<h3>--><?php //_e( 'System Info', 'redux-framework' );?><!--</h3>-->
+	<!--		<h3>--><?php //_esc_html_e( 'System Info', 'redux-framework' );?><!--</h3>-->
     <!---->
 	<!--		<div id="redux-system-info">-->
 	<!--			--><?php //echo $system_info->get( true );?>

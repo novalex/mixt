@@ -325,7 +325,6 @@ function mixt_local_options() {
 	if ( $opt['header']['enabled'] == false ) $opt['header'] = array( 'enabled' => false );
 
 	// Pagination Options
-	global $wp_query;
 	if ( ! empty($opt['page']['page-type']) && $opt['page']['page-type'] == 'single' ) {
 		if ( get_option('page_comments') && in_array($opt['layout']['comment-pagination-type'], array('ajax-click', 'ajax-scroll')) ) {
 			$opt['layout']['comment-default-page'] = get_option('default_comments_page', 'newest');

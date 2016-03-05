@@ -25,14 +25,14 @@ if ( $pag_type == 'classic' ) {
 
 	?>
 	<nav id="shop-nav" class="<?php echo $nav_class; ?>">
-		<h3 class="screen-reader-text"><?php _e( 'Shop navigation', 'mixt' ); ?></h3>
+		<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 		<ul class="pager">
 		<?php if ( get_previous_posts_link() ) : ?>
-			<li class="nav-previous prev"><?php previous_posts_link( mixt_get_icon('left-arrow') . __( 'Previous products', 'mixt' ) ); ?></li>
+			<li class="nav-previous prev"><?php previous_posts_link( mixt_get_icon('left-arrow') . esc_html__( 'Previous products', 'mixt' ) ); ?></li>
 		<?php endif; ?>
 
 		<?php if ( get_next_posts_link(null, $page_max) ) : ?>
-			<li class="nav-next next"><?php next_posts_link( __( 'Next products', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max ); ?></li>
+			<li class="nav-next next"><?php next_posts_link( esc_html__( 'Next products', 'mixt' ) . mixt_get_icon('right-arrow'), $page_max ); ?></li>
 		<?php endif; ?>
 		</ul>
 	</nav>
@@ -46,8 +46,8 @@ if ( $pag_type == 'classic' ) {
 		'current'   => max( 1, get_query_var( 'paged' ) ),
 		'total'     => $page_max,
 		'type'      => 'array',
-		'prev_text' => mixt_get_icon('left-arrow') . __( 'Previous', 'mixt' ),
-		'next_text' => __( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
+		'prev_text' => mixt_get_icon('left-arrow') . esc_html__( 'Previous', 'mixt' ),
+		'next_text' => esc_html__( 'Next', 'mixt' ) . mixt_get_icon('right-arrow'),
 		'end_size'  => 3,
 		'mid_size'  => 3,
 	) ) );
@@ -56,7 +56,7 @@ if ( $pag_type == 'classic' ) {
 		$nav_class = 'page-nav paging-navigation numbered-paging';
 		?>
 		<nav id="shop-nav" class="<?php echo $nav_class; ?>">
-			<h3 class="screen-reader-text"><?php _e( 'Shop navigation', 'mixt' ); ?></h3>
+			<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 			<ul class="pager">
 				<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
 			</ul>
@@ -69,14 +69,14 @@ if ( $pag_type == 'classic' ) {
 
 	?>
 	<nav id="shop-nav" class="<?php echo $nav_class; ?>"
-		 data-page-now="<?php echo $page_now; ?>" data-page-max="<?php echo $page_max; ?>">
-		<h3 class="screen-reader-text"><?php _e( 'Shop navigation', 'mixt' ); ?></h3>
+		 data-page-now="<?php echo esc_attr($page_now); ?>" data-page-max="<?php echo esc_attr($page_max); ?>">
+		<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 		<ul class="pager">
 			<li><a href="<?php echo next_posts($page_max, false); ?>" class="ajax-more" 
-				data-loading-text="<?php _e( 'Loading...', 'mixt' ); ?>" 
-				data-complete-text="<?php _e( 'No more posts to load', 'mixt' ); ?>" 
-				data-error-text="<?php _e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
-			><?php echo mixt_get_icon('down-arrow') . __( 'Load more posts', 'mixt' ); ?></a></li>
+				data-loading-text="<?php esc_attr_e( 'Loading...', 'mixt' ); ?>" 
+				data-complete-text="<?php esc_attr_e( 'No more posts to load', 'mixt' ); ?>" 
+				data-error-text="<?php esc_attr_e( 'An error occured while trying to load the posts!', 'mixt' ); ?>"
+			><?php echo mixt_get_icon('down-arrow') . esc_html__( 'Load more posts', 'mixt' ); ?></a></li>
 		</ul>
 	</nav>
 	<?php

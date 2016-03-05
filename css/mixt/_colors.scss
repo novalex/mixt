@@ -1,5 +1,8 @@
 
-// COLORS
+/* --------------------------
+ 2. Colors
+-------------------------- */
+
 
 $white: #fff;
 $off-white: #f6f6f6;
@@ -28,11 +31,11 @@ $sandy-brown: #F79468;
 $red: #D81616;
 
 
-// =====================================================
+// ===========================================================
 // When adding or removing colors in the maps below,
 // also update the respective assets array in core/assets.php,
 // or use the 'mixt_assets_array' filter in your child theme
-// =====================================================
+// ===========================================================
 
 $basic-colors: (
 	'white': $white,

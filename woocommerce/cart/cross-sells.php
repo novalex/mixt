@@ -37,7 +37,7 @@ if ( $products->have_posts() ) : ?>
 
 	<div class="cross-sells products columns-2">
 
-		<?php echo mixt_heading( __( 'You may also like&hellip;', 'woocommerce' ) ); ?>
+		<?php echo mixt_heading( esc_html__( 'You may also like&hellip;', 'woocommerce' ) ); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 
@@ -53,4 +53,4 @@ if ( $products->have_posts() ) : ?>
 
 <?php endif;
 
-wp_reset_query();
+wp_reset_postdata();

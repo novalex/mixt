@@ -15,7 +15,7 @@ get_header(); ?>
 
 		<header class="page-header text-center">
 			<h2 class="page-title accent-color">404</h2>
-			<h3 class="color-fade"><?php _e( 'The page could not be found!', 'mixt' ); ?></h3>
+			<h3 class="color-fade"><?php esc_html_e( 'The page could not be found!', 'mixt' ); ?></h3>
 		</header>
 
 		<div class="page-content row">
@@ -35,7 +35,7 @@ get_header(); ?>
 					$search_heading_args = '';
 
 					$nav_html = '<div class="col-sm-6">';
-						$nav_html .= mixt_heading( __( 'Useful links', 'mixt' ) );
+						$nav_html .= mixt_heading( esc_html__( 'Useful links', 'mixt' ) );
 						$nav_html .= $nav;
 					$nav_html .= '</div>';
 				} else {
@@ -48,8 +48,8 @@ get_header(); ?>
 
 			<?php // Search Form ?>
 			<div class="<?php echo $search_classes; ?>">
-				<?php echo mixt_heading( __( 'Do a search', 'mixt' ), $search_heading_args ); ?>
-				<p><?php _e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
+				<?php echo mixt_heading( esc_html__( 'Do a search', 'mixt' ), $search_heading_args ); ?>
+				<p><?php esc_html_e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
 				<?php get_search_form(); ?>
 			</div>
 

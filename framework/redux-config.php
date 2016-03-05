@@ -78,8 +78,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				$site_themes = mixt_get_themes('site', 'default');
 				$nav_themes = mixt_get_themes('nav', 'default');
 			}
-			$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
-			$footer_themes = array_merge( array('auto' => __( 'Auto', 'mixt' )), $site_themes );
+			$nav_themes = array_merge( array('auto' => esc_html__( 'Auto', 'mixt')), $nav_themes );
+			$footer_themes = array_merge( array('auto' => esc_html__( 'Auto', 'mixt' )), $site_themes );
 
 			// Nav Menus
 			$nav_menus = mixt_get_nav_menus();
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'em'     => array( 'class' => array() ),
 			);
 			// Textarea code field placeholder
-			$text_code_placeholder = __( 'Allowed HTML tags and attributes:', 'mixt' ) . ' <a href="" title="">, <i>, <span>, <strong>, <em>';
+			$text_code_placeholder = esc_html( esc_html__( 'Allowed HTML tags and attributes:', 'mixt' ) . ' <a href="" title="">, <i>, <span>, <strong>, <em>' );
 
 			// Sidebars
 			$available_sidebars = mixt_get_sidebars(false);
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
 				$this->sections['theme_docs'] = array(
 					'icon'   => 'el-icon-list-alt',
-					'title'  => __( 'Documentation', 'mixt' ),
+					'title'  => esc_html__( 'Documentation', 'mixt' ),
 					'fields' => array(
 						array(
 							'id'       => '17',
@@ -198,10 +198,10 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			include_once( MIXT_PLUGINS_DIR . '/redux-extend/demos.php' );
 			$this->sections[] = array(
 				'id'         => 'wbc_importer_section',
-				'title'      => __( 'Settings & Demos', 'mixt' ),
-				'desc'       => __( 'Manage your settings, and import demo content.', 'mixt' ) .
+				'title'      => esc_html__( 'Settings & Demos', 'mixt' ),
+				'desc'       => esc_html__( 'Manage your settings, and import demo content.', 'mixt' ) .
 								'<br><strong class="red-text">' .
-									__( 'Demos work best on clean, fresh sites. For complete content import, make sure all recommended plugins (Appearance > Install Plugins) are activated! The page will reload after importing.', 'mixt' ) .
+									esc_html__( 'Demos work best on clean, fresh sites. For complete content import, make sure all recommended plugins (Appearance > Install Plugins) are activated! The page will reload after importing.', 'mixt' ) .
 								'</strong>',
 				'icon'       => 'el-icon-refresh',
 				'customizer' => false,
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// CUSTOMIZER SECTIONS
 			if ( is_customize_preview() ) {
-				include_once( MIXT_PLUGINS_DIR . '/redux-extend/customizer.php' );
+				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/customizer.php' );
 			}
 		}
 
@@ -245,48 +245,51 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-global',
-				'title'   => __( 'Global Options', 'mixt' ),
+				'title'   => esc_html__( 'Global Options', 'mixt' ),
 				'content' => $mixt_help_file('global'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-header',
-				'title'   => __( 'Header', 'mixt' ),
+				'title'   => esc_html__( 'Header', 'mixt' ),
 				'content' => $mixt_help_file('header'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-navbars',
-				'title'   => __( 'Navbars', 'mixt' ),
+				'title'   => esc_html__( 'Navbars', 'mixt' ),
 				'content' => $mixt_help_file('navbars'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-sidebars',
-				'title'   => __( 'Sidebars', 'mixt' ),
+				'title'   => esc_html__( 'Sidebars', 'mixt' ),
 				'content' => $mixt_help_file('sidebars'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-post-pages',
-				'title'   => __( 'Post Pages', 'mixt' ),
+				'title'   => esc_html__( 'Post Pages', 'mixt' ),
 				'content' => $mixt_help_file('post-pages'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-themes',
-				'title'   => __( 'Themes', 'mixt' ),
+				'title'   => esc_html__( 'Themes', 'mixt' ),
 				'content' => $mixt_help_file('themes'),
 			);
 
 			$this->args['help_tabs'][] = array(
 				'id'      => 'help-social-profiles',
-				'title'   => __( 'Social Profiles', 'mixt' ),
+				'title'   => esc_html__( 'Social Profiles', 'mixt' ),
 				'content' => $mixt_help_file('social-profiles'),
 			);
 
 			// Set the help sidebar
-			$this->args['help_sidebar'] = '<p>The latest documentation is available online.<br><a class="button button-primary" href="http://docs.mixt.novalx.com/" target="_blank">Documentation</a></p>';
+			$this->args['help_sidebar'] = '<p>' .
+				esc_html__( 'The latest documentation is available online.', 'mixt' ) .
+				'<br><a class="button button-primary" href="http://docs.mixt.novalx.com/" target="_blank">' . esc_html__( 'Documentation', 'mixt' ) . '</a>' .
+			'</p>';
 		}
 
 		/**
@@ -304,8 +307,8 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 				'display_version'    => $theme->get('Version'),
 				'menu_type'          => 'submenu',
 				'allow_sub_menu'     => false,
-				'menu_title'         => __( 'Theme Options', 'mixt' ),
-				'page_title'         => __( 'MIXT Options', 'mixt' ),
+				'menu_title'         => esc_html__( 'Theme Options', 'mixt' ),
+				'page_title'         => esc_html__( 'MIXT Options', 'mixt' ),
 				'admin_bar'          => true,
 				'admin_bar_icon'     => 'dashicons-screenoptions',
 				'admin_bar_priority' => '31.6498',
@@ -377,7 +380,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// $this->args['admin_bar_links'][] = array(
 			// 	'id'    => 'redux-docs',
 			// 	'href'   => 'http://docs.reduxframework.com/',
-			// 	'title' => __( 'Documentation', 'mixt' ),
+			// 	'title' => esc_html__( 'Documentation', 'mixt' ),
 			// );
 
 			// SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
@@ -388,7 +391,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// );
 
 			// Panel Intro text -> before the form
-			// $this->args['intro_text'] = __( '', 'mixt' );
+			// $this->args['intro_text'] = esc_html__( '', 'mixt' );
 
 			// Add content after the form.
 			$this->args['footer_text'] = '';

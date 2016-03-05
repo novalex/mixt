@@ -67,7 +67,7 @@ function mixt_get_themes($elem, $type = 'all') {
  */
 function mixt_get_nav_menus( $show_auto = true ) {
 	$nav_menus = array();
-	if ( $show_auto ) { $nav_menus['auto'] = __( 'Auto', 'mixt'); }
+	if ( $show_auto ) { $nav_menus['auto'] = esc_html__( 'Auto', 'mixt'); }
 	foreach ( get_terms( 'nav_menu', array( 'hide_empty' => false ) ) as $menu ) {
 		$nav_menus[$menu->term_id] = $menu->name;
 	}
@@ -83,8 +83,8 @@ function mixt_get_nav_menus( $show_auto = true ) {
  */
 function mixt_get_sidebars( $show_auto = true ) {
 	$available_sidebars = array();
-	if ( $show_auto ) { $available_sidebars['auto'] = __( 'Auto', 'mixt'); }
-	$available_sidebars['sidebar-1'] = __( 'Default', 'mixt' );
+	if ( $show_auto ) { $available_sidebars['auto'] = esc_html__( 'Auto', 'mixt'); }
+	$available_sidebars['sidebar-1'] = esc_html__( 'Default', 'mixt' );
 	$custom_sidebars = get_option('mixt-sidebars');
 	if ( $custom_sidebars ) {
 		foreach ( $custom_sidebars as $sidebar ) { $available_sidebars[$sidebar['id']] = $sidebar['name']; }
@@ -105,19 +105,19 @@ function mixt_get_assets($group, $subgroup = false) {
 	$assets = apply_filters( 'mixt_assets_array', array(
 		'button' => array(
 			'sizes' => array(
-				''       => __( 'Normal', 'mixt' ),
-				'btn-lg' => __( 'Large', 'mixt' ),
-				'btn-xl' => __( 'Extra Large', 'mixt' ),
-				'btn-sm' => __( 'Small', 'mixt' ),
-				'btn-xs' => __( 'Extra Small', 'mixt' ),
+				''       => esc_html__( 'Normal', 'mixt' ),
+				'btn-lg' => esc_html__( 'Large', 'mixt' ),
+				'btn-xl' => esc_html__( 'Extra Large', 'mixt' ),
+				'btn-sm' => esc_html__( 'Small', 'mixt' ),
+				'btn-xs' => esc_html__( 'Extra Small', 'mixt' ),
 			),
 			'types' => array(
-				''       => __( 'Normal', 'mixt' ),
-				'round'  => __( 'Round', 'mixt' ),
-				'emboss' => __( 'Embossed', 'mixt' ),
+				''       => esc_html__( 'Normal', 'mixt' ),
+				'round'  => esc_html__( 'Round', 'mixt' ),
+				'emboss' => esc_html__( 'Embossed', 'mixt' ),
 			),
 			'animations' => array(
-				''        => __( 'None', 'mixt' ),
+				''        => esc_html__( 'None', 'mixt' ),
 				'fill'    => 'Fill',
 				'fill-in' => 'Fill In',
 				'grow'    => 'Grow',
@@ -126,81 +126,81 @@ function mixt_get_assets($group, $subgroup = false) {
 				'push'    => 'Push',
 			),
 			'icon-animations' => array(
-				''                  => __( 'None', 'mixt' ),
-				'icon-goDown'       => __( 'Go Down', 'mixt' ),
-				'hover-icon-goDown' => __( 'Go Down on Hover', 'mixt' ),
+				''                  => esc_html__( 'None', 'mixt' ),
+				'icon-goDown'       => esc_html__( 'Go Down', 'mixt' ),
+				'hover-icon-goDown' => esc_html__( 'Go Down on Hover', 'mixt' ),
 			),
 		),
 		
 		'colors' => array(
 			'basic' => array(
-				'accent' => __( 'Theme Accent', 'mixt' ),
-				'white'  => __( 'White', 'mixt' ),
-				'grey'   => __( 'Grey', 'mixt' ),
-				'black'  => __( 'Black', 'mixt' ),
-				'orange' => __( 'Orange', 'mixt' ),
-				'red'    => __( 'Red', 'mixt' ),
-				'green'  => __( 'Green', 'mixt' ),
-				'blue'   => __( 'Blue', 'mixt' ),
+				'accent' => esc_html__( 'Theme Accent', 'mixt' ),
+				'white'  => esc_html__( 'White', 'mixt' ),
+				'grey'   => esc_html__( 'Grey', 'mixt' ),
+				'black'  => esc_html__( 'Black', 'mixt' ),
+				'orange' => esc_html__( 'Orange', 'mixt' ),
+				'red'    => esc_html__( 'Red', 'mixt' ),
+				'green'  => esc_html__( 'Green', 'mixt' ),
+				'blue'   => esc_html__( 'Blue', 'mixt' ),
 			),
 			'buttons' => array(
-				'default' => __( 'Default', 'mixt' ),
-				'minimal' => __( 'Minimal', 'mixt' ),
-				'primary' => __( 'Primary (accent)', 'mixt' ),
-				'white'   => __( 'White', 'mixt' ),
-				'grey'    => __( 'Grey', 'mixt' ),
-				'black'   => __( 'Black', 'mixt' ),
-				'red'     => __( 'Red', 'mixt' ),
-				'orange'  => __( 'Orange', 'mixt' ),
-				'green'   => __( 'Green', 'mixt' ),
-				'blue'    => __( 'Blue', 'mixt' ),
-				'violet'  => __( 'Violet', 'mixt' ),
-				'shine'   => __( 'Shine', 'mixt' ),
-				'shade'   => __( 'Shade', 'mixt' ),
+				'default' => esc_html__( 'Default', 'mixt' ),
+				'minimal' => esc_html__( 'Minimal', 'mixt' ),
+				'primary' => esc_html__( 'Primary (accent)', 'mixt' ),
+				'white'   => esc_html__( 'White', 'mixt' ),
+				'grey'    => esc_html__( 'Grey', 'mixt' ),
+				'black'   => esc_html__( 'Black', 'mixt' ),
+				'red'     => esc_html__( 'Red', 'mixt' ),
+				'orange'  => esc_html__( 'Orange', 'mixt' ),
+				'green'   => esc_html__( 'Green', 'mixt' ),
+				'blue'    => esc_html__( 'Blue', 'mixt' ),
+				'violet'  => esc_html__( 'Violet', 'mixt' ),
+				'shine'   => esc_html__( 'Shine', 'mixt' ),
+				'shade'   => esc_html__( 'Shade', 'mixt' ),
 			),
 			'elements' => array(
-				'color-auto'  => __( 'Auto', 'mixt' ),
-				'blue'        => __( 'Blue', 'mixt' ),
-				'turquoise'   => __( 'Turquoise', 'mixt' ),
-				'pink'        => __( 'Pink', 'mixt' ),
-				'violet'      => __( 'Violet', 'mixt' ),
-				'peacoc'      => __( 'Peacoc', 'mixt' ),
-				'chino'       => __( 'Chino', 'mixt' ),
-				'mulled-wine' => __( 'Mulled Wine', 'mixt' ),
-				'vista-blue'  => __( 'Vista Blue', 'mixt' ),
-				'black'       => __( 'Black', 'mixt' ),
-				'grey'        => __( 'Grey', 'mixt' ),
-				'orange'      => __( 'Orange', 'mixt' ),
-				'sky'         => __( 'Sky', 'mixt' ),
-				'green'       => __( 'Green', 'mixt' ),
-				'juicy-pink'  => __( 'Juicy pink', 'mixt' ),
-				'sandy-brown' => __( 'Sandy brown', 'mixt' ),
-				'purple'      => __( 'Purple', 'mixt' ),
-				'white'       => __( 'White', 'mixt' ),
+				'color-auto'  => esc_html__( 'Auto', 'mixt' ),
+				'blue'        => esc_html__( 'Blue', 'mixt' ),
+				'turquoise'   => esc_html__( 'Turquoise', 'mixt' ),
+				'pink'        => esc_html__( 'Pink', 'mixt' ),
+				'violet'      => esc_html__( 'Violet', 'mixt' ),
+				'peacoc'      => esc_html__( 'Peacoc', 'mixt' ),
+				'chino'       => esc_html__( 'Chino', 'mixt' ),
+				'mulled-wine' => esc_html__( 'Mulled Wine', 'mixt' ),
+				'vista-blue'  => esc_html__( 'Vista Blue', 'mixt' ),
+				'black'       => esc_html__( 'Black', 'mixt' ),
+				'grey'        => esc_html__( 'Grey', 'mixt' ),
+				'orange'      => esc_html__( 'Orange', 'mixt' ),
+				'sky'         => esc_html__( 'Sky', 'mixt' ),
+				'green'       => esc_html__( 'Green', 'mixt' ),
+				'juicy-pink'  => esc_html__( 'Juicy pink', 'mixt' ),
+				'sandy-brown' => esc_html__( 'Sandy brown', 'mixt' ),
+				'purple'      => esc_html__( 'Purple', 'mixt' ),
+				'white'       => esc_html__( 'White', 'mixt' ),
 			),
 		),
 
 		'image-styles' => array(
-			'' => __( 'Default', 'mixt' ),
+			'' => esc_html__( 'Default', 'mixt' ),
 
-			'image-border'  => __( 'Bordered', 'mixt' ),
-			'image-outline' => __( 'Outlined', 'mixt' ),
-			'image-eclipse' => __( 'Eclipse', 'mixt' ),
-			'image-shadow'  => __( 'Shadow', 'mixt' ),
+			'image-border'  => esc_html__( 'Bordered', 'mixt' ),
+			'image-outline' => esc_html__( 'Outlined', 'mixt' ),
+			'image-eclipse' => esc_html__( 'Eclipse', 'mixt' ),
+			'image-shadow'  => esc_html__( 'Shadow', 'mixt' ),
 
-			'image-rounded' => __( 'Rounded', 'mixt' ),
-			'image-rounded image-border'  => __( 'Rounded with border', 'mixt' ),
-			'image-rounded image-outline' => __( 'Rounded with outline', 'mixt' ),
-			'image-rounded image-eclipse' => __( 'Rounded with eclipse', 'mixt' ),
-			'image-rounded image-shadow'  => __( 'Rounded with shadow', 'mixt' ),
+			'image-rounded' => esc_html__( 'Rounded', 'mixt' ),
+			'image-rounded image-border'  => esc_html__( 'Rounded with border', 'mixt' ),
+			'image-rounded image-outline' => esc_html__( 'Rounded with outline', 'mixt' ),
+			'image-rounded image-eclipse' => esc_html__( 'Rounded with eclipse', 'mixt' ),
+			'image-rounded image-shadow'  => esc_html__( 'Rounded with shadow', 'mixt' ),
 
-			'image-circle' => __( 'Circle', 'mixt' ),
-			'image-circle image-border'  => __( 'Circle with border', 'mixt' ),
-			'image-circle image-outline' => __( 'Circle with outline', 'mixt' ),
-			'image-circle image-eclipse' => __( 'Circle with eclipse', 'mixt' ),
-			'image-circle image-shadow'  => __( 'Circle with shadow', 'mixt' ),
+			'image-circle' => esc_html__( 'Circle', 'mixt' ),
+			'image-circle image-border'  => esc_html__( 'Circle with border', 'mixt' ),
+			'image-circle image-outline' => esc_html__( 'Circle with outline', 'mixt' ),
+			'image-circle image-eclipse' => esc_html__( 'Circle with eclipse', 'mixt' ),
+			'image-circle image-shadow'  => esc_html__( 'Circle with shadow', 'mixt' ),
 
-			'image-shadow-3d' => __( '3D Shadow', 'mixt' ),
+			'image-shadow-3d' => esc_html__( '3D Shadow', 'mixt' ),
 		),
 	) );
 
@@ -350,7 +350,7 @@ function mixt_get_icon($icon, $markup = true) {
 	global $mixt_opt;
 
 	if ( isset($mixt_opt[$icon . '-icon']) ) {
-		$icon_class = $mixt_opt[$icon . '-icon'];
+		$icon_class = mixt_sanitize_html_classes($mixt_opt[$icon . '-icon']);
 		return ( $markup ) ? "<i class='$icon_class'></i>" : $icon_class;
 	}
 	return '';
@@ -386,7 +386,7 @@ function mixt_icon_anims($type = 'combined') {
 		$icon_anims = array_merge($anims['main'], $anims['sec']);
 		foreach ( $anims['main'] as $main_key => $main_name ) {
 			foreach ( $anims['sec'] as $sec_key => $sec_name ) {
-				$icon_anims["$main_key $sec_key"] = $main_name . ' ' . __( 'and', 'mixt' ) . ' ' . $sec_name;
+				$icon_anims["$main_key $sec_key"] = $main_name . ' ' . esc_html__( 'and', 'mixt' ) . ' ' . $sec_name;
 			}
 		}
 		return $icon_anims;

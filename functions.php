@@ -45,7 +45,7 @@ function mixt_requires($files, $dir) {
 		} else if ( file_exists( $parent_dir . $file ) ) {
 			require_once( $parent_dir . $file );
 		} else {
-			trigger_error( __( 'Error locating file for inclusion', 'mixt' ) . ': ' . $file, E_USER_ERROR );
+			trigger_error( esc_html__( 'Error locating file for inclusion', 'mixt' ) . ': ' . $file, E_USER_ERROR );
 		}
 	}
 }
@@ -100,17 +100,17 @@ function mixt_setup() {
 
 	// Register Navigation Menus
 	register_nav_menus( array(
-		'primary'          => __( 'Main Nav', 'mixt' ),
-		'sec_navbar_left'  => __( 'Secondary Nav Left Side', 'mixt' ),
-		'sec_navbar_right' => __( 'Secondary Nav Right Side', 'mixt' ),
-		'404_page'         => __( '404 Page Nav', 'mixt' ),
+		'primary'          => esc_html__( 'Main Nav', 'mixt' ),
+		'sec_navbar_left'  => esc_html__( 'Secondary Nav Left Side', 'mixt' ),
+		'sec_navbar_right' => esc_html__( 'Secondary Nav Right Side', 'mixt' ),
+		'404_page'         => esc_html__( '404 Page Nav', 'mixt' ),
 	) );
 
-	// Custom Blog Image Sizes
-	add_image_size( 'blog-large', 960, 460, true );
-	add_image_size( 'blog-medium', 320, 200, true );
-	add_image_size( 'blog-small', 120, 120, true );
-	add_image_size( 'blog-grid', 600, 360, true );
+	// Custom Image Sizes
+	add_image_size('mixt-large', 960, 460, true);
+	add_image_size('mixt-medium', 320, 200, true);
+	add_image_size('mixt-small', 120, 120, true);
+	add_image_size('mixt-grid', 600, 360, true);
 }
 add_action('after_setup_theme', 'mixt_setup');
 
@@ -122,7 +122,7 @@ function mixt_widgets_init() {
 
 	// Main Sidebar
 	register_sidebar( array(
-		'name' => __( 'Sidebar', 'mixt' ),
+		'name' => esc_html__( 'Sidebar', 'mixt' ),
 		'id'   => 'sidebar-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">', 'after_title' => '</h3>',
@@ -147,25 +147,25 @@ function mixt_widgets_init() {
 
 	// Footer Sidebars
 	register_sidebar( array(
-		'name' => __( 'Footer Column 1', 'mixt' ),
+		'name' => esc_html__( 'Footer Column 1', 'mixt' ),
 		'id'   => 'footer-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => __( 'Footer Column 2', 'mixt' ),
+		'name' => esc_html__( 'Footer Column 2', 'mixt' ),
 		'id'   => 'footer-2',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => __( 'Footer Column 3', 'mixt' ),
+		'name' => esc_html__( 'Footer Column 3', 'mixt' ),
 		'id'   => 'footer-3',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => __( 'Footer Column 4', 'mixt' ),
+		'name' => esc_html__( 'Footer Column 4', 'mixt' ),
 		'id'   => 'footer-4',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
@@ -177,7 +177,9 @@ add_action('widgets_init', 'mixt_widgets_init');
 // Title Tag Backwards Compatibility
 if ( ! function_exists( '_wp_render_title_tag' ) ) {
 	function mixt_render_title() {
-		echo '<title>' . wp_title( '-', false, 'right' ) . '</title>';
+		?>
+		<title><?php wp_title(); ?></title>
+		<?php
 	}
 	add_action('wp_head', 'mixt_render_title');
 }

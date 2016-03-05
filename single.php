@@ -24,7 +24,7 @@ get_header();
 
 		// Post Tags
 		if ( $options['post-tags'] ) {
-			$tags = get_the_tag_list( '<p class="tag-list"><strong>' . __( 'Tags:', 'mixt' ) . '</strong>', '', '</p>' );
+			$tags = get_the_tag_list( '<p class="tag-list"><strong>' . esc_html__( 'Tags:', 'mixt' ) . '</strong>', '', '</p>' );
 			if ( $tags != '' ) {
 				echo '<footer class="entry-footer post-tags post-extra">' . $tags . '</footer>';
 			}
@@ -39,7 +39,7 @@ get_header();
 			));
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';
-					echo mixt_heading( __( 'Share this', 'mixt' ) );
+					echo mixt_heading( esc_html__( 'Share this', 'mixt' ) );
 					echo $icons;
 				echo '</div>';
 			}
@@ -57,7 +57,7 @@ get_header();
 
 		// Related Posts
 		if ( $options['post-related'] ) {
-			mixt_related_posts('post', __( 'Related Posts', 'mixt' ));
+			mixt_related_posts('post', esc_html__( 'Related Posts', 'mixt' ));
 		}
 
 		// Comments

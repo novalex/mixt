@@ -5,8 +5,8 @@ $navigation_fields = array(
 	// Nav Menu
 	array(
 		'id'      => $prefix . 'nav-menu',
-		'name'    => __( 'Nav Menu', 'mixt' ),
-		'desc'    => __( 'Select the menu for this page', 'mixt' ),
+		'name'    => esc_html__( 'Nav Menu', 'mixt' ),
+		'desc'    => esc_html__( 'Select the menu for this page', 'mixt' ),
 		'type'    => 'select',
 		'options' => mixt_get_nav_menus(),
 		'default' => 'auto',
@@ -15,8 +15,8 @@ $navigation_fields = array(
 	// Navbar Theme
 	array(
 		'id'      => $prefix . 'nav-theme',
-		'name'    => __( 'Theme', 'mixt' ),
-		'desc'    => __( 'The navbar theme for this page', 'mixt' ),
+		'name'    => esc_html__( 'Theme', 'mixt' ),
+		'desc'    => esc_html__( 'The navbar theme for this page', 'mixt' ),
 		'type'    => 'select',
 		'options' => $nav_themes,
 		'default' => 'auto',
@@ -25,13 +25,13 @@ $navigation_fields = array(
 	// See-Through Nav
 	array(
 		'id'      => $prefix . 'nav-transparent',
-		'name'    => __( 'See-Through', 'mixt' ),
-		'desc'    => __( 'Navbar see-through when at the top', 'mixt' ),
+		'name'    => esc_html__( 'See-Through', 'mixt' ),
+		'desc'    => esc_html__( 'Navbar see-through when at the top', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'true'  => __( 'Yes', 'mixt' ),
-			'false' => __( 'No', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'true'  => esc_html__( 'Yes', 'mixt' ),
+			'false' => esc_html__( 'No', 'mixt' ),
 		),
 		'default'    => 'auto',
 	),
@@ -39,8 +39,8 @@ $navigation_fields = array(
 	// See-Through Opacity
 	array(
 		'id'         => $prefix . 'nav-top-opacity',
-		'name'       => __( 'See-Through Opacity', 'mixt' ),
-		'desc'       => __( 'Set the navbar&#39;s see-through opacity, between 0 (transparent) and 1 (opaque)', 'mixt' ),
+		'name'       => esc_html__( 'See-Through Opacity', 'mixt' ),
+		'desc'       => esc_html__( 'Set the navbar&#39;s see-through opacity, between 0 (transparent) and 1 (opaque)', 'mixt' ),
 		'type'       => 'slider',
 		'min'        => 0,
 		'max'        => 1,
@@ -60,13 +60,13 @@ if ( mixt_get_option( array( 'key' => 'nav-layout', 'return' => 'value' ) ) == '
 	// Nav Position (Above or Below Header)
 	$navigation_fields[] = array(
 		'id'      => $prefix . 'nav-position',
-		'name'    => __( 'Position', 'mixt' ),
-		'desc'    => __( 'Navbar above or below header', 'mixt' ),
+		'name'    => esc_html__( 'Position', 'mixt' ),
+		'desc'    => esc_html__( 'Navbar above or below header', 'mixt' ),
 		'type'    => 'radio_inline',
 		'options' => array(
-			'auto'  => __( 'Auto', 'mixt' ),
-			'above' => __( 'Above', 'mixt' ),
-			'below' => __( 'Below', 'mixt' ),
+			'auto'  => esc_html__( 'Auto', 'mixt' ),
+			'above' => esc_html__( 'Above', 'mixt' ),
+			'below' => esc_html__( 'Below', 'mixt' ),
 		),
 		'default' => 'auto',
 	);
@@ -75,13 +75,13 @@ if ( mixt_get_option( array( 'key' => 'nav-layout', 'return' => 'value' ) ) == '
 // Secondary Nav Switch
 $navigation_fields[] = array(
 	'id'      => $prefix . 'second-nav',
-	'name'    => __( 'Secondary Navbar', 'mixt' ),
-	'desc'    => __( 'Show the secondary navbar', 'mixt' ),
+	'name'    => esc_html__( 'Secondary Navbar', 'mixt' ),
+	'desc'    => esc_html__( 'Show the secondary navbar', 'mixt' ),
 	'type'    => 'radio_inline',
 	'options' => array(
-		'auto'  => __( 'Auto', 'mixt' ),
-		'true'  => __( 'Yes', 'mixt' ),
-		'false' => __( 'No', 'mixt' ),
+		'auto'  => esc_html__( 'Auto', 'mixt' ),
+		'true'  => esc_html__( 'Yes', 'mixt' ),
+		'false' => esc_html__( 'No', 'mixt' ),
 	),
 	'default' => 'auto',
 );
@@ -89,11 +89,11 @@ $navigation_fields[] = array(
 // Secondary Nav Theme
 $navigation_fields[] = array(
 	'id'      => $prefix . 'sec-nav-theme',
-	'name'    => __( 'Secondary Nav Theme', 'mixt' ),
-	'desc'    => __( 'Select the theme for the secondary navbar', 'mixt' ),
+	'name'    => esc_html__( 'Secondary Nav Theme', 'mixt' ),
+	'desc'    => esc_html__( 'Select the theme for the secondary navbar', 'mixt' ),
 	'type'    => 'select',
 	'options' => $nav_themes,
 	'default' => 'auto',
 );
 
-mixt_cmb_make_tab( $fields, __( 'Navigation', 'mixt' ), 'dashicons dashicons-menu', $navigation_fields );
+mixt_cmb_make_tab( $fields, esc_html__( 'Navigation', 'mixt' ), 'dashicons dashicons-menu', $navigation_fields );

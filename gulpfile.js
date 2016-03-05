@@ -17,7 +17,12 @@
  *
  * OPTIONS ##################################
  *
- * env - prod or dev (default)
+ * Used by appending --option after the task name
+ * E.g. gulp sass --prod --prefix
+ *
+ * prod - production flag (default false)
+ * prefix - autoprefix properties (default false)
+ * srcmap - generate sourcemaps (default false)
  *
  */
 
@@ -60,11 +65,14 @@ var options = {
 		default: {
 			prod: false,
 			prefix: false,
+			srcmap: false,
 		}
 	},
 	options = minimist(process.argv.slice(2), options),
 	isDev   = ! options.prod,
-	prefix  = options.prefix;
+	prod    = options.prod,
+	prefix  = options.prefix,
+	srcmap  = options.srcmap;
 
 var autoprefix = autoprefixer('last 2 versions', 'ie 8');
 
@@ -80,11 +88,11 @@ function displayError(error) {
 // Compile Sass
 gulp.task('sass', function() {
 	return gulp.src(path.styles.main)
-		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
 		.pipe( concat('main.css') )
-		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( bsync.stream() );
@@ -93,10 +101,10 @@ gulp.task('sass', function() {
 // Compile Plugin Sass
 gulp.task('sass-plugin', function() {
 	return gulp.src(path.styles.plugins, {base: './'})
-		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
-		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest('./') )
 		.pipe( bsync.stream() );
@@ -105,10 +113,11 @@ gulp.task('sass-plugin', function() {
 // Concat & minify JS
 gulp.task('minify', function() {
 	return gulp.src([path.js.plugins, path.js.modules])
-		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('main.js') )
 		.on( 'error', displayError )
-		.pipe( gulpif(isDev, sourcemaps.write(), uglify()) )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
+		.pipe( gulpif(prod, uglify()) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( bsync.stream() );
 });
@@ -116,20 +125,21 @@ gulp.task('minify', function() {
 // Concat & minify Bootstrap JS
 gulp.task('minify-bs', function() {
 	return gulp.src(path.js.bootstrap)
-		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('bootstrap.js') )
-		.pipe( gulpif(isDev, sourcemaps.write(), uglify()) )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
+		.pipe( gulpif(prod, uglify()) )
 		.pipe( gulp.dest(path.dest) );
 });
 
 // Compile Admin Sass
 gulp.task('sass-admin', function() {
 	return gulp.src([path.styles.admin, path.styles.pluginAdmin])
-		.pipe( gulpif(isDev, sourcemaps.init()) )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
 		.pipe( concat('admin.css') )
-		.pipe( gulpif(isDev, sourcemaps.write()) )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prefix, autoprefix) )
 		.pipe( gulp.dest(path.dest) )
 		.pipe( bsync.stream() );
@@ -138,10 +148,10 @@ gulp.task('sass-admin', function() {
 // Concat & minify Customizer JS
 gulp.task('minify-customizer', function() {
 	return gulp.src(path.js.customizer)
-		.pipe( sourcemaps.init() )
+		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('customizer.js') )
 		.on( 'error', displayError )
-		.pipe( sourcemaps.write() )
+		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulp.dest(path.js.admin) );
 });
 

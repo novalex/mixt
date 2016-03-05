@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Portfolio', 'mixt' ),
-	'desc'       => __( 'Customize the portfolio\'s options and appearance', 'mixt' ),
+	'title'      => esc_html__( 'Portfolio', 'mixt' ),
+	'desc'       => esc_html__( 'Customize the portfolio\'s options and appearance', 'mixt' ),
 	'icon'       => 'el-icon-folder-open',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,9 +11,9 @@ $this->sections[] = array(
 		array(
 			'id'       => 'show-projects-author-archives',
 			'type'     => 'switch',
-			'title'    => __( 'Show projects on author archives', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Show projects on author archives', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -21,9 +21,9 @@ $this->sections[] = array(
 		array(
 			'id'       => 'show-projects-date-archives',
 			'type'     => 'switch',
-			'title'    => __( 'Show projects on date archives', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Show projects on date archives', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -31,10 +31,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'portfolio-page-filters',
 			'type'     => 'switch',
-			'title'    => __( 'Filters', 'mixt' ),
-			'subtitle' => __( 'Display filter links', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Filters', 'mixt' ),
+			'subtitle' => esc_html__( 'Display filter links', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -48,7 +48,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'portfolio-layout-section',
 			'type'     => 'section',
-			'title'    => __( 'Layout', 'mixt' ),
+			'title'    => esc_html__( 'Layout', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -56,10 +56,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-inherit',
 				'type'     => 'switch',
-				'title'    => __( 'Inherit Blog Options', 'mixt' ),
-				'subtitle' => __( 'Enable to inherit all options from the blog page', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Inherit Blog Options', 'mixt' ),
+				'subtitle' => esc_html__( 'Enable to inherit all options from the blog page', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -67,8 +67,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-nav-menu',
 				'type'     => 'select',
-				'title'    => __( 'Nav Menu', 'mixt' ),
-				'subtitle' => __( 'Select the menu for this page', 'mixt' ),
+				'title'    => esc_html__( 'Nav Menu', 'mixt' ),
+				'subtitle' => esc_html__( 'Select the menu for this page', 'mixt' ),
 				'options'  => $nav_menus,
 				'default'  => 'auto',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -78,11 +78,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-page-fullwidth',
 				'type'     => 'button_set',
-				'title'    => __( 'Full Width', 'mixt' ),
+				'title'    => esc_html__( 'Full Width', 'mixt' ),
 				'options'  => array(
-					'auto'  => __( 'Auto', 'mixt' ),
-					'true'  => __( 'Yes', 'mixt' ),
-					'false' => __( 'No', 'mixt' ),
+					'auto'  => esc_html__( 'Auto', 'mixt' ),
+					'true'  => esc_html__( 'Yes', 'mixt' ),
+					'false' => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => 'auto',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -92,11 +92,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-page-sidebar',
 				'type'     => 'button_set',
-				'title'    => __( 'Show Sidebar', 'mixt' ),
+				'title'    => esc_html__( 'Show Sidebar', 'mixt' ),
 				'options'  => array(
-					'auto'  => __( 'Auto', 'mixt' ),
-					'true'  => __( 'Yes', 'mixt' ),
-					'false' => __( 'No', 'mixt' ),
+					'auto'  => esc_html__( 'Auto', 'mixt' ),
+					'true'  => esc_html__( 'Yes', 'mixt' ),
+					'false' => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => 'auto',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -106,8 +106,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-sidebar-id',
 				'type'     => 'select',
-				'title'    => __( 'Sidebar', 'mixt' ),
-				'subtitle' => __( 'Select a sidebar to use on this page', 'mixt' ),
+				'title'    => esc_html__( 'Sidebar', 'mixt' ),
+				'subtitle' => esc_html__( 'Select a sidebar to use on this page', 'mixt' ),
 				'options'  => $available_sidebars,
 				'default'  => '',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -117,12 +117,12 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-layout-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Layout Type', 'mixt' ),
-				'subtitle' => __( 'Select the layout type for this page', 'mixt' ),
+				'title'    => esc_html__( 'Layout Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Select the layout type for this page', 'mixt' ),
 				'options'  => array(
-					'standard' => __( 'Standard', 'mixt' ),
-					'grid'     => __( 'Grid', 'mixt' ),
-					'masonry'  => __( 'Masonry', 'mixt' ),
+					'standard' => esc_html__( 'Standard', 'mixt' ),
+					'grid'     => esc_html__( 'Grid', 'mixt' ),
+					'masonry'  => esc_html__( 'Masonry', 'mixt' ),
 				),
 				'default'  => 'grid',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -132,8 +132,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-layout-columns',
 				'type'     => 'button_set',
-				'title'    => __( 'Columns', 'mixt' ),
-				'subtitle' => __( 'Number of columns for grid and masonry layout', 'mixt' ),
+				'title'    => esc_html__( 'Columns', 'mixt' ),
+				'subtitle' => esc_html__( 'Number of columns for grid and masonry layout', 'mixt' ),
 				'options'  => array(
 					'2' => '2',
 					'3' => '3',
@@ -152,10 +152,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-feat-show',
 				'type'     => 'switch',
-				'title'    => __( 'Show Media', 'mixt' ),
-				'subtitle' => __( 'Display the post featured media', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Show Media', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post featured media', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 				'required' => array('portfolio-page-inherit', '=', false),
 			),
@@ -164,8 +164,8 @@ $this->sections[] = array(
 			array(
 				'id'             => 'portfolio-page-feat-ph',
 				'type'           => 'media',
-				'title'          => __( 'Featured Media Placeholder', 'mixt' ),
-				'subtitle'       => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
+				'title'          => esc_html__( 'Featured Media Placeholder', 'mixt' ),
+				'subtitle'       => esc_html__( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
 				'mode'           => 'jpg, jpeg, png',
 				'library_filter' => array( 'jpg', 'jpeg', 'png' ),
 				'required' => array('portfolio-page-feat-show', '=', true),
@@ -175,14 +175,14 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-feat-size',
 				'type'     => 'button_set',
-				'title'    => __( 'Media Size', 'mixt' ),
-				'subtitle' => __( 'Select a size for the post featured media', 'mixt' ),
+				'title'    => esc_html__( 'Media Size', 'mixt' ),
+				'subtitle' => esc_html__( 'Select a size for the post featured media', 'mixt' ),
 				'options'  => array(
-					'blog-large'  => __( 'Large', 'mixt' ),
-					'blog-medium' => __( 'Medium', 'mixt' ),
-					'blog-small'  => __( 'Small', 'mixt' ),
+					'mixt-large'  => esc_html__( 'Large', 'mixt' ),
+					'mixt-medium' => esc_html__( 'Medium', 'mixt' ),
+					'mixt-small'  => esc_html__( 'Small', 'mixt' ),
 				),
-				'default'  => 'blog-large',
+				'default'  => 'mixt-large',
 				'required' => array(
 					array('portfolio-page-inherit', '=', false),
 					array('portfolio-page-layout-type', '=', 'standard'),
@@ -194,10 +194,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-post-info',
 				'type'     => 'switch',
-				'title'    => __( 'Post Info', 'mixt' ),
-				'subtitle' => __( 'Display the post format and date', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Info', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post format and date', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 				'required' => array('portfolio-page-inherit', '=', false),
 			),
@@ -206,12 +206,12 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-meta-show',
 				'type'     => 'button_set',
-				'title'    => __( 'Post Meta', 'mixt' ),
-				'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+				'title'    => esc_html__( 'Post Meta', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 				'options'  => array(
-					'header'  => __( 'In Header', 'mixt' ),
-					'footer'  => __( 'In Footer', 'mixt' ),
-					'false'   => __( 'No', 'mixt' ),
+					'header'  => esc_html__( 'In Header', 'mixt' ),
+					'footer'  => esc_html__( 'In Footer', 'mixt' ),
+					'false'   => esc_html__( 'No', 'mixt' ),
 				),
 				'default'  => 'false',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -221,10 +221,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-title',
 				'type'     => 'switch',
-				'title'    => __( 'Post Title', 'mixt' ),
-				'subtitle' => __( 'Display the post title', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Title', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post title', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 				'required' => array('portfolio-page-inherit', '=', false),
 			),
@@ -233,10 +233,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-content',
 				'type'     => 'switch',
-				'title'    => __( 'Post Content', 'mixt' ),
-				'subtitle' => __( 'Display the post content', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Content', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the post content', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 				'required' => array('portfolio-page-inherit', '=', false),
 			),
@@ -245,11 +245,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-page-post-content-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Post Content Type', 'mixt' ),
-				'subtitle' => __( 'Show the post\'s excerpt or full content', 'mixt' ),
+				'title'    => esc_html__( 'Post Content Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Show the post\'s excerpt or full content', 'mixt' ),
 				'options'  => array(
-					'full'    => __( 'Full', 'mixt' ),
-					'excerpt' => __( 'Excerpt', 'mixt' ),
+					'full'    => esc_html__( 'Full', 'mixt' ),
+					'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
 				),
 				'default'  => 'full',
 				'required' => array('portfolio-page-inherit', '=', false),
@@ -265,7 +265,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'portfolio-rollover-section',
 			'type'     => 'section',
-			'title'    => __( 'Rollover', 'mixt' ),
+			'title'    => esc_html__( 'Rollover', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -273,10 +273,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover',
 				'type'     => 'switch',
-				'title'    => __( 'Show Rollover', 'mixt' ),
-				'subtitle' => __( 'Display an overlay with useful links and info when a project is hovered', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Show Rollover', 'mixt' ),
+				'subtitle' => esc_html__( 'Display an overlay with useful links and info when a project is hovered', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 			),
 
@@ -284,12 +284,12 @@ $this->sections[] = array(
 			array(
                 'id'       => 'portfolio-rollover-items',
 				'type'     => 'checkbox',
-				'title'    => __( 'Items', 'mixt' ),
+				'title'    => esc_html__( 'Items', 'mixt' ),
 				'options'  => array(
-					'title'   => __( 'Title', 'mixt' ),
-					'excerpt' => __( 'Excerpt', 'mixt' ),
-					'view'    => __( 'View Post Button', 'mixt' ),
-					'full'    => __( 'Full Image Button', 'mixt' ),
+					'title'   => esc_html__( 'Title', 'mixt' ),
+					'excerpt' => esc_html__( 'Excerpt', 'mixt' ),
+					'view'    => esc_html__( 'View Post Button', 'mixt' ),
+					'full'    => esc_html__( 'Full Image Button', 'mixt' ),
 				),
 				'default' => array(
 					'title'   => '1',
@@ -304,7 +304,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover-color',
 				'type'     => 'select',
-				'title'    => __( 'Background Color', 'mixt' ),
+				'title'    => esc_html__( 'Background Color', 'mixt' ),
 				'options'  => mixt_get_assets('colors', 'basic'),
 				'default'  => 'black',
 				'required' => array('portfolio-rollover', '=', true),
@@ -314,7 +314,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover-anim-in',
 				'type'     => 'select',
-				'title'    => __( 'Animation - In', 'mixt' ),
+				'title'    => esc_html__( 'Animation - In', 'mixt' ),
 				'options'  => mixt_css_anims('trans-in'),
 				'default'  => 'fadeIn',
 				'required' => array('portfolio-rollover', '=', true),
@@ -324,7 +324,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover-anim-out',
 				'type'     => 'select',
-				'title'    => __( 'Animation - Out', 'mixt' ),
+				'title'    => esc_html__( 'Animation - Out', 'mixt' ),
 				'options'  => mixt_css_anims('trans-out'),
 				'default'  => 'fadeOut',
 				'required' => array('portfolio-rollover', '=', true),
@@ -334,11 +334,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover-item-style',
 				'type'     => 'select',
-				'title'    => __( 'Item Style', 'mixt' ),
+				'title'    => esc_html__( 'Item Style', 'mixt' ),
 				'options'  => array(
-					'plain'         => __( 'Plain', 'mixt' ),
-					'btn'           => __( 'Button', 'mixt' ),
-					'btn btn-round' => __( 'Round Button', 'mixt' ),
+					'plain'         => esc_html__( 'Plain', 'mixt' ),
+					'btn'           => esc_html__( 'Button', 'mixt' ),
+					'btn btn-round' => esc_html__( 'Round Button', 'mixt' ),
 				),
 				'default'  => 'plain',
 				'required' => array('portfolio-rollover', '=', true),
@@ -348,7 +348,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'portfolio-rollover-btn-color',
 				'type'     => 'select',
-				'title'    => __( 'Button Color', 'mixt' ),
+				'title'    => esc_html__( 'Button Color', 'mixt' ),
 				'options'  => mixt_get_assets('colors', 'buttons'),
 				'default'  => 'primary',
 				'required' => array(
@@ -364,8 +364,8 @@ $this->sections[] = array(
 // SINGLE PROJECT PAGE
 
 $this->sections[] = array(
-	'title'      => __( 'Project Page', 'mixt' ),
-	'desc'       => __( 'Manage the single project pages', 'mixt' ),
+	'title'      => esc_html__( 'Project Page', 'mixt' ),
+	'desc'       => esc_html__( 'Manage the single project pages', 'mixt' ),
 	'icon'       => 'el-icon-edit',
 	'customizer' => false,
 	'subsection' => true,
@@ -375,12 +375,12 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-sidebar',
 			'type'     => 'button_set',
-			'title'    => __( 'Show Sidebar', 'mixt' ),
-			'subtitle' => __( 'Display the sidebar on project pages', 'mixt' ),
+			'title'    => esc_html__( 'Show Sidebar', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the sidebar on project pages', 'mixt' ),
 			'options'  => array(
-				'auto'  => __( 'Auto', 'mixt' ),
-				'true'  => __( 'Yes', 'mixt' ),
-				'false' => __( 'No', 'mixt' ),
+				'auto'  => esc_html__( 'Auto', 'mixt' ),
+				'true'  => esc_html__( 'Yes', 'mixt' ),
+				'false' => esc_html__( 'No', 'mixt' ),
 			),
 			'default'  => 'auto',
 		),
@@ -389,10 +389,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-layout',
 			'type'     => 'button_set',
-			'title'    => __( 'Layout', 'mixt' ),
-			'subtitle' => __( 'Set the project featured media width. The content will fill the remaining space.', 'mixt' ),
+			'title'    => esc_html__( 'Layout', 'mixt' ),
+			'subtitle' => esc_html__( 'Set the project featured media width. The content will fill the remaining space.', 'mixt' ),
 			'options'  => array(
-				'full'       => __( 'Full Width', 'mixt' ),
+				'full'       => esc_html__( 'Full Width', 'mixt' ),
 				'two-thirds' => '2/3',
 				'half'       => '1/2',
 				'one-third'  => '1/3',
@@ -404,10 +404,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-post-info',
 			'type'     => 'switch',
-			'title'    => __( 'Post Info', 'mixt' ),
-			'subtitle' => __( 'Display the post format and date', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Post Info', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the post format and date', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -415,12 +415,12 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-meta-show',
 			'type'     => 'button_set',
-			'title'    => __( 'Post Meta', 'mixt' ),
-			'subtitle' => __( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
+			'title'    => esc_html__( 'Post Meta', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the meta in the post header, footer, or do not display', 'mixt' ),
 			'options'  => array(
-				'header'  => __( 'In Header', 'mixt' ),
-				'footer'  => __( 'In Footer', 'mixt' ),
-				'false'   => __( 'No', 'mixt' ),
+				'header'  => esc_html__( 'In Header', 'mixt' ),
+				'footer'  => esc_html__( 'In Footer', 'mixt' ),
+				'false'   => esc_html__( 'No', 'mixt' ),
 			),
 			'default'  => 'header',
 		),
@@ -429,10 +429,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-tags',
 			'type'     => 'switch',
-			'title'    => __( 'Show Tags', 'mixt' ),
-			'subtitle' => __( 'Display project types and attributes', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Show Tags', 'mixt' ),
+			'subtitle' => esc_html__( 'Display project types and attributes', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -440,9 +440,9 @@ $this->sections[] = array(
 		array(
 			'id'      => 'project-sharing',
 			'type'    => 'switch',
-			'title'   => __( 'Show Sharing Buttons', 'mixt' ),
-			'on'      => __( 'Yes', 'mixt' ),
-			'off'     => __( 'No', 'mixt' ),
+			'title'   => esc_html__( 'Show Sharing Buttons', 'mixt' ),
+			'on'      => esc_html__( 'Yes', 'mixt' ),
+			'off'     => esc_html__( 'No', 'mixt' ),
 			'default' => false,
 		),
 
@@ -450,8 +450,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-sharing-profiles',
 			'type'     => 'checkbox',
-			'title'    => __( 'Sharing Profiles', 'mixt' ),
-			'subtitle' => __( 'Select which sharing profiles to display', 'mixt' ),
+			'title'    => esc_html__( 'Sharing Profiles', 'mixt' ),
+			'subtitle' => esc_html__( 'Select which sharing profiles to display', 'mixt' ),
 			'options'  => $social_sharing_profile_names,
 			'required' => array('project-sharing', '=', true),
 		),
@@ -460,10 +460,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-navigation',
 			'type'     => 'switch',
-			'title'    => __( 'Project Navigation', 'mixt' ),
-			'subtitle' => __( 'Show links to next and previous projects', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Project Navigation', 'mixt' ),
+			'subtitle' => esc_html__( 'Show links to next and previous projects', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 		
@@ -471,10 +471,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-comments',
 			'type'     => 'switch',
-			'title'    => __( 'Comments', 'mixt' ),
-			'subtitle' => __( 'Show comments', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Comments', 'mixt' ),
+			'subtitle' => esc_html__( 'Show comments', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 
@@ -488,7 +488,7 @@ $this->sections[] = array(
 		array(
 			'id'       => 'project-related-section',
 			'type'     => 'section',
-			'title'    => __( 'Related Projects', 'mixt' ),
+			'title'    => esc_html__( 'Related Projects', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -496,9 +496,9 @@ $this->sections[] = array(
 			array(
 				'id'      => 'project-related',
 				'type'    => 'switch',
-				'title'   => __( 'Show Related Projects', 'mixt' ),
-				'on'      => __( 'Yes', 'mixt' ),
-				'off'     => __( 'No', 'mixt' ),
+				'title'   => esc_html__( 'Show Related Projects', 'mixt' ),
+				'on'      => esc_html__( 'Yes', 'mixt' ),
+				'off'     => esc_html__( 'No', 'mixt' ),
 				'default' => true,
 			),
 
@@ -506,8 +506,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-number',
 				'type'     => 'spinner',
-				'title'    => __( 'Related Projects', 'mixt' ),
-				'subtitle' => __( 'How many related projects to display', 'mixt' ),
+				'title'    => esc_html__( 'Related Projects', 'mixt' ),
+				'subtitle' => esc_html__( 'How many related projects to display', 'mixt' ),
 				'max'      => '15',
 				'min'      => '1',
 				'step'     => '1',
@@ -519,10 +519,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-slider',
 				'type'     => 'switch',
-				'title'    => __( 'Slider Style', 'mixt' ),
-				'subtitle' => __( 'Display related projects in a slider/carousel', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Slider Style', 'mixt' ),
+				'subtitle' => esc_html__( 'Display related projects in a slider/carousel', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 				'required' => array(
 					array('project-related', '=', true),
@@ -534,8 +534,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-cols',
 				'type'     => 'slider',
-				'title'    => __( 'Columns', 'mixt' ),
-				'subtitle' => __( 'How many columns (related projects per row) to display', 'mixt' ),
+				'title'    => esc_html__( 'Columns', 'mixt' ),
+				'subtitle' => esc_html__( 'How many columns (related projects per row) to display', 'mixt' ),
 				'default'  => 3,
 				'min'      => 1,
 				'max'      => 6,
@@ -546,8 +546,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-tablet-cols',
 				'type'     => 'slider',
-				'title'    => __( 'Tablet Columns', 'mixt' ),
-				'subtitle' => __( 'How many columns to display on tablets / medium screens', 'mixt' ),
+				'title'    => esc_html__( 'Tablet Columns', 'mixt' ),
+				'subtitle' => esc_html__( 'How many columns to display on tablets / medium screens', 'mixt' ),
 				'default'  => 3,
 				'min'      => 1,
 				'max'      => 6,
@@ -558,8 +558,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-mobile-cols',
 				'type'     => 'slider',
-				'title'    => __( 'Mobile Columns', 'mixt' ),
-				'subtitle' => __( 'How many columns to display on mobiles / small screens', 'mixt' ),
+				'title'    => esc_html__( 'Mobile Columns', 'mixt' ),
+				'subtitle' => esc_html__( 'How many columns to display on mobiles / small screens', 'mixt' ),
 				'default'  => 2,
 				'min'      => 1,
 				'max'      => 3,
@@ -570,11 +570,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Type', 'mixt' ),
-				'subtitle' => __( 'Display text-only projects or with featured media', 'mixt' ),
+				'title'    => esc_html__( 'Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Display text-only projects or with featured media', 'mixt' ),
 				'options'  => array(
-					'media' => __( 'Media', 'mixt' ),
-					'text'  => __( 'Text', 'mixt' ),
+					'media' => esc_html__( 'Media', 'mixt' ),
+					'text'  => esc_html__( 'Text', 'mixt' ),
 				),
 				'default'  => 'media',
 				'required' => array('project-related', '=', true),
@@ -584,12 +584,12 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-elements',
 				'type'     => 'checkbox',
-				'title'    => __( 'Text Elements', 'mixt' ),
-				'subtitle' => __( 'Select which elements to display', 'mixt' ),
+				'title'    => esc_html__( 'Text Elements', 'mixt' ),
+				'subtitle' => esc_html__( 'Select which elements to display', 'mixt' ),
 				'options'  => array(
-					'date'     => __( 'Date', 'mixt' ),
-					'comments' => __( 'Comments', 'mixt' ),
-					'excerpt'  => __( 'Excerpt', 'mixt' ),
+					'date'     => esc_html__( 'Date', 'mixt' ),
+					'comments' => esc_html__( 'Comments', 'mixt' ),
+					'excerpt'  => esc_html__( 'Excerpt', 'mixt' ),
 				),
 				'default'  => array(
 					'date'     => '1',
@@ -605,10 +605,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-mini',
 				'type'     => 'switch',
-				'title'    => __( 'Minimal Style', 'mixt' ),
-				'subtitle' => __( 'Hide the title and shrink items on small screens', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Minimal Style', 'mixt' ),
+				'subtitle' => esc_html__( 'Hide the title and shrink items on small screens', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 				'required' => array(
 					array('project-related', '=', true),
@@ -620,8 +620,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'project-related-feat-ph',
 				'type'     => 'media',
-				'title'    => __( 'Featured Media Placeholder', 'mixt' ),
-				'subtitle' => __( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
+				'title'    => esc_html__( 'Featured Media Placeholder', 'mixt' ),
+				'subtitle' => esc_html__( 'Select a placeholder image to show if a project does not have any featured media', 'mixt' ),
 				'mode'     => 'jpg, jpeg, png',
 				'library_filter' => array( 'jpg', 'jpeg', 'png' ),
 				'required' => array(

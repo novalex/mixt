@@ -4,17 +4,24 @@
 .post-feat {
 	width: 100%;
 	position: relative;
-	text-align: center;
 
 	.flexbox & {
 		display: flex;
 		flex-shrink: 1;
 		align-items: center;
-		flex-direction: column;
 		justify-content: center;
 
 		&.post-link,
 		&.post-quote { align-items: flex-start; }
+
+		&.post-link,
+		&.post-aside,
+		&.post-status,
+		&.post-quote { flex-direction: column; }
+
+		// Fix IE flexbox content overflowing container bug
+		> a,
+		.text-wrap { max-width: 100%; }
 	}
 
 	&,
@@ -126,7 +133,7 @@
 	}
 
 	&:not(.post-gallery) {
-		> .main-link {
+		.main-link {
 			border-radius: inherit;
 			transition: background-color 0.4s;
 

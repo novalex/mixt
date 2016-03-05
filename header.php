@@ -27,9 +27,6 @@ $layout_options = Mixt_Options::get('layout');
 
 	wp_head();
 	
-	// Output code before the closing 'head' tag
-	do_action('mixt_head_code');
-
 	?>
 </head>
 <?php
@@ -85,8 +82,8 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 				mixt_head_media();
 			}
 
-			$nav_wrap_classes = 'logo-' . $nav_options['logo-align'];
-			$nav_classes = 'theme-' . $theme_options['nav'];
+			$nav_wrap_classes = 'logo-' . sanitize_html_class($nav_options['logo-align']);
+			$nav_classes = 'theme-' . sanitize_html_class($theme_options['nav']);
 
 			if ( $nav_options['layout'] == 'vertical' ) {
 				$nav_wrap_classes .= ( $nav_options['vertical-mode'] == 'fixed' ) ? ' vertical-fixed' : ' vertical-static';
@@ -103,7 +100,7 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 
 			?>
 
-			<div id="main-nav-wrap" role="banner" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo $nav_options['logo-align'] ?>">
+			<div id="main-nav-wrap" role="banner" class="<?php echo $nav_wrap_classes; ?>" data-logo-align="<?php echo esc_attr($nav_options['logo-align']); ?>">
 
 				<nav id="main-nav" class="navbar navbar-mixt site-navigation position-top <?php echo $nav_classes; ?>">
 					<div class="container">
@@ -111,7 +108,7 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 						<?php // Main Navbar Header ?>
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-wrap" aria-expanded="false">
-								<span class="sr-only"><?php _e('Toggle navigation', 'mixt'); ?></span>
+								<span class="sr-only"><?php esc_html_e('Toggle navigation', 'mixt'); ?></span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
@@ -197,7 +194,7 @@ if ( $page_options['page-loader'] ) $body_classes .= ' loading';
 					// Content Classes
 					$content_classes = '';
 					if ( $page_options['posts-page'] ) {
-						$content_classes .= "blog-{$layout_options['type']}";
+						$content_classes .= 'blog-' . sanitize_html_class($layout_options['type']);
 						if ( $layout_options['type'] != 'standard' ) { $content_classes .= " blog-{$layout_options['columns']}-col"; }
 					}
 					$content_classes = apply_filters('mixt_content_class', $content_classes);

@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Social', 'mixt' ),
-	'desc'       => __( 'Manage your social settings and profiles', 'mixt' ),
+	'title'      => esc_html__( 'Social', 'mixt' ),
+	'desc'       => esc_html__( 'Manage your social settings and profiles', 'mixt' ),
 	'icon'       => 'el-icon-group',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,10 +11,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-og-meta',
 			'type'     => 'switch',
-			'title'    => __( 'Open Graph Meta', 'mixt' ),
-			'subtitle' => __( 'Add Open Graph attributes and meta information to improve social sharing for various sites', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Open Graph Meta', 'mixt' ),
+			'subtitle' => esc_html__( 'Add Open Graph attributes and meta information to improve social sharing for various sites', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => false,
 		),
 
@@ -22,8 +22,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-fb-appid',
 			'type'     => 'text',
-			'title'    => __( 'Facebook App ID', 'mixt' ),
-			'subtitle' => __( 'Enter your Facebook app ID here to enable analytics and other features', 'mixt' ),
+			'title'    => esc_html__( 'Facebook App ID', 'mixt' ),
+			'subtitle' => esc_html__( 'Enter your Facebook app ID here to enable analytics and other features', 'mixt' ),
 			'required' => array('social-og-meta', '=', true),
 		),
 
@@ -31,8 +31,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-fb-admins',
 			'type'     => 'multi_text',
-			'title'    => __( 'Facebook Admins', 'mixt' ),
-			'subtitle' => __( 'Enter your Facebook admin ID(s) here to enable analytics and other features', 'mixt' ),
+			'title'    => esc_html__( 'Facebook Admins', 'mixt' ),
+			'subtitle' => esc_html__( 'Enter your Facebook admin ID(s) here to enable analytics and other features', 'mixt' ),
 			'required' => array('social-og-meta', '=', true),
 		),
 
@@ -40,8 +40,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-site-name',
 			'type'     => 'text',
-			'title'    => __( 'Site Name', 'mixt' ),
-			'subtitle' => __( 'Show a custom site name when sharing (leave empty to use the site title from the settings)', 'mixt' ),
+			'title'    => esc_html__( 'Site Name', 'mixt' ),
+			'subtitle' => esc_html__( 'Show a custom site name when sharing (leave empty to use the site title from the settings)', 'mixt' ),
 			'required' => array('social-og-meta', '=', true),
 		),
 
@@ -49,8 +49,8 @@ $this->sections[] = array(
 		array(
 			'id'             => 'social-img-ph',
 			'type'           => 'media',
-			'title'          => __( 'Sharing Image Placeholder', 'mixt' ),
-			'subtitle'       => __( 'Select a placeholder image to show if the post being shared does not have a featured image', 'mixt' ),
+			'title'          => esc_html__( 'Sharing Image Placeholder', 'mixt' ),
+			'subtitle'       => esc_html__( 'Select a placeholder image to show if the post being shared does not have a featured image', 'mixt' ),
 			'mode'           => 'jpg, jpeg, png',
 			'library_filter' => array('jpg', 'jpeg', 'png'),
 			'required'       => array('social-og-meta', '=', true),
@@ -60,12 +60,12 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-icons-color',
 			'type'     => 'button_set',
-			'title'    => __( 'Social Icons Color On Hover', 'mixt' ),
-			'subtitle' => __( 'Color the icon, its background, or neither on hover', 'mixt' ),
+			'title'    => esc_html__( 'Social Icons Color On Hover', 'mixt' ),
+			'subtitle' => esc_html__( 'Color the icon, its background, or neither on hover', 'mixt' ),
 			'options'  => array(
-				'icon' => __( 'Icon', 'mixt' ),
-				'bg'   => __( 'Background', 'mixt' ),
-				'none' => __( 'Neither', 'mixt' ),
+				'icon' => esc_html__( 'Icon', 'mixt' ),
+				'bg'   => esc_html__( 'Background', 'mixt' ),
+				'none' => esc_html__( 'Neither', 'mixt' ),
 			),
 			'default'  => 'bg',
 		),
@@ -74,10 +74,10 @@ $this->sections[] = array(
 		array(
 			'id'       => 'social-icons-tooltip',
 			'type'     => 'switch',
-			'title'    => __( 'Social Icons Tooltip', 'mixt' ),
-			'subtitle' => __( 'Show a tooltip when a social icon is hovered', 'mixt' ),
-			'on'       => __( 'Yes', 'mixt' ),
-			'off'      => __( 'No', 'mixt' ),
+			'title'    => esc_html__( 'Social Icons Tooltip', 'mixt' ),
+			'subtitle' => esc_html__( 'Show a tooltip when a social icon is hovered', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
 			'default'  => true,
 		),
 			
@@ -86,26 +86,26 @@ $this->sections[] = array(
 			'id'       => 'social-profiles',
 			'type'     => 'mixt_multi_input',
 			'no_title' => true,
-			'add_text' => __( 'New Profile', 'mixt' ),
+			'add_text' => esc_html__( 'New Profile', 'mixt' ),
 			'sortable' => true,
 			'inputs'   => array(
 				'name' => array(
 					'icon'        => 'el-icon-tag',
 					'wrap_class'  => 'social-label social-name',
 					'input_class' => 'mixt-social-field network-name',
-					'placeholder' => __( 'Name', 'mixt' ),
+					'placeholder' => esc_html__( 'Name', 'mixt' ),
 				),
 				'url' => array(
 					'icon'        => 'el-icon-globe',
 					'wrap_class'  => 'social-label social-url',
 					'input_class' => 'mixt-social-field network-url',
-					'placeholder' => __( 'URL', 'mixt' ),
+					'placeholder' => esc_html__( 'URL', 'mixt' ),
 				),
 				'icon' => array(
 					'icon'        => 'el-icon-stop',
 					'wrap_class'  => 'social-label social-icon',
 					'input_class' => 'mixt-social-field network-icon',
-					'placeholder' => __( 'Icon', 'mixt' ),
+					'placeholder' => esc_html__( 'Icon', 'mixt' ),
 				),
 				'color' => array(
 					'type'        => 'color',
@@ -116,7 +116,7 @@ $this->sections[] = array(
 					'icon'        => 'el-icon-comment',
 					'wrap_class'  => 'social-label social-title',
 					'input_class' => 'mixt-social-field network-title',
-					'placeholder' => __( 'Title', 'mixt' ),
+					'placeholder' => esc_html__( 'Title', 'mixt' ),
 				),
 			),
 			'default'  => $social_profiles,

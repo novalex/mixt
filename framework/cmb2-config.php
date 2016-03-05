@@ -96,7 +96,7 @@ function mixt_cmb_auto_label_cb($args, $field) {
 	}
 	$field_id = $field->id();
 	$auto_id  = $field_id . '_auto';
-	$auto_text = __( 'Auto', 'mixt' );
+	$auto_text = esc_html__( 'Auto', 'mixt' );
 	$auto_atts = ( $field->escaped_value() == 'auto' ) ? ' checked="checked"' : '';
 	$style = ! $field->args( 'show_names' ) ? ' style="display:none;"' : '';
 
@@ -125,9 +125,9 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 	$prefix = '_mixt-'; // Start with underscore to hide custom meta from 'Custom Fields' section
 
 	$site_themes = ( (bool) get_option('mixt-themes-enabled') ) ? mixt_get_themes('site', 'all') : mixt_get_themes('site', 'default');
-	$site_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $site_themes );
+	$site_themes = array_merge( array('auto' => esc_html__( 'Auto', 'mixt')), $site_themes );
 	$nav_themes = ( (bool) get_option('mixt-themes-enabled') ) ? mixt_get_themes('nav', 'all') : mixt_get_themes('nav', 'default');
-	$nav_themes = array_merge( array('auto' => __( 'Auto', 'mixt')), $nav_themes );
+	$nav_themes = array_merge( array('auto' => esc_html__( 'Auto', 'mixt')), $nav_themes );
 
 	$fields = array();
 
@@ -180,7 +180,7 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 	$meta_boxes['mixt_page_meta'] = array(
 		'id'           => 'mixt_page_options',
-		'title'        => __( 'Page Options', 'mixt' ),
+		'title'        => esc_html__( 'Page Options', 'mixt' ),
 		'object_types' => array( 'page', 'post', 'portfolio', 'product' ),
 		'context'      => 'normal',
 		'priority'     => 'high',

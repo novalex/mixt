@@ -1,8 +1,8 @@
 <?php
 
 $this->sections[] = array(
-	'title'      => __( 'Header', 'mixt' ),
-	'desc'       => __( 'Customize the site header', 'mixt' ),
+	'title'      => esc_html__( 'Header', 'mixt' ),
+	'desc'       => esc_html__( 'Customize the site header', 'mixt' ),
 	'icon'       => 'el-icon-screen',
 	'customizer' => false,
 	'fields'     => array(
@@ -11,8 +11,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'head-media-section',
 			'type'     => 'section',
-			'title'    => __( 'Header Media', 'mixt' ),
-			'subtitle' => __( 'Configure the header media element and its appearance', 'mixt' ),
+			'title'    => esc_html__( 'Header Media', 'mixt' ),
+			'subtitle' => esc_html__( 'Configure the header media element and its appearance', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -20,10 +20,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-media',
 				'type'     => 'switch',
-				'title'    => __( 'Enabled', 'mixt' ),
-				'subtitle' => __( 'Display the header media element on all pages where possible', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Enabled', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the header media element on all pages where possible', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -31,8 +31,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-height',
 				'type'     => 'dimensions',
-				'title'    => __( 'Height', 'mixt' ),
-				'subtitle' => __( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
+				'title'    => esc_html__( 'Height', 'mixt' ),
+				'subtitle' => esc_html__( 'Set a height for the header, in pixels or percent (relative to viewport). 100% will make the header cover the whole screen.', 'mixt' ),
 				'units'    => array( 'px', '%' ),
 				'width'    => false,
 			),
@@ -41,8 +41,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-min-height',
 				'type'     => 'dimensions',
-				'title'    => __( 'Minimum Height', 'mixt' ),
-				'subtitle' => __( 'Set a minimum height for the header', 'mixt' ),
+				'title'    => esc_html__( 'Minimum Height', 'mixt' ),
+				'subtitle' => esc_html__( 'Set a minimum height for the header', 'mixt' ),
 				'units'    => array( 'px' ),
 				'width'    => false,
 			),
@@ -51,8 +51,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-bg-color',
 				'type'     => 'color',
-				'title'    => __( 'Background Color', 'mixt' ),
-				'subtitle' => __( 'Select a background color for the header', 'mixt' ),
+				'title'    => esc_html__( 'Background Color', 'mixt' ),
+				'subtitle' => esc_html__( 'Select a background color for the header', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'default'  => '',
@@ -62,8 +62,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-text-color',
 				'type'     => 'color',
-				'title'    => __( 'Text Color', 'mixt' ),
-				'subtitle' => __( 'The color for text on light backgrounds', 'mixt' ),
+				'title'    => esc_html__( 'Text Color', 'mixt' ),
+				'subtitle' => esc_html__( 'The color for text on light backgrounds', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'default'  => '',
@@ -73,8 +73,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-inv-text-color',
 				'type'     => 'color',
-				'title'    => __( 'Inverse Text Color', 'mixt' ),
-				'subtitle' => __( 'The color for text on dark backgrounds', 'mixt' ),
+				'title'    => esc_html__( 'Inverse Text Color', 'mixt' ),
+				'subtitle' => esc_html__( 'The color for text on dark backgrounds', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'default'  => '',
@@ -84,13 +84,13 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-media-type',
 				'type'     => 'button_set',
-				'title'    => __( 'Media Type', 'mixt' ),
-				'subtitle' => __( 'Type of media to use in the header', 'mixt' ),
+				'title'    => esc_html__( 'Media Type', 'mixt' ),
+				'subtitle' => esc_html__( 'Type of media to use in the header', 'mixt' ),
 				'options'  => array(
-					'color'  => __( 'Solid Color', 'mixt' ),
-					'image'  => __( 'Image', 'mixt' ),
-					'video'  => __( 'Video', 'mixt' ),
-					'slider' => __( 'Slider', 'mixt' ),
+					'color'  => esc_html__( 'Solid Color', 'mixt' ),
+					'image'  => esc_html__( 'Image', 'mixt' ),
+					'video'  => esc_html__( 'Video', 'mixt' ),
+					'slider' => esc_html__( 'Slider', 'mixt' ),
 				),
 				'default'  => 'color',
 			),
@@ -99,8 +99,8 @@ $this->sections[] = array(
 			array(
 				'id'             => 'head-img-ph',
 				'type'           => 'media',
-				'title'          => __( 'Image Placeholder', 'mixt' ),
-				'subtitle'       => __( 'Select a placeholder image to show if the desired image can\'t be found', 'mixt' ),
+				'title'          => esc_html__( 'Image Placeholder', 'mixt' ),
+				'subtitle'       => esc_html__( 'Select a placeholder image to show if the desired image can\'t be found', 'mixt' ),
 				'mode'           => 'jpg, jpeg, png',
 				'library_filter' => array('jpg', 'jpeg', 'png'),
 				'required'       => array('head-media-type', '=', 'image'),
@@ -110,11 +110,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-img-src',
 				'type'     => 'button_set',
-				'title'    => __( 'Image Source', 'mixt' ),
-				'subtitle' => __( 'Select an image or use the featured one', 'mixt' ),
+				'title'    => esc_html__( 'Image Source', 'mixt' ),
+				'subtitle' => esc_html__( 'Select an image or use the featured one', 'mixt' ),
 				'options'  => array(
-					'gallery' => __( 'Gallery', 'mixt' ),
-					'feat'    => __( 'Featured', 'mixt' ),
+					'gallery' => esc_html__( 'Gallery', 'mixt' ),
+					'feat'    => esc_html__( 'Featured', 'mixt' ),
 				),
 				'default'  => 'gallery',
 				'required' => array('head-media-type', '=', 'image'),
@@ -124,8 +124,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-img',
 				'type'     => 'media',
-				'title'    => __( 'Select Image', 'mixt' ),
-				'subtitle' => __( 'Select an image from the gallery or upload one', 'mixt' ),
+				'title'    => esc_html__( 'Select Image', 'mixt' ),
+				'subtitle' => esc_html__( 'Select an image from the gallery or upload one', 'mixt' ),
 				'required' => array('head-img-src', '=', 'gallery'),
 			),
 
@@ -133,9 +133,9 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-img-repeat',
 				'type'     => 'switch',
-				'title'    => __( 'Repeat / Pattern Image', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Repeat / Pattern Image', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 				'required' => array('head-media-type', '=', 'image'),
 			),
@@ -144,11 +144,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-video-src',
 				'type'     => 'button_set',
-				'title'    => __( 'Video Source', 'mixt' ),
-				'subtitle' => __( 'Use an embedded video or a hosted one', 'mixt' ),
+				'title'    => esc_html__( 'Video Source', 'mixt' ),
+				'subtitle' => esc_html__( 'Use an embedded video or a hosted one', 'mixt' ),
 				'options'  => array(
-					'embed' => __( 'Embedded', 'mixt' ),
-					'local' => __( 'Hosted', 'mixt' ),
+					'embed' => esc_html__( 'Embedded', 'mixt' ),
+					'local' => esc_html__( 'Hosted', 'mixt' ),
 				),
 				'default'  => 'embed',
 				'required' => array('head-media-type', '=', 'video'),
@@ -158,8 +158,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-video-embed',
 				'type'     => 'textarea',
-				'title'    => __( 'Video Embed Code', 'mixt' ),
-				'subtitle' => __( 'The embed code for the video you want to use', 'mixt' ),
+				'title'    => esc_html__( 'Video Embed Code', 'mixt' ),
+				'subtitle' => esc_html__( 'The embed code for the video you want to use', 'mixt' ),
 				'validate' => 'html_custom',
 				'allowed_html' => array( 
 					'iframe' => array(
@@ -177,11 +177,11 @@ $this->sections[] = array(
 			array(
 				'id'             => 'head-video',
 				'type'           => 'media',
-				'title'          => __( 'Video', 'mixt' ),
-				'subtitle'       => __( 'Select a video from the gallery or upload one', 'mixt' ),
+				'title'          => esc_html__( 'Video', 'mixt' ),
+				'subtitle'       => esc_html__( 'Select a video from the gallery or upload one', 'mixt' ),
 				'mode'           => 'webm, mp4, ogg',
 				'library_filter' => array('webm', 'mp4', 'ogg'),
-				'placeholder'    => __( 'No video selected', 'mixt' ),
+				'placeholder'    => esc_html__( 'No video selected', 'mixt' ),
 				'required'       => array('head-video-src', '=', 'local'),
 			),
 
@@ -189,11 +189,11 @@ $this->sections[] = array(
 			array(
 				'id'             => 'head-video-2',
 				'type'           => 'media',
-				'title'          => __( 'Video Fallback', 'mixt' ),
-				'subtitle'       => __( 'Select a fallback video from the gallery or upload one', 'mixt' ),
+				'title'          => esc_html__( 'Video Fallback', 'mixt' ),
+				'subtitle'       => esc_html__( 'Select a fallback video from the gallery or upload one', 'mixt' ),
 				'mode'           => 'webm, mp4, ogg',
 				'library_filter' => array('webm', 'mp4', 'ogg'),
-				'placeholder'    => __( 'No video selected', 'mixt' ),
+				'placeholder'    => esc_html__( 'No video selected', 'mixt' ),
 				'required'       => array('head-video-src', '=', 'local'),
 			),
 
@@ -201,8 +201,8 @@ $this->sections[] = array(
 			array(
 				'id'             => 'head-video-poster',
 				'type'           => 'media',
-				'title'          => __( 'Video Poster', 'mixt' ),
-				'subtitle'       => __( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
+				'title'          => esc_html__( 'Video Poster', 'mixt' ),
+				'subtitle'       => esc_html__( 'Select an image to show while the video loads or if video is not supported', 'mixt' ),
 				'mode'           => 'jpg, jpeg, png',
 				'library_filter' => array('jpg', 'jpeg', 'png'),
 				'required'       => array('head-video-src', '=', 'local'),
@@ -212,9 +212,9 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-video-loop',
 				'type'     => 'switch',
-				'title'    => __( 'Video Loop', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Video Loop', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 				'required' => array('head-video-src', '=', 'local'),
 			),
@@ -223,11 +223,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-video-lum',
 				'type'     => 'button_set',
-				'title'    => __( 'Video Luminance', 'mixt' ),
-				'subtitle' => __( 'Header text color will be adjusted based on this', 'mixt' ),
+				'title'    => esc_html__( 'Video Luminance', 'mixt' ),
+				'subtitle' => esc_html__( 'Header text color will be adjusted based on this', 'mixt' ),
 				'options'  => array(
-					'light' => __( 'Light', 'mixt' ),
-					'dark'  => __( 'Dark', 'mixt' ),
+					'light' => esc_html__( 'Light', 'mixt' ),
+					'dark'  => esc_html__( 'Dark', 'mixt' ),
 				),
 				'default'  => 'light',
 				'required' => array('head-media-type', '=', 'video'),
@@ -237,8 +237,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-slider',
 				'type'     => 'text',
-				'title'    => __( 'Slider ID', 'mixt' ),
-				'subtitle' => __( 'The ID number or slug of the slider to use', 'mixt' ),
+				'title'    => esc_html__( 'Slider ID', 'mixt' ),
+				'subtitle' => esc_html__( 'The ID number or slug of the slider to use', 'mixt' ),
 				'required' => array('head-media-type', '=', 'slider'),
 			),
 
@@ -246,11 +246,11 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-parallax',
 				'type'     => 'button_set',
-				'title'    => __( 'Parallax Effect', 'mixt' ),
+				'title'    => esc_html__( 'Parallax Effect', 'mixt' ),
 				'options'  => array(
-					'none' => __( 'None', 'mixt' ),
-					'slow' => __( 'Slow', 'mixt' ),
-					'fast' => __( 'Fast', 'mixt' ),
+					'none' => esc_html__( 'None', 'mixt' ),
+					'slow' => esc_html__( 'Slow', 'mixt' ),
+					'fast' => esc_html__( 'Fast', 'mixt' ),
 				),
 				'default'  => 'none',
 			),
@@ -259,11 +259,11 @@ $this->sections[] = array(
 			array(
 				'id'      => 'head-content-align',
 				'type'    => 'button_set',
-				'title'   => __( 'Content Align', 'mixt' ),
+				'title'   => esc_html__( 'Content Align', 'mixt' ),
 				'options' => array(
-					'left'   => __( 'Left', 'mixt' ),
-					'center' => __( 'Center', 'mixt' ),
-					'right'  => __( 'Right', 'mixt' ),
+					'left'   => esc_html__( 'Left', 'mixt' ),
+					'center' => esc_html__( 'Center', 'mixt' ),
+					'right'  => esc_html__( 'Right', 'mixt' ),
 				),
 				'default' => 'left',
 			),
@@ -272,11 +272,11 @@ $this->sections[] = array(
 			array(
 				'id'      => 'head-content-size',
 				'type'    => 'button_set',
-				'title'   => __( 'Content Size', 'mixt' ),
+				'title'   => esc_html__( 'Content Size', 'mixt' ),
 				'options' => array(
-					'normal'    => __( 'Normal', 'mixt' ),
-					'fullwidth' => __( 'Full Width', 'mixt' ),
-					'cover'     => __( 'Cover', 'mixt' ),
+					'normal'    => esc_html__( 'Normal', 'mixt' ),
+					'fullwidth' => esc_html__( 'Full Width', 'mixt' ),
+					'cover'     => esc_html__( 'Cover', 'mixt' ),
 				),
 				'default' => 'normal',
 			),
@@ -285,9 +285,9 @@ $this->sections[] = array(
 			array(
 				'id'      => 'head-content-fade',
 				'type'    => 'switch',
-				'title'   => __( 'Content Fade Effect', 'mixt' ),
-				'on'      => __( 'Yes', 'mixt' ),
-				'off'     => __( 'No', 'mixt' ),
+				'title'   => esc_html__( 'Content Fade Effect', 'mixt' ),
+				'on'      => esc_html__( 'Yes', 'mixt' ),
+				'off'     => esc_html__( 'No', 'mixt' ),
 				'default' => false,
 			),
 
@@ -295,10 +295,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-content-scroll',
 				'type'     => 'switch',
-				'title'    => __( 'Scroll To Content', 'mixt' ),
-				'subtitle' => __( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Scroll To Content', 'mixt' ),
+				'subtitle' => esc_html__( 'Show an arrow that scrolls down to the page content when clicked', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -306,10 +306,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-content-info',
 				'type'     => 'switch',
-				'title'    => __( 'Post Info', 'mixt' ),
-				'subtitle' => __( 'Show the post title and meta in the header', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Post Info', 'mixt' ),
+				'subtitle' => esc_html__( 'Show the post title and meta in the header', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -317,10 +317,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'head-content-code',
 				'type'     => 'switch',
-				'title'    => __( 'Custom Code', 'mixt' ),
-				'subtitle' => __( 'Output custom code in the header (can use shortcodes)', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Custom Code', 'mixt' ),
+				'subtitle' => esc_html__( 'Output custom code in the header (can use shortcodes)', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => false,
 			),
 
@@ -328,7 +328,7 @@ $this->sections[] = array(
 			array(
 				'id'      => 'head-code',
 				'type'    => 'editor',
-				'title'   => __( 'Custom Code Content', 'mixt' ),
+				'title'   => esc_html__( 'Custom Code Content', 'mixt' ),
 				'args' => array(
 					'teeny'         => false,
 					'wpautop'       => false,
@@ -348,8 +348,8 @@ $this->sections[] = array(
 		array(
 			'id'       => 'loc-bar-section',
 			'type'     => 'section',
-			'title'    => __( 'Location Bar', 'mixt' ),
-			'subtitle' => __( 'Configure the location bar and its appearance', 'mixt' ),
+			'title'    => esc_html__( 'Location Bar', 'mixt' ),
+			'subtitle' => esc_html__( 'Configure the location bar and its appearance', 'mixt' ),
 			'indent'   => true,
 		),
 
@@ -357,10 +357,10 @@ $this->sections[] = array(
 			array(
 				'id'       => 'location-bar',
 				'type'     => 'switch',
-				'title'    => __( 'Location Bar', 'mixt' ),
-				'subtitle' => __( 'Display the location bar', 'mixt' ),
-				'on'       => __( 'Yes', 'mixt' ),
-				'off'      => __( 'No', 'mixt' ),
+				'title'    => esc_html__( 'Location Bar', 'mixt' ),
+				'subtitle' => esc_html__( 'Display the location bar', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
 				'default'  => true,
 			),
 
@@ -368,7 +368,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-bg-color',
 				'type'     => 'color',
-				'title'    => __( 'Background Color', 'mixt' ),
+				'title'    => esc_html__( 'Background Color', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'required' => array('location-bar', '=', true),
@@ -378,7 +378,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-bg-pat',
 				'type'     => 'mixt_image_select',
-				'title'    => __( 'Background Pattern', 'mixt' ),
+				'title'    => esc_html__( 'Background Pattern', 'mixt' ),
 				'options'  => $img_patterns,
 				'empty'    => true,
 				'default'  => '',
@@ -389,7 +389,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-text-color',
 				'type'     => 'color',
-				'title'    => __( 'Text Color', 'mixt' ),
+				'title'    => esc_html__( 'Text Color', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'required' => array('location-bar', '=', true),
@@ -399,7 +399,7 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-border-color',
 				'type'     => 'color',
-				'title'    => __( 'Border Color', 'mixt' ),
+				'title'    => esc_html__( 'Border Color', 'mixt' ),
 				'transparent' => false,
 				'validate' => 'color',
 				'required' => array('location-bar', '=', true),
@@ -409,12 +409,12 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-left-content',
 				'type'     => 'select',
-				'title'    => __( 'Left Side Content', 'mixt' ),
-				'subtitle' => __( 'Content to show on the left side of the bar', 'mixt' ),
+				'title'    => esc_html__( 'Left Side Content', 'mixt' ),
+				'subtitle' => esc_html__( 'Content to show on the left side of the bar', 'mixt' ),
 				'options'  => array(
-					'0' => __( 'No Content', 'mixt' ),
-					'1' => __( 'Title', 'mixt' ),
-					'2' => __( 'Breadcrumbs', 'mixt' ),
+					'0' => esc_html__( 'No Content', 'mixt' ),
+					'1' => esc_html__( 'Title', 'mixt' ),
+					'2' => esc_html__( 'Breadcrumbs', 'mixt' ),
 				),
 				'default'  => '1',
 				'required' => array('location-bar', '=', true),
@@ -424,12 +424,12 @@ $this->sections[] = array(
 			array(
 				'id'       => 'loc-bar-right-content',
 				'type'     => 'select',
-				'title'    => __( 'Right Side Content', 'mixt' ),
-				'subtitle' => __( 'Content to show on the right side of the bar', 'mixt' ),
+				'title'    => esc_html__( 'Right Side Content', 'mixt' ),
+				'subtitle' => esc_html__( 'Content to show on the right side of the bar', 'mixt' ),
 				'options'  => array(
-					'0' => __( 'No Content', 'mixt' ),
-					'1' => __( 'Title', 'mixt' ),
-					'2' => __( 'Breadcrumbs', 'mixt' ),
+					'0' => esc_html__( 'No Content', 'mixt' ),
+					'1' => esc_html__( 'Title', 'mixt' ),
+					'2' => esc_html__( 'Breadcrumbs', 'mixt' ),
 				),
 				'default'  => '2',
 				'required' => array('location-bar', '=', true),
@@ -439,8 +439,8 @@ $this->sections[] = array(
 			array(
 				'id'       => 'breadcrumbs-prefix',
 				'type'     => 'text',
-				'title'    => __( 'Breadcrumbs Prefix', 'mixt' ),
-				'subtitle' => __( 'Text to display before the breadcrumbs', 'mixt' ),
+				'title'    => esc_html__( 'Breadcrumbs Prefix', 'mixt' ),
+				'subtitle' => esc_html__( 'Text to display before the breadcrumbs', 'mixt' ),
 				'required' => array('location-bar', '=', true),
 			),
 	),

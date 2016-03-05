@@ -163,7 +163,7 @@ function mixt_wc_badges() {
 	if ( mixt_wc_option('sale-badge') ) {
 		global $post, $product;
 		if ( $product->is_on_sale() ) {
-			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . __( 'Sale', 'mixt' ) . '</span>', $post, $product );
+			$badges .= apply_filters( 'woocommerce_sale_flash', '<span class="badge sale-badge">' . esc_html__( 'Sale', 'mixt' ) . '</span>', $post, $product );
 		}
 	}
 	// New Badge
@@ -172,7 +172,7 @@ function mixt_wc_badges() {
 		$datestamp = strtotime($date);
 		$new_days = mixt_wc_option('new-days', 30);
 		if ( ( time() - ( 86400 * $new_days ) ) < $datestamp ) {
-			$badges .= '<span class="badge new-badge">' . __( 'New', 'mixt' ) . '</span>';
+			$badges .= '<span class="badge new-badge">' . esc_html__( 'New', 'mixt' ) . '</span>';
 		}
 	}
 
@@ -246,9 +246,9 @@ function mixt_wc_product_stock() {
 		global $product;
 		$stock = $product->get_total_stock();
 		if ( ! $product->is_in_stock() ) {
-			echo '<span class="stock out-of-stock">' . __( 'Out of stock', 'woocommerce' ) . '</span>';
+			echo '<span class="stock out-of-stock">' . esc_html__( 'Out of stock', 'woocommerce' ) . '</span>';
 		} else if ( $stock > 1 ) {
-			echo '<span class="stock in-stock">' . $stock . __( ' In stock', 'woocommerce' ) . '</span>';
+			echo '<span class="stock in-stock">' . $stock . esc_html__( ' In stock', 'woocommerce' ) . '</span>';
 		}
 	}
 }

@@ -76,9 +76,14 @@ if ( ! class_exists( 'Mixt_VC_Styler' ) ) {
 		 * @return mixed|void
 		 */
 		function render() {
-			$output = '<div class="mixt-styler vc_row" data-parser="'.$this->setting('parser').'">' .
-						  '<div class="styler-fields-wrap">'.$this->render_fields().'</div>' .
-						  '<input name="'.$this->setting('param_name').'" class="wpb_vc_param_value '.$this->setting('type').'_field" type="hidden" value="'.esc_attr( $this->value() ).'">' .
+			$output = '<div class="mixt-styler vc_row" data-parser="' . esc_attr($this->setting('parser')) . '">' .
+						  '<div class="styler-fields-wrap">' . $this->render_fields() . '</div>' .
+						  '<input 
+							  name="' . esc_attr($this->setting('param_name')) . '" 
+							  class="wpb_vc_param_value ' . sanitize_html_class($this->setting('type')) . '_field" 
+							  type="hidden" 
+							  value="' . esc_attr( $this->value() ) .
+						  '">' .
 					  '</div>';
 
 			if ( ! $this->js_appended ) {
@@ -96,7 +101,7 @@ if ( ! class_exists( 'Mixt_VC_Styler' ) ) {
 			$output = '';
 			$fields = array();
 			$grouped = false;
-			$default_group = __( 'General', 'mixt' );
+			$default_group = esc_html__( 'General', 'mixt' );
 			$defaults = array(
 				'type'     => 'color',
 				'selector' => '',
@@ -119,28 +124,32 @@ if ( ! class_exists( 'Mixt_VC_Styler' ) ) {
 				extract( wp_parse_args($params, $defaults) );
 
 				$field_class = 'styler-field-cont vc_column vc_col-sm-' . (string)$cols;
-				if ( $class != '' ) $field_class .= ' ' . $class;
+				if ( $class != '' ) $field_class .= ' ' . mixt_sanitize_html_classes($class);
 
-				$field = '<div id="styler-'.$id.'" class="'.$field_class.'">';
-					if ( $label != '' ) $field .= '<label>'.$label.'</label>';
-					if ( $type == 'custom' ) $pattern = '';
-					$data_atts = "data-selector='$selector' data-pattern='$pattern'";
+				$field = '<div id="styler-' . esc_attr($id) . '" class="' . $field_class . '">';
+					if ( $label != '' ) {
+						$field .= '<label>' . $label . '</label>';
+					}
+					if ( $type == 'custom' ) {
+						$pattern = '';
+					}
+					$data_atts = "data-selector='" . esc_attr($selector) . "' data-pattern='" . esc_attr($pattern) . "'";
 				switch ( $type ) {
 					case 'color':
-						$field .= '<input type="text" name="'.$id.'" value="'.$value.'" '.$data_atts.' class="styler-field styler-colorpicker">';
+						$field .= '<input type="text" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" ' . $data_atts . ' class="styler-field styler-colorpicker">';
 						break;
 					case 'unit':
-						$field .= '<input type="text" name="'.$id.'" value="'.$value.'" '.$data_atts.' class="styler-field styler-unit" pattern="^(auto|0)$|^[+-]?[0-9]+.?([0-9]+)?(px|em|ex|%|in|cm|mm|pt|pc)$">';
+						$field .= '<input type="text" name="' . esc_attr($id) . '" value="' . esc_attr($value) . '" ' . $data_atts . ' class="styler-field styler-unit" pattern="^(auto|0)$|^[+-]?[0-9]+.?([0-9]+)?(px|em|ex|%|in|cm|mm|pt|pc)$">';
 						break;
 					case 'custom':
-						$field .= '<textarea name="'.$id.'" '.$data_atts.' class=" styler-field styler-custom">'.$value.'</textarea>';
+						$field .= '<textarea name="' . esc_attr($id) . '" ' . $data_atts . ' class="styler-field styler-custom">' . $value . '</textarea>';
 						break;
 				}
 				$field .= '</div>';
 
 				if ( $group != $default_group || $grouped ) {
 					if ( ! array_key_exists($group, $fields) ) {
-						$fields[$group] = array( 'label' => '<label class="wpb_element_label vc_col-sm-12 vc_column group-label">'.$group.'</label>' );
+						$fields[$group] = array( 'label' => '<label class="wpb_element_label vc_col-sm-12 vc_column group-label">' . $group . '</label>' );
 					}
 					$fields[$group][] = $field;
 				} else {

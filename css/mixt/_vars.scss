@@ -1,3 +1,9 @@
+
+/* --------------------------
+ 1. Variables
+-------------------------- */
+
+
 // =====================================================
 // Some of these variables are also defined in an array
 // inside 'modules/dcss/dynamic-css.php', make sure to
@@ -84,12 +90,12 @@ $post-format-bg-icon-size: 24px;
 $masonry-gutter: 10px;
 // Featured Sizes
 // Make sure these are updated as well if image sizes are changed in functions.php
-$blog-large-w: 960px;
-$blog-large-h: 460px;
-$blog-medium-w: 320px;
-$blog-medium-h: 200px;
-$blog-small-w: 120px;
-$blog-small-h: 120px;
+$feat-large-w: 960px;
+$feat-large-h: 460px;
+$feat-medium-w: 320px;
+$feat-medium-h: 200px;
+$feat-small-w: 120px;
+$feat-small-h: 120px;
 
 
 // SIDEBAR
