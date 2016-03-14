@@ -10,13 +10,13 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 
 // Menu Pages
-require_once('menu-pages.php');
+require_once( MIXT_FRAME_DIR . '/admin/menu-pages.php' );
 
 // Custom Nav Menu Elements
-require_once('admin-menus.php');
+require_once( MIXT_FRAME_DIR . '/admin/admin-menus.php' );
 
 // Custom Media Meta Fields
-require_once('media-meta.php');
+require_once( MIXT_FRAME_DIR . '/admin/media-meta.php' );
 
 
 /**
@@ -70,11 +70,11 @@ add_action('init', 'mixt_disable_redux_welcome', 9);
 /**
  * Calculate image luminosity after upload and set meta
  */
-function mixt_media_upload($id) {
+function mixt_media_upload( $id ) {
 	if ( wp_attachment_is_image($id) ) {
 		$src = wp_get_attachment_image_src( $id, 'full' );
 
-		$img_lum = get_img_luminance( $src[0] );
+		$img_lum = mixt_get_img_luminance( $src[0] );
 		$img_lum_val = 'none';
 
 		if ( $img_lum < 170 ) {

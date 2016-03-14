@@ -23,7 +23,7 @@ mixt_requires( $modules, 'modules' );
 
 // Admin Integration
 if ( is_admin() ) {
-	require_once MIXT_FRAME_DIR . '/admin/mixt-admin.php';
+	require_once( MIXT_FRAME_DIR . '/admin/mixt-admin.php' );
 }
 
 
@@ -71,15 +71,12 @@ class Mixt_Plugins {
 			include_once( MIXT_PLUGINS_DIR . '/redux-extend/extensions/loader.php' );
 			// Framework
 			if ( ! class_exists( 'ReduxFramework' ) ) {
-				if ( file_exists( MIXT_PLUGINS_DIR . '/redux/framework.php' ) ) {
-					require_once( MIXT_PLUGINS_DIR . '/redux/framework.php' );
-				} else {
-					$this->plugins[] = array(
-						'name'     => 'Redux Framework',
-						'slug'     => 'redux-framework',
-						'required' => true,
-					);
-				}
+				$this->plugins[] = array(
+					'name'     => 'Redux Framework',
+					'slug'     => 'redux-framework',
+					'source'   => 'redux-framework.zip',
+					'required' => true,
+				);
 			}
 			add_action( 'redux/page/mixt_opt/enqueue', array($this, 'redux_scripts'), 2 );
 			// Config
@@ -144,7 +141,7 @@ class Mixt_Plugins {
 			);
 
 		// TGM Plugin Activation
-			require_once( MIXT_PLUGINS_DIR . '/class-tgm-plugin-activation.php' );
+			require_once( MIXT_PLUGINS_DIR . '/tgmpa/class-tgm-plugin-activation.php' );
 			add_action( 'tgmpa_register', array($this, 'init_tgmpa') );
 	}
 
@@ -159,17 +156,16 @@ class Mixt_Plugins {
 	 * TGM Plugin Activation
 	 */
 	public function init_tgmpa() {
+		$tgmpa_msg = '<h4>' . esc_html__( 'Please activate all required plugins to enable all the features that make MIXT awesome!', 'mixt' ) . '</h4>';
 		$config = array(
 			'id'           => 'mixt_tgmpa',         // Unique ID for hashing notices for multiple instances of TGMPA.
 			'default_path' => MIXT_PLUGINS_DIR.'/', // Default absolute path to bundled plugins.
 			'menu'         => 'mixt-plugins',       // Menu slug.
-			'parent_slug'  => 'mixt-admin',         // Parent menu slug.
-			'capability'   => 'manage_options',     // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
 			'has_notices'  => true,                 // Show admin notices or not.
 			'dismissable'  => true,                 // If false, a user cannot dismiss the nag message.
 			'dismiss_msg'  => '',                   // If 'dismissable' is false, this message will be output at top of nag.
 			'is_automatic' => false,                // Automatically activate plugins after installation or not.
-			'message'      => '',                   // Message to output right before the plugins table.
+			'message'      => $tgmpa_msg,           // Message to output right before the plugins table.
 		);
 		tgmpa($this->plugins, $config);
 	}
@@ -180,7 +176,7 @@ new Mixt_Plugins;
 /**
  * Update options after they are saved
  */
-function mixt_options_changed($mixt_opt = null) {
+function mixt_options_changed( $mixt_opt = null ) {
 	if ( is_null($mixt_opt) || ! is_array($mixt_opt) ) { global $mixt_opt; }
 
 	// Custom Sidebars
@@ -209,14 +205,14 @@ add_action('customize_save_after', 'mixt_options_changed', 99);
 /**
  * Add user settings to theme_mods
  */
-function mixt_options_to_mods($mixt_opt) {
+function mixt_options_to_mods( $mixt_opt ) {
 	set_theme_mod('mixt_opt', $mixt_opt);
 }
 add_action('redux/options/mixt_opt/settings/change', 'mixt_options_to_mods', 3);
 
 // Customizer Preview
 if ( is_customize_preview() ) {
-	require_once MIXT_FRAME_DIR . '/admin/customizer.php';
+	require_once( MIXT_FRAME_DIR . '/admin/customizer.php' );
 }
 
 
@@ -296,7 +292,7 @@ add_action('wp_enqueue_scripts', 'mixt_scripts', 99);
  * 
  * @param string $hook Current admin page
  */
-function mixt_admin_scripts($hook) {
+function mixt_admin_scripts( $hook ) {
 	// Admin Styles
 	wp_enqueue_style( 'mixt-admin-styles', MIXT_URI . '/dist/admin.css', false, MIXT_VERSION );
 

@@ -21,6 +21,7 @@
 
 
 			// Summary
+			
 			.summary {
 
 				.woocommerce-product-rating {
@@ -59,6 +60,7 @@
 
 
 			// Grouped Add To Cart
+			
 			form.cart table.group_table {
 				td {
 					vertical-align: middle;
@@ -96,6 +98,7 @@
 
 
 			// Variations
+			
 			form.variations_form {
 				margin-bottom: 25px !important;
 				
@@ -144,12 +147,14 @@
 
 
 			// Add to cart button
+			
 			.single_add_to_cart_button {
 				min-width: 120px;
 			}
 
 
 			// Meta
+			
 			.product_meta {
 				> span {
 					font-size: 85%;
@@ -159,6 +164,7 @@
 
 
 			// Tabs
+			
 			.woocommerce-tabs {
 				ul.tabs {
 					padding: 0;
@@ -190,6 +196,7 @@
 				}
 
 				// Tab content
+				
 				.wc-tab {
 					@extend %panel;
 
@@ -215,6 +222,7 @@
 
 
 			// Reviews
+			
 			#reviews {
 				$avatar-size: 48px;
 
@@ -256,6 +264,7 @@
 					h3 { margin-top: 0; margin-bottom: $spacing; }
 
 					// Star Rating
+					
 					.stars {
 						a {
 							color: rgba(0,0,0,0.4);
@@ -275,6 +284,7 @@
 					}
 
 					// Comment Form
+					
 					.form-submit { margin-bottom: 0; }
 				}
 			}

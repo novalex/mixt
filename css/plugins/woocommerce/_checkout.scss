@@ -4,6 +4,7 @@
 	.woocommerce-checkout {
 
 		// Login Form
+		
 		form.login {
 			.button {
 				width: 120px;
@@ -14,6 +15,7 @@
 		}
 
 		// Coupon
+		
 		.coupon-cont {
 			.coupon-title {
 				float: left;
@@ -28,6 +30,7 @@
 		}
 
 		// Checkout Form
+		
 		form.checkout {
 			h3 {
 				margin-top: 0;
@@ -36,6 +39,7 @@
 		}
 
 		// Shipping Address
+		
 		.woocommerce-shipping-fields {
 			#ship-to-different-address {
 				font-size: $font-size;
@@ -48,6 +52,7 @@
 		}
 
 		// Payment
+		
 		#payment {
 			border-radius: $bd-radius;
 			border: 1px solid rgba(0,0,0,0.1);
@@ -94,6 +99,7 @@
 		}
 
 		// Thank You Page
+		
 		&.woocommerce-order-received {
 			.order_details {
 				padding: 0;

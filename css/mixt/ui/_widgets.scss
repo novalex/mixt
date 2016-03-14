@@ -1,6 +1,4 @@
 
-// Widget Styles
-
 .widget-area {
 
 	&,
@@ -9,18 +7,17 @@
 	.nav,
 	.widget { border-color: inherit; }
 
+	ul { @extend %reset-list; }
+
 	// Widget Titles
+
 	h3 {
 		font-size: $font-size-m;
 		margin: 0 0 15px;
 	}
 
-	ul {
-		padding: 0;
-		list-style: none;
-	}
-
 	// Nav Menus
+
 	.nav li {
 		> ul,
 		.menu-item-has-children > ul {
@@ -92,14 +89,18 @@
 .widget_nav_menu ul.sub-menu li,
 .widget_pages ul.children li { padding-left: 15px; }
 
-// Text Widget
+
+/* Text Widget */
+
 .widget_text {
 	p {
 		br { line-height: 30px; }
 	}
 }
 
-// RSS Widget
+
+/* RSS Widget */
+
 .widget_rss {
 	ul { @extend .media-list; }
 
@@ -114,7 +115,9 @@
 	cite { opacity: 0.8; }
 }
 
-// Calendar Widget
+
+/* Calendar Widget */
+
 table#wp-calendar {
 	th,
 	td { text-align: center; }

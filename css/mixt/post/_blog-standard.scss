@@ -1,8 +1,7 @@
 
-// Standard Blog Styling
-
 .blog-standard {
 	.posts-container {
+		
 		.article {
 			border-bottom-width: 1px;
 			border-bottom-style: solid;
@@ -20,6 +19,7 @@
 		}
 
 
+		// Featured Media
 
 		.post-feat {
 
@@ -104,5 +104,5 @@
 	img { width: 100%; }
 }
 
-// Fix IE image width auto bug
+/* Fix IE image width auto bug */
 .ie .blog-standard .post-feat.feat-mixt-large img { width: 100%; }

@@ -1,10 +1,9 @@
 
-// Site-Wide Theme Colors
-
-.color-fade { opacity: 0.8; }
-
-
 @mixin site-theme($name, $theme) {
+
+	/* ## #{$name} Site Theme
+	-------------------------- */
+
 	$accent: map-get($theme, 'accent');
 
 	$bg: map-get($theme, 'bg');

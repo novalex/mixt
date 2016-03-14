@@ -1,7 +1,7 @@
 
-/* --------------------------
- 1. Variables
--------------------------- */
+// --------------------------
+// Variables
+// --------------------------
 
 
 // =====================================================
@@ -184,7 +184,7 @@ $rounded-radius: $bd-radius-l;
 $quote-border-width: 3px;
 
 // Right-To-Left language support
-$rtl: false;
+$rtl: true;
 
 // Include various Internet Explorer tweaks and hacks
 $ie-support: true;

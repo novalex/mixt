@@ -157,7 +157,7 @@
 	}
 }
 
-// Transparent Navbar
+/* Transparent Navbar */
 
 .nav-transparent {
 	#main-nav-wrap {
@@ -189,7 +189,7 @@
 }
 
 
-// WIDGET AREAS
+/* WIDGET AREAS */
 
 .navbar-mixt .widget-area {
 	padding: 10px;
@@ -219,7 +219,7 @@
 }
 
 
-// DESKTOP NAV BREAKPOINT
+/* DESKTOP NAV BREAKPOINT */
 
 @include media('screen', 'navbar') {
 
@@ -266,7 +266,7 @@
 		}
 	}
 
-	// Logo Positions
+	/* Logo Positions */
 	
 	.logo-left .navbar-mixt {
 		.navbar-header {
@@ -307,7 +307,7 @@
 		.no-menu-msg { float: none; }
 	}
 
-	// Fixed State
+	/* Fixed State */
 
 	.fixed-nav {
 		$half-padding: $nav-primary-fixed-pad / 2;
@@ -341,7 +341,7 @@
 	}
 }
 
-// MOBILE NAV BREAKPOINT
+/* MOBILE NAV BREAKPOINT */
 
 @include media('screen', '<navbar') {
 
@@ -433,6 +433,7 @@
 
 		// Menu Expanded State
 		.nav li.expand { background-color: rgba(0,0,0,0.03); }
+
 
 		// Dropdown Menus
 
@@ -621,7 +622,7 @@
 		margin-top: -$nav-primary-item-height;
 	}
 
-	// Logo Positions
+	/* Logo Positions */
 
 	.logo-left .navbar-mixt {
 		.navbar-header { text-align: left; }
@@ -636,7 +637,7 @@
 	}
 }
 
-// Minimum width for fixed state
+/* Minimum width for fixed state */
 @include media('(min-width: #{$nav-primary-fixed-breakpoint})') {
 	.fixed-nav {
 		.navbar-mixt {
@@ -661,12 +662,12 @@
 	}
 }
 
-// Offset top when the WP admin bar is enabled
+/* Offset top when the WP admin bar is enabled */
 @include media('(min-width: #{$nav-primary-fixed-breakpoint})', '(max-width: 782px)') {
 	.fixed-nav.admin-bar .navbar-mixt { top: 46px; }
 }
 
-// Tell jQuery the mobile media query is active
+/* Tell jQuery the mobile media query is active */
 @include media('(max-width: #{$nav-primary-fixed-breakpoint - 1px})') {
 	.navbar-data:after { content: 'mobile'; }
 }

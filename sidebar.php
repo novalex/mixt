@@ -8,46 +8,23 @@
 
 if ( Mixt_Options::get('sidebar', 'enabled') ) {
 
-	$classes = 'sidebar widget-area';
-	if ( Mixt_Options::get('sidebar', 'hide') ) {
-		$classes .= ' hidden-xs';
-	}
+	$sidebar_classes = apply_filters('mixt_sidebar_class', array());
 
 	?>
 
 	</div><?php // close #content ?>
 
-	<div class="<?php echo $classes; ?>">
+	<div class="<?php echo mixt_sanitize_html_classes($sidebar_classes); ?>">
 
 		<div class="sidebar-padder">
 			<?php
 
-			// Child Page Navigation
-			if ( Mixt_Options::get('sidebar', 'page-nav') ) { mixt_child_page_nav(); }
-
-			do_action( 'before_sidebar' );
+			do_action('mixt_before_sidebar');
 			
-			if ( ! dynamic_sidebar(Mixt_Options::get('sidebar', 'id')) ) : ?>
-				<aside id="search" class="widget widget_search">
-					<?php get_search_form(); ?>
-				</aside>
+			dynamic_sidebar( Mixt_Options::get('sidebar', 'id') );
 
-				<aside id="archives" class="widget widget_archive">
-					<h3 class="widget-title"><?php esc_html_e( 'Archives', 'mixt' ); ?></h3>
-					<ul>
-						<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
-					</ul>
-				</aside>
+			?>
+		</div>
 
-				<aside id="meta" class="widget widget_meta">
-					<h3 class="widget-title"><?php esc_html_e( 'Meta', 'mixt' ); ?></h3>
-					<ul>
-						<?php wp_register(); ?>
-						<li><?php wp_loginout(); ?></li>
-						<?php wp_meta(); ?>
-					</ul>
-				</aside>
-			<?php endif; ?>
-
-		</div><?php
+		<?php
 }

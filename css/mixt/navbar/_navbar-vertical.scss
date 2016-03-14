@@ -3,10 +3,16 @@
 	#main-wrap.nav-vertical {
 		position: relative;
 
+		// Set content maximum width
+
 		.container {
 			width: 100%;
 			max-width: $nav-vertical-content-max-width;
 		}
+
+
+		// Set container padding
+
 		#second-nav .container,
 		.head-media .container,
 		#location-bar .container,
@@ -16,6 +22,9 @@
 			padding-left: $gutter-lg / 2;
 			padding-right: $gutter-lg / 2;
 		}
+
+
+		// Nav on left side
 
 		&.nav-left {
 			padding-left: $nav-vertical-width-sm;
@@ -39,6 +48,9 @@
 			}
 		}
 
+
+		// Nav on right side
+
 		&.nav-right {
 			padding-right: $nav-vertical-width-sm;
 
@@ -61,6 +73,9 @@
 				}
 			}
 		}
+
+
+		// Vertical navbar styling
 
 		#main-nav-wrap {
 			position: fixed;

@@ -84,7 +84,7 @@ function mixt_wbc_after_import($demo_import, $demo_dir) {
 			if ( is_dir($sliders_dir) ) {
 				$sliders = array_diff(scandir($sliders_dir), array('.', '..'));
 				LS_Sources::addDemoSlider($sliders_dir);
-				include LS_ROOT_PATH.'/classes/class.ls.importutil.php';
+				include( LS_ROOT_PATH . '/classes/class.ls.importutil.php' );
 
 				foreach ( $sliders as $slider ) {
 					$slider_demo = LS_Sources::getDemoSlider($slider);

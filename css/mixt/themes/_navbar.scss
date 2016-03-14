@@ -1,7 +1,9 @@
 
-// Navbar Theme Colors
-
 @mixin navbar-theme($name, $theme) {
+
+	/* ## #{$name} Navbar Theme
+	-------------------------- */
+
 	$accent: map-get($theme, 'accent');
 
 	$bg: map-get($theme, 'bg');

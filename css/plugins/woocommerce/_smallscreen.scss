@@ -4,6 +4,7 @@
 	.mixt {
 
 		// Tablets
+
 		@include media('screen', '<mars') {
 			.col2-set {
 				margin-left: 0;
@@ -78,7 +79,9 @@
 			}
 		}
 
+
 		// Mobiles
+
 		@include media('screen', '<mercury') {
 			.shop-filters {
 				&,

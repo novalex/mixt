@@ -43,7 +43,7 @@ class Mixt_Options {
 	 * @param  string $group
 	 * @param  string $key   Key to retreive from group
 	 */
-	public static function get($group, $key = null) {
+	public static function get( $group, $key = null ) {
 		if ( $group == 'all' ) {
 			return self::$config;
 		} else {
@@ -62,7 +62,7 @@ class Mixt_Options {
 	 * @param string $key
 	 * @param mixed  $val
 	 */
-	public static function set($group, $key = null, $val) {
+	public static function set( $group, $key = null, $val ) {
 		if ( empty($key) ) { self::$config[$group] = $val; }
 		else { self::$config[$group][$key] = $val; }
 	}
@@ -73,7 +73,7 @@ class Mixt_Options {
 	 * @param string $group
 	 * @param mixed  $val
 	 */
-	public static function add($group, $val) {
+	public static function add( $group, $val ) {
 		self::$config[$group] = array_merge(self::$config[$group], $val);
 	}
 
@@ -223,7 +223,7 @@ class Mixt_Options {
 	 * @param  bool $refresh Run the checks again
 	 * @return string
 	 */
-	public static function page_type($refresh = false) {
+	public static function page_type( $refresh = false ) {
 		static $type = '';
 		if ( $type != '' && ! $refresh ) return $type;
 
@@ -255,7 +255,7 @@ class Mixt_Options {
 	}
 
 	// Check if page is a shop page
-	public static function is_shop($type = 'any') {
+	public static function is_shop( $type = 'any' ) {
 		if ( class_exists('WooCommerce') ) {
 			if ( $type == 'any' ) {
 				return ( is_woocommerce() || is_cart() || is_checkout() );
@@ -294,7 +294,7 @@ class Mixt_Options {
 	 * @param array   $option_arr Options to retrieve
 	 * @param integer $post_id    ID of the post or page for which to retreive meta options
 	 */
-	public static function get_options($option_arr, $post_id = null) {
+	public static function get_options( $option_arr, $post_id = null ) {
 		$options = array();
 
 		if ( empty($option_arr) || ! is_array($option_arr) ) { return $options; }
@@ -410,13 +410,13 @@ new Mixt_Options;
 
 // Wrapper functions
 if ( ! function_exists('mixt_get_option') ) {
-	function mixt_get_option($option) { return array_values( (array) Mixt_Options::get_options( array($option) ) )[0]; }
+	function mixt_get_option( $option ) { return array_values( (array) Mixt_Options::get_options( array($option) ) )[0]; }
 }
 if ( ! function_exists('mixt_get_options') ) {
-	function mixt_get_options($option_arr) { return Mixt_Options::get_options($option_arr); }
+	function mixt_get_options( $option_arr ) { return Mixt_Options::get_options($option_arr); }
 }
 if ( ! function_exists('mixt_meta') ) {
-	function mixt_meta($key, $post_id = null, $single = true) { return Mixt_Options::get_meta($key, $post_id, $single); }
+	function mixt_meta( $key, $post_id = null, $single = true ) { return Mixt_Options::get_meta($key, $post_id, $single); }
 }
 
 
@@ -424,7 +424,7 @@ if ( ! function_exists('mixt_meta') ) {
  * Function to normalize checkbox values
  * @param $value The raw value
  */
-function mixt_option_checkbox_val($value) {
+function mixt_option_checkbox_val( $value ) {
 	$options = array();
 
 	if ( ! is_array($value) || empty($value) ) return array();

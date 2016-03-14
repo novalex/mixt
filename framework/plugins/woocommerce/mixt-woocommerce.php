@@ -74,6 +74,8 @@ add_option('mixt-wc-options', $options);
 function mixt_wc_option($option, $default = false) {
 	global $mixt_opt;
 
+	if ( empty($mixt_opt) ) return;
+
 	if ( array_key_exists("wc-$option", $mixt_opt) ) {
 		return $mixt_opt["wc-$option"];
 	} else {

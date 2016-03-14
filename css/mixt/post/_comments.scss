@@ -1,6 +1,4 @@
 
-// Comments Styling
-
 .comments-area {
 	ol, ul {
 		margin: 0;
@@ -78,6 +76,9 @@
 	border-width: 1px 0 1px 0;
 }
 
+
+/* Comment Header */
+
 .comment-header {
 	.comment-avatar {
 		float: left;
@@ -96,11 +97,17 @@
 .comment-reply { margin-top: $margin-s; }
 .comment-content p:last-child { margin-bottom: 0; }
 
+
+/* Comment Navigation */
+
 .comment-nav {
 	.pager { margin: 15px 0; }
 	&.classic-paging .pager { margin-top: 5px; }
 }
 #comment-nav-bottom { padding: 0; }
+
+
+/* Comment Reply Form */
 
 #respond {
 	#reply-title {
@@ -120,6 +127,10 @@
 
 	.form-submit { margin: 0; }
 }
+
+
+/* Tweak spacing for first elements after headline */
+
 .headline + .comment-list {
 	> .pingback:first-child,
 	> .comment:first-child > .comment-cont:first-child { border-top-width: 0; padding-top: 0; }

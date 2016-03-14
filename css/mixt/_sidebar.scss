@@ -1,17 +1,20 @@
 
 /* --------------------------
- 18. Sidebar
+ # Sidebar
 -------------------------- */
 
 
 .sidebar {
 
 	// Child Page Nav Menu
+
 	.child-page-nav {
 
 		li {
 			border-top-width: 1px;
 			margin-top: -1px !important;
+
+			a { color: inherit; }
 		}
 
 		.current_page_item {
@@ -26,8 +29,8 @@
 		}
 	}
 
-	.child-page-nav li a { color: inherit; }
-
+	// Calendar Widget Styling
+	
 	#wp-calendar {
 		th,
 		td { padding-left: 0 !important; padding-right: 0 !important; }

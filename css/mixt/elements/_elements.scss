@@ -1,43 +1,70 @@
 
 /* --------------------------
- 20. Elements
+ # Elements
 -------------------------- */
 
 
-// Carousel
-@import 'carousel';
+/* ## Carousel
+-------------------------- */
+.mixt-carousel {
+	width: 100%;
 
-// Flip Card
+	ul[data-items="1"] li { width: 100%; }
+}
+
+
+/* ## Flip Card
+-------------------------- */
 @import 'flipcard';
 
-// Headline
+
+/* ## Headline
+-------------------------- */
 @import 'headline';
 
-// Icon Box
+
+/* ## Icon Box
+-------------------------- */
 @import 'iconbox';
 
-// Icon List
+
+/* ## Icon List
+-------------------------- */
 @import 'iconlist';
 
-// Google Map
+
+/* ## Google Map
+-------------------------- */
 @import 'map';
 
-// Pricing Table
+
+/* ## Pricing Table
+-------------------------- */
 @import 'pricing';
 
-// Profile
+
+/* ## Profile
+-------------------------- */
 @import 'profile';
 
-// Review
+
+/* ## Review
+-------------------------- */
 @import 'review';
 
-// Stat
+
+/* ## Stat
+-------------------------- */
 @import 'stat';
 
-// Timeline
+
+/* ## Timeline
+-------------------------- */
 @import 'timeline';
 
-// Form
+
+/* ## Form
+-------------------------- */
 .mixt-form {
 	.submit-box {
 		&:last-child { margin-bottom: 0; }
@@ -49,7 +76,8 @@
 }
 
 
-// VC Integration
+/* ## Elements VC Integration
+-------------------------- */
 
 .vc_mixt_form,
 .vc_mixt_pricing,

@@ -194,7 +194,7 @@ function mixt_head_media() {
 			}
 
 			if ( $lumin == 'none' && ! empty($options['bg']) && $options['bg'] != '#' ) {
-				$lumin = ( hex_is_light($options['bg']) ) ? 'light' : 'dark';
+				$lumin = ( mixt_hex_is_light($options['bg']) ) ? 'light' : 'dark';
 			}
 
 			$wrap_classes .= ( $lumin == 'dark' ) ? ' bg-dark' : ' bg-light';
@@ -257,7 +257,7 @@ function mixt_head_media() {
 
 		else if ( $options['type'] == 'color' ) {
 			$wrap_classes .= ' head-color';
-			$wrap_classes .= ( hex_is_light($options['bg']) ) ? ' bg-light' : ' bg-dark';
+			$wrap_classes .= ( mixt_hex_is_light($options['bg']) ) ? ' bg-light' : ' bg-dark';
 			$media_bg = "<div class='media-container $media_cont_classes'></div>";
 		}
 	}

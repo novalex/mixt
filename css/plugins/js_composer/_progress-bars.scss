@@ -1,5 +1,4 @@
 
-// Color Variants
 @mixin progress-bar-variant($selector, $color) {
 	&.bar_#{$selector} {
 		.vc_bar { background-color: $color; }

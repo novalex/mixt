@@ -1,18 +1,32 @@
 
-// WooCommerce Custom Styling
-
 $wc-spacing: 15px;
 $wc-spacing-s: 10px;
 $wc-spacing-l: 20px;
 
+/* Layout */
 @import 'layout';
+
+/* Common */
 @import 'common';
+
+/* Widgets */
 @import 'widgets';
+
+/* Single Product */
 @import 'single';
+
+/* Cart */
 @import 'cart';
+
+/* Checkout */
 @import 'checkout';
+
+/* Catalog / Shop Page */
 @import 'catalog';
+
+/* Smallscreen */
 @import 'smallscreen';
+
 
 @if $woocommerce {
 
@@ -23,7 +37,8 @@ $wc-spacing-l: 20px;
 	}
 
 
-	// Shop Page
+	/* Shop Page */
+	
 	#shop-wrapper {
 		border-color: inherit;
 
@@ -49,6 +64,7 @@ $wc-spacing-l: 20px;
 	.mixt {
 
 		// Demo Notice
+
 		p.demo_store {
 			position: static;
 			font-size: $font-size;
@@ -58,6 +74,7 @@ $wc-spacing-l: 20px;
 		}
 
 		// Buttons
+
 		a.button,
 		input.button,
 		button.button,
@@ -70,7 +87,8 @@ $wc-spacing-l: 20px;
 		.price_slider_amount .button { @extend .btn-black; }
 	}
 
-	// Accent button
+	/* Accent button */
+
 	@each $name, $theme in $site-themes {
 		$color: map-get($theme, 'accent');
 

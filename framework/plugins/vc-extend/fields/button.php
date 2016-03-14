@@ -72,7 +72,7 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 			return $this->params;
 		}
 
-		public function select_options($options, $selected = null) {
+		public function select_options( $options, $selected = null ) {
 			$output = '';
 			foreach ( $options as $value => $name ) {
 				$value = esc_attr($value);

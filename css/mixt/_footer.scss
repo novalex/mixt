@@ -1,10 +1,11 @@
 
 /* --------------------------
- 19. Footer
+ # Footer
 -------------------------- */
 
 
-// Back To Top Button
+/* ## Back To Top Button
+-------------------------- */ 
 
 #back-to-top {
 	position: fixed;
@@ -17,7 +18,8 @@
 	i { font-size: 12px !important; }
 }
 
-// Footer
+/* ## Colophon Styling
+-------------------------- */ 
 
 #colophon {
 
@@ -98,7 +100,8 @@
 	}
 }
 
-// Info Bar
+/* ## Info Bar
+-------------------------- */ 
 
 #info-bar-wrap {
 	position: relative;
@@ -118,7 +121,8 @@
 	}
 }
 
-// Media
+/* ## Footer Media
+-------------------------- */ 
 
 @include media('screen', '<mars') {
 	#colophon .widget-row.hidden-xs + .copyright-row { border-top-width: 1px; }

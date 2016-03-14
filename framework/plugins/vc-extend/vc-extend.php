@@ -136,7 +136,7 @@ add_filter('vc_shortcodes_css_class', 'mixt_vc_custom_classes', 10, 2);
 /**
  * Add custom grid item templates
  */
-function mixt_vc_grid_templates($templates) {
+function mixt_vc_grid_templates( $templates ) {
 	return array_merge( array(
 		'masonry-scale-rotate' => array(
 			'name'     => esc_html__( 'MIXT - Masonry: Scale And Rotate', 'mixt' ),

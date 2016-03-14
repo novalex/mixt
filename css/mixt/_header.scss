@@ -4,7 +4,8 @@
 -------------------------- */
 
 
-// PAGE LOADER
+/* ## Page Loader
+-------------------------- */
 
 body.loading {
 	overflow: hidden;
@@ -79,7 +80,8 @@ body.loading {
 }
 
 
-// HEADER MEDIA
+/* ## Header Media
+-------------------------- */
 
 .head-media {
 	$spacing: 50px;
@@ -95,6 +97,7 @@ body.loading {
 	z-index: 0;
 
 	// Inset shadow
+
 	&:after {
 		content: ' ';
 		position: absolute;
@@ -103,6 +106,10 @@ body.loading {
 		box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05), 0 -1px 8px rgba(0, 0, 0, 0.15);
 		z-index: 2;
 	}
+	&.bg-dark:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
+
+
+	// Media Container
 
 	.media-container {
 		position: absolute;
@@ -140,6 +147,9 @@ body.loading {
 	}
 
 	&.media-slider > div { z-index: 1; }
+
+
+	// Content Wrapper
 
 	.container {
 		height: 100%;
@@ -193,6 +203,9 @@ body.loading {
 		}
 	}
 
+
+	// Header Post Info
+
 	.post-meta {
 		a,
 		> span { color: inherit; opacity: 0.8; }
@@ -207,6 +220,9 @@ body.loading {
 		padding-bottom: 0;
 	}
 
+
+	// Scroll To Content
+
 	.header-scroll {
 		$size: 32px;
 		position: absolute;
@@ -220,28 +236,37 @@ body.loading {
 		@extend %anim-goDown;
 	}
 
+
+	// Fullscreen
+
 	&.fullscreen { height: 100vh; }
 
-	&.bg-dark:after { box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 -1px 8px rgba(0, 0, 0, 0.4); }
 
 	// No Slider Plugin Message
+
 	&.no-slider p {
 		width: 100%;
 		text-align: center;
 		font-size: $font-size-l;
 	}
 
+
 	// Prevent content fade
+
 	&.no-fade .container {
 		opacity: 1 !important;
 		transform: none !important;
 	}
 
+
 	// Transparent navbar
+
 	.nav-transparent & { min-height: $nav-primary-height; }
 	.nav-transparent.nav-below & .container { padding-top: 0 !important; }
 
+
 	// Parallax
+
 	&.has-parallax {
 		.media-container,
 		.ls-container {
@@ -249,7 +274,9 @@ body.loading {
 		}
 	}
 
+
 	// Shrink spacing on small screens
+	
 	@include media('screen', '<mars') {
 		.container { width: 100%; }
 		.media-inner { padding: ( $spacing-sm - $spacing-content ) 0 $spacing-sm 0 !important; }
@@ -257,7 +284,8 @@ body.loading {
 }
 
 
-// LOCATION BAR & BREADCRUMBS
+/* ## Location Bar
+-------------------------- */
 
 #location-bar {
 	width: 100%;
@@ -317,6 +345,10 @@ body.loading {
 		}
 	}
 }
+
+
+/* ## Breadcrumbs
+-------------------------- */
 
 #breadcrumbs {
 	border-radius: 0;

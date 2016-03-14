@@ -1,22 +1,26 @@
 
 /* --------------------------
- 17. Post
+ # Post
 -------------------------- */
 
 
+/* ## Featured Media
+-------------------------- */
 @import 'featured';
 
+
+/* ## Post Info
+-------------------------- */
 @import 'post-info';
 
+
+/* ## Post Meta
+-------------------------- */
 @import 'post-meta';
 
-@import 'post-related';
 
-@import 'pagination';
-
-@import 'comments';
-
-
+/* ## Post Styles
+-------------------------- */
 .article {
 	&,
 	.page-header,
@@ -135,7 +139,24 @@
 	}
 }
 
-// Media
+
+/* ## Post Related
+-------------------------- */
+@import 'post-related';
+
+
+/* ## Pagination
+-------------------------- */
+@import 'pagination';
+
+
+/* ## Comments
+-------------------------- */
+@import 'comments';
+
+
+/* Media */
+
 @include media('screen', 'mars') {
 	.single-content.has-columns {
 		&.override-cols {
@@ -149,7 +170,7 @@
 }
 
 
-// FORMAT STYLING
+/* FORMAT STYLING */
 
 .format-aside,
 .format-link {
@@ -187,22 +208,34 @@
 }
 
 
-// BLOG STYLING
-
+/* ## Grid Blog Styling
+-------------------------- */
 @import 'blog-grid';
+
+
+/* ## Masonry Blog Styling
+-------------------------- */
 @import 'blog-masonry';
+
+
+/* ## Standard Blog Styling
+-------------------------- */
 @import 'blog-standard';
+
+
+/* ## Common Blog Styling
+-------------------------- */
 @import 'blog-common';
 
 
-// PORTFOLIO STYLING
-
+/* ## Portfolio Styling
+-------------------------- */
 @import 'portfolio';
 
 
-// FEATURED HOVER EFFECT
+/* Featured Hover Effect */
 
-//.posts-container,
+// .posts-container,
 .post-related {
 	.post-feat > a > img {
 		@extend %img-effect-hover;
@@ -210,7 +243,7 @@
 }
 
 
-// POST TAGS
+/* Post Tags */
 
 .entry-footer {
 	.tag-list {
@@ -221,12 +254,12 @@
 }
 
 
-// SOCIAL SHARING
+/* Social Sharing */
 
 .post-share .btn { padding: 10px 6px; }
 
 
-// ABOUT THE AUTHOR
+/* About The Author */
 
 .about-the-author {
 	.author-avatar {
@@ -250,7 +283,7 @@
 }
 
 
-// MISCELLANEOUS
+/* Miscellaneous */
 
 .post-extra { border-color: inherit; }
 

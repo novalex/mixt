@@ -31,21 +31,21 @@ HEADER FUNCTIONS
 
 		// Set header height to viewport percentage
 		} else if ( mixt_opt.header.height.height != '' && mixt_opt.header.height.units == '%' ) {
-			var height = parseInt(mixt_opt.header.height.height, 10) / 100 * viewHeight;
+			var percentHeight = parseInt(mixt_opt.header.height.height, 10) / 100 * viewHeight;
 
-			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) height -= topNavHeight;
+			if ( mixt_opt.nav.position == 'below' && ! mixt_opt.nav.transparent ) percentHeight -= topNavHeight;
 
-			mediaWrap.add(mediaCont).css('height', height);
+			mediaWrap.add(mediaCont).css('height', percentHeight);
 		}
 
 		// Add data attributes for parallax scrolling
 		if ( mixt_opt.header.parallax != 'none' ) {
 			var paraEl = mediaWrap.find('.media-container, .ls-container'),
-				height = mediaWrap.height() + wrapOffset,
+				paraHeight = mediaWrap.height() + wrapOffset,
 				offTop = '-'+wrapOffset+'px',
 				btmVal = ( mixt_opt.header.parallax == 'slow' ) ? '25%' : '80%';
 			if ( paraEl.length ) {
-				mediaCont.css({'top': offTop, 'height': height });
+				mediaCont.css({'top': offTop, 'height': paraHeight });
 				paraEl.attr('data-top', 'transform: translate3d(0, 0%, 0)');
 				paraEl.attr('data-top-bottom', 'transform: translate3d(0, ' + btmVal + ', 0)');
 
@@ -79,7 +79,7 @@ HEADER FUNCTIONS
 		});
 	}
 
-	if ( mixt_opt.header.enabled ) {
+	if ( mixt_opt.header.enabled && mediaWrap.length ) {
 		headerFn();
 
 		if ( mixt_opt.header.scroll ) { headerScroll(); }

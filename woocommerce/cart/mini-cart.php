@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php else : ?>
 
-		<li class="empty"><?php esc_html__( 'No products in the cart.', 'woocommerce' ); ?></li>
+		<li class="empty"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></li>
 
 	<?php endif; ?>
 
@@ -76,14 +76,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! WC()->cart->is_empty() ) : ?>
 
-	<p class="total"><strong><?php esc_html__( 'Subtotal', 'woocommerce' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
+	<p class="total"><strong><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
 
 	<?php // MIXT MOD ?>
 	<div class="buttons btn-group">
-		<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-minimal"><?php esc_html__( 'View Cart', 'woocommerce' ); ?></a>
-		<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-accent checkout"><?php esc_html__( 'Checkout', 'woocommerce' ); ?></a>
+		<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-minimal"><?php esc_html_e( 'View Cart', 'woocommerce' ); ?></a>
+		<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn-accent checkout"><?php esc_html_e( 'Checkout', 'woocommerce' ); ?></a>
 	</div>
 
 <?php endif; ?>

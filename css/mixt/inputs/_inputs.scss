@@ -1,10 +1,8 @@
 
 /* --------------------------
- 14. Inputs
+ # Inputs
 -------------------------- */
 
-
-label { font-weight: normal; }
 
 $input-bg: $off-white;
 $input-border: darken($input-bg, 10);
@@ -37,7 +35,10 @@ $input-focus-border: $input-border;
 	}
 }
 
-// INPUTS
+label { font-weight: normal; }
+
+
+/* INPUTS */
 
 input:not([type=submit]):not([type=button]):not(.btn),
 textarea,
@@ -49,7 +50,7 @@ input:not([type=checkbox]):not([type=radio]),
 textarea { -webkit-appearance: none; }
 
 
-// SELECTS
+/* SELECTS */
 
 %select-arrow {
 	background-image: url('#{$img-path}/icons/select-arrow-dark.png');
@@ -67,7 +68,7 @@ select {
 	border: 1px solid $input-border;
 	box-shadow: 0 1px 0 rgba(0,0,0,0.06);
 
-	// Remove default browser select styling and show custom arrow
+	/* Remove default browser select styling and show custom arrow */
 	padding-right: 28px !important;
 	@extend %select-arrow;
 	-webkit-appearance: none;
@@ -115,17 +116,17 @@ select {
 }
 
 
-// INPUT STATES
+/* INPUT STATES */
 
-	// Success
+	/* Success */
 	.input-success { border-bottom-color: $green !important; }
-	// Warning
+	/* Warning */
 	.input-warn { border-bottom-color: $orange !important; }
-	// Error
+	/* Error */
 	.input-error { border-bottom-color: $red !important; }
 
 
-// Override input & button outline
+/* Override input & button outline */
 input,
 button,
 select,
@@ -141,7 +142,7 @@ textarea,
 }
 
 
-// FORMS
+/* FORMS */
 
 .form-group {
 	label {
@@ -175,7 +176,7 @@ textarea,
 .form-no-labels label { @extend .sr-only; }
 
 
-// Small Gutter Width for Forms
+/* Small Gutter Width for Forms */
 
 .form-cols {
 	@include make-custom-grid-columns($gutter: $form-gutter);

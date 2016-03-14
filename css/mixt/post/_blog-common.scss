@@ -1,6 +1,4 @@
 
-// Common Blog Styling
-
 .blog-grid,
 .blog-masonry {
 	.posts-container {
@@ -47,6 +45,9 @@
 	}
 }
 
+
+/* Grid and Masonry Post Styling */
+
 .blog-grid .posts-container .article,
 .blog-masonry .post-wrapper {
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
@@ -56,6 +57,9 @@
 
 .fullwidth .blog-grid .posts-container:first-child { padding-top: 0; }
 .fullwidth .blog-grid .posts-container:last-child { padding-bottom: 0; }
+
+
+/* Blog Columns */
 
 .blog-2-col .posts-container .article { width: 50%; }
 .blog-3-col .posts-container .article { width: 33.33333%; }
@@ -147,7 +151,8 @@
 }
 
 
-// Animated Posts On Load
+/* Animated Posts On Load */
+
 .js .posts-container .article.animated {
 	opacity: 1;
 	transform: translate3d(0,0,0);

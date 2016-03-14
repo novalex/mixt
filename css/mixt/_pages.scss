@@ -1,6 +1,6 @@
 
 /* --------------------------
- 22. Pages
+ # Pages
 -------------------------- */
 
 
@@ -11,12 +11,12 @@
 }
 
 
-// One-Page
+/* One-Page */
 
 body.one-page { position: relative; }
 
 
-// 404 Page
+/* 404 Page */
 
 .error-404 {
 	padding: $row-spacing-lg 0;
@@ -29,7 +29,7 @@ body.one-page { position: relative; }
 }
 
 
-// No Results Page
+/* No Results Page */
 
 .no-results {
 	.page-content {
@@ -42,7 +42,7 @@ body.one-page { position: relative; }
 }
 
 
-// Blank Page
+/* Blank Page */
 
 .page-template-blank {
 	#main-wrap { padding: 0 !important; }
@@ -58,7 +58,7 @@ body.one-page { position: relative; }
 }
 
 
-// Services Page
+/* Services Page */
 
 .services-testimonial-carousel {
 	blockquote { display: inline-block; }

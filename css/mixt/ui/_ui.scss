@@ -1,29 +1,40 @@
 
 /* --------------------------
- 13. UI
+ # UI
 -------------------------- */
 
 
-// Image Styles
+/* ## Image Styles
+-------------------------- */
 @import 'image';
 
-// Row Separators
+
+/* ## Row Separators
+-------------------------- */
 @import 'row-separators';
 
-// Gallery & Carousel
+
+/* ## Gallery & Carousel
+-------------------------- */
 @import 'gallery';
 
-// Icon Styles
+
+/* ## Icon Styles
+-------------------------- */
 @import 'icon';
 
-// Hover Effects
-@import 'effects';
 
-// Widgets
+/* ## Widget Styles
+-------------------------- */
 @import 'widgets';
 
 
-// Animations
+/* Hover Effects */
+
+@import 'effects';
+
+
+/* Animations */
 
 .mixt-animate {
 	opacity: 1;
@@ -37,7 +48,7 @@
 }
 
 
-// Search Widget
+/* Search Widget */
 
 .search-form {
 	.search-submit {
@@ -49,7 +60,7 @@
 }
 
 
-// Link Lists
+/* Link Lists */
 
 .link-list,
 .social-links {
@@ -72,7 +83,7 @@
 .link-list li a { transition: color 0.25s; }
 
 
-// Social Links
+/* Social Links */
 
 .social-links {
 	li > a i {
@@ -118,7 +129,7 @@
 }
 
 
-// Hover Content
+/* Hover Content */
 
 .hover-content {
 	position: relative;
@@ -150,6 +161,7 @@
 				@include mixt-bg-variant(fade-out($color, 0.1), true, true);
 			}
 		}
+
 		// Accent Colors
 		@each $theme, $colors in $site-themes {
 			.theme-#{$theme} &.accent {
@@ -180,7 +192,7 @@
 }
 
 
-// Icon Header
+/* Icon Header */
 
 .icon-header {
 	text-align: center;
@@ -193,7 +205,7 @@
 }
 
 
-// Testimonial
+/* Testimonial */
 
 .mixt-testimonial {
 	font-size: $font-size-m;
@@ -202,7 +214,7 @@
 }
 
 
-// Blockquotes
+/* Blockquotes */
 
 blockquote {
 	padding: 15px;
@@ -224,7 +236,7 @@ blockquote + cite,
 }
 
 
-// Images and Captions
+/* Images and Captions */
 
 img {
 	display: inline-block;
@@ -259,7 +271,7 @@ img[class*="wp-image-"] {
 }
 
 
-// Tags
+/* Tags */
 
 .tag-list a,
 .tagcloud a {
@@ -292,7 +304,7 @@ img[class*="wp-image-"] {
 }
 
 
-// Miscellaneous
+/* Miscellaneous */
 
 .wp-smiley,
 .emoji { font-size: 16px; }

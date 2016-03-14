@@ -1,10 +1,10 @@
 
 /* --------------------------
- 9. Spacing
+ # Spacing
 -------------------------- */
 
 
-// Custom Gutter Columns & Rows
+/* Custom Gutter Columns & Rows */
 
 @mixin make-custom-grid-columns($i: 1, $list: '.col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}', $gutter: $grid-gutter-width) {
 	padding-left: $grid-gutter-width / 2 - $gutter / 2;
@@ -29,7 +29,7 @@
 }
 
 
-// Main Content
+/* Main Content */
 
 #content,
 .sidebar-padder {
@@ -46,7 +46,7 @@
 .portfolio-wrap.portfolio-sortable:first-child { padding-top: $gutter-lg; }
 
 
-// Page Header Spacing
+/* Page Header Spacing */
 
 .article {
 	margin: $gutter-lg 0 0;
@@ -55,20 +55,20 @@
 .article .first-row { margin-top: -$gutter-lg; }
 
 
-// Pre-Footer Spacing
+/* Pre-Footer Spacing */
 
 #content > .article .entry-body > :last-child { margin-bottom: 0; }
 .posts-container:last-child { padding-bottom: $gutter-lg; }
 
 
-// Fullwidth Layout
+/* Fullwidth Layout */
 
 .fullwidth {
 	.blog-grid .paging-navigation { padding: 0 $gutter-lg; }
 }
 
 
-// Rows & Containers
+/* Rows & Containers */
 
 .widget,
 .post-extra,
@@ -102,7 +102,7 @@ ul.wpb_thumbnails-fluid > li,
 }
 
 
-// Small Gutters
+/* Small Gutters */
 
 @include media('screen', '<mars') {
 	#content,

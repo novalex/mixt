@@ -1,6 +1,6 @@
 
 /* --------------------------
- 8. Base
+ # Base
 -------------------------- */
 
 
@@ -37,7 +37,7 @@ html,
 body { margin: 0 !important; }
 
 
-// Main Content
+/* Main Content */
 
 #content,
 .sidebar {
@@ -52,7 +52,7 @@ body { margin: 0 !important; }
 #content-wrap > .row { border-color: inherit; }
 
 
-// Lists
+/* Lists */
 
 ol, ul {
 	padding-left: 30px;
@@ -63,7 +63,7 @@ ol, ul {
 }
 
 
-// Anchors
+/* Anchors */
 
 a {
 	transition: color 0.2s;
@@ -78,32 +78,32 @@ a {
 }
 
 
-// Focus Styles
+/* Focus Styles */
 
 a:focus,
 .navbar .dropdown-toggle:focus {
 	outline: thin dashed;
 }
 
-// Hover Styles
+/* Hover Styles */
 
 a:hover,
 a:active,
 .no-outline a { outline: none !important; }
 
-// Screen Reader Text
+/* Screen Reader Text */
 
 .screen-reader-text { @extend .sr-only; }
 
-// Clearing
+/* Clearing */
 
 .clear { clear: both; }
 
-// Make Sure Embeds And Iframes Fit Their Containers
+/* Make Sure Embeds And Iframes Fit Their Containers */
 
 embed, iframe, object { max-width: 100%; }
 
-// Miscellaneous
+/* Miscellaneous */
 
 p:empty { display: none; }
 

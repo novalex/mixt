@@ -11,7 +11,7 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function mixt_customize_register($wp_customize) {
+function mixt_customize_register( $wp_customize ) {
 
 	// LOGO
 	
@@ -124,6 +124,10 @@ function mixt_customize_js() {
 }
 add_action('customize_preview_init', 'mixt_customize_js');
 
+
+/**
+ * Return theme options for use with the customizer
+ */
 function mixt_customize_options() {
 	global $mixt_opt;
 

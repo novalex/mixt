@@ -1,12 +1,16 @@
 
 /* --------------------------
- 11. Navbar
+ # Navbar
 -------------------------- */
 
 
+/* ## Navbar Base
+-------------------------- */
+
 @import 'navbar-base';
 
-// Navbar Bordered Menu Items
+
+/* Navbar Bordered Menu Items */
 
 .navbar.bordered {
 	.nav {
@@ -37,17 +41,20 @@
 }
 
 
-// Navbar Vetical Layout
+/* ## Navbar Vetical Layout
+-------------------------- */
 
 @import 'navbar-vertical';
 
 
-// Primary Navbar
+/* ## Primary Navbar
+-------------------------- */
 
 @import 'navbar-primary';
 
 
-// Secondary Navbar
+/* ## Secondary Navbar
+-------------------------- */
 
 .second-nav {
 	min-height: $sec-nav-item-height;

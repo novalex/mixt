@@ -79,7 +79,7 @@ if ( ! class_exists('Mixt_Media_Meta') ) {
 	
 	}
 }
-$media_meta_fields = array(
+$mixt_media_meta_fields = array(
 	'luminosity' => array(
 		'label'   => esc_html__( 'Luminosity', 'mixt' ),
 		'input'   => 'select',
@@ -92,4 +92,4 @@ $media_meta_fields = array(
 		'exclusions'  => array('audio', 'video'),
 	)
 );
-new Mixt_Media_Meta( $media_meta_fields );
+new Mixt_Media_Meta( $mixt_media_meta_fields );

@@ -1,6 +1,6 @@
 
 /* --------------------------
- 7. Themes
+ # Themes
 -------------------------- */
 
 
@@ -25,7 +25,8 @@ $site-themes: map-merge($themes, $site-themes);
 $nav-themes: map-merge($themes, $nav-themes);
 
 
-// COLOR VARIANTS
+/* ## Color Variants
+-------------------------- */
 
 %basic-color-text-variants {
 	@each $sel, $color in $basic-colors {

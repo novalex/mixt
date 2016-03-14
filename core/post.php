@@ -81,7 +81,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			$this->excerpt = get_the_excerpt();
 
 			if ( $context != 'single' ) {
-				$this->permalink = get_permalink($this->ID);
+				$this->permalink = esc_url(get_permalink($this->ID));
 			}
 
 			$this->type = get_post_type($id);
@@ -185,7 +185,7 @@ if ( ! class_exists('Mixt_Post') ) {
 		 * @param  string $comp
 		 * @return bool
 		 */
-		public function display_component($comp) {
+		public function display_component( $comp ) {
 			if ( array_key_exists($comp, $this->post_display) ) {
 				return $this->post_display[$comp];
 			} else {
@@ -280,7 +280,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 			$feat_size = $this->layout['feat-size'];
 
-			$feat_classes = 'post-feat feat-' . $feat_size;
+			$feat_classes = 'post-feat feat-' . sanitize_html_class($feat_size);
 
 			$permalink_start = $permalink_end = $placeholder_img = '';
 			if ( $this->context != 'single' ) {
@@ -293,14 +293,16 @@ if ( ! class_exists('Mixt_Post') ) {
 			$small_feat = $this->display_component('small-feat');
 
 			if ( ! empty($args['placeholder']) || ! empty($this->post_display['feat-ph']['id']) ) {
-				$placeholder = ! empty($args['placeholder']) ? $args['placeholder'] : $this->post_display['feat-ph']['id'];
+				$placeholder = ( ! empty($args['placeholder']) ) ? $args['placeholder'] : $this->post_display['feat-ph']['id'];
 				$placeholder_img = '<div class="' . $feat_classes . ' post-image image-placeholder">' . $permalink_start . wp_get_attachment_image($placeholder, $feat_size) . $permalink_end . '</div>';
 			}
 
-			if ( empty($this->options['format-icon']) ) { $this->options['format-icon'] = 'fa fa-ellipsis-h'; }
-			$format_icon = "<div class='$feat_classes feat-format'><i class='format-icon {$this->options['format-icon']}'></i><a href='{$this->permalink}' class='main-link'></a></div>";
-
-			$format_bg_icon = "<i class='format-bg-icon {$this->options['format-icon']}'></i>";
+			$format_icon_class = ( empty($this->options['format-icon']) ) ? 'fa fa-ellipsis-h' : mixt_sanitize_html_classes($this->options['format-icon']);
+			$format_icon = "<div class='$feat_classes feat-format'>";
+				$format_icon .= "<i class='format-icon $format_icon_class'></i>";
+				$format_icon .= "<a href='{$this->permalink}' class='main-link'></a>";
+			$format_icon .= '</div>';
+			$format_bg_icon = "<i class='format-bg-icon $format_icon_class'></i>";
 
 			$fallback_feat = ( ! empty($placeholder_img) ) ? $placeholder_img : $format_icon;
 
@@ -313,7 +315,7 @@ if ( ! class_exists('Mixt_Post') ) {
 				case 'aside':
 				case 'quote':
 				case 'status':
-					$feat_classes .= ' post-' . $this->format;
+					$feat_classes .= ' post-' . sanitize_html_class($this->format);
 
 					// Link Format
 					if ( $this->format == 'link' ) {
@@ -332,11 +334,14 @@ if ( ! class_exists('Mixt_Post') ) {
 						}
 
 						if ( $small_feat ) {
-							$output = "<div class='$feat_classes feat-format'><i class='format-icon {$this->options['format-icon']}'></i><a href='{$post_link}' class='main-link'></a></div>";
+							$output = "<div class='$feat_classes feat-format'>" .
+										  "<i class='format-icon $format_icon_class'></i>" .
+										  "<a href='" . esc_url($post_link) . "' target='_blank' class='main-link'></a>" .
+									  '</div>';
 						} else {
 							$output = "<div class='$feat_classes'><div class='text-wrap'>" .
-										  "<h2 class='title'>$link_title</h2><small>$post_link</small>$format_bg_icon" .
-										  "<a href='$post_link' target='_blank' class='main-link'></a>" .
+										  "<h2 class='title'>" . esc_html($link_title) . "</h2><small>" . esc_html($post_link) . "</small>$format_bg_icon" .
+										  "<a href='" . esc_url($post_link) . "' target='_blank' class='main-link'></a>" .
 									  '</div></div>';
 						}
 
@@ -527,7 +532,7 @@ if ( ! class_exists('Mixt_Post') ) {
 		/**
 		 * Display useful links and info when hovering the featured media
 		 */
-		public function rollover($content) {
+		public function rollover( $content ) {
 			$opt_pre = $this->layout['page-type'];
 			$options = mixt_get_options( array(
 				'items'      => array( 'key' => $opt_pre . '-rollover-items', 'return' => 'value' ),
@@ -558,7 +563,7 @@ if ( ! class_exists('Mixt_Post') ) {
 					<div class="inner">
 						<?php
 							if ( in_array('title', $items) ) {
-								echo "<a href='{$this->permalink}' class='post-title no-color'>" . get_the_title() . '</a>';
+								echo "<a href='{$this->permalink}' class='post-title no-color'>" . esc_html( get_the_title() ) . '</a>';
 							}
 							if ( in_array('excerpt', $items) ) {
 								$excerpt = wp_trim_words($this->excerpt, 20);
@@ -569,7 +574,7 @@ if ( ! class_exists('Mixt_Post') ) {
 								echo "<a href='$this->permalink' class='$item_classes view-post' title='" . esc_attr__('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
 							}
 							if ( in_array('full', $items) ) {
-								$link = wp_get_attachment_url(get_post_thumbnail_id($this->ID));
+								$link = esc_url( wp_get_attachment_url( get_post_thumbnail_id($this->ID) ) );
 								if ( $link ) {
 									$icon = mixt_get_icon('view-image');
 									echo "<a href='$link' class='$item_classes view-image' title='" . esc_attr__('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
@@ -585,6 +590,7 @@ if ( ! class_exists('Mixt_Post') ) {
 
 			$html = ob_get_clean();
 
+			// Return markup with rollover inserted at the end
 			return preg_replace('/<\/div>$/i', $html . '</div>', $content);
 		}
 
@@ -608,19 +614,19 @@ if ( ! class_exists('Mixt_Post') ) {
 				if ( ! empty($this->options['format-icon']) ) {
 					$format_link = get_post_format_link($this->format);
 					if ( empty($format_link) ) { $format_link = '#'; }
-					echo '<a href="' . $format_link . '" class="post-format"><i class="' . $this->options['format-icon'] . '"></i></a>';
+					echo '<a href="' . esc_url($format_link) . '" class="post-format"><i class="' . mixt_sanitize_html_classes($this->options['format-icon']) . '"></i></a>';
 				}
 
 				// Post Date
-				$date_iso    = esc_attr( get_the_date('c') );
+				$date_iso    = get_the_date('c');
 				$date_year   = get_the_date('Y');
 				$date_month  = get_the_date('m');
 				$date_day    = get_the_date('d');
 				$date_format = '<strong>' . esc_html( $date_day ) . '</strong>' . get_the_date('M') . ', ' . esc_html( $date_year );
 				$date_url    = get_day_link( $date_year, $date_month, $date_day );
 
-				$date = '<time class="entry-date published" datetime="' . $date_iso . '">' . $date_format . '</time>';
-				echo '<a href="' . esc_url( $date_url ) . '" title="' . esc_attr( get_the_time() ) . '" rel="bookmark" class="post-date no-color">' . $date . '</a>';
+				$date = '<time class="entry-date published" datetime="' . esc_attr($date_iso) . '">' . $date_format . '</time>';
+				echo '<a href="' . esc_url($date_url) . '" title="' . esc_attr( get_the_time() ) . '" rel="bookmark" class="post-date no-color">' . $date . '</a>';
 
 				echo '</div>';
 			}
@@ -668,7 +674,7 @@ if ( ! class_exists('Mixt_Post') ) {
 		 *
 		 * @param string $type display full content or excerpt
 		 */
-		public function content($type = null) {
+		public function content( $type = null ) {
 
 			// Display attachment image
 			if ( is_attachment() ) {
@@ -721,7 +727,7 @@ if ( ! function_exists('mixt_get_post_image') ) {
 	 * @param mixed  $content Content string to search in for image, or null to get the current post's content
 	 * @param string $type    Data to return. 'full' for image markup, 'id' for image attachment ID, 'url' for image URL, 'array' for an array of the image and attributes
 	 */
-	function mixt_get_post_image($content = null, $type = 'full') {
+	function mixt_get_post_image( $content = null, $type = 'full' ) {
 		if ( is_null($content) ) {
 			global $post;
 			$content = $post->post_content;
@@ -757,7 +763,7 @@ if ( ! function_exists('mixt_about_the_author') ) {
 	 *
 	 * @param bool $title Display title
 	 */
-	function mixt_about_the_author($title = true) {
+	function mixt_about_the_author( $title = true ) {
 		$bio = get_the_author_meta('description');
 
 		if ( empty($bio) ) {
@@ -765,7 +771,7 @@ if ( ! function_exists('mixt_about_the_author') ) {
 		}
 
 		$id     = get_the_author_meta('ID');
-		$name   = '<a href="' . esc_attr( get_author_posts_url($id) ) . '" class="author-url" rel="author">' .
+		$name   = '<a href="' . esc_url( get_author_posts_url($id) ) . '" class="author-url" rel="author">' .
 					  esc_html( get_the_author_meta('display_name') ) .
 				  '</a>';
 		$avatar = get_avatar($id, 64);
@@ -791,7 +797,7 @@ if ( ! function_exists('mixt_related_posts') ) {
 	 * @param string $type    Type of posts to display
 	 * @param string $heading Text for the heading
 	 */
-	function mixt_related_posts($type, $heading = '') {
+	function mixt_related_posts( $type, $heading = '' ) {
 		$args = mixt_get_options( array(
 			'number'   => array( 'key' => $type . '-related-number', 'type' => 'str', 'return' => 'value' ),
 			'cols-l'   => array( 'key' => $type . '-related-cols', 'type' => 'str', 'return' => 'value' ),
@@ -850,17 +856,19 @@ if ( ! function_exists('mixt_related_posts') ) {
 				if ( $args['slider'] && $args['number'] > 3 ) {
 					// Enqueue lightslider JS
 					mixt_enqueue_plugin('lightslider');
-					
-					echo "<div class='slider-cont init' data-type='{$args['type']}' data-cols='{$args['cols-l']}' data-tablet-cols='{$args['cols-m']}' data-mobile-cols='{$args['cols-s']}'>";
+
+					$col_attrs = 'data-cols="' . esc_attr($args['cols-l']) . '" data-tablet-cols="' . esc_attr($args['cols-m']) . '" data-mobile-cols="' . esc_attr($args['cols-s']) . '"';
+					echo '<div class="slider-cont init" data-type="' . esc_attr($args['type']) . '" ' . $col_attrs . '>';
 				} else {
-					echo "<div class='related-inner post-list related-{$args['cols-l']}-col related-tablet-{$args['cols-m']}-col related-mobile-{$args['cols-s']}-col'>";
+					$classes = mixt_sanitize_html_classes("related-{$args['cols-l']}-col related-tablet-{$args['cols-m']}-col related-mobile-{$args['cols-s']}-col");
+					echo "<div class='related-inner post-list $classes'>";
 				}
 
 				while ( $rel_query->have_posts() ) :
 					$rel_query->the_post();
 					$post_ob  = new Mixt_Post('related');
 					$title    = get_the_title();
-					$link     = $post_ob->permalink;
+					$link     = esc_url($post_ob->permalink);
 					$link_cls = 'related-title';
 
 					if ( $args['type'] == 'text' ) { $link_cls .= ' hover-accent-color'; }
@@ -869,7 +877,7 @@ if ( ! function_exists('mixt_related_posts') ) {
 					<article class="post related-post">
 						<div class="related-content">
 							<?php
-								echo "<a rel='external' href='$link' class='$link_cls'>$title</a>";
+								echo "<a rel='external' href='$link' class='$link_cls'>" . esc_html($title) . '</a>';
 								
 								if ( $args['type'] == 'text' ) {
 									if ( $args['elements']['date'] || $args['elements']['comments'] ) {
@@ -898,7 +906,7 @@ if ( ! function_exists('mixt_related_posts') ) {
 								);
 								$post_ob->featured($feat_args);
 								if ( $args['minimal'] ) {
-									echo "<a rel='external' href='$link' class='related-title-tip' title='$title'></a>";
+									echo "<a rel='external' href='$link' class='related-title-tip' title='" . esc_attr($title) . "'></a>";
 								}
 							}
 						?>
@@ -965,7 +973,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// View Post
 		if ( get_the_title() == '' && ! is_single() ) {
 			$view_icon = ( $args['icons'] ) ? mixt_get_icon('view-post') : '';
-			$view_post = '<span class="view-post"><a href="' . esc_attr( get_permalink() ) . '">' . $view_icon . esc_html__( 'View Post', 'mixt' ) . '</a></span>' . $separator;
+			$view_post = '<span class="view-post"><a href="' . esc_url( get_permalink() ) . '">' . $view_icon . esc_html__( 'View Post', 'mixt' ) . '</a></span>' . $separator;
 		}
 
 		// Author
@@ -984,8 +992,8 @@ if ( ! function_exists('mixt_post_meta') ) {
 
 		// Post Date
 		if ( $args['date'] ) {
-			$date_iso    = esc_attr( get_the_date('c') );
-			$date_format = esc_html( get_the_date('F jS, Y') );
+			$date_iso    = get_the_date('c');
+			$date_format = get_the_date('F jS, Y');
 			$date_url    = get_day_link( get_the_date('Y'), get_the_date('m'), get_the_date('d') );
 			$date_icon   = ( $args['icons'] ) ? mixt_get_icon('date') : '';
 			$date_title  = get_the_time();
@@ -995,7 +1003,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 				$date_title .= '. ' . sprintf( esc_html__( 'Updated %s', 'mixt' ), get_the_modified_date() );
 			}
 
-			$date = '<time class="entry-date published" datetime="' . $date_iso . '">' . $date_format . '</time>';
+			$date = '<time class="entry-date published" datetime="' . esc_attr( $date_iso ) . '">' . esc_html( $date_format ) . '</time>';
 			$date = '<a href="' . esc_url( $date_url ) . '" title="' . esc_attr( $date_title ) . '" rel="bookmark">' . $date . '</a>';
 			$date = '<span class="posted-on">' . $date_icon . $date . '</span>' . $separator;
 		}
@@ -1015,7 +1023,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 					$category = '<span class="cat">' . $cat_icon;
 					foreach ( $cats as $cat ) {
 						$cat_link = get_term_link($cat->term_id);
-						$category .= '<a href="' . esc_url($cat_link) . '">' . $cat->name . '</a>';
+						$category .= '<a href="' . esc_url($cat_link) . '">' . esc_html($cat->name) . '</a>';
 					}
 					$category .= '</span>' . $separator;
 				}
@@ -1034,7 +1042,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 				$comments_text = esc_html__( '1 comment', 'mixt' );
 			}
 
-			$comments = '<span class="comments">' . $comments_icon . '<a href="' . get_comments_link() . '">' . $comments_text . '</a></span>' . $separator;
+			$comments = '<span class="comments">' . $comments_icon . '<a href="' . esc_url( get_comments_link() ) . '">' . $comments_text . '</a></span>' . $separator;
 		}
 
 		$meta_string = $view_post . $author . $date . $category . $comments;

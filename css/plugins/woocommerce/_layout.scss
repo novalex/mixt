@@ -30,6 +30,7 @@
 
 
 		// Row spacing
+
 		div.product {
 			div.images,
 			div.summary,
@@ -54,6 +55,7 @@
 
 
 		// Columns
+
 		ul.products {
 			$gutter: $padding-l;
 
@@ -92,12 +94,14 @@
 			width: 100%;
 
 			// Spacing
+
 			div.images,
 			div.summary:first-child {
 				padding-right: $gutter-lg;
 			}
 
 			// Product Images & Thumbnails
+
 			.thumbnails {
 				$spacing: 10px;
 
@@ -148,7 +152,9 @@
 			}
 
 			@include media('screen', 'venus') {
+
 				// Tabs
+
 				.woocommerce-tabs {
 					float: right;
 					width: 50%;

@@ -13,6 +13,8 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * Display the Page Loader
  */
 function mixt_page_loader() {
+	if ( ! Mixt_Options::get('page', 'page-loader') ) return;
+	
 	$options = mixt_get_options( array(
 		'type' => array(
 			'key'    => 'page-loader-type',
@@ -35,20 +37,23 @@ function mixt_page_loader() {
 		),
 	) );
 
-	$load_classes  = 'loader ';
+	$load_classes  = 'loader';
 
 	// Loader Animation
-	if ( $options['anim'] != 'none' ) $load_classes .= 'animated infinite ' . sanitize_html_class($options['anim']) . ' ';
+	if ( $options['anim'] != 'none' ) {
+		$load_classes .= ' animated infinite ' . $options['anim'];
+	}
 
 	// Loader Shape
 	if ( $options['type'] == '1' ) {
-		$load_elem = '<div class="' . $load_classes . sanitize_html_class($options['shape']) . '"></div>';
+		$load_classes .= ' ' . $options['shape'];
+		$load_elem = '<div class="' . mixt_sanitize_html_classes($load_classes) . '"></div>';
 	// Loader Image
 	} else if ( is_array($options['img']) && ! empty($options['img']['url']) ) {
-		$load_elem = '<img src="' . esc_attr($options['img']['url']) . '" alt="' . esc_attr__( 'Loading...', 'mixt' ) . '" class="' . $load_classes . '">';
+		$load_elem = '<img src="' . esc_url($options['img']['url']) . '" alt="' . esc_attr__( 'Loading...', 'mixt' ) . '" class="' . mixt_sanitize_html_classes($load_classes) . '">';
 	// Default Loader
 	} else {
-		$load_elem = '<div class="ring ' . $load_classes . '"></div>';
+		$load_elem = '<div class="ring ' . mixt_sanitize_html_classes($load_classes) . '"></div>';
 	}
 
 	// Output
@@ -60,6 +65,7 @@ function mixt_page_loader() {
 	</div>
 	<?php
 }
+add_action('mixt_before_wrap', 'mixt_page_loader');
 
 
 /**
@@ -111,18 +117,18 @@ function mixt_display_logo() {
 	// Logo Markup
 	if ( $options['type'] == 'img' && ! empty($options['img']['url']) ) {
 		if ( ! empty($options['img-inv']['url']) ) {
-			$output .= '<img class="logo-img logo-light" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
-			$output .= '<img class="logo-img logo-dark" src="' . $options['img-inv']['url'] . '" alt="' . $options['text'] . '">';
+			$output .= '<img class="logo-img logo-light" src="' . esc_url($options['img']['url']) . '" alt="' . esc_attr($options['text']) . '">';
+			$output .= '<img class="logo-img logo-dark" src="' . esc_url($options['img-inv']['url']) . '" alt="' . esc_attr($options['text']) . '">';
 		} else {
-			$output .= '<img class="logo-img" src="' . $options['img']['url'] . '" alt="' . $options['text'] . '">';
+			$output .= '<img class="logo-img" src="' . esc_url($options['img']['url']) . '" alt="' . esc_attr($options['text']) . '">';
 		}
 	} else {
-		$output .= '<strong>' . $options['text'] . '</strong>';
+		$output .= '<strong>' . esc_html($options['text']) . '</strong>';
 	}
 
 	// Tagline Markup
 	if ( $options['show-tagline'] && ! empty($options['tagline']) ) {
-		$output .= '<small>' . $options['tagline'] . '</small>';
+		$output .= '<small>' . esc_html($options['tagline']) . '</small>';
 	}
 
 	// Output Logo
@@ -170,7 +176,7 @@ function mixt_second_nav() {
 			array(
 				'theme_location'  => 'sec_navbar_left',
 				'container_class' => 'navbar-inner',
-				'menu_class'      => $nav_menu_classes,
+				'menu_class'      => mixt_sanitize_html_classes($nav_menu_classes),
 				'fallback_cb'     => '__return_false',
 				'echo'            => false,
 				'menu_id'         => 'sec-navbar-menu-left',
@@ -232,12 +238,12 @@ function mixt_second_nav() {
 
 	if ( ! empty($left_content) || ! empty($right_content) ) {
 		?>
-		<nav id="second-nav" class="second-nav navbar <?php echo $nav_classes; ?>">
+		<nav id="second-nav" class="second-nav navbar <?php echo mixt_sanitize_html_classes($nav_classes); ?>">
 			<div class="container">
-				<div class="left-content <?php echo $left_content_class; ?>">
+				<div class="left-content <?php echo mixt_sanitize_html_classes($left_content_class); ?>">
 					<?php echo $left_content; ?>
 				</div>
-				<div class="right-content <?php echo $right_content_class; ?>">
+				<div class="right-content <?php echo mixt_sanitize_html_classes($right_content_class); ?>">
 					<?php echo $right_content; ?>
 				</div>
 			</div>

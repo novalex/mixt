@@ -47,7 +47,7 @@ get_header(); ?>
 			?>
 
 			<?php // Search Form ?>
-			<div class="<?php echo $search_classes; ?>">
+			<div class="<?php echo mixt_sanitize_html_classes($search_classes); ?>">
 				<?php echo mixt_heading( esc_html__( 'Do a search', 'mixt' ), $search_heading_args ); ?>
 				<p><?php esc_html_e( 'Try searching our website for what you are looking for!', 'mixt' ); ?></p><br>
 				<?php get_search_form(); ?>

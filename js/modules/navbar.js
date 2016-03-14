@@ -88,7 +88,7 @@ NAVBAR FUNCTIONS
 			trigger: function(isMobile) {
 				Navbar.sticky.offset = 0;
 				Navbar.sticky.isMobile = isMobile;
-				Navbar.sticky.scrollCorrection = 0;
+				Navbar.sticky.scrollCorrection = parseInt(mainWrap.offset().top, 10);
 
 				if ( isMobile === false && ( mixt_opt.nav.layout == 'vertical' || ( document.documentElement.scrollHeight - viewport.height() ) > 160 ) ) {
 					mainNavBar.data('fixed', true);
@@ -96,10 +96,6 @@ NAVBAR FUNCTIONS
 				} else {
 					mainNavBar.data('fixed', false);
 					viewport.off('scroll', Navbar.sticky.toggle);
-				}
-
-				if ( mixt_opt.page['show-admin-bar'] ) {
-					Navbar.sticky.scrollCorrection += parseFloat(mainWrap.css('padding-top'), 10);
 				}
 
 				if ( mixt_opt.nav.layout == 'horizontal' && mixt_opt.nav.transparent && mixt_opt.nav.position == 'below' ) {

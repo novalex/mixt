@@ -9,8 +9,8 @@
  */
 
 // Load CMB2
-if ( file_exists(  __DIR__ . '/plugins/cmb2/init.php' ) ) {
-	require_once( __DIR__ . '/plugins/cmb2/init.php' );
+if ( file_exists(  MIXT_PLUGINS_DIR . '/cmb2/init.php' ) ) {
+	require_once( MIXT_PLUGINS_DIR . '/cmb2/init.php' );
 }
 
 
@@ -19,7 +19,7 @@ if ( file_exists(  __DIR__ . '/plugins/cmb2/init.php' ) ) {
  * @param  string $tab The tab to check
  * @return bool
  */
-function mixt_cmb_show_tab($tab) {
+function mixt_cmb_show_tab( $tab ) {
 	// Get the current ID
 	if ( isset( $_GET['post'] ) ) {
 		$post_id = $_GET['post'];
@@ -64,7 +64,7 @@ function mixt_cmb_show_tab($tab) {
 /**
  * Wrap a group of options in a tab and add it to the metabox fields array
  */
-function mixt_cmb_make_tab(&$fields, $name, $icon = '', $options) {
+function mixt_cmb_make_tab( &$fields, $name, $icon = '', $options ) {
 	$id = sanitize_title($name);
 
 	$fields[] = array(
@@ -90,7 +90,7 @@ function mixt_cmb_make_tab(&$fields, $name, $icon = '', $options) {
 /**
  * Custom label callback with 'auto' checkbox
  */
-function mixt_cmb_auto_label_cb($args, $field) {
+function mixt_cmb_auto_label_cb( $args, $field ) {
 	if ( ! $field->args( 'name' ) ) {
 		return '';
 	}
@@ -108,7 +108,7 @@ function mixt_cmb_auto_label_cb($args, $field) {
 /**
  * Sanitize WYSIWYG editor
  */
-function mixt_cmb_sanitize_editor($override, $value, $object_id) {
+function mixt_cmb_sanitize_editor( $override, $value, $object_id ) {
 	return htmlspecialchars_decode( stripslashes( $value ) );
 }
 add_filter('cmb2_sanitize_wysiwyg', 'mixt_cmb_sanitize_editor', 10, 3);
@@ -120,7 +120,7 @@ add_filter('cmb2_sanitize_wysiwyg', 'mixt_cmb_sanitize_editor', 10, 3);
  * @param  array $meta_boxes
  * @return array
  */
-function cmb2_mixt_metaboxes( array $meta_boxes ) {
+function mixt_cmb_metaboxes( array $meta_boxes ) {
 
 	$prefix = '_mixt-'; // Start with underscore to hide custom meta from 'Custom Fields' section
 
@@ -190,4 +190,4 @@ function cmb2_mixt_metaboxes( array $meta_boxes ) {
 
 	return $meta_boxes;
 }
-add_filter( 'cmb2_meta_boxes', 'cmb2_mixt_metaboxes' );
+add_filter( 'cmb2_meta_boxes', 'mixt_cmb_metaboxes' );

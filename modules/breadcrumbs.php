@@ -13,7 +13,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  *
  * @param string $page_title
  */
-function mixt_breadcrumbs($page_title = '') {
+function mixt_breadcrumbs( $page_title = '' ) {
 
 	if ( is_front_page() ) { return; }
 

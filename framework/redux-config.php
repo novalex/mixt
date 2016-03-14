@@ -6,9 +6,9 @@
  * @package MIXT
  */
 
-if ( ! class_exists( 'Redux_MIXT_config' ) ) {
+if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 
-	class Redux_MIXT_config {
+	class Mixt_Redux_Config {
 
 		public $args = array();
 		public $sections = array();
@@ -27,9 +27,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 
 			// Set the default arguments
 			$this->setArguments();
-
-			// Set a few help tabs so you can see how it's done
-			$this->setHelpTabs();
 
 			// Create the sections and fields
 			$this->setSections();
@@ -174,22 +171,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			// TYPOGRAPHY
 			include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/typography.php' );
 
-			// DOCUMENTATION
-			if ( file_exists( dirname( __FILE__ ) . '/../README.md' ) ) {
-				$this->sections['theme_docs'] = array(
-					'icon'   => 'el-icon-list-alt',
-					'title'  => esc_html__( 'Documentation', 'mixt' ),
-					'fields' => array(
-						array(
-							'id'       => '17',
-							'type'     => 'raw',
-							'markdown' => true,
-							'content'  => file_get_contents( dirname( __FILE__ ) . '/../README.md' )
-						),
-					),
-				);
-			}
-
 			// DIVIDER
 			$this->sections[] = array( 'type' => 'divide' );
 
@@ -228,68 +209,6 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 			if ( is_customize_preview() ) {
 				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/customizer.php' );
 			}
-		}
-
-		public function setHelpTabs() {
-
-			$mixt_help_file = function($file) {
-				$file_path = MIXT_FRAME_DIR . "/admin/help/$file.html";
-
-				if ( file_exists($file_path) ) {
-					return file_get_contents($file_path);
-				} else {
-					return "<p>Unable to find help file <strong>$file.html</strong></p>";
-				}
-			};
-
-			// Custom page help tabs, displayed using the help API. Tabs are shown in order of definition.
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-global',
-				'title'   => esc_html__( 'Global Options', 'mixt' ),
-				'content' => $mixt_help_file('global'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-header',
-				'title'   => esc_html__( 'Header', 'mixt' ),
-				'content' => $mixt_help_file('header'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-navbars',
-				'title'   => esc_html__( 'Navbars', 'mixt' ),
-				'content' => $mixt_help_file('navbars'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-sidebars',
-				'title'   => esc_html__( 'Sidebars', 'mixt' ),
-				'content' => $mixt_help_file('sidebars'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-post-pages',
-				'title'   => esc_html__( 'Post Pages', 'mixt' ),
-				'content' => $mixt_help_file('post-pages'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-themes',
-				'title'   => esc_html__( 'Themes', 'mixt' ),
-				'content' => $mixt_help_file('themes'),
-			);
-
-			$this->args['help_tabs'][] = array(
-				'id'      => 'help-social-profiles',
-				'title'   => esc_html__( 'Social Profiles', 'mixt' ),
-				'content' => $mixt_help_file('social-profiles'),
-			);
-
-			// Set the help sidebar
-			$this->args['help_sidebar'] = '<p>' .
-				esc_html__( 'The latest documentation is available online.', 'mixt' ) .
-				'<br><a class="button button-primary" href="http://docs.mixt.novalx.com/" target="_blank">' . esc_html__( 'Documentation', 'mixt' ) . '</a>' .
-			'</p>';
 		}
 
 		/**
@@ -399,7 +318,7 @@ if ( ! class_exists( 'Redux_MIXT_config' ) ) {
 	}
 
 	global $mixtConfig;
-	$mixtConfig = new Redux_MIXT_config();
+	$mixtConfig = new Mixt_Redux_Config();
 } else {
-	echo "The class named Redux_MIXT_config has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
+	echo "The class named Mixt_Redux_Config has already been called. <strong>Developers, you need to prefix this class with your company name or you'll run into problems!</strong>";
 }

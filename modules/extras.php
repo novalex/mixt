@@ -22,26 +22,9 @@ add_action('wp_head', 'mixt_head_code_output', 99);
 
 
 /**
- * Add custom classes to the array of body classes.
- */
-function mixt_body_classes( $classes ) {
-	// Add class to blogs with more than 1 published author
-	if ( is_multi_author() ) { $classes[] = 'blog-multi'; }
-
-	// Old WP Version Handling
-	$version = empty($wp_version) ? get_bloginfo('version') : $wp_version;
-	// Slim Admin Bar in WP < 3.8
-	if ( version_compare($version, '3.8', '<') ) { $classes[] = 'admin-bar-slim'; }
-
-	return $classes;
-}
-add_filter('body_class', 'mixt_body_classes');
-
-
-/**
  * Customize the "Read More" link
  */
-function mixt_read_more_link($permalink) {
+function mixt_read_more_link( $permalink ) {
 	preg_match('/href="([^"]*)"/', $permalink, $matches);
 	if ( ! empty($matches[1]) ) {
 		return '<a class="btn btn-black btn-hover-accent read-more more-link" href="' . $matches[1] . '">' . __('Read More', 'mixt') . '</a>';
@@ -54,7 +37,7 @@ add_filter('the_content_more_link', 'mixt_read_more_link');
 /**
  * Set Custom Excerpt Length
  */
-function mixt_excerpt_length($length) {
+function mixt_excerpt_length( $length ) {
 	return get_option('mixt-post-excerpt-length', 55);
 }
 add_filter( 'excerpt_length', 'mixt_excerpt_length', 999 );

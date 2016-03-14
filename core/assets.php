@@ -16,7 +16,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
  * @param  string $type The type of themes to retreive ('default', 'custom' or 'all')
  * @return array
  */
-function mixt_get_themes($elem, $type = 'all') {
+function mixt_get_themes( $elem, $type = 'all' ) {
 	// Default universal themes
 	$default_themes = apply_filters( 'mixt_default_themes', array(
 		'lava'      => 'Lava',
@@ -101,7 +101,7 @@ function mixt_get_sidebars( $show_auto = true ) {
  * @param  string $subgroup Subgroup of assets to retreive
  * @return array
  */
-function mixt_get_assets($group, $subgroup = false) {
+function mixt_get_assets( $group, $subgroup = false ) {
 	$assets = apply_filters( 'mixt_assets_array', array(
 		'button' => array(
 			'sizes' => array(
@@ -225,7 +225,7 @@ function mixt_get_assets($group, $subgroup = false) {
  * @param  string $type Type of animations to return
  * @return array
  */
-function mixt_css_anims($type = 'all') {
+function mixt_css_anims( $type = 'all' ) {
 	$anims = apply_filters( 'mixt_css_anims', array(
 		'loops' => array(
 			'bounce'     => 'Bounce',
@@ -346,7 +346,7 @@ function mixt_css_anims($type = 'all') {
  * @param  bool   $markup Whether to return the CSS class only or complete HTML markup
  * @return string
  */
-function mixt_get_icon($icon, $markup = true) {
+function mixt_get_icon( $icon, $markup = true ) {
 	global $mixt_opt;
 
 	if ( isset($mixt_opt[$icon . '-icon']) ) {
@@ -363,7 +363,7 @@ function mixt_get_icon($icon, $markup = true) {
  * @param  string $type The type of animations to return. Can be 'main', 'sec', 'all' or 'combined'.
  * @return array
  */
-function mixt_icon_anims($type = 'combined') {
+function mixt_icon_anims( $type = 'combined' ) {
 	$anims = apply_filters( 'mixt_icon_anims', array(
 		'main' => array(
 			'anim-pop'    => 'Pop',
@@ -402,7 +402,7 @@ function mixt_icon_anims($type = 'combined') {
  * @param  string $type Type of images to retrieve (must match directory name in '/assets/img/')
  * @return array
  */
-function mixt_get_images($type) {
+function mixt_get_images( $type ) {
 	$images_path = apply_filters('mixt_images_path', MIXT_DIR . '/assets/img/') . $type . '/';
 	$images_url  = apply_filters('mixt_images_url', MIXT_URI . '/assets/img/') . $type . '/';
 	$images      = array();
@@ -414,8 +414,8 @@ function mixt_get_images($type) {
 					$name = explode( '.', $image_file );
 					$name = str_replace( '.' . end( $name ), '', $image_file );
 					$images[] = array(
-						'alt' => $name,
-						'img' => $images_url . rawurlencode($image_file),
+						'alt' => esc_attr($name),
+						'img' => esc_url($images_url . rawurlencode($image_file)),
 					);
 				}
 			}

@@ -1,10 +1,11 @@
 
 /* --------------------------
- 15. Buttons
+ # Buttons
 -------------------------- */
 
-
+/* Button Animations */
 @import 'button-anims';
+
 
 %button-base {
 	@extend %bs-button-base; // Bootstrap base styling
@@ -55,12 +56,11 @@
 }
 
 
-// Justified button group double border fix
+/* Justified button group double border fix */
 .btn-group-justified > .btn + .btn,
 .btn-group-justified > .btn-group + .btn-group > .btn { border-left-width: 0; }
 
 
-// Color Variants
 @mixin button-color($selector, $color) {
 	$color-lighter: lighten($color, 5);
 	$color-darker: darken($color, 5);
@@ -143,6 +143,10 @@
 	@include button-anims-color($selector, $color);
 }
 
+
+/* ## Color Variants
+-------------------------- */
+
 .mixt {
 	@each $selector, $color in $button-colors {
 		@include button-color($selector, $color);
@@ -165,9 +169,9 @@
 }
 
 
-// Button Styles
+/* Button Styles */
 
-	// Pill (round)
+	/* Pill (round) */
 	.btn-round {
 		border-radius: floor(($padding-base-vertical * 2 + $font-size-base * $line-height-base) / 2);
 		&.btn-xl { border-radius: floor(($padding-xl-vertical * 2 + $font-size-large * $line-height-large) / 2); }
@@ -176,5 +180,5 @@
 		&.btn-xs { border-radius: floor(($padding-xs-vertical * 2 + $font-size-small * $line-height-small) / 2); }
 	}
 	
-	// Embossed
+	/* Embossed */
 	.btn-emboss:not(:active) { box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2); }

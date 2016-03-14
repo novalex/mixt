@@ -4,6 +4,7 @@
 	.woocommerce {
 
 		// Cart
+
 		.widget_shopping_cart,
 		&.widget_shopping_cart {
 			.cart_list li {
@@ -36,7 +37,9 @@
 			}
 		}
 
+
 		// Layered Nav
+
 		.widget.woocommerce {
 			ul.nav li > a {
 				padding: 5px 0;
@@ -49,7 +52,9 @@
 			}
 		}
 
+
 		// Price Filter Slider
+
 		.widget_price_filter {
 			$slider-height: 4px;
 			$handle-size: 16px;
@@ -76,7 +81,9 @@
 			}
 		}
 
+
 		// Active Filters
+
 		.widget_layered_nav_filters {
 			li.chosen {
 				margin-right: 15px;
@@ -95,7 +102,9 @@
 			}
 		}
 
+
 		// Product Lists
+
 		.product_list_widget {
 			li {
 				> a { padding-bottom: 0 !important; }

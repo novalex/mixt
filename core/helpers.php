@@ -31,7 +31,7 @@ if ( ! function_exists('mixt_media_breakpoints') ) {
 	 * @param  string $bp Breakpoint to return, or 'all' for array
 	 * @return mixed
 	 */
-	function mixt_media_breakpoints($bp = 'all') {
+	function mixt_media_breakpoints( $bp = 'all' ) {
 		if ( Mixt_Options::get('page', 'responsive') ) {
 			$bps = apply_filters( 'mixt_media_breakpoints', array(
 				'mercury' => 480,
@@ -59,7 +59,7 @@ if ( ! function_exists('mixt_unautop') ) {
 	 * @param  string $string
 	 * @return string
 	 */
-	function mixt_unautop($string) {
+	function mixt_unautop( $string ) {
 		$string = force_balance_tags($string);
 		$string = str_replace(array('<p></p>', '<br />'), '', $string);
 		return trim($string);
@@ -75,7 +75,7 @@ if ( ! function_exists('mixt_shortcode_unwrap') ) {
 	 * @param  string $string
 	 * @return string
 	 */
-	function mixt_shortcode_unwrap($string) {
+	function mixt_shortcode_unwrap( $string ) {
 		$string = str_replace(array('<p>[', ']</p>'), array('[', ']'), $string);
 		return trim($string);
 	}
@@ -90,11 +90,14 @@ if ( ! function_exists('mixt_sanitize_html_classes') && function_exists('sanitiz
 	 * @param mixed  $cls
 	 * @param string $fallback
 	 */
-	function mixt_sanitize_html_classes($cls, $fallback = null) {
+	function mixt_sanitize_html_classes( $cls, $fallback = null ) {
+		if ( empty($cls) ) return '';
+
 		if ( ! is_string($cls) ) {
 			$cls = implode(' ', $cls);
 		}
 		$cls = array_map('sanitize_html_class', explode(' ', $cls));
+
 		return implode(' ', $cls);
 	}
 }
@@ -106,7 +109,7 @@ if ( ! function_exists('mixt_regex_pattern') ) {
 	 *
 	 * @param string $type
 	 */
-	function mixt_regex_pattern($type) {
+	function mixt_regex_pattern( $type ) {
 		$pat = array(
 			'url'               => "https?:\/\/[\S]*",
 			'image'             => "(<img [^>]* \/>)",
@@ -126,18 +129,60 @@ if ( ! function_exists('mixt_regex_pattern') ) {
 
 
 /**
+ * Escape & sanitize general purpose content with kses
+ *
+ * @param string $content The content to escape
+ */
+function mixt_kses( $content ) {
+	global $allowedposttags;
+
+	$allowedtags = array();
+
+	$data_attrs = apply_filters('mixt_kses_data_attr', array(
+		'data-src' => array(),
+		'data-type' => array(),
+		'data-cols' => array(),
+		'data-sort' => array(),
+		'data-color' => array(),
+		'data-ratio' => array(),
+		'data-filter' => array(),
+		'data-toggle' => array(),
+		'data-target' => array(),
+		'data-content' => array(),
+		'data-anim-in' => array(),
+		'data-anim-out' => array(),
+		'data-anim-delay' => array(),
+		'data-min-size' => array(),
+		'data-max-size' => array(),
+		'data-page-now' => array(),
+		'data-page-max' => array(),
+		'data-tablet-cols' => array(),
+		'data-mobile-cols' => array(),
+		'data-featherlight' => array(),
+		'data-no-hash-scroll' => array(),
+	) );
+
+	foreach ( $allowedposttags as $tag => $attrs ) {
+		$allowedtags[$tag] = array_merge($attrs, $data_attrs);
+	}
+	return wp_kses($content, $allowedtags);
+}
+
+
+/**
  * Display a message when no menu is assigned to a location
  *
  * @param bool $echo       Whether to echo or return string
  * @param bool $bs_wrapper Wrap string inside Bootstrap markup
  */
-function mixt_no_menu_msg($echo = true, $bs_wrapper = false) {
+function mixt_no_menu_msg( $echo = true, $bs_wrapper = false ) {
 	if ( ! current_user_can('edit_theme_options') ) return;
+
 	$no_menu_msg = sprintf('<p class="no-menu-msg text-cont">%1$s! <a href="%2$s" title="%3$s">%4$s</a>.</p>',
-		__('No menu assigned', 'mixt'),
+		esc_html__('No menu assigned', 'mixt'),
 		get_admin_url( null, 'nav-menus.php' ),
-		__('Manage menus', 'mixt'),
-		__('Click here to assign one', 'mixt')
+		esc_attr__('Manage menus', 'mixt'),
+		esc_html__('Click here to assign one', 'mixt')
 	);
 
 	if ( $bs_wrapper ) {
@@ -172,7 +217,7 @@ class Mixt_JS_Plugins {
 	 * 
 	 * @return array
 	 */
-	public function dir_struct($dir) {
+	public function dir_struct( $dir ) {
 		$struct = array();
 		foreach ( array_diff(scandir($dir), array('.', '..')) as $key => $value ) {
 			if ( is_dir($dir . DIRECTORY_SEPARATOR . $value) ) {
@@ -224,7 +269,7 @@ class Mixt_JS_Plugins {
 		}
 	}
 
-	public static function enqueue($handle) {
+	public static function enqueue( $handle ) {
 		$handle = self::$plugin_prefix . $handle;
 		wp_enqueue_script($handle);
 		wp_enqueue_style($handle);
@@ -237,7 +282,7 @@ new Mixt_JS_Plugins;
  * 
  * @param string $plugin Name of the plugin
  */
-function mixt_enqueue_plugin($plugin) {
+function mixt_enqueue_plugin( $plugin ) {
 	return Mixt_JS_Plugins::enqueue($plugin);
 }
 
@@ -248,7 +293,7 @@ function mixt_enqueue_plugin($plugin) {
  * @param  string $hex HEX code of color to analyze
  * @return bool
  */
-function hex_is_light($hex) {
+function mixt_hex_is_light( $hex ) {
 	$hex = str_replace('#', '', $hex);
 
 	if ( strlen($hex) == 3 ) { $hex .= $hex; }
@@ -274,7 +319,7 @@ function hex_is_light($hex) {
  * @param  integer $num_samples
  * @return integer Luminance value
  */
-function get_img_luminance($file, $num_samples = 10) {
+function mixt_get_img_luminance( $file, $num_samples = 10 ) {
 	$extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 	if ( $extension == 'jpg' || $extension == 'jpeg' ) {
 		$img = imagecreatefromjpeg($file);

@@ -1,12 +1,20 @@
 
-// Visual Composer Custom Styling
-
+/* Grid Item */
 @import 'gitem';
+
+/* Toggle */
 @import 'toggle';
+
+/* Progress Bars */
 @import 'progress-bars';
+
+/* Tabs / Tour / Accordion */
 @import 'tabs-tour-accordion';
 
+
 @if $vcomposer {
+
+	/* Spacing and Padding Tweaks */
 
 	.vc_row.row {
 		margin-left: ceil(($grid-gutter-width / -2));
@@ -50,7 +58,8 @@
 	.wpb_column > .vc_column-inner > .wpb_wrapper > :last-child,
 	.wpb_content_element:last-child { margin-bottom: 0; }
 
-	// Full-Width Rows For Boxed Layout
+
+	/* Full-Width Rows For Boxed Layout */
 	
 	.boxed {
 		.vc_row[data-vc-full-width='true'] {
@@ -80,7 +89,8 @@
 		}
 	}
 
-	// Rounded radius
+
+	/* VC Elements Rounded Radius */
 
 	.vc_toggle,
 	.vc_call_to_action,
@@ -112,7 +122,9 @@
 		}
 	}
 
-	// Editor Mode
+
+	/* Editor Mode */
+
 	.vc_editor {
 		.mixt-animate { opacity: 1 !important; }
 

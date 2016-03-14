@@ -64,7 +64,7 @@ class Mixt_Admin_Menu {
 		add_submenu_page('mixt-admin', esc_html__( 'Status', 'mixt' ), esc_html__( 'Status', 'mixt' ), $this->capability, 'mixt-status', array($this, 'status_screen'));
 	}
 
-	public function screen_header($title, $description) {
+	public function screen_header( $title, $description ) {
 		?>
 		<div class="wrap about-wrap mixt-admin-wrap">
 
@@ -84,15 +84,15 @@ class Mixt_Admin_Menu {
 	}
 
 	public function welcome_screen() {
-		require_once('views/welcome.php');
+		require_once( MIXT_FRAME_DIR . '/admin/views/welcome.php' );
 	}
 
 	public function about_screen() {
-		require_once('views/about.php');
+		require_once( MIXT_FRAME_DIR . '/admin/views/about.php' );
 	}
 
 	public function status_screen() {
-		require_once('views/status.php');
+		require_once( MIXT_FRAME_DIR . '/admin/views/status.php' );
 	}
 
 	public function tabs() {

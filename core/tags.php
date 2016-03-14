@@ -64,9 +64,9 @@ if ( ! function_exists('mixt_heading') ) {
 	 * @param  string $atts
 	 * @return string
 	 */
-	function mixt_heading($text, $atts = '') {
+	function mixt_heading( $text, $atts = '' ) {
 		if ( shortcode_exists('mixt_headline') ) {
-			return do_shortcode("[mixt_headline $atts]$text".'[/mixt_headline]');
+			return do_shortcode("[mixt_headline $atts]" . $text . '[/mixt_headline]');
 		} else {
 			extract(shortcode_atts( array(
 				'desc'             => '',
@@ -75,9 +75,9 @@ if ( ! function_exists('mixt_heading') ) {
 				'class'            => '',
 			), $atts ));
 			$h_class = 'title headline mixt-heading mixt-element';
-			if ( $class != '' ) { $h_class .= " $class"; }
+			if ( $class != '' ) { $h_class .= ' ' . mixt_sanitize_html_classes($class); }
 			$h_atts = '';
-			if ( $align != 'left' ) { $h_atts .= "style='text-align='$align' "; }
+			if ( $align != 'left' ) { $h_atts .= 'style="text-align: ' . esc_attr($align) . ';"'; }
 			return "<$tag class='$h_class' $h_atts>$text</$tag>";
 		}
 	}
@@ -221,8 +221,8 @@ if ( ! function_exists('mixt_comment') ) {
 			
 		} else {
 			?>
-			<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
-				<article id="div-comment-<?php comment_ID(); ?>" class="comment-cont">
+			<li id="comment-<?php esc_attr( comment_ID() ); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
+				<article class="comment-cont">
 
 					<?php // Comment Header ?>
 					<header class="comment-header clearfix">
@@ -231,7 +231,7 @@ if ( ! function_exists('mixt_comment') ) {
 							if ( empty($author_url) ) { $author_url = '#div-comment-' . get_comment_ID(); }
 						
 							if ( 0 != $args['avatar_size'] ) { ?>
-								<a class="comment-avatar" href="<?php echo $author_url; ?>">
+								<a class="comment-avatar" href="<?php echo esc_url($author_url); ?>">
 									<?php echo get_avatar( $comment, $args['avatar_size'] ); ?>
 								</a>
 							<?php } ?>
@@ -244,7 +244,7 @@ if ( ! function_exists('mixt_comment') ) {
 
 						<div class="comment-meta">
 							<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" class="color-fade no-color">
-								<time datetime="<?php comment_time( 'c' ); ?>">
+								<time datetime="<?php esc_attr( comment_time('c') ); ?>">
 									<?php printf( esc_html_x( '%1$s at %2$s', '1: date, 2: time', 'mixt' ), get_comment_date(), get_comment_time() ); ?>
 								</time>
 							</a>
@@ -290,7 +290,7 @@ if ( ! function_exists('mixt_comment_nav') ) {
 	 *
 	 * @param string $id ID to give the nav element
 	 */
-	function mixt_comment_nav($id) {
+	function mixt_comment_nav( $id ) {
 		$options = array(
 			'type'    => array( 'key' => 'comment-pagination-type', 'return' => 'value' ),
 			'display' => array( 'key' => 'comment-pagination-display', 'return' => 'value' ),
@@ -404,7 +404,7 @@ if ( ! function_exists('mixt_chat_format_content') ) {
 	 * Based on code by David Chandra (http://www.turtlepod.org) and Justin Tadlock (http://justintadlock.com)
 	 * http://justintadlock.com/archives/2012/08/21/post-formats-chat
 	 */
-	function mixt_chat_format_content($content) {
+	function mixt_chat_format_content( $content ) {
 		if ( ! has_post_format('chat') ) return $content;
 
 		$separator = apply_filters('mixt_chat_format_separator', ':');
@@ -436,8 +436,8 @@ if ( ! function_exists('mixt_chat_format_content') ) {
 				}
 
 				/* Open the chat row. */
-				$output .= '<div class="chat-row chat-author-' . $author_id . '">' .
-							   '<strong class="chat-author">' . $author . '</strong>' .
+				$output .= '<div class="chat-row chat-author-' . esc_attr($author_id) . '">' .
+							   '<strong class="chat-author">' . esc_html($author) . '</strong>' .
 							   '<div class="chat-text">' . $text . '</div>';
 			} else if ( ! empty($row) ) {
 				$output .= '<div class="chat-text">' . str_replace(array("\r","\n","\t"), '', $row) . '</div>';

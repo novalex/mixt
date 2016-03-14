@@ -1,6 +1,4 @@
 
-// Icon Styles
-
 $icon-sizes: (
 	'icon-sm': 16px,
 	'icon-lg': 32px,
@@ -21,12 +19,16 @@ $icon-el-padding: 8px;
 		line-height: 1;
 	}
 
+
 	// Icon Colors
+	
 	i {
 		@extend %basic-color-text-variants;
 	}
 
+
 	// Icon Styles
+
 	&.icon-solid,
 	&.icon-outline {
 		border-width: 1px; border-style: solid;
@@ -34,7 +36,9 @@ $icon-el-padding: 8px;
 	&.icon-rounded { border-radius: $rounded-radius; }
 	&.icon-circle { border-radius: 100px; border-radius: 50%; }
 
+
 	// Icon Sizes
+
 	@mixin icon-size($size) {
 		i {
 			width: $size;
@@ -50,6 +54,7 @@ $icon-el-padding: 8px;
 
 
 	// Animations
+
 	&.anim {
 		cursor: pointer;
 		position: relative;
@@ -114,7 +119,9 @@ $icon-el-padding: 8px;
 	&.anim-spin:hover i,
 	.icon-cont:hover &.anim-spin i { animation: spin 1.8s linear infinite; }
 
+
 	// Color Variants
+
 	@mixin icon-variant($sel, $color) {
 		$text: set-color-for-bg($color);
 		$border: darken($color, 10);

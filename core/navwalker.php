@@ -35,9 +35,9 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 		// Check If Item Is Top Level Menu
 
 		if ( $depth == 0 ) {
-			$output .= "\n$indent<ul class=\"sub-menu dropdown-menu\">\n";
+			$output .= "\n$indent<ul class='sub-menu dropdown-menu'>\n";
 		} else {
-			$output .= "\n$indent<ul class=\"sub-menu\">\n";
+			$output .= "\n$indent<ul class='sub-menu'>\n";
 		}
 
 	}
@@ -63,7 +63,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 		// DIVIDER
 		if ( $item_type == 'divider' ) {
 			if ( $depth === 0 ) {
-				$output .= $indent . '<li class="divider">';
+				$output .= $indent . '<li role="presentation" class="divider">';
 			}
 
 		// SOCIAL ICON LIST
@@ -83,12 +83,11 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 				$widgets_html = ob_get_clean();
 				$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter($classes), $item, $args ) );
-				$output .= $indent . "<li class='menu-item $class_names'>$widgets_html";
+				$output .= $indent . '<li class="menu-item ' . mixt_sanitize_html_classes($class_names) . '">' . $widgets_html;
 			}
 
 		// REGULAR MENU ITEM
 		} else {
-			$class_names = $value = '';
 			$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
 			$classes[]   = ($item->current) ? 'active' : '';
 			$classes[]   = 'menu-item-' . $item->ID;
@@ -199,41 +198,44 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			}
 
 			// START CONSTRUCTING ITEM
-			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+			$class_names = $class_names ? ' class="' . mixt_sanitize_html_classes($class_names) . '"' : '';
 
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+			$id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
 			if ( $is_button ) {
-				$output .= $indent . '<li' . $id . $value . ' class="menu-item menu-btn">';
+				$output .= $indent . '<li' . $id . ' class="menu-item menu-btn">';
 			} else {
-				$output .= $indent . '<li' . $id . $value . $class_names .'>';
+				$output .= $indent . '<li' . $id . $class_names .'>';
 			}
 
 			// Set URL to # if item is disabled
 			$attr_href = $is_disabled ? '#' : $item->url;
 
-			$attributes  = ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) . '"' : '';
-			$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) . '"' : '';
-			$attributes .= ! empty( $attr_href )        ? ' href="'   . esc_attr( $attr_href        ) . '"' : '';
-			$attributes .= ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) . '"' : '';
+			$attributes  = ! empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+			$attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+			$attributes .= ! empty($attr_href) ? ' href="' . esc_url($attr_href) . '"' : '';
+			$attributes .= ! empty($item->attr_title) ? ' title="'  . esc_attr($item->attr_title) . '"' : '';
 
 			$attributes .= $args->has_children  ? ' class="dropdown-toggle disabled" data-toggle="dropdown"' : '';
 
 			$item_output = $args->before;
 
-			if ( $is_button ) { $item_output .= '<span class="btn-cont"><a' . $attributes . $class_names . '>'; }
-			else { $item_output .= '<a' . $attributes . '>'; }
+			if ( $is_button ) {
+				$item_output .= '<span class="btn-cont"><a' . $attributes . $class_names . '>';
+			} else {
+				$item_output .= '<a' . $attributes . '>';
+			}
 
 			$item_output .= $args->link_before;
 
 			// ADD MENU ICONS
 			if ( $has_menu_icons ) {
-				$item_output .= '<i class="menu-icon ' . esc_attr( $menu_icon ) . '"></i>';
+				$item_output .= '<i class="menu-icon ' . mixt_sanitize_html_classes($menu_icon) . '"></i>';
 			}
 
 			// MENU ITEM TITLE
-			$item_output .= '<span class="menu-label">' . apply_filters( 'the_title', $item->title, $item->ID ) . '</span>';
+			$item_output .= '<span class="menu-label">' . esc_html( apply_filters('the_title', $item->title, $item->ID) ) . '</span>';
 
 			$item_output .= $args->link_after;
 
@@ -263,7 +265,7 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 						$arrow = $arrow_right;
 					}
 				}
-				$item_output .= "<i class='$arrow $arrow_classes'></i>";
+				$item_output .= '<i class="' . mixt_sanitize_html_classes($arrow . ' ' . $arrow_classes) . '"></i>';
 			}
 
 			// CART ITEMS BADGE
@@ -347,8 +349,10 @@ function mixt_nav_menu_widgets() {
 					register_sidebar( array(
 						'name' => $area_name,
 						'id'   => $area_id,
-						'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
-						'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+						'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+						'after_widget' => '</aside>',
+						'before_title' => '<h4 class="widget-title">',
+						'after_title' => '</h4>',
 					) );
 				}
 			}
@@ -364,7 +368,7 @@ if ( class_exists('WooCommerce') ) {
 	 */
 	function mixt_wc_menu_badge() {
 		$count = WC()->cart->get_cart_contents_count();
-		return ( $count > 0 ) ? "<span class='badge cart-items accent-bg'>$count</span>" : '<span class="cart-items"></span>';
+		return ( $count > 0 ) ? '<span class="badge cart-items accent-bg">' . esc_html($count) . '</span>' : '<span class="cart-items"></span>';
 	}
 
 	/**
@@ -386,7 +390,7 @@ if ( class_exists('WooCommerce') ) {
 	/**
 	 * Update the menu cart item when products are added or removed via AJAX
 	 */
-	function mixt_wc_cart_fragments($fragments) {
+	function mixt_wc_cart_fragments( $fragments ) {
 		$fragments['li.woo-cart .cart-items'] = mixt_wc_menu_badge();
 		$fragments['li.woo-cart .cart-contents'] = mixt_wc_menu_cart();
 		return $fragments;

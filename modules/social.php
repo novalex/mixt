@@ -11,7 +11,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 /**
  * Add Open Graph Attributes
  */
-function mixt_og_xmlns($output) {
+function mixt_og_xmlns( $output ) {
 	return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
 }
 
@@ -63,7 +63,7 @@ function mixt_og_meta() {
  * Initialize Social Open Graph Meta
  */
 function mixt_social_og() {
-	if ( mixt_get_option(array('key' => 'social-og-meta')) ) {
+	if ( mixt_get_option( array('key' => 'social-og-meta') ) ) {
 		add_filter('language_attributes', 'mixt_og_xmlns');
 		add_action('wp_head', 'mixt_og_meta', 5);
 	}
@@ -128,8 +128,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		$profiles = ( $type == 'networks' ) ? $options['social-profiles'] : $options['post-sharing-profiles'];
 	}
 
-	$cont_classes = "social-links hover-$hover $class";
-
+	$cont_classes = 'social-links ' . mixt_sanitize_html_classes("hover-$hover $class");
 	if ( $style == 'plain' ) { $cont_classes .= ' plain'; }
 	else if ( $style == 'nav' ) { $cont_classes .= ' nav'; }
 	else if ( $style == 'group' ) { $cont_classes .= ' btn-group'; }
@@ -138,13 +137,13 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 	if ( is_array($profiles) && ! empty($profiles) ) {
 		$items = $item_class = '';
 
-		$link_atts = 'role="button"';
+		$link_atts = ' role="button"';
 		if ( $options['social-icons-tooltip'] ) {
 			$link_atts .= ' data-toggle="tooltip"';
 		}
 		if ( $style == 'buttons' || $style == 'group' ) {
 			$size = ( empty($size) ) ? '' : $size;
-			$link_atts .= " class='btn btn-$color $size'";
+			$link_atts .= ' class="btn ' . mixt_sanitize_html_classes("btn-$color $size") . '"';
 
 			if ( $style == 'group' ) { $item_class .= 'btn-group'; }
 		} else {
@@ -168,13 +167,13 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 					if ( $profile['url'] == 'rss' ) { $profile_url = get_bloginfo('rss2_url'); }
 				}
 
-				$profile_icon = $profile['icon'];
-
-				if ( isset($profile['color']) ) { $link_atts_now .= " data-color='{$profile['color']}'"; }
+				if ( isset($profile['color']) ) { $link_atts_now .= ' data-color="' . esc_attr($profile['color']) . '"'; }
 				
 				$profile_title = isset($profile['title']) ? $profile['title'] : '';
 
-				$item = "<a href='$profile_url' title='$profile_title' target='_blank' $link_atts_now><i class='$profile_icon'></i></a>";
+				$item = '<a href="' . esc_url($profile_url) . '" title="' . esc_attr($profile_title) . '" target="_blank"' . $link_atts_now . '>';
+					$item .= '<i class="' . mixt_sanitize_html_classes($profile['icon']) . '"></i>';
+				$item .= '</a>';
 
 				$items .= "<li class='$item_class'>$item</li>";
 			}
@@ -198,7 +197,7 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 /**
  * Bit.ly URL shortening
  */
-function mixt_make_bitly_url($url, $format = 'json', $version = '2.0.1') {
+function mixt_make_bitly_url( $url, $format = 'json', $version = '2.0.1' ) {
 	global $mixt_opt;
 
 	if ( empty($mixt_opt['short-url-login']) || ! is_array($mixt_opt['short-url-login']) ) { return; }
@@ -210,7 +209,7 @@ function mixt_make_bitly_url($url, $format = 'json', $version = '2.0.1') {
 	if ( empty($response['body']) ) return;
 	if ( $format == 'json' ) {
 		$json = @json_decode($response['body'], true);
-		return $json['results'][$url]['shortUrl'];
+		return esc_url($json['results'][$url]['shortUrl']);
 	} else {
 		$xml = simplexml_load_string($response['body']);
 		return 'http://bit.ly/' . esc_url($xml->results->nodeKeyVal->hash);

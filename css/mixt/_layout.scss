@@ -1,10 +1,10 @@
 
 /* --------------------------
- 16. Layout
+ # Layout
 -------------------------- */
 
 
-// Wrappers
+/* Wrappers */
 
 #main-wrap {
 	width: 100%;
@@ -17,34 +17,8 @@
 	min-width: 300px;
 }
 
-// Admin Bar Offset
-.admin-bar {
-	#main-wrap {
-		padding-top: 32px;
 
-		&.nav-vertical #main-nav-wrap { top: 32px; }
-	}
-
-	&.admin-bar-slim {
-		#main-wrap {
-			padding-top: 28px !important;
-
-			&.nav-vertical #main-nav-wrap { top: 28px; }
-		}
-	}
-}
-@media screen and (max-width: 782px) {
-	.admin-bar {
-		#main-wrap {
-			padding-top: 46px;
-
-			&.nav-vertical #main-nav-wrap { top: 46px; }
-		}
-	}
-}
-
-
-// Boxed Layout
+/* Boxed Layout */
 
 .boxed {
 	#main-wrap,
@@ -70,7 +44,7 @@
 }
 
 
-// Fullwidth Content Layout
+/* Fullwidth Content Layout */
 
 .fullwidth {
 	.container { max-width: none !important; }
@@ -82,7 +56,7 @@
 }
 
 
-// Tablet & Desktop
+/* Tablet & Desktop */
 
 @include media('screen', 'mars') {
 	$content-width: 100%;
@@ -137,7 +111,7 @@
 }
 
 
-// Mobile
+/* Mobile */
 
 @include media('screen', '<mars') {
 	.sidebar {

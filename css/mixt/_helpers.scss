@@ -1,10 +1,11 @@
 
 /* --------------------------
- 6. Helpers
+ # Helpers
 -------------------------- */
 
 
-// ALIGNMENT
+/* ## Alignment
+-------------------------- */
 
 .alignleft {
 	display: inline;
@@ -29,7 +30,8 @@
 }
 
 
-// TYPOGRAPHY
+/* ## Typography
+-------------------------- */
 
 .text-size-xs { font-size: $font-size-xs; }
 .text-size-s { font-size: $font-size-s; }
@@ -47,7 +49,8 @@
 .text-size-96 { font-size: 96px; }
 
 
-// RESPONSIVE HELPER CLASSES
+/* ## Responsive Classes
+-------------------------- */
 
 $responsive-bps: (
 	'md': '<venus',
@@ -83,7 +86,10 @@ $responsive-bps: (
 }
 
 
-// COLORS
+/* ## Colors
+-------------------------- */
+
+.color-fade { opacity: 0.8; }
 
 @each $name, $color in $basic-colors {
 	.text-color-#{$name} { color: $color !important; }
@@ -92,7 +98,8 @@ $responsive-bps: (
 }
 
 
-// BORDERS
+/* ## Borders
+-------------------------- */
 
 	// Border Positions
 	.border-top, .border-bottom, .border-top-bottom,
@@ -121,7 +128,8 @@ $responsive-bps: (
 	.no-border-rad { border-radius: 0 !important; }
 
 
-// SPACING
+/* ## Spacing
+-------------------------- */
 
 $spacing-margin-sizes: (
 	's': $margin-s,
@@ -200,7 +208,8 @@ $spacing-padding-sizes: (
 }
 
 
-// LISTS
+/* ## Lists
+-------------------------- */
 
 %reset-list {
 	padding: 0;
@@ -210,7 +219,8 @@ $spacing-padding-sizes: (
 }
 
 
-// MISCELLANEOUS
+/* ## Miscellaneous
+-------------------------- */
 
 %clearfix {
 	@include clearfix;

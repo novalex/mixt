@@ -1,9 +1,6 @@
 
-// Row Separators
+.mixt-row-has-separator { position: relative; }
 
-.mixt-row-has-separator {
-	position: relative;
-}
 .mixt-row-separator {
 	position: absolute;
 	left: 0; bottom: -1px;

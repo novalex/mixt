@@ -24,7 +24,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 			add_meta_box('mixt_nav_meta', esc_html__( 'MIXT Elements', 'mixt' ), array( $this, 'nav_menu_items'), 'nav-menus', 'side', 'high');
 		}
 
-		public function update_nav_menu_items($menu_id, $menu_item_id, $args) {
+		public function update_nav_menu_items( $menu_id, $menu_item_id, $args ) {
 			if ( ! empty($_POST['mixt-menu-item-type'][$menu_item_id]) ) {
 				$type = explode('-', $_POST['mixt-menu-item-type'][$menu_item_id]);
 				// Update Archive Page URL
@@ -138,7 +138,7 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 									<li>
 										<label class="menu-item-title">
 											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1">
-											<?php echo esc_html($post_type->labels->name . ' ' . __( 'Archive', 'mixt' ) ); ?>
+											<?php echo $post_type->labels->name . ' ' . esc_html__( 'Archive', 'mixt' ); ?>
 										</label>
 										<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo esc_attr($post_type->labels->name); ?>">
