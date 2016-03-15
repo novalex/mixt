@@ -61,7 +61,7 @@ $this->screen_header(
 					$color_class =  'green-text';
 				}
 				echo '<tr>';
-					echo "<td class='label'>$var</td><td><strong class='$color_class'>$ini_var</strong> <small>( min $min )</small></td>";
+					echo "<td class='label'>" . esc_html($var) . "</td><td><strong class='$color_class'>" . esc_html($ini_var) . "</strong> <small>( min " . esc_html($min) . " )</small></td>";
 				echo '</tr>';
 			}
 			?>

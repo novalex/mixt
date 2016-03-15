@@ -34,7 +34,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 				echo '<li class="bc-prefix">' . esc_html($prefix) . '</li>';
 			}
 
-			echo '<li><a href="' . home_url() . '">' . esc_html_x( 'Home', 'breadcrumb', 'mixt' ) . '</a></li>';
+			echo '<li><a href="' . esc_url( home_url() ) . '">' . esc_html_x( 'Home', 'breadcrumb', 'mixt' ) . '</a></li>';
 
 			// Category Or Single Page
 			if ( is_category() || is_single() ) {
@@ -44,7 +44,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 					$parent_title     = get_the_title( $parent_id );
 					if ( $parent_title != $page_title ) {
 						$parent_permalink = get_permalink( $parent_id );
-						echo '<li><a href="' . $parent_permalink . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
+						echo '<li><a href="' . esc_url($parent_permalink) . '" title="' . esc_attr($parent_title) . '">' . esc_html($parent_title) . '</a></li>';
 					}
 				} else if ( is_category() ) {
 					$category = get_category(get_query_var('cat'), false);
@@ -53,7 +53,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 					} else {
 						$cat_parents = '';
 					}
-					echo '<li>' . $cat_parents . $category->name . '</li>';
+					echo '<li>' . $cat_parents . esc_html($category->name) . '</li>';
 				}
 
 				// Post type with archive page
@@ -61,12 +61,12 @@ function mixt_breadcrumbs( $page_title = '' ) {
 					if ( ! in_array($post_type, array('post', 'page', 'attachment', 'revision', 'nav_menu_item')) && $post_type_link = get_post_type_archive_link($post_type) ) {
 						$post_type_ob = get_post_type_object($post_type);
 						$post_type_name = $post_type_ob->labels->name;
-						echo '<li><a href="' . $post_type_link . '" title="' . $post_type_name . '">' . $post_type_name . '</a></li>';
+						echo '<li><a href="' . esc_url($post_type_link) . '" title="' . esc_attr($post_type_name) . '">' . esc_html($post_type_name) . '</a></li>';
 					}
 				}
 
 				if ( is_single() ) {
-					echo '<li>' . $page_title . '</li>';
+					echo '<li>' . esc_html($page_title) . '</li>';
 				}
 
 			// Date Page
@@ -78,15 +78,15 @@ function mixt_breadcrumbs( $page_title = '' ) {
 				$archive_crumbs = '';
 
 				if ( is_year() ) {
-					$archive_crumbs .= '<li>' . $year . '</li>';
+					$archive_crumbs .= '<li>' . esc_html($year) . '</li>';
 				} else {
-					$archive_crumbs .= '<li><a href="' . esc_url( get_year_link( $year ) ) . '">' . $year . '</a></li>';
+					$archive_crumbs .= '<li><a href="' . esc_url( get_year_link( $year ) ) . '">' . esc_html($year) . '</a></li>';
 
 					if ( is_day() ) {
-						$archive_crumbs .= '<li><a href="' . esc_url( get_month_link( $year, $month ) ) . '">' . get_the_date('F') . '</a></li>';
-						$archive_crumbs .= '<li>' . get_the_date('jS') . '</li>';
+						$archive_crumbs .= '<li><a href="' . esc_url( get_month_link( $year, $month ) ) . '">' . esc_html( get_the_date('F') ) . '</a></li>';
+						$archive_crumbs .= '<li>' . esc_html( get_the_date('jS') ) . '</li>';
 					} else if ( is_month() ) {
-						$archive_crumbs .= '<li>' . get_the_date('F') . '</li>';
+						$archive_crumbs .= '<li>' . esc_html( get_the_date('F') ) . '</li>';
 					}
 				}
 
@@ -94,7 +94,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 
 			// Tag Page
 			} else if ( is_tag() ) {
-				echo '<li>' . esc_html_x( 'Tag: ', 'breadcrumb', 'mixt' ) . single_tag_title('', false) . '</li>';
+				echo '<li>' . esc_html_x( 'Tag: ', 'breadcrumb', 'mixt' ) . esc_html( single_tag_title('', false) ) . '</li>';
 
 			// Taxonomy Page
 			} else if ( is_tax() ) {
@@ -108,7 +108,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 			// Author Archive Page
 			} else if ( is_author() ) {
 				$author = get_queried_object();
-				echo '<li>' . esc_html_x( 'Author: ', 'breadcrumb', 'mixt' ) . $author->display_name . '</li>';
+				echo '<li>' . esc_html_x( 'Author: ', 'breadcrumb', 'mixt' ) . esc_html($author->display_name) . '</li>';
 
 			// Search Page
 			} else if ( is_search() ) {
@@ -127,22 +127,16 @@ function mixt_breadcrumbs( $page_title = '' ) {
 						$title     = get_the_title($ancestor);
 						$permalink = get_permalink($ancestor);
 						if ( ! empty($title) ) {
-							$output = '<li><a href="' . $permalink . '" title="' . esc_attr($title) . '">' . $title . '</a></li>';
+							$output = '<li><a href="' . esc_url($permalink) . '" title="' . esc_attr($title) . '">' . esc_html($title) . '</a></li>';
 						}
 					}
 					echo $output;
-					echo '<li>' . $page_title . '</li>';
-				} else {
-					echo '<li>' . $page_title . '</li>';
 				}
+				echo '<li>' . esc_html($page_title) . '</li>';
 
-			// Home Page
-			} else if ( is_home() ) {
-				echo '<li>' . $page_title . '</li>';
-
-			// Archive Page
-			} else if ( is_archive() ) {
-				echo '<li>' . $page_title . '</li>';
+			// Home & Archive Page
+			} else if ( is_home() || is_archive() ) {
+				echo '<li>' . esc_html($page_title) . '</li>';
 
 			// 404 Page
 			} else if ( is_404() ) {

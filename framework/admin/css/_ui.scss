@@ -105,6 +105,9 @@ $text-fade: #777;
 	.button.button-primary {
 		@extend %button-blue;
 
+		font-weight: bold;
+		font-size: 14px;
+
 		&:focus,
 		&:hover {
 			background-color: #61ABEC !important;

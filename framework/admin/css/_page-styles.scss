@@ -82,6 +82,22 @@
 }
 
 
+// Power Up Page
+
+.powerup-wrap {
+	.powerup-badge {
+		width: 150px;
+		height: 150px;
+		padding-top: 0;
+		background-color: #ef9f2d;
+		background-size: 150px;
+		background-position: 0 0;
+		background-image: url('#{$img-path}/powerup-logo.png');
+		border: 1px solid #965500;
+	}
+}
+
+
 // Page Metaboxes
 
 #poststuff #mixt_page_options {

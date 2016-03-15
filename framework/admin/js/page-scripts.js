@@ -126,6 +126,7 @@ ADMIN PAGE SCRIPTS
 
 
 	$(document).ready( function() {
+
 		pageFieldsNest();
 
 		pageFieldsVis();

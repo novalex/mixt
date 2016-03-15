@@ -9,6 +9,12 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 
+/**
+ * Load Power Up
+ */
+require_once( MIXT_FRAME_DIR . '/class-powerup.php' );
+
+
 // LOAD THEME MODULES
 
 $modules = array(
@@ -25,152 +31,6 @@ mixt_requires( $modules, 'modules' );
 if ( is_admin() ) {
 	require_once( MIXT_FRAME_DIR . '/admin/mixt-admin.php' );
 }
-
-
-/**
- * Initialize and load framework plugins
- */
-class Mixt_Plugins {
-
-	/**
-	 * Plugins to be activated
-	 * @var array
-	 */
-	public $plugins = array();
-
-	public function __construct() {
-		$this->load_plugins();
-	}
-
-	/**
-	 * Load plugins
-	 */
-	public function load_plugins() {
-		global $mixt_opt;
-
-		// MIXT Portfolio
-			$this->plugins[] = array(
-				'name'     => 'MIXT Portfolio',
-				'slug'     => 'mixt-portfolio',
-				'source'   => 'mixt-portfolio.zip',
-			);
-
-		// MIXT Elements
-			$this->plugins[] = array(
-				'name'     => 'MIXT Elements',
-				'slug'     => 'mixt-elements',
-				'source'   => 'mixt-elements.zip',
-				'required' => true,
-			);
-
-		// MIXT CodeBuilder
-			include_once( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' );
-
-		// Redux Framework and Extensions
-			// Extension Loader
-			include_once( MIXT_PLUGINS_DIR . '/redux-extend/extensions/loader.php' );
-			// Framework
-			if ( ! class_exists( 'ReduxFramework' ) ) {
-				$this->plugins[] = array(
-					'name'     => 'Redux Framework',
-					'slug'     => 'redux-framework',
-					'source'   => 'redux-framework.zip',
-					'required' => true,
-				);
-			}
-			add_action( 'redux/page/mixt_opt/enqueue', array($this, 'redux_scripts'), 2 );
-			// Config
-			if ( ! isset( $mixt_opt ) ) {
-				include_once( MIXT_FRAME_DIR . '/redux-config.php' );
-			}
-
-		// CMB2 Framework
-			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
-				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
-
-				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php') ) {
-					$this->plugins[] = array(
-						'name'     => 'CMB2',
-						'slug'     => 'cmb2',
-						'required' => true,
-					);
-				}
-				// CMB2 Extensions
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/slider-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/dimensions-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/post-search-field.php' );
-			}
-
-		// MICF library & Config
-			if ( file_exists( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' ) ) {
-				require_once( MIXT_PLUGINS_DIR . '/micf/menu-item-custom-fields.php' );
-			} else {
-				$this->plugins[] = array(
-					'name'     => 'Menu Item Custom Fields',
-					'slug'     => 'menu-item-custom-fields',
-					'required' => true,
-				);
-			}
-			include_once( MIXT_FRAME_DIR . '/micf-config.php' );
-
-		// WPBakery Visual Composer
-			$this->plugins[] = array(
-				'name'     => 'WPBakery Visual Composer',
-				'slug'     => 'js_composer',
-				'source'   => 'js_composer.zip',
-				'version'  => '4.8.1',
-				'force_deactivation' => true,
-			);
-
-		// LayerSlider
-			$this->plugins[] = array(
-				'name'     => 'LayerSlider WP',
-				'slug'     => 'LayerSlider',
-				'source'   => 'layerslider.zip',
-				'version'  => '5.6.2',
-				'force_deactivation' => true,
-			);
-
-		// Envato WordPress Toolkit
-			$this->plugins[] = array(
-				'name'     => 'Envato WordPress Toolkit',
-				'slug'     => 'envato-wordpress-toolkit',
-				'source'   => 'envato-wordpress-toolkit.zip',
-				'version'  => '1.7.3',
-			);
-
-		// TGM Plugin Activation
-			require_once( MIXT_PLUGINS_DIR . '/tgmpa/class-tgm-plugin-activation.php' );
-			add_action( 'tgmpa_register', array($this, 'init_tgmpa') );
-	}
-
-	/**
-	 * Enqueue custom Redux Panel CSS
-	 */
-	public function redux_scripts() {
-		wp_enqueue_script( 'redux-mixt-js', MIXT_FRAME_URI . '/admin/js/redux-mixt.js', array( 'jquery' ), time(), 'all' );
-	}
-
-	/**
-	 * TGM Plugin Activation
-	 */
-	public function init_tgmpa() {
-		$tgmpa_msg = '<h4>' . esc_html__( 'Please activate all required plugins to enable all the features that make MIXT awesome!', 'mixt' ) . '</h4>';
-		$config = array(
-			'id'           => 'mixt_tgmpa',         // Unique ID for hashing notices for multiple instances of TGMPA.
-			'default_path' => MIXT_PLUGINS_DIR.'/', // Default absolute path to bundled plugins.
-			'menu'         => 'mixt-plugins',       // Menu slug.
-			'has_notices'  => true,                 // Show admin notices or not.
-			'dismissable'  => true,                 // If false, a user cannot dismiss the nag message.
-			'dismiss_msg'  => '',                   // If 'dismissable' is false, this message will be output at top of nag.
-			'is_automatic' => false,                // Automatically activate plugins after installation or not.
-			'message'      => $tgmpa_msg,           // Message to output right before the plugins table.
-		);
-		tgmpa($this->plugins, $config);
-	}
-}
-new Mixt_Plugins;
 
 
 /**
