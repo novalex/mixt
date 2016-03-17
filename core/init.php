@@ -9,12 +9,6 @@
 defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Access
 
 
-/**
- * Load Power Up
- */
-require_once( MIXT_FRAME_DIR . '/class-powerup.php' );
-
-
 // LOAD THEME MODULES
 
 $modules = array(
@@ -31,6 +25,12 @@ mixt_requires( $modules, 'modules' );
 if ( is_admin() ) {
 	require_once( MIXT_FRAME_DIR . '/admin/mixt-admin.php' );
 }
+
+
+/**
+ * Load Power Up
+ */
+require_once( MIXT_FRAME_DIR . '/class-powerup.php' );
 
 
 /**

@@ -55,13 +55,16 @@ class Mixt_Powerup {
 			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
 				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
 
-				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php') ) {
+				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php' ) ) {
 					$this->plugins[] = array(
 						'name'     => 'CMB2',
 						'slug'     => 'cmb2',
 						'required' => true,
 					);
+				} else {
+					require_once( MIXT_PLUGINS_DIR . '/cmb2/init.php' );
 				}
+
 				// CMB2 Extensions
 				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
 				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/slider-field.php' );
@@ -157,17 +160,29 @@ class Mixt_Powerup {
 	 */
 	public function plugins_page() {
 		$tgmpa = TGM_Plugin_Activation::get_instance();
-		// Store new instance of plugin table in object.
-		$plugin_table = new TGMPA_List_Table;
 
-		// Return early if processing a plugin installation action.
-		if ( ( ( 'tgmpa-bulk-install' === $plugin_table->current_action() || 'tgmpa-bulk-update' === $plugin_table->current_action() ) && $plugin_table->process_bulk_actions() ) ) {
-			return;
-		}
+		ob_start();
 
-		// Force refresh of available plugin information so we'll know about manual updates/deletes.
-		wp_clean_plugins_cache( false );
+		$tgmpa->install_plugins_page();
 
+		$markup = ob_get_clean();
+
+		if ( empty($markup) ) return;
+
+		$title = esc_html( get_admin_page_title() );
+		$message = wp_kses_post($tgmpa->message);
+
+		// Remove original header markup
+
+		$markup = str_replace(
+			array(
+				'<div class="tgmpa wrap">',
+				'<h3>' . $title . '</h3>',
+				$message,
+
+			),
+			'', $markup);
+		
 		?>
 		<div class="tgmpa wrap powerup-wrap about-wrap mixt-admin-wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
@@ -184,16 +199,11 @@ class Mixt_Powerup {
 
 			<div class="wp-badge powerup-badge"></div>
 
-			<?php $plugin_table->prepare_items(); ?>
-			
-			<?php $plugin_table->views(); ?>
+		<?php
 
-			<form id="tgmpa-plugins" action="" method="post">
-				<input type="hidden" name="tgmpa-page" value="<?php echo esc_attr( $tgmpa->menu ); ?>" />
-				<input type="hidden" name="plugin_status" value="<?php echo esc_attr( $plugin_table->view_context ); ?>" />
-				<?php $plugin_table->display(); ?>
-			</form>
-		</div>
+		echo $markup;
+
+		?>
 
 		<script type="text/javascript">
 			( function($) {
