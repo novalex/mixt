@@ -129,47 +129,6 @@ if ( ! function_exists('mixt_regex_pattern') ) {
 
 
 /**
- * Escape & sanitize general purpose content with kses
- *
- * @param string $content The content to escape
- */
-function mixt_kses( $content ) {
-	global $allowedposttags;
-
-	$allowedtags = array();
-
-	$data_attrs = apply_filters('mixt_kses_data_attr', array(
-		'data-src' => array(),
-		'data-type' => array(),
-		'data-cols' => array(),
-		'data-sort' => array(),
-		'data-color' => array(),
-		'data-ratio' => array(),
-		'data-filter' => array(),
-		'data-toggle' => array(),
-		'data-target' => array(),
-		'data-content' => array(),
-		'data-anim-in' => array(),
-		'data-anim-out' => array(),
-		'data-anim-delay' => array(),
-		'data-min-size' => array(),
-		'data-max-size' => array(),
-		'data-page-now' => array(),
-		'data-page-max' => array(),
-		'data-tablet-cols' => array(),
-		'data-mobile-cols' => array(),
-		'data-featherlight' => array(),
-		'data-no-hash-scroll' => array(),
-	) );
-
-	foreach ( $allowedposttags as $tag => $attrs ) {
-		$allowedtags[$tag] = array_merge($attrs, $data_attrs);
-	}
-	return wp_kses($content, $allowedtags);
-}
-
-
-/**
  * Display a message when no menu is assigned to a location
  *
  * @param bool $echo       Whether to echo or return string

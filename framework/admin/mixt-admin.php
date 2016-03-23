@@ -42,7 +42,7 @@ function mixt_activation_redirect() {
 	set_transient('_mixt_show_welcome', true, 30);
 
 	// Redirect to welcome page
-	wp_redirect( admin_url('admin.php?page=mixt-admin') );
+	wp_redirect( admin_url('themes.php?page=mixt-welcome') );
 	exit();
 }
 add_action('admin_init', 'mixt_activation_redirect');
@@ -66,6 +66,12 @@ function mixt_disable_redux_welcome() {
 }
 add_action('init', 'mixt_disable_redux_welcome', 9);
 
+
+/**
+ * Disable Visual Composer Welcome page
+ */
+remove_action( 'vc_activation_hook', 'vc_page_welcome_set_redirect' );
+remove_action( 'admin_init', 'vc_page_welcome_redirect' );
 
 /**
  * Calculate image luminosity after upload and set meta

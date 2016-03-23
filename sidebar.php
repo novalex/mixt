@@ -23,6 +23,8 @@ if ( Mixt_Options::get('sidebar', 'enabled') ) {
 			
 			dynamic_sidebar( Mixt_Options::get('sidebar', 'id') );
 
+			do_action('mixt_after_sidebar');
+
 			?>
 		</div>
 

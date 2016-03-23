@@ -60,6 +60,7 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 
 			// GET ASSETS
 
+			// Animations
 			$page_loader_anims = array(
 				'none' => 'No Animation',
 			);
@@ -80,6 +81,9 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 
 			// Nav Menus
 			$nav_menus = mixt_get_nav_menus();
+
+			// Icons
+			$default_icons = mixt_get_icon('defaults');
 
 			// Image Patterns
 			$img_patterns = mixt_get_images('patterns');
@@ -176,33 +180,34 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 
 
 			// IMPORT & DEMOS SECTION
-			include_once( MIXT_PLUGINS_DIR . '/redux-extend/demos.php' );
-			$this->sections[] = array(
-				'id'         => 'wbc_importer_section',
-				'title'      => esc_html__( 'Settings & Demos', 'mixt' ),
-				'desc'       => esc_html__( 'Manage your settings, and import demo content.', 'mixt' ) .
-								'<br><strong class="red-text">' .
-									esc_html__( 'Demos work best on clean, fresh sites. For complete content import, make sure all recommended plugins (Appearance > Install Plugins) are activated! The page will reload after importing.', 'mixt' ) .
-								'</strong>',
-				'icon'       => 'el-icon-refresh',
-				'customizer' => false,
-				'fields'     => array(
+			if ( defined('MIXT_CORE') ) {
+				$this->sections[] = array(
+					'id'         => 'wbc_importer_section',
+					'title'      => esc_html__( 'Settings & Demos', 'mixt' ),
+					'desc'       => esc_html__( 'Manage your settings, and import demo content.', 'mixt' ) .
+									'<br><strong class="red-text">' .
+										esc_html__( 'Demos work best on clean, fresh sites. For complete content import, make sure all recommended plugins (Appearance > Install Plugins) are activated! The page will reload after importing.', 'mixt' ) .
+									'</strong>',
+					'icon'       => 'el-icon-refresh',
+					'customizer' => false,
+					'fields'     => array(
 
-					// Demo Import
-					array(
-						'id'   => 'wbc_demo_importer',
-						'type' => 'wbc_importer',
-					),
+						// Demo Import
+						array(
+							'id'   => 'wbc_demo_importer',
+							'type' => 'wbc_importer',
+						),
 
-					// Options Import/Export
-					array(
-						'id'         => 'opt-import-export',
-						'type'       => 'import_export',
-						'full_width' => true,
-					),
-					
-				)
-			);
+						// Options Import/Export
+						array(
+							'id'         => 'opt-import-export',
+							'type'       => 'import_export',
+							'full_width' => true,
+						),
+						
+					)
+				);
+			}
 
 
 			// CUSTOMIZER SECTIONS
@@ -226,7 +231,7 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 				'display_version'    => $theme->get('Version'),
 				'menu_type'          => 'submenu',
 				'allow_sub_menu'     => false,
-				'menu_title'         => esc_html__( 'Theme Options', 'mixt' ),
+				'menu_title'         => ( defined('MIXT_CORE') ) ? esc_html__( 'Options', 'mixt' ) : esc_html__( 'MIXT - Options' , 'mixt' ),
 				'page_title'         => esc_html__( 'MIXT Options', 'mixt' ),
 				'admin_bar'          => true,
 				'admin_bar_icon'     => 'dashicons-screenoptions',
@@ -239,7 +244,7 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 				'customizer'         => true,
 				
 				'page_priority'      => null,
-				'page_parent'        => 'mixt-admin',
+				'page_parent'        => ( defined('MIXT_CORE') ) ? 'mixt-admin' : 'themes.php',
 				'page_permissions'   => 'manage_options',
 				'menu_icon'          => '',
 				'page_icon'          => 'icon-themes',

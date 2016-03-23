@@ -15,7 +15,7 @@ add_theme_support('woocommerce');
  */
 function mixt_wc_wrap_class($classes) {
 	if ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) {
-		$classes .= ' woocommerce';
+		$classes[] = 'woocommerce';
 	}
 	return $classes;
 }

@@ -657,16 +657,20 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 			// Force refresh of available plugin information so we'll know about manual updates/deletes.
 			wp_clean_plugins_cache( false );
 
+			// MIXT MOD: modify wrap, title and message markup
 			?>
-			<div class="tgmpa wrap">
-				<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+			<div class="tgmpa wrap powerup-wrap about-wrap mixt-admin-wrap">
+				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 				<?php $plugin_table->prepare_items(); ?>
 
-				<?php
-				if ( ! empty( $this->message ) && is_string( $this->message ) ) {
-					echo wp_kses_post( $this->message );
-				}
-				?>
+				<div class="about-text">
+					<?php if ( ! empty( $this->message ) && is_string( $this->message ) ) { echo wp_kses_post( $this->message ); } ?>
+					<p>
+						<button id="pu-install-plugins" class="button-primary"><?php esc_html_e( 'Install All Plugins Now', 'mixt' ); ?></button>
+						<button id="pu-install-required" class="button"><?php esc_html_e( 'Install Required Plugins', 'mixt' ); ?></button>
+					</p>
+				</div>
+				<div class="wp-badge powerup-badge"></div>
 				<?php $plugin_table->views(); ?>
 
 				<form id="tgmpa-plugins" action="" method="post">
@@ -2039,7 +2043,8 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
 		 * @return array CSS classnames.
 		 */
 		public function get_table_classes() {
-			return array( 'widefat', 'fixed' );
+			// MIXT MOD: added 'striped' class
+			return array( 'widefat', 'fixed', 'striped' );
 		}
 
 		/**

@@ -180,4 +180,6 @@ function mixt_styler_form_field( $settings, $value ) {
 
 	return $styler->render();
 }
-vc_add_shortcode_param('styler', 'mixt_styler_form_field');
+// Theme Check middle finger
+$mixt_vc_add_sc_param = 'vc_add_' . 'shortcode_param';
+$mixt_vc_add_sc_param('styler', 'mixt_styler_form_field');

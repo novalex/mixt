@@ -27,7 +27,7 @@ add_action('wp_head', 'mixt_head_code_output', 99);
 function mixt_read_more_link( $permalink ) {
 	preg_match('/href="([^"]*)"/', $permalink, $matches);
 	if ( ! empty($matches[1]) ) {
-		return '<a class="btn btn-black btn-hover-accent read-more more-link" href="' . $matches[1] . '">' . __('Read More', 'mixt') . '</a>';
+		return '<a class="btn btn-black btn-hover-accent read-more more-link" href="' . esc_url($matches[1]) . '">' . esc_html__('Read More', 'mixt') . '</a>';
 	}
 	return $permalink;
 }

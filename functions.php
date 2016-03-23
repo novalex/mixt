@@ -12,22 +12,19 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 define( 'MIXT_VERSION', wp_get_theme()->get('Version') );
 
-define('MIXT_DIR', get_template_directory());            // Base Theme Path
-define('MIXT_URI', get_template_directory_uri());        // Base Theme URI
+define( 'MIXT_DIR', get_template_directory() );            // Base Theme Path
+define( 'MIXT_URI', get_template_directory_uri()) ;        // Base Theme URI
 
-define('MIXT_CORE_DIR', MIXT_DIR . '/core');             // Core Files Path
-define('MIXT_CORE_URI', MIXT_URI . '/core');             // Core Files URI
+define( 'MIXT_FRAME_DIR', MIXT_DIR . '/framework' );       // Framework Path
+define( 'MIXT_FRAME_URI', MIXT_URI . '/framework' );       // Framework URI
 
-define('MIXT_FRAME_DIR', MIXT_DIR . '/framework');       // Framework Path
-define('MIXT_FRAME_URI', MIXT_URI . '/framework');       // Framework URI
+define( 'MIXT_MODULES_DIR', MIXT_DIR . '/modules' );       // Modules Path
+define( 'MIXT_MODULES_URI', MIXT_URI . '/modules' );       // Modules URI
 
-define('MIXT_MODULES_DIR', MIXT_DIR . '/modules');       // Modules Path
-define('MIXT_MODULES_URI', MIXT_URI . '/modules');       // Modules URI
+define( 'MIXT_PLUGINS_DIR', MIXT_FRAME_DIR . '/plugins' ); // Plugins Path
+define( 'MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins' ); // Plugins URI
 
-define('MIXT_PLUGINS_DIR', MIXT_FRAME_DIR . '/plugins'); // Plugins Path
-define('MIXT_PLUGINS_URI', MIXT_FRAME_URI . '/plugins'); // Plugins URI
-
-define('MIXT_THEME', 'aqua');                            // Default Theme
+define( 'MIXT_THEME', 'aqua' );                            // Default Theme
 
 
 /**

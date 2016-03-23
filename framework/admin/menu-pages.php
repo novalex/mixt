@@ -29,46 +29,40 @@ class Mixt_Admin_Menu {
 	 * URLs for support, documentation, etc.
 	 * @var array
 	 */
-	public $help_links = array(
+	public $links = array(
+		'main'    => 'mixt-admin',
+		'plugins' => 'mixt-powerup',
+		'status'  => 'mixt-status',
+		'options' => 'mixt-options',
+
 		'docs' => 'http://docs.mixt.novalx.com',
 		'support' => 'https://novalex.ticksy.com',
 		'forums' => 'https://novalex.ticksy.com/public-tickets/',
 	);
 
 	public function __construct() {
-		if ( get_transient('_mixt_show_welcome') ) {
+		if ( get_transient('_mixt_show_welcome') || ( ! empty($_GET['page']) && $_GET['page'] == 'mixt-welcome' ) ) {
 			$this->welcome_mode = true;
 			delete_transient('_mixt_show_welcome');
-		}
 
-		// Add admin pages
-		add_action('admin_menu', array($this, 'admin_menus'));
+			// Add Welcome Page
+			add_action('admin_menu', array($this, 'welcome_page'));
+		}
 
 		// Check if there are any plugins to install/activate
 		add_action('tgmpa_register', array($this, 'check_tgmpa'), 999);
 	}
 
-	public function admin_menus() {
-		// Main Menu
-		add_menu_page('MIXT', 'MIXT', $this->capability, 'mixt-admin', '', MIXT_URI . '/assets/img/admin-menu-icon.png', '59.6498');
-
-		if ( $this->welcome_mode ) {
-			// Welcome Page
-			add_submenu_page('mixt-admin', esc_html__( 'Welcome!', 'mixt' ), esc_html__( 'Welcome', 'mixt' ), $this->capability, 'mixt-admin', array($this, 'welcome_screen'));
-		} else {
-			// About Page
-			add_submenu_page('mixt-admin', esc_html__( 'About MIXT', 'mixt' ), esc_html__( 'About', 'mixt' ), $this->capability, 'mixt-admin', array($this, 'about_screen'));
-		}
-
-		// Status Page
-		add_submenu_page('mixt-admin', esc_html__( 'Status', 'mixt' ), esc_html__( 'Status', 'mixt' ), $this->capability, 'mixt-status', array($this, 'status_screen'));
+	public function welcome_page() {
+		// Welcome Page
+		add_theme_page( esc_html__( 'Welcome!', 'mixt' ), esc_html__( 'MIXT - Welcome', 'mixt' ), $this->capability, 'mixt-welcome', array($this, 'welcome_screen'));
 	}
 
 	public function screen_header( $title, $description ) {
 		?>
 		<div class="wrap about-wrap mixt-admin-wrap">
 
-			<h1><?php echo esc_html($title); ?></h1>
+			<h1><?php echo $title; ?></h1>
 			<div class="about-text"><?php echo $description; ?></div>
 
 			<div class="wp-badge mixt-badge">
@@ -99,20 +93,21 @@ class Mixt_Admin_Menu {
 		$selected = isset ( $_GET['page'] ) ? $_GET['page'] : 'mixt-admin';
 		?>
 		<h2 class="nav-tab-wrapper">
-			<a class="nav-tab <?php echo ( $selected == 'mixt-admin' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-admin'), 'admin.php') ) ); ?>">
-				<?php echo ( $this->welcome_mode ) ? esc_html__( 'Getting Started', 'mixt' ) : esc_html__( 'About', 'mixt' ); ?>
+			<a class="nav-tab <?php echo ( $selected == 'mixt-admin' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( menu_page_url( $this->links['main'], false ) ); ?>">
+				<?php esc_html_e( 'About', 'mixt' ); ?>
 			</a>
-			<a class="nav-tab <?php echo ( $selected == 'mixt-status' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-status'), 'admin.php') ) ); ?>">
-				<?php esc_attr_e( 'Status', 'mixt' ); ?>
+			<a class="nav-tab <?php echo ( $selected == 'mixt-status' ) ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( menu_page_url( $this->links['status'], false ) ); ?>">
+				<?php esc_html_e( 'Status', 'mixt' ); ?>
 			</a>
 			<?php if ( $this->tgmpa_active ) { ?>
-			<a class="nav-tab" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-plugins'), 'admin.php') ) ); ?>">
-				<?php esc_attr_e( 'Install Plugins', 'mixt' ); ?>
+			<a class="nav-tab" href="<?php echo esc_url( menu_page_url( $this->links['plugins'], false ) ); ?>">
+				<?php esc_html_e( 'Install Plugins', 'mixt' ); ?>
+			</a>
+			<?php } if ( class_exists('ReduxFramework') ) { ?>
+			<a class="nav-tab" href="<?php echo esc_url( menu_page_url( $this->links['options'], false ) ); ?>">
+				<?php esc_html_e( 'Options', 'mixt' ); ?>
 			</a>
 			<?php } ?>
-			<a class="nav-tab" href="<?php echo esc_url( admin_url( add_query_arg(array('page' => 'mixt-options'), 'admin.php') ) ); ?>">
-				<?php esc_attr_e( 'Options', 'mixt' ); ?>
-			</a>
 		</h2>
 		<?php
 	}
@@ -120,9 +115,9 @@ class Mixt_Admin_Menu {
 	public function support_links() {
 		$output = '';
 
-		$output .= "<a href='{$this->help_links['docs']}' class='button button-white' target='_blank'>" . esc_html__( 'Documentation', 'mixt' ) . "</a>&nbsp;";
-		$output .= "<a href='{$this->help_links['support']}' class='button button-white' target='_blank'>" . esc_html__( 'Support', 'mixt' ) . "</a>&nbsp;";
-		$output .= "<a href='{$this->help_links['forums']}' class='button button-white' target='_blank'>" . esc_html__( 'Forums', 'mixt' ) . "</a>&nbsp;";
+		$output .= '<a href="' . esc_url( $this->links['docs'] ) . '" class="button button-white" target="_blank">' . esc_html__( 'Documentation', 'mixt' ) . '</a>&nbsp;';
+		$output .= '<a href="' . esc_url( $this->links['support'] ) . '" class="button button-white" target="_blank">' . esc_html__( 'Support', 'mixt' ) . '</a>&nbsp;';
+		$output .= '<a href="' . esc_url( $this->links['forums'] ) . '" class="button button-white" target="_blank">' . esc_html__( 'Forums', 'mixt' ) . '</a>&nbsp;';
 
 		return $output;
 	}

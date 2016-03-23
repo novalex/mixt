@@ -18,14 +18,14 @@ if ( ! function_exists('mixt_get_title') ) {
 	function mixt_get_title( $echo = false ) {
 		if ( is_home() ) {
 			if ( get_option('page_for_posts', true) ) {
-				$title = get_the_title(get_option('page_for_posts', true));
+				$title = esc_html( get_the_title( get_option('page_for_posts', true) ) );
 			} else {
 				$title = esc_html__( 'Latest Posts', 'mixt' );
 			}
 		} else if ( is_archive() ) {
 			$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 			if ( $term ) {
-				$title = $term->name;
+				$title = esc_html( $term->name );
 			} else if ( is_post_type_archive() ) {
 				$title = get_queried_object()->labels->name;
 			} else if ( is_day() ) {
@@ -36,16 +36,16 @@ if ( ! function_exists('mixt_get_title') ) {
 				$title = esc_html__( 'Yearly Archives: ', 'mixt' ) . get_the_date('Y');
 			} else if ( is_author() ) {
 				$author = get_queried_object();
-				$title = $author->display_name;
+				$title = esc_html( $author->display_name );
 			} else {
-				$title = single_cat_title('', false);
+				$title = esc_html( single_cat_title('', false) );
 			}
 		} else if ( is_search() ) {
 			$title = esc_html__( 'Search Results for ', 'mixt' ) . '"' . get_search_query() . '"';
 		} else if ( is_404() ) {
 			$title = esc_html__( '404 - Not Found', 'mixt' );
 		} else {
-			$title = get_the_title();
+			$title = esc_html( get_the_title() );
 		}
 
 		$title = apply_filters('mixt_title', $title);

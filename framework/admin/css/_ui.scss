@@ -1,4 +1,9 @@
 
+/* --------------------------
+ # UI
+-------------------------- */
+
+
 // COLORS
 
 $bg-main: #FFF;
@@ -10,8 +15,6 @@ $bd-darker: #d0d0d0;
 
 $text-fade: #777;
 
-
-// Common Elements
 
 %button {
 	display: inline-block;
@@ -33,7 +36,7 @@ $text-fade: #777;
 	text-shadow: 0 1px 1px #FFF;
 
 	background-image: none !important;
-	background-color: #F5F5F5 !important;
+	background-color: #fafafa !important;
 	border-color: $bd-light !important;
 	box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 1px rgba(0,0,0,0.1);
 	@extend %transition;
@@ -76,6 +79,10 @@ $text-fade: #777;
 	}
 }
 
+/* --------------------------
+ ## Buttons and Inputs
+-------------------------- */
+
 .mixt-admin-wrap,
 .redux-container,
 .redux-main {
@@ -90,7 +97,7 @@ $text-fade: #777;
 
 		&:focus,
 		&:hover {
-			background-color: #F9F9F9 !important;
+			background-color: #fff !important;
 			box-shadow: inset 0 1px 0 #FAFAFA, 0 1px 0 $bd-light !important;
 		}
 
@@ -104,6 +111,8 @@ $text-fade: #777;
 	.button-primary,
 	.button.button-primary {
 		@extend %button-blue;
+
+		outline: none !important;
 
 		font-weight: bold;
 		font-size: 14px;
@@ -119,16 +128,13 @@ $text-fade: #777;
 		}
 	}
 
-	.button.red {
+	.button.red,
+	a.deletion {
 		@extend %button;
 		@extend %button-red;
 	}
 
-	a.deletion {
-		@extend %button;
-		@extend %button-red;
-		font-size: 12px;
-	}
+	a.deletion { font-size: 12px; }
 
 	// Inputs
 
@@ -148,13 +154,13 @@ $text-fade: #777;
 	.red-text { color: red !important; }
 }
 
-// Slider
 
+/* --------------------------
+ ## noUI Slider
+-------------------------- */
 
-/* Functional styling;
- * These styles are required for noUiSlider to function.
- * You don't need to change these rules to apply your design.
- */
+// Functional styling
+
 .noUi-target,
 .noUi-target * {
 	touch-action: none;	
@@ -169,6 +175,7 @@ $text-fade: #777;
 	height: 100%;
 	position: relative;
 	z-index: 1; /* Fix 401 */
+	transform: translate3d(0,0,0);
 }
 .noUi-origin {
 	position: absolute;
@@ -182,8 +189,6 @@ $text-fade: #777;
 	z-index: 1;
 }
 .noUi-stacking .noUi-handle {
-/* This class is applied to the lower origin when
-   its values is > 50%. */
 	z-index: 10;
 }
 .noUi-state-tap .noUi-origin {
@@ -193,15 +198,8 @@ $text-fade: #777;
 	cursor: inherit !important;
 }
 
-/* Painting and performance;
- * Browsers can paint handles in their own layer.
- */
-.noUi-base {
-	transform: translate3d(0,0,0);
-}
+// Slider size and handle placement
 
-/* Slider size and handle placement;
- */
 .noUi-horizontal {
 	height: 12px;
 }
@@ -221,8 +219,8 @@ $text-fade: #777;
 	top: -13px;
 }
 
-/* Styling;
- */
+// Styling
+
 .mixt {
 	.noUi-background {
 		background: $bg-light;
@@ -245,8 +243,8 @@ $text-fade: #777;
 	}
 }
 
-/* Handles and cursors;
- */
+// Handles and cursors
+
 .noUi-draggable {
 	cursor: w-resize;
 }
@@ -264,8 +262,8 @@ $text-fade: #777;
 	&:before { display: none; }
 }
 
-/* Disabled state;
- */
+// Disabled state
+
 [disabled] .noUi-target {
 	opacity: 0.6;
 }

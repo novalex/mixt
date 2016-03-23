@@ -91,7 +91,7 @@ class Mixt_Options {
 				'footer'  => array( 'key' => 'footer-theme', 'type' => 'str', 'return' => 'value', 'default' => 'auto' ),
 			),
 			'assets' => array(
-				'icon-fonts' => array( 'return' => 'value' ),
+				'icon-fonts' => array( 'return' => 'value', 'default' => array( 'fontawesome' => '1' ) ),
 			),
 			'page' => array(
 				'layout'        => array( 'key' => 'site-layout', 'return' => 'value' ),
@@ -147,7 +147,7 @@ class Mixt_Options {
 				'comment-pagination-type' => array( 'return' => 'value' ),
 			),
 			'sidebar' => array(
-				'enabled'  => array( 'key' => 'page-sidebar', 'inherited' => true ),
+				'enabled'  => array( 'key' => 'page-sidebar', 'inherited' => true, 'default' => true ),
 				'id'       => array( 'key' => 'sidebar-id', 'type' => 'str', 'return' => 'value', 'default' => 'none', 'inherited' => true ),
 				'position' => array( 'key' => 'sidebar-position', 'type' => 'str', 'return' => 'value', 'default' => 'right' ),
 				'hide'     => array( 'key' => 'sidebar-hide' ),
@@ -335,7 +335,7 @@ class Mixt_Options {
 			$page_type_option = $page_type_now . '-' . $key;
 
 			// Get Page Specific Option Value
-			if ( ! empty($post_id) && ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) {
+			if ( ! empty($post_id) && ( empty($mixt_opt['page-metaboxes']) || $mixt_opt['page-metaboxes'] == 1 ) ) {
 				$page_meta_key = '_mixt-' . $key;
 				$page_value = get_post_meta($post_id, $page_meta_key, true);
 				if ( $page_value == '' ) {

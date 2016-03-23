@@ -1,11 +1,16 @@
 
-// MIXT REDUX STYLING
+/* --------------------------
+ # Redux Styling
+-------------------------- */
 
 %transition {
 	transition: color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
-// GENERAL STYLING
+
+/* --------------------------
+ ## General
+-------------------------- */
 
 .redux-container {
 	position: relative;
@@ -245,7 +250,10 @@
 
 }
 
-// SIDEBAR MENU
+
+/* --------------------------
+ ## Sidebar Menu
+-------------------------- */
 
 .redux-sidebar {
 
@@ -309,7 +317,9 @@
 }
 
 
-// COMMON ELEMENTS
+/* --------------------------
+ ## Common Elements
+-------------------------- */
 
 .redux-container,
 .redux-main {
@@ -464,8 +474,9 @@
 }
 
 
-// CUSTOM FIELD STYLING
-
+/* --------------------------
+ ## Custom Field Styling
+-------------------------- */
 
 // MULTI INPUT STYLING
 
@@ -868,7 +879,9 @@
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { border-bottom-right-radius: 3px !important; }
 
 
-// RTL
+/* --------------------------
+ ## RTL
+-------------------------- */
 
 .rtl {
 	.redux-container {

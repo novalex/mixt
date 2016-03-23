@@ -349,11 +349,47 @@ function mixt_css_anims( $type = 'all' ) {
 function mixt_get_icon( $icon, $markup = true ) {
 	global $mixt_opt;
 
+	$defaults = array(
+		'left-arrow'          => 'fa fa-chevron-left',
+		'right-arrow'         => 'fa fa-chevron-right',
+		'up-arrow'            => 'fa fa-chevron-up',
+		'down-arrow'          => 'fa fa-chevron-down',
+		'search'              => 'fa fa-search',
+		'head-content-scroll' => 'fa fa-chevron-down',
+		'view-post'           => 'fa fa-share',
+		'view-image'          => 'fa fa-search',
+		'author'              => 'fa fa-user',
+		'date'                => 'fa fa-clock-o',
+		'category'            => 'fa fa-folder-open',
+		'comments'            => 'fa fa-comment',
+		'back-to-top'         => 'fa fa-chevron-up',
+		'shop-cart'           => 'fa fa-shopping-cart',
+		'format-standard'     => 'fa fa-align-left',
+		'format-aside'        => 'fa fa-pencil',
+		'format-image'        => 'fa fa-picture-o',
+		'format-video'        => 'fa fa-play',
+		'format-audio'        => 'fa fa-music',
+		'format-gallery'      => 'fa fa-camera',
+		'format-quote'        => 'fa fa-quote-right',
+		'format-link'         => 'fa fa-link',
+		'format-status'       => 'fa fa-sticky-note',
+		'format-chat'         => 'fa fa-comments',
+		'format-page'         => 'fa fa-file-text',
+		'format-product'      => 'fa fa-shopping-cart',
+	);
+
+	if ( $icon == 'defaults' ) { return $defaults; }
+
 	if ( isset($mixt_opt[$icon . '-icon']) ) {
 		$icon_class = mixt_sanitize_html_classes($mixt_opt[$icon . '-icon']);
-		return ( $markup ) ? "<i class='$icon_class'></i>" : $icon_class;
+	} else if ( isset($defaults[$icon]) ) {
+		$icon_class = $defaults[$icon];
 	}
-	return '';
+	if ( ! empty($icon_class) ) {
+		return ( $markup ) ? "<i class='$icon_class'></i>" : $icon_class;
+	} else {
+		return '';
+	}
 }
 
 

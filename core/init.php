@@ -94,7 +94,7 @@ add_action('layerslider_ready', 'mixt_layerslider_overrides');
 
 // Configure WooCommerce
 if ( class_exists('WooCommerce') ) {
-	require_once( MIXT_PLUGINS_DIR . '/woocommerce/mixt-woocommerce.php' );
+	require_once( MIXT_FRAME_DIR . '/woocommerce-config.php' );
 }
 
 

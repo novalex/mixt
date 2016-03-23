@@ -28,10 +28,9 @@ class Mixt_Powerup {
 				'name'     => 'MIXT Core',
 				'slug'     => 'mixt-core',
 				'source'   => 'mixt-core.zip',
+				'required' => true,
+				'force_deactivation' => true,
 			);
-
-		// MIXT CodeBuilder
-			include_once( MIXT_PLUGINS_DIR . '/mixt-codebuilder/mixt-codebuilder.php' );
 
 		// Redux Framework and Extensions
 			// Extension Loader
@@ -52,7 +51,7 @@ class Mixt_Powerup {
 			}
 
 		// CMB2 Framework
-			if ( ( ! empty($mixt_opt['page-metaboxes']) && $mixt_opt['page-metaboxes'] == 1 ) ) {
+			if ( empty($mixt_opt['page-metaboxes']) || $mixt_opt['page-metaboxes'] == 1 ) {
 				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
 
 				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php' ) ) {
@@ -127,7 +126,7 @@ class Mixt_Powerup {
 	 * TGM Plugin Activation
 	 */
 	public function init_tgmpa() {
-		$tgmpa_msg = esc_html__( 'Activate the plugins to enable all the features that make MIXT awesome!', 'mixt' );
+		$tgmpa_msg = esc_html__( 'Install and activate the plugins to enable all the features that make MIXT awesome!', 'mixt' );
 		$config = array(
 			'id'           => 'mixt_tgmpa',         // Unique ID for hashing notices for multiple instances of TGMPA.
 			'default_path' => MIXT_PLUGINS_DIR.'/', // Default absolute path to bundled plugins.
@@ -135,11 +134,11 @@ class Mixt_Powerup {
 			'has_notices'  => true,                 // Show admin notices or not.
 			'dismissable'  => true,                 // If false, a user cannot dismiss the nag message.
 			'dismiss_msg'  => '',                   // If 'dismissable' is false, this message will be output at top of nag.
-			'is_automatic' => false,                // Automatically activate plugins after installation or not.
+			'is_automatic' => true,                 // Automatically activate plugins after installation or not.
 			'message'      => $tgmpa_msg,           // Message to output right before the plugins table.
 			'strings'      => array(
 				'page_title'   => esc_html__( 'MIXT Power Up', 'mixt' ),
-				'menu_title'   => esc_html__( 'MIXT Power Up', 'mixt' ),
+				'menu_title'   => esc_html__( 'MIXT - Power Up', 'mixt' ),
 			),
 			'function'     => array($this, 'plugins_page'),
 		);
@@ -161,62 +160,24 @@ class Mixt_Powerup {
 	public function plugins_page() {
 		$tgmpa = TGM_Plugin_Activation::get_instance();
 
-		ob_start();
-
-		$tgmpa->install_plugins_page();
-
-		$markup = ob_get_clean();
-
-		if ( empty($markup) ) return;
-
-		$title = esc_html( get_admin_page_title() );
-		$message = wp_kses_post($tgmpa->message);
-
-		// Remove original header markup
-
-		$markup = str_replace(
-			array(
-				'<div class="tgmpa wrap">',
-				'<h3>' . $title . '</h3>',
-				$message,
-
-			),
-			'', $markup);
-		
-		?>
-		<div class="tgmpa wrap powerup-wrap about-wrap mixt-admin-wrap">
-			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<div class="about-text">
-				<?php
-				if ( ! empty( $tgmpa->message ) && is_string( $tgmpa->message ) ) {
-					echo wp_kses_post( $tgmpa->message );
-				}
-				?>
-				<p>
-					<button id="pu-install-plugins" class="button-primary"><?php esc_html_e( 'Install All Plugins Now', 'mixt' ); ?></button>
-				</p>
-			</div>
-
-			<div class="wp-badge powerup-badge"></div>
-
-		<?php
-
-		echo $markup;
+		echo $tgmpa->install_plugins_page();
 
 		?>
 
 		<script type="text/javascript">
+			// Install All Button
 			( function($) {
 				$(document).ready( function() {
-
-					// Power Up Install All
 					$('#pu-install-plugins').click( function(e) {
 						e.preventDefault();
-
 						$('#the-list .check-column input').click();
-
-						$('#bulk-action-selector-top').val('tgmpa-bulk-activate');
-
+						$('#bulk-action-selector-top').val('tgmpa-bulk-install');
+						$('#tgmpa-plugins').submit();
+					});
+					$('#pu-install-required').click( function(e) {
+						e.preventDefault();
+						$('input[value="mixt-core"], input[value="redux-framework"]').click();
+						$('#bulk-action-selector-top').val('tgmpa-bulk-install');
 						$('#tgmpa-plugins').submit();
 					});
 				});

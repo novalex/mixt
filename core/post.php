@@ -633,9 +633,7 @@ if ( ! class_exists('Mixt_Post') ) {
 
 			// Display Featured Post Media
 
-			if ( $this->display_component('featured') ) {
-				$feat = $this->featured();
-			}
+			$feat = ( $this->display_component('featured') ) ? $this->featured() : null;
 
 			// Sticky / Featured Label
 
@@ -650,11 +648,13 @@ if ( ! class_exists('Mixt_Post') ) {
 
 			if ( $this->context == 'blog' || ( ! $this->options['header']['enabled'] || ! $this->options['header']['content-info'] ) ) {
 
+				$force_title = ( ! $feat && $this->context != 'single' );
+
 				// Title
-				if ( $this->display_component('title') || ! $feat ) {
+				if ( $this->display_component('title') || $force_title ) {
 					$tag = ( $this->context == 'single' ) ? 'h1' : 'h2';
 					$class = 'page-title';
-					if ( ! $feat ) { $class .= ' force-display'; }
+					if ( $force_title ) { $class .= ' force-display'; }
 					echo "<$tag class='$class'>$permalink_start"; 
 						if ( $this->sticky ) { echo $sticky_label; }
 						echo get_the_title();

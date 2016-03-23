@@ -138,11 +138,11 @@ if ( ! class_exists('Mixt_Nav_Meta') ) {
 									<li>
 										<label class="menu-item-title">
 											<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="-1">
-											<?php echo $post_type->labels->name . ' ' . esc_html__( 'Archive', 'mixt' ); ?>
+											<?php echo esc_html( $post_type->labels->name ) . ' ' . esc_html__( 'Archive', 'mixt' ); ?>
 										</label>
 										<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="custom">
 										<input type="hidden" class="menu-item-title" name="menu-item[-1][menu-item-title]" value="<?php echo esc_attr($post_type->labels->name); ?>">
-										<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="<?php echo get_post_type_archive_link($post_type->name); ?>">
+										<input type="hidden" class="menu-item-url" name="menu-item[-1][menu-item-url]" value="<?php echo esc_url( get_post_type_archive_link($post_type->name) ); ?>">
 										<input type="hidden" class="mixt-menu-item-type" name="menu-item[-1][mixt-menu-item-type]" value="archive-<?php echo esc_attr($post_type->name); ?>">
 									</li>
 									<?php

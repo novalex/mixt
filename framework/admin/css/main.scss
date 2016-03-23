@@ -1,5 +1,29 @@
 
-// MIXT Admin Styles
+/*! -------------------------
+ *
+ * MIXT ADMIN STYLESHEET
+ *
+ * --------------------------
+ *//*
+ ----------------------------
+ TABLE OF CONTENTS
+ ----------------------------
+
+ # UI
+ |- ## Buttons and Inputs
+ |- ## noUI Slider
+ # Redux Styling
+ |- ## General
+ |- ## Sidebar Menu
+ |- ## Common Elements
+ |- ## Custom Field Styling
+ |- ## RTL
+ # Visual Composer Styling
+ # Elements
+ # CodeBuilder Styling
+ # Customizer Styling
+
+-------------------------- */
 
 @import 'css/mixt/vars';
 @import 'css/mixt/colors';
@@ -11,4 +35,5 @@
 @import 'redux-mixt';
 @import 'vc-mixt';
 @import 'elements';
+@import 'codebuilder';
 @import 'customizer';

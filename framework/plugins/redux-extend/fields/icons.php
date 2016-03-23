@@ -12,7 +12,7 @@ $this->sections[] = array(
 			'id'       => 'left-arrow-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Left Arrow', 'mixt' ),
-			'default'  => 'fa fa-chevron-left',
+			'default'  => $default_icons['left-arrow'],
 		),
 
 		// Right Arrow
@@ -20,7 +20,7 @@ $this->sections[] = array(
 			'id'       => 'right-arrow-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Right Arrow', 'mixt' ),
-			'default'  => 'fa fa-chevron-right',
+			'default'  => $default_icons['right-arrow'],
 		),
 
 		// Up Arrow
@@ -28,7 +28,7 @@ $this->sections[] = array(
 			'id'       => 'up-arrow-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Up Arrow', 'mixt' ),
-			'default'  => 'fa fa-chevron-up',
+			'default'  => $default_icons['up-arrow'],
 		),
 
 		// Down Arrow
@@ -36,7 +36,7 @@ $this->sections[] = array(
 			'id'       => 'down-arrow-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Down Arrow', 'mixt' ),
-			'default'  => 'fa fa-chevron-down',
+			'default'  => $default_icons['down-arrow'],
 		),
 
 		// Search
@@ -44,7 +44,7 @@ $this->sections[] = array(
 			'id'       => 'search-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Search', 'mixt' ),
-			'default'  => 'fa fa-search',
+			'default'  => $default_icons['search'],
 		),
 
 		// Scroll To Content
@@ -52,7 +52,7 @@ $this->sections[] = array(
 			'id'       => 'head-content-scroll-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Scroll To Content', 'mixt' ),
-			'default'  => 'fa fa-chevron-down',
+			'default'  => $default_icons['head-content-scroll'],
 		),
 
 		// View Post
@@ -60,7 +60,7 @@ $this->sections[] = array(
 			'id'       => 'view-post-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'View Post', 'mixt' ),
-			'default'  => 'fa fa-share',
+			'default'  => $default_icons['view-post'],
 		),
 
 		// View Image
@@ -68,7 +68,7 @@ $this->sections[] = array(
 			'id'       => 'view-image-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'View Image', 'mixt' ),
-			'default'  => 'fa fa-search',
+			'default'  => $default_icons['view-image'],
 		),
 
 		// Author
@@ -76,7 +76,7 @@ $this->sections[] = array(
 			'id'       => 'author-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Author', 'mixt' ),
-			'default'  => 'fa fa-user',
+			'default'  => $default_icons['author'],
 		),
 
 		// Date
@@ -84,7 +84,7 @@ $this->sections[] = array(
 			'id'       => 'date-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Date', 'mixt' ),
-			'default'  => 'fa fa-clock-o',
+			'default'  => $default_icons['date'],
 		),
 
 		// Category
@@ -92,7 +92,7 @@ $this->sections[] = array(
 			'id'       => 'category-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Category', 'mixt' ),
-			'default'  => 'fa fa-folder-open',
+			'default'  => $default_icons['category'],
 		),
 
 		// Comments
@@ -100,7 +100,7 @@ $this->sections[] = array(
 			'id'       => 'comments-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Comments', 'mixt' ),
-			'default'  => 'fa fa-comment',
+			'default'  => $default_icons['comments'],
 		),
 
 		// Back To Top
@@ -108,7 +108,7 @@ $this->sections[] = array(
 			'id'       => 'back-to-top-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Back To Top', 'mixt' ),
-			'default'  => 'fa fa-chevron-up',
+			'default'  => $default_icons['back-to-top'],
 		),
 
 		// Shopping Cart
@@ -116,7 +116,7 @@ $this->sections[] = array(
 			'id'       => 'shop-cart-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Shopping Cart', 'mixt' ),
-			'default'  => 'fa fa-shopping-cart',
+			'default'  => $default_icons['shop-cart'],
 		),
 
 		// Standard Format
@@ -124,7 +124,7 @@ $this->sections[] = array(
 			'id'       => 'format-standard-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Standard Format', 'mixt' ),
-			'default'  => 'fa fa-align-left',
+			'default'  => $default_icons['format-standard'],
 		),
 
 		// Aside Format
@@ -132,7 +132,7 @@ $this->sections[] = array(
 			'id'       => 'format-aside-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Aside Format', 'mixt' ),
-			'default'  => 'fa fa-pencil',
+			'default'  => $default_icons['format-aside'],
 		),
 
 		// Image Format
@@ -140,7 +140,7 @@ $this->sections[] = array(
 			'id'       => 'format-image-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Image Format', 'mixt' ),
-			'default'  => 'fa fa-picture-o',
+			'default'  => $default_icons['format-image'],
 		),
 
 		// Video Format
@@ -148,7 +148,7 @@ $this->sections[] = array(
 			'id'       => 'format-video-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Video Format', 'mixt' ),
-			'default'  => 'fa fa-play',
+			'default'  => $default_icons['format-video'],
 		),
 
 		// Audio Format
@@ -156,7 +156,7 @@ $this->sections[] = array(
 			'id'       => 'format-audio-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Audio Format', 'mixt' ),
-			'default'  => 'fa fa-music',
+			'default'  => $default_icons['format-audio'],
 		),
 
 		// Gallery Format
@@ -164,7 +164,7 @@ $this->sections[] = array(
 			'id'       => 'format-gallery-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Gallery Format', 'mixt' ),
-			'default'  => 'fa fa-camera',
+			'default'  => $default_icons['format-gallery'],
 		),
 
 		// Quote Format
@@ -172,7 +172,7 @@ $this->sections[] = array(
 			'id'       => 'format-quote-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Quote Format', 'mixt' ),
-			'default'  => 'fa fa-quote-right',
+			'default'  => $default_icons['format-quote'],
 		),
 
 		// Link Format
@@ -180,7 +180,7 @@ $this->sections[] = array(
 			'id'       => 'format-link-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Link Format', 'mixt' ),
-			'default'  => 'fa fa-link',
+			'default'  => $default_icons['format-link'],
 		),
 
 		// Status Format
@@ -188,7 +188,7 @@ $this->sections[] = array(
 			'id'       => 'format-status-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Status Format', 'mixt' ),
-			'default'  => 'fa fa-sticky-note',
+			'default'  => $default_icons['format-status'],
 		),
 
 		// Chat Format
@@ -196,7 +196,7 @@ $this->sections[] = array(
 			'id'       => 'format-chat-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Chat Format', 'mixt' ),
-			'default'  => 'fa fa-comments',
+			'default'  => $default_icons['format-chat'],
 		),
 
 		// Page Format
@@ -204,7 +204,7 @@ $this->sections[] = array(
 			'id'       => 'format-page-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Page Format', 'mixt' ),
-			'default'  => 'fa fa-file-text',
+			'default'  => $default_icons['format-page'],
 		),
 
 		// Product Format
@@ -212,7 +212,7 @@ $this->sections[] = array(
 			'id'       => 'format-product-icon',
 			'type'     => 'text',
 			'title'    => esc_html__( 'Product Format', 'mixt' ),
-			'default'  => 'fa fa-shopping-cart',
+			'default'  => $default_icons['format-product'],
 		),
 	),
 );

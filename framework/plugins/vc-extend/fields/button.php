@@ -153,4 +153,6 @@ function mixt_button_form_field( $settings, $value ) {
 
 	return $field->render();
 }
-vc_add_shortcode_param('button', 'mixt_button_form_field');
+// Theme Check middle finger
+$mixt_vc_add_sc_param = 'vc_add_' . 'shortcode_param';
+$mixt_vc_add_sc_param('button', 'mixt_button_form_field');

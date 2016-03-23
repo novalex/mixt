@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2016-03-09 01:19+0200\n"
-"PO-Revision-Date: 2016-03-09 01:20+0200\n"
+"POT-Creation-Date: 2016-03-21 00:35+0200\n"
+"PO-Revision-Date: 2016-03-21 00:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -113,8 +113,8 @@ msgstr "No entries by this author"
 #: framework/plugins/redux-extend/fields/posts.php:17
 #: framework/plugins/redux-extend/fields/woocommerce.php:26
 #: framework/plugins/redux-extend/fields/woocommerce.php:39
-#: framework/plugins/vc-extend/vc-extend.php:33 framework/redux-config.php:81
-#: framework/redux-config.php:82
+#: framework/plugins/vc-extend/vc-extend.php:33 framework/redux-config.php:79
+#: framework/redux-config.php:80
 msgid "Auto"
 msgstr "Auto"
 
@@ -329,91 +329,83 @@ msgstr "Circle with shadow"
 msgid "3D Shadow"
 msgstr "3D Shadow"
 
-#: core/assets.php:389 templates/redux-templates/header.tpl.php:31
+#: core/assets.php:425 templates/redux-templates/header.tpl.php:31
 msgid "and"
 msgstr "and"
 
-#: core/header-tags.php:48 core/tags.php:141 core/tags.php:349
+#: core/header-tags.php:53 core/tags.php:141 core/tags.php:349
 #: woocommerce/loop/pagination.php:76
 msgid "Loading..."
 msgstr "Loading..."
 
-#: core/helpers.php:137
+#: core/helpers.php:141
 msgid "No menu assigned"
 msgstr "No menu assigned"
 
-#: core/helpers.php:139
+#: core/helpers.php:143
 msgid "Manage menus"
 msgstr "Manage menus"
 
-#: core/helpers.php:140
+#: core/helpers.php:144
 msgid "Click here to assign one"
 msgstr "Click here to assign one"
 
-#: core/init.php:159
-msgid ""
-"Please activate all required plugins to enable all the features that make "
-"MIXT awesome!"
-msgstr ""
-"Please activate all required plugins to enable all the features that make "
-"MIXT awesome!"
-
-#: core/navwalker.php:378
+#: core/navwalker.php:382
 #, php-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] "%d item"
 msgstr[1] "%d items"
 
-#: core/navwalker.php:380
+#: core/navwalker.php:384
 msgid "No items in the cart"
 msgstr "No items in the cart"
 
-#: core/post.php:569 core/post.php:968
+#: core/post.php:574 core/post.php:976
 #: framework/plugins/redux-extend/fields/icons.php:62
 msgid "View Post"
 msgstr "View Post"
 
-#: core/post.php:575
+#: core/post.php:580
 msgid "Full Image"
 msgstr "Full Image"
 
-#: core/post.php:699
+#: core/post.php:705
 msgid "Post pages"
 msgstr "Post pages"
 
-#: core/post.php:764
+#: core/post.php:770
 msgid "This author has not yet written their bio."
 msgstr "This author has not yet written their bio."
 
-#: core/post.php:775
+#: core/post.php:781
 #, php-format
 msgctxt "author"
 msgid "About %s"
 msgstr "About %s"
 
-#: core/post.php:979
+#: core/post.php:987
 #, php-format
 msgctxt "author"
 msgid "View all posts by %s"
 msgstr "View all posts by %s"
 
-#: core/post.php:981
+#: core/post.php:989
 #, php-format
 msgid "By %s"
 msgstr "By %s"
 
-#: core/post.php:995
+#: core/post.php:1003
 #, php-format
 msgid "Updated %s"
 msgstr "Updated %s"
 
-#: core/post.php:1032 templates/comments.php:29
+#: core/post.php:1040 templates/comments.php:29
 #, php-format
 msgid "%d comments"
 msgstr "%d comments"
 
-#: core/post.php:1034 templates/comments.php:31
+#: core/post.php:1042 templates/comments.php:31
 msgid "1 comment"
 msgstr "1 comment"
 
@@ -604,58 +596,52 @@ msgstr "Light"
 msgid "Dark"
 msgstr "Dark"
 
-#: framework/admin/menu-pages.php:57 framework/admin/views/welcome.php:4
+#: framework/admin/menu-pages.php:58 framework/admin/views/welcome.php:4
 msgid "Welcome!"
 msgstr "Welcome!"
 
-#: framework/admin/menu-pages.php:57
-msgid "Welcome"
-msgstr "Welcome"
+#: framework/admin/menu-pages.php:58
+msgid "MIXT - Welcome"
+msgstr "MIXT - Welcome"
 
-#: framework/admin/menu-pages.php:60 framework/admin/views/about.php:4
-msgid "About MIXT"
-msgstr "About MIXT"
-
-#: framework/admin/menu-pages.php:60 framework/admin/menu-pages.php:103
-msgid "About"
-msgstr "About"
-
-#: framework/admin/menu-pages.php:64 framework/admin/menu-pages.php:106
-#: framework/admin/views/status.php:4
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2435
-msgid "Status"
-msgstr "Status"
-
-#: framework/admin/menu-pages.php:75
+#: framework/admin/menu-pages.php:69
 #, php-format
 msgid "Version %s"
 msgstr "Version %s"
 
-#: framework/admin/menu-pages.php:103
-msgid "Getting Started"
-msgstr "Getting Started"
+#: framework/admin/menu-pages.php:97
+msgid "About"
+msgstr "About"
 
-#: framework/admin/menu-pages.php:110 framework/admin/views/welcome.php:25
+#: framework/admin/menu-pages.php:100 framework/admin/views/status.php:4
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2440
+msgid "Status"
+msgstr "Status"
+
+#: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:36
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:334
 msgid "Install Plugins"
 msgstr "Install Plugins"
 
-#: framework/admin/menu-pages.php:114
+#: framework/admin/menu-pages.php:108 framework/redux-config.php:234
 msgid "Options"
 msgstr "Options"
 
-#: framework/admin/menu-pages.php:123 framework/admin/views/welcome.php:17
-#: framework/redux-config.php:275
+#: framework/admin/menu-pages.php:118 framework/admin/views/welcome.php:15
 msgid "Documentation"
 msgstr "Documentation"
 
-#: framework/admin/menu-pages.php:124
+#: framework/admin/menu-pages.php:119
 msgid "Support"
 msgstr "Support"
 
-#: framework/admin/menu-pages.php:125
+#: framework/admin/menu-pages.php:120
 msgid "Forums"
 msgstr "Forums"
+
+#: framework/admin/views/about.php:4
+msgid "About MIXT"
+msgstr "About MIXT"
 
 #: framework/admin/views/about.php:5
 msgid "Need any help? Check out the links below!"
@@ -712,7 +698,7 @@ msgid "Theme Info"
 msgstr "Theme Info"
 
 #: framework/admin/views/status.php:20
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2434
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2439
 msgid "Version"
 msgstr "Version"
 
@@ -1104,11 +1090,11 @@ msgstr ""
 "start using one of the greatest themes in the world! Just a couple more "
 "steps..."
 
-#: framework/admin/views/welcome.php:15
+#: framework/admin/views/welcome.php:13
 msgid "Read The Documentation"
 msgstr "Read The Documentation"
 
-#: framework/admin/views/welcome.php:16
+#: framework/admin/views/welcome.php:14
 msgid ""
 "Be sure to go over the online documentation at least once, it contains a lot "
 "of useful information on how to make full use of the theme and leverage the "
@@ -1118,34 +1104,48 @@ msgstr ""
 "of useful information on how to make full use of the theme and leverage the "
 "various features it offers."
 
-#: framework/admin/views/welcome.php:22
+#: framework/admin/views/welcome.php:20
 msgid "Install The Plugins"
 msgstr "Install The Plugins"
 
-#: framework/admin/views/welcome.php:23
+#: framework/admin/views/welcome.php:21
 msgid ""
-"Go to the &quot;Install Plugins&quot; page and install and activate the "
-"plugins you will be using on your website."
+"Install and activate all the required plugins, and the ones you will be "
+"using on your website."
 msgstr ""
-"Go to the &quot;Install Plugins&quot; page and install and activate the "
-"plugins you will be using on your website."
+"Install and activate all the required plugins, and the ones you will be "
+"using on your website."
 
 #: framework/admin/views/welcome.php:24
 msgid ""
-"The \"Envato WordPress Toolkit\" plugin is strongly recommended, it will "
-"notify you when an update is released for the theme and you can easily "
-"download the latest version through it."
+"will provide additional functionality as well as custom element shortcodes "
+"and portfolio"
 msgstr ""
-"The \"Envato WordPress Toolkit\" plugin is strongly recommended, it will "
-"notify you when an update is released for the theme and you can easily "
-"download the latest version through it."
+"will provide additional functionality as well as custom element shortcodes "
+"and portfolio"
 
-#: framework/admin/views/welcome.php:30
-msgid "Get Help On Speed Dial"
-msgstr "Get Help On Speed Dial"
+#: framework/admin/views/welcome.php:27
+msgid "will enable the options panel so you can customize your website"
+msgstr "will enable the options panel so you can customize your website"
 
 #: framework/admin/views/welcome.php:31
 msgid ""
+"will notify you when an update is released for the theme and you can easily "
+"download the latest version through it"
+msgstr ""
+"will notify you when an update is released for the theme and you can easily "
+"download the latest version through it"
+
+#: framework/admin/views/welcome.php:34
+msgid "will enable the visual drag-and-drop page editor"
+msgstr "will enable the visual drag-and-drop page editor"
+
+#: framework/admin/views/welcome.php:41
+msgid "Get Help On Speed Dial"
+msgstr "Get Help On Speed Dial"
+
+#: framework/admin/views/welcome.php:42
+msgid ""
 "Sign up to have support at the ready if you ever need it! We will do our "
 "best to answer any questions as fast as possible, usually within a few "
 "hours. But first, check out the articles and do a quick search - with a bit "
@@ -1156,29 +1156,31 @@ msgstr ""
 "hours. But first, check out the articles and do a quick search - with a bit "
 "of luck, your question might have been answered already!"
 
-#: framework/admin/views/welcome.php:32
+#: framework/admin/views/welcome.php:43
 msgid "Get Support"
 msgstr "Get Support"
 
-#: framework/admin/views/welcome.php:37
+#: framework/admin/views/welcome.php:48
 msgid "Customize Everything"
 msgstr "Customize Everything"
 
-#: framework/admin/views/welcome.php:38
+#: framework/admin/views/welcome.php:49
 msgid ""
 "Adjust, tweak and customize every imaginable aspect of your new website with "
-"the powerful, comprehensive options panel at your disposal! But you don&#39;"
-"t have to settle for blindly changing options, with the extensive Live "
-"Customizer integration, you can SEE the perfect website take shape before "
-"your eyes!"
+"the powerful, comprehensive options panel at your disposal!"
 msgstr ""
 "Adjust, tweak and customize every imaginable aspect of your new website with "
-"the powerful, comprehensive options panel at your disposal! But you don&#39;"
-"t have to settle for blindly changing options, with the extensive Live "
-"Customizer integration, you can SEE the perfect website take shape before "
-"your eyes!"
+"the powerful, comprehensive options panel at your disposal!"
 
-#: framework/admin/views/welcome.php:39
+#: framework/admin/views/welcome.php:50
+msgid ""
+"With the extensive Live Customizer integration, you can SEE the perfect "
+"website take shape before your eyes!"
+msgstr ""
+"With the extensive Live Customizer integration, you can SEE the perfect "
+"website take shape before your eyes!"
+
+#: framework/admin/views/welcome.php:51
 msgid ""
 "One-Click Demos are also available to quickly get you started with a website "
 "just like the live demos."
@@ -1186,13 +1188,29 @@ msgstr ""
 "One-Click Demos are also available to quickly get you started with a website "
 "just like the live demos."
 
-#: framework/admin/views/welcome.php:40
-msgid "Customize It!"
-msgstr "Customize It!"
+#: framework/admin/views/welcome.php:53
+msgid "Customize MIXT"
+msgstr "Customize MIXT"
 
-#: framework/admin/views/welcome.php:46
+#: framework/admin/views/welcome.php:62
 msgid "That&#39;s All Folks! Go Forth And Create!"
 msgstr "That&#39;s All Folks! Go Forth And Create!"
+
+#: framework/class-powerup.php:129
+msgid ""
+"Install and activate the plugins to enable all the features that make MIXT "
+"awesome!"
+msgstr ""
+"Install and activate the plugins to enable all the features that make MIXT "
+"awesome!"
+
+#: framework/class-powerup.php:140
+msgid "MIXT Power Up"
+msgstr "MIXT Power Up"
+
+#: framework/class-powerup.php:141
+msgid "MIXT - Power Up"
+msgstr "MIXT - Power Up"
 
 #: framework/cmb2-config.php:183
 msgid "Page Options"
@@ -1631,7 +1649,6 @@ msgstr "Display page in full width mode"
 #: framework/plugins/cmb2-extend/fields/header.php:3
 #: framework/plugins/redux-extend/fields/customizer.php:125
 #: framework/plugins/redux-extend/fields/header.php:4
-#: framework/redux-config.php:238
 msgid "Header"
 msgstr "Header"
 
@@ -2266,7 +2283,7 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:109
 #: framework/plugins/redux-extend/fields/post-pages.php:95
 #: framework/plugins/redux-extend/fields/post-pages.php:461
-#: framework/plugins/redux-extend/fields/woocommerce.php:50 functions.php:125
+#: framework/plugins/redux-extend/fields/woocommerce.php:50 functions.php:123
 msgid "Sidebar"
 msgstr "Sidebar"
 
@@ -2274,43 +2291,13 @@ msgstr "Sidebar"
 msgid "The sidebar to use for this page"
 msgstr "The sidebar to use for this page"
 
-#: framework/plugins/mixt-codebuilder/mixt-codebuilder.php:43
-#: framework/plugins/mixt-codebuilder/panel.php:64
-msgid "Build Shortcode"
-msgstr "Build Shortcode"
-
-#: framework/plugins/mixt-codebuilder/mixt-codebuilder.php:44
-msgid "Select Media"
-msgstr "Select Media"
-
-#: framework/plugins/mixt-codebuilder/panel.php:82
-msgid "Add Shortcode"
-msgstr "Add Shortcode"
-
-#: framework/plugins/mixt-codebuilder/panel.php:83
-msgid "Cancel"
-msgstr "Cancel"
-
-#: framework/plugins/mixt-codebuilder/panel.php:115
-#: framework/plugins/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.php:175
-msgid "Remove"
-msgstr "Remove"
-
-#: framework/plugins/mixt-codebuilder/panel.php:135
-msgid "Child Element"
-msgstr "Child Element"
-
-#: framework/plugins/mixt-codebuilder/panel.php:137
-msgid "Add Element"
-msgstr "Add Element"
-
-#: framework/plugins/mixt-codebuilder/panel.php:295
-msgid "No field of type"
-msgstr "No field of type"
-
 #: framework/plugins/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.php:80
 msgid "Add More"
 msgstr "Add More"
+
+#: framework/plugins/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.php:175
+msgid "Remove"
+msgstr "Remove"
 
 #: framework/plugins/redux-extend/fields/customizer.php:9
 msgid "Global"
@@ -2575,7 +2562,6 @@ msgstr "Text to display before the breadcrumbs"
 
 #: framework/plugins/redux-extend/fields/customizer.php:539
 #: framework/plugins/redux-extend/fields/themes.php:5
-#: framework/redux-config.php:262
 msgid "Themes"
 msgstr "Themes"
 
@@ -2757,7 +2743,6 @@ msgstr "Enable Opacity"
 
 #: framework/plugins/redux-extend/fields/customizer.php:829
 #: framework/plugins/redux-extend/fields/navbars.php:4
-#: framework/redux-config.php:244
 msgid "Navbars"
 msgstr "Navbars"
 
@@ -2996,7 +2981,6 @@ msgid "Hide the widget area on mobile / small screens"
 msgstr "Hide the widget area on mobile / small screens"
 
 #: framework/plugins/redux-extend/fields/footer.php:240
-#: framework/redux-config.php:268
 msgid "Social Profiles"
 msgstr "Social Profiles"
 
@@ -3043,7 +3027,6 @@ msgid "Hide the info bar on mobile / small screens"
 msgstr "Hide the info bar on mobile / small screens"
 
 #: framework/plugins/redux-extend/fields/global.php:4
-#: framework/redux-config.php:232
 msgid "Global Options"
 msgstr "Global Options"
 
@@ -3111,7 +3094,7 @@ msgstr "Show animations when pages are loading"
 #: framework/plugins/redux-extend/fields/logo.php:12
 #: framework/plugins/redux-extend/fields/portfolio.php:573
 #: framework/plugins/redux-extend/fields/posts.php:204
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2430
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2435
 #: framework/plugins/vc-extend/fields/button.php:94
 msgid "Type"
 msgstr "Type"
@@ -3744,7 +3727,6 @@ msgid "Display an overlay with useful links and info when a post is hovered"
 msgstr "Display an overlay with useful links and info when a post is hovered"
 
 #: framework/plugins/redux-extend/fields/post-pages.php:343
-#: framework/redux-config.php:256
 msgid "Post Pages"
 msgstr "Post Pages"
 
@@ -4060,7 +4042,6 @@ msgid "Display the allowed tags in the comment form"
 msgstr "Display the allowed tags in the comment form"
 
 #: framework/plugins/redux-extend/fields/sidebars.php:4
-#: framework/redux-config.php:250
 msgid "Sidebars"
 msgstr "Sidebars"
 
@@ -4358,6 +4339,7 @@ msgid "How many columns (related products per row) to display"
 msgstr "How many columns (related products per row) to display"
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:333
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:670
 msgid "Install Required Plugins"
 msgstr "Install Required Plugins"
 
@@ -4490,12 +4472,12 @@ msgid "Return to the dashboard"
 msgstr "Return to the dashboard"
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:399
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3021
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3026
 msgid "Plugin activated successfully."
 msgstr "Plugin activated successfully."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:400
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2824
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2829
 msgid "The following plugin was activated successfully:"
 msgid_plural "The following plugins were activated successfully:"
 msgstr[0] "The following plugin was activated successfully:"
@@ -4536,12 +4518,16 @@ msgstr "This plugin needs to be updated to be compatible with your theme."
 msgid "Update Required"
 msgstr "Update Required"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:820
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3430
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:669
+msgid "Install All Plugins Now"
+msgstr "Install All Plugins Now"
+
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:824
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3435
 msgid "Return to the Dashboard"
 msgstr "Return to the Dashboard"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:927
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
 msgid ""
 "The remote plugin package does not contain a folder with the desired slug "
 "and renaming did not work."
@@ -4549,8 +4535,8 @@ msgstr ""
 "The remote plugin package does not contain a folder with the desired slug "
 "and renaming did not work."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:927
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:930
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
 msgid ""
 "Please contact the plugin provider and ask them to package their plugin "
 "according to the WordPress guidelines."
@@ -4558,7 +4544,7 @@ msgstr ""
 "Please contact the plugin provider and ask them to package their plugin "
 "according to the WordPress guidelines."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:930
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
 msgid ""
 "The remote plugin package consists of more than one file, but the files are "
 "not packaged in a folder."
@@ -4566,69 +4552,69 @@ msgstr ""
 "The remote plugin package consists of more than one file, but the files are "
 "not packaged in a folder."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1108
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2820
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1112
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2825
 msgctxt "plugin A *and* plugin B"
 msgid "and"
 msgstr "and"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1873
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1877
 #, php-format
 msgctxt "%s = version number"
 msgid "TGMPA v%s"
 msgstr "TGMPA v%s"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2159
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2164
 msgid "Required"
 msgstr "Required"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2162
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2167
 msgid "Recommended"
 msgstr "Recommended"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2178
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2183
 msgid "WordPress Repository"
 msgstr "WordPress Repository"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2181
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2186
 msgid "External Source"
 msgstr "External Source"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2184
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2189
 msgid "Pre-Packaged"
 msgstr "Pre-Packaged"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2201
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2206
 msgid "Not Installed"
 msgstr "Not Installed"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2205
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2210
 msgid "Installed But Not Activated"
 msgstr "Installed But Not Activated"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2207
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2212
 msgid "Active"
 msgstr "Active"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2213
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2218
 msgid "Required Update not Available"
 msgstr "Required Update not Available"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2216
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2221
 msgid "Requires Update"
 msgstr "Requires Update"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2219
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2224
 msgid "Update recommended"
 msgstr "Update recommended"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2227
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2232
 #, php-format
 msgctxt "%1$s = install status, %2$s = update status"
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2272
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2277
 #, php-format
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
@@ -4636,45 +4622,45 @@ msgid_plural "All <span class=\"count\">(%s)</span>"
 msgstr[0] "All <span class=\"count\">(%s)</span>"
 msgstr[1] "All <span class=\"count\">(%s)</span>"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2275
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2280
 #, php-format
 msgid "To Install <span class=\"count\">(%s)</span>"
 msgid_plural "To Install <span class=\"count\">(%s)</span>"
 msgstr[0] "To Install <span class=\"count\">(%s)</span>"
 msgstr[1] "To Install <span class=\"count\">(%s)</span>"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2278
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2283
 #, php-format
 msgid "Update Available <span class=\"count\">(%s)</span>"
 msgid_plural "Update Available <span class=\"count\">(%s)</span>"
 msgstr[0] "Update Available <span class=\"count\">(%s)</span>"
 msgstr[1] "Update Available <span class=\"count\">(%s)</span>"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2281
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2286
 #, php-format
 msgid "To Activate <span class=\"count\">(%s)</span>"
 msgid_plural "To Activate <span class=\"count\">(%s)</span>"
 msgstr[0] "To Activate <span class=\"count\">(%s)</span>"
 msgstr[1] "To Activate <span class=\"count\">(%s)</span>"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2363
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2368
 msgctxt "as in: \"version nr unknown\""
 msgid "unknown"
 msgstr "unknown"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2371
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2376
 msgid "Installed version:"
 msgstr "Installed version:"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2379
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2384
 msgid "Minimum required version:"
 msgstr "Minimum required version:"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2391
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2396
 msgid "Available version:"
 msgstr "Available version:"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2414
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2419
 #, php-format
 msgid ""
 "No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
@@ -4683,92 +4669,92 @@ msgstr ""
 "No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
 "Dashboard</a>"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2428
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2433
 msgid "Plugin"
 msgstr "Plugin"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2429
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2434
 msgid "Source"
 msgstr "Source"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2483
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2488
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Install %2$s"
 msgstr "Install %2$s"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2487
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2492
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Update %2$s"
 msgstr "Update %2$s"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2492
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2497
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Activate %2$s"
 msgstr "Activate %2$s"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2562
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2567
 msgid "Upgrade message from the plugin author:"
 msgstr "Upgrade message from the plugin author:"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2595
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2600
 msgid "Install"
 msgstr "Install"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2601
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2606
 msgid "Update"
 msgstr "Update"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2604
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2609
 msgid "Activate"
 msgstr "Activate"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2635
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2640
 msgid "No plugins were selected to be installed. No action taken."
 msgstr "No plugins were selected to be installed. No action taken."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2637
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2642
 msgid "No plugins were selected to be updated. No action taken."
 msgstr "No plugins were selected to be updated. No action taken."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2673
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2678
 msgid "No plugins are available to be installed at this time."
 msgstr "No plugins are available to be installed at this time."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2675
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2680
 msgid "No plugins are available to be updated at this time."
 msgstr "No plugins are available to be updated at this time."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2780
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2785
 msgid "No plugins were selected to be activated. No action taken."
 msgstr "No plugins were selected to be activated. No action taken."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2806
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2811
 msgid "No plugins are available to be activated at this time."
 msgstr "No plugins are available to be activated at this time."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3020
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3025
 msgid "Plugin activation failed."
 msgstr "Plugin activation failed."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3354
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3359
 #, php-format
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
 msgstr "Updating Plugin %1$s (%2$d/%3$d)"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3356
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3361
 #, php-format
 msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
 msgstr "An error occurred while installing %1$s: <strong>%2$s</strong>."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3357
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
 #, php-format
 msgid "The installation of %1$s failed."
 msgstr "The installation of %1$s failed."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3361
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3366
 msgid ""
 "The installation and activation process is starting. This process may take a "
 "while on some hosts, so please be patient."
@@ -4776,31 +4762,31 @@ msgstr ""
 "The installation and activation process is starting. This process may take a "
 "while on some hosts, so please be patient."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
 #, php-format
 msgid "%1$s installed and activated successfully."
 msgstr "%1$s installed and activated successfully."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 msgid "Show Details"
 msgstr "Show Details"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 msgid "Hide Details"
 msgstr "Hide Details"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3363
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
 msgid "All installations and activations have been completed."
 msgstr "All installations and activations have been completed."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3364
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3369
 #, php-format
 msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
 msgstr "Installing and Activating Plugin %1$s (%2$d/%3$d)"
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3372
 msgid ""
 "The installation process is starting. This process may take a while on some "
 "hosts, so please be patient."
@@ -4808,16 +4794,16 @@ msgstr ""
 "The installation process is starting. This process may take a while on some "
 "hosts, so please be patient."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 #, php-format
 msgid "%1$s installed successfully."
 msgstr "%1$s installed successfully."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3369
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3374
 msgid "All installations have been completed."
 msgstr "All installations have been completed."
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3370
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3375
 #, php-format
 msgid "Installing Plugin %1$s (%2$d/%3$d)"
 msgstr "Installing Plugin %1$s (%2$d/%3$d)"
@@ -4910,35 +4896,19 @@ msgstr "MIXT - Masonry: Scale And Rotate"
 msgid "MIXT - Grid: Fade In With Title"
 msgstr "MIXT - Grid: Fade In With Title"
 
-#: framework/plugins/woocommerce/mixt-woocommerce.php:168
-msgid "Sale"
-msgstr "Sale"
-
-#: framework/plugins/woocommerce/mixt-woocommerce.php:177
-msgid "New"
-msgstr "New"
-
-#: framework/plugins/woocommerce/mixt-woocommerce.php:251
-msgid "Out of stock"
-msgstr "Out of stock"
-
-#: framework/plugins/woocommerce/mixt-woocommerce.php:253
-msgid " In stock"
-msgstr " In stock"
-
-#: framework/redux-config.php:113
+#: framework/redux-config.php:114
 msgid "Allowed HTML tags and attributes:"
 msgstr "Allowed HTML tags and attributes:"
 
-#: framework/redux-config.php:185
+#: framework/redux-config.php:186
 msgid "Settings & Demos"
 msgstr "Settings & Demos"
 
-#: framework/redux-config.php:186
+#: framework/redux-config.php:187
 msgid "Manage your settings, and import demo content."
 msgstr "Manage your settings, and import demo content."
 
-#: framework/redux-config.php:188
+#: framework/redux-config.php:189
 msgid ""
 "Demos work best on clean, fresh sites. For complete content import, make "
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
@@ -4948,59 +4918,71 @@ msgstr ""
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
 "The page will reload after importing."
 
-#: framework/redux-config.php:274
-msgid "The latest documentation is available online."
-msgstr "The latest documentation is available online."
+#: framework/redux-config.php:234
+msgid "MIXT - Options"
+msgstr "MIXT - Options"
 
-#: framework/redux-config.php:294
-msgid "Theme Options"
-msgstr "Theme Options"
-
-#: framework/redux-config.php:295
+#: framework/redux-config.php:235
 msgid "MIXT Options"
 msgstr "MIXT Options"
 
-#: functions.php:48
+#: framework/woocommerce-config.php:168
+msgid "Sale"
+msgstr "Sale"
+
+#: framework/woocommerce-config.php:177
+msgid "New"
+msgstr "New"
+
+#: framework/woocommerce-config.php:251
+msgid "Out of stock"
+msgstr "Out of stock"
+
+#: framework/woocommerce-config.php:253
+msgid " In stock"
+msgstr " In stock"
+
+#: functions.php:45
 msgid "Error locating file for inclusion"
 msgstr "Error locating file for inclusion"
 
-#: functions.php:103
+#: functions.php:101
 msgid "Main Nav"
 msgstr "Main Nav"
 
-#: functions.php:104
+#: functions.php:102
 msgid "Secondary Nav Left Side"
 msgstr "Secondary Nav Left Side"
 
-#: functions.php:105
+#: functions.php:103
 msgid "Secondary Nav Right Side"
 msgstr "Secondary Nav Right Side"
 
-#: functions.php:106
+#: functions.php:104
 msgid "404 Page Nav"
 msgstr "404 Page Nav"
 
-#: functions.php:150
+#: functions.php:148
 msgid "Footer Column 1"
 msgstr "Footer Column 1"
 
-#: functions.php:156
+#: functions.php:154
 msgid "Footer Column 2"
 msgstr "Footer Column 2"
 
-#: functions.php:162
+#: functions.php:160
 msgid "Footer Column 3"
 msgstr "Footer Column 3"
 
-#: functions.php:168
+#: functions.php:166
 msgid "Footer Column 4"
 msgstr "Footer Column 4"
 
-#: header.php:111
+#: header.php:69
 msgid "Toggle navigation"
 msgstr "Toggle navigation"
 
-#: modules/breadcrumbs.php:37 modules/breadcrumbs.php:173
+#: modules/breadcrumbs.php:37 modules/breadcrumbs.php:167
 msgctxt "breadcrumb"
 msgid "Home"
 msgstr "Home"
@@ -5020,7 +5002,7 @@ msgctxt "breadcrumb"
 msgid "Search"
 msgstr "Search"
 
-#: modules/extras.php:47
+#: modules/extras.php:30
 msgid "Read More"
 msgstr "Read More"
 
@@ -5032,71 +5014,71 @@ msgstr "Slider with specified ID not found!"
 msgid "LayerSlider plugin not installed or deactivated!"
 msgstr "LayerSlider plugin not installed or deactivated!"
 
-#: modules/social.php:237
+#: modules/social.php:236
 msgid "Like us on Facebook"
 msgstr "Like us on Facebook"
 
-#: modules/social.php:245
+#: modules/social.php:244
 msgid "Follow us on Twitter"
 msgstr "Follow us on Twitter"
 
-#: modules/social.php:253
+#: modules/social.php:252
 msgid "Follow us on Google+"
 msgstr "Follow us on Google+"
 
-#: modules/social.php:261
+#: modules/social.php:260
 msgid "Subscribe to us on Youtube"
 msgstr "Subscribe to us on Youtube"
 
-#: modules/social.php:269
+#: modules/social.php:268
 msgid "Connect on LinkedIn"
 msgstr "Connect on LinkedIn"
 
-#: modules/social.php:277
+#: modules/social.php:276
 msgid "Follow us on Instagram"
 msgstr "Follow us on Instagram"
 
-#: modules/social.php:285
+#: modules/social.php:284
 msgid "Follow us on Pinterest"
 msgstr "Follow us on Pinterest"
 
-#: modules/social.php:293
+#: modules/social.php:292
 msgid "Follow us on Tumblr"
 msgstr "Follow us on Tumblr"
 
-#: modules/social.php:305
+#: modules/social.php:304
 msgid "Share on Facebook"
 msgstr "Share on Facebook"
 
-#: modules/social.php:313
+#: modules/social.php:312
 msgid "Share on Twitter"
 msgstr "Share on Twitter"
 
-#: modules/social.php:321
+#: modules/social.php:320
 msgid "Share on Google+"
 msgstr "Share on Google+"
 
-#: modules/social.php:329
+#: modules/social.php:328
 msgid "Share on reddit"
 msgstr "Share on reddit"
 
-#: modules/social.php:337
+#: modules/social.php:336
 msgid "Share on LinkedIn"
 msgstr "Share on LinkedIn"
 
-#: modules/social.php:345
+#: modules/social.php:344
 msgid "Share on Pinterest"
 msgstr "Share on Pinterest"
 
-#: modules/social.php:353
+#: modules/social.php:352
 msgid "Share on Tumblr"
 msgstr "Share on Tumblr"
 
-#: modules/social.php:361
+#: modules/social.php:360
 msgid "Share on StumbleUpon"
 msgstr "Share on StumbleUpon"
 
-#: modules/social.php:369
+#: modules/social.php:368
 msgid "Share via email"
 msgstr "Share via email"
 
@@ -5109,14 +5091,6 @@ msgstr "Search..."
 msgctxt "label"
 msgid "Search for:"
 msgstr "Search for:"
-
-#: sidebar.php:36
-msgid "Archives"
-msgstr "Archives"
-
-#: sidebar.php:43
-msgid "Meta"
-msgstr "Meta"
 
 #: single-portfolio.php:29
 msgid "Type:"
@@ -5293,31 +5267,24 @@ msgstr "Return To Shop"
 msgid "Cart Totals"
 msgstr "Cart Totals"
 
-#: woocommerce/cart/cart-totals.php:24 woocommerce/cart/mini-cart.php:79
+#: woocommerce/cart/cart-totals.php:24 woocommerce/cart/cart-totals.php:25
+#: woocommerce/cart/mini-cart.php:79
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: woocommerce/cart/cart-totals.php:46
+#: woocommerce/cart/cart-totals.php:46 woocommerce/cart/cart-totals.php:47
 msgid "Shipping"
 msgstr "Shipping"
 
-#: woocommerce/cart/cart-totals.php:78 woocommerce/cart/cart.php:30
+#: woocommerce/cart/cart-totals.php:62
+#, php-format
+msgid "estimated for %s"
+msgstr "estimated for %s"
+
+#: woocommerce/cart/cart-totals.php:83 woocommerce/cart/cart-totals.php:84
+#: woocommerce/cart/cart.php:30
 msgid "Total"
 msgstr "Total"
-
-#: woocommerce/cart/cart-totals.php:90
-#, php-format
-msgid " (taxes estimated for %s)"
-msgstr " (taxes estimated for %s)"
-
-#: woocommerce/cart/cart-totals.php:93
-#, php-format
-msgid ""
-"Note: Shipping and taxes are estimated%s and will be updated during checkout "
-"based on your billing and shipping information."
-msgstr ""
-"Note: Shipping and taxes are estimated%s and will be updated during checkout "
-"based on your billing and shipping information."
 
 #: woocommerce/cart/cart.php:27
 msgid "Product"
@@ -5489,6 +5456,94 @@ msgstr ""
 #: woocommerce/single-product/product-image.php:43
 msgid "Placeholder"
 msgstr "Placeholder"
+
+#~ msgid ""
+#~ "Please activate all required plugins to enable all the features that make "
+#~ "MIXT awesome!"
+#~ msgstr ""
+#~ "Please activate all required plugins to enable all the features that make "
+#~ "MIXT awesome!"
+
+#~ msgid "Welcome"
+#~ msgstr "Welcome"
+
+#~ msgid "Getting Started"
+#~ msgstr "Getting Started"
+
+#~ msgid ""
+#~ "Go to the &quot;Install Plugins&quot; page and install and activate the "
+#~ "plugins you will be using on your website."
+#~ msgstr ""
+#~ "Go to the &quot;Install Plugins&quot; page and install and activate the "
+#~ "plugins you will be using on your website."
+
+#~ msgid ""
+#~ "The \"Envato WordPress Toolkit\" plugin is strongly recommended, it will "
+#~ "notify you when an update is released for the theme and you can easily "
+#~ "download the latest version through it."
+#~ msgstr ""
+#~ "The \"Envato WordPress Toolkit\" plugin is strongly recommended, it will "
+#~ "notify you when an update is released for the theme and you can easily "
+#~ "download the latest version through it."
+
+#~ msgid ""
+#~ "Adjust, tweak and customize every imaginable aspect of your new website "
+#~ "with the powerful, comprehensive options panel at your disposal! But you "
+#~ "don&#39;t have to settle for blindly changing options, with the extensive "
+#~ "Live Customizer integration, you can SEE the perfect website take shape "
+#~ "before your eyes!"
+#~ msgstr ""
+#~ "Adjust, tweak and customize every imaginable aspect of your new website "
+#~ "with the powerful, comprehensive options panel at your disposal! But you "
+#~ "don&#39;t have to settle for blindly changing options, with the extensive "
+#~ "Live Customizer integration, you can SEE the perfect website take shape "
+#~ "before your eyes!"
+
+#~ msgid "Customize It!"
+#~ msgstr "Customize It!"
+
+#~ msgid "Build Shortcode"
+#~ msgstr "Build Shortcode"
+
+#~ msgid "Select Media"
+#~ msgstr "Select Media"
+
+#~ msgid "Add Shortcode"
+#~ msgstr "Add Shortcode"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#~ msgid "Child Element"
+#~ msgstr "Child Element"
+
+#~ msgid "Add Element"
+#~ msgstr "Add Element"
+
+#~ msgid "No field of type"
+#~ msgstr "No field of type"
+
+#~ msgid "The latest documentation is available online."
+#~ msgstr "The latest documentation is available online."
+
+#~ msgid "Theme Options"
+#~ msgstr "Theme Options"
+
+#~ msgid "Archives"
+#~ msgstr "Archives"
+
+#~ msgid "Meta"
+#~ msgstr "Meta"
+
+#~ msgid " (taxes estimated for %s)"
+#~ msgstr " (taxes estimated for %s)"
+
+#~ msgid ""
+#~ "Note: Shipping and taxes are estimated%s and will be updated during "
+#~ "checkout based on your billing and shipping information."
+#~ msgstr ""
+#~ "Note: Shipping and taxes are estimated%s and will be updated during "
+#~ "checkout based on your billing and shipping information."
 
 #~ msgctxt "author"
 #~ msgid "About "
