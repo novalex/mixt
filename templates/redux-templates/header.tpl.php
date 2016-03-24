@@ -42,20 +42,19 @@
 		<div class="display_header">
 
 			<?php if ( isset( $this->parent->args['dev_mode'] ) && $this->parent->args['dev_mode'] ) { ?>
-				<div class="redux-dev-mode-notice-container redux-dev-qtip" qtip-title="<?php echo $tip_title; ?>" qtip-content="<?php echo $tip_msg; ?>">
+				<div class="redux-dev-mode-notice-container redux-dev-qtip" qtip-title="<?php echo esc_attr($tip_title); ?>" qtip-content="<?php echo esc_attr($tip_msg); ?>">
 					<span class="redux-dev-mode-notice"><?php esc_html_e( 'Developer Mode Enabled', 'redux-framework' ); ?></span>
 				</div>
 			<?php } ?>
 
 			<h2 class="logo">
 				<?php
-				// echo $this->parent->args['display_name'];
 				echo '<img src="' . MIXT_URI . '/assets/img/logo.png" alt="MIXT" />';
 				?>
 			</h2>
 
 			<?php if ( ! empty( $this->parent->args['display_version'] ) ) : ?>
-				<span><?php echo $this->parent->args['display_version']; ?></span>
+				<span><?php echo esc_html($this->parent->args['display_version']); ?></span>
 			<?php endif; ?>
 
 		</div>

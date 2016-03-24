@@ -98,11 +98,11 @@ function mixt_footer_copyright_area() {
 					<div class="inner">
 						<?php if ( ! empty($left_content) ) { ?>
 						<div class="left-content <?php echo mixt_sanitize_html_classes($left_content_class); ?>">
-							<?php echo $left_content; ?>
+							<?php echo mixt_clean($left_content, 'strip'); ?>
 						</div>
 						<?php } if ( ! empty($right_content) ) { ?>
 						<div class="right-content <?php echo mixt_sanitize_html_classes($right_content_class); ?>">
-							<?php echo $right_content; ?>
+							<?php echo mixt_clean($right_content, 'strip'); ?>
 						</div>
 						<?php } ?>
 					</div>
@@ -136,7 +136,7 @@ function mixt_footer_infobar() {
 		?>
 		<div id="info-bar-wrap">
 			<div class="<?php echo mixt_sanitize_html_classes($info_class); ?>">
-				<div class="container"><?php echo $options['info-bar-content']; ?></div>
+				<div class="container"><?php echo mixt_clean($options['info-bar-content'], 'strip'); ?></div>
 			</div>
 		</div>
 		<?php

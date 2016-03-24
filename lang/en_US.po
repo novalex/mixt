@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2016-03-21 00:35+0200\n"
-"PO-Revision-Date: 2016-03-21 00:35+0200\n"
+"POT-Creation-Date: 2016-03-24 22:51+0200\n"
+"PO-Revision-Date: 2016-03-24 22:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -338,15 +338,15 @@ msgstr "and"
 msgid "Loading..."
 msgstr "Loading..."
 
-#: core/helpers.php:141
+#: core/helpers.php:187
 msgid "No menu assigned"
 msgstr "No menu assigned"
 
-#: core/helpers.php:143
+#: core/helpers.php:189
 msgid "Manage menus"
 msgstr "Manage menus"
 
-#: core/helpers.php:144
+#: core/helpers.php:190
 msgid "Click here to assign one"
 msgstr "Click here to assign one"
 
@@ -361,12 +361,12 @@ msgstr[1] "%d items"
 msgid "No items in the cart"
 msgstr "No items in the cart"
 
-#: core/post.php:574 core/post.php:976
+#: core/post.php:573 core/post.php:976
 #: framework/plugins/redux-extend/fields/icons.php:62
 msgid "View Post"
 msgstr "View Post"
 
-#: core/post.php:580
+#: core/post.php:579
 msgid "Full Image"
 msgstr "Full Image"
 
@@ -618,7 +618,7 @@ msgstr "About"
 msgid "Status"
 msgstr "Status"
 
-#: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:36
+#: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:39
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:334
 msgid "Install Plugins"
 msgstr "Install Plugins"
@@ -1130,21 +1130,27 @@ msgstr "will enable the options panel so you can customize your website"
 
 #: framework/admin/views/welcome.php:31
 msgid ""
+"will enable options for pages and posts which can override the global options"
+msgstr ""
+"will enable options for pages and posts which can override the global options"
+
+#: framework/admin/views/welcome.php:34
+msgid ""
 "will notify you when an update is released for the theme and you can easily "
 "download the latest version through it"
 msgstr ""
 "will notify you when an update is released for the theme and you can easily "
 "download the latest version through it"
 
-#: framework/admin/views/welcome.php:34
+#: framework/admin/views/welcome.php:37
 msgid "will enable the visual drag-and-drop page editor"
 msgstr "will enable the visual drag-and-drop page editor"
 
-#: framework/admin/views/welcome.php:41
+#: framework/admin/views/welcome.php:44
 msgid "Get Help On Speed Dial"
 msgstr "Get Help On Speed Dial"
 
-#: framework/admin/views/welcome.php:42
+#: framework/admin/views/welcome.php:45
 msgid ""
 "Sign up to have support at the ready if you ever need it! We will do our "
 "best to answer any questions as fast as possible, usually within a few "
@@ -1156,47 +1162,47 @@ msgstr ""
 "hours. But first, check out the articles and do a quick search - with a bit "
 "of luck, your question might have been answered already!"
 
-#: framework/admin/views/welcome.php:43
+#: framework/admin/views/welcome.php:46
 msgid "Get Support"
 msgstr "Get Support"
 
-#: framework/admin/views/welcome.php:48
+#: framework/admin/views/welcome.php:51
 msgid "Customize Everything"
 msgstr "Customize Everything"
 
-#: framework/admin/views/welcome.php:49
+#: framework/admin/views/welcome.php:52
 msgid ""
 "Adjust, tweak and customize every imaginable aspect of your new website with "
 "the powerful, comprehensive options panel at your disposal!"
 msgstr ""
 "Adjust, tweak and customize every imaginable aspect of your new website with "
 "the powerful, comprehensive options panel at your disposal!"
-
-#: framework/admin/views/welcome.php:50
-msgid ""
-"With the extensive Live Customizer integration, you can SEE the perfect "
-"website take shape before your eyes!"
-msgstr ""
-"With the extensive Live Customizer integration, you can SEE the perfect "
-"website take shape before your eyes!"
-
-#: framework/admin/views/welcome.php:51
-msgid ""
-"One-Click Demos are also available to quickly get you started with a website "
-"just like the live demos."
-msgstr ""
-"One-Click Demos are also available to quickly get you started with a website "
-"just like the live demos."
 
 #: framework/admin/views/welcome.php:53
+msgid ""
+"With the extensive Live Customizer integration, you can SEE the perfect "
+"website take shape before your eyes!"
+msgstr ""
+"With the extensive Live Customizer integration, you can SEE the perfect "
+"website take shape before your eyes!"
+
+#: framework/admin/views/welcome.php:54
+msgid ""
+"One-Click Demos are also available to quickly get you started with a website "
+"just like the live demos."
+msgstr ""
+"One-Click Demos are also available to quickly get you started with a website "
+"just like the live demos."
+
+#: framework/admin/views/welcome.php:56
 msgid "Customize MIXT"
 msgstr "Customize MIXT"
 
-#: framework/admin/views/welcome.php:62
+#: framework/admin/views/welcome.php:65
 msgid "That&#39;s All Folks! Go Forth And Create!"
 msgstr "That&#39;s All Folks! Go Forth And Create!"
 
-#: framework/class-powerup.php:129
+#: framework/class-powerup.php:125
 msgid ""
 "Install and activate the plugins to enable all the features that make MIXT "
 "awesome!"
@@ -1204,11 +1210,11 @@ msgstr ""
 "Install and activate the plugins to enable all the features that make MIXT "
 "awesome!"
 
-#: framework/class-powerup.php:140
+#: framework/class-powerup.php:136
 msgid "MIXT Power Up"
 msgstr "MIXT Power Up"
 
-#: framework/class-powerup.php:141
+#: framework/class-powerup.php:137
 msgid "MIXT - Power Up"
 msgstr "MIXT - Power Up"
 
@@ -4322,7 +4328,7 @@ msgid "Show Related Products"
 msgstr "Show Related Products"
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:356
-#: woocommerce/single-product/related.php:45
+#: woocommerce/single-product/related.php:47
 msgid "Related Products"
 msgstr "Related Products"
 
@@ -5014,71 +5020,71 @@ msgstr "Slider with specified ID not found!"
 msgid "LayerSlider plugin not installed or deactivated!"
 msgstr "LayerSlider plugin not installed or deactivated!"
 
-#: modules/social.php:236
+#: modules/social.php:239
 msgid "Like us on Facebook"
 msgstr "Like us on Facebook"
 
-#: modules/social.php:244
+#: modules/social.php:247
 msgid "Follow us on Twitter"
 msgstr "Follow us on Twitter"
 
-#: modules/social.php:252
+#: modules/social.php:255
 msgid "Follow us on Google+"
 msgstr "Follow us on Google+"
 
-#: modules/social.php:260
+#: modules/social.php:263
 msgid "Subscribe to us on Youtube"
 msgstr "Subscribe to us on Youtube"
 
-#: modules/social.php:268
+#: modules/social.php:271
 msgid "Connect on LinkedIn"
 msgstr "Connect on LinkedIn"
 
-#: modules/social.php:276
+#: modules/social.php:279
 msgid "Follow us on Instagram"
 msgstr "Follow us on Instagram"
 
-#: modules/social.php:284
+#: modules/social.php:287
 msgid "Follow us on Pinterest"
 msgstr "Follow us on Pinterest"
 
-#: modules/social.php:292
+#: modules/social.php:295
 msgid "Follow us on Tumblr"
 msgstr "Follow us on Tumblr"
 
-#: modules/social.php:304
+#: modules/social.php:307
 msgid "Share on Facebook"
 msgstr "Share on Facebook"
 
-#: modules/social.php:312
+#: modules/social.php:315
 msgid "Share on Twitter"
 msgstr "Share on Twitter"
 
-#: modules/social.php:320
+#: modules/social.php:323
 msgid "Share on Google+"
 msgstr "Share on Google+"
 
-#: modules/social.php:328
+#: modules/social.php:331
 msgid "Share on reddit"
 msgstr "Share on reddit"
 
-#: modules/social.php:336
+#: modules/social.php:339
 msgid "Share on LinkedIn"
 msgstr "Share on LinkedIn"
 
-#: modules/social.php:344
+#: modules/social.php:347
 msgid "Share on Pinterest"
 msgstr "Share on Pinterest"
 
-#: modules/social.php:352
+#: modules/social.php:355
 msgid "Share on Tumblr"
 msgstr "Share on Tumblr"
 
-#: modules/social.php:360
+#: modules/social.php:363
 msgid "Share on StumbleUpon"
 msgstr "Share on StumbleUpon"
 
-#: modules/social.php:368
+#: modules/social.php:371
 msgid "Share via email"
 msgstr "Share via email"
 
@@ -5208,12 +5214,12 @@ msgstr ""
 "searching can help."
 
 #: templates/redux-templates/footer.tpl.php:18
-#: templates/redux-templates/header.tpl.php:67
+#: templates/redux-templates/header.tpl.php:66
 msgid "Save"
 msgstr "Save"
 
 #: templates/redux-templates/footer.tpl.php:22
-#: templates/redux-templates/header.tpl.php:71
+#: templates/redux-templates/header.tpl.php:70
 msgid "Reset Section"
 msgstr "Reset Section"
 
@@ -5222,7 +5228,7 @@ msgid "Reset All"
 msgstr "Reset All"
 
 #: templates/redux-templates/footer.tpl.php:28
-#: templates/redux-templates/header.tpl.php:75
+#: templates/redux-templates/header.tpl.php:74
 msgid "Working..."
 msgstr "Working..."
 
@@ -5323,7 +5329,7 @@ msgid "Update Cart"
 msgstr "Update Cart"
 
 #: woocommerce/cart/cross-sells.php:40
-#: woocommerce/single-product/up-sells.php:45
+#: woocommerce/single-product/up-sells.php:47
 msgid "You may also like&hellip;"
 msgstr "You may also like&hellip;"
 

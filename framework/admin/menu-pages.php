@@ -62,8 +62,8 @@ class Mixt_Admin_Menu {
 		?>
 		<div class="wrap about-wrap mixt-admin-wrap">
 
-			<h1><?php echo $title; ?></h1>
-			<div class="about-text"><?php echo $description; ?></div>
+			<h1><?php echo esc_html($title); ?></h1>
+			<div class="about-text"><?php echo mixt_clean($description); ?></div>
 
 			<div class="wp-badge mixt-badge">
 				<span class="version"><?php printf( esc_html__( 'Version %s', 'mixt' ), MIXT_VERSION ); ?></span>

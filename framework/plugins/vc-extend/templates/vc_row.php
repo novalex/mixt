@@ -170,4 +170,4 @@ if ( $separator != '' ) { $output .= mixt_row_separator($separator, $separator_c
 $output .= '</div>';
 $output .= $after_output;
 
-echo $output;
+echo mixt_clean($output, 'strip');

@@ -24,7 +24,7 @@ if ( $pag_type == 'classic' ) {
 	$nav_class = 'page-nav paging-navigation classic-paging';
 
 	?>
-	<nav id="shop-nav" class="<?php echo $nav_class; ?>">
+	<nav id="shop-nav" class="<?php echo mixt_sanitize_html_classes($nav_class); ?>">
 		<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 		<ul class="pager">
 		<?php if ( get_previous_posts_link() ) : ?>
@@ -55,7 +55,7 @@ if ( $pag_type == 'classic' ) {
 	if ( ! empty($page_links) ) {
 		$nav_class = 'page-nav paging-navigation numbered-paging';
 		?>
-		<nav id="shop-nav" class="<?php echo $nav_class; ?>">
+		<nav id="shop-nav" class="<?php echo mixt_sanitize_html_classes($nav_class); ?>">
 			<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 			<ul class="pager">
 				<?php foreach ( $page_links as $link ) { echo '<li>' . $link . '</li>'; } ?>
@@ -68,7 +68,7 @@ if ( $pag_type == 'classic' ) {
 	$page_now = max(1, get_query_var('paged'));
 
 	?>
-	<nav id="shop-nav" class="<?php echo $nav_class; ?>"
+	<nav id="shop-nav" class="<?php echo mixt_sanitize_html_classes($nav_class); ?>"
 		 data-page-now="<?php echo esc_attr($page_now); ?>" data-page-max="<?php echo esc_attr($page_max); ?>">
 		<h3 class="screen-reader-text"><?php esc_html_e( 'Shop navigation', 'mixt' ); ?></h3>
 		<ul class="pager">

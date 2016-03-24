@@ -103,6 +103,52 @@ if ( ! function_exists('mixt_sanitize_html_classes') && function_exists('sanitiz
 }
 
 
+/**
+ * Escape & sanitize general purpose content (i.e. user HTML from theme options)
+ *
+ * @param string $content The content to escape
+ * @param string $type    Escape with kses or clean with stripslashes
+ */
+function mixt_clean( $content, $type = 'kses' ) {
+	if ( $type == 'kses' ) {
+		global $allowedposttags;
+
+		$allowedtags = array();
+
+		$data_attrs = apply_filters('mixt_kses_data_attr', array(
+			'data-src' => array(),
+			'data-type' => array(),
+			'data-cols' => array(),
+			'data-sort' => array(),
+			'data-color' => array(),
+			'data-ratio' => array(),
+			'data-filter' => array(),
+			'data-toggle' => array(),
+			'data-target' => array(),
+			'data-content' => array(),
+			'data-anim-in' => array(),
+			'data-anim-out' => array(),
+			'data-anim-delay' => array(),
+			'data-min-size' => array(),
+			'data-max-size' => array(),
+			'data-page-now' => array(),
+			'data-page-max' => array(),
+			'data-tablet-cols' => array(),
+			'data-mobile-cols' => array(),
+			'data-featherlight' => array(),
+			'data-no-hash-scroll' => array(),
+		) );
+
+		foreach ( $allowedposttags as $tag => $attrs ) {
+			$allowedtags[$tag] = array_merge($attrs, $data_attrs);
+		}
+		return wp_kses($content, $allowedtags);
+	} else {
+		return stripslashes( implode("", explode("\\", $content) ) );
+	}
+}
+
+
 if ( ! function_exists('mixt_regex_pattern') ) {
 	/**
 	 * Retreive a regex pattern for specific purpose
@@ -151,7 +197,7 @@ function mixt_no_menu_msg( $echo = true, $bs_wrapper = false ) {
 	if ( $echo == false ) {
 		return $no_menu_msg;
 	} else {
-		echo $no_menu_msg;
+		echo mixt_clean($no_menu_msg);
 	}
 }
 

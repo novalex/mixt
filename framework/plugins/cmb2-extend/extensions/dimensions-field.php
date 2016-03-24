@@ -67,7 +67,7 @@ class Mixt_Cmb_Dimensions_Field {
 			'desc'    => '',
 		) );
 
-		echo $html;
+		echo mixt_clean($html, 'strip');
 
 		$field_type->_desc( true, true );
 	}

@@ -218,16 +218,16 @@ if ( ! class_exists( 'ReduxFramework_mixt_multi_input' ) ) {
 						// }
 
 						echo '<li>';
-							echo $group_fields;
-							echo $field_controls;
+							echo mixt_clean($group_fields, 'strip');
+							echo mixt_clean($field_controls, 'strip');
 						echo '</li>';
 					}
 				}
 
 				// PRINT MODEL INPUT
 				echo '<li class="multi-input-model" style="display:none;">';
-					echo $group_elems;
-					echo $field_controls;
+					echo mixt_clean($group_elems, 'strip');
+					echo mixt_clean($field_controls, 'strip');
 				echo '</li>';
 
 			echo '</ul>';

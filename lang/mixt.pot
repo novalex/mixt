@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2016-03-21 00:35+0200\n"
-"PO-Revision-Date: 2016-03-21 00:35+0200\n"
+"POT-Creation-Date: 2016-03-24 22:51+0200\n"
+"PO-Revision-Date: 2016-03-24 22:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -338,15 +338,15 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: core/helpers.php:141
+#: core/helpers.php:187
 msgid "No menu assigned"
 msgstr ""
 
-#: core/helpers.php:143
+#: core/helpers.php:189
 msgid "Manage menus"
 msgstr ""
 
-#: core/helpers.php:144
+#: core/helpers.php:190
 msgid "Click here to assign one"
 msgstr ""
 
@@ -361,12 +361,12 @@ msgstr[1] ""
 msgid "No items in the cart"
 msgstr ""
 
-#: core/post.php:574 core/post.php:976
+#: core/post.php:573 core/post.php:976
 #: framework/plugins/redux-extend/fields/icons.php:62
 msgid "View Post"
 msgstr ""
 
-#: core/post.php:580
+#: core/post.php:579
 msgid "Full Image"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:36
+#: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:39
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:334
 msgid "Install Plugins"
 msgstr ""
@@ -1107,19 +1107,24 @@ msgstr ""
 
 #: framework/admin/views/welcome.php:31
 msgid ""
+"will enable options for pages and posts which can override the global options"
+msgstr ""
+
+#: framework/admin/views/welcome.php:34
+msgid ""
 "will notify you when an update is released for the theme and you can easily "
 "download the latest version through it"
 msgstr ""
 
-#: framework/admin/views/welcome.php:34
+#: framework/admin/views/welcome.php:37
 msgid "will enable the visual drag-and-drop page editor"
 msgstr ""
 
-#: framework/admin/views/welcome.php:41
+#: framework/admin/views/welcome.php:44
 msgid "Get Help On Speed Dial"
 msgstr ""
 
-#: framework/admin/views/welcome.php:42
+#: framework/admin/views/welcome.php:45
 msgid ""
 "Sign up to have support at the ready if you ever need it! We will do our "
 "best to answer any questions as fast as possible, usually within a few "
@@ -1127,51 +1132,51 @@ msgid ""
 "of luck, your question might have been answered already!"
 msgstr ""
 
-#: framework/admin/views/welcome.php:43
+#: framework/admin/views/welcome.php:46
 msgid "Get Support"
 msgstr ""
 
-#: framework/admin/views/welcome.php:48
+#: framework/admin/views/welcome.php:51
 msgid "Customize Everything"
 msgstr ""
 
-#: framework/admin/views/welcome.php:49
+#: framework/admin/views/welcome.php:52
 msgid ""
 "Adjust, tweak and customize every imaginable aspect of your new website with "
 "the powerful, comprehensive options panel at your disposal!"
 msgstr ""
 
-#: framework/admin/views/welcome.php:50
+#: framework/admin/views/welcome.php:53
 msgid ""
 "With the extensive Live Customizer integration, you can SEE the perfect "
 "website take shape before your eyes!"
 msgstr ""
 
-#: framework/admin/views/welcome.php:51
+#: framework/admin/views/welcome.php:54
 msgid ""
 "One-Click Demos are also available to quickly get you started with a website "
 "just like the live demos."
 msgstr ""
 
-#: framework/admin/views/welcome.php:53
+#: framework/admin/views/welcome.php:56
 msgid "Customize MIXT"
 msgstr ""
 
-#: framework/admin/views/welcome.php:62
+#: framework/admin/views/welcome.php:65
 msgid "That&#39;s All Folks! Go Forth And Create!"
 msgstr ""
 
-#: framework/class-powerup.php:129
+#: framework/class-powerup.php:125
 msgid ""
 "Install and activate the plugins to enable all the features that make MIXT "
 "awesome!"
 msgstr ""
 
-#: framework/class-powerup.php:140
+#: framework/class-powerup.php:136
 msgid "MIXT Power Up"
 msgstr ""
 
-#: framework/class-powerup.php:141
+#: framework/class-powerup.php:137
 msgid "MIXT - Power Up"
 msgstr ""
 
@@ -4250,7 +4255,7 @@ msgid "Show Related Products"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:356
-#: woocommerce/single-product/related.php:45
+#: woocommerce/single-product/related.php:47
 msgid "Related Products"
 msgstr ""
 
@@ -4269,30 +4274,30 @@ msgstr ""
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:333
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:670
 msgid "Install Required Plugins"
-msgstr "Install Required Plugins"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:335
 #, php-format
 msgid "Installing Plugin: %s"
-msgstr "Installing Plugin: %s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:336
 msgid "Something went wrong with the plugin API."
-msgstr "Something went wrong with the plugin API."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:338
 #, php-format
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
-msgstr[0] "This theme requires the following plugin: %1$s."
-msgstr[1] "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:343
 #, php-format
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
-msgstr[0] "This theme recommends the following plugin: %1$s."
-msgstr[1] "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:348
 #, php-format
@@ -4303,11 +4308,7 @@ msgid_plural ""
 "Sorry, but you do not have the correct permissions to install the %1$s "
 "plugins."
 msgstr[0] ""
-"Sorry, but you do not have the correct permissions to install the %1$s "
-"plugin."
 msgstr[1] ""
-"Sorry, but you do not have the correct permissions to install the %1$s "
-"plugins."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:353
 #, php-format
@@ -4318,18 +4319,14 @@ msgid_plural ""
 "The following plugins need to be updated to their latest version to ensure "
 "maximum compatibility with this theme: %1$s."
 msgstr[0] ""
-"The following plugin needs to be updated to its latest version to ensure "
-"maximum compatibility with this theme: %1$s."
 msgstr[1] ""
-"The following plugins need to be updated to their latest version to ensure "
-"maximum compatibility with this theme: %1$s."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:358
 #, php-format
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
-msgstr[0] "There is an update available for: %1$s."
-msgstr[1] "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:363
 #, php-format
@@ -4339,24 +4336,21 @@ msgid_plural ""
 "Sorry, but you do not have the correct permissions to update the %1$s "
 "plugins."
 msgstr[0] ""
-"Sorry, but you do not have the correct permissions to update the %1$s plugin."
 msgstr[1] ""
-"Sorry, but you do not have the correct permissions to update the %1$s "
-"plugins."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:368
 #, php-format
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
-msgstr[0] "The following required plugin is currently inactive: %1$s."
-msgstr[1] "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:373
 #, php-format
 msgid "The following recommended plugin is currently inactive: %1$s."
 msgid_plural "The following recommended plugins are currently inactive: %1$s."
-msgstr[0] "The following recommended plugin is currently inactive: %1$s."
-msgstr[1] "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:378
 #, php-format
@@ -4367,54 +4361,50 @@ msgid_plural ""
 "Sorry, but you do not have the correct permissions to activate the %1$s "
 "plugins."
 msgstr[0] ""
-"Sorry, but you do not have the correct permissions to activate the %1$s "
-"plugin."
 msgstr[1] ""
-"Sorry, but you do not have the correct permissions to activate the %1$s "
-"plugins."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:383
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
-msgstr[0] "Begin installing plugin"
-msgstr[1] "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:388
 msgid "Begin updating plugin"
 msgid_plural "Begin updating plugins"
-msgstr[0] "Begin updating plugin"
-msgstr[1] "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:393
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
-msgstr[0] "Begin activating plugin"
-msgstr[1] "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:397
 msgid "Return to Required Plugins Installer"
-msgstr "Return to Required Plugins Installer"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:398
 msgid "Return to the dashboard"
-msgstr "Return to the dashboard"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:399
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3026
 msgid "Plugin activated successfully."
-msgstr "Plugin activated successfully."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:400
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2829
 msgid "The following plugin was activated successfully:"
 msgid_plural "The following plugins were activated successfully:"
-msgstr[0] "The following plugin was activated successfully:"
-msgstr[1] "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:401
 #, php-format
 msgid "No action taken. Plugin %1$s was already active."
-msgstr "No action taken. Plugin %1$s was already active."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:402
 #, php-format
@@ -4422,29 +4412,27 @@ msgid ""
 "Plugin not activated. A higher version of %s is needed for this theme. "
 "Please update the plugin."
 msgstr ""
-"Plugin not activated. A higher version of %s is needed for this theme. "
-"Please update the plugin."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:403
 #, php-format
 msgid "All plugins installed and activated successfully. %1$s"
-msgstr "All plugins installed and activated successfully. %1$s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:404
 msgid "Dismiss this notice"
-msgstr "Dismiss this notice"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:405
 msgid "Please contact the administrator of this site for help."
-msgstr "Please contact the administrator of this site for help."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:520
 msgid "This plugin needs to be updated to be compatible with your theme."
-msgstr "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:521
 msgid "Update Required"
-msgstr "Update Required"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:669
 msgid "Install All Plugins Now"
@@ -4453,15 +4441,13 @@ msgstr ""
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:824
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3435
 msgid "Return to the Dashboard"
-msgstr "Return to the Dashboard"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
 msgid ""
 "The remote plugin package does not contain a folder with the desired slug "
 "and renaming did not work."
 msgstr ""
-"The remote plugin package does not contain a folder with the desired slug "
-"and renaming did not work."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
@@ -4469,124 +4455,120 @@ msgid ""
 "Please contact the plugin provider and ask them to package their plugin "
 "according to the WordPress guidelines."
 msgstr ""
-"Please contact the plugin provider and ask them to package their plugin "
-"according to the WordPress guidelines."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
 msgid ""
 "The remote plugin package consists of more than one file, but the files are "
 "not packaged in a folder."
 msgstr ""
-"The remote plugin package consists of more than one file, but the files are "
-"not packaged in a folder."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1112
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2825
 msgctxt "plugin A *and* plugin B"
 msgid "and"
-msgstr "and"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1877
 #, php-format
 msgctxt "%s = version number"
 msgid "TGMPA v%s"
-msgstr "TGMPA v%s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2164
 msgid "Required"
-msgstr "Required"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2167
 msgid "Recommended"
-msgstr "Recommended"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2183
 msgid "WordPress Repository"
-msgstr "WordPress Repository"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2186
 msgid "External Source"
-msgstr "External Source"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2189
 msgid "Pre-Packaged"
-msgstr "Pre-Packaged"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2206
 msgid "Not Installed"
-msgstr "Not Installed"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2210
 msgid "Installed But Not Activated"
-msgstr "Installed But Not Activated"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2212
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2218
 msgid "Required Update not Available"
-msgstr "Required Update not Available"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2221
 msgid "Requires Update"
-msgstr "Requires Update"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2224
 msgid "Update recommended"
-msgstr "Update recommended"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2232
 #, php-format
 msgctxt "%1$s = install status, %2$s = update status"
 msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2277
 #, php-format
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
 msgid_plural "All <span class=\"count\">(%s)</span>"
-msgstr[0] "All <span class=\"count\">(%s)</span>"
-msgstr[1] "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2280
 #, php-format
 msgid "To Install <span class=\"count\">(%s)</span>"
 msgid_plural "To Install <span class=\"count\">(%s)</span>"
-msgstr[0] "To Install <span class=\"count\">(%s)</span>"
-msgstr[1] "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2283
 #, php-format
 msgid "Update Available <span class=\"count\">(%s)</span>"
 msgid_plural "Update Available <span class=\"count\">(%s)</span>"
-msgstr[0] "Update Available <span class=\"count\">(%s)</span>"
-msgstr[1] "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2286
 #, php-format
 msgid "To Activate <span class=\"count\">(%s)</span>"
 msgid_plural "To Activate <span class=\"count\">(%s)</span>"
-msgstr[0] "To Activate <span class=\"count\">(%s)</span>"
-msgstr[1] "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2368
 msgctxt "as in: \"version nr unknown\""
 msgid "unknown"
-msgstr "unknown"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2376
 msgid "Installed version:"
-msgstr "Installed version:"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2384
 msgid "Minimum required version:"
-msgstr "Minimum required version:"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2396
 msgid "Available version:"
-msgstr "Available version:"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2419
 #, php-format
@@ -4594,147 +4576,141 @@ msgid ""
 "No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
 "Dashboard</a>"
 msgstr ""
-"No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
-"Dashboard</a>"
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2433
 msgid "Plugin"
-msgstr "Plugin"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2434
 msgid "Source"
-msgstr "Source"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2488
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Install %2$s"
-msgstr "Install %2$s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2492
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Update %2$s"
-msgstr "Update %2$s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2497
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Activate %2$s"
-msgstr "Activate %2$s"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2567
 msgid "Upgrade message from the plugin author:"
-msgstr "Upgrade message from the plugin author:"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2600
 msgid "Install"
-msgstr "Install"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2606
 msgid "Update"
-msgstr "Update"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2609
 msgid "Activate"
-msgstr "Activate"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2640
 msgid "No plugins were selected to be installed. No action taken."
-msgstr "No plugins were selected to be installed. No action taken."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2642
 msgid "No plugins were selected to be updated. No action taken."
-msgstr "No plugins were selected to be updated. No action taken."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2678
 msgid "No plugins are available to be installed at this time."
-msgstr "No plugins are available to be installed at this time."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2680
 msgid "No plugins are available to be updated at this time."
-msgstr "No plugins are available to be updated at this time."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2785
 msgid "No plugins were selected to be activated. No action taken."
-msgstr "No plugins were selected to be activated. No action taken."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2811
 msgid "No plugins are available to be activated at this time."
-msgstr "No plugins are available to be activated at this time."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3025
 msgid "Plugin activation failed."
-msgstr "Plugin activation failed."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3359
 #, php-format
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
-msgstr "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3361
 #, php-format
 msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
-msgstr "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
 #, php-format
 msgid "The installation of %1$s failed."
-msgstr "The installation of %1$s failed."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3366
 msgid ""
 "The installation and activation process is starting. This process may take a "
 "while on some hosts, so please be patient."
 msgstr ""
-"The installation and activation process is starting. This process may take a "
-"while on some hosts, so please be patient."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
 #, php-format
 msgid "%1$s installed and activated successfully."
-msgstr "%1$s installed and activated successfully."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 msgid "Show Details"
-msgstr "Show Details"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 msgid "Hide Details"
-msgstr "Hide Details"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
 msgid "All installations and activations have been completed."
-msgstr "All installations and activations have been completed."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3369
 #, php-format
 msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
-msgstr "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3372
 msgid ""
 "The installation process is starting. This process may take a while on some "
 "hosts, so please be patient."
 msgstr ""
-"The installation process is starting. This process may take a while on some "
-"hosts, so please be patient."
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
 #, php-format
 msgid "%1$s installed successfully."
-msgstr "%1$s installed successfully."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3374
 msgid "All installations have been completed."
-msgstr "All installations have been completed."
+msgstr ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3375
 #, php-format
 msgid "Installing Plugin %1$s (%2$d/%3$d)"
-msgstr "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
 
 #: framework/plugins/vc-extend/fields/button.php:99
 msgid "Color"
@@ -4935,71 +4911,71 @@ msgstr ""
 msgid "LayerSlider plugin not installed or deactivated!"
 msgstr ""
 
-#: modules/social.php:236
+#: modules/social.php:239
 msgid "Like us on Facebook"
 msgstr ""
 
-#: modules/social.php:244
+#: modules/social.php:247
 msgid "Follow us on Twitter"
 msgstr ""
 
-#: modules/social.php:252
+#: modules/social.php:255
 msgid "Follow us on Google+"
 msgstr ""
 
-#: modules/social.php:260
+#: modules/social.php:263
 msgid "Subscribe to us on Youtube"
 msgstr ""
 
-#: modules/social.php:268
+#: modules/social.php:271
 msgid "Connect on LinkedIn"
 msgstr ""
 
-#: modules/social.php:276
+#: modules/social.php:279
 msgid "Follow us on Instagram"
 msgstr ""
 
-#: modules/social.php:284
+#: modules/social.php:287
 msgid "Follow us on Pinterest"
 msgstr ""
 
-#: modules/social.php:292
+#: modules/social.php:295
 msgid "Follow us on Tumblr"
 msgstr ""
 
-#: modules/social.php:304
+#: modules/social.php:307
 msgid "Share on Facebook"
 msgstr ""
 
-#: modules/social.php:312
+#: modules/social.php:315
 msgid "Share on Twitter"
 msgstr ""
 
-#: modules/social.php:320
+#: modules/social.php:323
 msgid "Share on Google+"
 msgstr ""
 
-#: modules/social.php:328
+#: modules/social.php:331
 msgid "Share on reddit"
 msgstr ""
 
-#: modules/social.php:336
+#: modules/social.php:339
 msgid "Share on LinkedIn"
 msgstr ""
 
-#: modules/social.php:344
+#: modules/social.php:347
 msgid "Share on Pinterest"
 msgstr ""
 
-#: modules/social.php:352
+#: modules/social.php:355
 msgid "Share on Tumblr"
 msgstr ""
 
-#: modules/social.php:360
+#: modules/social.php:363
 msgid "Share on StumbleUpon"
 msgstr ""
 
-#: modules/social.php:368
+#: modules/social.php:371
 msgid "Share via email"
 msgstr ""
 
@@ -5121,12 +5097,12 @@ msgid ""
 msgstr ""
 
 #: templates/redux-templates/footer.tpl.php:18
-#: templates/redux-templates/header.tpl.php:67
+#: templates/redux-templates/header.tpl.php:66
 msgid "Save"
 msgstr ""
 
 #: templates/redux-templates/footer.tpl.php:22
-#: templates/redux-templates/header.tpl.php:71
+#: templates/redux-templates/header.tpl.php:70
 msgid "Reset Section"
 msgstr ""
 
@@ -5135,7 +5111,7 @@ msgid "Reset All"
 msgstr ""
 
 #: templates/redux-templates/footer.tpl.php:28
-#: templates/redux-templates/header.tpl.php:75
+#: templates/redux-templates/header.tpl.php:74
 msgid "Working..."
 msgstr ""
 
@@ -5234,7 +5210,7 @@ msgid "Update Cart"
 msgstr ""
 
 #: woocommerce/cart/cross-sells.php:40
-#: woocommerce/single-product/up-sells.php:45
+#: woocommerce/single-product/up-sells.php:47
 msgid "You may also like&hellip;"
 msgstr ""
 

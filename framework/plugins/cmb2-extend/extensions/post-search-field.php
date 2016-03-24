@@ -12,10 +12,10 @@ License: GPLv2
 function cmb2_post_search_render_field( $field, $escaped_value, $object_id, $object_type, $field_type ) {
 	$select_type = $field->args( 'select_type' );
 
-	echo $field_type->input( array(
+	echo mixt_clean($field_type->input( array(
 		'data-posttype'   => $field->args( 'post_type' ),
 		'data-selecttype' => 'radio' == $select_type ? 'radio' : 'checkbox',
-	) );
+	) ), 'strip');
 }
 add_action( 'cmb2_render_post_search_text', 'cmb2_post_search_render_field', 10, 5 );
 

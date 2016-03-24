@@ -25,7 +25,7 @@ class Mixt_Cmb_Slider_Field {
 			$slider_value = ( $escaped_value == 'auto' ) ? ( $max + $min ) / 2 : $escaped_value;
 
 			echo '<div class="mixt-slider"></div>';
-			echo $field_type->input( array(
+			echo mixt_clean( $field_type->input( array(
 				'type'         => 'text',
 				'class'        => 'mixt-slider-value',
 				'value'        => esc_attr($escaped_value),
@@ -35,7 +35,7 @@ class Mixt_Cmb_Slider_Field {
 				'data-step'    => esc_attr($step),
 				'data-tooltip' => esc_attr($field->tooltip()),
 				'desc'         => '',
-			) );
+			) ), 'strip');
 		}
 
 		$field_type->_desc( true, true );

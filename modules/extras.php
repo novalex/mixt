@@ -15,7 +15,7 @@ function mixt_head_code_output() {
 
 	// User-defined code
 	if ( ! empty($mixt_opt['head-user-code']) ) {
-		echo $mixt_opt['head-user-code'];
+		echo mixt_clean($mixt_opt['head-user-code'], 'strip');
 	}
 }
 add_action('wp_head', 'mixt_head_code_output', 99);

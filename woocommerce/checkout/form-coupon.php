@@ -21,7 +21,7 @@ $info_message = apply_filters( 'woocommerce_checkout_coupon_message', esc_html__
 
 <div class="coupon-cont panel panel-default">
 	<div class="panel-body">
-		<h4 class="coupon-title"><?php echo $info_message; ?></h4>
+		<h4 class="coupon-title"><?php echo esc_html($info_message); ?></h4>
 
 		<form class="checkout-coupon input-group" method="post">
 			<input type="text" name="coupon_code" class="form-control input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />

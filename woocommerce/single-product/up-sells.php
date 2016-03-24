@@ -38,9 +38,11 @@ $upsell_cols = mixt_wc_option('upsell-cols', 3);
 
 $woocommerce_loop['columns'] = $upsell_cols;
 
+$classes = 'upsells products columns-' . $upsell_cols;
+
 if ( $products->have_posts() ) : ?>
 
-	<div class="upsells products columns-<?php echo $upsell_cols; ?>">
+	<div class="<?php echo mixt_sanitize_html_classes($classes); ?>">
 
 		<?php echo mixt_heading( esc_html__( 'You may also like&hellip;', 'woocommerce' ), 'tag="h2"'); ?>
 

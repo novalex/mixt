@@ -90,7 +90,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 					}
 				}
 
-				echo $archive_crumbs;
+				echo mixt_clean($archive_crumbs);
 
 			// Tag Page
 			} else if ( is_tag() ) {
@@ -130,7 +130,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 							$output = '<li><a href="' . esc_url($permalink) . '" title="' . esc_attr($title) . '">' . esc_html($title) . '</a></li>';
 						}
 					}
-					echo $output;
+					echo mixt_clean($output);
 				}
 				echo '<li>' . esc_html($page_title) . '</li>';
 

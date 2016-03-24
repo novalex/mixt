@@ -38,9 +38,11 @@ $products = new WP_Query( $args );
 
 $woocommerce_loop['columns'] = $related_cols;
 
+$classes = 'related products columns-' . $related_cols;
+
 if ( $products->have_posts() ) : ?>
 
-	<div class="related products columns-<?php echo $related_cols; ?>">
+	<div class="<?php echo mixt_sanitize_html_classes($classes); ?>">
 
 		<?php echo mixt_heading( esc_html__( 'Related Products', 'woocommerce' ) ); ?>
 

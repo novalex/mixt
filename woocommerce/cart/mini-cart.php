@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'woocommerce_before_mini_cart' ); ?>
 
-<ul class="cart_list product_list_widget <?php echo $args['list_class']; ?>">
+<ul class="cart_list product_list_widget <?php echo mixt_sanitize_html_classes($args['list_class']); ?>">
 
 	<?php if ( ! WC()->cart->is_empty() ) : ?>
 

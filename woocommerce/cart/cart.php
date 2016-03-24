@@ -59,7 +59,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 
 							if ( ! $_product->is_visible() ) {
-								echo $thumbnail;
+								echo mixt_clean($thumbnail);
 							} else {
 								printf( '<a href="%s">%s</a>', esc_url( $_product->get_permalink( $cart_item ) ), $thumbnail );
 							}

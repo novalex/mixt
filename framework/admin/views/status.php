@@ -78,9 +78,9 @@ $this->screen_header(
 		echo '<div class="stuffbox mixt-alert alert-ok margin-top"><p>' . esc_html__( 'Everything seems to be in order. Sweet!', 'mixt' ) . '</p></div>';
 	}
 
-	echo $theme_info;
+	echo mixt_clean($theme_info, 'strip');
 
-	echo $server_info;
+	echo mixt_clean($server_info, 'strip');
 
 $this->screen_footer();
 

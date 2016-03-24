@@ -323,7 +323,7 @@ function mixt_head_media() {
 
 	$html .= '</header>';
 
-	echo $html;
+	echo mixt_clean($html, 'strip');
 }
 
 /**

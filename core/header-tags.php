@@ -60,7 +60,7 @@ function mixt_page_loader() {
 	?>
 	<div id="load-overlay">
 		<div class="load-inner">
-			<?php echo $load_elem; ?>
+			<?php echo mixt_clean($load_elem, 'strip'); ?>
 		</div>
 	</div>
 	<?php
@@ -241,10 +241,10 @@ function mixt_second_nav() {
 		<nav id="second-nav" class="second-nav navbar <?php echo mixt_sanitize_html_classes($nav_classes); ?>">
 			<div class="container">
 				<div class="left-content <?php echo mixt_sanitize_html_classes($left_content_class); ?>">
-					<?php echo $left_content; ?>
+					<?php echo mixt_clean($left_content, 'strip'); ?>
 				</div>
 				<div class="right-content <?php echo mixt_sanitize_html_classes($right_content_class); ?>">
-					<?php echo $right_content; ?>
+					<?php echo mixt_clean($right_content, 'strip'); ?>
 				</div>
 			</div>
 			<div class="navbar-data"></div>

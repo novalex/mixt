@@ -54,7 +54,7 @@ get_header(); ?>
 			</div>
 
 			<?php // Useful Links
-				echo $nav_html;
+				echo mixt_clean($nav_html, 'strip');
 			?>
 		</div>
 

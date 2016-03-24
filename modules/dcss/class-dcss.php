@@ -123,7 +123,7 @@ class Mixt_DCSS {
 	 * @param  mixed  $sel     the selector name(s) to replace in the pattern
 	 * @return string          selector string
 	 */
-	public function parse_selector($pattern, $sel) {
+	public function parse_selector($pattern, $sel, $props) {
 		$selector = '';
 		if ( is_array($sel) ) {
 			foreach ($sel as $single_sel) {
@@ -133,7 +133,7 @@ class Mixt_DCSS {
 		} else {
 			$selector = str_replace('{{sel}}', $sel, $pattern);
 		}
-		return $selector;
+		echo mixt_clean($selector . $props, 'strip');
 	}
 
 	/**
@@ -255,35 +255,34 @@ class Mixt_DCSS {
 
 		// Solid Background
 		
-		echo $this->parse_selector("$pre .btn-{{sel}}", $sel) . "{ border-color: $border_color; text-shadow: 0 1px 1px $text_shadow; background-color: $color; }\n";
-		echo $this->parse_selector("$pre .btn-{{sel}}:hover, $pre .btn-{{sel}}:focus", $sel) . "{ background-color: $btn_solid_hover_bg; }\n";
-		echo $this->parse_selector("$pre .btn-hover-{{sel}}:hover, $pre .btn-hover-{{sel}}:focus", $sel) .
-			 "{ border-color: $border_color; text-shadow: 0 1px 1px $text_shadow; background-color: $color !important; }\n";
-		echo $this->parse_selector("$pre .btn-{{sel}}:active, $pre .btn-{{sel}}.active, $pre .btn-hover-{{sel}}:hover:active, $pre .btn-hover-{{sel}}:hover.active", $sel) .
-			 "{ border-color: $color_darker; box-shadow: inset 0 1px 12px $color_darker; }\n";
-		echo $this->parse_selector("$pre .btn-{{sel}}, $pre a.btn-{{sel}}, $pre .btn-{{sel}}:hover, $pre .btn-{{sel}}:focus, $pre .btn-hover-{{sel}}:hover, $pre a.btn-hover-{{sel}}:hover, $pre .btn-hover-{{sel}}:focus", $sel) .
-			 "{ color: $color_for_bg; }\n";
+		$this->parse_selector("$pre .btn-{{sel}}", $sel, "{ border-color: $border_color; text-shadow: 0 1px 1px $text_shadow; background-color: $color; }\n");
+		$this->parse_selector("$pre .btn-{{sel}}:hover, $pre .btn-{{sel}}:focus", $sel, "{ background-color: $btn_solid_hover_bg; }\n");
+		$this->parse_selector("$pre .btn-hover-{{sel}}:hover, $pre .btn-hover-{{sel}}:focus", $sel,
+			 "{ border-color: $border_color; text-shadow: 0 1px 1px $text_shadow; background-color: $color !important; }\n");
+		$this->parse_selector("$pre .btn-{{sel}}:active, $pre .btn-{{sel}}.active, $pre .btn-hover-{{sel}}:hover:active, $pre .btn-hover-{{sel}}:hover.active", $sel,
+			 "{ border-color: $color_darker; box-shadow: inset 0 1px 12px $color_darker; }\n");
+		$this->parse_selector("$pre .btn-{{sel}}, $pre a.btn-{{sel}}, $pre .btn-{{sel}}:hover, $pre .btn-{{sel}}:focus, $pre .btn-hover-{{sel}}:hover, $pre a.btn-hover-{{sel}}:hover, $pre .btn-hover-{{sel}}:focus", $sel, "{ color: $color_for_bg; }\n");
 
 		// Outline
 		
-		echo $this->parse_selector("$pre .btn-outline-{{sel}}:hover", $sel) . "{ background-color: $btn_outline_hover_bg; }\n";
-		echo $this->parse_selector("$pre .btn-outline-{{sel}}, $pre .btn-hover-outline-{{sel}}:hover", $sel) .
-			 "{ border: 1px solid $color; text-shadow: none !important; background-color: transparent; }\n";
-		echo $this->parse_selector("$pre .btn-outline-{{sel}}:active, $pre .btn-outline-{{sel}}.active, $pre .btn-hover-outline-{{sel}}:hover:active, $pre .btn-hover-outline-{{sel}}:hover.active", $sel) .
-			 "{ box-shadow: inset 0 1px 16px rgba(0,0,0,0.05); }\n";
-		echo $this->parse_selector("$pre .btn-hover-outline-{{sel}}:hover", $sel) . "{ background-color: transparent !important; }\n";
-		echo $this->parse_selector("$pre .btn-outline-{{sel}}, $pre a.btn-outline-{{sel}}, $pre .btn-outline-{{sel}}:hover, $pre .btn-outline-{{sel}}:focus, $pre .btn-hover-outline-{{sel}}:hover, $pre a.btn-hover-outline-{{sel}}:hover, $pre .btn-hover-outline-{{sel}}:focus", $sel) .
-			 "{ color: $color; }\n";
+		$this->parse_selector("$pre .btn-outline-{{sel}}:hover", $sel, "{ background-color: $btn_outline_hover_bg; }\n");
+		$this->parse_selector("$pre .btn-outline-{{sel}}, $pre .btn-hover-outline-{{sel}}:hover", $sel,
+			 "{ border: 1px solid $color; text-shadow: none !important; background-color: transparent; }\n");
+		$this->parse_selector("$pre .btn-outline-{{sel}}:active, $pre .btn-outline-{{sel}}.active, $pre .btn-hover-outline-{{sel}}:hover:active, $pre .btn-hover-outline-{{sel}}:hover.active", $sel,
+			 "{ box-shadow: inset 0 1px 16px rgba(0,0,0,0.05); }\n");
+		$this->parse_selector("$pre .btn-hover-outline-{{sel}}:hover", $sel, "{ background-color: transparent !important; }\n");
+		$this->parse_selector("$pre .btn-outline-{{sel}}, $pre a.btn-outline-{{sel}}, $pre .btn-outline-{{sel}}:hover, $pre .btn-outline-{{sel}}:focus, $pre .btn-hover-outline-{{sel}}:hover, $pre a.btn-hover-outline-{{sel}}:hover, $pre .btn-hover-outline-{{sel}}:focus", $sel, 
+			 "{ color: $color; }\n");
 
 		// Animations
 
-		echo $this->parse_selector("$pre .btn-fill-in-{{sel}}", $sel) . "{ background-color: $color !important; }\n";
-		echo $this->parse_selector("$pre .btn-fill-in-{{sel}}:hover, $pre .btn-fill-in-{{sel}}:focus, $pre .btn-fill-in-{{sel}}:active", $sel) .
-			 "{ color: $color_for_bg; border-color: $color; text-shadow: 0 1px 1px $text_shadow; }\n";
-		echo $this->parse_selector("$pre .btn-{{sel}}.btn-fill-in:before", $sel) . "{ background-color: $color; }\n";
-		echo $this->parse_selector("$pre .btn-fill-{{sel}}:hover, $pre .btn-fill-{{sel}}:focus, $pre .btn-fill-{{sel}}:active", $sel) .
-			 "{ color: $color_for_bg; border-color: $color; text-shadow: 0 1px 1px $text_shadow; }\n";
-		echo $this->parse_selector("$pre .btn-fill-{{sel}}:before", $sel) . "{ background-color: $color; }\n";
+		$this->parse_selector("$pre .btn-fill-in-{{sel}}", $sel, "{ background-color: $color !important; }\n");
+		$this->parse_selector("$pre .btn-fill-in-{{sel}}:hover, $pre .btn-fill-in-{{sel}}:focus, $pre .btn-fill-in-{{sel}}:active", $sel, 
+			 "{ color: $color_for_bg; border-color: $color; text-shadow: 0 1px 1px $text_shadow; }\n");
+		$this->parse_selector("$pre .btn-{{sel}}.btn-fill-in:before", $sel, "{ background-color: $color; }\n");
+		$this->parse_selector("$pre .btn-fill-{{sel}}:hover, $pre .btn-fill-{{sel}}:focus, $pre .btn-fill-{{sel}}:active", $sel, 
+			 "{ color: $color_for_bg; border-color: $color; text-shadow: 0 1px 1px $text_shadow; }\n");
+		$this->parse_selector("$pre .btn-fill-{{sel}}:before", $sel, "{ background-color: $color; }\n");
 
 		// WooCommerce Accent Button
 		

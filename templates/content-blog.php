@@ -16,11 +16,11 @@ if ( empty($post_content) ) return;
 
 ?>
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class( array($post_ob->classes(), 'posts-page-content' ) ); ?>>
+<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( array($post_ob->classes(), 'posts-page-content' ) ); ?>>
 
 	<div class="entry-body entry-content page-content"><?php
 
-		echo $post_content;
+		echo mixt_clean($post_content, 'strip');
 
 	?></div>
 

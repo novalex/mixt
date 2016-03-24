@@ -81,7 +81,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			$this->excerpt = get_the_excerpt();
 
 			if ( $context != 'single' ) {
-				$this->permalink = esc_url(get_permalink($this->ID));
+				$this->permalink = get_permalink($this->ID);
 			}
 
 			$this->type = get_post_type($id);
@@ -280,11 +280,11 @@ if ( ! class_exists('Mixt_Post') ) {
 			}
 			$feat_size = $this->layout['feat-size'];
 
-			$feat_classes = 'post-feat feat-' . sanitize_html_class($feat_size);
+			$feat_classes = 'post-feat feat-' . $feat_size;
 
 			$permalink_start = $permalink_end = $placeholder_img = '';
 			if ( $this->context != 'single' ) {
-				$permalink_start = '<a href="' . $this->permalink . '">';
+				$permalink_start = '<a href="' . esc_url($this->permalink) . '">';
 				$permalink_end   = '</a>';
 			}
 
@@ -297,12 +297,12 @@ if ( ! class_exists('Mixt_Post') ) {
 				$placeholder_img = '<div class="' . $feat_classes . ' post-image image-placeholder">' . $permalink_start . wp_get_attachment_image($placeholder, $feat_size) . $permalink_end . '</div>';
 			}
 
-			$format_icon_class = ( empty($this->options['format-icon']) ) ? 'fa fa-ellipsis-h' : mixt_sanitize_html_classes($this->options['format-icon']);
-			$format_icon = "<div class='$feat_classes feat-format'>";
-				$format_icon .= "<i class='format-icon $format_icon_class'></i>";
-				$format_icon .= "<a href='{$this->permalink}' class='main-link'></a>";
+			$format_icon_class = ( empty($this->options['format-icon']) ) ? 'fa fa-ellipsis-h' : $this->options['format-icon'];
+			$format_icon = '<div class="' . mixt_sanitize_html_classes($feat_classes) . ' feat-format">';
+				$format_icon .= '<i class="format-icon ' . mixt_sanitize_html_classes($format_icon_class) . '"></i>';
+				$format_icon .= '<a href="' . esc_url($this->permalink) . '" class="main-link"></a>';
 			$format_icon .= '</div>';
-			$format_bg_icon = "<i class='format-bg-icon $format_icon_class'></i>";
+			$format_bg_icon = '<i class="format-bg-icon ' . mixt_sanitize_html_classes($format_icon_class) . '"></i>';
 
 			$fallback_feat = ( ! empty($placeholder_img) ) ? $placeholder_img : $format_icon;
 
@@ -386,9 +386,9 @@ if ( ! class_exists('Mixt_Post') ) {
 
 							$content .= $format_bg_icon;
 							if ( $this->context != 'single' ) {
-								$content .= "<a href='{$this->permalink}' class='main-link'></a>";
+								$content .= '<a href="' . esc_url($this->permalink) . '" class="main-link"></a>';
 							}
-							$output = "<div class='$feat_classes'><div class='text-wrap'>$content</div></div>";
+							$output = '<div class="' . $feat_classes . '"><div class="text-wrap">' . mixt_clean($content) . '</div></div>';
 						}
 					}
 
@@ -471,7 +471,7 @@ if ( ! class_exists('Mixt_Post') ) {
 						} else {
 							// Replace attributes with new ones and execute shortcode
 							$shortcode = str_replace($matches[3], $gallery_atts, $shortcode);
-							$post_link = ( $this->context != 'single' ) ? "<a href='{$this->permalink}' class='main-link'></a>" : '';
+							$post_link = ( $this->context != 'single' ) ? '<a href="' . esc_url($this->permalink) . '" class="main-link"></a>' : '';
 							$output = "<div class='$feat_classes'>" . do_shortcode($shortcode) . $post_link . '</div>';
 						}
 
@@ -524,7 +524,7 @@ if ( ! class_exists('Mixt_Post') ) {
 				$output = $this->rollover($output);
 			}
 
-			echo $output;
+			echo mixt_clean($output, 'strip');
 
 			return ( ! empty($output) );
 		}
@@ -550,39 +550,38 @@ if ( ! class_exists('Mixt_Post') ) {
 			$item_style = $options['item-style'];
 			$item_classes = 'rollover-item ' . $item_style;
 			if ( $item_style != 'plain' ) { $item_classes .= " btn-{$options['btn-color']} no-border"; }
-			$item_classes = mixt_sanitize_html_classes($item_classes);
 
-			$on_hover_classes = 'on-hover ' . sanitize_html_class($options['color']);
+			$on_hover_classes = 'on-hover ' . $options['color'];
 
 			ob_start();
 
 			?>
 
 			<div class="post-rollover hover-content anim-on-hover anim-content">
-				<div class="<?php echo $on_hover_classes ?>" data-anim-in="<?php echo esc_attr($options['anim-in']); ?>" data-anim-out="<?php echo esc_attr($options['anim-out']); ?>">
+				<div class="<?php echo mixt_sanitize_html_classes($on_hover_classes); ?>" data-anim-in="<?php echo esc_attr($options['anim-in']); ?>" data-anim-out="<?php echo esc_attr($options['anim-out']); ?>">
 					<div class="inner">
 						<?php
 							if ( in_array('title', $items) ) {
-								echo "<a href='{$this->permalink}' class='post-title no-color'>" . esc_html( get_the_title() ) . '</a>';
+								echo '<a href="' . esc_url($this->permalink) . '" class="post-title no-color">' . esc_html( get_the_title() ) . '</a>';
 							}
 							if ( in_array('excerpt', $items) ) {
 								$excerpt = wp_trim_words($this->excerpt, 20);
-								if ( ! empty($excerpt) ) { echo "<a href='{$this->permalink}' class='post-excerpt no-color'>$excerpt</a>"; }
+								if ( ! empty($excerpt) ) { echo '<a href="' . esc_url($this->permalink) . '" class="post-excerpt no-color">' . mixt_clean($excerpt, 'strip') . '</a>'; }
 							}
 							if ( in_array('view', $items) ) {
 								$icon = mixt_get_icon('view-post');
-								echo "<a href='$this->permalink' class='$item_classes view-post' title='" . esc_attr__('View Post', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+								echo '<a href="' . esc_url($this->permalink) . '" class="' . mixt_sanitize_html_classes($item_classes) . ' view-post" title="' . esc_attr__('View Post', 'mixt') . '" data-toggle="tooltip">' . $icon . '</a>';
 							}
 							if ( in_array('full', $items) ) {
-								$link = esc_url( wp_get_attachment_url( get_post_thumbnail_id($this->ID) ) );
+								$link = wp_get_attachment_url( get_post_thumbnail_id($this->ID) );
 								if ( $link ) {
 									$icon = mixt_get_icon('view-image');
-									echo "<a href='$link' class='$item_classes view-image' title='" . esc_attr__('Full Image', 'mixt') . "' data-toggle='tooltip'>$icon</a>";
+									echo '<a href="' . esc_url($link) . '" class="' . mixt_sanitize_html_classes($item_classes) . ' view-image" title="' . esc_attr__('Full Image', 'mixt') . '" data-toggle="tooltip">' . $icon . '</a>';
 								}
 							}
 						?>
 					</div>
-					<a href='<?php echo $this->permalink; ?>' class='main-link'></a>
+					<a href='<?php echo esc_url($this->permalink); ?>' class='main-link'></a>
 				</div>
 			</div>
 
@@ -600,7 +599,7 @@ if ( ! class_exists('Mixt_Post') ) {
 		public function header() {
 			$permalink_start = $permalink_end = '';
 			if ( $this->context != 'single' ) {
-				$permalink_start = '<a href="' . $this->permalink . '">';
+				$permalink_start = '<a href="' . esc_url($this->permalink) . '">';
 				$permalink_end   = '</a>';
 			}
 
@@ -655,10 +654,11 @@ if ( ! class_exists('Mixt_Post') ) {
 					$tag = ( $this->context == 'single' ) ? 'h1' : 'h2';
 					$class = 'page-title';
 					if ( $force_title ) { $class .= ' force-display'; }
-					echo "<$tag class='$class'>$permalink_start"; 
-						if ( $this->sticky ) { echo $sticky_label; }
-						echo get_the_title();
-					echo "$permalink_end</$tag>";
+
+					$title = "<$tag class='$class'>$permalink_start"; 
+					if ( $this->sticky ) { $title .= $sticky_label; }
+					$title .= get_the_title() . "$permalink_end</$tag>";
+					echo mixt_clean($title);
 				}
 
 				// Header Post Meta
@@ -696,7 +696,7 @@ if ( ! class_exists('Mixt_Post') ) {
 					$content = strip_shortcodes($this->excerpt);
 				}
 
-				echo $content;
+				echo mixt_clean($content, 'strip');
 
 				// Split post navigation
 				if ( $this->context == 'single' ) {
@@ -842,11 +842,11 @@ if ( ! function_exists('mixt_related_posts') ) {
 		$rel_query = new WP_Query($query_args);
 
 		if ( $rel_query->have_posts() ) {
-			$classes = 'post-extra post-related post-list related-' . sanitize_html_class($args['type']);
+			$classes = 'post-extra post-related post-list related-' . $args['type'];
 			if ( $args['minimal'] ) { $classes .= ' mobile-mini'; }
 
 			?>
-			<div class="<?php echo $classes; ?>">
+			<div class="<?php echo mixt_sanitize_html_classes($classes); ?>">
 				<?php
 
 				if ( $heading != '' ) {
@@ -1050,7 +1050,10 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// Full HTML string
 		if ( ! empty($meta_string) ) { $meta = '<div class="entry-meta post-meta">' . $meta_string . '</div>'; }
 
-		if ( $args['echo'] ) { echo $meta; }
-		else { return $meta; }
+		if ( $args['echo'] ) {
+			echo mixt_clean($meta);
+		} else {
+			return $meta;
+		}
 	}
 }

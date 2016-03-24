@@ -17,7 +17,7 @@ global $product;
 
 <div class="price-cont"><?php
 	if ( $price_html = $product->get_price_html() ) { ?>
-		<span class="price"><?php echo $price_html; ?></span>
+		<span class="price"><?php echo mixt_clean($price_html); ?></span>
 	<?php }
 
 	// Stock

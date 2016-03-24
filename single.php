@@ -40,7 +40,7 @@ get_header();
 			if ( $icons != '' ) {
 				echo '<div class="post-extra post-share-cont">';
 					echo mixt_heading( esc_html__( 'Share this', 'mixt' ) );
-					echo $icons;
+					echo mixt_clean($icons);
 				echo '</div>';
 			}
 		}

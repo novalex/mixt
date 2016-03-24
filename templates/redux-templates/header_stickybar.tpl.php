@@ -13,7 +13,7 @@
 	<div id="info_bar">
 
 		<a href="javascript:void(0);"
-		   class="expand_options<?php echo ( $this->parent->args['open_expanded'] ) ? ' expanded' : ''; ?>"<?php echo $this->parent->args['hide_expand'] ? ' style="display: none;"' : '' ?>><?php esc_html_e( 'Expand', 'redux-framework' ); ?></a>
+		   class="expand_options<?php echo ( $this->parent->args['open_expanded'] ) ? ' expanded' : ''; ?>"<?php echo ( $this->parent->args['hide_expand'] ) ? ' style="display: none;"' : '' ?>><?php esc_html_e( 'Expand', 'redux-framework' ); ?></a>
 
 		<div class="clear"></div>
 	</div>

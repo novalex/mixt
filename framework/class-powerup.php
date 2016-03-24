@@ -54,15 +54,11 @@ class Mixt_Powerup {
 			if ( empty($mixt_opt['page-metaboxes']) || $mixt_opt['page-metaboxes'] == 1 ) {
 				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
 
-				if ( ! file_exists( MIXT_PLUGINS_DIR . '/cmb2/init.php' ) ) {
-					$this->plugins[] = array(
-						'name'     => 'CMB2',
-						'slug'     => 'cmb2',
-						'required' => true,
-					);
-				} else {
-					require_once( MIXT_PLUGINS_DIR . '/cmb2/init.php' );
-				}
+				$this->plugins[] = array(
+					'name'     => 'CMB2',
+					'slug'     => 'cmb2',
+					'source'   => 'cmb2.zip',
+				);
 
 				// CMB2 Extensions
 				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
@@ -160,7 +156,7 @@ class Mixt_Powerup {
 	public function plugins_page() {
 		$tgmpa = TGM_Plugin_Activation::get_instance();
 
-		echo $tgmpa->install_plugins_page();
+		echo mixt_clean($tgmpa->install_plugins_page(), 'strip');
 
 		?>
 

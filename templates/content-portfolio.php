@@ -43,17 +43,17 @@ if ( is_single() ) {
 
 ?>
 
-<article id="post-<?php the_ID() ?>" <?php post_class($post_classes); ?>>
+<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class($post_classes); ?>>
 
 	<?php if ( $has_columns ) echo '<div class="row">'; ?>
 
-	<header class="<?php echo $header_classes; ?>"><?php
+	<header class="<?php echo mixt_sanitize_html_classes($header_classes); ?>"><?php
 
 		$post_ob->header();
 
 	?></header>
 
-	<div class="<?php echo $content_classes; ?>"><?php
+	<div class="<?php echo mixt_sanitize_html_classes($content_classes); ?>"><?php
 
 		$post_ob->content();
 

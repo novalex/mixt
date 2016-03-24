@@ -210,8 +210,8 @@ class Mixt_Themes extends Mixt_DCSS {
 
 			// Buttons
 			
-			echo $this->button_color(array('primary', 'accent'), $accent, $th);
-			echo $this->button_color('minimal', '#'.$bg_ob->darken(2), $th);
+			$this->button_color(array('primary', 'accent'), $accent, $th);
+			$this->button_color('minimal', '#'.$bg_ob->darken(2), $th);
 
 			// Element Colors
 			

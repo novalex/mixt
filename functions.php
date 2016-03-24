@@ -332,7 +332,7 @@ add_filter('mixt_wrap_inner_class', 'mixt_wrap_inner_classes');
  * Construct nav wrap classes
  */
 function mixt_nav_wrap_classes( $classes ) {
-	$classes = 'logo-' . Mixt_Options::get('nav', 'logo-align');
+	$classes[] = 'logo-' . Mixt_Options::get('nav', 'logo-align');
 
 	if ( Mixt_Options::get('nav', 'layout') == 'vertical' ) {
 		$classes[] = ( Mixt_Options::get('nav', 'vertical-mode') == 'fixed' ) ? 'vertical-fixed' : 'vertical-static';

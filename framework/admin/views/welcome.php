@@ -28,6 +28,9 @@ $this->screen_header(
 		</p>
 		<h4 class="green-text">Recommended</h4>
 		<p>
+			<strong>CMB2</strong> - <?php esc_html_e( 'will enable options for pages and posts which can override the global options', 'mixt' ); ?>
+		</p>
+		<p>
 			<strong>Envato WordPress Toolkit</strong> - <?php esc_html_e( 'will notify you when an update is released for the theme and you can easily download the latest version through it', 'mixt' ); ?>
 		</p>
 		<p>

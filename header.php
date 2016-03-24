@@ -106,7 +106,7 @@
 
 						// Check if a menu is assigned and display a message if not
 						if ( ! empty($main_nav_menu) ) {
-							echo $main_nav_menu;
+							echo mixt_clean($main_nav_menu, 'strip');
 						} else {
 							mixt_no_menu_msg(true, true);
 						}

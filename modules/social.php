@@ -182,12 +182,15 @@ function mixt_social_profiles( $echo = true, $args = array() ) {
 		$before = "<ul class='$cont_classes'>";
 		$after  = '</ul>';
 
-		$return_val = $before . $items . $after;
+		$html = $before . $items . $after;
 
 		if ( empty($items) ) return '';
 
-		if ( $echo ) { echo $return_val; }
-		else { return $return_val; }
+		if ( $echo ) {
+			echo mixt_clean($html);
+		} else {
+			return $html;
+		}
 	} else {
 		return null;
 	}
