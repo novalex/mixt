@@ -3,8 +3,6 @@ framework/plugins/cmb2/
 framework/plugins/micf/
 framework/plugins/redux/
 *.sublime-workspace
-assets/icons/
-assets/videos/
 css/bootstrap/
 js/bootstrap/
 .idea/
