@@ -294,6 +294,15 @@ $this->sections[] = array(
 			'default'  => true,
 		),
 
+		// Meta Date Format
+		array(
+			'id'       => 'meta-date-format',
+			'type'     => 'text',
+			'title'    => esc_html__( 'Date Format', 'mixt' ),
+			'subtitle' => sprintf( esc_html__( 'Set the meta date format, from the list of %s available date formats %s', 'mixt' ), '<a href="https://codex.wordpress.org/Formatting_Date_and_Time" target="_blank">', '</a>' ),
+			'default'  => 'F jS, Y',
+		),
+
 		// Meta Category
 		array(
 			'id'       => 'meta-category',

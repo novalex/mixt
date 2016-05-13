@@ -51,7 +51,8 @@ function mixt_options_changed( $mixt_opt = null ) {
 	if ( array_key_exists('nav-themes', $mixt_opt) ) { update_option('mixt-nav-themes', $mixt_opt['nav-themes']); }
 
 	// Update Custom CSS
-	( new Mixt_DCSS() )->print_stylesheet();
+	$dcss = new Mixt_DCSS();
+	$dcss->print_stylesheet();
 
 	// Social Profiles
 	if ( array_key_exists('social-profiles', $mixt_opt) && ! empty($mixt_opt['social-profiles']) ) { update_option('mixt-social-profiles', $mixt_opt['social-profiles']); }

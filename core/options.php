@@ -410,7 +410,10 @@ new Mixt_Options;
 
 // Wrapper functions
 if ( ! function_exists('mixt_get_option') ) {
-	function mixt_get_option( $option ) { return array_values( (array) Mixt_Options::get_options( array($option) ) )[0]; }
+	function mixt_get_option( $option ) {
+		$arr = (array) Mixt_Options::get_options( array($option) );
+		$arr_val = array_values($arr);
+		return $arr_val[0]; }
 }
 if ( ! function_exists('mixt_get_options') ) {
 	function mixt_get_options( $option_arr ) { return Mixt_Options::get_options($option_arr); }
