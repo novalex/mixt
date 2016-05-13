@@ -8,11 +8,6 @@
  * @link     https://github.com/webdevstudios/Custom-Metaboxes-and-Fields-for-WordPress
  */
 
-// Load CMB2
-if ( file_exists(  MIXT_PLUGINS_DIR . '/cmb2/init.php' ) ) {
-	require_once( MIXT_PLUGINS_DIR . '/cmb2/init.php' );
-}
-
 
 /**
  * Check if a tab should display on the current page

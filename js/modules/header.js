@@ -83,8 +83,14 @@ HEADER FUNCTIONS
 		headerFn();
 
 		if ( mixt_opt.header.scroll ) { headerScroll(); }
-		
-		$(window).resize( $.debounce( 500, headerFn ));
+
+		$(document).ready( function() {
+			if ( ! window.mobileCheck() ) {
+				$(window).resize( $.debounce( 500, headerFn ) );
+			} else {
+				$(window).on('orientationchange', headerFn );
+			}
+		});
 	}
 
 })(jQuery);

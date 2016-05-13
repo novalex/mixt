@@ -52,19 +52,21 @@ class Mixt_Powerup {
 
 		// CMB2 Framework
 			if ( empty($mixt_opt['page-metaboxes']) || $mixt_opt['page-metaboxes'] == 1 ) {
-				include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
-
 				$this->plugins[] = array(
 					'name'     => 'CMB2',
 					'slug'     => 'cmb2',
 					'source'   => 'cmb2.zip',
 				);
 
-				// CMB2 Extensions
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/slider-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/dimensions-field.php' );
-				include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/post-search-field.php' );
+				if ( defined('CMB2_LOADED') ) {
+					include_once( MIXT_FRAME_DIR . '/cmb2-config.php' );
+
+					// CMB2 Extensions
+					include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/tab-field.php' );
+					include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/slider-field.php' );
+					include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/dimensions-field.php' );
+					include_once( MIXT_PLUGINS_DIR . '/cmb2-extend/extensions/post-search-field.php' );
+				}
 			}
 
 		// MICF library & Config

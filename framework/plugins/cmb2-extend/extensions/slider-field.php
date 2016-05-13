@@ -17,7 +17,8 @@ class Mixt_Cmb_Slider_Field {
 	public function render_field( $field, $escaped_value, $object_id, $object_type, $field_type ) {
 		$min = $field->min();
 		$max = $field->max();
-		$step = ( empty($field->step()) ) ? 'none' : $field->step();
+		$step = $field->step();
+		$step = ( empty($step) ) ? 'none' : $step;
 
 		if ( ! is_numeric($min) || ! is_numeric($max) || ! is_numeric($step) ) {
 			echo '<p>' . esc_html__( 'The min, max and step values of the slider must be numeric!', 'mixt' ) . '</p>';

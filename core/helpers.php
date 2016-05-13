@@ -228,8 +228,10 @@ class Mixt_JS_Plugins {
 			if ( is_dir($dir . DIRECTORY_SEPARATOR . $value) ) {
 				$struct[$value] = $this->dir_struct($dir . DIRECTORY_SEPARATOR . $value);
 			} else {
-				$name = explode('.', $value)[0];
-				$struct[$name] = $value;
+				$name = explode('.', $value);
+				if ( ! empty($name) && is_array($name) ) {
+					$struct[$name[0]] = $value;
+				}
 			}
 		}
 		return $struct;

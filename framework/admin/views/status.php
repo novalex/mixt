@@ -23,7 +23,7 @@ $this->screen_header(
 			<tr>
 				<td class="label"><?php esc_html_e( 'Child Theme', 'mixt' ); ?></td>
 				<td><?php
-					if ( ! is_child_theme() ) {
+					if ( is_child_theme() ) {
 						esc_html_e( 'Yes', 'mixt' );
 					} else {
 						echo esc_html__( 'No', 'mixt' ) . ' - ' .

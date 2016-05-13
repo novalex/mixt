@@ -944,6 +944,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 			if ( $mixt_opt['meta-comments'] == false ) { $args['comments'] = false; }
 			if ( $mixt_opt['meta-icons'] == false ) { $args['icons'] = false; }
 			if ( ! empty($mixt_opt['meta-separator']) ) { $args['separator'] = $mixt_opt['meta-separator']; }
+			if ( ! empty($mixt_opt['meta-date-format']) ) { $args['date_format'] = $mixt_opt['meta-date-format']; }
 		}
 
 		$post_display_args = Mixt_Options::get('post-display');
@@ -951,16 +952,18 @@ if ( ! function_exists('mixt_post_meta') ) {
 		if ( array_key_exists('meta-date', $post_display_args) ) { $args['date'] = $post_display_args['meta-date']; }
 		if ( array_key_exists('meta-category', $post_display_args) ) { $args['category'] = $post_display_args['meta-category']; }
 		if ( array_key_exists('meta-comments', $post_display_args) ) { $args['comments'] = $post_display_args['meta-comments']; }
+		if ( array_key_exists('meta-date-format', $post_display_args) ) { $args['date_format'] = $post_display_args['meta-date-format']; }
 
 		// Default Args
 		$defaults = array(
-			'echo'      => true,
-			'author'    => true,
-			'date'      => true,
-			'category'  => true,
-			'comments'  => true,
-			'icons'     => true,
-			'separator' => '',
+			'echo'        => true,
+			'author'      => true,
+			'date'        => true,
+			'category'    => true,
+			'comments'    => true,
+			'icons'       => true,
+			'separator'   => '',
+			'date_format' => 'F jS, Y',
 		);
 		$args = wp_parse_args($args, $defaults);
 
@@ -993,7 +996,7 @@ if ( ! function_exists('mixt_post_meta') ) {
 		// Post Date
 		if ( $args['date'] ) {
 			$date_iso    = get_the_date('c');
-			$date_format = get_the_date('F jS, Y');
+			$date_format = get_the_date($args['date_format']);
 			$date_url    = get_day_link( get_the_date('Y'), get_the_date('m'), get_the_date('d') );
 			$date_icon   = ( $args['icons'] ) ? mixt_get_icon('date') : '';
 			$date_title  = get_the_time();
