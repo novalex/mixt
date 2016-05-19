@@ -145,26 +145,38 @@ function mixt_widgets_init() {
 
 	// Footer Sidebars
 	register_sidebar( array(
-		'name' => esc_html__( 'Footer Column 1', 'mixt' ),
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 1 ),
 		'id'   => 'footer-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => esc_html__( 'Footer Column 2', 'mixt' ),
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 2 ),
 		'id'   => 'footer-2',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => esc_html__( 'Footer Column 3', 'mixt' ),
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 3 ),
 		'id'   => 'footer-3',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );
 	register_sidebar( array(
-		'name' => esc_html__( 'Footer Column 4', 'mixt' ),
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 4 ),
 		'id'   => 'footer-4',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
+	register_sidebar( array(
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 5 ),
+		'id'   => 'footer-5',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
+	) );
+	register_sidebar( array(
+		'name' => sprintf( esc_html__( 'Footer Column %d', 'mixt' ), 6 ),
+		'id'   => 'footer-6',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">', 'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">', 'after_title' => '</h4>',
 	) );

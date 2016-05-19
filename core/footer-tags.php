@@ -21,7 +21,7 @@ function mixt_footer_widget_area() {
 	if ( (bool) $options['widgets-show'] ) {
 		$sidebars = 0;
 		$active_sidebars = array();
-		foreach ( array( 'footer-1', 'footer-2', 'footer-3', 'footer-4' ) as $sidebar_id ) {
+		foreach ( array( 'footer-1', 'footer-2', 'footer-3', 'footer-4', 'footer-5', 'footer-6' ) as $sidebar_id ) {
 			if ( is_active_sidebar($sidebar_id) ) {
 				$sidebars++;
 				$active_sidebars[] = $sidebar_id;
@@ -31,17 +31,42 @@ function mixt_footer_widget_area() {
 			$widgets_class = 'footer-row widget-row theme-section-main';
 			if ( $options['widgets-hide'] ) { $widgets_class .= ' hidden-xs'; }
 
-			$widget_col_class = 'widget-area col-sm-' . ( 12 / intval($sidebars) );
+			$current_col = 1;
+
+			switch ( $sidebars ) {
+				case 1:
+					$widget_col_class = 'widget-area col-sm-12';
+					break;
+				case 2:
+					$widget_col_class = 'widget-area col-sm-6';
+					break;
+				case 3:
+					$widget_col_class = 'widget-area col-sm-4';
+					break;
+				case 4:
+					$widget_col_class = 'widget-area col-lg-3 col-md-6 col-sm-6';
+					break;
+				case 5:
+					$widget_col_class = 'widget-area col-lg-2 col-md-4 col-sm-6';
+					break;
+				case 6:
+					$widget_col_class = 'widget-area col-lg-2 col-md-4 col-sm-6';
+					break;
+			}
 			
 			?>
 			<div class="<?php echo mixt_sanitize_html_classes($widgets_class); ?>">
 				<div class="container">
 					<div id="footer-widgets" class="row">
-						<?php foreach ( $active_sidebars as $sidebar ) { ?>
-							<div class="<?php echo mixt_sanitize_html_classes($widget_col_class); ?>" role="complementary">
-								<?php dynamic_sidebar($sidebar); ?>
-							</div>
-						<?php } ?>
+						<?php
+							foreach ( $active_sidebars as $sidebar ) {
+								if ( $sidebars == 5 && $current_col == 5 ) $widget_col_class = 'widget-area col-lg-4 col-md-8 col-sm-12';
+								echo '<div class="' . mixt_sanitize_html_classes($widget_col_class) . '" role="complementary">';
+									dynamic_sidebar($sidebar);
+								echo '</div>';
+								$current_col++;
+							}
+						?>
 					</div>
 				</div>
 			</div>
