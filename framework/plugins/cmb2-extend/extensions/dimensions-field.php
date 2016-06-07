@@ -48,7 +48,7 @@ class Mixt_Cmb_Dimensions_Field {
 			) );
 		}
 		
-		$units = ( $field->units() ) ? array('px') : $field->units();
+		$units = ( ! $field->units() ) ? array('px') : $field->units();
 		$unit_options = '';
 		foreach ( $units as $unit ) {
 			$args = array(
