@@ -267,6 +267,30 @@ $this->sections[] = array(
 				'default'  => false,
 			),
 
+			// Only Show Once
+			array(
+				'id'       => 'info-bar-cookie',
+				'type'     => 'switch',
+				'title'    => esc_html__( 'Only show once', 'mixt' ),
+				'on'       => esc_html__( 'Yes', 'mixt' ),
+				'off'      => esc_html__( 'No', 'mixt' ),
+				'default'  => false,
+				'required' => array('info-bar', '=', true),
+			),
+
+			// Cookie Persistence
+			array(
+				'id'       => 'info-bar-cookie-persist',
+				'type'     => 'spinner',
+				'title'    => esc_html__( 'Days until showing again', 'mixt' ),
+				'subtitle' => esc_html__( 'How many days should pass before showing again', 'mixt' ),
+				'default'  => 999,
+				'min'      => 1,
+				'max'      => 999,
+				'step'     => 1,
+				'required' => array('info-bar-cookie', '=', true),
+			),
+
 			// Content
 			array(
 				'id'           => 'info-bar-content',

@@ -272,8 +272,17 @@ UI FUNCTIONS
 	}
 
 	if ( infoBar.length ) {
-		infoBar.find('.info-close').click( function() {
-			infoBarWrap.fadeOut(300);
+		infoBar.find('.info-close').click( function(event) {
+			event.preventDefault();
+			infoBarWrap.slideUp(300, function() {
+				if ( mixt_opt.layout['info-bar-cookie'] && typeof Cookies === 'function' ) {
+					var cookie_persist = parseInt(mixt_opt.layout['info-bar-cookie-persist']);
+					if ( cookie_persist < 1 || cookie_persist > 999 ) {
+						cookie_persist = 999;
+					}
+					Cookies.set('mixt_info_bar_close', true, { expires: cookie_persist, path: '/' });
+				}
+			});
 			if ( backToTop.length ) { backToTop.css('margin-bottom', ''); }
 		});
 		if ( infoBar.hasClass('sticky') ) { infoBarSticky(); }

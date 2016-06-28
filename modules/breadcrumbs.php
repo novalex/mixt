@@ -40,10 +40,10 @@ function mixt_breadcrumbs( $page_title = '' ) {
 			if ( is_category() || is_single() ) {
 
 				if ( is_attachment() ) {
-					$parent_id        = $post->post_parent;
-					$parent_title     = get_the_title( $parent_id );
+					$parent_id    = $post->post_parent;
+					$parent_title = get_the_title($parent_id);
 					if ( $parent_title != $page_title ) {
-						$parent_permalink = get_permalink( $parent_id );
+						$parent_permalink = get_permalink($parent_id);
 						echo '<li><a href="' . esc_url($parent_permalink) . '" title="' . esc_attr($parent_title) . '">' . esc_html($parent_title) . '</a></li>';
 					}
 				} else if ( is_category() ) {
@@ -65,6 +65,15 @@ function mixt_breadcrumbs( $page_title = '' ) {
 					}
 				}
 
+				// Show blog breadcrumb for single blog post
+				if ( is_singular('post') ) {
+					$blog_id = get_option('page_for_posts');
+					$blog_page = get_post($blog_id);
+					$blog_title = $blog_page->post_title;
+					echo '<li><a href="' . esc_url( get_permalink($blog_id) ) . '" title="' . esc_attr($blog_title) . '">' . esc_html($blog_title) . '</a></li>';
+				}
+
+				// Single page / post title
 				if ( is_single() ) {
 					echo '<li>' . esc_html($page_title) . '</li>';
 				}

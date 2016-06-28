@@ -145,6 +145,8 @@ class Mixt_Options {
 				'pagination-type'   => array( 'return' => 'value' ),
 				'show-page-nr'      => array(),
 				'comment-pagination-type' => array( 'return' => 'value' ),
+				'info-bar-cookie'         => array(),
+				'info-bar-cookie-persist' => array( 'return' => 'value' ),
 			),
 			'sidebar' => array(
 				'enabled'  => array( 'key' => 'page-sidebar', 'inherited' => true, 'default' => true ),

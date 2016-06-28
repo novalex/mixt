@@ -153,7 +153,7 @@ function mixt_footer_infobar() {
 		'info-bar-hide'    => array(),
 	) );
 
-	if ( (bool) $options['info-bar'] && ! empty($options['info-bar-content']) ) {
+	if ( (bool) $options['info-bar'] && ! empty($options['info-bar-content']) && ! isset($_COOKIE['mixt_info_bar_close']) ) {
 		$info_class = 'info-bar theme-section-alt';
 		if ( $options['info-bar-fixed'] ) { $info_class .= ' sticky'; }
 		if ( $options['info-bar-hide'] ) { $info_class .= ' hidden-xs'; }
