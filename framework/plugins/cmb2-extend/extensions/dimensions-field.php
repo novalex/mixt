@@ -55,17 +55,13 @@ class Mixt_Cmb_Dimensions_Field {
 			$unit_options .= sprintf( "\t" . '<option value="%s" %s>%s</option>', $unit, selected( $selected, true, false ), $unit ) . "\n";
 		}
 
-		$select_a = $field_type->parse_args( 'select', array(
-			'class'   => 'cmb2_select mixt-dimensions-units',
+		$html .= $field_type->select( array(
 			'name'    => $field_type->_name('[units]'),
 			'id'      => $field_type->_id('_units'),
+			'class'   => 'cmb2_select mixt-dimensions-units',
 			'options' => $unit_options,
 			'desc'    => '',
 		) );
-
-		$select_attrs = $field_type->concat_attrs( $select_a, array( 'desc', 'options' ) );
-
-		$html .= sprintf( '<select%s>%s</select>%s', $select_attrs, $select_a['options'], $select_a['desc'] );
 
 		echo mixt_clean($html, 'strip');
 
