@@ -51,18 +51,14 @@ class Mixt_Cmb_Dimensions_Field {
 		$units = ( ! $field->units() ) ? array('px') : $field->units();
 		$unit_options = '';
 		foreach ( $units as $unit ) {
-			$args = array(
-				'value' => $unit,
-				'label' => $unit,
-				'checked' => ( $value['units'] == $unit ),
-			);
-			$unit_options .= $field_type->select_option($args);
+			$selected = ( $value['units'] == $unit );
+			$unit_options .= sprintf( "\t" . '<option value="%s" %s>%s</option>', $unit, selected( $selected, true, false ), $unit ) . "\n";
 		}
 
 		$html .= $field_type->select( array(
-			'class'   => 'mixt-dimensions-units cmb2_select',
 			'name'    => $field_type->_name('[units]'),
 			'id'      => $field_type->_id('_units'),
+			'class'   => 'cmb2_select mixt-dimensions-units',
 			'options' => $unit_options,
 			'desc'    => '',
 		) );
