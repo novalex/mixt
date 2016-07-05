@@ -88,6 +88,7 @@ $this->sections[] = array(
 				),
 				'id' => array(
 					'wrap_class'  => 'sidebar-custom sidebar-id',
+					'input_class' => 'mixt-multi-input-id',
 					'placeholder' => esc_html__( 'ID', 'mixt' ),
 				),
 			),

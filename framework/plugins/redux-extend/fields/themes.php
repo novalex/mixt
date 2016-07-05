@@ -112,7 +112,6 @@ $this->sections[] = array(
 					'label'      => esc_html__( 'Dark Background', 'mixt' ),
 				),
 			),
-			'default' => get_option('mixt-site-themes', array()),
 		),
 	),
 );
@@ -243,7 +242,6 @@ $this->sections[] = array(
 					'wrap_class' => 'rgba-field',
 				),
 			),
-			'default' => get_option('mixt-nav-themes', array())
 		),
 	),
 );

@@ -42,7 +42,7 @@ class Mixt_Themes extends Mixt_DCSS {
 		// Do nothing if themes are disabled
 		if ( ! $this->themes_enabled ) return;
 
-		$themes = array( $this->active_themes['site']);
+		$themes = array($this->active_themes['site']);
 		if ( $this->active_themes['footer'] != $this->active_themes['site'] ) $themes[] = $this->active_themes['footer'];
 
 		foreach ( $themes as $theme_id ) {

@@ -47,18 +47,22 @@
 			if ( input.hasClass('multi-input-checkbox') ) {
 				makeCheckbox(input);
 			}
+		});
 
-
+		group.find('.mixt-multi-input-id').on('focusout', function() {
+			$(this).val($(this).val().toLowerCase().replace(/ /g, '-').replace(/[-]+/g, '-').replace(/[^\w-]+/g, ''));
 		});
 
 		group.find('.group-id').on('focusout', function() {
 			var field = $(this),
 				input = field.find('input'),
 				group = field.closest('li'),
-				groupID = input.val();
+				groupID = input.val().toLowerCase().replace(/ /g, '-').replace(/[-]+/g, '-').replace(/[^\w-]+/g, '');
+
+			input.val(groupID);
 
 			setGroupId(group, groupID);
-		}).children('input').val(groupID);
+		});
 
 		if ( typeof(groupID) != 'undefined' && groupID !== '' ) {
 			setGroupId(group, groupID);
@@ -68,7 +72,7 @@
 	function setGroupId(group, groupID) {
 		if ( typeof(groupID) !== 'undefined' && groupID !== '' ) {
 
-			var oldGroupID = group.attr('data-group-id');
+			var oldGroupID = group.data('group-id');
 
 			if ( typeof(oldGroupID) == 'undefined' ) {
 				oldGroupID = 'field-id';
@@ -86,7 +90,7 @@
 						name: newId
 					});
 
-					group.attr('data-group-id', groupID);
+					group.data('group-id', groupID);
 				}
 			});
 		}
@@ -94,7 +98,6 @@
 
 	$( document ).ready( function() {
 		//redux.field_objects.mixt_multi_input.init();
-
 
 		$('.mixt-multi-input').find('li:not(.multi-input-model)').each( function() {
 			var group = $(this),
@@ -112,7 +115,7 @@
 	redux.field_objects.mixt_multi_input.init = function(selector) {
 
 		if ( ! selector ) {
-			selector = $( document ).find( '.redux-container-mixt_multi_input:visible' );
+			selector = $( document ).find('.redux-container-mixt_multi_input:visible');
 		}
 
 		$( selector ).each( function() {
@@ -127,40 +130,35 @@
 				return;
 			}
 
-			if ( parent.hasClass('redux-field-init') ) {
-				parent.removeClass('redux-field-init');
-			} else {
-				return;
-			}
-
-			el.find('.mixt-multi-input-add').click( function() {
-				var btn = $(this),
-					number = parseInt( btn.attr('data-add_number') ),
-					id = btn.attr('data-id');
-
-				for ( var i = 0; i < number; i++ ) {
-					var container = $('#' + id),
-						new_input = container.find('.multi-input-model').clone();
-
-					container.append( new_input );
-
-					var groupNr   = container.find('li').length,
-						lastGroup = container.find('li:last-child');
-					lastGroup.removeAttr('style').removeClass('multi-input-model');
-
-					groupInit(lastGroup, groupNr);
-				}
-				redux_change(btn);
-				maybeDisableAjax(el);
-			});
+			parent.removeClass('redux-field-init');
 		});
 	};
 
+	$(document).on('click', '.mixt-multi-input-add', function() {
+		var btn = $(this),
+			number = parseInt( btn.data('add_number') ),
+			id = btn.data('id');
+
+		for ( var i = 0; i < number; i++ ) {
+			var container = $('#' + id),
+				new_input = container.find('.multi-input-model').clone();
+
+			container.append( new_input );
+
+			var groupNr   = container.find('li').length,
+				lastGroup = container.find('li:last-child');
+			lastGroup.removeAttr('style').removeClass('multi-input-model');
+
+			groupInit(lastGroup, groupNr);
+		}
+		redux_change(btn);
+		maybeDisableAjax(btn.parents('.redux-container-mixt_multi_input'));
+	});
+
 	$(document).on('click', '.mixt-multi-input-remove', function() {
 		var btn = $(this);
-		redux_change(btn);
-		btn.prev('input[type="text"]').val('');
 		btn.parent().slideUp(300, function() { $(this).remove(); });
+		redux_change(btn);
 		maybeDisableAjax(btn.parents('.redux-container-mixt_multi_input'));
 	});
 
@@ -171,4 +169,4 @@
 		}
 	}
 
-})( jQuery );
+})(jQuery);
