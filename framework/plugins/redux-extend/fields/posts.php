@@ -36,6 +36,20 @@ $this->sections[] = array(
 			'default'  => 'full',
 		),
 
+		// Display Featured Image
+		array(
+			'id'       => 'single-feat-show',
+			'type'     => 'button_set',
+			'title'    => esc_html__( 'Show Featured Media', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the featured media on single posts', 'mixt' ),
+			'options' => array(
+				'auto'  => esc_html__( 'Auto', 'mixt' ),
+				'true'  => esc_html__( 'Yes', 'mixt' ),
+				'false' => esc_html__( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
 		// Post Info
 		array(
 			'id'       => 'single-post-info',

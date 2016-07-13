@@ -12,7 +12,7 @@ if ( have_posts() ) {
 
 	$cont_classes = 'portfolio-wrap page-padding';
 
-	$is_sortable = ( mixt_get_options( array('portfolio-page-filters' => array()) ) && function_exists('mixt_portfolio_filters') );
+	$is_sortable = ( mixt_get_option(array('key' => 'portfolio-page-filters')) && function_exists('mixt_portfolio_filters') );
 	if ( $is_sortable ) $cont_classes .= ' portfolio-sortable';
 
 	echo "<div class='$cont_classes'>";

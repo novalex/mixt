@@ -400,6 +400,20 @@ $this->sections[] = array(
 			'default'  => 'full',
 		),
 
+		// Display Featured Image
+		array(
+			'id'       => 'project-feat-show',
+			'type'     => 'button_set',
+			'title'    => esc_html__( 'Show Featured Media', 'mixt' ),
+			'subtitle' => esc_html__( 'Display the featured media on single projects', 'mixt' ),
+			'options' => array(
+				'auto'  => esc_html__( 'Auto', 'mixt' ),
+				'true'  => esc_html__( 'Yes', 'mixt' ),
+				'false' => esc_html__( 'No', 'mixt' ),
+			),
+			'default' => 'auto',
+		),
+
 		// Post Info
 		array(
 			'id'       => 'project-post-info',
