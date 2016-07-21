@@ -142,7 +142,8 @@
 		#content-wrap,
 		.sidebar ul,
 		.wp-caption,
-		hr { border-color: $border; }
+		hr,
+		legend { border-color: $border; }
 
 		.article.sticky .page-title,
 		.article.sticky-post .page-title { border-color: $accent; }

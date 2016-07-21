@@ -37,6 +37,7 @@ UI FUNCTIONS
 			if ( maxVal !== null && newVal > maxVal ) newVal = maxVal;
 			input.val(newVal);
 		}
+		input.trigger('change');
 	});
 
 
