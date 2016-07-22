@@ -244,6 +244,17 @@ $this->sections[] = array(
 			'default'  => true,
 		),
 
+		// Write Dynamic CSS To File
+		array(
+			'id'       => 'write-dynamic-css',
+			'type'     => 'switch',
+			'title'    => esc_html__( 'Write Dynamic CSS To File', 'mixt' ),
+			'subtitle' => esc_html__( 'Put dynamically generated CSS in a file instead of outputting it in the HTML. Not supported on all servers', 'mixt' ),
+			'on'       => esc_html__( 'Yes', 'mixt' ),
+			'off'      => esc_html__( 'No', 'mixt' ),
+			'default'  => false,
+		),
+
 		// Divider
 		array(
 			'id'   => 'misc-divider',

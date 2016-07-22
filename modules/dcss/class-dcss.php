@@ -33,6 +33,7 @@ class Mixt_DCSS {
 	 * @var bool
 	 */
 	protected $stylesheet = false;
+	protected $stylesheet_opt = false;
 
 	/**
 	 * Media breakpoints defined in the CSS
@@ -47,7 +48,8 @@ class Mixt_DCSS {
 		// Output CSS in the body
 		add_action('wp_footer', array($this, 'print_body_css'), 999);
 
-		// Test if files can be written to the uploads directory, and if yes set the stylesheet flag
+		// Test if files can be written to the uploads directory and if the write to file option is enabled, and if yes set the stylesheet flag
+		$this->stylesheet_opt = mixt_get_option( array('key' => 'write-dynamic-css') );
 		if ( ( function_exists('get_filesystem_method') && get_filesystem_method('', MIXT_UPLOAD_PATH) == 'direct' ) || file_exists(MIXT_UPLOAD_PATH . '/dynamic.css') ) {
 			$this->stylesheet = true;
 		}
@@ -82,18 +84,21 @@ class Mixt_DCSS {
 	 * Update custom CSS stylesheet
 	 */
 	public function print_stylesheet() {
-		if ( $this->stylesheet ) {
+		$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
+		if ( $this->stylesheet && $this->stylesheet_opt ) {
 			WP_Filesystem();
 			global $wp_filesystem;
 
 			$css = self::$stylesheet_css . mixt_custom_theme_css();
 
-			$stylesheet = MIXT_UPLOAD_PATH . '/dynamic.css';
 			if ( ! empty($css) ) {
+				$css = "/* DYNAMIC STYLESHEET, DO NOT EDIT! */\n\n" . $css;
 				$wp_filesystem->put_contents($stylesheet, $css, FS_CHMOD_FILE);
 			} else if ( file_exists($stylesheet) ) {
 				unlink($stylesheet);
 			}
+		} else if ( file_exists($stylesheet) ) {
+			unlink($stylesheet);
 		}
 	}
 
