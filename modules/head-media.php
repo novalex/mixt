@@ -171,12 +171,8 @@ function mixt_head_media() {
 				}
 			}
 
+			// If image is selected, display it. Else, display placeholder
 			if ( $img_id != '' && $img_url != '' ) {
-				$img_response = wp_remote_head( $img_url );
-			}
-
-			// If image was deleted or none was selected, use placeholder
-			if ( ! empty($img_response) && is_array($img_response) && $img_response['response']['code'] == '200' ) {
 				$lumin      = mixt_meta( '_mixt_luminosity', $img_id );
 				$img_repeat = $options['img-repeat'];
 				$img_meta   = wp_get_attachment_metadata( $img_id );
@@ -201,10 +197,11 @@ function mixt_head_media() {
 
 			// Add pattern or image proportion class
 			if ( $img_repeat ) {
-				$media_cont_classes .= ' pattern';
+				$media_cont_classes .= 'pattern';
+			} else if ( $img_width > $img_height ) {
+				$media_cont_classes .= 'img-wide';
 			} else {
-				if ( $img_width > $img_height ) { $media_cont_classes .= ' img-wide'; }
-				else { $media_cont_classes .= ' img-tall'; }
+				$media_cont_classes .= 'img-tall';
 			}
 
 			$media_bg = "<div class='media-container $media_cont_classes' $img_atts style='background-image: url($img_url);'></div>";

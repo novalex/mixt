@@ -215,6 +215,14 @@ $this->sections[] = array(
 				'default' => true,
 			),
 
+			// Sale Badge Text
+			array(
+				'id'      => 'wc-sale-badge-text',
+				'type'    => 'text',
+				'title'   => esc_html__( '&quot;Sale&quot; Badge Text', 'mixt' ),
+				'default' => esc_html__( 'Sale', 'mixt' ),
+			),
+
 			// New Badge
 			array(
 				'id'      => 'wc-new-badge',
@@ -223,6 +231,14 @@ $this->sections[] = array(
 				'on'      => esc_html__( 'Yes', 'mixt' ),
 				'off'     => esc_html__( 'No', 'mixt' ),
 				'default' => false,
+			),
+
+			// New Badge Text
+			array(
+				'id'      => 'wc-new-badge-text',
+				'type'    => 'text',
+				'title'   => esc_html__( '&quot;New&quot; Badge Text', 'mixt' ),
+				'default' => esc_html__( 'New', 'mixt' ),
 			),
 
 			// New Period
