@@ -238,6 +238,7 @@ class Mixt_Options {
 		else if ( self::is_blog() ) { $type = 'blog'; }
 		else if ( self::is_portfolio() ) { $type = 'portfolio'; }
 		else if ( self::is_shop('catalog') ) { $type = 'shop'; }
+		else if ( self::is_forum() ) { $type = 'forum'; }
 		else if ( get_page_template_slug() == 'templates/one-page.php' ) { $type = 'onepage'; }
 		else if ( get_page_template_slug() == 'templates/blank.php' ) { $type = 'blank'; }
 		else if ( is_singular('portfolio') ) { $type = 'project'; }
@@ -269,6 +270,11 @@ class Mixt_Options {
 		} else {
 			return false;
 		}
+	}
+
+	// Check if page is a forum page
+	public static function is_forum() {
+		return ( function_exists('is_bbpress') && is_bbpress() );
 	}
 
 	// Check if page is a posts page

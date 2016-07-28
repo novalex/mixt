@@ -158,6 +158,12 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/woocommerce.php' );
 			}
 
+			// FORUMS
+			if ( class_exists('bbPress') ) {
+				$this->sections[] = array( 'type' => 'divide' );
+				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/bbpress.php' );
+			}
+
 			// DIVIDER
 			$this->sections[] = array( 'type' => 'divide' );
 

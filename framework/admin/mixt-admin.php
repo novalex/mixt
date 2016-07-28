@@ -33,7 +33,7 @@ add_action('after_switch_theme', 'mixt_activation_flag');
  */
 function mixt_activation_redirect() {
 	// Return if the activation redirect flag is not set, activating from the network admin or in bulk
-	if ( ! get_transient('_mixt_activation_redirect') || is_network_admin() || isset($_GET['activate-multi']) ) return;
+	if ( ! get_transient('_mixt_activation_redirect') || is_network_admin() || isset($_GET['activate-multi']) || isset($_GET['activate']) ) return;
 
 	// Delete the redirect transient
 	delete_transient('_mixt_activation_redirect');
