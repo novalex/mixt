@@ -65,6 +65,6 @@ $this->sections[] = array(
 	'customizer' => false,
 	'subsection' => true,
 	'fields'     => array(
-		
+		//
 	),
 );
