@@ -109,6 +109,8 @@
 			<key name="footer-right-code" />
 			<key name="info-bar-content" />
 			<key name="sticky-label" />
+			<key name="wc-sale-badge-text" />
+			<key name="wc-new-badge-text" />
 			<key name="post-sharing-profiles">
 				<key name="*">
 					<key name="title" />

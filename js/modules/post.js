@@ -173,7 +173,7 @@ POST FUNCTIONS
 									$container.isotope('appended', newPosts);
 								});
 							}
-							viewport.trigger('refresh');
+							viewport.trigger('post-load').trigger('refresh');
 						}
 					}, 100);
 

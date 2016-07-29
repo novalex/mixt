@@ -26,18 +26,15 @@
 
 		// Badges
 
-		.badge-cont {
-			.badge {
-				width: 54px;
-				padding: 7px;
-				font-size: $font-size-s;
-				text-align: center;
-				margin: 0 5px 5px 0;
-				border-radius: $bd-radius;
-				text-transform: uppercase;
+		.badge-cont .badge {
+			padding: 7px;
+			font-size: $font-size-s;
+			text-align: center;
+			margin: 0 5px 5px 0;
+			border-radius: $bd-radius;
+			text-transform: uppercase;
 
-				&.new-badge { background-color: $green; }
-			}
+			&.new-badge { background-color: $green; }
 		}
 
 
@@ -47,6 +44,7 @@
 			font-size: 0;
 
 			+ .badge-cont {
+				max-width: 100%;
 				position: absolute;
 				top: 15px; left: -5px;
 
