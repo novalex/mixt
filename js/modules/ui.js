@@ -87,7 +87,7 @@ UI FUNCTIONS
 		var link = $(this),
 			hash = link.attr('href');
 
-		if ( link.data('no-hash-scroll') || $(e.target).data('no-hash-scroll') || hash == '#' ) return true;
+		if ( link.data('no-hash-scroll') || $(e.target).data('no-hash-scroll') || link.data('toggle') == 'collapse' || hash == '#' ) return true;
 
 		if ( hash.length ) {
 			e.preventDefault();
