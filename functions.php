@@ -10,7 +10,7 @@ defined('ABSPATH') or die('You are not supposed to do that.'); // No Direct Acce
 
 // DEFINE THEME CONSTANTS
 
-define( 'MIXT_VERSION', wp_get_theme()->get('Version') );
+define( 'MIXT_VERSION', wp_get_theme('mixt')->get('Version') );
 
 define( 'MIXT_DIR', get_template_directory() );            // Base Theme Path
 define( 'MIXT_URI', get_template_directory_uri()) ;        // Base Theme URI

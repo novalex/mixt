@@ -158,12 +158,6 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/woocommerce.php' );
 			}
 
-			// FORUMS
-			if ( class_exists('bbPress') ) {
-				$this->sections[] = array( 'type' => 'divide' );
-				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/bbpress.php' );
-			}
-
 			// DIVIDER
 			$this->sections[] = array( 'type' => 'divide' );
 
@@ -183,6 +177,15 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 
 			// DIVIDER
 			$this->sections[] = array( 'type' => 'divide' );
+
+
+			// CUSTOM SECTIONS
+			if ( file_exists( MIXT_PLUGINS_DIR . '/custom/redux/fields.php' ) ) {
+				include_once( MIXT_PLUGINS_DIR . '/custom/redux/fields.php' );
+			}
+			if ( defined('MIXT_CHILD_DIR') && file_exists( MIXT_CHILD_DIR . '/custom/redux/fields.php' ) ) {
+				include_once( MIXT_CHILD_DIR . '/custom/redux/fields.php' );
+			}
 
 
 			// IMPORT & DEMOS SECTION

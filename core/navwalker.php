@@ -94,17 +94,17 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter($classes), $item, $args ) );
 
 			// Remove unused classes
-			$unused_classes = array(
-				' menu-item-type-custom',
-				' menu-item-object-custom',
-				' menu-item-type-post_type',
-				' menu-item-object-page',
-				' current-page-ancestor',
-				' current-page-parent',
-				' current_page_parent',
-				' current_page_ancestor',
-			);
-			$class_names = str_replace( $unused_classes, '', $class_names );
+			// $unused_classes = array(
+			// 	' menu-item-type-custom',
+			// 	' menu-item-object-custom',
+			// 	' menu-item-type-post_type',
+			// 	' menu-item-object-page',
+			// 	' current-page-ancestor',
+			// 	' current-page-parent',
+			// 	' current_page_parent',
+			// 	' current_page_ancestor',
+			// );
+			// $class_names = str_replace( $unused_classes, '', $class_names );
 
 
 			// CHECK FOR CUSTOM ITEMS
