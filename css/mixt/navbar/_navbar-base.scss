@@ -359,8 +359,9 @@
 
 	// Nav Search Form
 	.nav-search {
-		.sub-menu { width: 300px; }
-		.input-group-btn { line-height: 1; }
+		.sub-menu { width: 240px; }
+		.search-form { display: block; }
+		.input-group-btn { display: none; }
 
 		input {
 			margin-left: 0;
