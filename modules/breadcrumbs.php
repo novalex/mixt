@@ -66,7 +66,7 @@ function mixt_breadcrumbs( $page_title = '' ) {
 				}
 
 				// Show blog breadcrumb for single blog post
-				if ( is_singular('post') ) {
+				if ( is_singular('post') && get_option('page_for_posts') !== 0 ) {
 					$blog_id = get_option('page_for_posts');
 					$blog_page = get_post($blog_id);
 					$blog_title = $blog_page->post_title;
