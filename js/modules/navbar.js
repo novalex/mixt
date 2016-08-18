@@ -473,6 +473,12 @@ NAVBAR FUNCTIONS
 	}
 
 
+	// Focus Nav Search Input On Menu Item Click
+	$('.nav-search').on('click', function() {
+		$(this).find('.search-field').focus();
+	});
+
+
 	// Functions Run On Load & Window Resize
 	function navbarFn() {
 		var mqNav = mqCheck();

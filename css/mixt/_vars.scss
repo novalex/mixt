@@ -13,201 +13,203 @@
 
 // GLOBAL VARIABLES
 
-$img-path:  '../assets/img';
-$font-path: '../assets/fonts';
+$img-path:  '../assets/img' !default;
+$font-path: '../assets/fonts' !default;
 
 
 // NAVBARS
 
-$nav-item-height: 42px;
-$nav-sub-item-height: 36px;
-$nav-sub-pad-h: 10px;
-$nav-sub-pad-v: 12px;
-$menu-hover-bg: rgba(0,0,0,0.03);
-$nav-icon-size: 16px;
-$nav-icon-spacing: 8px;
+$nav-item-height: 42px !default;
+$nav-sub-item-height: 36px !default;
+$nav-sub-pad-h: 10px !default;
+$nav-sub-pad-v: 12px !default;
+$menu-hover-bg: rgba(0,0,0,0.03) !default;
+$nav-icon-size: 16px !default;
+$nav-icon-spacing: 8px !default;
 
 // Primary Navbar
 
 // Padding. Defined in PHP as 'nav-padding'
-$nav-primary-pad: 20px;
+$nav-primary-pad: 20px !default;
 // Padding when fixed. Defined in PHP as 'nav-fixed-padding'
-$nav-primary-fixed-pad: 0;
+$nav-primary-fixed-pad: 0 !default;
 // Item height. This will be the base height of the navbar. Defined in PHP as 'nav-item-height'
-$nav-primary-item-height: 50px;
+$nav-primary-item-height: 50px !default;
 // Total height
-$nav-primary-height: $nav-primary-item-height + $nav-primary-pad * 2 + 1px;
+$nav-primary-height: $nav-primary-item-height + $nav-primary-pad * 2 + 1px !default;
 // Total height when fixed
-$nav-primary-fixed-height: $nav-primary-item-height + $nav-primary-fixed-pad * 2;
+$nav-primary-fixed-height: $nav-primary-item-height + $nav-primary-fixed-pad * 2 !default;
 // Opacity
-$nav-primary-opacity: 0.95;
+$nav-primary-opacity: 0.95 !default;
 // Submenu opacity
-$nav-primary-menu-opacity: 1;
+$nav-primary-menu-opacity: 1 !default;
 // Submenu item height
-$nav-primary-sub-item-height: 36px;
+$nav-primary-sub-item-height: 36px !default;
 // Submenu item horizontal padding
-$nav-primary-sub-pad-h: 12px;
+$nav-primary-sub-pad-h: 12px !default;
 // Submenu item vertical padding
-$nav-primary-sub-pad-v: 14px;
+$nav-primary-sub-pad-v: 14px !default;
 // Menu item spacing
-$nav-primary-spacing: 14px;
+$nav-primary-spacing: 14px !default;
 // Minimum width for the fixed (sticky) mode
-$nav-primary-fixed-breakpoint: 601px;
+$nav-primary-fixed-breakpoint: 601px !default;
+// Item height for the mobile mode
+$nav-primary-mobile-item-height: 50px !default;
 // Main navbar mobile (mini) breakpoint - the width below which the navbar switches to mobile mode
-// $grid-float-breakpoint: 768px;
+// $grid-float-breakpoint: 768px !default;
 
 // Primary Navbar (Vertical)
 
 // Width
-$nav-vertical-width: 320px;
+$nav-vertical-width: 320px !default;
 // Width on small screens
-$nav-vertical-width-sm: 20%;
+$nav-vertical-width-sm: 20% !default;
 // Item height
-$nav-vertical-item-height: 42px;
+$nav-vertical-item-height: 42px !default;
 // Max content width. Set to '100%' to enable fullwidth
-$nav-vertical-content-max-width: 1200px;
+$nav-vertical-content-max-width: 1200px !default;
 
 // Secondary Navbar
 
 // Item height
-$sec-nav-item-height: 38px;
+$sec-nav-item-height: 38px !default;
 // Submenu item height
-$sec-nav-sub-item-height: 32px;
+$sec-nav-sub-item-height: 32px !default;
 
 // Navbar line height correction
-$nav-line-height-correction: -2px;
+$nav-line-height-correction: -2px !default;
 
 
 // POSTS
 
 // Spacing for post elements
-$post-inner-pad: 15px;
+$post-inner-pad: 15px !default;
 // Format icon size
-$post-format-icon-size: 36px;
+$post-format-icon-size: 36px !default;
 // Featured background format icon size
-$post-format-bg-icon-size: 24px;
+$post-format-bg-icon-size: 24px !default;
 // Masonry gutter width
-$masonry-gutter: 10px;
+$masonry-gutter: 10px !default;
 // Featured Sizes
 // Make sure these are updated as well if image sizes are changed in functions.php
-$feat-large-w: 960px;
-$feat-large-h: 460px;
-$feat-medium-w: 320px;
-$feat-medium-h: 200px;
-$feat-small-w: 120px;
-$feat-small-h: 120px;
+$feat-large-w: 960px !default;
+$feat-large-h: 460px !default;
+$feat-medium-w: 320px !default;
+$feat-medium-h: 200px !default;
+$feat-small-w: 120px !default;
+$feat-small-h: 120px !default;
 
 
 // SIDEBAR
 
 // Width
-$sidebar-width: 25%;
+$sidebar-width: 25% !default;
 // Width on small screens
-$sidebar-width-sm: 30%;
+$sidebar-width-sm: 30% !default;
 
 
 // TYPOGRAPHY
 
-$font-family-base: sans-serif;
+$font-family-base: sans-serif !default;
 
-$line-height-base: 1.618;
-$headings-line-height: 1.2;
+$line-height-base: 1.618 !default;
+$headings-line-height: 1.2 !default;
 
-$font-size: 14px;
-$font-size-base: $font-size;
+$font-size: 14px !default;
+$font-size-base: $font-size !default;
 
-$font-size-xs:  $font-size - 2px;
-$font-size-s:   $font-size - 1px;
-$font-size-m:   $font-size + 1px;
-$font-size-l:   $font-size + 3px;
-$font-size-xl:  $font-size + 6px;
-$font-size-xxl: $font-size + 8px;
+$font-size-xs:  $font-size - 2px !default;
+$font-size-s:   $font-size - 1px !default;
+$font-size-m:   $font-size + 1px !default;
+$font-size-l:   $font-size + 3px !default;
+$font-size-xl:  $font-size + 6px !default;
+$font-size-xxl: $font-size + 8px !default;
 
 // Rem based font sizes
-$rem-font-sizes: true;
+$rem-font-sizes: true !default;
 
 @if $rem-font-sizes {
-	$font-size-xs:  0.85rem;
-	$font-size-s:   0.925rem;
-	$font-size-m:   1.1rem;
-	$font-size-l:   1.25rem;
-	$font-size-xl:  1.35rem;
-	$font-size-xxl: 1.55rem;
+	$font-size-xs:  0.85rem !default;
+	$font-size-s:   0.925rem !default;
+	$font-size-m:   1.1rem !default;
+	$font-size-l:   1.25rem !default;
+	$font-size-xl:  1.35rem !default;
+	$font-size-xxl: 1.55rem !default;
 }
 
 // Heading font sizes
-$font-size-h1: $font-size-xxl;
-$font-size-h2: $font-size-xl;
-$font-size-h3: $font-size-l;
-$font-size-h4: $font-size-m;
-$font-size-h5: $font-size-s;
-$font-size-h6: $font-size-xs;
+$font-size-h1: $font-size-xxl !default;
+$font-size-h2: $font-size-xl !default;
+$font-size-h3: $font-size-l !default;
+$font-size-h4: $font-size-m !default;
+$font-size-h5: $font-size-s !default;
+$font-size-h6: $font-size-xs !default;
 
 
 // SPACING, MARGINS & PADDINGS
 
 // Column spacing
-$main-gutter: 40px;
-$gutter-lg: $main-gutter;
+$main-gutter: 40px !default;
+$gutter-lg: $main-gutter !default;
 // Column spacing on small screens
-$main-gutter-sm: 30px;
-$gutter-sm: $main-gutter-sm;
+$main-gutter-sm: 30px !default;
+$gutter-sm: $main-gutter-sm !default;
 // Column spacing for compact grids
-$row-grid-sm-gutter: 20px;
+$row-grid-sm-gutter: 20px !default;
 // Column spacing for forms
-$form-gutter: 15px;
+$form-gutter: 15px !default;
 
 // Row spacing
-$row-spacing-lg: 40px;
+$row-spacing-lg: 40px !default;
 // Row spacing on small screens
-$row-spacing-sm: 30px;
+$row-spacing-sm: 30px !default;
 
-$margin-xs: 5px;
-$margin-s:  10px;
-$margin-m:  20px;
-$margin-l:  30px;
+$margin-xs: 5px !default;
+$margin-s:  10px !default;
+$margin-m:  20px !default;
+$margin-l:  30px !default;
 
-$padding-xs: 5px;
-$padding-s:  10px;
-$padding-m:  20px;
-$padding-l:  30px;
+$padding-xs: 5px !default;
+$padding-s:  10px !default;
+$padding-m:  20px !default;
+$padding-l:  30px !default;
 
 
 // MISCELLANEOUS
 
-$bd-radius-s: 2px;
-$bd-radius:   2px;
-$bd-radius-l: 3px;
+$bd-radius-s: 2px !default;
+$bd-radius:   2px !default;
+$bd-radius-l: 3px !default;
 
-$rounded-radius: $bd-radius-l;
+$rounded-radius: $bd-radius-l !default;
 
-$quote-border-width: 3px;
+$quote-border-width: 3px !default;
 
 // Right-To-Left language support
-$rtl: true;
+$rtl: true !default;
 
 // Include various Internet Explorer tweaks and hacks
-$ie-support: true;
+$ie-support: true !default;
 
 // Responsive features (set to false to display site in desktop-only mode)
-$responsive: true;
+$responsive: true !default;
 
 @if ( $responsive == false ) {
-	$screen-xs: 1px;
-	$screen-sm: 2px;
-	$screen-md: 3px;
-	$screen-lg: 4px;
+	$screen-xs: 1px !default;
+	$screen-sm: 2px !default;
+	$screen-md: 3px !default;
+	$screen-lg: 4px !default;
 	$grid-float-breakpoint: 1px !default;
 }
 
 
 // PLUGIN CONFIG
 
-$portfolio:    true;
-$featherlight: true;
-$lightgallery: true;
-$lightslider:  true;
-$vcomposer:    true;
-$woocommerce:  true;
-$select2:      $woocommerce;
-$wpcf:         false;
+$portfolio:    true !default;
+$featherlight: true !default;
+$lightgallery: true !default;
+$lightslider:  true !default;
+$vcomposer:    true !default;
+$woocommerce:  true !default;
+$select2:      $woocommerce !default;
+$wpcf:         false !default;

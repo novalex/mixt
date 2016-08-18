@@ -347,7 +347,7 @@
 
 	.navbar-data:after { content: 'tablet'; } // Tell jQuery the tablet mobile media query is active
 
-	$nav-height: $nav-primary-item-height + 1px;
+	$nav-height: $nav-primary-mobile-item-height + 1px;
 
 	#main-nav-wrap {
 		top: 0 !important;
@@ -403,12 +403,21 @@
 			border-bottom-width: 1px;
 
 			&.dropdown-toggle {
-				padding-right: $nav-primary-item-height;
+				padding-right: $nav-primary-mobile-item-height;
 
 				@if $rtl {
-					.rtl & { padding-right: 15px; padding-left: $nav-primary-item-height; }
+					.rtl & { padding-right: 15px; padding-left: $nav-primary-mobile-item-height; }
 				}
 			}
+		}
+
+		#nav-logo,
+		.nav > li > a,
+		.no-menu-msg,
+		.navbar-header,
+		.navbar-toggle {
+			height: $nav-primary-mobile-item-height;
+			line-height: $nav-primary-mobile-item-height + $nav-line-height-correction;
 		}
 
 		&.bordered {
@@ -442,10 +451,10 @@
 		.drop-submenu.arrow-right,
 		.mega-menu-column {
 			> a {
-				padding-right: $nav-primary-item-height !important;
+				padding-right: $nav-primary-mobile-item-height !important;
 
 				@if $rtl {
-					.rtl & { padding-left: $nav-primary-item-height !important; }
+					.rtl & { padding-left: $nav-primary-mobile-item-height !important; }
 				}
 			}
 
@@ -555,10 +564,10 @@
 		.drop-arrow {
 			position: absolute;
 			top: 0; right: 0; bottom: 0;
-			width: $nav-primary-item-height;
+			width: $nav-primary-mobile-item-height;
 			font-size: 16px;
 			text-align: center;
-			line-height: $nav-primary-item-height - 2px;
+			line-height: $nav-primary-mobile-item-height - 2px;
 			margin-left: 0;
 
 			@if $rtl {
@@ -582,7 +591,7 @@
 			button { padding-left: 30px; padding-right: 30px; }
 
 			input, button {
-				height: $nav-primary-item-height - 1px;
+				height: $nav-primary-mobile-item-height - 1px;
 			}
 		}
 
@@ -619,7 +628,7 @@
 	}
 
 	.nav-below.nav-transparent .navbar-mixt.position-top {
-		margin-top: -$nav-primary-item-height;
+		margin-top: -$nav-primary-mobile-item-height;
 	}
 
 	/* Logo Positions */

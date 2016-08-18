@@ -91,23 +91,23 @@ if ( ! class_exists( 'Mixt_VC_Button' ) ) {
 			$values = mixt_element_button($this->value(), 'value');
 
 			// Type Select
-			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Type', 'mixt' ) .
-						   '<select class="button-field type-select button-colors" data-attr="type">' . $this->select_options($this->types, $values['type']) . '</select>' .
+			$output .= '<div class="vc_col-sm-3 button-types-wrap"><label>' . esc_html__( 'Type', 'mixt' ) .
+						   '<select class="button-field type-select button-types" data-attr="type">' . $this->select_options($this->types, $values['type']) . '</select>' .
 					   '</label></div>';
 
 			// Color Select
-			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Color', 'mixt' ) .
+			$output .= '<div class="vc_col-sm-3 button-colors-wrap"><label>' . esc_html__( 'Color', 'mixt' ) .
 						   '<select class="button-field color-select button-colors" data-attr="color">' . $this->select_options($this->colors, $values['color']) . '</select>' .
 					   '</label></div>';
 
 			// Size Select
-			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Size', 'mixt' ) .
+			$output .= '<div class="vc_col-sm-3 button-sizes-wrap"><label>' . esc_html__( 'Size', 'mixt' ) .
 						   '<select class="button-field button-sizes" data-attr="size">' . $this->select_options($this->sizes, $values['size']) . '</select>' .
 					   '</label></div>';
 
 			// Animation Select
-			$output .= '<div class="vc_col-sm-3"><label>' . esc_html__( 'Animation', 'mixt' ) . 
-						   '<select class="button-field anim-select button-colors" data-attr="anim">' . $this->select_options($this->anims, $values['anim']) . '</select>' .
+			$output .= '<div class="vc_col-sm-3 button-anims-wrap"><label>' . esc_html__( 'Animation', 'mixt' ) . 
+						   '<select class="button-field anim-select button-anims" data-attr="anim">' . $this->select_options($this->anims, $values['anim']) . '</select>' .
 					   '</label></div>';
 
 			return $output;
