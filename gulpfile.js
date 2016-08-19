@@ -56,9 +56,6 @@ var path = {
 	dest: 'dist'
 };
 
-// BrowserSync IP - Change this to the IP of your local server
-var host_ip = '192.168.0.103';
-
 // Task arguments
 var options = {
 		boolean: true,
@@ -157,9 +154,7 @@ gulp.task('minify-customizer', function() {
 
 // Watch Sass & JS files
 gulp.task('watch', function() {
-	bsync.init({
-		host: host_ip
-	});
+	bsync.init();
 	gulp.watch([path.styles.files], ['sass']);
 	gulp.watch([path.styles.admin, path.styles.pluginAdmin], ['sass-admin']);
 	gulp.watch([path.js.plugins, path.js.modules], ['minify']);

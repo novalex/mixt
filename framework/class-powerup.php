@@ -40,7 +40,6 @@ class Mixt_Powerup {
 				$this->plugins[] = array(
 					'name'     => 'Redux Framework',
 					'slug'     => 'redux-framework',
-					'source'   => 'redux-framework.zip',
 					'required' => true,
 				);
 			}
@@ -55,7 +54,6 @@ class Mixt_Powerup {
 				$this->plugins[] = array(
 					'name'     => 'CMB2',
 					'slug'     => 'cmb2',
-					'source'   => 'cmb2.zip',
 				);
 
 				if ( defined('CMB2_LOADED') ) {
@@ -99,12 +97,12 @@ class Mixt_Powerup {
 				'force_deactivation' => true,
 			);
 
-		// Envato WordPress Toolkit
+		// Envato Market
 			$this->plugins[] = array(
-				'name'     => 'Envato WordPress Toolkit',
-				'slug'     => 'envato-wordpress-toolkit',
-				'source'   => 'envato-wordpress-toolkit.zip',
-				'version'  => '1.7.3',
+				'name'     => 'Envato Market',
+				'slug'     => 'envato-market',
+				'source'   => 'https://envato.github.io/wp-envato-market/dist/envato-market.zip',
+				'version'  => '1.0',
 			);
 
 		// TGM Plugin Activation
