@@ -322,7 +322,7 @@ class Mixt_DCSS {
 
 		// Font family and backup font
 		if ( ! empty($field['font-family']) ) {
-			if ( preg_match('/\s/', $field['font-family']) ) {
+			if ( preg_match('/\s/', $field['font-family']) && ! preg_match('/(,|\')/', $field['font-family']) ) {
 				$font_family = '"' . $field['font-family'] . '"';
 			} else {
 				$font_family = $field['font-family'];

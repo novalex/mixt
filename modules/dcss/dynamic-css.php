@@ -103,36 +103,6 @@ function mixt_custom_css() {
 		echo ".container, #main-wrap.nav-vertical .container, .boxed #main-wrap, .boxed #main-nav { max-width: 100%; }\n";
 	}
 
-	// Sidebar Width
-	$sidebar_width_sm = $dimension_field('sidebar-width-sm');
-	if ( $sidebar_width_sm ) {
-		$width_sm = $sidebar_width_sm['width'];
-		if ( $sidebar_width_sm['units'] == '%' ) {
-			$width_sm = min(max(intval($width_sm), 10), 100) . '%';
-			$content_width = 100 - intval($width_sm) . '%';
-		} else {
-			$content_width = "calc(100% - $width_sm)";
-		}
-		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('mars', 'min') . " ) {\n";
-			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
-			echo "\t#content-wrap.has-sidebar .sidebar { width: $width_sm; }\n";
-		echo "}\n";
-	}
-	$sidebar_width = $dimension_field('sidebar-width');
-	if ( $sidebar_width ) {
-		$width = $sidebar_width['width'];
-		if ( $sidebar_width['units'] == '%' ) {
-			$width = min(max(intval($width), 10), 100) . '%';
-			$content_width = 100 - intval($width) . '%';
-		} else {
-			$content_width = "calc(100% - $width)";
-		}
-		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('venus', 'min') . " ) {\n";
-			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
-			echo "\t#content-wrap.has-sidebar .sidebar { width: $width; }\n";
-		echo "}\n";
-	}
-
 	if ( $body_styles != '' ) { echo "body { $body_styles }\n"; }
 
 	// Typography
@@ -196,7 +166,7 @@ function mixt_custom_css() {
 
 	$navbar_properties = '';
 
-	// Navbar Texture
+	// Texture
 	if ( ! empty($mixt_opt['nav-texture']) ) {
 		$img_url = $mixt_opt['nav-texture'];
 		$navbar_properties .= "background-image: url($img_url); ";
@@ -206,7 +176,7 @@ function mixt_custom_css() {
 		echo ".second-nav { background-image: url($img_url); }\n";
 	}
 
-	// Navbar Padding
+	// Padding
 	if ( isset($mixt_opt['nav-padding']) ) {
 		$nav_pad = $mixt_opt['nav-padding'];
 		if ( $nav_pad != $defaults['nav-padding'] ) {
@@ -282,14 +252,12 @@ function mixt_custom_css() {
 
 	if ( $navbar_properties != '' ) echo ".navbar-mixt { $navbar_properties }\n";
 
-	// Navbar Typography
+	// Typography
 	$navbar_item_properties = Mixt_DCSS::parse_typo_field('font-nav');
-
 	if ( $navbar_item_properties != '' ) echo ".navbar-mixt .nav > li > a { $navbar_item_properties }\n";
 
-	// Navbar Submenu Typography
-	$navbar_sub_item_properties = Mixt_DCSS::parse_typo_field('font-nav-sub');;
-
+	// Submenu Typography
+	$navbar_sub_item_properties = Mixt_DCSS::parse_typo_field('font-nav-sub');
 	if ( $navbar_sub_item_properties != '' ) echo ".navbar-mixt .sub-menu li > a { $navbar_sub_item_properties }\n";
 
 
@@ -307,27 +275,57 @@ function mixt_custom_css() {
 		if ( ! empty($loc_bar_options['border-color']) ) { $loc_bar_styles .= "border-color: {$loc_bar_options['border-color']}; "; }
 		if ( ! empty($loc_bar_options['bg-color']) ) { $loc_bar_styles .= "background-color: {$loc_bar_options['bg-color']}; "; }
 		if ( ! empty($loc_bar_options['bg-pat']) ) { $loc_bar_styles .= "background-image: url({$loc_bar_options['bg-pat']}); "; }
+		$loc_bar_styles .= Mixt_DCSS::parse_typo_field('font-loc-bar');
 
 		if ( $loc_bar_styles != '' ) echo "#location-bar { $loc_bar_styles }\n";
 		if ( ! empty($loc_bar_options['text-color']) ) { echo "#location-bar, #location-bar a:hover, #location-bar li:before { color: {$loc_bar_options['text-color']}; }\n"; }
 	}
 
 
-	// HEADING TYPOGRAPHY
+	// HEADER TYPOGRAPHY
 
-	$heading_typo_main = Mixt_DCSS::parse_typo_field('font-heading-main');
-	if ( ! empty($heading_typo_main) ) {
-		echo "h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { $heading_typo_main }\n";
+	$header_typo = Mixt_DCSS::parse_typo_field('font-header');
+	if ( ! empty($header_typo) ) {
+		echo ".head-media { $header_typo }\n";
 	}
 
-	$hx = 1;
 
-	while ( $hx <= 6 ) {
-		$heading_typo = Mixt_DCSS::parse_typo_field('font-heading-h'.$hx);
-		if ( ! empty($heading_typo) ) {
-			echo "h{$hx}, .h{$hx} { $heading_typo }\n";
+	// SIDEBAR STYLING
+
+	// Width
+	$sidebar_width_sm = $dimension_field('sidebar-width-sm');
+	if ( $sidebar_width_sm ) {
+		$width_sm = $sidebar_width_sm['width'];
+		if ( $sidebar_width_sm['units'] == '%' ) {
+			$width_sm = min(max(intval($width_sm), 10), 100) . '%';
+			$content_width = 100 - intval($width_sm) . '%';
+		} else {
+			$content_width = "calc(100% - $width_sm)";
 		}
-		$hx++;
+		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('mars', 'min') . " ) {\n";
+			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
+			echo "\t#content-wrap.has-sidebar .sidebar { width: $width_sm; }\n";
+		echo "}\n";
+	}
+	$sidebar_width = $dimension_field('sidebar-width');
+	if ( $sidebar_width ) {
+		$width = $sidebar_width['width'];
+		if ( $sidebar_width['units'] == '%' ) {
+			$width = min(max(intval($width), 10), 100) . '%';
+			$content_width = 100 - intval($width) . '%';
+		} else {
+			$content_width = "calc(100% - $width)";
+		}
+		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('venus', 'min') . " ) {\n";
+			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
+			echo "\t#content-wrap.has-sidebar .sidebar { width: $width; }\n";
+		echo "}\n";
+	}
+
+	// Typography
+	$sidebar_typo = Mixt_DCSS::parse_typo_field('font-sidebar');
+	if ( ! empty($sidebar_typo) ) {
+		echo ".sidebar { $sidebar_typo }\n";
 	}
 
 
@@ -346,19 +344,59 @@ function mixt_custom_css() {
 		'footer-copy-bg-pat'       => array( 'type' => 'str', 'return' => 'value' ),
 	) );
 
+	// Widgets Row
 	$footer_widgets_styles = '';
 	if ( ! empty($footer_options['footer-widgets-text-color']) ) { $footer_widgets_styles .= "color: {$footer_options['footer-widgets-text-color']}; "; }
 	if ( ! empty($footer_options['footer-widgets-border-color']) ) { $footer_widgets_styles .= "border-color: {$footer_options['footer-widgets-border-color']}; "; }
 	if ( ! empty($footer_options['footer-widgets-bg-color']) ) { $footer_widgets_styles .= "background-color: {$footer_options['footer-widgets-bg-color']}; "; }
 	if ( ! empty($footer_options['footer-widgets-bg-pat']) ) { $footer_widgets_styles .= "background-image: url({$footer_options['footer-widgets-bg-pat']}); "; }
+	$footer_widgets_styles .= Mixt_DCSS::parse_typo_field('font-footer-widgets');
 	if ( $footer_widgets_styles != '' ) echo "#colophon .widget-row { $footer_widgets_styles }\n";
 
+	// Copyright Row
 	$footer_copy_styles = '';
 	if ( ! empty($footer_options['footer-copy-text-color']) ) { $footer_copy_styles .= "color: {$footer_options['footer-copy-text-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-border-color']) ) { $footer_copy_styles .= "border-color: {$footer_options['footer-copy-border-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-bg-color']) ) { $footer_copy_styles .= "background-color: {$footer_options['footer-copy-bg-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-bg-pat']) ) { $footer_copy_styles .= "background-image: url({$footer_options['footer-copy-bg-pat']}); "; }
+	$footer_copy_styles .= Mixt_DCSS::parse_typo_field('font-footer-copyright');
 	if ( $footer_copy_styles != '' ) echo "#colophon .copyright-row { $footer_copy_styles }\n";
+
+
+	// HEADING TYPOGRAPHY
+
+	$heading_typo_main = Mixt_DCSS::parse_typo_field('font-heading-main');
+	if ( ! empty($heading_typo_main) ) {
+		echo "h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { $heading_typo_main }\n";
+	}
+
+	$hx = 1;
+	while ( $hx <= 6 ) {
+		$heading_typo = Mixt_DCSS::parse_typo_field('font-heading-h'.$hx);
+		if ( ! empty($heading_typo) ) {
+			echo "h{$hx}, .h{$hx} { $heading_typo }\n";
+		}
+		$hx++;
+	}
+
+
+	// POST TYPOGRAPHY
+
+	$post_title_typo = Mixt_DCSS::parse_typo_field('font-post-title');
+	if ( ! empty($post_title_typo) ) {
+		echo ".article .page-title { $post_title_typo }\n";
+	}
+
+	$post_content_typo = Mixt_DCSS::parse_typo_field('font-post-content');
+	if ( ! empty($post_content_typo) ) {
+		echo ".article .post-content { $post_content_typo }\n";
+	}
+
+	$comments_typo = Mixt_DCSS::parse_typo_field('font-comments');
+	if ( ! empty($comments_typo) ) {
+		echo "#comments .comment-content { $comments_typo }\n";
+	}
+
 
 	return ob_get_clean();
 }
