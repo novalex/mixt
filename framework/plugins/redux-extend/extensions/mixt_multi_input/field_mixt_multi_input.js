@@ -118,7 +118,7 @@
 			selector = $( document ).find('.redux-container-mixt_multi_input:visible');
 		}
 
-		$( selector ).each( function() {
+		$(selector).each( function() {
 			var el = $(this),
 				parent = el;
 
@@ -157,7 +157,7 @@
 
 	$(document).on('click', '.mixt-multi-input-remove', function() {
 		var btn = $(this);
-		btn.parent().slideUp(300, function() { $(this).remove(); });
+		btn.parents('li').slideUp(300, function() { $(this).remove(); });
 		redux_change(btn);
 		maybeDisableAjax(btn.parents('.redux-container-mixt_multi_input'));
 	});

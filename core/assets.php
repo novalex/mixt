@@ -220,6 +220,26 @@ function mixt_get_assets( $group, $subgroup = false ) {
 
 
 /**
+ * Add custom colors to assets array
+ */
+function mixt_assets_custom_colors($array) {
+	$custom_elem_colors = mixt_get_option( array( 'key' => 'custom-elem-colors', 'return' => 'value', 'default' => array() ) );
+	if ( ! empty($custom_elem_colors) && is_array($custom_elem_colors) ) 
+		foreach ( $custom_elem_colors as $color ) {
+			$array['colors']['basic'][$color['name']] = esc_html__( 'Custom:', 'mixt' ) . ' ' . $color['name'];
+			$array['colors']['elements'][$color['name']] = esc_html__( 'Custom:', 'mixt' ) . ' ' . $color['name'];
+		}
+
+	$custom_btn_colors = mixt_get_option( array( 'key' => 'custom-btn-colors', 'return' => 'value', 'default' => array() ) );
+	if ( ! empty($custom_btn_colors) && is_array($custom_btn_colors) ) 
+		foreach ( $custom_btn_colors as $color ) { $array['colors']['buttons'][$color['name']] = esc_html__( 'Custom:', 'mixt' ) . ' ' . $color['name']; }
+
+	return $array;
+}
+add_filter('mixt_assets_array', 'mixt_assets_custom_colors');
+
+
+/**
  * Return available CSS animations
  *
  * @param  string $type Type of animations to return

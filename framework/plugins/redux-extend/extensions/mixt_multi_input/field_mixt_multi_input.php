@@ -167,12 +167,14 @@ if ( ! class_exists( 'ReduxFramework_mixt_multi_input' ) ) {
 			}
 
 			// Field Controls
-			$field_controls = '<br style="clear: both;">';			  
-			// Sortable Handle
-			if ( $this->sortable ) {
-				$field_controls .= '<a href="javascript:void(0);" class="button sort-handle" title="Move Group"><i class="el ' . $this->sort_icon . '"></i></a>';
-			}
-			$field_controls .= '<a href="javascript:void(0);" class="button red deletion mixt-multi-input-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
+			$field_controls = '<div class="mixt-multi-input-actions">';			  
+				// Sortable Handle
+				if ( $this->sortable ) {
+					$field_controls .= '<a href="javascript:void(0);" class="button sort-handle" title="Move Group"><i class="el ' . $this->sort_icon . '"></i></a>';
+				}
+				// Delete Button
+				$field_controls .= '<a href="javascript:void(0);" class="button red deletion mixt-multi-input-remove">' . __( 'Remove', 'redux-framework' ) . '</a>';
+			$field_controls .= '</div>';
 
 			// PRINT SAVED FIELDS
 
@@ -205,17 +207,6 @@ if ( ! class_exists( 'ReduxFramework_mixt_multi_input' ) ) {
 							
 							$group_fields .= build_field($saved_field);
 						}
-
-						// foreach ( $value as $field => $val ) {
-						// 	if ( ! array_key_exists($field, $inputs_arr) ) continue;
-						// 	$saved_field = $inputs_arr[$field];
-
-						// 	$saved_field['id']    = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
-						// 	$saved_field['name']  = $this->field['name'] . $this->field['name_suffix'] . '[' . $k . '][' . $field . ']';
-						// 	$saved_field['value'] = $val;
-							
-						// 	$group_fields .= build_field($saved_field);
-						// }
 
 						echo '<li>';
 							echo mixt_clean($group_fields, 'strip');

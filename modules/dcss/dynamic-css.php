@@ -21,6 +21,8 @@ function mixt_custom_css() {
 	global $mixt_opt;
 	if ( ! is_array($mixt_opt) ) { return; }
 
+	$dcss = new Mixt_DCSS();
+
 	$defaults = apply_filters( 'mixt_dcss_defaults', array(
 		'nav-padding'                => 20,
 		'nav-fixed-padding'          => 0,
@@ -106,7 +108,7 @@ function mixt_custom_css() {
 	if ( $body_styles != '' ) { echo "body { $body_styles }\n"; }
 
 	// Typography
-	$site_typo = Mixt_DCSS::parse_typo_field('font-sitewide');
+	$site_typo = $dcss::parse_typo_field('font-sitewide');
 	if ( $site_typo != '' ) { echo "html, body { $site_typo }\n"; }
 
 
@@ -132,7 +134,7 @@ function mixt_custom_css() {
 
 	// Text Logo
 	} else {
-		$logo_font = Mixt_DCSS::parse_typo_field('logo-text-typo',
+		$logo_font = $dcss::parse_typo_field('logo-text-typo',
 			array( 'color' => mixt_get_option( array( 'key' => 'logo-text-color', 'return' => 'value' ) ) ),
 			array('font-family')
 		);
@@ -152,7 +154,7 @@ function mixt_custom_css() {
 	}
 
 	// Logo Tagline
-	$tagline_font = Mixt_DCSS::parse_typo_field('logo-tagline-typo',
+	$tagline_font = $dcss::parse_typo_field('logo-tagline-typo',
 		array( 'color' => mixt_get_option( array( 'key' => 'logo-tagline-color', 'return' => 'value' ) ) ),
 		array('font-family')
 	);
@@ -242,7 +244,7 @@ function mixt_custom_css() {
 			if ( $navbar_width['units'] == '%' ) {
 				$width = min(max(intval($width), 10), 100) . '%';
 			}
-			echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('earth', 'min') . " ) {\n";
+			echo "@media only screen and ( min-width: " . $dcss::media_bp('earth', 'min') . " ) {\n";
 				echo "\t#main-wrap.nav-vertical.nav-full #main-nav-wrap { width: $width; }\n";
 				echo "\t#main-wrap.nav-vertical.nav-full.nav-left { padding-left: $width; }\n";
 				echo "\t#main-wrap.nav-vertical.nav-full.nav-right { padding-right: $width; }\n";
@@ -253,11 +255,11 @@ function mixt_custom_css() {
 	if ( $navbar_properties != '' ) echo ".navbar-mixt { $navbar_properties }\n";
 
 	// Typography
-	$navbar_item_properties = Mixt_DCSS::parse_typo_field('font-nav');
+	$navbar_item_properties = $dcss::parse_typo_field('font-nav');
 	if ( $navbar_item_properties != '' ) echo ".navbar-mixt .nav > li > a { $navbar_item_properties }\n";
 
 	// Submenu Typography
-	$navbar_sub_item_properties = Mixt_DCSS::parse_typo_field('font-nav-sub');
+	$navbar_sub_item_properties = $dcss::parse_typo_field('font-nav-sub');
 	if ( $navbar_sub_item_properties != '' ) echo ".navbar-mixt .sub-menu li > a { $navbar_sub_item_properties }\n";
 
 
@@ -275,7 +277,7 @@ function mixt_custom_css() {
 		if ( ! empty($loc_bar_options['border-color']) ) { $loc_bar_styles .= "border-color: {$loc_bar_options['border-color']}; "; }
 		if ( ! empty($loc_bar_options['bg-color']) ) { $loc_bar_styles .= "background-color: {$loc_bar_options['bg-color']}; "; }
 		if ( ! empty($loc_bar_options['bg-pat']) ) { $loc_bar_styles .= "background-image: url({$loc_bar_options['bg-pat']}); "; }
-		$loc_bar_styles .= Mixt_DCSS::parse_typo_field('font-loc-bar');
+		$loc_bar_styles .= $dcss::parse_typo_field('font-loc-bar');
 
 		if ( $loc_bar_styles != '' ) echo "#location-bar { $loc_bar_styles }\n";
 		if ( ! empty($loc_bar_options['text-color']) ) { echo "#location-bar, #location-bar a:hover, #location-bar li:before { color: {$loc_bar_options['text-color']}; }\n"; }
@@ -284,7 +286,7 @@ function mixt_custom_css() {
 
 	// HEADER TYPOGRAPHY
 
-	$header_typo = Mixt_DCSS::parse_typo_field('font-header');
+	$header_typo = $dcss::parse_typo_field('font-header');
 	if ( ! empty($header_typo) ) {
 		echo ".head-media { $header_typo }\n";
 	}
@@ -302,7 +304,7 @@ function mixt_custom_css() {
 		} else {
 			$content_width = "calc(100% - $width_sm)";
 		}
-		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('mars', 'min') . " ) {\n";
+		echo "@media only screen and ( min-width: " . $dcss::media_bp('mars', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
 			echo "\t#content-wrap.has-sidebar .sidebar { width: $width_sm; }\n";
 		echo "}\n";
@@ -316,14 +318,14 @@ function mixt_custom_css() {
 		} else {
 			$content_width = "calc(100% - $width)";
 		}
-		echo "@media only screen and ( min-width: " . Mixt_DCSS::media_bp('venus', 'min') . " ) {\n";
+		echo "@media only screen and ( min-width: " . $dcss::media_bp('venus', 'min') . " ) {\n";
 			echo "\t#content-wrap.has-sidebar #content { width: $content_width; }\n";
 			echo "\t#content-wrap.has-sidebar .sidebar { width: $width; }\n";
 		echo "}\n";
 	}
 
 	// Typography
-	$sidebar_typo = Mixt_DCSS::parse_typo_field('font-sidebar');
+	$sidebar_typo = $dcss::parse_typo_field('font-sidebar');
 	if ( ! empty($sidebar_typo) ) {
 		echo ".sidebar { $sidebar_typo }\n";
 	}
@@ -350,7 +352,7 @@ function mixt_custom_css() {
 	if ( ! empty($footer_options['footer-widgets-border-color']) ) { $footer_widgets_styles .= "border-color: {$footer_options['footer-widgets-border-color']}; "; }
 	if ( ! empty($footer_options['footer-widgets-bg-color']) ) { $footer_widgets_styles .= "background-color: {$footer_options['footer-widgets-bg-color']}; "; }
 	if ( ! empty($footer_options['footer-widgets-bg-pat']) ) { $footer_widgets_styles .= "background-image: url({$footer_options['footer-widgets-bg-pat']}); "; }
-	$footer_widgets_styles .= Mixt_DCSS::parse_typo_field('font-footer-widgets');
+	$footer_widgets_styles .= $dcss::parse_typo_field('font-footer-widgets');
 	if ( $footer_widgets_styles != '' ) echo "#colophon .widget-row { $footer_widgets_styles }\n";
 
 	// Copyright Row
@@ -359,20 +361,20 @@ function mixt_custom_css() {
 	if ( ! empty($footer_options['footer-copy-border-color']) ) { $footer_copy_styles .= "border-color: {$footer_options['footer-copy-border-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-bg-color']) ) { $footer_copy_styles .= "background-color: {$footer_options['footer-copy-bg-color']}; "; }
 	if ( ! empty($footer_options['footer-copy-bg-pat']) ) { $footer_copy_styles .= "background-image: url({$footer_options['footer-copy-bg-pat']}); "; }
-	$footer_copy_styles .= Mixt_DCSS::parse_typo_field('font-footer-copyright');
+	$footer_copy_styles .= $dcss::parse_typo_field('font-footer-copyright');
 	if ( $footer_copy_styles != '' ) echo "#colophon .copyright-row { $footer_copy_styles }\n";
 
 
 	// HEADING TYPOGRAPHY
 
-	$heading_typo_main = Mixt_DCSS::parse_typo_field('font-heading-main');
+	$heading_typo_main = $dcss::parse_typo_field('font-heading-main');
 	if ( ! empty($heading_typo_main) ) {
 		echo "h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { $heading_typo_main }\n";
 	}
 
 	$hx = 1;
 	while ( $hx <= 6 ) {
-		$heading_typo = Mixt_DCSS::parse_typo_field('font-heading-h'.$hx);
+		$heading_typo = $dcss::parse_typo_field('font-heading-h'.$hx);
 		if ( ! empty($heading_typo) ) {
 			echo "h{$hx}, .h{$hx} { $heading_typo }\n";
 		}
@@ -382,19 +384,69 @@ function mixt_custom_css() {
 
 	// POST TYPOGRAPHY
 
-	$post_title_typo = Mixt_DCSS::parse_typo_field('font-post-title');
+	$post_title_typo = $dcss::parse_typo_field('font-post-title');
 	if ( ! empty($post_title_typo) ) {
 		echo ".article .page-title { $post_title_typo }\n";
 	}
 
-	$post_content_typo = Mixt_DCSS::parse_typo_field('font-post-content');
+	$post_content_typo = $dcss::parse_typo_field('font-post-content');
 	if ( ! empty($post_content_typo) ) {
 		echo ".article .post-content { $post_content_typo }\n";
 	}
 
-	$comments_typo = Mixt_DCSS::parse_typo_field('font-comments');
+	$comments_typo = $dcss::parse_typo_field('font-comments');
 	if ( ! empty($comments_typo) ) {
 		echo "#comments .comment-content { $comments_typo }\n";
+	}
+
+
+	// CUSTOM COLORS
+
+	// Buttons
+	$custom_btn_colors = mixt_get_option( array( 'key' => 'custom-btn-colors', 'return' => 'value', 'default' => array() ) );
+	if ( ! empty($custom_btn_colors) && is_array($custom_btn_colors) ) {
+		foreach ( $custom_btn_colors as $color ) {
+			echo $dcss->button_color($color['name'], $color['value']);
+		}
+	}
+
+	// Element Colors
+	$custom_elem_colors = mixt_get_option( array( 'key' => 'custom-elem-colors', 'return' => 'value', 'default' => array() ) );
+	if ( ! empty($custom_elem_colors) && is_array($custom_elem_colors) ) {
+		$th = '.mixt';
+		foreach ( $custom_elem_colors as $col ) {
+			$class = sanitize_html_class($col['name']);
+			$color = $col['value'];
+			$color_ob = $dcss::_toColor($color);
+			$color_darker = '#' . $color_ob->darken(5);
+			$color_for_bg = $dcss->set_color_for_bg($color);
+			$textsh_for_bg = $dcss->set_textsh_for_bg($color);
+
+			echo "$th .mixt-flipcard > .inner > .$class { color: $color_for_bg; background-color: $color; border-color: $color_darker; }\n";
+			echo "$th .mixt-pricing.$class .mixt-pricing-inner .header { color: $color_for_bg; background-color: $color; box-shadow: 0 0 0 1px $color_darker; text-shadow: 0 1px 1px $textsh_for_bg; }\n";
+
+			echo "$th .mixt-icon i.$class, " .
+				 "$th .mixt-stat.color-outline.$class { color: $color; }\n";
+
+			echo "$th .mixt-icon.icon-outline.$class, " .
+				 "$th .mixt-stat.color-outline.$class, " .
+				 "$th .mixt-iconbox .inner.bordered.$class, " .
+				 "$th .mixt-image .image-wrap.$class, " .
+				 "$th .mixt-headline .sideline.$class:after { border-color: $color; }\n";
+
+			echo "$th .mixt-stat.color-bg.$class, " .
+				 "$th .mixt-icon.icon-solid.$class, " .
+				 "$th .mixt-iconbox .inner.solid.$class, " .
+				 "$th .mixt-review.boxed.$class, " .
+				 "$th .mixt-review.bubble .review-content.$class, " .
+				 "$th .mixt-review.bubble .review-content.$class:before, " .
+				 "$th .mixt-timeline .timeline-block .content.boxed.$class, " .
+				 "$th .mixt-timeline .timeline-block .content.bubble.$class, " .
+				 "$th .mixt-timeline .timeline-block .content.bubble.$class:before, " .
+				 "$th .hover-content .on-hover.$class { color: $color_for_bg; border-color: $color_darker; background-color: $color; text-shadow: 0 1px 1px $textsh_for_bg; }\n";
+			echo "$th .mixt-icon.icon-solid.$class.anim-invert:hover, $th .icon-cont:hover .mixt-icon.icon-solid.$class.anim-invert { color: $color; border-color: $color_darker; background-color: $color_for_bg; text-shadow: 0 1px 1px ".$dcss->set_textsh_for_bg($color_for_bg)."; }\n";
+			echo "$th .hover-content .on-hover.$class { background-color: ".$dcss->hex2rgba($color, 0.9)."; }\n";
+		}
 	}
 
 

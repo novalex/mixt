@@ -162,9 +162,7 @@ if ( ! class_exists( 'Mixt_Redux_Config' ) ) {
 			$this->sections[] = array( 'type' => 'divide' );
 
 			// THEMES
-			if ( $themes_enabled ) {
-				include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/themes.php' );
-			}
+			include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/themes.php' );
 
 			// ICONS
 			include_once( MIXT_PLUGINS_DIR . '/redux-extend/fields/icons.php' );

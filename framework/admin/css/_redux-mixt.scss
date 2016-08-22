@@ -501,6 +501,10 @@
 		margin-bottom: 20px !important;
 		border-bottom: 2px dashed $bd-darker;
 
+		.mixt-multi-input-actions {
+			clear: both;
+		}
+
 		&.ui-sortable-helper {
 			background-color: $bg-main;
 		}
@@ -612,6 +616,36 @@
 }
 
 // Themes Section
+
+#mixt_opt-custom-elem-colors,
+#mixt_opt-custom-btn-colors {
+	.multi-input-field {
+		width: auto;
+		margin-right: 2% !important;
+
+		&.color-name { width: 33%; }
+	}
+
+	.wp-picker-container {
+		padding-top: 2px;
+	}
+
+	label .label-text {
+		width: 100%;
+		padding: 4px 0;
+	}
+
+	.mixt-multi-input-actions {
+		clear: none;
+		float: right;
+
+		a { margin-top: 25px; }
+
+		.mixt-multi-input-remove {
+			margin-right: 0;
+		}
+	}
+}
 
 #mixt_opt-site-themes,
 #mixt_opt-nav-themes { padding-top: 0; }

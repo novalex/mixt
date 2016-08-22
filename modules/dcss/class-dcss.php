@@ -41,8 +41,8 @@ class Mixt_DCSS {
 	 */
 	public static $media_bps = array();
 
-	public function __construct() {
 
+	public function __construct() {
 		// Output CSS in the header
 		add_action('wp_head', array($this, 'print_head_css'), 999);
 		// Output CSS in the body
@@ -58,6 +58,7 @@ class Mixt_DCSS {
 		require_once( MIXT_MODULES_DIR . '/dcss/themes.php' );
 	}
 
+
 	/**
 	 * Output dynamic CSS in the header
 	 * Used to output page specific styles and custom CSS if stylesheets are unsupported
@@ -71,6 +72,7 @@ class Mixt_DCSS {
 		echo "\n<style type='text/css' data-id='mixt-head-css'>\n" . self::$head_css . "</style>\n";
 	}
 
+
 	/**
 	 * Output dynamic CSS in the body
 	 * Used to output CSS from the element Styler and any other styles that cannot be loaded in the header
@@ -79,6 +81,7 @@ class Mixt_DCSS {
 		if ( self::$body_css == '' ) return;
 		echo "\n<style type='text/css' data-id='mixt-body-css' scoped>\n" . self::$body_css . "</style>\n";
 	}
+
 
 	/**
 	 * Update custom CSS stylesheet
@@ -102,6 +105,7 @@ class Mixt_DCSS {
 		}
 	}
 
+
 	/**
 	 * Return pixel value for the site's media breakpoints
 	 * 
@@ -120,6 +124,7 @@ class Mixt_DCSS {
 			return self::$media_bps[$bp] . 'px';
 		}
 	}
+
 
 	/**
 	 * Parse one or more CSS selector based on the given pattern
@@ -141,6 +146,7 @@ class Mixt_DCSS {
 		echo mixt_clean($selector . $props, 'strip');
 	}
 
+
 	/**
 	 * Test a color's luminance
 	 * 
@@ -155,11 +161,12 @@ class Mixt_DCSS {
 		if ( array_key_exists($color, $color_ov) ) {
 			$lumin = $color_ov[$color];
 		} else {
-			$color_ob = new Color($color);
+			$color_ob = $this->_toColor($color);
 			$lumin = $color_ob->isLight() ? 'light' : 'dark';
 		}
 		return $lumin;
 	}
+
 
 	/**
 	 * Return the appropriate color for the given background
@@ -176,6 +183,7 @@ class Mixt_DCSS {
 		}
 	}
 
+
 	/**
 	 * Return the appropriate text shadow color for the given background
 	 * 
@@ -190,6 +198,7 @@ class Mixt_DCSS {
 			return $colors[0];
 		}
 	}
+
 
 	/**
 	 * Convert a HEX color to RGB or RGBa.
@@ -215,6 +224,7 @@ class Mixt_DCSS {
 		return ( $opacity ) ? 'rgba('.implode(",",$rgb).','.$opacity.')' : $output = 'rgb('.implode(",",$rgb).')';
 	}
 
+
 	/**
 	 * Invert a HEX color (return its opposite)
 	 * Credit: http://www.jonasjohn.de/snippets/php/color-inverse.htm
@@ -233,6 +243,7 @@ class Mixt_DCSS {
 		return '#'.$rgb;
 	}
 
+
 	/**
 	 * Return styles for a button color variant
 	 * 
@@ -241,7 +252,7 @@ class Mixt_DCSS {
 	 * @return string        CSS code for the variant
 	 */
 	public function button_color($sel, $color, $pre = '.mixt') {
-		$color_ob = new Color($color);
+		$color_ob = $this->_toColor($color);
 
 		$color_for_bg = $this->set_color_for_bg($color);
 		$border_color = '#'.$color_ob->darken(7);
@@ -344,6 +355,14 @@ class Mixt_DCSS {
 		}
 
 		return rtrim($string);
+	}
+
+
+	/**
+	 * Pass-through to Color class
+	 */
+	public static function _toColor($color) {
+		return new Color($color);
 	}
 }
 new Mixt_DCSS();
