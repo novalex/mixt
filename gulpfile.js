@@ -1,9 +1,8 @@
 
-// MIXT BUILDER
-
-'use strict';
-
-/* TASKS ####################################
+/* MIXT BUILDER
+ *
+ *
+ * TASKS ####################################
  *
  * watch       - listen to file changes and perform the appropriate tasks
  *
@@ -38,23 +37,24 @@ var gulp         = require('gulp'),
 	autoprefixer = require('gulp-autoprefixer');
 
 // Paths
-var path = {
-	js: {
-		plugins:    'js/plugins/*.js',
-		modules:    'js/modules/*.js',
-		bootstrap:  'js/bootstrap/*.js',
-		admin:      'framework/admin/js',
-		customizer: 'framework/admin/js/customizer/*.js',
-	},
-	styles: {
-		main:        'css/main.scss',
-		files:       'css/**/*.scss',
-		plugins:     'framework/plugins/**/main.scss',
-		admin:       'framework/admin/css/*.scss',
-		pluginAdmin: 'framework/plugins/**/admin.scss',
-	},
-	dest: 'dist'
-};
+var base  = process.env.INIT_CWD,
+	files = {
+		js: {
+			plugins:    base + '/js/plugins/*.js',
+			modules:    base + '/js/modules/*.js',
+			bootstrap:  base + '/js/bootstrap/*.js',
+			admin:      base + '/framework/admin/js',
+			customizer: base + '/framework/admin/js/customizer/*.js',
+		},
+		styles: {
+			main:        base + '/css/main.scss',
+			files:       base + '/css/**/*.scss',
+			plugins:     base + '/framework/plugins/**/main.scss',
+			admin:       base + '/framework/admin/css/*.scss',
+			pluginAdmin: base + '/framework/plugins/**/admin.scss',
+		},
+		dest: base + '/dist'
+	};
 
 // Task arguments
 var options = {
@@ -84,20 +84,20 @@ function displayError(error) {
 
 // Compile Sass
 gulp.task('sass', function() {
-	return gulp.src(path.styles.main)
+	return gulp.src(files.styles.main)
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
 		.pipe( concat('main.css') )
 		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prefix, autoprefix) )
-		.pipe( gulp.dest(path.dest) )
+		.pipe( gulp.dest(files.dest) )
 		.pipe( bsync.stream() );
 });
 
 // Compile Plugin Sass
 gulp.task('sass-plugin', function() {
-	return gulp.src(path.styles.plugins, {base: './'})
+	return gulp.src(files.styles.plugins, {base: './'})
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
 		.on( 'error', displayError )
@@ -109,57 +109,57 @@ gulp.task('sass-plugin', function() {
 
 // Concat & minify JS
 gulp.task('minify', function() {
-	return gulp.src([path.js.plugins, path.js.modules])
+	return gulp.src([files.js.plugins, files.js.modules])
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('main.js') )
 		.on( 'error', displayError )
 		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prod, uglify()) )
-		.pipe( gulp.dest(path.dest) )
+		.pipe( gulp.dest(files.dest) )
 		.pipe( bsync.stream() );
 });
 
 // Concat & minify Bootstrap JS
 gulp.task('minify-bs', function() {
-	return gulp.src(path.js.bootstrap)
+	return gulp.src(files.js.bootstrap)
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('bootstrap.js') )
 		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prod, uglify()) )
-		.pipe( gulp.dest(path.dest) );
+		.pipe( gulp.dest(files.dest) );
 });
 
 // Compile Admin Sass
 gulp.task('sass-admin', function() {
-	return gulp.src([path.styles.admin, path.styles.pluginAdmin])
+	return gulp.src([files.styles.admin, files.styles.pluginAdmin])
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
-		.pipe( gulpif(isDev, sass(), sass({ outputStyle: 'compressed' })) )
+		.pipe( gulpif(isDev, sass({includePaths: base}), sass({ outputStyle: 'compressed', includePaths: base })) )
 		.on( 'error', displayError )
 		.pipe( concat('admin.css') )
 		.pipe( gulpif(srcmap, sourcemaps.write()) )
 		.pipe( gulpif(prefix, autoprefix) )
-		.pipe( gulp.dest(path.dest) )
+		.pipe( gulp.dest(files.dest) )
 		.pipe( bsync.stream() );
 });
 
 // Concat & minify Customizer JS
 gulp.task('minify-customizer', function() {
-	return gulp.src(path.js.customizer)
+	return gulp.src(files.js.customizer)
 		.pipe( gulpif(srcmap, sourcemaps.init()) )
 		.pipe( concat('customizer.js') )
 		.on( 'error', displayError )
 		.pipe( gulpif(srcmap, sourcemaps.write()) )
-		.pipe( gulp.dest(path.js.admin) );
+		.pipe( gulp.dest(files.js.admin) );
 });
 
 // Watch Sass & JS files
 gulp.task('watch', function() {
 	bsync.init();
-	gulp.watch([path.styles.files], ['sass']);
-	gulp.watch([path.styles.admin, path.styles.pluginAdmin], ['sass-admin']);
-	gulp.watch([path.js.plugins, path.js.modules], ['minify']);
-	gulp.watch([path.js.bootstrap], ['minify-bs']);
-	gulp.watch([path.js.customizer], ['minify-customizer']);
+	gulp.watch([files.styles.files], ['sass']);
+	gulp.watch([files.styles.admin, files.styles.pluginAdmin], ['sass-admin']);
+	gulp.watch([files.js.plugins, files.js.modules], ['minify']);
+	gulp.watch([files.js.bootstrap], ['minify-bs']);
+	gulp.watch([files.js.customizer], ['minify-customizer']);
 });
 
 // Default

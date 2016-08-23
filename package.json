@@ -1,21 +1,21 @@
 {
-  "name": "MIXT",
-  "version": "0.1.0",
-  "description": "MIXT build system",
-  "homepage": "http://mixt.novalx.com/",
-  "private": true,
-  "devDependencies": {
-    "browser-sync": "^2.11.1",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-if": "^2.0.0",
-    "gulp-sass": "^2.2.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.3",
-    "minimist": "^1.2.0"
-  },
-  "scripts": {
+  "name":        "MIXT",
+  "version":     "0.1.1",
+  "description": "MIXT - Premium, full-featured WordPress theme",
+  "homepage":    "http://mixt.novalx.com/",
+  "private":     true,
+  "scripts":     {
     "gulp": "gulp"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-if": "^2.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "minimist": "^1.2.0"
   }
 }

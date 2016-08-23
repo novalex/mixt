@@ -1,8 +1,7 @@
 node_modules/
-framework/plugins/cmb2/
 framework/plugins/micf/
-framework/plugins/redux/
 *.sublime-workspace
 css/bootstrap/
 js/bootstrap/
 .idea/
+node_modules

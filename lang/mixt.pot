@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: MIXT\n"
-"POT-Creation-Date: 2016-03-24 22:51+0200\n"
+"POT-Creation-Date: 2016-08-23 19:43+0300\n"
 "PO-Revision-Date: 2016-03-24 22:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -19,13 +20,12 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: framework/plugins/micf\n"
-"X-Poedit-SearchPathExcluded-2: framework/plugins/cmb2\n"
-"X-Poedit-SearchPathExcluded-3: framework/plugins/redux\n"
-"X-Poedit-SearchPathExcluded-4: framework/plugins/class-tgm-plugin-activation."
-"php\n"
-"X-Poedit-SearchPathExcluded-5: frameowrk/libs\n"
-"X-Poedit-SearchPathExcluded-6: framework/plugins/redux-extend/extensions/"
-"wbc_importer\n"
+"X-Poedit-SearchPathExcluded-2: framework/plugins\tgmpa\n"
+"X-Poedit-SearchPathExcluded-3: framework/libs\n"
+"X-Poedit-SearchPathExcluded-4: framework/plugins\redux-extend/extensions\n"
+"X-Poedit-SearchPathExcluded-5: node_modules\n"
+"X-Poedit-SearchPathExcluded-6: .git\n"
+"X-Poedit-SearchPathExcluded-7: _build\n"
 
 #: 404.php:18
 msgid "The page could not be found!"
@@ -52,8 +52,8 @@ msgid "No entries by this author"
 msgstr ""
 
 #: core/assets.php:70 core/assets.php:86 core/assets.php:162
-#: framework/cmb2-config.php:99 framework/cmb2-config.php:128
-#: framework/cmb2-config.php:130
+#: framework/cmb2-config.php:94 framework/cmb2-config.php:123
+#: framework/cmb2-config.php:125
 #: framework/plugins/cmb2-extend/fields/blog.php:12
 #: framework/plugins/cmb2-extend/fields/blog.php:27
 #: framework/plugins/cmb2-extend/fields/blog.php:44
@@ -106,11 +106,13 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:83
 #: framework/plugins/redux-extend/fields/portfolio.php:97
 #: framework/plugins/redux-extend/fields/portfolio.php:381
+#: framework/plugins/redux-extend/fields/portfolio.php:410
 #: framework/plugins/redux-extend/fields/post-pages.php:69
 #: framework/plugins/redux-extend/fields/post-pages.php:83
 #: framework/plugins/redux-extend/fields/post-pages.php:437
 #: framework/plugins/redux-extend/fields/post-pages.php:450
 #: framework/plugins/redux-extend/fields/posts.php:17
+#: framework/plugins/redux-extend/fields/posts.php:46
 #: framework/plugins/redux-extend/fields/woocommerce.php:26
 #: framework/plugins/redux-extend/fields/woocommerce.php:39
 #: framework/plugins/vc-extend/vc-extend.php:33 framework/redux-config.php:79
@@ -329,7 +331,11 @@ msgstr ""
 msgid "3D Shadow"
 msgstr ""
 
-#: core/assets.php:425 templates/redux-templates/header.tpl.php:31
+#: core/assets.php:229 core/assets.php:230 core/assets.php:235
+msgid "Custom:"
+msgstr ""
+
+#: core/assets.php:445 templates/redux-templates/header.tpl.php:31
 msgid "and"
 msgstr ""
 
@@ -361,7 +367,7 @@ msgstr[1] ""
 msgid "No items in the cart"
 msgstr ""
 
-#: core/post.php:573 core/post.php:976
+#: core/post.php:573 core/post.php:979
 #: framework/plugins/redux-extend/fields/icons.php:62
 msgid "View Post"
 msgstr ""
@@ -384,28 +390,28 @@ msgctxt "author"
 msgid "About %s"
 msgstr ""
 
-#: core/post.php:987
+#: core/post.php:990
 #, php-format
 msgctxt "author"
 msgid "View all posts by %s"
 msgstr ""
 
-#: core/post.php:989
+#: core/post.php:992
 #, php-format
 msgid "By %s"
 msgstr ""
 
-#: core/post.php:1003
+#: core/post.php:1006
 #, php-format
 msgid "Updated %s"
 msgstr ""
 
-#: core/post.php:1040 templates/comments.php:29
+#: core/post.php:1043 templates/comments.php:29
 #, php-format
 msgid "%d comments"
 msgstr ""
 
-#: core/post.php:1042 templates/comments.php:31
+#: core/post.php:1045 templates/comments.php:31
 msgid "1 comment"
 msgstr ""
 
@@ -614,16 +620,16 @@ msgid "About"
 msgstr ""
 
 #: framework/admin/menu-pages.php:100 framework/admin/views/status.php:4
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2440
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2643
 msgid "Status"
 msgstr ""
 
 #: framework/admin/menu-pages.php:104 framework/admin/views/welcome.php:39
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:334
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:335
 msgid "Install Plugins"
 msgstr ""
 
-#: framework/admin/menu-pages.php:108 framework/redux-config.php:234
+#: framework/admin/menu-pages.php:108 framework/redux-config.php:241
 msgid "Options"
 msgstr ""
 
@@ -689,7 +695,7 @@ msgid "Theme Info"
 msgstr ""
 
 #: framework/admin/views/status.php:20
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2439
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2642
 msgid "Version"
 msgstr ""
 
@@ -756,15 +762,17 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/footer.php:194
 #: framework/plugins/redux-extend/fields/footer.php:230
 #: framework/plugins/redux-extend/fields/footer.php:265
-#: framework/plugins/redux-extend/fields/footer.php:289
-#: framework/plugins/redux-extend/fields/footer.php:301
+#: framework/plugins/redux-extend/fields/footer.php:275
+#: framework/plugins/redux-extend/fields/footer.php:313
+#: framework/plugins/redux-extend/fields/footer.php:325
 #: framework/plugins/redux-extend/fields/global.php:101
 #: framework/plugins/redux-extend/fields/global.php:134
 #: framework/plugins/redux-extend/fields/global.php:231
 #: framework/plugins/redux-extend/fields/global.php:242
-#: framework/plugins/redux-extend/fields/global.php:285
+#: framework/plugins/redux-extend/fields/global.php:253
 #: framework/plugins/redux-extend/fields/global.php:296
 #: framework/plugins/redux-extend/fields/global.php:307
+#: framework/plugins/redux-extend/fields/global.php:318
 #: framework/plugins/redux-extend/fields/header.php:25
 #: framework/plugins/redux-extend/fields/header.php:137
 #: framework/plugins/redux-extend/fields/header.php:216
@@ -800,14 +808,15 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:238
 #: framework/plugins/redux-extend/fields/portfolio.php:278
 #: framework/plugins/redux-extend/fields/portfolio.php:382
-#: framework/plugins/redux-extend/fields/portfolio.php:409
-#: framework/plugins/redux-extend/fields/portfolio.php:434
-#: framework/plugins/redux-extend/fields/portfolio.php:444
-#: framework/plugins/redux-extend/fields/portfolio.php:465
-#: framework/plugins/redux-extend/fields/portfolio.php:476
-#: framework/plugins/redux-extend/fields/portfolio.php:500
-#: framework/plugins/redux-extend/fields/portfolio.php:524
-#: framework/plugins/redux-extend/fields/portfolio.php:610
+#: framework/plugins/redux-extend/fields/portfolio.php:411
+#: framework/plugins/redux-extend/fields/portfolio.php:423
+#: framework/plugins/redux-extend/fields/portfolio.php:448
+#: framework/plugins/redux-extend/fields/portfolio.php:458
+#: framework/plugins/redux-extend/fields/portfolio.php:479
+#: framework/plugins/redux-extend/fields/portfolio.php:490
+#: framework/plugins/redux-extend/fields/portfolio.php:514
+#: framework/plugins/redux-extend/fields/portfolio.php:538
+#: framework/plugins/redux-extend/fields/portfolio.php:624
 #: framework/plugins/redux-extend/fields/post-pages.php:47
 #: framework/plugins/redux-extend/fields/post-pages.php:70
 #: framework/plugins/redux-extend/fields/post-pages.php:84
@@ -826,23 +835,24 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/post-pages.php:569
 #: framework/plugins/redux-extend/fields/post-pages.php:607
 #: framework/plugins/redux-extend/fields/posts.php:18
-#: framework/plugins/redux-extend/fields/posts.php:45
-#: framework/plugins/redux-extend/fields/posts.php:70
-#: framework/plugins/redux-extend/fields/posts.php:81
-#: framework/plugins/redux-extend/fields/posts.php:92
-#: framework/plugins/redux-extend/fields/posts.php:117
-#: framework/plugins/redux-extend/fields/posts.php:155
-#: framework/plugins/redux-extend/fields/posts.php:241
-#: framework/plugins/redux-extend/fields/posts.php:281
-#: framework/plugins/redux-extend/fields/posts.php:292
-#: framework/plugins/redux-extend/fields/posts.php:303
-#: framework/plugins/redux-extend/fields/posts.php:314
-#: framework/plugins/redux-extend/fields/posts.php:325
-#: framework/plugins/redux-extend/fields/posts.php:355
-#: framework/plugins/redux-extend/fields/posts.php:380
-#: framework/plugins/redux-extend/fields/posts.php:486
-#: framework/plugins/redux-extend/fields/posts.php:497
-#: framework/plugins/redux-extend/fields/posts.php:508
+#: framework/plugins/redux-extend/fields/posts.php:47
+#: framework/plugins/redux-extend/fields/posts.php:59
+#: framework/plugins/redux-extend/fields/posts.php:84
+#: framework/plugins/redux-extend/fields/posts.php:95
+#: framework/plugins/redux-extend/fields/posts.php:106
+#: framework/plugins/redux-extend/fields/posts.php:131
+#: framework/plugins/redux-extend/fields/posts.php:169
+#: framework/plugins/redux-extend/fields/posts.php:255
+#: framework/plugins/redux-extend/fields/posts.php:295
+#: framework/plugins/redux-extend/fields/posts.php:306
+#: framework/plugins/redux-extend/fields/posts.php:326
+#: framework/plugins/redux-extend/fields/posts.php:337
+#: framework/plugins/redux-extend/fields/posts.php:348
+#: framework/plugins/redux-extend/fields/posts.php:378
+#: framework/plugins/redux-extend/fields/posts.php:403
+#: framework/plugins/redux-extend/fields/posts.php:509
+#: framework/plugins/redux-extend/fields/posts.php:520
+#: framework/plugins/redux-extend/fields/posts.php:531
 #: framework/plugins/redux-extend/fields/sidebars.php:16
 #: framework/plugins/redux-extend/fields/sidebars.php:60
 #: framework/plugins/redux-extend/fields/sidebars.php:71
@@ -860,11 +870,11 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/woocommerce.php:193
 #: framework/plugins/redux-extend/fields/woocommerce.php:203
 #: framework/plugins/redux-extend/fields/woocommerce.php:213
-#: framework/plugins/redux-extend/fields/woocommerce.php:223
-#: framework/plugins/redux-extend/fields/woocommerce.php:258
-#: framework/plugins/redux-extend/fields/woocommerce.php:305
-#: framework/plugins/redux-extend/fields/woocommerce.php:325
-#: framework/plugins/redux-extend/fields/woocommerce.php:347
+#: framework/plugins/redux-extend/fields/woocommerce.php:231
+#: framework/plugins/redux-extend/fields/woocommerce.php:274
+#: framework/plugins/redux-extend/fields/woocommerce.php:321
+#: framework/plugins/redux-extend/fields/woocommerce.php:341
+#: framework/plugins/redux-extend/fields/woocommerce.php:363
 msgid "Yes"
 msgstr ""
 
@@ -930,15 +940,17 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/footer.php:195
 #: framework/plugins/redux-extend/fields/footer.php:231
 #: framework/plugins/redux-extend/fields/footer.php:266
-#: framework/plugins/redux-extend/fields/footer.php:290
-#: framework/plugins/redux-extend/fields/footer.php:302
+#: framework/plugins/redux-extend/fields/footer.php:276
+#: framework/plugins/redux-extend/fields/footer.php:314
+#: framework/plugins/redux-extend/fields/footer.php:326
 #: framework/plugins/redux-extend/fields/global.php:102
 #: framework/plugins/redux-extend/fields/global.php:135
 #: framework/plugins/redux-extend/fields/global.php:232
 #: framework/plugins/redux-extend/fields/global.php:243
-#: framework/plugins/redux-extend/fields/global.php:286
+#: framework/plugins/redux-extend/fields/global.php:254
 #: framework/plugins/redux-extend/fields/global.php:297
 #: framework/plugins/redux-extend/fields/global.php:308
+#: framework/plugins/redux-extend/fields/global.php:319
 #: framework/plugins/redux-extend/fields/header.php:26
 #: framework/plugins/redux-extend/fields/header.php:138
 #: framework/plugins/redux-extend/fields/header.php:217
@@ -975,15 +987,16 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:239
 #: framework/plugins/redux-extend/fields/portfolio.php:279
 #: framework/plugins/redux-extend/fields/portfolio.php:383
-#: framework/plugins/redux-extend/fields/portfolio.php:410
-#: framework/plugins/redux-extend/fields/portfolio.php:423
-#: framework/plugins/redux-extend/fields/portfolio.php:435
-#: framework/plugins/redux-extend/fields/portfolio.php:445
-#: framework/plugins/redux-extend/fields/portfolio.php:466
-#: framework/plugins/redux-extend/fields/portfolio.php:477
-#: framework/plugins/redux-extend/fields/portfolio.php:501
-#: framework/plugins/redux-extend/fields/portfolio.php:525
-#: framework/plugins/redux-extend/fields/portfolio.php:611
+#: framework/plugins/redux-extend/fields/portfolio.php:412
+#: framework/plugins/redux-extend/fields/portfolio.php:424
+#: framework/plugins/redux-extend/fields/portfolio.php:437
+#: framework/plugins/redux-extend/fields/portfolio.php:449
+#: framework/plugins/redux-extend/fields/portfolio.php:459
+#: framework/plugins/redux-extend/fields/portfolio.php:480
+#: framework/plugins/redux-extend/fields/portfolio.php:491
+#: framework/plugins/redux-extend/fields/portfolio.php:515
+#: framework/plugins/redux-extend/fields/portfolio.php:539
+#: framework/plugins/redux-extend/fields/portfolio.php:625
 #: framework/plugins/redux-extend/fields/post-pages.php:48
 #: framework/plugins/redux-extend/fields/post-pages.php:71
 #: framework/plugins/redux-extend/fields/post-pages.php:85
@@ -1004,24 +1017,25 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/post-pages.php:570
 #: framework/plugins/redux-extend/fields/post-pages.php:608
 #: framework/plugins/redux-extend/fields/posts.php:19
-#: framework/plugins/redux-extend/fields/posts.php:46
-#: framework/plugins/redux-extend/fields/posts.php:59
-#: framework/plugins/redux-extend/fields/posts.php:71
-#: framework/plugins/redux-extend/fields/posts.php:82
-#: framework/plugins/redux-extend/fields/posts.php:93
-#: framework/plugins/redux-extend/fields/posts.php:118
-#: framework/plugins/redux-extend/fields/posts.php:156
-#: framework/plugins/redux-extend/fields/posts.php:242
-#: framework/plugins/redux-extend/fields/posts.php:282
-#: framework/plugins/redux-extend/fields/posts.php:293
-#: framework/plugins/redux-extend/fields/posts.php:304
-#: framework/plugins/redux-extend/fields/posts.php:315
-#: framework/plugins/redux-extend/fields/posts.php:326
-#: framework/plugins/redux-extend/fields/posts.php:356
-#: framework/plugins/redux-extend/fields/posts.php:381
-#: framework/plugins/redux-extend/fields/posts.php:487
-#: framework/plugins/redux-extend/fields/posts.php:498
-#: framework/plugins/redux-extend/fields/posts.php:509
+#: framework/plugins/redux-extend/fields/posts.php:48
+#: framework/plugins/redux-extend/fields/posts.php:60
+#: framework/plugins/redux-extend/fields/posts.php:73
+#: framework/plugins/redux-extend/fields/posts.php:85
+#: framework/plugins/redux-extend/fields/posts.php:96
+#: framework/plugins/redux-extend/fields/posts.php:107
+#: framework/plugins/redux-extend/fields/posts.php:132
+#: framework/plugins/redux-extend/fields/posts.php:170
+#: framework/plugins/redux-extend/fields/posts.php:256
+#: framework/plugins/redux-extend/fields/posts.php:296
+#: framework/plugins/redux-extend/fields/posts.php:307
+#: framework/plugins/redux-extend/fields/posts.php:327
+#: framework/plugins/redux-extend/fields/posts.php:338
+#: framework/plugins/redux-extend/fields/posts.php:349
+#: framework/plugins/redux-extend/fields/posts.php:379
+#: framework/plugins/redux-extend/fields/posts.php:404
+#: framework/plugins/redux-extend/fields/posts.php:510
+#: framework/plugins/redux-extend/fields/posts.php:521
+#: framework/plugins/redux-extend/fields/posts.php:532
 #: framework/plugins/redux-extend/fields/sidebars.php:17
 #: framework/plugins/redux-extend/fields/sidebars.php:61
 #: framework/plugins/redux-extend/fields/sidebars.php:72
@@ -1039,11 +1053,11 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/woocommerce.php:194
 #: framework/plugins/redux-extend/fields/woocommerce.php:204
 #: framework/plugins/redux-extend/fields/woocommerce.php:214
-#: framework/plugins/redux-extend/fields/woocommerce.php:224
-#: framework/plugins/redux-extend/fields/woocommerce.php:259
-#: framework/plugins/redux-extend/fields/woocommerce.php:306
-#: framework/plugins/redux-extend/fields/woocommerce.php:326
-#: framework/plugins/redux-extend/fields/woocommerce.php:348
+#: framework/plugins/redux-extend/fields/woocommerce.php:232
+#: framework/plugins/redux-extend/fields/woocommerce.php:275
+#: framework/plugins/redux-extend/fields/woocommerce.php:322
+#: framework/plugins/redux-extend/fields/woocommerce.php:342
+#: framework/plugins/redux-extend/fields/woocommerce.php:364
 msgid "No"
 msgstr ""
 
@@ -1180,7 +1194,7 @@ msgstr ""
 msgid "MIXT - Power Up"
 msgstr ""
 
-#: framework/cmb2-config.php:183
+#: framework/cmb2-config.php:178
 msgid "Page Options"
 msgstr ""
 
@@ -1221,7 +1235,7 @@ msgstr ""
 msgid "Find Posts or Pages"
 msgstr ""
 
-#: framework/plugins/cmb2-extend/extensions/slider-field.php:23
+#: framework/plugins/cmb2-extend/extensions/slider-field.php:24
 msgid "The min, max and step values of the slider must be numeric!"
 msgstr ""
 
@@ -1324,10 +1338,10 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/customizer.php:437
 #: framework/plugins/redux-extend/fields/header.php:309
 #: framework/plugins/redux-extend/fields/portfolio.php:197
-#: framework/plugins/redux-extend/fields/portfolio.php:407
+#: framework/plugins/redux-extend/fields/portfolio.php:421
 #: framework/plugins/redux-extend/fields/post-pages.php:172
 #: framework/plugins/redux-extend/fields/post-pages.php:531
-#: framework/plugins/redux-extend/fields/posts.php:43
+#: framework/plugins/redux-extend/fields/posts.php:57
 msgid "Post Info"
 msgstr ""
 
@@ -1335,10 +1349,10 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:71
 #: framework/plugins/cmb2-extend/fields/post.php:47
 #: framework/plugins/redux-extend/fields/portfolio.php:198
-#: framework/plugins/redux-extend/fields/portfolio.php:408
+#: framework/plugins/redux-extend/fields/portfolio.php:422
 #: framework/plugins/redux-extend/fields/post-pages.php:173
 #: framework/plugins/redux-extend/fields/post-pages.php:532
-#: framework/plugins/redux-extend/fields/posts.php:44
+#: framework/plugins/redux-extend/fields/posts.php:58
 msgid "Display the post format and date"
 msgstr ""
 
@@ -1346,11 +1360,11 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:84
 #: framework/plugins/cmb2-extend/fields/post.php:60
 #: framework/plugins/redux-extend/fields/portfolio.php:209
-#: framework/plugins/redux-extend/fields/portfolio.php:418
+#: framework/plugins/redux-extend/fields/portfolio.php:432
 #: framework/plugins/redux-extend/fields/post-pages.php:184
 #: framework/plugins/redux-extend/fields/post-pages.php:542
-#: framework/plugins/redux-extend/fields/posts.php:54
-#: framework/plugins/redux-extend/fields/posts.php:268
+#: framework/plugins/redux-extend/fields/posts.php:68
+#: framework/plugins/redux-extend/fields/posts.php:282
 msgid "Post Meta"
 msgstr ""
 
@@ -1358,10 +1372,10 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:85
 #: framework/plugins/cmb2-extend/fields/post.php:61
 #: framework/plugins/redux-extend/fields/portfolio.php:210
-#: framework/plugins/redux-extend/fields/portfolio.php:419
+#: framework/plugins/redux-extend/fields/portfolio.php:433
 #: framework/plugins/redux-extend/fields/post-pages.php:185
 #: framework/plugins/redux-extend/fields/post-pages.php:543
-#: framework/plugins/redux-extend/fields/posts.php:55
+#: framework/plugins/redux-extend/fields/posts.php:69
 msgid "Display the meta in the post header, footer, or do not display"
 msgstr ""
 
@@ -1369,10 +1383,10 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:88
 #: framework/plugins/cmb2-extend/fields/post.php:65
 #: framework/plugins/redux-extend/fields/portfolio.php:212
-#: framework/plugins/redux-extend/fields/portfolio.php:421
+#: framework/plugins/redux-extend/fields/portfolio.php:435
 #: framework/plugins/redux-extend/fields/post-pages.php:187
 #: framework/plugins/redux-extend/fields/post-pages.php:545
-#: framework/plugins/redux-extend/fields/posts.php:57
+#: framework/plugins/redux-extend/fields/posts.php:71
 msgid "In Header"
 msgstr ""
 
@@ -1380,10 +1394,10 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:89
 #: framework/plugins/cmb2-extend/fields/post.php:66
 #: framework/plugins/redux-extend/fields/portfolio.php:213
-#: framework/plugins/redux-extend/fields/portfolio.php:422
+#: framework/plugins/redux-extend/fields/portfolio.php:436
 #: framework/plugins/redux-extend/fields/post-pages.php:188
 #: framework/plugins/redux-extend/fields/post-pages.php:546
-#: framework/plugins/redux-extend/fields/posts.php:58
+#: framework/plugins/redux-extend/fields/posts.php:72
 msgid "In Footer"
 msgstr ""
 
@@ -1450,7 +1464,7 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:289
 #: framework/plugins/redux-extend/fields/post-pages.php:264
 #: framework/plugins/redux-extend/fields/post-pages.php:618
-#: framework/plugins/redux-extend/fields/posts.php:434
+#: framework/plugins/redux-extend/fields/posts.php:457
 #: framework/plugins/redux-extend/fields/social.php:119
 msgid "Title"
 msgstr ""
@@ -1459,12 +1473,12 @@ msgstr ""
 #: framework/plugins/cmb2-extend/fields/portfolio.php:158
 #: framework/plugins/redux-extend/fields/portfolio.php:252
 #: framework/plugins/redux-extend/fields/portfolio.php:290
-#: framework/plugins/redux-extend/fields/portfolio.php:592
+#: framework/plugins/redux-extend/fields/portfolio.php:606
 #: framework/plugins/redux-extend/fields/post-pages.php:227
 #: framework/plugins/redux-extend/fields/post-pages.php:265
 #: framework/plugins/redux-extend/fields/post-pages.php:582
 #: framework/plugins/redux-extend/fields/post-pages.php:619
-#: framework/plugins/redux-extend/fields/posts.php:223
+#: framework/plugins/redux-extend/fields/posts.php:237
 msgid "Excerpt"
 msgstr ""
 
@@ -1502,8 +1516,8 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/portfolio.php:307
 #: framework/plugins/redux-extend/fields/post-pages.php:282
 #: framework/plugins/redux-extend/fields/post-pages.php:636
-#: framework/plugins/redux-extend/fields/themes.php:46
-#: framework/plugins/redux-extend/fields/themes.php:170
+#: framework/plugins/redux-extend/fields/themes.php:114
+#: framework/plugins/redux-extend/fields/themes.php:237
 msgid "Background Color"
 msgstr ""
 
@@ -1679,8 +1693,8 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/header.php:65
 #: framework/plugins/redux-extend/fields/header.php:392
 #: framework/plugins/redux-extend/fields/logo.php:85
-#: framework/plugins/redux-extend/fields/themes.php:52
-#: framework/plugins/redux-extend/fields/themes.php:176
+#: framework/plugins/redux-extend/fields/themes.php:120
+#: framework/plugins/redux-extend/fields/themes.php:243
 msgid "Text Color"
 msgstr ""
 
@@ -1695,8 +1709,8 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/customizer.php:642
 #: framework/plugins/redux-extend/fields/customizer.php:755
 #: framework/plugins/redux-extend/fields/header.php:76
-#: framework/plugins/redux-extend/fields/themes.php:76
-#: framework/plugins/redux-extend/fields/themes.php:182
+#: framework/plugins/redux-extend/fields/themes.php:144
+#: framework/plugins/redux-extend/fields/themes.php:249
 msgid "Inverse Text Color"
 msgstr ""
 
@@ -2110,9 +2124,9 @@ msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/portfolio.php:23
 #: framework/plugins/redux-extend/fields/portfolio.php:135
-#: framework/plugins/redux-extend/fields/portfolio.php:537
+#: framework/plugins/redux-extend/fields/portfolio.php:551
 #: framework/plugins/redux-extend/fields/post-pages.php:121
-#: framework/plugins/redux-extend/fields/posts.php:168
+#: framework/plugins/redux-extend/fields/posts.php:182
 msgid "Columns"
 msgstr ""
 
@@ -2149,11 +2163,13 @@ msgid ""
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/post.php:32
+#: framework/plugins/redux-extend/fields/portfolio.php:407
+#: framework/plugins/redux-extend/fields/posts.php:43
 msgid "Show Featured Media"
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/post.php:75
-#: framework/plugins/redux-extend/fields/portfolio.php:432
+#: framework/plugins/redux-extend/fields/portfolio.php:446
 msgid "Show Tags"
 msgstr ""
 
@@ -2162,13 +2178,13 @@ msgid "Display post tags, types and attributes"
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/post.php:89
-#: framework/plugins/redux-extend/fields/portfolio.php:443
-#: framework/plugins/redux-extend/fields/woocommerce.php:304
+#: framework/plugins/redux-extend/fields/portfolio.php:457
+#: framework/plugins/redux-extend/fields/woocommerce.php:320
 msgid "Show Sharing Buttons"
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/post.php:102
-#: framework/plugins/redux-extend/fields/posts.php:79
+#: framework/plugins/redux-extend/fields/posts.php:93
 msgid "Post Navigation"
 msgstr ""
 
@@ -2177,13 +2193,14 @@ msgid "Show links to next and previous posts"
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/post.php:116
-#: framework/plugins/redux-extend/fields/posts.php:90
+#: framework/plugins/redux-extend/fields/posts.php:104
 msgid "About The Author"
 msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/posts-page.php:3
 #: framework/plugins/cmb2-extend/fields/posts-page.php:8
 #: framework/plugins/redux-extend/fields/posts.php:4
+#: framework/plugins/redux-extend/fields/typography.php:241
 msgid "Posts"
 msgstr ""
 
@@ -2216,7 +2233,7 @@ msgstr ""
 
 #: framework/plugins/cmb2-extend/fields/sidebar.php:36
 #: framework/plugins/redux-extend/fields/footer.php:95
-#: framework/plugins/redux-extend/fields/footer.php:299
+#: framework/plugins/redux-extend/fields/footer.php:323
 #: framework/plugins/redux-extend/fields/sidebars.php:58
 msgid "Hide On Mobile"
 msgstr ""
@@ -2253,7 +2270,7 @@ msgstr ""
 msgid "Add More"
 msgstr ""
 
-#: framework/plugins/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.php:175
+#: framework/plugins/redux-extend/extensions/mixt_multi_input/field_mixt_multi_input.php:176
 msgid "Remove"
 msgstr ""
 
@@ -2453,8 +2470,8 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/footer.php:86
 #: framework/plugins/redux-extend/fields/footer.php:158
 #: framework/plugins/redux-extend/fields/header.php:402
-#: framework/plugins/redux-extend/fields/themes.php:64
-#: framework/plugins/redux-extend/fields/themes.php:188
+#: framework/plugins/redux-extend/fields/themes.php:132
+#: framework/plugins/redux-extend/fields/themes.php:255
 msgid "Border Color"
 msgstr ""
 
@@ -2519,7 +2536,6 @@ msgid "Text to display before the breadcrumbs"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:539
-#: framework/plugins/redux-extend/fields/themes.php:5
 msgid "Themes"
 msgstr ""
 
@@ -2557,18 +2573,19 @@ msgid "Select the theme to be used for the footer"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:585
+#: framework/plugins/redux-extend/fields/themes.php:72
 msgid "Site Themes"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:586
-#: framework/plugins/redux-extend/fields/themes.php:6
+#: framework/plugins/redux-extend/fields/themes.php:73
 msgid "Create and manage site-wide themes."
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:587
 #: framework/plugins/redux-extend/fields/customizer.php:701
-#: framework/plugins/redux-extend/fields/themes.php:7
-#: framework/plugins/redux-extend/fields/themes.php:124
+#: framework/plugins/redux-extend/fields/themes.php:74
+#: framework/plugins/redux-extend/fields/themes.php:191
 msgid ""
 "Fields marked * can be left empty and their respective colors will be "
 "automatically generated."
@@ -2576,124 +2593,124 @@ msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:596
 #: framework/plugins/redux-extend/fields/customizer.php:709
-#: framework/plugins/redux-extend/fields/themes.php:18
-#: framework/plugins/redux-extend/fields/themes.php:136
+#: framework/plugins/redux-extend/fields/themes.php:86
+#: framework/plugins/redux-extend/fields/themes.php:203
 msgid "New Theme"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:603
 #: framework/plugins/redux-extend/fields/customizer.php:716
-#: framework/plugins/redux-extend/fields/themes.php:25
-#: framework/plugins/redux-extend/fields/themes.php:143
+#: framework/plugins/redux-extend/fields/themes.php:93
+#: framework/plugins/redux-extend/fields/themes.php:210
 msgid "Theme Name"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:611
 #: framework/plugins/redux-extend/fields/customizer.php:724
-#: framework/plugins/redux-extend/fields/themes.php:33
-#: framework/plugins/redux-extend/fields/themes.php:151
+#: framework/plugins/redux-extend/fields/themes.php:101
+#: framework/plugins/redux-extend/fields/themes.php:218
 msgid "Theme ID"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:618
 #: framework/plugins/redux-extend/fields/customizer.php:731
-#: framework/plugins/redux-extend/fields/themes.php:40
-#: framework/plugins/redux-extend/fields/themes.php:158
+#: framework/plugins/redux-extend/fields/themes.php:108
+#: framework/plugins/redux-extend/fields/themes.php:225
 #: framework/plugins/vc-extend/vc-extend.php:37
 msgid "Accent"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:636
-#: framework/plugins/redux-extend/fields/themes.php:58
+#: framework/plugins/redux-extend/fields/themes.php:126
 msgid "Text Color Fade"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:648
-#: framework/plugins/redux-extend/fields/themes.php:82
+#: framework/plugins/redux-extend/fields/themes.php:150
 msgid "Inverse Text Fade"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:660
-#: framework/plugins/redux-extend/fields/themes.php:70
+#: framework/plugins/redux-extend/fields/themes.php:138
 msgid "Inverse Background"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:666
-#: framework/plugins/redux-extend/fields/themes.php:94
+#: framework/plugins/redux-extend/fields/themes.php:162
 msgid "Alt Background"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:672
-#: framework/plugins/redux-extend/fields/themes.php:100
+#: framework/plugins/redux-extend/fields/themes.php:168
 msgid "Alt Text Color"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:678
 #: framework/plugins/redux-extend/fields/customizer.php:767
-#: framework/plugins/redux-extend/fields/themes.php:88
-#: framework/plugins/redux-extend/fields/themes.php:194
+#: framework/plugins/redux-extend/fields/themes.php:156
+#: framework/plugins/redux-extend/fields/themes.php:261
 msgid "Inverse Border"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:684
-#: framework/plugins/redux-extend/fields/themes.php:106
+#: framework/plugins/redux-extend/fields/themes.php:174
 msgid "Alt Border"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:690
 #: framework/plugins/redux-extend/fields/customizer.php:809
-#: framework/plugins/redux-extend/fields/themes.php:112
-#: framework/plugins/redux-extend/fields/themes.php:236
+#: framework/plugins/redux-extend/fields/themes.php:180
+#: framework/plugins/redux-extend/fields/themes.php:303
 msgid "Dark Background"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:699
-#: framework/plugins/redux-extend/fields/themes.php:122
+#: framework/plugins/redux-extend/fields/themes.php:189
 msgid "Navbar Themes"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:700
-#: framework/plugins/redux-extend/fields/themes.php:123
+#: framework/plugins/redux-extend/fields/themes.php:190
 msgid "Create and manage themes for the navbar."
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:737
-#: framework/plugins/redux-extend/fields/themes.php:164
+#: framework/plugins/redux-extend/fields/themes.php:231
 msgid "Inverse Accent"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:773
-#: framework/plugins/redux-extend/fields/themes.php:200
+#: framework/plugins/redux-extend/fields/themes.php:267
 msgid "Menu Background"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:779
-#: framework/plugins/redux-extend/fields/themes.php:206
+#: framework/plugins/redux-extend/fields/themes.php:273
 msgid "Menu Text Color"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:785
-#: framework/plugins/redux-extend/fields/themes.php:212
+#: framework/plugins/redux-extend/fields/themes.php:279
 msgid "Menu Text Fade"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:791
-#: framework/plugins/redux-extend/fields/themes.php:218
+#: framework/plugins/redux-extend/fields/themes.php:285
 msgid "Menu Hover Bg"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:797
-#: framework/plugins/redux-extend/fields/themes.php:224
+#: framework/plugins/redux-extend/fields/themes.php:291
 msgid "Menu Hover Text"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:803
-#: framework/plugins/redux-extend/fields/themes.php:230
+#: framework/plugins/redux-extend/fields/themes.php:297
 msgid "Menu Border"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/customizer.php:815
-#: framework/plugins/redux-extend/fields/themes.php:242
+#: framework/plugins/redux-extend/fields/themes.php:309
 msgid "Enable Opacity"
 msgstr ""
 
@@ -2824,7 +2841,7 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/customizer.php:1046
 #: framework/plugins/redux-extend/fields/navbars.php:283
 #: framework/plugins/redux-extend/fields/navbars.php:383
-#: framework/plugins/redux-extend/fields/posts.php:473
+#: framework/plugins/redux-extend/fields/posts.php:496
 msgid "Top"
 msgstr ""
 
@@ -2832,7 +2849,7 @@ msgstr ""
 #: framework/plugins/redux-extend/fields/customizer.php:1049
 #: framework/plugins/redux-extend/fields/navbars.php:286
 #: framework/plugins/redux-extend/fields/navbars.php:386
-#: framework/plugins/redux-extend/fields/posts.php:474
+#: framework/plugins/redux-extend/fields/posts.php:497
 msgid "Bottom"
 msgstr ""
 
@@ -2955,28 +2972,40 @@ msgid ""
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/footer.php:264
-#: framework/plugins/redux-extend/fields/posts.php:115
-#: framework/plugins/redux-extend/fields/posts.php:353
+#: framework/plugins/redux-extend/fields/posts.php:129
+#: framework/plugins/redux-extend/fields/posts.php:376
 msgid "Show"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/footer.php:274
+msgid "Only show once"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/footer.php:285
+msgid "Days until showing again"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/footer.php:286
+msgid "How many days should pass before showing again"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/footer.php:298
 msgid "Content"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/footer.php:275
+#: framework/plugins/redux-extend/fields/footer.php:299
 msgid "Text or code to display in the info bar"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/footer.php:287
+#: framework/plugins/redux-extend/fields/footer.php:311
 msgid "Fixed Position"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/footer.php:288
+#: framework/plugins/redux-extend/fields/footer.php:312
 msgid "Make the info bar fixed (sticky)"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/footer.php:300
+#: framework/plugins/redux-extend/fields/footer.php:324
 msgid "Hide the info bar on mobile / small screens"
 msgstr ""
 
@@ -3044,9 +3073,9 @@ msgstr ""
 
 #: framework/plugins/redux-extend/fields/global.php:143
 #: framework/plugins/redux-extend/fields/logo.php:12
-#: framework/plugins/redux-extend/fields/portfolio.php:573
-#: framework/plugins/redux-extend/fields/posts.php:204
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2435
+#: framework/plugins/redux-extend/fields/portfolio.php:587
+#: framework/plugins/redux-extend/fields/posts.php:218
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2638
 #: framework/plugins/vc-extend/fields/button.php:94
 msgid "Type"
 msgstr ""
@@ -3080,41 +3109,51 @@ msgstr ""
 msgid "Show comments on single pages"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:258
+#: framework/plugins/redux-extend/fields/global.php:251
+msgid "Write Dynamic CSS To File"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/global.php:252
+msgid ""
+"Put dynamically generated CSS in a file instead of outputting it in the "
+"HTML. Not supported on all servers"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/global.php:269
 msgid "Modules"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:266
+#: framework/plugins/redux-extend/fields/global.php:277
 msgid "Icon Font Sets"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:267
+#: framework/plugins/redux-extend/fields/global.php:278
 msgid "Select which icon font sets you want to use."
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:283
+#: framework/plugins/redux-extend/fields/global.php:294
 msgid "Enable Themes"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:284
+#: framework/plugins/redux-extend/fields/global.php:295
 msgid ""
 "Add theme sections and management. Disable if customizing themes in CSS "
 "directly."
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:294
+#: framework/plugins/redux-extend/fields/global.php:305
 msgid "Page Option Metaboxes"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:295
+#: framework/plugins/redux-extend/fields/global.php:306
 msgid "Enable option metaboxes when editing pages or posts"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:305
+#: framework/plugins/redux-extend/fields/global.php:316
 msgid "BrowserSync Script"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/global.php:306
+#: framework/plugins/redux-extend/fields/global.php:317
 msgid "Add BrowserSync script in the footer (only for logged in admins)"
 msgstr ""
 
@@ -3131,7 +3170,7 @@ msgid "Configure the location bar and its appearance"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/icons.php:4
-#: framework/plugins/redux-extend/fields/posts.php:323
+#: framework/plugins/redux-extend/fields/posts.php:346
 msgid "Icons"
 msgstr ""
 
@@ -3164,28 +3203,28 @@ msgid "View Image"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/icons.php:78
-#: framework/plugins/redux-extend/fields/posts.php:279
+#: framework/plugins/redux-extend/fields/posts.php:293
 msgid "Author"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/icons.php:86
-#: framework/plugins/redux-extend/fields/portfolio.php:590
-#: framework/plugins/redux-extend/fields/posts.php:221
-#: framework/plugins/redux-extend/fields/posts.php:290
+#: framework/plugins/redux-extend/fields/portfolio.php:604
+#: framework/plugins/redux-extend/fields/posts.php:235
+#: framework/plugins/redux-extend/fields/posts.php:304
 msgid "Date"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/icons.php:94
-#: framework/plugins/redux-extend/fields/posts.php:301
+#: framework/plugins/redux-extend/fields/posts.php:324
 msgid "Category"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/icons.php:102
-#: framework/plugins/redux-extend/fields/portfolio.php:474
-#: framework/plugins/redux-extend/fields/portfolio.php:591
-#: framework/plugins/redux-extend/fields/posts.php:222
-#: framework/plugins/redux-extend/fields/posts.php:312
-#: framework/plugins/redux-extend/fields/posts.php:444
+#: framework/plugins/redux-extend/fields/portfolio.php:488
+#: framework/plugins/redux-extend/fields/portfolio.php:605
+#: framework/plugins/redux-extend/fields/posts.php:236
+#: framework/plugins/redux-extend/fields/posts.php:335
+#: framework/plugins/redux-extend/fields/posts.php:467
 msgid "Comments"
 msgstr ""
 
@@ -3255,8 +3294,8 @@ msgstr ""
 
 #: framework/plugins/redux-extend/fields/logo.php:16
 #: framework/plugins/redux-extend/fields/logo.php:57
-#: framework/plugins/redux-extend/fields/portfolio.php:577
-#: framework/plugins/redux-extend/fields/posts.php:208
+#: framework/plugins/redux-extend/fields/portfolio.php:591
+#: framework/plugins/redux-extend/fields/posts.php:222
 msgid "Text"
 msgstr ""
 
@@ -3492,13 +3531,13 @@ msgid "Select the layout type for this page"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/portfolio.php:167
-#: framework/plugins/redux-extend/fields/portfolio.php:623
-#: framework/plugins/redux-extend/fields/posts.php:254
+#: framework/plugins/redux-extend/fields/portfolio.php:637
+#: framework/plugins/redux-extend/fields/posts.php:268
 msgid "Featured Media Placeholder"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/portfolio.php:168
-#: framework/plugins/redux-extend/fields/portfolio.php:624
+#: framework/plugins/redux-extend/fields/portfolio.php:638
 msgid ""
 "Select a placeholder image to show if a project does not have any featured "
 "media"
@@ -3553,103 +3592,107 @@ msgid ""
 "space."
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:433
+#: framework/plugins/redux-extend/fields/portfolio.php:408
+msgid "Display the featured media on single projects"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/portfolio.php:447
 msgid "Display project types and attributes"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:453
-#: framework/plugins/redux-extend/fields/woocommerce.php:314
+#: framework/plugins/redux-extend/fields/portfolio.php:467
+#: framework/plugins/redux-extend/fields/woocommerce.php:330
 msgid "Sharing Profiles"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:454
-#: framework/plugins/redux-extend/fields/woocommerce.php:315
+#: framework/plugins/redux-extend/fields/portfolio.php:468
+#: framework/plugins/redux-extend/fields/woocommerce.php:331
 msgid "Select which sharing profiles to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:463
+#: framework/plugins/redux-extend/fields/portfolio.php:477
 msgid "Project Navigation"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:464
+#: framework/plugins/redux-extend/fields/portfolio.php:478
 msgid "Show links to next and previous projects"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:475
+#: framework/plugins/redux-extend/fields/portfolio.php:489
 msgid "Show comments"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:491
-#: framework/plugins/redux-extend/fields/portfolio.php:509
+#: framework/plugins/redux-extend/fields/portfolio.php:505
+#: framework/plugins/redux-extend/fields/portfolio.php:523
 msgid "Related Projects"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:499
+#: framework/plugins/redux-extend/fields/portfolio.php:513
 msgid "Show Related Projects"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:510
+#: framework/plugins/redux-extend/fields/portfolio.php:524
 msgid "How many related projects to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:522
-#: framework/plugins/redux-extend/fields/posts.php:153
+#: framework/plugins/redux-extend/fields/portfolio.php:536
+#: framework/plugins/redux-extend/fields/posts.php:167
 msgid "Slider Style"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:523
+#: framework/plugins/redux-extend/fields/portfolio.php:537
 msgid "Display related projects in a slider/carousel"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:538
+#: framework/plugins/redux-extend/fields/portfolio.php:552
 msgid "How many columns (related projects per row) to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:549
-#: framework/plugins/redux-extend/fields/posts.php:180
+#: framework/plugins/redux-extend/fields/portfolio.php:563
+#: framework/plugins/redux-extend/fields/posts.php:194
 msgid "Tablet Columns"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:550
-#: framework/plugins/redux-extend/fields/posts.php:181
+#: framework/plugins/redux-extend/fields/portfolio.php:564
+#: framework/plugins/redux-extend/fields/posts.php:195
 msgid "How many columns to display on tablets / medium screens"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:561
-#: framework/plugins/redux-extend/fields/posts.php:192
+#: framework/plugins/redux-extend/fields/portfolio.php:575
+#: framework/plugins/redux-extend/fields/posts.php:206
 msgid "Mobile Columns"
-msgstr ""
-
-#: framework/plugins/redux-extend/fields/portfolio.php:562
-#: framework/plugins/redux-extend/fields/posts.php:193
-msgid "How many columns to display on mobiles / small screens"
-msgstr ""
-
-#: framework/plugins/redux-extend/fields/portfolio.php:574
-msgid "Display text-only projects or with featured media"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/portfolio.php:576
 #: framework/plugins/redux-extend/fields/posts.php:207
-msgid "Media"
-msgstr ""
-
-#: framework/plugins/redux-extend/fields/portfolio.php:587
-msgid "Text Elements"
+msgid "How many columns to display on mobiles / small screens"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/portfolio.php:588
-#: framework/plugins/redux-extend/fields/posts.php:219
+msgid "Display text-only projects or with featured media"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/portfolio.php:590
+#: framework/plugins/redux-extend/fields/posts.php:221
+msgid "Media"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/portfolio.php:601
+msgid "Text Elements"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/portfolio.php:602
+#: framework/plugins/redux-extend/fields/posts.php:233
 msgid "Select which elements to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:608
-#: framework/plugins/redux-extend/fields/posts.php:239
+#: framework/plugins/redux-extend/fields/portfolio.php:622
+#: framework/plugins/redux-extend/fields/posts.php:253
 msgid "Minimal Style"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/portfolio.php:609
-#: framework/plugins/redux-extend/fields/posts.php:240
+#: framework/plugins/redux-extend/fields/portfolio.php:623
+#: framework/plugins/redux-extend/fields/posts.php:254
 msgid "Hide the title and shrink items on small screens"
 msgstr ""
 
@@ -3685,7 +3728,7 @@ msgid "Apply animation to posts on page load"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/post-pages.php:364
-#: framework/plugins/redux-extend/fields/posts.php:455
+#: framework/plugins/redux-extend/fields/posts.php:478
 msgid "Pagination"
 msgstr ""
 
@@ -3694,22 +3737,22 @@ msgid "Select a pagination type"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/post-pages.php:367
-#: framework/plugins/redux-extend/fields/posts.php:458
+#: framework/plugins/redux-extend/fields/posts.php:481
 msgid "Classic"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/post-pages.php:368
-#: framework/plugins/redux-extend/fields/posts.php:459
+#: framework/plugins/redux-extend/fields/posts.php:482
 msgid "Numbered"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/post-pages.php:369
-#: framework/plugins/redux-extend/fields/posts.php:460
+#: framework/plugins/redux-extend/fields/posts.php:483
 msgid "Ajax On Click"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/post-pages.php:370
-#: framework/plugins/redux-extend/fields/posts.php:461
+#: framework/plugins/redux-extend/fields/posts.php:484
 msgid "Ajax On Scroll"
 msgstr ""
 
@@ -3757,228 +3800,243 @@ msgstr ""
 msgid "Display the sidebar on post pages"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:68
+#: framework/plugins/redux-extend/fields/posts.php:44
+msgid "Display the featured media on single posts"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/posts.php:82
 msgid "Post Tags"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:69
+#: framework/plugins/redux-extend/fields/posts.php:83
 msgid "Show the post's tags"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:80
+#: framework/plugins/redux-extend/fields/posts.php:94
 msgid "Display links to the previous and next posts"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:91
+#: framework/plugins/redux-extend/fields/posts.php:105
 msgid "Show info about the author"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:107 single.php:60
+#: framework/plugins/redux-extend/fields/posts.php:121 single.php:60
 msgid "Related Posts"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:116
+#: framework/plugins/redux-extend/fields/posts.php:130
 msgid "Display related posts at the bottom of the post"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:126
+#: framework/plugins/redux-extend/fields/posts.php:140
 msgid "Related By"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:127
+#: framework/plugins/redux-extend/fields/posts.php:141
 msgid "Show posts related by tags or categories"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:129
+#: framework/plugins/redux-extend/fields/posts.php:143
 msgid "Categories"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:130
+#: framework/plugins/redux-extend/fields/posts.php:144
 msgid "Tags"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:140
+#: framework/plugins/redux-extend/fields/posts.php:154
 msgid "Number"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:141
+#: framework/plugins/redux-extend/fields/posts.php:155
 msgid "How many related posts to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:154
+#: framework/plugins/redux-extend/fields/posts.php:168
 msgid "Display related posts in a slider/carousel"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:169
+#: framework/plugins/redux-extend/fields/posts.php:183
 msgid "How many columns (related posts per row) to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:205
+#: framework/plugins/redux-extend/fields/posts.php:219
 msgid "Display posts with media or text only"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:218
+#: framework/plugins/redux-extend/fields/posts.php:232
 msgid "Post Elements"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:255
+#: framework/plugins/redux-extend/fields/posts.php:269
 msgid ""
 "Select a placeholder image to show if a post does not have any featured media"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:269
+#: framework/plugins/redux-extend/fields/posts.php:283
 msgid "Configure the post meta appearance and icons"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:280
+#: framework/plugins/redux-extend/fields/posts.php:294
 msgid "Display the post author"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:291
+#: framework/plugins/redux-extend/fields/posts.php:305
 msgid "Display the post date and time"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:302
+#: framework/plugins/redux-extend/fields/posts.php:315
+msgid "Date Format"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/posts.php:316
+#, php-format
+msgid "Set the meta date format, from the list of %s available date formats %s"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/posts.php:325
 msgid "Display the post category(es)"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:313
+#: framework/plugins/redux-extend/fields/posts.php:336
 msgid "Display the comments number"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:324
+#: framework/plugins/redux-extend/fields/posts.php:347
 msgid "Display icons next to the meta"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:334
+#: framework/plugins/redux-extend/fields/posts.php:357
 msgid "Separator"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:335
+#: framework/plugins/redux-extend/fields/posts.php:358
 msgid "Character(s) for the meta separator"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:342
+#: framework/plugins/redux-extend/fields/posts.php:365
 msgid "Social Sharing"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:343
+#: framework/plugins/redux-extend/fields/posts.php:366
 msgid "Manage your social sharing profiles and add new ones"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:354
+#: framework/plugins/redux-extend/fields/posts.php:377
 msgid "Display the share buttons"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:364
+#: framework/plugins/redux-extend/fields/posts.php:387
 #: framework/plugins/redux-extend/fields/social.php:63
 msgid "Social Icons Color On Hover"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:365
+#: framework/plugins/redux-extend/fields/posts.php:388
 #: framework/plugins/redux-extend/fields/social.php:64
 msgid "Color the icon, its background, or neither on hover"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:367
-#: framework/plugins/redux-extend/fields/posts.php:423
+#: framework/plugins/redux-extend/fields/posts.php:390
+#: framework/plugins/redux-extend/fields/posts.php:446
 #: framework/plugins/redux-extend/fields/social.php:66
 #: framework/plugins/redux-extend/fields/social.php:108
 msgid "Icon"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:368
+#: framework/plugins/redux-extend/fields/posts.php:391
 #: framework/plugins/redux-extend/fields/social.php:67
 msgid "Background"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:369
+#: framework/plugins/redux-extend/fields/posts.php:392
 #: framework/plugins/redux-extend/fields/social.php:68
 msgid "Neither"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:378
+#: framework/plugins/redux-extend/fields/posts.php:401
 msgid "Shorten URLs"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:379
+#: framework/plugins/redux-extend/fields/posts.php:402
 msgid "Shorten the {link2} tag with Bit.ly"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:389
+#: framework/plugins/redux-extend/fields/posts.php:412
 msgid "Bit.ly login"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:390
+#: framework/plugins/redux-extend/fields/posts.php:413
 #, php-format
 msgid "Your user and API key. Get them here: %s"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:393
+#: framework/plugins/redux-extend/fields/posts.php:416
 msgid "Enter your Username"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:394
+#: framework/plugins/redux-extend/fields/posts.php:417
 msgid "Enter your API Key"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:404
+#: framework/plugins/redux-extend/fields/posts.php:427
 #: framework/plugins/redux-extend/fields/social.php:89
 msgid "New Profile"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:411
+#: framework/plugins/redux-extend/fields/posts.php:434
 #: framework/plugins/redux-extend/fields/sidebars.php:87
 #: framework/plugins/redux-extend/fields/social.php:96
+#: framework/plugins/redux-extend/fields/themes.php:25
+#: framework/plugins/redux-extend/fields/themes.php:52
 #: templates/comments.php:83 woocommerce/single-product-reviews.php:66
 msgid "Name"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:417
+#: framework/plugins/redux-extend/fields/posts.php:440
 msgid "Share URL"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:445
+#: framework/plugins/redux-extend/fields/posts.php:468
 msgid "Configure the comments' appearance"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:456
+#: framework/plugins/redux-extend/fields/posts.php:479
 msgid "Select a comment pagination type"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:470
+#: framework/plugins/redux-extend/fields/posts.php:493
 msgid "Pagination Display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:471
+#: framework/plugins/redux-extend/fields/posts.php:494
 msgid "Show pagination links at top of comments, at the bottom, or both"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:475
+#: framework/plugins/redux-extend/fields/posts.php:498
 msgid "Both"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:484
+#: framework/plugins/redux-extend/fields/posts.php:507
 msgid "Show Before Notes"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:485
+#: framework/plugins/redux-extend/fields/posts.php:508
 msgid "Display the notes before the comment fields for users not logged in"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:495
+#: framework/plugins/redux-extend/fields/posts.php:518
 msgid "Logged in as"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:496
+#: framework/plugins/redux-extend/fields/posts.php:519
 msgid "Display the &quot;logged in as&quot; message"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:506
+#: framework/plugins/redux-extend/fields/posts.php:529
 msgid "Allowed Tags"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/posts.php:507
+#: framework/plugins/redux-extend/fields/posts.php:530
 msgid "Display the allowed tags in the comment form"
 msgstr ""
 
@@ -4014,7 +4072,7 @@ msgstr ""
 msgid "New Sidebar"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/sidebars.php:91
+#: framework/plugins/redux-extend/fields/sidebars.php:92
 msgid "ID"
 msgstr ""
 
@@ -4085,6 +4143,33 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: framework/plugins/redux-extend/fields/themes.php:5
+msgid "Colors"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/themes.php:6
+msgid "Create and manage custom colors and themes."
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/themes.php:15
+msgid "Element Colors"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/themes.php:18
+#: framework/plugins/redux-extend/fields/themes.php:45
+msgid "New Color"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/themes.php:32
+#: framework/plugins/redux-extend/fields/themes.php:59
+#: framework/plugins/vc-extend/fields/button.php:99
+msgid "Color"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/themes.php:42
+msgid "Button Colors"
+msgstr ""
+
 #: framework/plugins/redux-extend/fields/typography.php:4
 msgid "Typography"
 msgstr ""
@@ -4117,22 +4202,86 @@ msgstr ""
 msgid "Select the font to use for the navbar submenus"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/typography.php:83
+#: framework/plugins/redux-extend/fields/typography.php:77
+msgid "Header Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:78
+msgid "Select the font to use for the header"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:97
+msgid "Location Bar Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:98
+msgid "Select the font to use for the location bar"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:117
+msgid "Sidebar Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:118
+msgid "Select the font to use for the sidebar"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:137
+msgid "Footer Widgets Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:138
+msgid "Select the font to use for the footer widgets"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:157
+msgid "Footer Copyright Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:158
+msgid "Select the font to use for the footer copyright"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:184
 msgid "Heading Font"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/typography.php:84
+#: framework/plugins/redux-extend/fields/typography.php:185
 msgid ""
 "Set the default options for headings (can be overridden individually below)"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/typography.php:109
+#: framework/plugins/redux-extend/fields/typography.php:210
 #, php-format
 msgid "Heading %d"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/typography.php:129
+#: framework/plugins/redux-extend/fields/typography.php:230
 msgid "Headings"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:251
+msgid "Post Title Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:252
+msgid "Select the font to use for post titles"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:271
+msgid "Post Content Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:272
+msgid "Select the font to use for post content"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:291
+msgid "Comments Font"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/typography.php:292
+msgid "Select the font to use for comments"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:4
@@ -4176,17 +4325,17 @@ msgid "Order By Dropdown"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:127
-#: framework/plugins/redux-extend/fields/woocommerce.php:257
+#: framework/plugins/redux-extend/fields/woocommerce.php:273
 msgid "Show Product Thumbnails"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:137
-#: framework/plugins/redux-extend/fields/woocommerce.php:267
+#: framework/plugins/redux-extend/fields/woocommerce.php:283
 msgid "Thumbnail Style"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:147
-#: framework/plugins/redux-extend/fields/woocommerce.php:277
+#: framework/plugins/redux-extend/fields/woocommerce.php:293
 msgid "Thumbnail Border Color"
 msgstr ""
 
@@ -4215,102 +4364,112 @@ msgid "Show &quot;Sale&quot; Badge"
 msgstr ""
 
 #: framework/plugins/redux-extend/fields/woocommerce.php:222
+msgid "&quot;Sale&quot; Badge Text"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/woocommerce.php:223
+msgid "Sale"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/woocommerce.php:230
 msgid "Show &quot;New&quot; Badge"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:232
+#: framework/plugins/redux-extend/fields/woocommerce.php:240
+msgid "&quot;New&quot; Badge Text"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/woocommerce.php:241
+msgid "New"
+msgstr ""
+
+#: framework/plugins/redux-extend/fields/woocommerce.php:248
 msgid "Days To Show &quot;New&quot; Badge"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:246
+#: framework/plugins/redux-extend/fields/woocommerce.php:262
 msgid "Product Page"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:247
+#: framework/plugins/redux-extend/fields/woocommerce.php:263
 msgid "Manage the single product page"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:292
+#: framework/plugins/redux-extend/fields/woocommerce.php:308
 msgid "Thumbnail Columns"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:293
+#: framework/plugins/redux-extend/fields/woocommerce.php:309
 msgid "How many thumbnails per row to display below the main product image"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:324
+#: framework/plugins/redux-extend/fields/woocommerce.php:340
 msgid "Show Upsells"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:334
+#: framework/plugins/redux-extend/fields/woocommerce.php:350
 msgid "Upsell Columns"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:335
+#: framework/plugins/redux-extend/fields/woocommerce.php:351
 msgid "How many columns (products per row) to display for upsells"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:346
+#: framework/plugins/redux-extend/fields/woocommerce.php:362
 msgid "Show Related Products"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:356
+#: framework/plugins/redux-extend/fields/woocommerce.php:372
 #: woocommerce/single-product/related.php:47
 msgid "Related Products"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:357
+#: framework/plugins/redux-extend/fields/woocommerce.php:373
 msgid "How many related products to display"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:369
+#: framework/plugins/redux-extend/fields/woocommerce.php:385
 msgid "Related Product Columns"
 msgstr ""
 
-#: framework/plugins/redux-extend/fields/woocommerce.php:370
+#: framework/plugins/redux-extend/fields/woocommerce.php:386
 msgid "How many columns (related products per row) to display"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:333
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:670
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:334
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:760
 msgid "Install Required Plugins"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:335
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:337
 #, php-format
 msgid "Installing Plugin: %s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:336
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:339
+#, php-format
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:340
 msgid "Something went wrong with the plugin API."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:338
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:343
 #, php-format
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:343
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:349
 #, php-format
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:348
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to install the %1$s "
-"plugin."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to install the %1$s "
-"plugins."
-msgstr[0] ""
-msgstr[1] ""
-
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:353
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:355
 #, php-format
 msgid ""
 "The following plugin needs to be updated to its latest version to ensure "
@@ -4321,24 +4480,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:358
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:361
 #, php-format
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:363
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to update the %1$s plugin."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to update the %1$s "
-"plugins."
-msgstr[0] ""
-msgstr[1] ""
-
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:367
 #, php-format
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
@@ -4353,178 +4502,170 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: framework/plugins/tgmpa/class-tgm-plugin-activation.php:378
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to activate the %1$s "
-"plugin."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to activate the %1$s "
-"plugins."
-msgstr[0] ""
-msgstr[1] ""
-
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:383
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:388
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:383
 msgid "Begin updating plugin"
 msgid_plural "Begin updating plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:393
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:388
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:397
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:392
 msgid "Return to Required Plugins Installer"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:398
-msgid "Return to the dashboard"
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:393
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:916
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2622
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3669
+msgid "Return to the Dashboard"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:399
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3026
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:394
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3248
 msgid "Plugin activated successfully."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:400
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2829
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:395
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3041
 msgid "The following plugin was activated successfully:"
 msgid_plural "The following plugins were activated successfully:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:401
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:397
 #, php-format
 msgid "No action taken. Plugin %1$s was already active."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:402
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:399
 #, php-format
 msgid ""
 "Plugin not activated. A higher version of %s is needed for this theme. "
 "Please update the plugin."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:403
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:401
 #, php-format
 msgid "All plugins installed and activated successfully. %1$s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:404
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:402
 msgid "Dismiss this notice"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:405
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:403
+msgid ""
+"There are one or more required or recommended plugins to install, update or "
+"activate."
+msgstr ""
+
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:404
 msgid "Please contact the administrator of this site for help."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:520
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:607
 msgid "This plugin needs to be updated to be compatible with your theme."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:521
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:608
 msgid "Update Required"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:669
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:759
 msgid "Install All Plugins Now"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:824
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3435
-msgid "Return to the Dashboard"
-msgstr ""
-
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1023
 msgid ""
 "The remote plugin package does not contain a folder with the desired slug "
 "and renaming did not work."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:931
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1023
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1026
 msgid ""
 "Please contact the plugin provider and ask them to package their plugin "
 "according to the WordPress guidelines."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:934
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1026
 msgid ""
 "The remote plugin package consists of more than one file, but the files are "
 "not packaged in a folder."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1112
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2825
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1210
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3037
 msgctxt "plugin A *and* plugin B"
 msgid "and"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:1877
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2071
 #, php-format
-msgctxt "%s = version number"
 msgid "TGMPA v%s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2164
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2362
 msgid "Required"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2167
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2365
 msgid "Recommended"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2183
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2381
 msgid "WordPress Repository"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2186
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2384
 msgid "External Source"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2189
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2387
 msgid "Pre-Packaged"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2206
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2404
 msgid "Not Installed"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2210
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2408
 msgid "Installed But Not Activated"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2212
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2410
 msgid "Active"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2218
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2416
 msgid "Required Update not Available"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2221
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2419
 msgid "Requires Update"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2224
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2422
 msgid "Update recommended"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2232
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2431
 #, php-format
-msgctxt "%1$s = install status, %2$s = update status"
+msgctxt "Install/Update Status"
 msgid "%1$s, %2$s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2277
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2477
 #, php-format
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
@@ -4532,188 +4673,178 @@ msgid_plural "All <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2280
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2481
 #, php-format
 msgid "To Install <span class=\"count\">(%s)</span>"
 msgid_plural "To Install <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2283
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2485
 #, php-format
 msgid "Update Available <span class=\"count\">(%s)</span>"
 msgid_plural "Update Available <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2286
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2489
 #, php-format
 msgid "To Activate <span class=\"count\">(%s)</span>"
 msgid_plural "To Activate <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2571
 msgctxt "as in: \"version nr unknown\""
 msgid "unknown"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2376
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2579
 msgid "Installed version:"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2384
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2587
 msgid "Minimum required version:"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2396
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2599
 msgid "Available version:"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2419
-#, php-format
-msgid ""
-"No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
-"Dashboard</a>"
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2622
+msgid "No plugins to install, update or activate."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2433
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2636
 msgid "Plugin"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2434
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2637
 msgid "Source"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2488
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2692
 #, php-format
-msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Install %2$s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2492
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2697
 #, php-format
-msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Update %2$s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2497
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2703
 #, php-format
-msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Activate %2$s"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2567
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2773
 msgid "Upgrade message from the plugin author:"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2600
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2806
 msgid "Install"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2606
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2812
 msgid "Update"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2609
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2815
 msgid "Activate"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2640
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2846
 msgid "No plugins were selected to be installed. No action taken."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2642
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2848
 msgid "No plugins were selected to be updated. No action taken."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2678
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2889
 msgid "No plugins are available to be installed at this time."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2680
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2891
 msgid "No plugins are available to be updated at this time."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2785
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2997
 msgid "No plugins were selected to be activated. No action taken."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:2811
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3023
 msgid "No plugins are available to be activated at this time."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3025
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3247
 msgid "Plugin activation failed."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3359
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3587
 #, php-format
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3361
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3590
 #, php-format
 msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3362
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3592
 #, php-format
 msgid "The installation of %1$s failed."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3366
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3596
 msgid ""
 "The installation and activation process is starting. This process may take a "
 "while on some hosts, so please be patient."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3598
 #, php-format
 msgid "%1$s installed and activated successfully."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3598
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3606
 msgid "Show Details"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3367
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3598
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3606
 msgid "Hide Details"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3368
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3599
 msgid "All installations and activations have been completed."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3369
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3601
 #, php-format
 msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3372
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3604
 msgid ""
 "The installation process is starting. This process may take a while on some "
 "hosts, so please be patient."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3373
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3606
 #, php-format
 msgid "%1$s installed successfully."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3374
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3607
 msgid "All installations have been completed."
 msgstr ""
 
-#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3375
+#: framework/plugins/tgmpa/class-tgm-plugin-activation.php:3609
 #, php-format
 msgid "Installing Plugin %1$s (%2$d/%3$d)"
-msgstr ""
-
-#: framework/plugins/vc-extend/fields/button.php:99
-msgid "Color"
 msgstr ""
 
 #: framework/plugins/vc-extend/fields/button.php:104
@@ -4800,35 +4931,27 @@ msgstr ""
 msgid "Allowed HTML tags and attributes:"
 msgstr ""
 
-#: framework/redux-config.php:186
+#: framework/redux-config.php:193
 msgid "Settings & Demos"
 msgstr ""
 
-#: framework/redux-config.php:187
+#: framework/redux-config.php:194
 msgid "Manage your settings, and import demo content."
 msgstr ""
 
-#: framework/redux-config.php:189
+#: framework/redux-config.php:196
 msgid ""
 "Demos work best on clean, fresh sites. For complete content import, make "
 "sure all recommended plugins (Appearance > Install Plugins) are activated! "
 "The page will reload after importing."
 msgstr ""
 
-#: framework/redux-config.php:234
+#: framework/redux-config.php:241
 msgid "MIXT - Options"
 msgstr ""
 
-#: framework/redux-config.php:235
+#: framework/redux-config.php:242
 msgid "MIXT Options"
-msgstr ""
-
-#: framework/woocommerce-config.php:168
-msgid "Sale"
-msgstr ""
-
-#: framework/woocommerce-config.php:177
-msgid "New"
 msgstr ""
 
 #: framework/woocommerce-config.php:251
@@ -4859,42 +4982,32 @@ msgstr ""
 msgid "404 Page Nav"
 msgstr ""
 
-#: functions.php:148
-msgid "Footer Column 1"
-msgstr ""
-
-#: functions.php:154
-msgid "Footer Column 2"
-msgstr ""
-
-#: functions.php:160
-msgid "Footer Column 3"
-msgstr ""
-
-#: functions.php:166
-msgid "Footer Column 4"
+#: functions.php:148 functions.php:154 functions.php:160 functions.php:166
+#: functions.php:172 functions.php:178
+#, php-format
+msgid "Footer Column %d"
 msgstr ""
 
 #: header.php:69
 msgid "Toggle navigation"
 msgstr ""
 
-#: modules/breadcrumbs.php:37 modules/breadcrumbs.php:167
+#: modules/breadcrumbs.php:37 modules/breadcrumbs.php:176
 msgctxt "breadcrumb"
 msgid "Home"
 msgstr ""
 
-#: modules/breadcrumbs.php:97
+#: modules/breadcrumbs.php:106
 msgctxt "breadcrumb"
 msgid "Tag: "
 msgstr ""
 
-#: modules/breadcrumbs.php:111
+#: modules/breadcrumbs.php:120
 msgctxt "breadcrumb"
 msgid "Author: "
 msgstr ""
 
-#: modules/breadcrumbs.php:115
+#: modules/breadcrumbs.php:124
 msgctxt "breadcrumb"
 msgid "Search"
 msgstr ""
@@ -5339,7 +5452,7 @@ msgid ""
 "Only logged in customers who have purchased this product may leave a review."
 msgstr ""
 
-#: woocommerce/single-product/product-image.php:43
+#: woocommerce/single-product/product-image.php:55
 msgid "Placeholder"
 msgstr ""
 

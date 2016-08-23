@@ -36,8 +36,8 @@ class Mixt_Admin_Menu {
 		'options' => 'mixt-options',
 
 		'docs' => 'http://docs.mixt.novalx.com',
-		'support' => 'https://novalex.ticksy.com',
-		'forums' => 'https://novalex.ticksy.com/public-tickets/',
+		'support' => 'http://support.mixt.novalx.com',
+		'forums' => 'http://forums.mixt.novalx.com',
 	);
 
 	public function __construct() {

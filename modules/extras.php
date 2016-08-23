@@ -80,7 +80,8 @@ function mixt_browsersync() {
 	ob_start();
 	?>
 	<script type="text/javascript" id="__bs_script__">
-		var bsurl = 'http://' + location.hostname + ':3000/browser-sync/browser-sync-client.js';
+		// var bsurl = 'http://' + location.hostname + ':3000/browser-sync/browser-sync-client.js';
+		var bsurl = 'http://localhost:3000/browser-sync/browser-sync-client.js';
 		//<![CDATA[
 		document.write("<script async src='" + bsurl + "'><\/script>");
 		//]]>
