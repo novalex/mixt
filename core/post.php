@@ -99,7 +99,7 @@ if ( ! class_exists('Mixt_Post') ) {
 			// Set post display options
 			$post_display = Mixt_Options::get('post-display');
 			if ( empty($post_display) ) $post_display = array();
-			if ( $layout['posts-page'] ) {
+			if ( $layout['posts-page'] && $this->context != 'page' ) {
 				$post_display_options = mixt_get_options( array(
 					'title'    => array( 'key' => $layout['page-type'] . '-page-title', 'default' => true ),
 					'content'  => array( 'key' => $layout['page-type'] . '-page-content', 'default' => true ),

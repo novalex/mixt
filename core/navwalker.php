@@ -89,8 +89,11 @@ class Mixt_Navwalker extends Walker_Nav_Menu {
 		// REGULAR MENU ITEM
 		} else {
 			$classes     = empty( $item->classes ) ? array() : (array) $item->classes;
-			$classes[]   = ($item->current) ? 'active' : '';
+			$classes[]   = $item->current ? 'active' : '';
 			$classes[]   = 'menu-item-' . $item->ID;
+
+			if ( in_array('current-lang', $classes) ) $classes[] = 'active';
+			
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter($classes), $item, $args ) );
 
 			// Remove unused classes
