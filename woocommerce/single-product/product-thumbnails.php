@@ -35,7 +35,7 @@ if ( $attachment_ids ) {
 
 		foreach ( $attachment_ids as $attachment_id ) {
 
-			$classes = array( 'zoom' );
+			$classes = array( 'main-link', 'zoom' );
 
 			$order_class = '';
 

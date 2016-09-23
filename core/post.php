@@ -92,6 +92,7 @@ if ( ! class_exists('Mixt_Post') ) {
 				$layout['page-type'] = Mixt_Options::get('page', 'page-type');
 				$layout['posts-page'] = Mixt_Options::get('page', 'posts-page');
 			}
+			if ( $context == 'page' ) { $layout['post-content-type'] = 'full'; }
 			$this->layout = $layout;
 
 			$this->sticky = ( is_sticky($id) && ( $layout['posts-page'] || is_home() ) && ! is_paged() );
@@ -686,7 +687,7 @@ if ( ! class_exists('Mixt_Post') ) {
 					$content = $this->content;
 
 					// Strip shortcode tags when the post is displayed in a posts page
-					if ( $this->context != 'single' && $this->layout['posts-page'] ) {
+					if ( ! in_array($this->context, array('single', 'page')) && $this->layout['posts-page'] ) {
 						$content = preg_replace("~(?:\[/?)(?=(?:vc_row|vc_column))[^/\]]+/?\]~s", '', $content);
 					}
 

@@ -44,7 +44,7 @@ global $post, $woocommerce, $product;
 				echo apply_filters(
 					'woocommerce_single_product_image_html',
 					sprintf(
-						'<a href="%1$s" data-src="%1$s" itemprop="image" class="woocommerce-main-image product-gallery-thumb zoom" title="%2$s">%3$s</a>',
+						'<a href="%1$s" data-src="%1$s" itemprop="image" class="main-link woocommerce-main-image product-gallery-thumb zoom" title="%2$s">%3$s</a>',
 						esc_url( $props['url'] ),
 						esc_attr( $props['caption'] ),
 						$image

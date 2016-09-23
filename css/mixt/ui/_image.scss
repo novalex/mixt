@@ -33,12 +33,20 @@
 		// Eclipse
 		&.image-eclipse {
 			position: relative;
+
+			.main-link {
+				display: block;
+				position: relative;
+				z-index: 1;
+			}
+			
 			&:after {
 				content: ' ';
 				position: absolute;
 				top: 0; left: 0; right: 0; bottom: 0;
 				border-radius: inherit;
 				box-shadow: inset 0 0 0 $border-width rgba(255,255,255,0.4);
+				z-index: 0;
 			}
 		}
 

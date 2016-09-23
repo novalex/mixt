@@ -108,8 +108,9 @@ function mixt_head_media() {
 	if ( $options['type'] == 'slider' && ! empty($options['slider']) ) {
 		$wrap_classes .= ' media-slider';
 
-		if ( class_exists('LS_Sliders') ) {
-			if ( is_array(LS_Sliders::find($options['slider']) ) ) {
+		if ( class_exists('LS_Sliders') || class_exists('RevSlider') ) {
+			// LayerSlider
+			if ( class_exists('LS_Sliders') && is_array(LS_Sliders::find($options['slider']) ) ) {
 				$slider = do_shortcode('[layerslider id="' . $options['slider'] . '"]');
 
 				// Adjust transparent navbar text color depending on slide luminosity ?>
@@ -136,14 +137,21 @@ function mixt_head_media() {
 						}
 					}
 				</script><?php
+
+			// Slider Revolution
+			} else if ( class_exists('RevSlider') ) {
+				$wrap_classes .= ( mixt_hex_is_light($options['bg']) ) ? ' bg-light' : ' bg-dark';
+				$slider = do_shortcode('[rev_slider alias="' . $options['slider'] . '"]');
+
 			// Show Slider Not Found Message
 			} else if ( current_user_can('manage_options') ) {
 				$slider = '<p class="container">' . esc_html__( 'Slider with specified ID not found!', 'mixt' ) . '</p>';
 			}
-		// Show LayerSlider Deactivated Message
+
+		// Show Slider Deactivated Message
 		} else if ( current_user_can('manage_options') ) {
 			$wrap_classes .= ' no-slider';
-			$slider = '<p class="container">' . esc_html__( 'LayerSlider plugin not installed or deactivated!', 'mixt' ) . '</p>';
+			$slider = '<p class="container">' . esc_html__( 'Slider plugin not installed or deactivated!', 'mixt' ) . '</p>';
 		}
 
 	} else {
