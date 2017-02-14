@@ -107,7 +107,7 @@ function mixt_scripts() {
 	wp_enqueue_style( 'mixt-main', MIXT_URI . '/dist/main.css', array(), MIXT_VERSION );
 
 	// Custom Stylesheet
-	if ( file_exists(MIXT_DIR . '/dist/dynamic.css') && filesize(MIXT_DIR . '/dist/custom.css') !== 0 ) {
+	if ( file_exists(MIXT_DIR . '/dist/custom.css') && filesize(MIXT_DIR . '/dist/custom.css') !== 0 ) {
 		wp_enqueue_style( 'mixt-custom', MIXT_URI . '/dist/custom.css', array(), MIXT_VERSION );
 	}
 

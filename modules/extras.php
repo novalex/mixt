@@ -90,7 +90,7 @@ function mixt_browsersync() {
 	echo ob_get_clean();
 }
 if ( current_user_can('manage_options') ) {
-	add_action('wp_footer', 'mixt_browsersync');
-	add_action('admin_footer', 'mixt_browsersync');
+	// add_action('wp_footer', 'mixt_browsersync');
+	// add_action('admin_footer', 'mixt_browsersync');
 	// add_action('customize_controls_enqueue_scripts', 'mixt_browsersync');
 }

@@ -71,7 +71,9 @@ var options = {
 	prefix  = options.prefix,
 	srcmap  = options.srcmap;
 
-var autoprefix = autoprefixer('last 2 versions', 'ie 8');
+var autoprefix = autoprefixer({
+	browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
+});
 
 function displayError(error) {
 	var errorString = '[' + error.plugin + ']';
