@@ -79,32 +79,6 @@ class Mixt_Powerup {
 			}
 			include_once( MIXT_FRAME_DIR . '/micf-config.php' );
 
-		// WPBakery Visual Composer
-			$this->plugins[] = array(
-				'name'     => 'WPBakery Visual Composer',
-				'slug'     => 'js_composer',
-				'source'   => 'js_composer.zip',
-				'version'  => '4.8.1',
-				'force_deactivation' => true,
-			);
-
-		// LayerSlider
-			$this->plugins[] = array(
-				'name'     => 'LayerSlider WP',
-				'slug'     => 'LayerSlider',
-				'source'   => 'layerslider.zip',
-				'version'  => '5.6.2',
-				'force_deactivation' => true,
-			);
-
-		// Envato Market
-			$this->plugins[] = array(
-				'name'     => 'Envato Market',
-				'slug'     => 'envato-market',
-				'source'   => 'https://envato.github.io/wp-envato-market/dist/envato-market.zip',
-				'version'  => '1.0',
-			);
-
 		// TGM Plugin Activation
 			require_once( MIXT_PLUGINS_DIR . '/tgmpa/class-tgm-plugin-activation.php' );
 			add_filter('tgmpa_admin_menu_args', array($this, 'admin_menu_args'));

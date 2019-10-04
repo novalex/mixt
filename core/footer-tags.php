@@ -83,7 +83,7 @@ function mixt_footer_copyright_area() {
 	$options = mixt_get_options( array(
 		'copy-show'        => array( 'key' => 'footer-copy-show', 'default' => true ),
 		'left-content'     => array( 'key' => 'footer-left-content', 'type' => 'str', 'return' => 'value', 'default' => '2' ),
-		'left-code'        => array( 'key' => 'footer-left-code', 'return' => 'value', 'default' => 'MIXT Theme by <a href="http://themeforest.net/user/novalex/">novalex</a>' ),
+		'left-code'        => array( 'key' => 'footer-left-code', 'return' => 'value', 'default' => 'MIXT Theme by <a href="https://novalx.com/">novalex</a>' ),
 		'left-hide'        => array( 'key' => 'footer-left-hide' ),
 		'right-content'    => array( 'key' => 'footer-right-content', 'type' => 'str', 'return' => 'value' ),
 		'right-code'       => array( 'key' => 'footer-right-code', 'return' => 'value' ),
